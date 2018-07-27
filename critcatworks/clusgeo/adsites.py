@@ -7,8 +7,45 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
+import clusgeo
 
+def atoms_dict_to_ase(atoms_dict):
+    calculator = atoms_dict['_calc']
+    cell = atoms_dict['_cell']
+    celldisp = atoms_dict['_celldisp']
+    constraint = atoms_dict['_constraints']
+    pbc = atoms_dict['_pbc']
+    numbers = atoms_dict['arrays']['numbers']
+    positions = atoms_dict['arrays']['positions']
+    info = atoms_dict['info']
 
+    atoms = ase.Atoms(numbers=numbers,
+        positions=positions,
+        calculator=calculator,
+        cell = cell,
+        celldisp = celldisp,
+        constraint = constraint,
+        pbc = pbc,
+        info = info)
+
+    return atoms
+
+"""
+    {'_calc': None,
+ '_cell': array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]]),
+ '_celldisp': array([[0.],
+       [0.],
+       [0.]]),
+ '_constraints': [],
+ '_pbc': array([False, False, False]),
+ 'arrays': {'numbers': array([8, 1, 1]),
+            'positions': array([[ 0.      ,  0.      ,  0.119262],
+       [ 0.      ,  0.763239, -0.477047],
+       [ 0.      , -0.763239, -0.477047]])},
+ 'info': {}}
+"""
 
 @explicit_serialize
 class AdsiteCreationTask(FiretaskBase):
@@ -38,9 +75,26 @@ class AdsiteCreationTask(FiretaskBase):
         # going through nc atoms
         nc_structures_dict = fw_spec["nc_structures"]
         for atoms_dict in nc_structures_dict:
+            print("ATOMS DICT")
             print(atoms_dict)
-            atoms = ase.Atoms().__dict__ = atoms_dict
+            atoms = ase.Atoms()
+            #atoms.__dict__ = atoms_dict
+            
+            atoms =  atoms_dict_to_ase(atoms_dict)
+            print("ASE atoms from DICT")
             print(atoms)
+            
+
+            # running clusgeo on cluster
+            surfatoms = clusgeo.surface.get_surface_atoms(atoms)
+            top_adsites = clusgeo.surface.get_top_sites(atoms, surfatoms)
+            edge_adsites = clusgeo.surface.get_edge_sites(atoms, surfatoms)
+            hollow_adsites = clusgeo.surface.get_hollow_sites(atoms, surfatoms)
+
+        print(len(surfatoms))
+        print(len(top_adsites))
+        print(len(edge_adsites))
+        print(len(hollow_adsites))
 
         update_spec = fw_spec
         update_spec["nc_structures"] = nc_structures_dict
