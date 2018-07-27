@@ -9,8 +9,8 @@ from pprint import pprint as pp
 import pathlib
 
 # internal modules
-import ncstructures
-import adsites
+from critcatworks.clusgeo import get_adsites
+from critcatworks.database import read_structures
 
 @explicit_serialize
 class SimpleTestTask(FiretaskBase):
@@ -129,9 +129,9 @@ def get_adsites_workflow(path, adsorbate_energy=0.0, adsorbate_name='H'):
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information
     abspath = pathlib.Path(path).resolve()
-    fw_read_structures = ncstructures.read_structures(abspath)
+    fw_read_structures = read_structures(abspath)
     # FireWork: Determine adsites and add to database
-    fw_get_adsites = adsites.get_adsites(adsorbate_energy=0.0, adsorbate_name='H')
+    fw_get_adsites = get_adsites(adsorbate_energy=0.0, adsorbate_name='H')
     # FireWork: FPS ranking
 
     # FireWork: setup, run and extract DFT calculation

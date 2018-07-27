@@ -14,6 +14,8 @@ if __name__ == "__main__":
             'ase',
             'future',
             'clusgeo',
+            'pathlib',
+            'pprint',
         ],
         license="GNU General Public License v3.0",
         classifiers=[

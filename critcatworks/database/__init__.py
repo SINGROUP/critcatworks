@@ -1,0 +1,1 @@
+from critcatworks.database.ncstructures import read_structures
