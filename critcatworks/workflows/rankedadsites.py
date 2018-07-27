@@ -164,7 +164,7 @@ if __name__ == "__main__":
     #wf = dummy_workflow()
     #wf = cp2k_test_workflow()
     #wf = test_foreachtask_workflow()
-    wf = get_adsites_workflow(path = "tests/dummy_db/nc_structures/")
+    wf = get_adsites_workflow(path = "/l/programs/critcatworks/tests/dummy_db/nc_structures/")
 
     # store workflow and launch it locally, single shot
     launchpad.add_wf(wf)
