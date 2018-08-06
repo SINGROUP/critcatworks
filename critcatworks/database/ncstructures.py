@@ -33,6 +33,7 @@ class NCReadTask(FiretaskBase):
         nc_structures_dict = []
         nc_energies = []
         nc_ids = []
+        atomic_numbers = []
         for idx, p in enumerate(pathlib.Path(path).iterdir()):
             if p.is_file():
                 print(p, p.stem)
@@ -47,6 +48,7 @@ class NCReadTask(FiretaskBase):
                 except:
                     print("Unexpected error:", sys.exc_info()[0])
                 nc_names.append(p.stem)
+                atomic_numbers.extend(atoms.get_atomic_numbers())
                 atoms_dict = atoms.__dict__
                 nc_structures_ase.append(atoms)
                 nc_structures_dict.append(atoms_dict)
@@ -58,12 +60,14 @@ class NCReadTask(FiretaskBase):
 
                 nc_energies.append(energy)
 
+        sorted_set_atomic_numbers = sorted(set(atomic_numbers)) 
         # create dictionary entries
         update_spec = fw_spec
         update_spec["nc_structures"] = nc_structures_dict
         update_spec["nc_names"] = nc_names
         update_spec["nc_ids"] = nc_ids
         update_spec["nc_energies"] = nc_energies
+        update_spec["nc_atomic_numbers"] = sorted_set_atomic_numbers
 
         return FWAction(update_spec=update_spec)
 
