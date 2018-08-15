@@ -47,8 +47,8 @@ class UpdateDataTask(FiretaskBase):
             relaxed_structure_list[int(ranked_id)] = relaxed_structure_dict[str(ranked_id)]
 
         update_spec = fw_spec
-        update_spec["relaxed_structure_list"] = adsorbate_energies_list
-        update_spec["adsorbate_energies_list"] = relaxed_structure_list
+        update_spec["relaxed_structure_list"] = relaxed_structure_list
+        update_spec["adsorbate_energies_list"] = adsorbate_energies_list
 
 
         logging.debug(adsorbate_energies_list)

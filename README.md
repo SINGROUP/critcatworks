@@ -10,3 +10,11 @@ Work in progress, the first version will feature a workflow to
 Dependencies:
 fireworks
 clusgeo
+sklearn
+
+
+
+Fireworks specs for get_adsites_workflow
+
+ 
+

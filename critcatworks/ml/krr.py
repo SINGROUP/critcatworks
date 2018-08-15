@@ -9,8 +9,9 @@ from pprint import pprint as pp
 import ase, ase.io
 import logging, time
 import numpy as np
-import sklearn
-
+from sklearn.kernel_ridge import KernelRidge
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import GridSearchCV, train_test_split
 
 @explicit_serialize
 class MLTask(FiretaskBase):
@@ -20,12 +21,19 @@ class MLTask(FiretaskBase):
     """
 
     _fw_name = 'MLTask'
-    required_params = []
+    required_params = ['target_path']
     optional_params = []
 
     def run_task(self, fw_spec):
 
-        logging.info("ML not implemented yet")
+        target_path = self['target_path']
+        parent_folder_name = 'ml_krr'
+        parent_folder_path = target_path + "/" + parent_folder_name
+
+        if not os.path.exists(parent_folder_path):
+            os.makedirs(parent_folder_path)
+
+        logging.info("ML not tested yet")
 
         n_calcs_started = fw_spec["n_calcs_started"]
         ranked_ids = fw_spec["fps_ranking"][:n_calcs_started]
@@ -33,13 +41,14 @@ class MLTask(FiretaskBase):
 
 
         descmatrix = np.array(fw_spec["descmatrix"])
-        toten = np.array(fw_spec["adsorbate_energies_list"])
+        en = np.array(fw_spec["adsorbate_energies_list"])
         
         features = descmatrix[ranked_ids]
-        to_predict_features = descmatrix[ranked_ids]
-        labels = toten[ranked_ids]
+        to_predict_features = descmatrix[to_predict_ids]
+        labels = en[ranked_ids]
 
-        mae, y_to_predict, krr_parameters = ml_krr(features, labels, ranked_ids, to_predict_features, to_predict_ids, is_scaled = False)
+        mae, y_to_predict, krr_parameters = ml_krr(features, labels, ranked_ids, to_predict_features, to_predict_ids, 
+            is_scaled = False, path = parent_folder_path)
 
         update_spec = fw_spec
         update_spec["mae"] = mae
@@ -50,8 +59,8 @@ class MLTask(FiretaskBase):
         return FWAction(update_spec=update_spec)
 
 
-def get_mae():
-    firetask1  = MLTask()
+def get_mae(target_path):
+    firetask1  = MLTask(target_path=target_path)
     fw = Firework([firetask1])
     return fw
 
@@ -61,10 +70,11 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
         gamma_list = np.logspace(-1, -9, 9), 
         kernel_list = ['rbf'], 
         sample_size=0.8,
-        is_scaled = False):
+        is_scaled = False,
+        path = "."):
     
     # load, split and scale data
-    x_train, x_test, y_train, y_test, ids_train, ids_test = split_scale_data(x_data, y_data, ids, sample_size, is_scaled)
+    x_train, x_test, y_train, y_test, ids_train, ids_test = split_scale_data(features, labels, train_test_ids, sample_size, is_scaled)
 
     # Create kernel linear ridge regression object
     learner = GridSearchCV(KernelRidge(kernel='rbf'), n_jobs = 8, cv=5,
@@ -88,7 +98,8 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
     write_output(learner, sample_size, "krr", mae, mse, "param", 
         ids_test, y_test, y_pred, 
         ids_train, y_train, train_y_pred,
-        to_predict_ids, y_to_predict
+        to_predict_ids, y_to_predict,
+        path,
         )
 
     return mae, y_to_predict, learner.best_params_
@@ -104,7 +115,7 @@ def scale_data(x_train, x_test, is_mean=True):
     x_test = scaler.transform(x_test)  
     return x_train, x_test
 
-def split_scale_data(x_datafile, y_datafile, sample_size, is_scaled):
+def split_scale_data(x_data, y_data, ids_data, sample_size, is_scaled):
     
     x_train, x_test, y_train, y_test, ids_train, ids_test = train_test_split(x_data, y_data, ids_data, test_size = 1 - sample_size)
 
@@ -131,32 +142,32 @@ def predict_and_error(learner, x_test, x_train, y_test):
 
 def write_output(learner, sample_size, ml_method, mae, mse, runtype, 
     ids_test, y_test, y_pred, ids_train, y_train, train_y_pred,
-    to_predict_ids, y_to_predict):
+    to_predict_ids, y_to_predict, path):
     ### OUTPUT ###
     # y_test vs y_predict
     y_tmp = np.array([ids_test, y_test, y_pred])
     y_compare = np.transpose(y_tmp)
 
-    np.savetxt(ml_method + str("_") + runtype + "_size" + str(sample_size) + ".predictions", y_compare, 
+    np.savetxt(path + "/" + ml_method + str("_") + runtype + "_size" + str(sample_size) + ".predictions", y_compare, 
         header = "###ids_test   y_test    y_pred")
 
     # also y_train vs. y_pred_train
     y_tmp = np.array([ids_train, y_train, train_y_pred])
     y_compare = np.transpose(y_tmp)
 
-    np.savetxt(ml_method + str("_") + runtype + "_size" + str(sample_size) + ".trainset_predictions", y_compare, 
+    np.savetxt(path + "/" + ml_method + str("_") + runtype + "_size" + str(sample_size) + ".trainset_predictions", y_compare, 
         header = "###ids_train   y_train    train_y_pred")
 
     # also to_predict_ids and y_to_predict
     y_tmp = np.array([to_predict_ids, y_to_predict])
     y_compare = np.transpose(y_tmp)
 
-    np.savetxt(ml_method + str("_") + runtype + "_size" + str(sample_size) + ".remaining_predictions", y_compare, 
+    np.savetxt(path + "/" + ml_method + str("_") + runtype + "_size" + str(sample_size) + ".remaining_predictions", y_compare, 
         header = "###ids_remaining   y_pred_remaining")
 
 
 
-    with open(ml_method + str("_") + runtype + "_size" + str(sample_size) + ".out", "w") as f:
+    with open(path + "/" + ml_method + str("_") + runtype + "_size" + str(sample_size) + ".out", "w") as f:
         f.write("MAE " + str(mae) + "\n")
         f.write("MSE " + str(mse) + "\n")
         f.write("\n")

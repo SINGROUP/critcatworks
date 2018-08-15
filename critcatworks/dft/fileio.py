@@ -2,7 +2,7 @@ from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, Template
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
 from fireworks.queue.queue_launcher import launch_rocket_to_queue
 from fireworks.user_objects.queue_adapters.common_adapter import *
-import os,time
+import os,time, re, glob
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
@@ -65,11 +65,11 @@ class ChunkCalculationsTask(FiretaskBase):
     """
 
     _fw_name = 'ChunkCalculationsTask'
-    required_params = ['template', 'target_path', 'chunk_size', 'name']
+    required_params = ['template_path', 'target_path', 'chunk_size', 'name']
     optional_params = []
 
     def run_task(self, fw_spec):
-        template = self["template"]
+        template_path = self["template_path"]
         target_path = self["target_path"]
         chunk_size = self["chunk_size"]
         name = self["name"]
@@ -92,7 +92,7 @@ class ChunkCalculationsTask(FiretaskBase):
             target_path = calc_paths[int(ranked_id)]
 
             # create detour to setup cp2k calculation
-            new_fw = Firework([CP2KSetupTask(template = template,
+            new_fw = Firework([CP2KSetupTask(template_path = template_path,
                 target_path = target_path,
                 ranked_id = ranked_id,
                 name = name)])
@@ -115,7 +115,7 @@ class CP2KSetupTask(FiretaskBase):
     """
 
     _fw_name = 'CP2KSetupTask'
-    required_params = ['template', 'target_path', 'ranked_id']
+    required_params = ['template_path', 'target_path', 'ranked_id']
     optional_params = ['name']
 
     def run_task(self, fw_spec):
@@ -123,14 +123,15 @@ class CP2KSetupTask(FiretaskBase):
         logging.info("CP2KSetupTask not implemented yet")
         
         prefix = self.get("name", "cp2k_run_id")      
-        template_path = self["template"]
+        template_path = self["template_path"]
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
 
         # read template
+        cp2kinput = glob.glob(template_path + "/" + "*inp")[0]
 
         inpparser = pycp2k.CP2KInputParser()
-        calc = inpparser.parse(template_path)
+        calc = inpparser.parse(cp2kinput)
 
         logging.info("info about input parser")
         logging.info(inpparser)
@@ -140,6 +141,8 @@ class CP2KSetupTask(FiretaskBase):
 
 
         logging.debug("target_path", target_path)
+        
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 20 20 20"
 
         calc.working_directory = str(target_path)
         logging.debug("working_directory", calc.working_directory)
@@ -151,8 +154,7 @@ class CP2KSetupTask(FiretaskBase):
         #print("dummy outputs generated")
 
         detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)])
-        return FWAction(detours = detours)
-
+        return FWAction(update_spec = fw_spec, detours = detours)
 
 
 @explicit_serialize
@@ -171,9 +173,14 @@ class CP2KRunTask(FiretaskBase):
     def run_task(self, fw_spec):
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
-        logging.info("Running CP2K not implemented yet")
+        logging.info("Running CP2K not implemented yet. Creating dummy outputs")
+
+        with open(target_path + "/fake.out", "w") as f:
+            f.write("WARNING")
+            f.write("total_energy:        42.42")
+
         detours = Firework([CP2KAnalysisTask(target_path=target_path, ranked_id = ranked_id)])
-        return FWAction(detours = detours)
+        return FWAction(update_spec = fw_spec, detours = detours)
 
 
 @explicit_serialize
@@ -194,22 +201,40 @@ class CP2KAnalysisTask(FiretaskBase):
         ranked_id = self["ranked_id"]
         
         logging.info("Analysis of CP2K output not implemented yet")
-        total_energy = ranked_id
+
+
+        # read output
+        cp2koutput = glob.glob(target_path + "/" + "*out")[0]
+        total_energy = 42.42 + float(ranked_id / 100.0)
+        with open(cp2koutput) as origin_file:
+            for line in origin_file:
+                print(line)
+                is_toten = re.findall(r'total_energy:', line)
+                if is_toten:
+                    total_energy = line.split(None)[1]
+                    print(total_energy)
+
+                is_warning = re.findall(r'Warning:', line, flags=re.IGNORECASE)
+
+                is_converged = re.findall(r'Warning:', line, flags=re.IGNORECASE)
+
+                is_ended = re.findall(r'PROGRAM ENDED AT', line)
+
+
         logging.info(ranked_id)
 
         atoms_dict = "NotYetImplemented"
 
         mod_spec =[
-            {'_set' : {'adsorbate_energies_dict->' + str(ranked_id): total_energy}},
+            {'_set' : {'adsorbate_energies_dict->' + str(ranked_id): float(total_energy)}},
             {'_set' : {'relaxed_structure_dict->' + str(ranked_id): atoms_dict}},
             ]
-        return FWAction(mod_spec=mod_spec)
+        return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
 
-
-def setup_cp2k(template, target_path, chunk_size, name = "cp2k_run_id",):
+def setup_cp2k(template_path, target_path, chunk_size, name = "cp2k_run_id",):
     firetask1  = ChunkCalculationsTask(
-        template = template,
+        template_path = template_path,
         target_path = target_path,
         chunk_size = chunk_size,
         name = name,
@@ -224,61 +249,3 @@ def setup_folders(target_path, name = "cp2k_run_id",):
         name = name)
     fw = Firework([firetask1])
     return fw
-
-
-
-
-###############################################################################################
-
-@explicit_serialize
-class DFTSetupTask(FiretaskBase):
-   """ 
-   Task to setup DFT calculations.
-
-   Args:
-        None
-   """
-
-   _fw_name = 'DFTSetupTask'
-   required_params = ['path']
-   optional_params = []
-
-   def run_task(self, fw_spec):
-       logging.info("DFTSetupTask not implemented yet")
-       logging.info("forwarding information")
-       pass_spec = fw_spec
-       mod_spec =[{'_set' : {'dft_outputs->id' + str(dft_params[0]) : dft_params[0]}}]
-       return FWAction(update_spec =pass_spec, mod_spec=mod_spec)
-
-
-
-def branch_dft_calculations_fw():
-    task = DFTSetupTask(spec={'dft_params':[]}, inputs=['dft_params'])
-    task_dict = task.to_dict()
-    firetask1 = ForeachTask(task=task_dict, split='dft_params', spec={'dft_params':[1,2,3]})
-    fw = Firework([firetask1])
-    return fw
-
-
-
-def cp2k_test_workflow():
-    simple_task = SimpleTestTask(spec={'simple': 'stuff'})
-    firetask = PyTask(run_cp2k("cp2k_mm_energy.inp"))
-    wf = Firework([simple_task, firetask])
-
-    return wf
-
-
-def run_cp2k(template_file):
-    #export ASE_CP2K_COMMAND="mpirun -n 2 cp2k_shell.popt"
-    from ase.calculators.cp2k import CP2K
-    from ase.build import molecule
-
-    with open('cp2k_mm_energy.inp', 'r') as f:
-        content = f.read()
-    calc = CP2K(inp=content)
-    atoms = molecule('H2O', calculator=calc)
-    atoms.center(vacuum=2.0)
-    logging.info(atoms.get_potential_energy())
-    return
-###############################################################################################

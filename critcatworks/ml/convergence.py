@@ -36,6 +36,7 @@ class CheckConvergenceTask(FiretaskBase):
             defuse_workflow = False
             # start new chunk of calculations
             # already defined as children in the workflow
+            logging.info("calculating next chunk of DFT")
 
         update_spec = fw_spec
         return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
