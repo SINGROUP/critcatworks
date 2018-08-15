@@ -1,3 +1,6 @@
+@SET CFN adsorbate_structure.xyz
+
+
 &GLOBAL                  ! section to select the kind of calculation
    RUN_TYPE ENERGY       ! select type of calculation. In this case: ENERGY (=Single point calculation)
 &END GLOBAL
@@ -43,10 +46,11 @@
      ABC [angstrom] 20 20 20  
      PERIODIC NONE
     &END CELL
-    &COORD                
-      UNIT angstrom
-      Cu  0 0 0
-      Cu  4 0 0
-    &END COORD
+    &TOPOLOGY
+      COORD_FILE_FORMAT XYZ
+      COORD_FILE_NAME ${CFN}
+      &CENTER_COORDINATES T
+      &END CENTER_COORDINATES
+    &END TOPOLOGY
    &END SUBSYS
 &END FORCE_EVAL

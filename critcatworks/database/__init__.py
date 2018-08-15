@@ -1,2 +1,3 @@
 from critcatworks.database.ncstructures import read_structures
 from critcatworks.database.format import atoms_dict_to_ase
+from critcatworks.database.update import update_converged_data

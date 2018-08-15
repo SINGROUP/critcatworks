@@ -9,6 +9,7 @@ from pprint import pprint as pp
 import ase, ase.io
 import clusgeo
 import numpy as np
+import logging
 
 from critcatworks.database import atoms_dict_to_ase
 
@@ -16,9 +17,9 @@ def adsorbate_pos_to_atoms_dict(structure, adspos, adsite_type):
     atoms_lst = []
     ads_structures_dict = []
     for adatom, idx in zip(adspos, range(len(adspos))):
-        print(adsite_type)
-        print(adatom)
-        print(adatom.shape)
+        logging.debug(adsite_type)
+        logging.debug(adatom)
+        logging.debug(adatom.shape)
         adatom = ase.Atoms(symbols=adsite_type, positions=adatom.reshape((1,3)))
         clus_ads = structure + adatom
         atoms_lst.append(clus_ads)
@@ -29,6 +30,8 @@ def adsorbate_pos_to_atoms_dict(structure, adspos, adsite_type):
 
 
 def adsorbate_pos_to_descriptor(structure, adspos, adsite_type, all_atomtypes, rcut = 5.0):
+
+    all_atomtypes = [int(i) for i in all_atomtypes]
     desc = clusgeo.environment.get_soap_sites(structure, adspos, rCut=rcut, NradBas=9, Lmax=6, 
         crossOver=True, all_atomtypes=all_atomtypes)
     return desc
@@ -59,7 +62,7 @@ class AdsiteCreationTask(FiretaskBase):
         adsorbate_name = self["adsorbate_name"]
         adsite_types = self["adsite_types"]
 
-        #pp(fw_spec)
+        logging.debug(fw_spec)
         ads_structures = []
         connect_dict = {}
         desc_lst = []
@@ -68,21 +71,21 @@ class AdsiteCreationTask(FiretaskBase):
         all_atomtypes = fw_spec["nc_atomic_numbers"]
         nc_structures_dict = fw_spec["nc_structures"]
         for idx, atoms_dict in enumerate(nc_structures_dict):
-            print("ATOMS DICT")
-            print(atoms_dict)
+            logging.debug("ATOMS DICT")
+            logging.debug(atoms_dict)
             atoms = ase.Atoms()
             #atoms.__dict__ = atoms_dict
             
             atoms =  atoms_dict_to_ase(atoms_dict)
-            print("ASE atoms from DICT")
-            print(atoms)
+            logging.debug("ASE atoms from DICT")
+            logging.debug(atoms)
 
             # entries for adsorbate dictionary
             connect_dict[str(idx)] = {}
 
             # running clusgeo on cluster
             surfatoms = clusgeo.surface.get_surface_atoms(atoms)
-            print(len(surfatoms))
+            logging.debug(len(surfatoms))
             for adsite_type in adsite_types:
                 if adsite_type == "top":
                     adsites = clusgeo.surface.get_top_sites(atoms, surfatoms)
@@ -91,7 +94,7 @@ class AdsiteCreationTask(FiretaskBase):
                 elif adsite_type == "hollow":
                     adsites = clusgeo.surface.get_hollow_sites(atoms, surfatoms)
                 else:
-                    print("adsorption site type unknown, known types are: top, bridge, hollow")
+                    logging.error("adsorption site type unknown, known types are: top, bridge, hollow")
                     exit(1)
                 
                 # get adsorption sites for a nanocluster
@@ -111,10 +114,7 @@ class AdsiteCreationTask(FiretaskBase):
                 for i in range(desc.shape[0]):
                     desc_lst.append(desc[i])
 
-
-        desc_lst = np.array(desc_lst)
-        #desc_lst = desc_lst.tolist()
-        descmatrix = desc_lst
+        descmatrix = np.array(desc_lst)
     
         # order cluster-adsorbates
         update_spec = fw_spec
@@ -122,6 +122,15 @@ class AdsiteCreationTask(FiretaskBase):
         update_spec["ads_structures"] = ads_structures
         update_spec["connect_dict"] = connect_dict
         update_spec["descmatrix"] = descmatrix
+
+        # dictionary and list for filling total energies later
+        update_spec["adsorbate_energies_dict"] = {}
+        update_spec["adsorbate_energies_list"] = np.zeros(descmatrix.shape[0])
+        
+        # dictionary and list for filling total energies later
+        update_spec["relaxed_structure_dict"] = {}
+        update_spec["relaxed_structure_list"] = list(np.zeros(descmatrix.shape[0]))
+
 
         return FWAction(update_spec=update_spec)
 
@@ -139,12 +148,14 @@ class AdsiteRankTask(FiretaskBase):
     optional_params = []
 
     def run_task(self, fw_spec):
-        pp(fw_spec)
+        logging.debug(fw_spec)
         ads_structures = fw_spec["ads_structures"]
         nc_ids = fw_spec["nc_ids"]
         descmatrix = fw_spec["descmatrix"]
         descmatrix = np.array(descmatrix)
-
+        logging.info("DESCRIPTOR matrix attributes")
+        logging.info(descmatrix.shape)
+        logging.info(np.sum(descmatrix))
         fps_ranking = clusgeo.environment.rank_sites(descmatrix, K = None, idx=[], greedy = False, is_safe = True)
 
         update_spec = fw_spec

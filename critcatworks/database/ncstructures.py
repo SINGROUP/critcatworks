@@ -7,7 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
-
+import logging
 
 @explicit_serialize
 class NCReadTask(FiretaskBase):
@@ -25,7 +25,7 @@ class NCReadTask(FiretaskBase):
 
     def run_task(self, fw_spec):
         path = self["path"]
-        pp(fw_spec)
+        logging.debug(fw_spec)
 
         f_lst = []
         nc_names = []
@@ -36,17 +36,17 @@ class NCReadTask(FiretaskBase):
         atomic_numbers = []
         for idx, p in enumerate(pathlib.Path(path).iterdir()):
             if p.is_file():
-                print(p, p.stem)
+                logging.debug(p, p.stem)
                 f_lst.append(p)
                 try:
                     atoms = ase.io.read(p)
 
-                    print(atoms)
+                    logging.debug(atoms)
                 except ValueError:
-                    print("WARNING: file type not understood", p)
+                    logging.warning("WARNING: file type not understood" + str(p) )
                     continue
                 except:
-                    print("Unexpected error:", sys.exc_info()[0])
+                    logging.error("Unexpected error:", sys.exc_info()[0])
                 nc_names.append(p.stem)
                 atomic_numbers.extend(atoms.get_atomic_numbers())
                 atoms_dict = atoms.__dict__
