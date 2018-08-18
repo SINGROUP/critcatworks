@@ -39,11 +39,13 @@ class CheckConvergenceTask(FiretaskBase):
             logging.info("calculating next chunk of DFT")
 
         update_spec = fw_spec
+        update_spec.pop("_category")
+
         return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
 
 
 def check_convergence(threshold):
     firetask1  = CheckConvergenceTask(threshold = threshold)
-    fw = Firework([firetask1])
+    fw = Firework([firetask1], spec = {'_category' : "lightweight"})
     return fw
 

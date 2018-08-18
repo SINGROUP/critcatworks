@@ -36,10 +36,10 @@ class NCReadTask(FiretaskBase):
         atomic_numbers = []
         for idx, p in enumerate(pathlib.Path(path).iterdir()):
             if p.is_file():
-                logging.debug(p, p.stem)
+                logging.debug("nanocluster path " + str(p) + " stem " + str(p.stem))
                 f_lst.append(p)
                 try:
-                    atoms = ase.io.read(p)
+                    atoms = ase.io.read(str(p))
 
                     logging.debug(atoms)
                 except ValueError:
@@ -53,11 +53,9 @@ class NCReadTask(FiretaskBase):
                 nc_structures_ase.append(atoms)
                 nc_structures_dict.append(atoms_dict)
                 nc_ids.append(idx)
-                try:
-                    energy = atoms.info["energy"]
-                except:
-                    energy = None
 
+                energy = None
+                energy = atoms.info.get("E")
                 nc_energies.append(energy)
 
         sorted_set_atomic_numbers = sorted(set(atomic_numbers)) 
@@ -68,6 +66,7 @@ class NCReadTask(FiretaskBase):
         update_spec["nc_ids"] = nc_ids
         update_spec["nc_energies"] = nc_energies
         update_spec["nc_atomic_numbers"] = sorted_set_atomic_numbers
+        update_spec.pop("_category")
 
         return FWAction(update_spec=update_spec)
 
@@ -76,5 +75,5 @@ class NCReadTask(FiretaskBase):
 
 def read_structures(path):
     firetask1  = NCReadTask(path=path)
-    fw = Firework([firetask1], spec={'path':path})
+    fw = Firework([firetask1], spec={'path':path, '_category' : "lightweight"})
     return fw

@@ -2,11 +2,13 @@ from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, Template
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
 from fireworks.queue.queue_launcher import launch_rocket_to_queue
 from fireworks.user_objects.queue_adapters.common_adapter import *
-import os,time
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
+from fireworks.user_objects.queue_adapters.common_adapter import CommonAdapter
+
 from pprint import pprint as pp
 import pathlib
+import os,time
 
 # internal modules
 from critcatworks.clusgeo import get_adsites, rank_adsites
@@ -14,7 +16,7 @@ from critcatworks.database import read_structures, update_converged_data
 from critcatworks.dft import setup_folders, setup_cp2k
 from critcatworks.ml import get_mae, check_convergence
 
-def get_adsites_workflow(source_path, template_path, target_path = None, adsorbate_energy=0.0, 
+def get_adsites_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
         adsorbate_name='H', chunk_size = 100, max_calculations = 10000):
     """
     Workflow to determine the adsorption sites and energies of a set of
@@ -32,7 +34,7 @@ def get_adsites_workflow(source_path, template_path, target_path = None, adsorba
     fw_read_structures = read_structures(abspath)
     # FireWork: Determine adsites and add to database
     fw_get_adsites = get_adsites(
-        adsorbate_energy=0.0, 
+        reference_energy=0.0, 
         adsorbate_name='H', 
         #adsite_types = ["top", "bridge", "hollow"],
         adsite_types = ["top"],
@@ -109,13 +111,11 @@ def get_adsites_workflow(source_path, template_path, target_path = None, adsorba
             fw_setup_cp2k : [fw_update_converged_data],
             fw_update_converged_data : [fw_get_mae],
             fw_get_mae : [fw_check_convergence],
-            #fw_check_convergence : [fw_setup_cp2k]
+            fw_check_convergence : [fw_setup_cp2k]
             })
     """
     wf = Workflow(workflow_list, links_dict)
     return wf
-
-
 
 
 if __name__ == "__main__":
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     logging.basicConfig(filename = "logfile_ranked_adsites.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = LaunchPad()
+    launchpad = LaunchPad(logdir=".")
     launchpad.reset('', require_password=False)
     #launchpad = LaunchPad(host="myhost", port=12345, \
     #name="fireworks_testing_db", username="my_user", \
@@ -134,7 +134,9 @@ if __name__ == "__main__":
         source_path = "/l/programs/critcatworks/tests/dummy_db/nc_structures/", 
         #template = '/l/programs/critcatworks/tests/dummy_db/templates/cu_mm_bulk.inp', 
         template_path = '/l/programs/critcatworks/tests/dummy_db/templates/', 
-        target_path = "/l/programs/critcatworks/tests/dummy_db/output/", 
+        target_path = "/l/programs/critcatworks/tests/dummy_db/output/",
+        reference_energy = -1.16195386047558 * 0.5,
+        adsorbate_name = "H",
         chunk_size = 12,
         max_calculations = 30,
         )
@@ -146,19 +148,73 @@ if __name__ == "__main__":
     # excecute workflow
     IS_QUEUE = False
     if IS_QUEUE:
-        launch_rocket_to_queue(launchpad, FWorker(), adapter, launcher_dir='.', reserve=True)
+        abspath = pathlib.Path(".").resolve()
+        dft = CommonAdapter(
+            q_type="SLURM",
+            queue="test",
+            nodes= 1,
+            ntasks= 8,
+            walltime= '00:02:00',
+            constraint='hsw',
+            account= None,
+            job_name= 'dfttestrun',
+            pre_rocket= None,
+            post_rocket= None,
+            logdir= abspath,
+            rocket_launch= "rlaunch  singleshot --offline")
+        lightweight = CommonAdapter(
+            q_type="SLURM",
+            queue="light",
+            nodes= 1,
+            ntasks= 8,
+            walltime= '00:00:30',
+            constraint='hsw',
+            account= None,
+            job_name= 'light',
+            pre_rocket= None,
+            post_rocket= None,
+            logdir= abspath,
+            rocket_launch= "rlaunch  singleshot --offline")
+        medium = CommonAdapter(
+            q_type="SLURM",
+            queue="test",
+            nodes= 1,
+            ntasks= 8,
+            walltime= '00:01:00',
+            constraint='hsw',
+            account= None,
+            job_name= 'medium',
+            pre_rocket= None,
+            post_rocket= None,
+            logdir= abspath,
+            rocket_launch= "rlaunch  singleshot --offline")
+
+        for i in range(0, 10):
+            launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, launcher_dir=abspath, reserve=True)
+            launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, launcher_dir=abspath, reserve=True)
+            launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, launcher_dir=abspath, reserve=True)
     else:
         #launch_rocket(launchpad, FWorker())
-        rapidfire(launchpad, FWorker())
+        rapidfire(launchpad, FWorker(category=['dft', 'medium', 'lightweight']))
+        #rapidfire(launchpad, FWorker(category='medium'))
+        #rapidfire(launchpad, FWorker(category='lightweight'))
 
 
+    # running in background to submit dynamic fireworks
+    # and recover offline fireworks
     if IS_QUEUE:
-        # recover offline fireworks
         for i in range(0,10):
+            # recover offline fireworks
             time.sleep(5)
             ids =launchpad.get_fw_ids()
             for idx in ids:
                 launchpad.recover_offline(launch_id = idx)
+            # submit fireworks which have been added
+            for i in range(0, 10):
+                launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, launcher_dir=abspath, reserve=True)
+                launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, launcher_dir=abspath, reserve=True)
+                launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, launcher_dir=abspath, reserve=True)
+
 
 
 

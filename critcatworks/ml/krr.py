@@ -41,7 +41,7 @@ class MLTask(FiretaskBase):
 
 
         descmatrix = np.array(fw_spec["descmatrix"])
-        en = np.array(fw_spec["adsorbate_energies_list"])
+        en = np.array(fw_spec["reaction_energies_list"])
         
         features = descmatrix[ranked_ids]
         to_predict_features = descmatrix[to_predict_ids]
@@ -55,13 +55,14 @@ class MLTask(FiretaskBase):
         update_spec["best_krr_parameters"] = krr_parameters
         update_spec["ids_predicted"] = to_predict_ids
         update_spec["predicted_energies"] = y_to_predict
+        update_spec.pop("_category")
 
         return FWAction(update_spec=update_spec)
 
 
 def get_mae(target_path):
     firetask1  = MLTask(target_path=target_path)
-    fw = Firework([firetask1])
+    fw = Firework([firetask1], spec = {'_category' : "medium"})
     return fw
 
 

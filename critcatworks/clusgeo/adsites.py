@@ -43,7 +43,7 @@ class AdsiteCreationTask(FiretaskBase):
     Task to determine adsorption site structures.
 
     Args:
-        adsorbate_energy (float) :  Total energy of the free adsorbate 
+        reference_energy (float) :  Total energy of the free adsorbate 
                                     as a reference energy to 
                                     determine the adsorption energy 
                                     as in
@@ -54,17 +54,18 @@ class AdsiteCreationTask(FiretaskBase):
     """
 
     _fw_name = 'AdsiteCreationTask'
-    required_params = ['adsorbate_energy', 'adsorbate_name', 'adsite_types']
+    required_params = ['reference_energy', 'adsorbate_name', 'adsite_types']
     optional_params = []
 
     def run_task(self, fw_spec):
-        adsorbate_energy = self["adsorbate_energy"]
+        reference_energy = self["reference_energy"]
         adsorbate_name = self["adsorbate_name"]
         adsite_types = self["adsite_types"]
 
         logging.debug(fw_spec)
         ads_structures = []
         connect_dict = {}
+        reverse_connect_dict = {}
         desc_lst = []
 
         # going through nc atoms
@@ -105,6 +106,8 @@ class AdsiteCreationTask(FiretaskBase):
                 added_ids_end = added_ids_start + len(adsites_dict)
                 added_ids = list(range(added_ids_start, added_ids_end))
                 connect_dict[str(idx)][adsite_type] = added_ids
+                for adsorbate_id in added_ids:
+                    reverse_connect_dict[str(adsorbate_id)] = str(idx)
 
                 # save adsorbate structures
                 ads_structures.extend(adsites_dict)
@@ -121,16 +124,21 @@ class AdsiteCreationTask(FiretaskBase):
         update_spec["nc_structures"] = nc_structures_dict
         update_spec["ads_structures"] = ads_structures
         update_spec["connect_dict"] = connect_dict
+        update_spec["reverse_connect_dict"] = reverse_connect_dict
         update_spec["descmatrix"] = descmatrix
 
         # dictionary and list for filling total energies later
         update_spec["adsorbate_energies_dict"] = {}
         update_spec["adsorbate_energies_list"] = np.zeros(descmatrix.shape[0])
         
-        # dictionary and list for filling total energies later
+        # dictionary and list for filling structures later
         update_spec["relaxed_structure_dict"] = {}
         update_spec["relaxed_structure_list"] = list(np.zeros(descmatrix.shape[0]))
 
+        # dictionary and list for filling reaction energies later
+        update_spec["reaction_energies_list"] = np.zeros(descmatrix.shape[0])
+
+        update_spec.pop("_category")
 
         return FWAction(update_spec=update_spec)
 
@@ -160,6 +168,8 @@ class AdsiteRankTask(FiretaskBase):
 
         update_spec = fw_spec
         update_spec["fps_ranking"] = fps_ranking
+        update_spec.pop("_category")
+
         return FWAction(update_spec=update_spec)
 
 
@@ -167,15 +177,17 @@ class AdsiteRankTask(FiretaskBase):
 
 
 
-def get_adsites(adsorbate_energy = 0.0, adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"],
+def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"],
 ):
     firetask1  = AdsiteCreationTask(
-        adsorbate_energy=adsorbate_energy, 
+        reference_energy=reference_energy, 
         adsorbate_name=adsorbate_name, 
         adsite_types = adsite_types,
         )
     fw = Firework([firetask1], 
-        spec={'adsorbate_energy': adsorbate_energy, 'adsorbate_name' : adsorbate_name, 'adsite_types' : adsite_types,
+        spec={'reference_energy': reference_energy, 'adsorbate_name' : adsorbate_name, 
+        'adsite_types' : adsite_types,
+        '_category' : "lightweight",
 }
         )
     return fw
@@ -183,5 +195,5 @@ def get_adsites(adsorbate_energy = 0.0, adsorbate_name='H', adsite_types = ["top
 
 def rank_adsites():
     firetask1  = AdsiteRankTask()
-    fw = Firework([firetask1])
+    fw = Firework([firetask1], spec = {'_category' : "medium"})
     return fw

@@ -23,10 +23,14 @@ class UpdateDataTask(FiretaskBase):
     def run_task(self, fw_spec):
         chunk_size = int(self["chunk_size"])
         n_calcs_started = int(fw_spec["n_calcs_started"])
+        nc_energies = fw_spec["nc_energies"]
+        reverse_connect_dict = fw_spec["reverse_connect_dict"]
+        reference_energy = fw_spec["reference_energy"]
+
 
         ranked_ids_chunk = fw_spec["fps_ranking"][n_calcs_started - chunk_size : n_calcs_started]
 
-        print(ranked_ids_chunk)
+        logging.info(ranked_ids_chunk)
 
         adsorbate_energies_list = fw_spec["adsorbate_energies_list"]
         adsorbate_energies_dict = fw_spec["adsorbate_energies_dict"]
@@ -34,6 +38,7 @@ class UpdateDataTask(FiretaskBase):
         relaxed_structure_list = fw_spec["relaxed_structure_list"]
         relaxed_structure_dict = fw_spec["relaxed_structure_dict"]
 
+        reaction_energies_list = fw_spec["reaction_energies_list"]
 
         logging.debug(adsorbate_energies_list)
         logging.debug(relaxed_structure_list)
@@ -46,10 +51,23 @@ class UpdateDataTask(FiretaskBase):
             adsorbate_energies_list[int(ranked_id)] = adsorbate_energies_dict[str(ranked_id)]
             relaxed_structure_list[int(ranked_id)] = relaxed_structure_dict[str(ranked_id)]
 
+        logging.debug("reverse_connect_dict")
+        logging.debug(reverse_connect_dict)
+
+        print("reverse_connect_dict")
+        pp(reverse_connect_dict)
+        for ranked_id in ranked_ids_chunk:
+            print(ranked_id, type(ranked_id))
+            nc_id = reverse_connect_dict[str(ranked_id)]
+            reaction_energies_list[int(ranked_id)] = adsorbate_energies_list[int(ranked_id)] - reference_energy - nc_energies[int(nc_id)]
+
+
+
         update_spec = fw_spec
         update_spec["relaxed_structure_list"] = relaxed_structure_list
         update_spec["adsorbate_energies_list"] = adsorbate_energies_list
-
+        update_spec["reaction_energies_list"] = reaction_energies_list
+        update_spec.pop("_category")
 
         logging.debug(adsorbate_energies_list)
         logging.debug(relaxed_structure_list)
@@ -59,5 +77,5 @@ class UpdateDataTask(FiretaskBase):
 
 def update_converged_data(chunk_size):
     firetask1  = UpdateDataTask(chunk_size = chunk_size)
-    fw = Firework([firetask1])
+    fw = Firework([firetask1], spec = {'_category' : "lightweight"})
     return fw

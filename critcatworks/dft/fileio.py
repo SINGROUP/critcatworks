@@ -7,7 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import pathlib, logging
-import pycp2k
+import pycp2k, cp2kparser
 import ase, ase.io
 
 from critcatworks.database import atoms_dict_to_ase
@@ -53,6 +53,8 @@ class StructureFolderTask(FiretaskBase):
 
 
         update_spec["calc_paths"] = calc_paths
+        #update_spec["result_dict"] = {}
+        update_spec.pop("_category")
         return FWAction(update_spec = update_spec)
 
 @explicit_serialize
@@ -95,12 +97,13 @@ class ChunkCalculationsTask(FiretaskBase):
             new_fw = Firework([CP2KSetupTask(template_path = template_path,
                 target_path = target_path,
                 ranked_id = ranked_id,
-                name = name)])
+                name = name)], spec = {'_category' : "lightweight"})
             detours.append(new_fw)
 
 
         update_spec = fw_spec
         update_spec["n_calcs_started"] = n_calcs_started + chunk_size
+        update_spec.pop("_category")
 
         return FWAction(update_spec = update_spec, detours = detours)
 
@@ -140,20 +143,22 @@ class CP2KSetupTask(FiretaskBase):
         logging.info(inpparser.storage_obj)
 
 
-        logging.debug("target_path", target_path)
+        logging.debug("target_path")
+        logging.debug(target_path)
         
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 20 20 20"
 
         calc.working_directory = str(target_path)
-        logging.debug("working_directory", calc.working_directory)
+        logging.debug("working_directory: " + str(calc.working_directory))
         calc.project_name = "gopt"
         calc.write_input_file()
 
         logging.info("cp2k input file written TO" + calc.project_name + ".inp")
         #pass_spec = fw_spec
         #print("dummy outputs generated")
-
-        detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)])
+        fw_spec.pop("_category")
+        detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
+            spec = {'_category' : "dft"})
         return FWAction(update_spec = fw_spec, detours = detours)
 
 
@@ -175,11 +180,12 @@ class CP2KRunTask(FiretaskBase):
         ranked_id = self["ranked_id"]
         logging.info("Running CP2K not implemented yet. Creating dummy outputs")
 
-        with open(target_path + "/fake.out", "w") as f:
-            f.write("WARNING")
-            f.write("total_energy:        42.42")
-
-        detours = Firework([CP2KAnalysisTask(target_path=target_path, ranked_id = ranked_id)])
+        #with open(target_path + "/fake.out", "w") as f:
+        #    f.write("WARNING")
+        #    f.write("total_energy:        42.42")
+        fw_spec.pop("_category")
+        detours = Firework([CP2KAnalysisTask(target_path=target_path, ranked_id = ranked_id)], 
+            spec = {'_category' : "lightweight"})
         return FWAction(update_spec = fw_spec, detours = detours)
 
 
@@ -200,34 +206,81 @@ class CP2KAnalysisTask(FiretaskBase):
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
         
-        logging.info("Analysis of CP2K output not implemented yet")
-
+        logging.info("Analysis of CP2K is being implemented")
 
         # read output
+
+        # preparse for correct termination, warnings and exceeded walltime
+        output_state, preparse_results = additional_parse_stdout(str(target_path))
+
+        if output_state == "no_output":
+            logging.warning("no output file available")
+        elif output_state == "incorrect_termination":
+            logging.info("incorrect termination")
+        else:
+            logging.info("parser confirmed that CP2K terminated correctly")
+
+        if output_state == "no_output" or output_state == "incorrect_termination":
+            detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
+                spec = {'_category' : "dft"})
+            return FWAction(update_spec = fw_spec, detours = detours)
+
+
+        nwarnings = preparse_results['nwarnings']
+        is_walltime_exceeded = preparse_results['exceeded_walltime']
+
+        # cp2k parser
+        parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.ERROR)
         cp2koutput = glob.glob(target_path + "/" + "*out")[0]
-        total_energy = 42.42 + float(ranked_id / 100.0)
-        with open(cp2koutput) as origin_file:
-            for line in origin_file:
-                print(line)
-                is_toten = re.findall(r'total_energy:', line)
-                if is_toten:
-                    total_energy = line.split(None)[1]
-                    print(total_energy)
+        results = parser.parse(cp2koutput)
 
-                is_warning = re.findall(r'Warning:', line, flags=re.IGNORECASE)
+        atom_positions = results["atom_positions"]
+        number_of_frames_in_sequence = results["number_of_frames_in_sequence"]
+        is_converged = results["geometry_optimization_converged"]
+        atom_labels = results["atom_labels"]
+        frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
 
-                is_converged = re.findall(r'Warning:', line, flags=re.IGNORECASE)
+        if is_converged:
+            adsorbate_total_energy = frame_sequence_potential_energy[-1]
+        else:
+            adsorbate_total_energy = None
+            detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
+                spec = {'_category' : "dft"})
+            return FWAction(update_spec = fw_spec, detours = detours)     
 
-                is_ended = re.findall(r'PROGRAM ENDED AT', line)
+        logging.info("adsorbate_total_energy: " + str(adsorbate_total_energy))
 
+        logging.debug("atom_labels")
+        logging.debug(atom_labels.shape)
+        logging.debug(atom_labels[-1])
+        logging.debug("atom_positions")
+        logging.debug(atom_positions.shape)
+        logging.debug("frame_sequence_potential_energy")
+        logging.debug(frame_sequence_potential_energy.shape)
+        logging.debug("number_of_frames_in_sequence")
+        logging.debug(number_of_frames_in_sequence)
+        logging.debug("is_converged")
+        logging.debug(is_converged)
 
-        logging.info(ranked_id)
+        relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1])
 
-        atoms_dict = "NotYetImplemented"
+        atoms_dict = relaxed_structure.__dict__
+
+        result_dict = {
+            "is_converged" : is_converged,
+            "number_of_frames_in_sequence" : number_of_frames_in_sequence,
+            "nwarnings" : nwarnings,
+            "is_walltime_exceeded" : is_walltime_exceeded,
+            "adsorbate_total_energy" : adsorbate_total_energy,
+        }
+
+        
+        fw_spec.pop("_category")
 
         mod_spec =[
-            {'_set' : {'adsorbate_energies_dict->' + str(ranked_id): float(total_energy)}},
+            {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : float(adsorbate_total_energy)}},
             {'_set' : {'relaxed_structure_dict->' + str(ranked_id): atoms_dict}},
+            {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
             ]
         return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
@@ -239,7 +292,7 @@ def setup_cp2k(template_path, target_path, chunk_size, name = "cp2k_run_id",):
         chunk_size = chunk_size,
         name = name,
         )
-    fw = Firework([firetask1])
+    fw = Firework([firetask1], spec = {'_category' : "lightweight"})
     return fw
 
 
@@ -247,5 +300,32 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     firetask1  = StructureFolderTask(
         target_path = target_path,
         name = name)
-    fw = Firework([firetask1])
+    fw = Firework([firetask1], spec = {'_category' : "medium"})
     return fw
+
+
+def additional_parse_stdout(target_path):
+    output_files = glob.glob(target_path + "/" + "*out")
+    if len(output_files) == 0:
+        logging.warning("Cp2k output file not retrieved")
+        return "no_output", None
+    elif len(output_files) > 1:
+        logging.warning("WARNING, more than one output file available")
+    cp2koutput = output_files[0]
+    abs_fn = pathlib.Path(cp2koutput).resolve()
+    abs_fn = str(abs_fn)
+    result_dict = {'exceeded_walltime': False}
+    with open(abs_fn, "r") as f:
+        for line in f.readlines():
+            #if line.startswith(' ENERGY| '):
+            #    result_dict['energy'] = float(line.split()[8])
+            if 'The number of warnings for this run is' in line:
+                result_dict['nwarnings'] = int(line.split()[-1])
+            if 'exceeded requested execution time' in line:
+                result_dict['exceeded_walltime'] = True
+
+    if 'nwarnings' not in result_dict:
+        logging.warning("CP2K did not finish properly.")
+        return "incorrect_termination", result_dict
+    else:
+        return "ok", result_dict
