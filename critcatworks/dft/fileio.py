@@ -2,7 +2,7 @@ from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, Template
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
 from fireworks.queue.queue_launcher import launch_rocket_to_queue
 from fireworks.user_objects.queue_adapters.common_adapter import *
-import os,time, re, glob
+import os,time, re, glob, sys
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
@@ -55,6 +55,7 @@ class StructureFolderTask(FiretaskBase):
         update_spec["calc_paths"] = calc_paths
         #update_spec["result_dict"] = {}
         update_spec.pop("_category")
+        update_spec.pop("name")
         return FWAction(update_spec = update_spec)
 
 @explicit_serialize
@@ -97,13 +98,15 @@ class ChunkCalculationsTask(FiretaskBase):
             new_fw = Firework([CP2KSetupTask(template_path = template_path,
                 target_path = target_path,
                 ranked_id = ranked_id,
-                name = name)], spec = {'_category' : "lightweight"})
+                name = name)], spec = {'_category' : "lightweight", 'name' : 'CP2KSetupTask'},
+                name = 'CP2KSetupWork')
             detours.append(new_fw)
 
 
         update_spec = fw_spec
         update_spec["n_calcs_started"] = n_calcs_started + chunk_size
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         return FWAction(update_spec = update_spec, detours = detours)
 
@@ -157,8 +160,10 @@ class CP2KSetupTask(FiretaskBase):
         #pass_spec = fw_spec
         #print("dummy outputs generated")
         fw_spec.pop("_category")
+        fw_spec.pop("name")
         detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
-            spec = {'_category' : "dft"})
+            spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
+            name = 'CP2KRunWork')
         return FWAction(update_spec = fw_spec, detours = detours)
 
 
@@ -179,13 +184,19 @@ class CP2KRunTask(FiretaskBase):
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
         logging.info("Running CP2K not implemented yet. Creating dummy outputs")
+        print("Running CP2K not implemented yet. Creating dummy outputs")
+        print("ranked id", ranked_id)
+        print("sleeping for 5 seconds")
+        time.sleep(5)
 
         #with open(target_path + "/fake.out", "w") as f:
         #    f.write("WARNING")
         #    f.write("total_energy:        42.42")
         fw_spec.pop("_category")
+        fw_spec.pop("name")
         detours = Firework([CP2KAnalysisTask(target_path=target_path, ranked_id = ranked_id)], 
-            spec = {'_category' : "lightweight"})
+            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask'},
+            name = 'CP2KAnalysisWork')
         return FWAction(update_spec = fw_spec, detours = detours)
 
 
@@ -207,6 +218,14 @@ class CP2KAnalysisTask(FiretaskBase):
         ranked_id = self["ranked_id"]
         
         logging.info("Analysis of CP2K is being implemented")
+        print("Analysis of CP2K is being implemented")
+
+        print("ranked id", ranked_id)
+        
+        print("len sys.argv", len(sys.argv))
+        print("sys.argv values")
+        for value in sys.argv:
+            print(value)
 
         # read output
 
@@ -215,14 +234,18 @@ class CP2KAnalysisTask(FiretaskBase):
 
         if output_state == "no_output":
             logging.warning("no output file available")
+            print("no output file available")
         elif output_state == "incorrect_termination":
             logging.info("incorrect termination")
+            print("incorrect termination")
         else:
             logging.info("parser confirmed that CP2K terminated correctly")
+            print("parser confirmed that CP2K terminated correctly")
 
         if output_state == "no_output" or output_state == "incorrect_termination":
             detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
-                spec = {'_category' : "dft"})
+                spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
+                name = 'CP2KRunWork')
             return FWAction(update_spec = fw_spec, detours = detours)
 
 
@@ -230,9 +253,12 @@ class CP2KAnalysisTask(FiretaskBase):
         is_walltime_exceeded = preparse_results['exceeded_walltime']
 
         # cp2k parser
-        parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.ERROR)
+        parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)
+        print("cp2k parser setup successfully")
         cp2koutput = glob.glob(target_path + "/" + "*out")[0]
+        print("cp2k output file", cp2koutput)
         results = parser.parse(cp2koutput)
+        print("cp2k parser ran successfully")
 
         atom_positions = results["atom_positions"]
         number_of_frames_in_sequence = results["number_of_frames_in_sequence"]
@@ -243,12 +269,16 @@ class CP2KAnalysisTask(FiretaskBase):
         if is_converged:
             adsorbate_total_energy = frame_sequence_potential_energy[-1]
         else:
+            logging.info("CP2K not converged")
+            print("CP2K not converged")
             adsorbate_total_energy = None
             detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
-                spec = {'_category' : "dft"})
+                spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
+                name = 'CP2KRunWork')
             return FWAction(update_spec = fw_spec, detours = detours)     
 
         logging.info("adsorbate_total_energy: " + str(adsorbate_total_energy))
+        print("adsorbate_total_energy: " + str(adsorbate_total_energy))
 
         logging.debug("atom_labels")
         logging.debug(atom_labels.shape)
@@ -262,6 +292,8 @@ class CP2KAnalysisTask(FiretaskBase):
         logging.debug("is_converged")
         logging.debug(is_converged)
 
+        print("is_converged")
+        print(is_converged)
         relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1])
 
         atoms_dict = relaxed_structure.__dict__
@@ -276,6 +308,7 @@ class CP2KAnalysisTask(FiretaskBase):
 
         
         fw_spec.pop("_category")
+        fw_spec.pop("name")
 
         mod_spec =[
             {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : float(adsorbate_total_energy)}},
@@ -292,7 +325,8 @@ def setup_cp2k(template_path, target_path, chunk_size, name = "cp2k_run_id",):
         chunk_size = chunk_size,
         name = name,
         )
-    fw = Firework([firetask1], spec = {'_category' : "lightweight"})
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'ChunkCalculationsTask'},
+             name = 'ChunkCalculationsWork')
     return fw
 
 
@@ -300,7 +334,8 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     firetask1  = StructureFolderTask(
         target_path = target_path,
         name = name)
-    fw = Firework([firetask1], spec = {'_category' : "medium"})
+    fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'StructureFolderTask'},
+             name = 'StructureFolderWork')
     return fw
 
 

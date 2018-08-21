@@ -67,6 +67,7 @@ class NCReadTask(FiretaskBase):
         update_spec["nc_energies"] = nc_energies
         update_spec["nc_atomic_numbers"] = sorted_set_atomic_numbers
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         return FWAction(update_spec=update_spec)
 
@@ -75,5 +76,6 @@ class NCReadTask(FiretaskBase):
 
 def read_structures(path):
     firetask1  = NCReadTask(path=path)
-    fw = Firework([firetask1], spec={'path':path, '_category' : "lightweight"})
+    fw = Firework([firetask1], spec={'path':path, '_category' : "lightweight", 'name' : 'NCReadTask'},
+             name = 'NCReadWork')
     return fw

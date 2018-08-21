@@ -68,6 +68,7 @@ class UpdateDataTask(FiretaskBase):
         update_spec["adsorbate_energies_list"] = adsorbate_energies_list
         update_spec["reaction_energies_list"] = reaction_energies_list
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         logging.debug(adsorbate_energies_list)
         logging.debug(relaxed_structure_list)
@@ -77,5 +78,6 @@ class UpdateDataTask(FiretaskBase):
 
 def update_converged_data(chunk_size):
     firetask1  = UpdateDataTask(chunk_size = chunk_size)
-    fw = Firework([firetask1], spec = {'_category' : "lightweight"})
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'UpdateDataTask'},
+             name = 'UpdateDataWork')
     return fw

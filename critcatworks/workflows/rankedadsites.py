@@ -120,35 +120,33 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
 
 if __name__ == "__main__":
     import logging
-    #logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
-    logging.basicConfig(filename = "logfile_ranked_adsites.log", level=logging.INFO)
+    IS_QUEUE = True
+    if IS_QUEUE:
+        logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
+    else:
+        logdir = str(pathlib.Path(".").resolve())
+        logging.basicConfig(filename = logdir + "/logfile_ranked_adsites.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = LaunchPad(logdir=".")
+    launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
     launchpad.reset('', require_password=False)
-    #launchpad = LaunchPad(host="myhost", port=12345, \
-    #name="fireworks_testing_db", username="my_user", \
-    #password="my_pass")
 
     wf = get_adsites_workflow(
-        source_path = "/l/programs/critcatworks/tests/dummy_db/nc_structures/", 
-        #template = '/l/programs/critcatworks/tests/dummy_db/templates/cu_mm_bulk.inp', 
-        template_path = '/l/programs/critcatworks/tests/dummy_db/templates/', 
-        target_path = "/l/programs/critcatworks/tests/dummy_db/output/",
+        source_path = str(pathlib.Path("../../tests/dummy_db/nc_structures/").resolve()),
+        template_path = str(pathlib.Path("../../tests/dummy_db/templates/").resolve()), 
+        target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 12,
-        max_calculations = 30,
+        chunk_size = 15,
+        max_calculations = 50,
         )
 
     # store workflow and launch it locally, single shot
     launchpad.add_wf(wf)
 
-
     # excecute workflow
-    IS_QUEUE = False
     if IS_QUEUE:
-        abspath = pathlib.Path(".").resolve()
+        abspath = str(pathlib.Path(".").resolve())
         dft = CommonAdapter(
             q_type="SLURM",
             queue="test",
@@ -161,10 +159,11 @@ if __name__ == "__main__":
             pre_rocket= None,
             post_rocket= None,
             logdir= abspath,
-            rocket_launch= "rlaunch  singleshot --offline")
+            #rocket_launch= "rlaunch  singleshot --offline")
+            rocket_launch= "rlaunch  singleshot")
         lightweight = CommonAdapter(
             q_type="SLURM",
-            queue="light",
+            queue="test",
             nodes= 1,
             ntasks= 8,
             walltime= '00:00:30',
@@ -174,7 +173,8 @@ if __name__ == "__main__":
             pre_rocket= None,
             post_rocket= None,
             logdir= abspath,
-            rocket_launch= "rlaunch  singleshot --offline")
+            #rocket_launch= "rlaunch  singleshot --offline")
+            rocket_launch= "rlaunch  singleshot")
         medium = CommonAdapter(
             q_type="SLURM",
             queue="test",
@@ -187,26 +187,34 @@ if __name__ == "__main__":
             pre_rocket= None,
             post_rocket= None,
             logdir= abspath,
-            rocket_launch= "rlaunch  singleshot --offline")
+            #rocket_launch= "rlaunch  singleshot --offline")
+            rocket_launch= "rlaunch  singleshot")
 
-        for i in range(0, 10):
-            launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, launcher_dir=abspath, reserve=True)
-            launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, launcher_dir=abspath, reserve=True)
-            launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, launcher_dir=abspath, reserve=True)
+        for i in range(0, 1000):
+            launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, 
+                launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
+            time.sleep(3)
+            launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, 
+                launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
+            time.sleep(3)
+            launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, 
+                launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
+            time.sleep(3)
     else:
         #launch_rocket(launchpad, FWorker())
         rapidfire(launchpad, FWorker(category=['dft', 'medium', 'lightweight']))
-        #rapidfire(launchpad, FWorker(category='medium'))
-        #rapidfire(launchpad, FWorker(category='lightweight'))
 
 
     # running in background to submit dynamic fireworks
     # and recover offline fireworks
-    if IS_QUEUE:
-        for i in range(0,10):
+    #if IS_QUEUE:
+    if False:
+        for i in range(0,100):
             # recover offline fireworks
             time.sleep(5)
-            ids =launchpad.get_fw_ids()
+            ids =launchpad.get_fw_ids(launches_mode=True)
+            print("launchpad ids")
+            print(ids)
             for idx in ids:
                 launchpad.recover_offline(launch_id = idx)
             # submit fireworks which have been added
@@ -214,6 +222,7 @@ if __name__ == "__main__":
                 launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, launcher_dir=abspath, reserve=True)
                 launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, launcher_dir=abspath, reserve=True)
                 launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, launcher_dir=abspath, reserve=True)
+
 
 
 

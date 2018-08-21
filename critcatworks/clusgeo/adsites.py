@@ -139,6 +139,7 @@ class AdsiteCreationTask(FiretaskBase):
         update_spec["reaction_energies_list"] = np.zeros(descmatrix.shape[0])
 
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         return FWAction(update_spec=update_spec)
 
@@ -169,6 +170,7 @@ class AdsiteRankTask(FiretaskBase):
         update_spec = fw_spec
         update_spec["fps_ranking"] = fps_ranking
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         return FWAction(update_spec=update_spec)
 
@@ -188,12 +190,14 @@ def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top
         spec={'reference_energy': reference_energy, 'adsorbate_name' : adsorbate_name, 
         'adsite_types' : adsite_types,
         '_category' : "lightweight",
-}
+        'name' : 'AdsiteCreationTask'},
+        name = 'AdsiteCreationWork'
         )
     return fw
 
 
 def rank_adsites():
     firetask1  = AdsiteRankTask()
-    fw = Firework([firetask1], spec = {'_category' : "medium"})
+    fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AdsiteRankTask'},
+             name = 'AdsiteRankWork')
     return fw
