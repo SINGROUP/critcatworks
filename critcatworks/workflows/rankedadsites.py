@@ -93,27 +93,6 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
 
     ### loop ends ###
 
-    """
-    wf = Workflow([fw_read_structures, 
-        fw_get_adsites, 
-        fw_rank_adsites, 
-        fw_setup_folders, 
-        fw_setup_cp2k,
-        fw_update_converged_data,
-        fw_get_mae,
-        fw_check_convergence,
-        ], 
-        links_dict = {
-            fw_read_structures: [fw_get_adsites], 
-            fw_get_adsites: [fw_rank_adsites],
-            fw_rank_adsites : [fw_setup_folders],
-            fw_setup_folders : [fw_setup_cp2k],
-            fw_setup_cp2k : [fw_update_converged_data],
-            fw_update_converged_data : [fw_get_mae],
-            fw_get_mae : [fw_check_convergence],
-            fw_check_convergence : [fw_setup_cp2k]
-            })
-    """
     wf = Workflow(workflow_list, links_dict)
     return wf
 
@@ -137,8 +116,8 @@ if __name__ == "__main__":
         target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 15,
-        max_calculations = 50,
+        chunk_size = 12,
+        max_calculations = 30,
         )
 
     # store workflow and launch it locally, single shot
@@ -151,13 +130,13 @@ if __name__ == "__main__":
             q_type="SLURM",
             queue="test",
             nodes= 1,
-            ntasks= 8,
+            ntasks= 48,
             walltime= '00:02:00',
             constraint='hsw',
             account= None,
             job_name= 'dfttestrun',
-            pre_rocket= None,
-            post_rocket= None,
+            pre_rocket= "module load cp2k-env/4.1-hsw",
+            post_rocket= "current fashion: post-modern rocket after running dft",
             logdir= abspath,
             #rocket_launch= "rlaunch  singleshot --offline")
             rocket_launch= "rlaunch  singleshot")
@@ -190,7 +169,7 @@ if __name__ == "__main__":
             #rocket_launch= "rlaunch  singleshot --offline")
             rocket_launch= "rlaunch  singleshot")
 
-        for i in range(0, 1000):
+        for i in range(0, 4000):
             launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, 
                 launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
             time.sleep(3)
@@ -203,27 +182,5 @@ if __name__ == "__main__":
     else:
         #launch_rocket(launchpad, FWorker())
         rapidfire(launchpad, FWorker(category=['dft', 'medium', 'lightweight']))
-
-
-    # running in background to submit dynamic fireworks
-    # and recover offline fireworks
-    #if IS_QUEUE:
-    if False:
-        for i in range(0,100):
-            # recover offline fireworks
-            time.sleep(5)
-            ids =launchpad.get_fw_ids(launches_mode=True)
-            print("launchpad ids")
-            print(ids)
-            for idx in ids:
-                launchpad.recover_offline(launch_id = idx)
-            # submit fireworks which have been added
-            for i in range(0, 10):
-                launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, launcher_dir=abspath, reserve=True)
-                launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, launcher_dir=abspath, reserve=True)
-                launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, launcher_dir=abspath, reserve=True)
-
-
-
 
 

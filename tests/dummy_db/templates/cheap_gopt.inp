@@ -1,7 +1,6 @@
 ############ General ############################
 @SET COORD_FILE adsorbate_structure.xyz 
 @SET SYSTEM gopt
-@SET LIBDIR . 
 @SET CELLSIZE 25.0 25.0 25.0 
 
 #&EXT_RESTART
@@ -30,16 +29,16 @@
     &END FORCES
   &END PRINT
   &DFT                      
-    BASIS_SET_FILE_NAME ${LIBDIR}/BASIS_SET
-    POTENTIAL_FILE_NAME ${LIBDIR}/POTENTIAL
+    BASIS_SET_FILE_NAME BASIS_MOLOPT
+    POTENTIAL_FILE_NAME POTENTIAL
 
     UKS
 #    CHARGE 0
 
     &MGRID
-      CUTOFF 600             # plane-wave cutoff for the charge density [Rydbergs]
-      NGRIDS 5
-      REL_CUTOFF 60
+      CUTOFF 300             # plane-wave cutoff for the charge density [Rydbergs]
+      NGRIDS 4
+      REL_CUTOFF 30
     &END MGRID  
 # Periodic poisson solver as a trick to speed up calculation
     &POISSON
@@ -95,7 +94,7 @@
       CHOLESKY INVERSE_DBCSR
 
 ### STANDARD DIAGONALIZATION with SMEARING
-     MAX_SCF 200 
+     MAX_SCF 1 
      ADDED_MOS  200 
      &SMEAR  ON 
          METHOD FERMI_DIRAC 
@@ -115,7 +114,7 @@
      # Start again if not converged
      # Must be smaller than the one in inner loop, default 1.0E-5
           EPS_SCF 1.0E-6
-          MAX_SCF 2
+          MAX_SCF 1
      &END OUTER_SCF
 
 ### END OF ST DIAG #######################
@@ -143,7 +142,7 @@
           CALCULATE_C9_TERM .TRUE.
           REFERENCE_C9_TERM .TRUE.
           LONG_RANGE_CORRECTION .TRUE.
-          PARAMETER_FILE_NAME ${LIBDIR}/dftd3.dat
+          PARAMETER_FILE_NAME dftd3.dat
           REFERENCE_FUNCTIONAL PBE
         &END PAIR_POTENTIAL
       &END VDW_POTENTIAL
@@ -232,7 +231,7 @@
 &MOTION
   &GEO_OPT
     TYPE MINIMIZATION
-    MAX_ITER 240
+    MAX_ITER 1
     MAX_FORCE 4.5E-4  #9.75E-5
     RMS_FORCE 3.0E-4  #5.0E-5
     OPTIMIZER BFGS

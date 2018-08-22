@@ -184,10 +184,25 @@ class CP2KRunTask(FiretaskBase):
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
         logging.info("Running CP2K not implemented yet. Creating dummy outputs")
-        print("Running CP2K not implemented yet. Creating dummy outputs")
+        print("Running CP2K dry. dummy outputs")
         print("ranked id", ranked_id)
-        print("sleeping for 5 seconds")
-        time.sleep(5)
+        # shell command construction
+        input_file = glob.glob(target_path + "/" + "*inp")[0]
+        output_file = input_file.replace(".inp", ".out")
+        
+        output_file ="dryrun.stuff"
+        print("redirecting cp2k output for testing to", output_file)
+        cp2k_bin="cp2k.popt"
+        run_command = "srun " + cp2k_bin  + " -o " + output_file + " -i " + input_file
+        command_list = run_command.split()
+        print("shell command:")
+        print(command_list)
+        # running CP2K with srun in shell
+        with cd(target_path):
+            print("going into directory", target_path)
+            subprocess.call(command_list, shell = False)
+
+        print("dry run done")
 
         #with open(target_path + "/fake.out", "w") as f:
         #    f.write("WARNING")
@@ -364,3 +379,17 @@ def additional_parse_stdout(target_path):
         return "incorrect_termination", result_dict
     else:
         return "ok", result_dict
+
+class cd:
+    """Context manager for changing the current working directory"""
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+                                   
+
