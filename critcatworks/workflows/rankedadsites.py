@@ -120,7 +120,7 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
 
 if __name__ == "__main__":
     import logging
-    IS_QUEUE = True
+    IS_QUEUE = False
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:

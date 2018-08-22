@@ -135,9 +135,9 @@ class CP2KSetupTask(FiretaskBase):
 
         # read template
         cp2kinput = glob.glob(template_path + "/" + "*inp")[0]
-
+        calc = pycp2k.cp2k.CP2K()
         inpparser = pycp2k.CP2KInputParser()
-        calc = inpparser.parse(cp2kinput)
+        calc = inpparser.parse(calc, cp2kinput)
 
         logging.info("info about input parser")
         logging.info(inpparser)

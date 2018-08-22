@@ -48,30 +48,59 @@ fw_spec = {
 
  
 # Installation
-# NOMAD CP2K parser Installation
-The code is python 2 and python 3 compatible. First download and install
-the nomadcore package:
+
+0. Download this repository
+
+1. virtual environment recommended
+virtualenv critcatenv
+source critcatenv/bin/activate
+
+2. Go inside this repository
+cd path/to/critcatworks
+
+3.  slightly modified NOMAD CP2K parser Installation
 
 ```sh
-git clone https://gitlab.mpcdf.mpg.de/nomad-lab/python-common.git
-cd python-common
+cd nomad_parser/python-common
 pip install -r requirements.txt
 pip install -e .
 ```
 
-Then download the metainfo definitions to the same folder where the
-'python-common' repository was cloned:
-
 ```sh
-git clone https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info.git
-```
-
-Finally download and install the parser:
-
-```sh
-git clone https://gitlab.mpcdf.mpg.de/nomad-lab/parser-cp2k.git
-cd parser-cp2k
+cd ../parser-cp2k
 pip install -e .
 ```
 
+4. pycp2k - input parser installation
+
+not available on pypi yet,
+clone it to location of your choice
+
+```sh
+git clone https://github.com/SINGROUP/pycp2k.git
+cd pycp2k
+python3 setup.py install
+```
+During installation choose:
+2
+path/to/critcatworks/nomad_parser/cp2k4-1.xml
+3
+1
+
+5. critcatworks installation
+
+cd path/to/critcatworks
+
+python3 setup.py install
+
+6. Deactivate virtual environment
+
+deactivate
+
+--
+
+steps 3 to 5 are automatically executed by 
+```sh
+./easily_install_all.sh
+```
 
