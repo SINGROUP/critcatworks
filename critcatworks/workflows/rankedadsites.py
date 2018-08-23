@@ -99,7 +99,7 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
 
 if __name__ == "__main__":
     import logging
-    IS_QUEUE = False
+    IS_QUEUE = True
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -129,14 +129,14 @@ if __name__ == "__main__":
         dft = CommonAdapter(
             q_type="SLURM",
             queue="test",
-            nodes= 1,
+            nodes= 3,
             ntasks= 48,
             walltime= '00:02:00',
             constraint='hsw',
             account= None,
             job_name= 'dfttestrun',
             pre_rocket= "module load cp2k-env/4.1-hsw",
-            post_rocket= "current fashion: post-modern rocket after running dft",
+            post_rocket= "echo 'current fashion: post-modern rocket after running dft'",
             logdir= abspath,
             #rocket_launch= "rlaunch  singleshot --offline")
             rocket_launch= "rlaunch  singleshot")
@@ -169,7 +169,7 @@ if __name__ == "__main__":
             #rocket_launch= "rlaunch  singleshot --offline")
             rocket_launch= "rlaunch  singleshot")
 
-        for i in range(0, 4000):
+        for i in range(0, 3000):
             launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, 
                 launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
             time.sleep(3)

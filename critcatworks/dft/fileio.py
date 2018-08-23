@@ -2,7 +2,7 @@ from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, Template
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
 from fireworks.queue.queue_launcher import launch_rocket_to_queue
 from fireworks.user_objects.queue_adapters.common_adapter import *
-import os,time, re, glob, sys
+import os,time, re, glob, sys, subprocess
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
