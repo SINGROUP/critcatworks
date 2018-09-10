@@ -16,13 +16,15 @@ from critcatworks.database import read_structures, update_converged_data
 from critcatworks.dft import setup_folders, setup_cp2k
 from critcatworks.ml import get_mae, check_convergence
 
-def get_adsites_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
+def reduce_overcoverage_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
         adsorbate_name='H', chunk_size = 100, max_calculations = 10000):
     """
-    Workflow to determine the adsorption sites and energies of a set of
-    nanocluster structures using CP2K and Clusgeo
+    Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 
+    adsorbates are put on top, bridge and hollow sites. Once the structure is relaxed by DFT,
+    formed adsorbate molecules (pairs of atoms) are replaced by a single adsorbate.
+    The procedure is repeated until no adsorbate molecules form.
     """
-    # FireWork: Read nanocluster structures and initialise a database
+    # FireWork: Read nanocluster structure and initialise a database
     # object containing set information
     abspath = pathlib.Path(source_path).resolve()
 
@@ -36,14 +38,11 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
     fw_get_adsites = get_adsites(
         reference_energy=0.0, 
         adsorbate_name='H', 
-        #adsite_types = ["top", "bridge", "hollow"],
-        adsite_types = ["top"],
+        adsite_types = ["top", "bridge", "hollow"],
         )
-    # FireWork: FPS ranking
-    fw_rank_adsites = rank_adsites()
 
-    # Firework: setup folders for DFT calculations
-    fw_setup_folders = setup_folders(target_path = target_path)
+    # Firework: setup folders for DFT calculations,
+    # create structure with overcoverage
 
 
     # add above Fireworks with links
@@ -78,18 +77,9 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
         workflow_list.append(fw_update_converged_data)
         links_dict[fw_setup_cp2k] =[fw_update_converged_data]
 
+        # eliminate adsorbate pairs too close
+        # early exit here
 
-        # FireWork: machine learning from database
-        fw_get_mae = get_mae(target_path = target_path)
-        workflow_list.append(fw_get_mae)
-        links_dict[fw_update_converged_data] =[fw_get_mae]
-
-
-        # FireWork: check if converged, give intermediary overview.
-        # give summary when finished
-        fw_check_convergence = check_convergence(threshold = 0.1)
-        workflow_list.append(fw_check_convergence)
-        links_dict[fw_get_mae] =[fw_check_convergence]
 
     ### loop ends ###
 
@@ -110,15 +100,23 @@ if __name__ == "__main__":
     launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
     launchpad.reset('', require_password=False)
 
-    wf = get_adsites_workflow(
+    wf = reduce_coverage_workflow(
         source_path = str(pathlib.Path("../../tests/dummy_db/nc_structures/").resolve()),
         template_path = str(pathlib.Path("../../tests/dummy_db/templates/").resolve()), 
         target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 12,
         max_calculations = 30,
-        )
+    )
+    #wf = get_adsites_workflow(
+    #    source_path = str(pathlib.Path("../../tests/dummy_db/nc_structures/").resolve()),
+    #    template_path = str(pathlib.Path("../../tests/dummy_db/templates/").resolve()), 
+    #    target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
+    #    reference_energy = -1.16195386047558 * 0.5,
+    #    adsorbate_name = "H",
+    #    chunk_size = 12,
+    #    max_calculations = 30,
+    #    )
 
     # store workflow and launch it locally, single shot
     launchpad.add_wf(wf)

@@ -68,7 +68,7 @@ class ChunkCalculationsTask(FiretaskBase):
     """
 
     _fw_name = 'ChunkCalculationsTask'
-    required_params = ['template_path', 'target_path', 'chunk_size', 'name']
+    required_params = ['template_path', 'target_path', 'chunk_size', 'name', 'n_max_restarts']
     optional_params = []
 
     def run_task(self, fw_spec):
@@ -76,7 +76,7 @@ class ChunkCalculationsTask(FiretaskBase):
         target_path = self["target_path"]
         chunk_size = self["chunk_size"]
         name = self["name"]
-
+        n_max_restarts = self["n_max_restarts"]
         calc_paths = fw_spec["calc_paths"]
         fps_ranking = fw_spec["fps_ranking"]
 
@@ -98,7 +98,8 @@ class ChunkCalculationsTask(FiretaskBase):
             new_fw = Firework([CP2KSetupTask(template_path = template_path,
                 target_path = target_path,
                 ranked_id = ranked_id,
-                name = name)], spec = {'_category' : "lightweight", 'name' : 'CP2KSetupTask'},
+                name = name,
+                n_max_restarts = n_max_restarts)], spec = {'_category' : "lightweight", 'name' : 'CP2KSetupTask'},
                 name = 'CP2KSetupWork')
             detours.append(new_fw)
 
@@ -121,7 +122,7 @@ class CP2KSetupTask(FiretaskBase):
     """
 
     _fw_name = 'CP2KSetupTask'
-    required_params = ['template_path', 'target_path', 'ranked_id']
+    required_params = ['template_path', 'target_path', 'ranked_id', "n_max_restarts"]
     optional_params = ['name']
 
     def run_task(self, fw_spec):
@@ -132,6 +133,7 @@ class CP2KSetupTask(FiretaskBase):
         template_path = self["template_path"]
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
+        n_max_restarts = self["n_max_restarts"]
 
         # read template
         cp2kinput = glob.glob(template_path + "/" + "*inp")[0]
@@ -161,8 +163,8 @@ class CP2KSetupTask(FiretaskBase):
         #print("dummy outputs generated")
         fw_spec.pop("_category")
         fw_spec.pop("name")
-        detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
-            spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
+        detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id, n_max_restarts = n_max_restarts)], 
+            spec = {'_category' : "dft", 'name' : 'CP2KRunTask', "n_restarts" : 0},
             name = 'CP2KRunWork')
         return FWAction(update_spec = fw_spec, detours = detours)
 
@@ -177,21 +179,37 @@ class CP2KRunTask(FiretaskBase):
     """
 
     _fw_name = 'CP2KRunTask'
-    required_params = ['target_path', 'ranked_id']
+    required_params = ['target_path', 'ranked_id', "n_max_restarts"]
     optional_params = []
 
     def run_task(self, fw_spec):
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
+        n_max_restarts = self["n_max_restarts"]
+        n_restarts = fw_spec["n_restarts"]
         logging.info("Running CP2K not implemented yet. Creating dummy outputs")
         print("Running CP2K dry. dummy outputs")
         print("ranked id", ranked_id)
         # shell command construction
         input_file = glob.glob(target_path + "/" + "*inp")[0]
         output_file = input_file.replace(".inp", ".out")
+       
         
-        output_file ="dryrun.stuff"
-        print("redirecting cp2k output for testing to", output_file)
+        # check for restart file
+        restart_file_list = glob.glob(target_path + "/" + "*restart")
+        if len(restart_file_list) == 1:
+            restart_file = restart_file_list[0]
+            input_file = restart_file 
+        elif len(restart_file_list) > 1:
+            logging.warning("Found several .restart files. Taking first one.")
+            restart_file = restart_file_list[0]
+            input_file = restart_file 
+        else:
+            # otherwise use inp
+            pass
+        
+        #output_file ="dryrun.stuff"
+        #print("redirecting cp2k output for testing to", output_file)
         cp2k_bin="cp2k.popt"
         run_command = "srun " + cp2k_bin  + " -o " + output_file + " -i " + input_file
         command_list = run_command.split()
@@ -204,13 +222,10 @@ class CP2KRunTask(FiretaskBase):
 
         print("dry run done")
 
-        #with open(target_path + "/fake.out", "w") as f:
-        #    f.write("WARNING")
-        #    f.write("total_energy:        42.42")
         fw_spec.pop("_category")
         fw_spec.pop("name")
-        detours = Firework([CP2KAnalysisTask(target_path=target_path, ranked_id = ranked_id)], 
-            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask'},
+        detours = Firework([CP2KAnalysisTask(target_path=target_path, ranked_id = ranked_id, n_max_restarts = n_max_restarts)], 
+            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', "n_restarts" : n_restarts},
             name = 'CP2KAnalysisWork')
         return FWAction(update_spec = fw_spec, detours = detours)
 
@@ -225,23 +240,15 @@ class CP2KAnalysisTask(FiretaskBase):
     """
 
     _fw_name = 'CP2KAnalysisTask'
-    required_params = ['target_path', 'ranked_id']
+    required_params = ['target_path', 'ranked_id', 'n_max_restarts']
     optional_params = []
 
     def run_task(self, fw_spec):
         target_path = self["target_path"]
         ranked_id = self["ranked_id"]
-        
-        logging.info("Analysis of CP2K is being implemented")
-        print("Analysis of CP2K is being implemented")
-
+        n_max_restarts = self["n_max_restarts"]
+        n_restarts = fw_spec["n_restarts"]
         print("ranked id", ranked_id)
-        
-        print("len sys.argv", len(sys.argv))
-        print("sys.argv values")
-        for value in sys.argv:
-            print(value)
-
         # read output
 
         # preparse for correct termination, warnings and exceeded walltime
@@ -256,92 +263,114 @@ class CP2KAnalysisTask(FiretaskBase):
         else:
             logging.info("parser confirmed that CP2K terminated correctly")
             print("parser confirmed that CP2K terminated correctly")
-
+        ####
         if output_state == "no_output" or output_state == "incorrect_termination":
-            detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
-                spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
-                name = 'CP2KRunWork')
-            return FWAction(update_spec = fw_spec, detours = detours)
-
-
-        nwarnings = preparse_results['nwarnings']
-        is_walltime_exceeded = preparse_results['exceeded_walltime']
-
-        # cp2k parser
-        parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)
-        print("cp2k parser setup successfully")
-        cp2koutput = glob.glob(target_path + "/" + "*out")[0]
-        print("cp2k output file", cp2koutput)
-        results = parser.parse(cp2koutput)
-        print("cp2k parser ran successfully")
-
-        atom_positions = results["atom_positions"]
-        number_of_frames_in_sequence = results["number_of_frames_in_sequence"]
-        is_converged = results["geometry_optimization_converged"]
-        atom_labels = results["atom_labels"]
-        frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
-
-        if is_converged:
-            adsorbate_total_energy = frame_sequence_potential_energy[-1]
+            pass
         else:
-            logging.info("CP2K not converged")
-            print("CP2K not converged")
-            adsorbate_total_energy = None
-            detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id)], 
+            nwarnings = preparse_results['nwarnings']
+            is_walltime_exceeded = preparse_results['exceeded_walltime']
+
+
+
+
+            # cp2k parser
+            parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)
+            print("cp2k parser setup successfully")
+            cp2koutput = glob.glob(target_path + "/" + "*out")[0]
+            print("cp2k output file", cp2koutput)
+            results = parser.parse(cp2koutput)
+            print("cp2k parser ran successfully")
+    
+            atom_positions = results["atom_positions"]
+            number_of_frames_in_sequence = results["number_of_frames_in_sequence"]
+            is_converged = results["geometry_optimization_converged"]
+            atom_labels = results["atom_labels"]
+            frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
+    
+            if is_converged:
+                adsorbate_total_energy = frame_sequence_potential_energy[-1]
+            else:
+                output_state = "not_converged"
+                logging.info("CP2K not converged")
+                print("CP2K not converged")
+                adsorbate_total_energy = None
+
+        if output_state == "ok":
+            logging.info("adsorbate_total_energy: " + str(adsorbate_total_energy))
+            print("adsorbate_total_energy: " + str(adsorbate_total_energy))
+    
+            logging.debug("atom_labels")
+            logging.debug(atom_labels.shape)
+            logging.debug(atom_labels[-1])
+            logging.debug("atom_positions")
+            logging.debug(atom_positions.shape)
+            logging.debug("frame_sequence_potential_energy")
+            logging.debug(frame_sequence_potential_energy.shape)
+            logging.debug("number_of_frames_in_sequence")
+            logging.debug(number_of_frames_in_sequence)
+            logging.debug("is_converged")
+            logging.debug(is_converged)
+    
+            print("is_converged")
+            print(is_converged)
+            relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1])
+    
+            atoms_dict = relaxed_structure.__dict__
+    
+            result_dict = {
+                "is_converged" : is_converged,
+                "number_of_frames_in_sequence" : number_of_frames_in_sequence,
+                "nwarnings" : nwarnings,
+                "is_walltime_exceeded" : is_walltime_exceeded,
+                "adsorbate_total_energy" : adsorbate_total_energy,
+            }
+    
+            
+            fw_spec.pop("_category")
+            fw_spec.pop("name")
+    
+            mod_spec =[
+                {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : float(adsorbate_total_energy)}},
+                {'_set' : {'relaxed_structure_dict->' + str(ranked_id): atoms_dict}},
+                {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
+                ]
+            return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
+        else:
+            detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id, n_max_restarts = n_max_restarts)], 
                 spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
                 name = 'CP2KRunWork')
-            return FWAction(update_spec = fw_spec, detours = detours)     
-
-        logging.info("adsorbate_total_energy: " + str(adsorbate_total_energy))
-        print("adsorbate_total_energy: " + str(adsorbate_total_energy))
-
-        logging.debug("atom_labels")
-        logging.debug(atom_labels.shape)
-        logging.debug(atom_labels[-1])
-        logging.debug("atom_positions")
-        logging.debug(atom_positions.shape)
-        logging.debug("frame_sequence_potential_energy")
-        logging.debug(frame_sequence_potential_energy.shape)
-        logging.debug("number_of_frames_in_sequence")
-        logging.debug(number_of_frames_in_sequence)
-        logging.debug("is_converged")
-        logging.debug(is_converged)
-
-        print("is_converged")
-        print(is_converged)
-        relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1])
-
-        atoms_dict = relaxed_structure.__dict__
-
-        result_dict = {
-            "is_converged" : is_converged,
-            "number_of_frames_in_sequence" : number_of_frames_in_sequence,
-            "nwarnings" : nwarnings,
-            "is_walltime_exceeded" : is_walltime_exceeded,
-            "adsorbate_total_energy" : adsorbate_total_energy,
-        }
-
+            #keep track of number of restarts
+            fw_spec["n_restarts"] += 1
+            if fw_spec["n_restarts"] <= n_restarts_max:
+                # restart
+                return FWAction(update_spec = fw_spec, detours = detours)     
+            else:
+                result_dict = {
+                    "is_converged" : is_converged,
+                    "n_restarts" : fw_spec["n_restarts"],
+                }
+                fw_spec.pop("_category")
+                fw_spec.pop("name")
         
-        fw_spec.pop("_category")
-        fw_spec.pop("name")
-
-        mod_spec =[
-            {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : float(adsorbate_total_energy)}},
-            {'_set' : {'relaxed_structure_dict->' + str(ranked_id): atoms_dict}},
-            {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
-            ]
-        return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
+                mod_spec =[
+                    {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : None}},
+                    {'_set' : {'relaxed_structure_dict->' + str(ranked_id): None}},
+                    {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
+                    ]
+                # no more restarts
+                return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
 
-def setup_cp2k(template_path, target_path, chunk_size, name = "cp2k_run_id",):
+def setup_cp2k(template_path, target_path, chunk_size, name = "cp2k_run_id", n_max_restarts = 4):
     firetask1  = ChunkCalculationsTask(
         template_path = template_path,
         target_path = target_path,
         chunk_size = chunk_size,
         name = name,
+        n_max_restarts = n_max_restarts,
         )
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'ChunkCalculationsTask'},
-             name = 'ChunkCalculationsWork')
+                     name = 'ChunkCalculationsWork')
     return fw
 
 
