@@ -1,6 +1,6 @@
 ############ General ############################
-@SET COORD_FILE adsorbate_structure.xyz 
-@SET SYSTEM gopt
+@SET COORD_FILE coverage_structure.xyz 
+@SET SYSTEM cheap_gopt
 @SET CELLSIZE 25.0 25.0 25.0 
 
 #&EXT_RESTART
@@ -12,7 +12,7 @@
   RUN_TYPE GEO_OPT           # ENERGY_FORCE, GEO_OPT
   PREFERRED_FFT_LIBRARY FFTSG
   EXTENDED_FFT_LENGTHS
-  PRINT_LEVEL LOW            
+  PRINT_LEVEL MEDIUM            
   PROJECT ${SYSTEM}          # Name of calculation 
 &END GLOBAL
 
@@ -231,7 +231,7 @@
 &MOTION
   &GEO_OPT
     TYPE MINIMIZATION
-    MAX_ITER 1
+    MAX_ITER 3
     MAX_FORCE 4.5E-4  #9.75E-5
     RMS_FORCE 3.0E-4  #5.0E-5
     OPTIMIZER BFGS

@@ -42,6 +42,10 @@ fw_spec = {
     nc_energies (list of float) : "total energies of the nanoclusters sorted by nanocluster id",
     path (str) : "absolute path to nanocluster structure folder",
     reaction_energies_list (list of float) : "reaction energy (using reference_energy) of the relaxed adsorbate structure sorted by adsorbate id",
+    coverage_structures (list of dict) : "nanocluster structures covered with adsorbates in ase dicts",
+    history_coverage_structures_dict (dict of int : dict): "ase dict of relaxed structures over different iterations", 
+    history_coverage_energies_dict (dict of int : list): "total energy of the relaxed structures over different iterations",
+    relaxed_coverage_dict (list of dict): "last relaxed structures in ase dicts",
 }
     
 ```

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages, Extension
 
 if __name__ == "__main__":
     setup(name='critcatworks',
-        version='0.2',
+        version='0.3',
         url="https://github.com/singroup/critcatworks/",
         description='A Python package for creating DFT workflows for nanoclusters.',
         long_description='A Python package for creating workflows for nanoclusters.',

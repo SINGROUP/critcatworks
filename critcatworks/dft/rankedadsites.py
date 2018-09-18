@@ -53,10 +53,10 @@ class StructureFolderTask(FiretaskBase):
 
 
         update_spec["calc_paths"] = calc_paths
-        #update_spec["result_dict"] = {}
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec = update_spec)
+
 
 @explicit_serialize
 class ChunkCalculationsTask(FiretaskBase):
@@ -341,7 +341,7 @@ class CP2KAnalysisTask(FiretaskBase):
                 name = 'CP2KRunWork')
             #keep track of number of restarts
             fw_spec["n_restarts"] += 1
-            if fw_spec["n_restarts"] <= n_restarts_max:
+            if fw_spec["n_restarts"] <= n_max_restarts:
                 # restart
                 return FWAction(update_spec = fw_spec, detours = detours)     
             else:

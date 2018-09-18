@@ -1,4 +1,4 @@
-@SET CFN adsorbate_structure.xyz
+@SET CFN coverage_structure.xyz
 
 
 &GLOBAL                  ! section to select the kind of calculation
@@ -11,18 +11,24 @@
     &SPLINE
     EMAX_SPLINE 10000    ! numeric parameter to ensure calculation stability. Should not be changed
     &END
-        &NONBONDED       ! parameters for the non bonded interactions
-          &LENNARD-JONES ! Lennard-Jones parameters
+      &NONBONDED       ! parameters for the non bonded interactions
+        &LENNARD-JONES ! Lennard-Jones parameters
           atoms Cu Cu
           EPSILON    [K_e] 164.56
           SIGMA [angstrom]   3.601
-          RCUT  [angstrom]  25.0
+          RCUT  [angstrom]  15.0
         &END LENNARD-JONES
-          &LENNARD-JONES ! Lennard-Jones parameters
+        &LENNARD-JONES ! Lennard-Jones parameters
           atoms Pt Pt
           EPSILON    [K_e] 164.56
           SIGMA [angstrom]   3.601
-          RCUT  [angstrom]  25.0
+          RCUT  [angstrom]  15.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H H
+          EPSILON    [K_e] 104.56
+          SIGMA [angstrom]   2.601
+          RCUT  [angstrom]  5.0
         &END LENNARD-JONES
       &END NONBONDED
       &CHARGE
@@ -31,6 +37,10 @@
       &END CHARGE
       &CHARGE
         ATOM Pt
+        CHARGE 0.0
+      &END CHARGE
+      &CHARGE
+        ATOM H
         CHARGE 0.0
       &END CHARGE
     &END FORCEFIELD

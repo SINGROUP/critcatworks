@@ -6,6 +6,7 @@
 #SBATCH --ntasks-per-core=$${ntasks_per_core}
 #SBATCH --exclude=$${exclude_nodes}
 #SBATCH --cpus-per-task=$${cpus_per_task}
+#SBATCH --mem-per-cpu=$${mem_per_cpu}
 #SBATCH --gres=$${gres}
 #SBATCH --qos=$${qos}
 #SBATCH --time=$${walltime}

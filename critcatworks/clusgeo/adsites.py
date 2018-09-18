@@ -64,9 +64,11 @@ class AdsiteCreationTask(FiretaskBase):
 
         logging.debug(fw_spec)
         ads_structures = []
+        coverage_structures = []
         connect_dict = {}
         reverse_connect_dict = {}
         desc_lst = []
+        coverage_id_dict = {}
 
         # going through nc atoms
         all_atomtypes = fw_spec["nc_atomic_numbers"]
@@ -83,6 +85,7 @@ class AdsiteCreationTask(FiretaskBase):
 
             # entries for adsorbate dictionary
             connect_dict[str(idx)] = {}
+            ads_pos_lst = []
 
             # running clusgeo on cluster
             surfatoms = clusgeo.surface.get_surface_atoms(atoms)
@@ -100,6 +103,9 @@ class AdsiteCreationTask(FiretaskBase):
                 
                 # get adsorption sites for a nanocluster
                 adsites_dict = adsorbate_pos_to_atoms_dict(atoms, adsites, adsorbate_name)
+                 
+                # get structure with all adsorbates
+                ads_pos_lst.append(adsites)
 
                 # provide ids for adsorbate dictionary
                 added_ids_start = len(ads_structures)
@@ -117,8 +123,18 @@ class AdsiteCreationTask(FiretaskBase):
                 for i in range(desc.shape[0]):
                     desc_lst.append(desc[i])
 
+            # get structure with all adsorbates, different sites combined
+            clus_cov = atoms.copy()
+            for pos in ads_pos_lst:
+                adatoms = ase.Atoms(symbols=[adsorbate_name] * pos.shape[0], positions=pos)
+                clus_cov += adatoms
+            clus_cov_dict = clus_cov.__dict__
+            coverage_structures.append(clus_cov_dict)
+            coverage_id_dict[str(idx)] = []
+        
         descmatrix = np.array(desc_lst)
-    
+
+            
         # order cluster-adsorbates
         update_spec = fw_spec
         update_spec["nc_structures"] = nc_structures_dict
@@ -126,6 +142,7 @@ class AdsiteCreationTask(FiretaskBase):
         update_spec["connect_dict"] = connect_dict
         update_spec["reverse_connect_dict"] = reverse_connect_dict
         update_spec["descmatrix"] = descmatrix
+        update_spec["coverage_structures"] = coverage_structures
 
         # dictionary and list for filling total energies later
         update_spec["adsorbate_energies_dict"] = {}
@@ -137,6 +154,14 @@ class AdsiteCreationTask(FiretaskBase):
 
         # dictionary and list for filling reaction energies later
         update_spec["reaction_energies_list"] = np.zeros(descmatrix.shape[0])
+
+        # dictionary and list for filling total energies later
+        update_spec["coverage_energies_dict"] = {}
+        update_spec["history_coverage_energies_dict"] = coverage_id_dict 
+        
+        # dictionary and list for filling structures later
+        update_spec["relaxed_coverage_dict"] = {}
+        update_spec["history_coverage_structures_dict"] = coverage_id_dict 
 
         update_spec.pop("_category")
         update_spec.pop("name")
