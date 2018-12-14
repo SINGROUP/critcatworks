@@ -164,7 +164,7 @@ if __name__ == "__main__":
             rocket_launch= "rlaunch  singleshot --offline")
         lightweight = CommonAdapter(
             q_type="SLURM",
-            queue="light",
+            queue="test",
             nodes= 1,
             ntasks= 8,
             walltime= '00:00:30',
@@ -209,11 +209,6 @@ if __name__ == "__main__":
             ids =launchpad.get_fw_ids()
             for idx in ids:
                 launchpad.recover_offline(launch_id = idx)
-            # submit fireworks which have been added
-            for i in range(0, 10):
-                launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, launcher_dir=abspath, reserve=True)
-                launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, launcher_dir=abspath, reserve=True)
-                launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, launcher_dir=abspath, reserve=True)
 
 
 
