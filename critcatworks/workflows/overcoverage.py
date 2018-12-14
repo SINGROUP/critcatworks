@@ -11,18 +11,19 @@ import pathlib
 import os,time
 
 # internal modules
-from critcatworks.clusgeo import get_adsites, rank_adsites
-from critcatworks.database import read_structures, update_converged_data
-from critcatworks.dft import setup_folders, setup_cp2k
-from critcatworks.ml import get_mae, check_convergence
+from critcatworks.clusgeo import get_adsites, eliminate_pairs 
+from critcatworks.database import read_structures, update_coverage_data
+from critcatworks.dft import setup_coverage_folders, setup_coverage_cp2k
 
-def get_adsites_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
-        adsorbate_name='H', chunk_size = 100, max_calculations = 10000):
+def reduce_overcoverage_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
+        adsorbate_name='H', max_iterations = 50, bond_length = 1.0):
     """
-    Workflow to determine the adsorption sites and energies of a set of
-    nanocluster structures using CP2K and Clusgeo
+    Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 
+    adsorbates are put on top, bridge and hollow sites. Once the structure is relaxed by DFT,
+    formed adsorbate molecules (pairs of atoms) are replaced by a single adsorbate.
+    The procedure is repeated until no adsorbate molecules form.
     """
-    # FireWork: Read nanocluster structures and initialise a database
+    # FireWork: Read nanocluster structure and initialise a database
     # object containing set information
     abspath = pathlib.Path(source_path).resolve()
 
@@ -33,63 +34,51 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
 
     fw_read_structures = read_structures(abspath)
     # FireWork: Determine adsites and add to database
+    # create structure with overcoverage
     fw_get_adsites = get_adsites(
         reference_energy=0.0, 
         adsorbate_name='H', 
-        #adsite_types = ["top", "bridge", "hollow"],
-        adsite_types = ["top"],
+        adsite_types = ["top", "bridge", "hollow"],
         )
-    # FireWork: FPS ranking
-    fw_rank_adsites = rank_adsites()
-
-    # Firework: setup folders for DFT calculations
-    fw_setup_folders = setup_folders(target_path = target_path)
-
 
     # add above Fireworks with links
     workflow_list = [fw_read_structures, 
         fw_get_adsites, 
-        fw_rank_adsites, 
-        fw_setup_folders,
         ]
 
     links_dict = {
             fw_read_structures: [fw_get_adsites], 
-            fw_get_adsites: [fw_rank_adsites],
-            fw_rank_adsites : [fw_setup_folders],
             }
 
     ### loop starts ###
-    max_iterations = int(max_calculations / chunk_size)
     for i in range(max_iterations):
+        # Firework: setup folders for DFT calculations,
+        fw_setup_coverage_folders = setup_coverage_folders(target_path = target_path, name = "cp2k_coverage_iter_" + str(i))
+        workflow_list.append(fw_setup_coverage_folders)
+        if i == 0:
+            links_dict[fw_get_adsites] = [fw_setup_coverage_folders]
+        else:
+            links_dict[fw_eliminate_pairs] = [fw_setup_coverage_folders]
+
 
         # FireWork: setup, run and extract DFT calculation
         # (involves checking for errors in DFT and rerunning)
-        fw_setup_cp2k = setup_cp2k(template_path = template_path, target_path = target_path, chunk_size = chunk_size, n_max_restarts = 4)
-        workflow_list.append(fw_setup_cp2k)
-        if i == 0:
-            links_dict[fw_setup_folders] = [fw_setup_cp2k]
-        else: 
-            links_dict[fw_check_convergence] = [fw_setup_cp2k]
+        fw_setup_coverage_cp2k = setup_coverage_cp2k(template_path = template_path, target_path = target_path, name = "cp2k_coverage_iter_" + str(i), n_max_restarts = 0)
+        workflow_list.append(fw_setup_coverage_cp2k)
 
+        links_dict[fw_setup_coverage_folders] = [fw_setup_coverage_cp2k] 
         # FireWork: update database, 
         # (includes reading relaxed structure and energy)
-        fw_update_converged_data = update_converged_data(chunk_size = chunk_size)
-        workflow_list.append(fw_update_converged_data)
-        links_dict[fw_setup_cp2k] =[fw_update_converged_data]
+        fw_update_coverage_data = update_coverage_data()
+        workflow_list.append(fw_update_coverage_data)
+        links_dict[fw_setup_coverage_cp2k] =[fw_update_coverage_data]
 
+        # eliminate adsorbate pairs too close
+        # early exit here
+        fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
+        workflow_list.append(fw_eliminate_pairs)
+        links_dict[fw_update_coverage_data] = [fw_eliminate_pairs]
 
-        # FireWork: machine learning from database
-        fw_get_mae = get_mae(target_path = target_path)
-        workflow_list.append(fw_get_mae)
-        links_dict[fw_update_converged_data] =[fw_get_mae]
-
-
-        # FireWork: check if converged, give intermediary overview.
-        # give summary when finished
-        fw_check_convergence = check_convergence(threshold = 0.1)
-        workflow_list.append(fw_check_convergence)
-        links_dict[fw_get_mae] =[fw_check_convergence]
 
     ### loop ends ###
 
@@ -110,15 +99,15 @@ if __name__ == "__main__":
     launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
     launchpad.reset('', require_password=False)
 
-    wf = get_adsites_workflow(
+    wf = reduce_overcoverage_workflow(
         source_path = str(pathlib.Path("../../tests/dummy_db/nc_structures/").resolve()),
         template_path = str(pathlib.Path("../../tests/dummy_db/templates/").resolve()), 
         target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 12,
-        max_calculations = 30,
-        )
+        max_iterations = 4,
+        bond_length = 1.5,
+    )
 
     # store workflow and launch it locally, single shot
     launchpad.add_wf(wf)
@@ -128,10 +117,12 @@ if __name__ == "__main__":
         abspath = str(pathlib.Path(".").resolve())
         dft = CommonAdapter(
             q_type="SLURM",
+            template_file="../../utils/SLURM_template.txt",
             queue="test",
             nodes= None,
             ntasks= 48,
-            walltime= '00:02:00',
+            mem_per_cpu= 4000,
+            walltime= '00:03:00',
             constraint='hsw',
             account= None,
             job_name= 'dfttestrun',
@@ -182,18 +173,5 @@ if __name__ == "__main__":
     else:
         #launch_rocket(launchpad, FWorker())
         rapidfire(launchpad, FWorker(category=['dft', 'medium', 'lightweight']))
-        #rapidfire(launchpad, FWorker(category='medium'))
-        #rapidfire(launchpad, FWorker(category='lightweight'))
-
-
-    # running in background to submit dynamic fireworks
-    # and recover offline fireworks
-    if IS_QUEUE:
-        for i in range(0,10):
-            # recover offline fireworks
-            time.sleep(5)
-            ids =launchpad.get_fw_ids()
-            for idx in ids:
-                launchpad.recover_offline(launch_id = idx)
 
 

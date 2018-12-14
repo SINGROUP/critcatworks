@@ -56,13 +56,15 @@ class MLTask(FiretaskBase):
         update_spec["ids_predicted"] = to_predict_ids
         update_spec["predicted_energies"] = y_to_predict
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         return FWAction(update_spec=update_spec)
 
 
 def get_mae(target_path):
     firetask1  = MLTask(target_path=target_path)
-    fw = Firework([firetask1], spec = {'_category' : "medium"})
+    fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'MLTask'},
+             name = 'MLWork')
     return fw
 
 

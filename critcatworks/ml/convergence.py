@@ -40,12 +40,14 @@ class CheckConvergenceTask(FiretaskBase):
 
         update_spec = fw_spec
         update_spec.pop("_category")
+        update_spec.pop("name")
 
         return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
 
 
 def check_convergence(threshold):
     firetask1  = CheckConvergenceTask(threshold = threshold)
-    fw = Firework([firetask1], spec = {'_category' : "lightweight"})
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'CheckConvergenceTask'},
+             name = 'CheckConvergenceWork')
     return fw
 

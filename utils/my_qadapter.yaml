@@ -1,0 +1,14 @@
+_fw_name: CommonAdapter
+_fw_q_type: SLURM
+rocket_launch: rlaunch  singleshot
+nnodes: 1
+ntasks: 8
+walltime: '00:01:00'
+queue: test
+account: null
+job_name: yamlmedium
+logdir: full/path/to/fw_logs
+pre_rocket: null
+post_rocket: null
+
+
