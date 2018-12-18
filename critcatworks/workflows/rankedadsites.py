@@ -182,5 +182,18 @@ if __name__ == "__main__":
     else:
         #launch_rocket(launchpad, FWorker())
         rapidfire(launchpad, FWorker(category=['dft', 'medium', 'lightweight']))
+        #rapidfire(launchpad, FWorker(category='medium'))
+        #rapidfire(launchpad, FWorker(category='lightweight'))
+
+
+    # running in background to submit dynamic fireworks
+    # and recover offline fireworks
+    if IS_QUEUE:
+        for i in range(0,10):
+            # recover offline fireworks
+            time.sleep(5)
+            ids =launchpad.get_fw_ids()
+            for idx in ids:
+                launchpad.recover_offline(launch_id = idx)
 
 
