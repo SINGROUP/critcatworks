@@ -1,0 +1,26 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"mopac",
+  "description":"metainfo for the mopac_parser",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_mopac_fhof",
+    "description":"Final heat of formation",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_mopac_keyword_line",
+    "description":"Mopac keyword line (it controls the calculation)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_mopac_method",
+    "description":"Mopac method, i.e. PM7, AM1, etc..",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  }]
+}

@@ -1,0 +1,13 @@
+{
+  "meta_name":"energy_sum_eigenvalues_scf_iteration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Sum of the eigenvalues of the Hamiltonian matrix defined by xc_method, during ",
+    "each self-consistent field (SCF) iteration."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "energy_component",
+    "scf_info"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

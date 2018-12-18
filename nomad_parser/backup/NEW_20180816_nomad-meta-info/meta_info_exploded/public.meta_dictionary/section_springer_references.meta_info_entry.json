@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_springer_references",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Contains the information about references related to current material according ",
+    "to Springer Materials"],
+  "meta_parent_section":"section_springer_material",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,12 @@
+{
+  "meta_name":"molecule_constraint_parameters",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Explicit constraint parameters for this kind of constraint ",
+    "(depending on the constraint type some might be given implicitly through other ",
+    "means)."],
+  "meta_parent_section":"section_molecule_constraint",
+  "meta_abstract_types":[
+    "settings_constraint"],
+  "meta_data_type":"json"
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_kinetic_energies_in_sequence",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of kinetic energy evaluations in this sequence of frames, see ",
+    "frame_sequence_kinetic_energy."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_abstract_types":[
+    "derived_quantity"]
+}

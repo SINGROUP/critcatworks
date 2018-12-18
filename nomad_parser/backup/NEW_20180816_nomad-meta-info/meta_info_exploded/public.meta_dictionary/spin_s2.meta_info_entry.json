@@ -1,0 +1,10 @@
+{
+  "meta_name":"spin_s2",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the value of the total spin moment operator $S^2$ for the converged ",
+    "wavefunctions calculated with the xc_method. It can be used to calculate the ",
+    "spin contamination in spin-unrestricted calculations."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float"
+}

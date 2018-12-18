@@ -1,0 +1,13 @@
+{
+  "meta_name":"number_of_user_quantity_evaluations_in_sequence",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of user defined quantity evaluations along a sequence of ",
+    "frame_sequence_user_quantity frames. A sequence is a trajectory, which can have ",
+    "number_of_frames_in_sequence each representing one ",
+    "section_single_configuration_calculation ",
+    "section."],
+  "meta_parent_section":"section_user_quantity_definition",
+  "meta_abstract_types":[
+    "derived_quantity"]
+}

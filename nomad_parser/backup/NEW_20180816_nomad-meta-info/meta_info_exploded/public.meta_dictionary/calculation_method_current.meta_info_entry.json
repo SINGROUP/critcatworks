@@ -1,0 +1,17 @@
+{
+  "meta_name":"calculation_method_current",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String that represents the method used to calculate the energy_current. If the ",
+    "method is perturbative, this string does not describe the starting point ",
+    "method, the latter being referenced to by section_method_to_method_refs. For ",
+    "self-consistent field (SCF) ab initio calculations, for example, this is ",
+    "composed by concatenating xc_method_current and basis_set. See ",
+    "[calculation_method_current wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nom",
+    "ad-meta-info/wikis/metainfo/calculation-method-current) for the ",
+    "details."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

@@ -1,0 +1,6 @@
+{
+  "meta_name":"number_of_atoms_std",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of atoms in standardized system.",
+  "meta_parent_section":"section_std_system"
+}

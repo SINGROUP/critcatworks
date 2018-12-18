@@ -1,0 +1,12 @@
+{
+  "meta_name":"number_of_basis_functions_in_basis_set_atom_centered",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of different basis functions in a ",
+    "section_basis_set_atom_centered section. This equals the number of actual ",
+    "coefficients that are specified when using this basis ",
+    "set."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"]
+}

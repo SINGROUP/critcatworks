@@ -1,0 +1,10 @@
+{
+  "meta_name":"settings_xc_functional",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contain parameters connected with the definition of the exchange-correlation ",
+    "(XC) functional (see section_xc_functionals and ",
+    "xc_functional)."],
+  "meta_abstract_types":[
+    "settings_xc"]
+}

@@ -1,0 +1,15 @@
+{
+  "meta_name":"gaussian_basis_group_ls",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Azimuthal quantum number ($l$) values (of the angular part given by the ",
+    "spherical harmonic $Y_{l m}$ of the various contracted basis ",
+    "functions)."],
+  "meta_parent_section":"section_gaussian_basis_group",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_gaussian_basis_group_contractions"
+  }]
+}

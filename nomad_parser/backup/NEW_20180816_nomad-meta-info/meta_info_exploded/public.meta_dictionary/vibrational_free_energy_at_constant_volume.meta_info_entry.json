@@ -1,0 +1,13 @@
+{
+  "meta_name":"vibrational_free_energy_at_constant_volume",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Holds the vibrational free energy per atom at constant ",
+    "volume."],
+  "meta_parent_section":"section_thermodynamical_properties",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+  }],
+  "meta_units":"J"
+}

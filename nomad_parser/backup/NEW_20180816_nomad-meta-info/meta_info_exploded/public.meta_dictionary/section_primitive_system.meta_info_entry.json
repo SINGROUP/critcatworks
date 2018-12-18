@@ -1,0 +1,13 @@
+{
+  "meta_name":"section_primitive_system",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing symmetry information that is specific to the primitive ",
+    "system. The primitive system is derived from the standardized system with a ",
+    "transformation that is specific to the centring. The transformation matrices ",
+    "can be found e.g. from here: https://atztogo.github.io/spglib/definition.html#tr",
+    "ansformation-to-the-primitive-cell"],
+  "meta_parent_section":"section_symmetry",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

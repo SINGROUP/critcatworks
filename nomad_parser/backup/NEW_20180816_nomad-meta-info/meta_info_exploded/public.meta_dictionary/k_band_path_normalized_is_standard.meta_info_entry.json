@@ -1,0 +1,12 @@
+{
+  "meta_name":"k_band_path_normalized_is_standard",
+  "meta_type":"type-value",
+  "meta_description":[
+    "If the normalized path is along the default path defined in W. Setyawan and S. ",
+    "Curtarolo, [Comput. Mater. Sci. **49**, 299-312 ",
+    "(2010)](http://dx.doi.org/10.1016/j.commatsci.2010.05.010)."],
+  "meta_parent_section":"section_k_band_normalized",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"boolean"
+}

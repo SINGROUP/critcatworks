@@ -1,0 +1,73 @@
+{
+  "metadict_name":"quasi_harmonic_properties",
+  "metadict_description":[
+    "quasi harmonic meta info, not specific to any ",
+    "code"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_qhp_formula",
+    "meta_type":"type-value",
+    "meta_description":[
+      "The chemical formula of the material for which the quasi-harmonic properties ",
+      "were calculated"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qhp_quasi_harmonic_bulk_modulus",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Holds the bulk modulus that is calculated from the helmolz free energy ",
+      "calculated from the quasi harmonic approximation"],
+    "meta_parent_section":"section_thermodynamical_properties",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+    }],
+    "meta_units":"J*m**-3"
+  },{
+    "meta_name":"x_qhp_quasi_harmonic_free_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Holds the quasi harmonic free energy per ",
+      "atom"],
+    "meta_parent_section":"section_thermodynamical_properties",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+    }],
+    "meta_units":"J"
+  },{
+    "meta_name":"x_qhp_quasi_harmonic_thermal_expansion",
+    "meta_type":"type-value",
+    "meta_description":"Holds the quasi harmonic thermal expansion",
+    "meta_parent_section":"section_thermodynamical_properties",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+    }],
+    "meta_units":"K**-1"
+  },{
+    "meta_name":"x_qhp_quasi_harmonic_volume",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Holds the temperature dependent volume calculated using the quasi harmonic ",
+      "approximation"],
+    "meta_parent_section":"section_thermodynamical_properties",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+    }],
+    "meta_units":"m**3"
+  },{
+    "meta_name":"x_qhp_space_group_3d_number",
+    "meta_type":"type-value",
+    "meta_description":[
+      "space group detected (and used) by the quasi harmonic ",
+      "program"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  }]
+}

@@ -1,0 +1,551 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the AMBER parser, all names are expected to start with x_amber_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "PBC image flag index.",
+      "dtypeStr": "i",
+      "name": "x_amber_atom_positions_image_index",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "units": " ",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Position of the atoms in a scaled format [0, 1].",
+      "dtypeStr": "f",
+      "name": "x_amber_atom_positions_scaled",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "units": " ",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Position of the atoms wrapped back to the periodic box.",
+      "dtypeStr": "f",
+      "name": "x_amber_atom_positions_wrapped",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "units": "m",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "MD barostat target pressure.",
+      "dtypeStr": "f",
+      "name": "x_amber_barostat_target_pressure",
+      "shape": [],
+      "units": "Pa",
+      "superNames": [
+        "settings_barostat"
+      ]
+    }, {
+      "description": "MD barostat relaxation time.",
+      "dtypeStr": "f",
+      "name": "x_amber_barostat_tau",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_barostat"
+      ]
+    }, {
+      "description": "MD barostat type, valid values are defined in the barostat_type wiki page.",
+      "dtypeStr": "C",
+      "name": "x_amber_barostat_type",
+      "shape": [],
+      "superNames": [
+        "settings_barostat"
+      ]
+    }, {
+      "description": "MD integration time step.",
+      "dtypeStr": "f",
+      "name": "x_amber_integrator_dt",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "MD integrator type, valid values are defined in the integrator_type wiki page.",
+      "dtypeStr": "C",
+      "name": "x_amber_integrator_type",
+      "shape": [],
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "Periodic boundary condition type in the sampling (non-PBC or PBC).",
+      "dtypeStr": "C",
+      "name": "x_amber_periodicity_type",
+      "shape": [],
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "Element symbol of an atom type.",
+      "dtypeStr": "C",
+      "name": "x_amber_atom_type_element",
+      "shape": [],
+      "superNames": [
+        "section_atom_type"
+      ]
+    }, {
+      "description": "van der Waals radius of an atom type.",
+      "dtypeStr": "f",
+      "name": "x_amber_atom_type_radius",
+      "shape": [],
+      "superNames": [
+        "section_atom_type"
+      ]
+    }, {
+      "description": "Reference to the atom type of each interaction atoms.",
+      "dtypeStr": "r",
+      "name": "x_amber_interaction_atom_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": ["number_of_atoms_per_interaction"],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Langevin thermostat damping factor.",
+      "dtypeStr": "f",
+      "name": "x_amber_langevin_gamma",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "Reference to the atom type of each molecule interaction atoms.",
+      "dtypeStr": "r",
+      "name": "x_amber_molecule_interaction_atom_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": ["number_of_atoms_per_interaction"],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "Number of defined pair interactions within a molecule (L-J pairs).",
+      "dtypeStr": "i",
+      "name": "x_amber_number_of_defined_molecule_pair_interactions",
+      "shape": [],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "Number of defined pair interactions (L-J pairs).",
+      "dtypeStr": "i",
+      "name": "x_amber_number_of_defined_pair_interactions",
+      "shape": [],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Number of requested MD integration time steps.",
+      "dtypeStr": "f",
+      "name": "x_amber_number_of_steps_requested",
+      "shape": [],
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "Reference to the atom type for pair interactions.",
+      "dtypeStr": "r",
+      "name": "x_amber_pair_interaction_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": [
+        "x_amber_number_of_defined_pair_interactions",
+        "number_of_atoms_per_interaction"
+      ],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Pair interactions parameters.",
+      "dtypeStr": "f",
+      "name": "x_amber_pair_interaction_parameters",
+      "shape": [
+        "x_amber_number_of_defined_pair_interactions",
+        2
+      ],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Molecule pair interactions parameters.",
+      "dtypeStr": "f",
+      "name": "x_amber_pair_molecule_interaction_parameters",
+      "shape": [
+        "number_of_defined_molecule_pair_interactions",
+        2
+      ],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "Reference to the atom type for pair interactions within a molecule.",
+      "dtypeStr": "r",
+      "name": "x_amber_pair_molecule_interaction_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": [
+        "x_amber_number_of_defined_pair_interactions",
+        "number_of_atoms_per_interaction"
+      ],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "MD thermostat level (see wiki: single, multiple, regional).",
+      "dtypeStr": "C",
+      "name": "x_amber_thermostat_level",
+      "shape": [],
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "MD thermostat target temperature.",
+      "dtypeStr": "f",
+      "name": "x_amber_thermostat_target_temperature",
+      "shape": [],
+      "units": "K",
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "MD thermostat relaxation time.",
+      "dtypeStr": "f",
+      "name": "x_amber_thermostat_tau",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "MD thermostat type, valid values are defined in the thermostat_type wiki page.",
+      "dtypeStr": "C",
+      "name": "x_amber_thermostat_type",
+      "shape": [],
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "Program version date.",
+      "dtypeStr": "C",
+      "name": "x_amber_program_version_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+    "description":"test",
+    "name": "x_amber_xlo_xhi",
+    "superNames": [
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  }, {
+    "description":"Filename of data file",
+    "name": "x_amber_data_file_store",
+    "superNames": [
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  }, {
+    "description":"dummy",
+    "name": "x_amber_dummy",
+    "superNames": [
+      "section_system",
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  },  {
+    "name": "x_amber_section_input_output_files",
+    "kindStr": "type_section",
+    "description": "Temperory variable to store input and output file keywords",
+    "repeats": false,
+    "shape": [],
+    "superNames": [
+      "section_run"
+    ]
+  },   {
+    "description":"finline in mdin",
+    "name": "x_amber_mdin_finline",
+    "superNames": [
+      "section_system",
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  },  {
+    "name": "x_amber_input_units_store",
+    "description": "It determines the units of all quantities specified in the input script and data file, as well as quantities output to the screen, log file, and dump files.",
+    "superNames": ["section_topology"],
+    "dtypeStr": "C",
+    "shape": []
+  },
+    {
+      "name": "x_amber_data_bond_types_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_bond_count_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_angle_count_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_atom_types_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_dihedral_count_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_angles_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_angle_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_bond_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_dihedral_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_dihedral_coeff_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_masses_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_data_topo_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_traj_timestep_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_traj_number_of_atoms_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_traj_box_bound_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },    {
+      "name": "x_amber_traj_box_bounds_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_traj_variables_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_traj_atoms_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_amber_program_working_path",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_program_execution_host",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_program_execution_path",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_program_module",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_program_execution_date",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_program_execution_time",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_mdin_header",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_amber_mdin_wt",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to section method.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_amber_mdin_method",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "section for gathering values for MD steps",
+      "kindStr": "type_section",
+      "name": "x_amber_section_single_configuration_calculation",
+      "repeats": true,
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Parameters of mdout belonging to section_single_configuration_calculation.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_amber_mdout_single_configuration_calculation",
+      "repeats": true,
+      "superNames": [
+        "x_amber_section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to section method.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_amber_mdout_method",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to settings run.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_amber_mdout_run",
+      "superNames": [
+        "settings_run"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to settings run.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_amber_mdin_run",
+      "superNames": [
+        "settings_run"
+      ]
+    }
+  ]
+}

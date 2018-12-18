@@ -1,0 +1,17 @@
+{
+  "meta_name":"user_quantity_stats",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Average of frame_sequence_user_quantity and its standard deviation in this ",
+    "sequence of frames (i.e., a trajectory, a frame is one ",
+    "section_single_configuration_calculation)."],
+  "meta_parent_section":"section_user_quantity_definition",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":2
+  },{
+    "meta_dimension_symbolic":"number_of_user_quantity_components"
+  }]
+}

@@ -1,0 +1,12 @@
+{
+  "meta_name":"number_of_pressure_evaluations_in_sequence",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of pressure evaluations in this sequence. A sequence is a ",
+    "trajectory, which can have number_of_frames_in_sequence each representing one ",
+    "section_single_configuration_calculation ",
+    "section."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_abstract_types":[
+    "derived_quantity"]
+}

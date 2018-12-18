@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_atoms_per_interaction",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of atoms involved in this interaction.",
+  "meta_parent_section":"section_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"]
+}

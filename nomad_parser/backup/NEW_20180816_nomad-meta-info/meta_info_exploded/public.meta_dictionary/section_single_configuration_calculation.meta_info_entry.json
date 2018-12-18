@@ -1,0 +1,24 @@
+{
+  "meta_name":"section_single_configuration_calculation",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Every section_single_configuration_calculation section contains the values ",
+    "computed during a *single configuration calculation*, i.e. a calculation ",
+    "performed on a given configuration of the system (as defined in section_system) ",
+    "and a given computational method (e.g., exchange-correlation method, basis sets, ",
+    "as defined in section_method).\n",
+    "\n",
+    "The link between the current section_single_configuration_calculation and the ",
+    "related section_system and section_method sections is established by the values ",
+    "stored in single_configuration_calculation_to_system_ref and ",
+    "single_configuration_to_calculation_method_ref, respectively.\n",
+    "\n",
+    "The reason why information on the system configuration and computational method ",
+    "is stored separately is that several *single configuration calculations* can be ",
+    "performed on the same system configuration, viz. several system configurations ",
+    "can be evaluated with the same computational method. This storage strategy ",
+    "avoids redundancies."],
+  "meta_parent_section":"section_run",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

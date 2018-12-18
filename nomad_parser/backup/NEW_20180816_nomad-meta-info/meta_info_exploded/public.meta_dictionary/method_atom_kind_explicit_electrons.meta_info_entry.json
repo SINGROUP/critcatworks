@@ -1,0 +1,9 @@
+{
+  "meta_name":"method_atom_kind_explicit_electrons",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Number of explicit electrons (often called ",
+    "valence)."],
+  "meta_parent_section":"section_method_atom_kind",
+  "meta_data_type":"float"
+}

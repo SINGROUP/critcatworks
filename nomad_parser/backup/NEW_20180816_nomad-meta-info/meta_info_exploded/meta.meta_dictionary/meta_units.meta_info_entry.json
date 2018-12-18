@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_units",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String giving the units used by default for the data of this Meta Info. They ",
+    "should be SI units, or combination of them using ``*'' and",
+    " ``^$exponent$''."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string"
+}

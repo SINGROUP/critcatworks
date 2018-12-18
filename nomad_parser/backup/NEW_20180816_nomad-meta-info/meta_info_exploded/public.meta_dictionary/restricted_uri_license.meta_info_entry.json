@@ -1,0 +1,10 @@
+{
+  "meta_name":"restricted_uri_license",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The info of the license that is the reason of ",
+    "restriction."],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

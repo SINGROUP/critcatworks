@@ -1,0 +1,15 @@
+{
+  "meta_name":"geometry_optimization_threshold_force",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of threshold for the force modulus as convergence criterion of the ",
+    "geometry_optimization_method. A geometry optimization is considered converged ",
+    "when the maximum of the moduli of the force on each of the atoms is below this ",
+    "threshold (possibly in combination with other ",
+    "criteria)"],
+  "meta_parent_section":"section_sampling_method",
+  "meta_abstract_types":[
+    "settings_geometry_optimization"],
+  "meta_data_type":"float",
+  "meta_units":"N"
+}

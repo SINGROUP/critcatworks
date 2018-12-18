@@ -1,0 +1,16 @@
+{
+  "meta_name":"atom_positions_primitive",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Atom positions in the primitive cell in reduced ",
+    "units."],
+  "meta_parent_section":"section_primitive_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms_primitive"
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

@@ -1,0 +1,11 @@
+{
+  "meta_name":"section_run",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Every section_run represents a single call of a program. What exactly is ",
+    "contained in a run depends on the run type (see for example section_method and ",
+    "section_single_configuration_calculation) and the program (see [program_info ",
+    "](program_info))."],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

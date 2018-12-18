@@ -1,0 +1,13 @@
+{
+  "meta_name":"number_of_temperatures_in_sequence",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of temperature frames (frame_sequence_temperature) used in the ",
+    "section_frame_sequence. A sequence is a trajectory, which can have ",
+    "number_of_frames_in_sequence each representing one ",
+    "section_single_configuration_calculation ",
+    "section."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_abstract_types":[
+    "derived_quantity"]
+}

@@ -1,0 +1,18 @@
+{
+  "meta_name":"atomic_multipole_lm",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Tuples of $l$ and $m$ values for which the atomic multipoles (including the ",
+    "electric charge, dipole, etc.) are given. The method used to obtain the ",
+    "multipoles is specified by atomic_multipole_kind. The meaning of the integer ",
+    "number $l$ is monopole/charge for $l=0$, dipole for $l=1$, quadrupole for ",
+    "$l=2$, etc. The meaning of the integer numbers $m$ is specified by ",
+    "atomic_multipole_m_kind."],
+  "meta_parent_section":"section_atomic_multipoles",
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_lm_atomic_multipoles"
+  },{
+    "meta_dimension_fixed":2
+  }]
+}

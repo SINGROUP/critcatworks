@@ -1,0 +1,9 @@
+{
+  "meta_name":"springer_url",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Url to the source page in Springer Materials describing the current ",
+    "entry"],
+  "meta_parent_section":"section_springer_id",
+  "meta_data_type":"string"
+}

@@ -1,0 +1,3154 @@
+ DBCSR| Multiplication driver                                               BLAS
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Randmat seed                                                    12341313
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use MPI memory allocation                                              T
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2018-03-01 14:40:40.649
+ ***** ** ***  *** **   PROGRAM STARTED ON                             lenovo700
+ **    ****   ******    PROGRAM STARTED BY                                 lauri
+ ***** **    ** ** **   PROGRAM PROCESS ID                                  8746
+  **** **  *******  **  PROGRAM STARTED IN /home/lauri/Dropbox/nomad-dev/WP1/nom
+                                           ad-lab-base/parsers/cp2k/regtests/cp2
+                                           k_2.6.2/input_preprocessing/variable_
+                                           multiple
+
+ CP2K| version string:                                          CP2K version 3.0
+ CP2K| source code revision number:                                    svn:16458
+ CP2K| cp2kflags: libint fftw3 libxc parallel mpi2 scalapack                    
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                            ma 4.7.2016 10.44.00 +0300
+ CP2K| Program compiled on                                             lenovo700
+ CP2K| Program compiled for                          Linux-x86-64-gfortran_basic
+ CP2K| Data directory path                          /home/lauri/cp2k30/cp2k/data
+ CP2K| Input file name                                                  main.inp
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                ../../GTH_POTENTIALS
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                      __STD_INPUT__
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                              variable_test
+ GLOBAL| Preferred FFT library                                             FFTW3
+ GLOBAL| Preferred diagonalization lib.                                       SL
+ GLOBAL| Run type                                                   ENERGY_FORCE
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Global print level                                                 HIGH
+ GLOBAL| Total number of message passing processes                             1
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name :  Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal              7961692       7961692       7961692       7961692
+ MEMORY| MemFree               1847200       1847200       1847200       1847200
+ MEMORY| Buffers               1469836       1469836       1469836       1469836
+ MEMORY| Cached                1686752       1686752       1686752       1686752
+ MEMORY| Slab                   924532        924532        924532        924532
+ MEMORY| SReclaimable           869392        869392        869392        869392
+ MEMORY| MemLikelyFree         5873180       5873180       5873180       5873180
+
+
+ *** Fundamental physical constants (SI units) ***
+
+ *** Literature: B. J. Mohr and B. N. Taylor,
+ ***             CODATA recommended values of the fundamental physical
+ ***             constants: 2006, Web Version 5.1
+ ***             http://physics.nist.gov/constants
+
+ Speed of light in vacuum [m/s]                             2.99792458000000E+08
+ Magnetic constant or permeability of vacuum [N/A**2]       1.25663706143592E-06
+ Electric constant or permittivity of vacuum [F/m]          8.85418781762039E-12
+ Planck constant (h) [J*s]                                  6.62606896000000E-34
+ Planck constant (h-bar) [J*s]                              1.05457162825177E-34
+ Elementary charge [C]                                      1.60217648700000E-19
+ Electron mass [kg]                                         9.10938215000000E-31
+ Electron g factor [ ]                                     -2.00231930436220E+00
+ Proton mass [kg]                                           1.67262163700000E-27
+ Fine-structure constant                                    7.29735253760000E-03
+ Rydberg constant [1/m]                                     1.09737315685270E+07
+ Avogadro constant [1/mol]                                  6.02214179000000E+23
+ Boltzmann constant [J/K]                                   1.38065040000000E-23
+ Atomic mass unit [kg]                                      1.66053878200000E-27
+ Bohr radius [m]                                            5.29177208590000E-11
+
+ *** Conversion factors ***
+
+ [u] -> [a.u.]                                              1.82288848426455E+03
+ [Angstrom] -> [Bohr] = [a.u.]                              1.88972613288564E+00
+ [a.u.] = [Bohr] -> [Angstrom]                              5.29177208590000E-01
+ [a.u.] -> [s]                                              2.41888432650478E-17
+ [a.u.] -> [fs]                                             2.41888432650478E-02
+ [a.u.] -> [J]                                              4.35974393937059E-18
+ [a.u.] -> [N]                                              8.23872205491840E-08
+ [a.u.] -> [K]                                              3.15774647902944E+05
+ [a.u.] -> [kJ/mol]                                         2.62549961709828E+03
+ [a.u.] -> [kcal/mol]                                       6.27509468713739E+02
+ [a.u.] -> [Pa]                                             2.94210107994716E+13
+ [a.u.] -> [bar]                                            2.94210107994716E+08
+ [a.u.] -> [atm]                                            2.90362800883016E+08
+ [a.u.] -> [eV]                                             2.72113838565563E+01
+ [a.u.] -> [Hz]                                             6.57968392072181E+15
+ [a.u.] -> [1/cm] (wave numbers)                            2.19474631370540E+05
+ [a.u./Bohr**2] -> [1/cm]                                   5.14048714338585E+03
+ 
+
+ CELL_TOP| Volume [angstrom^3]:                                          216.000
+ CELL_TOP| Vector a [angstrom     6.000     0.000     0.000    |a| =       6.000
+ CELL_TOP| Vector b [angstrom     0.000     6.000     0.000    |b| =       6.000
+ CELL_TOP| Vector c [angstrom     0.000     0.000     6.000    |c| =       6.000
+ CELL_TOP| Angle (b,c), alpha [degree]:                                   90.000
+ CELL_TOP| Angle (a,c), beta  [degree]:                                   90.000
+ CELL_TOP| Angle (a,b), gamma [degree]:                                   90.000
+ CELL_TOP| Numerically orthorhombic:                                         YES
+
+
+ SUBCELL GRID  INFO FOR THE NONBONDED NEIGHBOR LISTS
+
+    NUMBER OF SUBCELLS             ::                   2         2         2
+    NUMBER OF PERIODIC      IMAGES ::                   1         1         1
+    NUMBER OF INTERACTING SUBCELLS ::                   1         1         1
+
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+ CELL| Volume [angstrom^3]:                                              216.000
+ CELL| Vector a [angstrom]:       6.000     0.000     0.000    |a| =       6.000
+ CELL| Vector b [angstrom]:       0.000     6.000     0.000    |b| =       6.000
+ CELL| Vector c [angstrom]:       0.000     0.000     6.000    |c| =       6.000
+ CELL| Angle (b,c), alpha [degree]:                                       90.000
+ CELL| Angle (a,c), beta  [degree]:                                       90.000
+ CELL| Angle (a,b), gamma [degree]:                                       90.000
+ CELL| Numerically orthorhombic:                                             YES
+
+ CELL_REF| Volume [angstrom^3]:                                          216.000
+ CELL_REF| Vector a [angstrom     6.000     0.000     0.000    |a| =       6.000
+ CELL_REF| Vector b [angstrom     0.000     6.000     0.000    |b| =       6.000
+ CELL_REF| Vector c [angstrom     0.000     0.000     6.000    |c| =       6.000
+ CELL_REF| Angle (b,c), alpha [degree]:                                   90.000
+ CELL_REF| Angle (a,c), beta  [degree]:                                   90.000
+ CELL_REF| Angle (a,b), gamma [degree]:                                   90.000
+ CELL_REF| Numerically orthorhombic:                                         YES
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K Developers Group (2000 - 2015)           **
+ **                                                                           **
+ *******************************************************************************
+
+ RADII: ORBITAL BASIS in angstrom            Kind   Label     Radius  OCE Radius
+                                                1   Si      3.133470    3.133470
+
+ RADII: SHELL SETS OF ORBITAL BASIS in angstrom   Kind  Label   Set       Radius
+                                                     1  Si        1     3.133470
+                                                                  2     1.871900
+
+ RADII: PRIMITIVE GAUSSIANS OF ORBITAL BASIS in anKindomLabel   Set       Radius
+                                                     1  Si        1     0.706108
+                                                                        1.174495
+                                                                        1.946185
+                                                                        3.133470
+                                                     1  Si        2     1.871900
+
+ RADII: AUXILLIARY BASIS in angstrom         Kind   Label     Radius  OCE Radius
+                                                          1   Si        no basis
+
+ RADII: SHELL SETS OF AUXILLIARY BASIS in angstromKind  Label   Set       Radius
+                                                     1   Si             no basis
+
+ RADII: PRIMITIVE GAUSSIANS OF AUXILLIARY BASIS inKindstLabel   Set       Radius
+                                                     1   Si             no basis
+
+ RADII: LOCAL RI BASIS in angstrom           Kind   Label     Radius  OCE Radius
+                                                          1   Si        no basis
+
+ RADII: SHELL SETS OF LOCAL RI BASIS in angstrom  Kind  Label   Set       Radius
+                                                     1   Si             no basis
+
+ RADII: PRIMITIVE GAUSSIANS OF LOCAL RI BASIS in aKindroLabel   Set       Radius
+                                                     1   Si             no basis
+
+ RADII: CORE CHARGE DISTRIBUTIONS in angstrom          Kind   Label       Radius
+                                                          1   Si        1.169085
+
+ RADII: LOCAL PART OF GTH/ELP PP in angstrom           Kind   Label       Radius
+                                                          1   Si        0.845813
+
+ RADII: NON-LOCAL PART OF GTH PP in angstrom           Kind   Label       Radius
+                                                          1   Si        0.886790
+
+ RADII: ONE CENTER PROJECTORS in angstrom              Kind   Label       Radius
+
+ DISTRIBUTION OF THE MOLECULES                    Process    Number of molecules
+                                                        0                      1
+                                                      Sum                      1
+
+  Process   Kind   Local molecules (global indices)
+        0      1         1
+
+ DISTRIBUTION OF THE PARTICLES                    Process    Number of particles
+                                                        0                      1
+                                                      Sum                      1
+
+  Process   Kind   Local particles (global indices)
+        0      1        1
+
+ DFT| Spin restricted Kohn-Sham (RKS) calculation                            RKS
+ DFT| Multiplicity                                                             1
+ DFT| Number of spin states                                                    1
+ DFT| Charge                                                                   0
+ DFT| Self-interaction correction (SIC)                                       NO
+ DFT| Cutoffs: density                                              1.000000E-10
+ DFT|          gradient                                             1.000000E-10
+ DFT|          tau                                                  1.000000E-10
+ DFT|          cutoff_smoothing_range                               0.000000E+00
+ DFT| XC density smoothing                                                  NONE
+ DFT| XC derivatives                                                          PW
+ FUNCTIONAL| ROUTINE=NEW
+ FUNCTIONAL| PADE:
+ FUNCTIONAL| S. Goedecker, M. Teter and J. Hutter, Phys. Rev. B 54, 1703 (1996) 
+
+ QS| Method:                                                                 GPW
+ QS| Density plane wave grid type                        NON-SPHERICAL FULLSPACE
+ QS| Number of grid levels:                                                    2
+ QS| Density cutoff [a.u.]:                                                  2.5
+ QS| Multi grid cutoff [a.u.]: 1) grid level                                 2.5
+ QS|                           2) grid level                                 0.8
+ QS| Grid level progression factor:                                          3.0
+ QS| Relative density cutoff [a.u.]:                                        12.5
+ QS| Consistent realspace mapping and integration 
+ QS| Interaction thresholds: eps_pgf_orb:                                3.2E-02
+ QS|                         eps_filter_matrix:                          0.0E+00
+ QS|                         eps_core_charge:                            1.0E-05
+ QS|                         eps_rho_gspace:                             1.0E-03
+ QS|                         eps_rho_rspace:                             1.0E-03
+ QS|                         eps_gvg_rspace:                             3.2E-02
+ QS|                         eps_ppl:                                    1.0E-02
+ QS|                         eps_ppnl:                                   3.2E-04
+
+
+ ATOMIC KIND INFORMATION
+
+  1. Atomic kind: Si                                    Number of atoms:       1
+
+     Orbital Basis Set                                             DZVP-GTH-PADE
+
+       Number of orbital shell sets:                                           2
+       Number of orbital shells:                                               5
+       Number of primitive Cartesian functions:                                5
+       Number of Cartesian basis functions:                                   14
+       Number of spherical basis functions:                                   13
+       Norm type:                                                              2
+
+       Normalised Cartesian orbitals:
+
+                        Set   Shell   Orbital            Exponent    Coefficient
+
+                          1       1    3s                1.203242       0.269412
+                                                         0.468841      -0.102290
+                                                         0.167986      -0.147195
+                                                         0.057562      -0.015996
+
+                          1       2    4s                1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.083755
+
+                          1       3    4px               1.203242       0.085242
+                                                         0.468841      -0.143473
+                                                         0.167986      -0.083408
+                                                         0.057562      -0.014565
+                          1       3    4py               1.203242       0.085242
+                                                         0.468841      -0.143473
+                                                         0.167986      -0.083408
+                                                         0.057562      -0.014565
+                          1       3    4pz               1.203242       0.085242
+                                                         0.468841      -0.143473
+                                                         0.167986      -0.083408
+                                                         0.057562      -0.014565
+
+                          1       4    5px               1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.040189
+                          1       4    5py               1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.040189
+                          1       4    5pz               1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.040189
+
+                          2       1    3dx2              0.450000       0.406941
+                          2       1    3dxy              0.450000       0.704842
+                          2       1    3dxz              0.450000       0.704842
+                          2       1    3dy2              0.450000       0.406941
+                          2       1    3dyz              0.450000       0.704842
+                          2       1    3dz2              0.450000       0.406941
+
+     Potential information for                                       GTH-PADE-q4
+
+       Description:                       Goedecker-Teter-Hutter pseudopotential
+                                           Goedecker et al., PRB 54, 1703 (1996)
+                                          Hartwigsen et al., PRB 58, 3641 (1998)
+                                                      Krack, TCA 114, 145 (2005)
+
+       Gaussian exponent of the core charge distribution:               2.582645
+       Electronic configuration (s p d ...):                               2   2
+
+       Parameters of the local part of the GTH pseudopotential:
+
+                          rloc        C1          C2          C3          C4
+                        0.440000   -7.336103
+
+       Parameters of the non-local part of the GTH pseudopotential:
+
+                   l      r(l)      h(i,j,l)
+
+                   0    0.422738    5.906928   -1.261894
+                                   -1.261894    3.258196
+                   1    0.484278    2.727013
+
+
+ MOLECULE KIND INFORMATION
+
+
+ All atoms are their own molecule, skipping detailed information
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   1
+                             - Atoms:                                          1
+                             - Shell sets:                                     2
+                             - Shells:                                         5
+                             - Primitive Cartesian functions:                  5
+                             - Cartesian basis functions:                     14
+                             - Spherical basis functions:                     13
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          0
+                             - Non-local part of the GTH pseudopotential:      2
+
+
+ MODULE QUICKSTEP:  ATOMIC COORDINATES IN angstrom
+
+  Atom  Kind  Element       X           Y           Z          Z(eff)       Mass
+
+       1     1 Si  14    0.000000    0.000000    0.000000      4.00      28.0855
+
+
+
+ REQUESTED STRUCTURE DATA
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        1.00E-03
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        --------------------------------------------------------
+                        Mixing method:                           DIRECT_P_MIXING
+                        --------------------------------------------------------
+                        No outer SCF
+
+ PW_GRID| Information for grid number                                          1
+ PW_GRID| Cutoff [a.u.]                                                      2.5
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1             -4       4                Points:           9
+ PW_GRID|   Bounds   2             -4       4                Points:           9
+ PW_GRID|   Bounds   3             -4       4                Points:           9
+ PW_GRID| Volume element (a.u.^3)   2.000         Volume (a.u.^3)      1457.6403
+ PW_GRID| Grid span                                                    FULLSPACE
+
+ PW_GRID| Information for grid number                                          2
+ PW_GRID| Cutoff [a.u.]                                                      0.8
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1             -3       2                Points:           6
+ PW_GRID|   Bounds   2             -3       2                Points:           6
+ PW_GRID|   Bounds   3             -3       2                Points:           6
+ PW_GRID| Volume element (a.u.^3)   6.748         Volume (a.u.^3)      1457.6403
+ PW_GRID| Grid span                                                    FULLSPACE
+
+ POISSON| Solver                                                        PERIODIC
+ POISSON| Periodicity                                                        XYZ
+
+ RS_GRID| Information for grid number                                          1
+ RS_GRID|   Bounds   1             -4       4                Points:           9
+ RS_GRID|   Bounds   2             -4       4                Points:           9
+ RS_GRID|   Bounds   3             -4       4                Points:           9
+
+ RS_GRID| Information for grid number                                          2
+ RS_GRID|   Bounds   1             -3       2                Points:           6
+ RS_GRID|   Bounds   2             -3       2                Points:           6
+ RS_GRID|   Bounds   3             -3       2                Points:           6
+
+ DISTRIBUTION OF THE PARTICLES (ROWS)
+              Process row      Number of particles         Number of matrix rows
+                        0                        1                            -1
+                      Sum                        1                            -1
+
+ DISTRIBUTION OF THE PARTICLES (COLUMNS)
+              Process col      Number of particles      Number of matrix columns
+                        0                        1                            -1
+                      Sum                        1                            -1
+
+ <distribution_2d> {      id_nr=         1      ref_count=         1,
+    n_row_distribution=              1,
+      row_distribution= (     0,),
+    n_col_distribution=              1,
+      col_distribution= (     0,),
+    n_local_rows= (     1,),
+      local_rows=(
+(      1 )
+ ),
+    n_local_cols= (     1,),
+      local_cols=(
+(      1 )
+ ),
+    blacs_env=  group=         0, ref_count=         5,
+  mepos=(       0,       0),
+  num_pe=(       1,       1),
+  blacs2mpi=      0
+  para_env=<cp_para_env id=     0>,
+  my_pid=         0, n_pid=         1 }
+ }
+
+ DISTRIBUTION OF THE NEIGHBOR LISTS
+              Total number of particle pairs:                                  7
+              Total number of matrix elements:                              1183
+              Average number of particle pairs:                                7
+              Maximum number of particle pairs:                                7
+              Average number of matrix element:                             1183
+              Maximum number of matrix elements:                            1183
+
+
+ DISTRIBUTION OF THE OVERLAP MATRIX
+              Number  of non-zero blocks:                                      1
+              Percentage non-zero blocks:                                 100.00
+              Average number of blocks per CPU:                                1
+              Maximum number of blocks per CPU:                                1
+              Average number of matrix elements per CPU:                     179
+              Maximum number of matrix elements per CPU:                     179
+
+ Initializing the DDAPC Environment
+
+ Number of electrons:                                                          4
+ Number of occupied orbitals:                                                  2
+ Number of molecular orbitals:                                                 2
+
+ Number of orbital functions:                                                 13
+ Number of independent orbital functions:                                     13
+
+ Extrapolation method: initial_guess
+
+ Atomic guess: The first density matrix is obtained in terms of atomic orbitals
+               and electronic configurations assigned to each atomic kind
+
+ Guess for atomic kind: Si
+
+ Electronic structure
+    Total number of core electrons                                         10.00
+    Total number of valence electrons                                       4.00
+    Total number of electrons                                              14.00
+    Multiplicity                                                   not specified
+    S   [  2.00  2.00] 2.00
+    P   [  6.00] 2.00
+
+
+ *******************************************************************************
+                  Iteration          Convergence                     Energy [au]
+ *******************************************************************************
+                          1        0.191310                      -3.618313869735
+                          2        0.731569E-01                  -3.691159009622
+                          3        0.405574E-02                  -3.699900512584
+                          4        0.328704E-02                  -3.699908407293
+                          5        0.320845E-02                  -3.699909118998
+                          6        0.316809E-02                  -3.699909477757
+                          7        0.331859E-05                  -3.699923449535
+                          8        0.110258E-06                  -3.699923449550
+
+ Energy components [Hartree]           Total Energy ::           -3.699923449550
+                                        Band Energy ::           -1.012729790251
+                                     Kinetic Energy ::            1.397012768229
+                                   Potential Energy ::           -5.096936217779
+                                      Virial (-V/T) ::            3.648453567279
+                                        Core Energy ::           -5.703543362687
+                                          XC Energy ::           -0.980691562795
+                                     Coulomb Energy ::            2.984311475932
+                       Total Pseudopotential Energy ::           -7.145739758818
+                       Local Pseudopotential Energy ::           -7.987908627736
+                    Nonlocal Pseudopotential Energy ::            0.842168868918
+                                        Confinement ::            0.451836279031
+
+ Orbital energies  State     L     Occupation   Energy[a.u.]          Energy[eV]
+
+                       1     0          2.000      -0.378230          -10.292155
+
+                       1     1          2.000      -0.128135           -3.486734
+
+ Re-scaling the density matrix to get the right number of electrons
+                  # Electrons              Trace(P)               Scaling factor
+                            4                 3.964                        1.009
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.0426094784       -0.0426094784
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.5122522541
+  Total charge density g-space grids:           2.5122522541
+
+
+  Core Hamiltonian energy:                                          2.0193102260
+  Hartree energy:                                                  26.8550255248
+  Exchange-correlation energy:                                     -1.0130182540
+  Coulomb (electron-electron) energy:                               1.2049091170
+        Maximum deviation from MO S-orthonormality                    0.1000E+01
+        Minimum/Maximum MO magnitude              0.0000E+00          0.0000E+00
+     1 P_Mix/Diag. 0.40E+00    0.0     2.94843325        17.6033250687  1.76E+01
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.1790168338       -0.1790168338
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.3758448987
+  Total charge density g-space grids:           2.3758448987
+
+
+  Core Hamiltonian energy:                                          2.9715910249
+  Hartree energy:                                                  25.5636194352
+  Exchange-correlation energy:                                     -1.1891892256
+  Coulomb (electron-electron) energy:                               1.6625823580
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3129E+01
+
+        DIIS | The SCF DIIS buffer was allocated and initialized
+
+        DIIS | Current SCF DIIS buffer size:            1
+        DIIS | Maximum SCF DIIS error vector element:   1.471E-02
+        DIIS | Current SCF convergence:                 2.948E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     2 P_Mix/Diag. 0.40E+00    0.0     1.77947626        17.0880288064 -5.15E-01
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.2616478852       -0.2616478852
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.2932138473
+  Total charge density g-space grids:           2.2932138473
+
+
+  Core Hamiltonian energy:                                          3.5476012298
+  Hartree energy:                                                  24.8221163319
+  Exchange-correlation energy:                                     -1.3005329547
+  Coulomb (electron-electron) energy:                               1.9743638544
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3153E+01
+
+        DIIS | Current SCF DIIS buffer size:            2
+        DIIS | Maximum SCF DIIS error vector element:   8.692E-02
+        DIIS | Current SCF convergence:                 1.779E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     3 P_Mix/Diag. 0.40E+00    0.0     1.11803361        16.8111921790 -2.77E-01
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3110450376       -0.3110450376
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.2438166949
+  Total charge density g-space grids:           2.2438166949
+
+
+  Core Hamiltonian energy:                                          3.8901161290
+  Hartree energy:                                                  24.4053081614
+  Exchange-correlation energy:                                     -1.3802475325
+  Coulomb (electron-electron) energy:                               2.1865968969
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3186E+01
+
+        DIIS | Current SCF DIIS buffer size:            3
+        DIIS | Maximum SCF DIIS error vector element:   7.646E-03
+        DIIS | Current SCF convergence:                 1.118E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     4 P_Mix/Diag. 0.40E+00    0.0     1.16103691        16.6571843297 -1.54E-01
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3409986933       -0.3409986933
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.2138630392
+  Total charge density g-space grids:           2.2138630392
+
+
+  Core Hamiltonian energy:                                          4.0975529055
+  Hartree energy:                                                  24.1601110860
+  Exchange-correlation energy:                                     -1.4285556326
+  Coulomb (electron-electron) energy:                               2.3203808299
+        Maximum deviation from MO S-orthonormality                    0.1422E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3194E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   8.160E-02
+        DIIS | Current SCF convergence:                 1.161E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     5 P_Mix/Diag. 0.40E+00    0.0     1.07800724        16.5711159308 -8.61E-02
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3588964699       -0.3588964699
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1959652627
+  Total charge density g-space grids:           2.1959652627
+
+
+  Core Hamiltonian energy:                                          4.2206738011
+  Hartree energy:                                                  24.0138653448
+  Exchange-correlation energy:                                     -1.4583752257
+  Coulomb (electron-electron) energy:                               2.4002187529
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3209E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   6.949E-03
+        DIIS | Current SCF convergence:                 1.078E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     6 P_Mix/Diag. 0.40E+00    0.0     1.12830932        16.5181714921 -5.29E-02
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3698175437       -0.3698175437
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1850441888
+  Total charge density g-space grids:           2.1850441888
+
+
+  Core Hamiltonian energy:                                          4.2958438245
+  Hartree energy:                                                  23.9299540138
+  Exchange-correlation energy:                                     -1.4776364522
+  Coulomb (electron-electron) energy:                               2.4530446331
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3210E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   8.026E-02
+        DIIS | Current SCF convergence:                 1.128E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     7 P_Mix/Diag. 0.40E+00    0.0     1.10304468        16.4901689579 -2.80E-02
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3762859431       -0.3762859431
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1785757895
+  Total charge density g-space grids:           2.1785757895
+
+
+  Core Hamiltonian energy:                                          4.3398864563
+  Hartree energy:                                                  23.8758905371
+  Exchange-correlation energy:                                     -1.4876936492
+  Coulomb (electron-electron) energy:                               2.4800255711
+        Maximum deviation from MO S-orthonormality                    0.2220E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3218E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   8.502E-03
+        DIIS | Current SCF convergence:                 1.103E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     8 P_Mix/Diag. 0.40E+00    0.0     1.12644144        16.4700909161 -2.01E-02
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3803010241       -0.3803010241
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1745607085
+  Total charge density g-space grids:           2.1745607085
+
+
+  Core Hamiltonian energy:                                          4.3674217782
+  Hartree energy:                                                  23.8478733974
+  Exchange-correlation energy:                                     -1.4956683955
+  Coulomb (electron-electron) energy:                               2.5016021678
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3216E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   7.937E-02
+        DIIS | Current SCF convergence:                 1.126E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+     9 P_Mix/Diag. 0.40E+00    0.0     1.12057051        16.4616343520 -8.46E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3826144503       -0.3826144503
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1722472822
+  Total charge density g-space grids:           2.1722472822
+
+
+  Core Hamiltonian energy:                                          4.3829314546
+  Hartree energy:                                                  23.8264764800
+  Exchange-correlation energy:                                     -1.4983924845
+  Coulomb (electron-electron) energy:                               2.5090329175
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3222E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   1.093E-02
+        DIIS | Current SCF convergence:                 1.121E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    10 P_Mix/Diag. 0.40E+00    0.0     1.13582423        16.4530230220 -8.61E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3841180260       -0.3841180260
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1707437066
+  Total charge density g-space grids:           2.1707437066
+
+
+  Core Hamiltonian energy:                                          4.3932763100
+  Hartree energy:                                                  23.8183116432
+  Exchange-correlation energy:                                     -1.5021818762
+  Coulomb (electron-electron) energy:                               2.5190881094
+        Maximum deviation from MO S-orthonormality                    0.1554E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3218E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   7.822E-02
+        DIIS | Current SCF convergence:                 1.136E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    11 P_Mix/Diag. 0.40E+00    0.0     1.13765548        16.4514136489 -1.61E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3849206959       -0.3849206959
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1699410366
+  Total charge density g-space grids:           2.1699410366
+
+
+  Core Hamiltonian energy:                                          4.3984954567
+  Hartree energy:                                                  23.8086835096
+  Exchange-correlation energy:                                     -1.5022621201
+  Coulomb (electron-electron) energy:                               2.5194955148
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3223E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   1.424E-02
+        DIIS | Current SCF convergence:                 1.138E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    12 P_Mix/Diag. 0.40E+00    0.0     1.15151833        16.4469244181 -4.49E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3855086071       -0.3855086071
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1693531255
+  Total charge density g-space grids:           2.1693531255
+
+
+  Core Hamiltonian energy:                                          4.4026184333
+  Hartree energy:                                                  23.8075995514
+  Exchange-correlation energy:                                     -1.5045086013
+  Coulomb (electron-electron) energy:                               2.5253212557
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3219E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   7.642E-02
+        DIIS | Current SCF convergence:                 1.152E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    13 P_Mix/Diag. 0.40E+00    0.0     1.15710074        16.4477169553  7.93E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3857638380       -0.3857638380
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1690978946
+  Total charge density g-space grids:           2.1690978946
+
+
+  Core Hamiltonian energy:                                          4.4041459262
+  Hartree energy:                                                  23.8022839571
+  Exchange-correlation energy:                                     -1.5036716274
+  Coulomb (electron-electron) energy:                               2.5232963785
+        Maximum deviation from MO S-orthonormality                    0.1776E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3223E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   1.857E-02
+        DIIS | Current SCF convergence:                 1.157E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    14 P_Mix/Diag. 0.40E+00    0.0     1.17152842        16.4447658278 -2.95E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3860153253       -0.3860153253
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1688464073
+  Total charge density g-space grids:           2.1688464073
+
+
+  Core Hamiltonian energy:                                          4.4059935379
+  Hartree energy:                                                  23.8036618911
+  Exchange-correlation energy:                                     -1.5053180506
+  Coulomb (electron-electron) energy:                               2.5274858740
+        Maximum deviation from MO S-orthonormality                    0.9992E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3220E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   7.364E-02
+        DIIS | Current SCF convergence:                 1.172E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    15 P_Mix/Diag. 0.40E+00    0.0     1.17939980        16.4463449502  1.58E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3860759093       -0.3860759093
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1687858232
+  Total charge density g-space grids:           2.1687858232
+
+
+  Core Hamiltonian energy:                                          4.4062326438
+  Hartree energy:                                                  23.8000201928
+  Exchange-correlation energy:                                     -1.5042124015
+  Coulomb (electron-electron) energy:                               2.5247464697
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3223E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   2.401E-02
+        DIIS | Current SCF convergence:                 1.179E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    16 P_Mix/Diag. 0.40E+00    0.0     1.19377125        16.4440480070 -2.30E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3861998818       -0.3861998818
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1686618507
+  Total charge density g-space grids:           2.1686618507
+
+
+  Core Hamiltonian energy:                                          4.4072113449
+  Hartree energy:                                                  23.8021294804
+  Exchange-correlation energy:                                     -1.5055670519
+  Coulomb (electron-electron) energy:                               2.5281493898
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3220E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   6.955E-02
+        DIIS | Current SCF convergence:                 1.194E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    17 P_Mix/Diag. 0.40E+00    0.0     1.20301186        16.4457813453  1.73E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3861970582       -0.3861970582
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1686646743
+  Total charge density g-space grids:           2.1686646743
+
+
+  Core Hamiltonian energy:                                          4.4070563126
+  Hartree energy:                                                  23.7992851546
+  Exchange-correlation energy:                                     -1.5044642659
+  Coulomb (electron-electron) energy:                               2.5254112354
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3223E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   3.032E-02
+        DIIS | Current SCF convergence:                 1.203E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    18 P_Mix/Diag. 0.40E+00    0.0     1.21489942        16.4438847733 -1.90E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3862671451       -0.3862671451
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685945874
+  Total charge density g-space grids:           2.1685945874
+
+
+  Core Hamiltonian energy:                                          4.4076506300
+  Hartree energy:                                                  23.8014112569
+  Exchange-correlation energy:                                     -1.5055953294
+  Coulomb (electron-electron) energy:                               2.5282210534
+        Maximum deviation from MO S-orthonormality                    0.9021E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3220E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   6.403E-02
+        DIIS | Current SCF convergence:                 1.215E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    19 P_Mix/Diag. 0.40E+00    0.0     1.22443819        16.4454741294  1.59E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3862510935       -0.3862510935
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1686106390
+  Total charge density g-space grids:           2.1686106390
+
+
+  Core Hamiltonian energy:                                          4.4074471435
+  Hartree energy:                                                  23.7991437442
+  Exchange-correlation energy:                                     -1.5046380892
+  Coulomb (electron-electron) energy:                               2.5258573955
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3222E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   3.686E-02
+        DIIS | Current SCF convergence:                 1.224E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    20 P_Mix/Diag. 0.40E+00    0.0     1.23100187        16.4439603702 -1.51E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3862922110       -0.3862922110
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685695215
+  Total charge density g-space grids:           2.1685695215
+
+
+  Core Hamiltonian energy:                                          4.4078136906
+  Hartree energy:                                                  23.8009395940
+  Exchange-correlation energy:                                     -1.5055286059
+  Coulomb (electron-electron) energy:                               2.5280373776
+        Maximum deviation from MO S-orthonormality                    0.2220E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3220E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.755E-02
+        DIIS | Current SCF convergence:                 1.231E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    21 P_Mix/Diag. 0.40E+00    0.0     1.23969792        16.4452322506  1.27E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3862811986       -0.3862811986
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685805339
+  Total charge density g-space grids:           2.1685805339
+
+
+  Core Hamiltonian energy:                                          4.4076869079
+  Hartree energy:                                                  23.7992486692
+  Exchange-correlation energy:                                     -1.5048000242
+  Coulomb (electron-electron) energy:                               2.5262622636
+        Maximum deviation from MO S-orthonormality                    0.1554E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3222E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.259E-02
+        DIIS | Current SCF convergence:                 1.240E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    22 P_Mix/Diag. 0.40E+00    0.0     1.24017634        16.4441431248 -1.09E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863026866       -0.3863026866
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685590459
+  Total charge density g-space grids:           2.1685590459
+
+
+  Core Hamiltonian energy:                                          4.4078842919
+  Hartree energy:                                                  23.8005484475
+  Exchange-correlation energy:                                     -1.5054259860
+  Coulomb (electron-electron) energy:                               2.5277599892
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.282E-02
+        DIIS | Current SCF convergence:                 1.240E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    23 P_Mix/Diag. 0.40E+00    0.0     1.24726605        16.4450143253  8.71E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863000874       -0.3863000874
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685616452
+  Total charge density g-space grids:           2.1685616452
+
+
+  Core Hamiltonian energy:                                          4.4078488249
+  Hartree energy:                                                  23.7994433364
+  Exchange-correlation energy:                                     -1.5049514925
+  Coulomb (electron-electron) energy:                               2.5266325705
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.667E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    24 P_Mix/Diag. 0.40E+00    0.0     1.24398553        16.4443482406 -6.66E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863081663       -0.3863081663
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685535662
+  Total charge density g-space grids:           2.1685535662
+
+
+  Core Hamiltonian energy:                                          4.4079246070
+  Hartree energy:                                                  23.8002290970
+  Exchange-correlation energy:                                     -1.5053250070
+  Coulomb (electron-electron) energy:                               2.5274944803
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.105E-02
+        DIIS | Current SCF convergence:                 1.244E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    25 P_Mix/Diag. 0.40E+00    0.0     1.24922057        16.4448362688  4.88E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863109299       -0.3863109299
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685508026
+  Total charge density g-space grids:           2.1685508026
+
+
+  Core Hamiltonian energy:                                          4.4079453246
+  Hartree energy:                                                  23.7996348744
+  Exchange-correlation energy:                                     -1.5050726110
+  Coulomb (electron-electron) energy:                               2.5269216274
+        Maximum deviation from MO S-orthonormality                    0.1443E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.899E-02
+        DIIS | Current SCF convergence:                 1.249E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    26 P_Mix/Diag. 0.40E+00    0.0     1.24536424        16.4445151598 -3.21E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863114701       -0.3863114701
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685502624
+  Total charge density g-space grids:           2.1685502624
+
+
+  Core Hamiltonian energy:                                          4.4079509022
+  Hartree energy:                                                  23.8000045435
+  Exchange-correlation energy:                                     -1.5052476104
+  Coulomb (electron-electron) energy:                               2.5272995564
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.981E-02
+        DIIS | Current SCF convergence:                 1.245E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    27 P_Mix/Diag. 0.40E+00    0.0     1.24881713        16.4447154072  2.00E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863158894       -0.3863158894
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685458432
+  Total charge density g-space grids:           2.1685458432
+
+
+  Core Hamiltonian energy:                                          4.4079901800
+  Hartree energy:                                                  23.7997736155
+  Exchange-correlation energy:                                     -1.5051516831
+  Coulomb (electron-electron) energy:                               2.5271046168
+        Maximum deviation from MO S-orthonormality                    0.1776E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.001E-02
+        DIIS | Current SCF convergence:                 1.249E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    28 P_Mix/Diag. 0.40E+00    0.0     1.24611197        16.4446196843 -9.57E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863135144       -0.3863135144
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685482182
+  Total charge density g-space grids:           2.1685482182
+
+
+  Core Hamiltonian energy:                                          4.4079680265
+  Hartree energy:                                                  23.7998748534
+  Exchange-correlation energy:                                     -1.5052003973
+  Coulomb (electron-electron) energy:                               2.5271872300
+        Maximum deviation from MO S-orthonormality                    0.1665E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.925E-02
+        DIIS | Current SCF convergence:                 1.246E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    29 P_Mix/Diag. 0.40E+00    0.0     1.24804846        16.4446500545  3.04E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863174549       -0.3863174549
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685442777
+  Total charge density g-space grids:           2.1685442777
+
+
+  Core Hamiltonian energy:                                          4.4080043459
+  Hartree energy:                                                  23.7998496807
+  Exchange-correlation energy:                                     -1.5051926327
+  Coulomb (electron-electron) energy:                               2.5271948845
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.030E-02
+        DIIS | Current SCF convergence:                 1.248E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    30 P_Mix/Diag. 0.40E+00    0.0     1.24670339        16.4446689658  1.89E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863148406       -0.3863148406
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685468920
+  Total charge density g-space grids:           2.1685468920
+
+
+  Core Hamiltonian energy:                                          4.4079795970
+  Hartree energy:                                                  23.7998171171
+  Exchange-correlation energy:                                     -1.5051789478
+  Coulomb (electron-electron) energy:                               2.5271405222
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.917E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    31 P_Mix/Diag. 0.40E+00    0.0     1.24752503        16.4446253382 -4.36E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863175640       -0.3863175640
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685441685
+  Total charge density g-space grids:           2.1685441685
+
+
+  Core Hamiltonian energy:                                          4.4080051765
+  Hartree energy:                                                  23.7998773597
+  Exchange-correlation energy:                                     -1.5052074904
+  Coulomb (electron-electron) energy:                               2.5272238646
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.024E-02
+        DIIS | Current SCF convergence:                 1.248E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    32 P_Mix/Diag. 0.40E+00    0.0     1.24711921        16.4446826176  5.73E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863157489       -0.3863157489
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685459836
+  Total charge density g-space grids:           2.1685459836
+
+
+  Core Hamiltonian energy:                                          4.4079877939
+  Hartree energy:                                                  23.7998027396
+  Exchange-correlation energy:                                     -1.5051742259
+  Coulomb (electron-electron) energy:                               2.5271337133
+        Maximum deviation from MO S-orthonormality                    0.7772E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.931E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    33 P_Mix/Diag. 0.40E+00    0.0     1.24726536        16.4446238795 -5.87E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863172700       -0.3863172700
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685444625
+  Total charge density g-space grids:           2.1685444625
+
+
+  Core Hamiltonian energy:                                          4.4080023047
+  Hartree energy:                                                  23.7998773309
+  Exchange-correlation energy:                                     -1.5052083349
+  Coulomb (electron-electron) energy:                               2.5272214549
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   5.007E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    34 P_Mix/Diag. 0.40E+00    0.0     1.24733528        16.4446788727  5.50E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863163535       -0.3863163535
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685453790
+  Total charge density g-space grids:           2.1685453790
+
+
+  Core Hamiltonian energy:                                          4.4079933823
+  Hartree energy:                                                  23.7998086694
+  Exchange-correlation energy:                                     -1.5051776142
+  Coulomb (electron-electron) energy:                               2.5271447386
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.950E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    35 P_Mix/Diag. 0.40E+00    0.0     1.24717313        16.4446320094 -4.69E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863169904       -0.3863169904
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685447422
+  Total charge density g-space grids:           2.1685447422
+
+
+  Core Hamiltonian energy:                                          4.4079995907
+  Hartree energy:                                                  23.7998663515
+  Exchange-correlation energy:                                     -1.5052037505
+  Coulomb (electron-electron) energy:                               2.5272080971
+        Maximum deviation from MO S-orthonormality                    0.1998E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.991E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    36 P_Mix/Diag. 0.40E+00    0.0     1.24740171        16.4446697635  3.78E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863167094       -0.3863167094
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685450231
+  Total charge density g-space grids:           2.1685450231
+
+
+  Core Hamiltonian energy:                                          4.4079967293
+  Hartree energy:                                                  23.7998204114
+  Exchange-correlation energy:                                     -1.5051832202
+  Coulomb (electron-electron) energy:                               2.5271595241
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.964E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    37 P_Mix/Diag. 0.40E+00    0.0     1.24716870        16.4446414923 -2.83E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168273       -0.3863168273
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685449053
+  Total charge density g-space grids:           2.1685449053
+
+
+  Core Hamiltonian energy:                                          4.4079979901
+  Hartree energy:                                                  23.7998543508
+  Exchange-correlation energy:                                     -1.5051985248
+  Coulomb (electron-electron) energy:                               2.5271946672
+        Maximum deviation from MO S-orthonormality                    0.7772E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.979E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    38 P_Mix/Diag. 0.40E+00    0.0     1.24739010        16.4446613879  1.99E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168791       -0.3863168791
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448535
+  Total charge density g-space grids:           2.1685448535
+
+
+  Core Hamiltonian energy:                                          4.4079983515
+  Hartree energy:                                                  23.7998308128
+  Exchange-correlation energy:                                     -1.5051880418
+  Coulomb (electron-electron) energy:                               2.5271714058
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.972E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    39 P_Mix/Diag. 0.40E+00    0.0     1.24720024        16.4446486944 -1.27E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863167664       -0.3863167664
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685449662
+  Total charge density g-space grids:           2.1685449662
+
+
+  Core Hamiltonian energy:                                          4.4079973701
+  Hartree energy:                                                  23.7998455103
+  Exchange-correlation energy:                                     -1.5051946365
+  Coulomb (electron-electron) energy:                               2.5271852634
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    40 P_Mix/Diag. 0.40E+00    0.0     1.24735352        16.4446558158  7.12E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863169321       -0.3863169321
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448005
+  Total charge density g-space grids:           2.1685448005
+
+
+  Core Hamiltonian energy:                                          4.4079988746
+  Hartree energy:                                                  23.7998375705
+  Exchange-correlation energy:                                     -1.5051911357
+  Coulomb (electron-electron) energy:                               2.5271786485
+        Maximum deviation from MO S-orthonormality                    0.3331E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.976E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    41 P_Mix/Diag. 0.40E+00    0.0     1.24723748        16.4446528813 -2.93E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863167663       -0.3863167663
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685449662
+  Total charge density g-space grids:           2.1685449662
+
+
+  Core Hamiltonian energy:                                          4.4079973417
+  Hartree energy:                                                  23.7998405058
+  Exchange-correlation energy:                                     -1.5051924303
+  Coulomb (electron-electron) energy:                               2.5271802256
+        Maximum deviation from MO S-orthonormality                    0.1443E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.972E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    42 P_Mix/Diag. 0.40E+00    0.0     1.24731925        16.4446529890  1.08E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863169271       -0.3863169271
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448054
+  Total charge density g-space grids:           2.1685448054
+
+
+  Core Hamiltonian energy:                                          4.4079988432
+  Hartree energy:                                                  23.7998409021
+  Exchange-correlation energy:                                     -1.5051926495
+  Coulomb (electron-electron) energy:                               2.5271819608
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.977E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    43 P_Mix/Diag. 0.40E+00    0.0     1.24726632        16.4446546677  1.68E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863167915       -0.3863167915
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685449411
+  Total charge density g-space grids:           2.1685449411
+
+
+  Core Hamiltonian energy:                                          4.4079975647
+  Hartree energy:                                                  23.7998384564
+  Exchange-correlation energy:                                     -1.5051915314
+  Coulomb (electron-electron) energy:                               2.5271783714
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.972E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    44 P_Mix/Diag. 0.40E+00    0.0     1.24729636        16.4446520616 -2.61E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863169029       -0.3863169029
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448296
+  Total charge density g-space grids:           2.1685448296
+
+
+  Core Hamiltonian energy:                                          4.4079986212
+  Hartree energy:                                                  23.7998419206
+  Exchange-correlation energy:                                     -1.5051931094
+  Coulomb (electron-electron) energy:                               2.5271827843
+        Maximum deviation from MO S-orthonormality                    0.5551E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.977E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    45 P_Mix/Diag. 0.40E+00    0.0     1.24728341        16.4446550044  2.94E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168197       -0.3863168197
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685449129
+  Total charge density g-space grids:           2.1685449129
+
+
+  Core Hamiltonian energy:                                          4.4079978260
+  Hartree energy:                                                  23.7998381460
+  Exchange-correlation energy:                                     -1.5051914035
+  Coulomb (electron-electron) energy:                               2.5271782933
+        Maximum deviation from MO S-orthonormality                    0.1554E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.972E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    46 P_Mix/Diag. 0.40E+00    0.0     1.24728466        16.4446521403 -2.86E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168792       -0.3863168792
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448534
+  Total charge density g-space grids:           2.1685448534
+
+
+  Core Hamiltonian energy:                                          4.4079983986
+  Hartree energy:                                                  23.7998417470
+  Exchange-correlation energy:                                     -1.5051930301
+  Coulomb (electron-electron) energy:                               2.5271824122
+        Maximum deviation from MO S-orthonormality                    0.1665E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.976E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    47 P_Mix/Diag. 0.40E+00    0.0     1.24729086        16.4446546874  2.55E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168411       -0.3863168411
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448915
+  Total charge density g-space grids:           2.1685448915
+
+
+  Core Hamiltonian energy:                                          4.4079980275
+  Hartree energy:                                                  23.7998385920
+  Exchange-correlation energy:                                     -1.5051916098
+  Coulomb (electron-electron) energy:                               2.5271789199
+        Maximum deviation from MO S-orthonormality                    0.9992E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.973E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    48 P_Mix/Diag. 0.40E+00    0.0     1.24728071        16.4446525815 -2.11E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168630       -0.3863168630
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448696
+  Total charge density g-space grids:           2.1685448696
+
+
+  Core Hamiltonian energy:                                          4.4079982448
+  Hartree energy:                                                  23.7998411681
+  Exchange-correlation energy:                                     -1.5051927689
+  Coulomb (electron-electron) energy:                               2.5271816951
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.975E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    49 P_Mix/Diag. 0.40E+00    0.0     1.24729238        16.4446542158  1.63E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168536       -0.3863168536
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448789
+  Total charge density g-space grids:           2.1685448789
+
+
+  Core Hamiltonian energy:                                          4.4079981474
+  Hartree energy:                                                  23.7998391934
+  Exchange-correlation energy:                                     -1.5051918828
+  Coulomb (electron-electron) energy:                               2.5271796294
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    50 P_Mix/Diag. 0.40E+00    0.0     1.24728091        16.4446530298 -1.19E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168546       -0.3863168546
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448779
+  Total charge density g-space grids:           2.1685448779
+
+
+  Core Hamiltonian energy:                                          4.4079981640
+  Hartree energy:                                                  23.7998406070
+  Exchange-correlation energy:                                     -1.5051925164
+  Coulomb (electron-electron) energy:                               2.5271810609
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    51 P_Mix/Diag. 0.40E+00    0.0     1.24729118        16.4446538264  7.97E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168591       -0.3863168591
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448735
+  Total charge density g-space grids:           2.1685448735
+
+
+  Core Hamiltonian energy:                                          4.4079982007
+  Hartree energy:                                                  23.7998396742
+  Exchange-correlation energy:                                     -1.5051920997
+  Coulomb (electron-electron) energy:                               2.5271801587
+        Maximum deviation from MO S-orthonormality                    0.5551E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    52 P_Mix/Diag. 0.40E+00    0.0     1.24728263        16.4446533470 -4.79E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168518       -0.3863168518
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448807
+  Total charge density g-space grids:           2.1685448807
+
+
+  Core Hamiltonian energy:                                          4.4079981357
+  Hartree energy:                                                  23.7998402203
+  Exchange-correlation energy:                                     -1.5051923429
+  Coulomb (electron-electron) energy:                               2.5271806481
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    53 P_Mix/Diag. 0.40E+00    0.0     1.24728930        16.4446535850  2.38E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168602       -0.3863168602
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448723
+  Total charge density g-space grids:           2.1685448723
+
+
+  Core Hamiltonian energy:                                          4.4079982128
+  Hartree energy:                                                  23.7998399650
+  Exchange-correlation energy:                                     -1.5051922303
+  Coulomb (electron-electron) energy:                               2.5271804609
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    54 P_Mix/Diag. 0.40E+00    0.0     1.24728443        16.4446535193 -6.57E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168520       -0.3863168520
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448806
+  Total charge density g-space grids:           2.1685448806
+
+
+  Core Hamiltonian energy:                                          4.4079981360
+  Hartree energy:                                                  23.7998400159
+  Exchange-correlation energy:                                     -1.5051922515
+  Coulomb (electron-electron) energy:                               2.5271804436
+        Maximum deviation from MO S-orthonormality                    0.2429E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    55 P_Mix/Diag. 0.40E+00    0.0     1.24728772        16.4446534723 -4.69E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168594       -0.3863168594
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448732
+  Total charge density g-space grids:           2.1685448732
+
+
+  Core Hamiltonian energy:                                          4.4079982055
+  Hartree energy:                                                  23.7998400961
+  Exchange-correlation energy:                                     -1.5051922890
+  Coulomb (electron-electron) energy:                               2.5271805859
+        Maximum deviation from MO S-orthonormality                    0.3886E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    56 P_Mix/Diag. 0.40E+00    0.0     1.24728572        16.4446535845  1.12E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168532       -0.3863168532
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448793
+  Total charge density g-space grids:           2.1685448793
+
+
+  Core Hamiltonian energy:                                          4.4079981473
+  Hartree energy:                                                  23.7998399424
+  Exchange-correlation energy:                                     -1.5051922189
+  Coulomb (electron-electron) energy:                               2.5271803799
+        Maximum deviation from MO S-orthonormality                    0.1221E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    57 P_Mix/Diag. 0.40E+00    0.0     1.24728674        16.4446534427 -1.42E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168580       -0.3863168580
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448745
+  Total charge density g-space grids:           2.1685448745
+
+
+  Core Hamiltonian energy:                                          4.4079981932
+  Hartree energy:                                                  23.7998401269
+  Exchange-correlation energy:                                     -1.5051923025
+  Coulomb (electron-electron) energy:                               2.5271806057
+        Maximum deviation from MO S-orthonormality                    0.5551E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    58 P_Mix/Diag. 0.40E+00    0.0     1.24728642        16.4446535894  1.47E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168545       -0.3863168545
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448780
+  Total charge density g-space grids:           2.1685448780
+
+
+  Core Hamiltonian energy:                                          4.4079981594
+  Hartree energy:                                                  23.7998399408
+  Exchange-correlation energy:                                     -1.5051922185
+  Coulomb (electron-electron) energy:                               2.5271803892
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    59 P_Mix/Diag. 0.40E+00    0.0     1.24728627        16.4446534537 -1.36E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168569       -0.3863168569
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448757
+  Total charge density g-space grids:           2.1685448757
+
+
+  Core Hamiltonian energy:                                          4.4079981825
+  Hartree energy:                                                  23.7998401101
+  Exchange-correlation energy:                                     -1.5051922948
+  Coulomb (electron-electron) energy:                               2.5271805794
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    60 P_Mix/Diag. 0.40E+00    0.0     1.24728670        16.4446535697  1.16E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168554       -0.3863168554
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448771
+  Total charge density g-space grids:           2.1685448771
+
+
+  Core Hamiltonian energy:                                          4.4079981682
+  Hartree energy:                                                  23.7998399673
+  Exchange-correlation energy:                                     -1.5051922305
+  Coulomb (electron-electron) energy:                               2.5271804236
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    61 P_Mix/Diag. 0.40E+00    0.0     1.24728614        16.4446534769 -9.28E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168562       -0.3863168562
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448764
+  Total charge density g-space grids:           2.1685448764
+
+
+  Core Hamiltonian energy:                                          4.4079981757
+  Hartree energy:                                                  23.7998400802
+  Exchange-correlation energy:                                     -1.5051922812
+  Coulomb (electron-electron) energy:                               2.5271805433
+        Maximum deviation from MO S-orthonormality                    0.2220E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    62 P_Mix/Diag. 0.40E+00    0.0     1.24728673        16.4446535465  6.96E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981732
+  Hartree energy:                                                  23.7998399966
+  Exchange-correlation energy:                                     -1.5051922437
+  Coulomb (electron-electron) energy:                               2.5271804573
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    63 P_Mix/Diag. 0.40E+00    0.0     1.24728618        16.4446534979 -4.86E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168558       -0.3863168558
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448767
+  Total charge density g-space grids:           2.1685448767
+
+
+  Core Hamiltonian energy:                                          4.4079981724
+  Hartree energy:                                                  23.7998400541
+  Exchange-correlation energy:                                     -1.5051922695
+  Coulomb (electron-electron) energy:                               2.5271805143
+        Maximum deviation from MO S-orthonormality                    0.6870E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    64 P_Mix/Diag. 0.40E+00    0.0     1.24728665        16.4446535289  3.10E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168561       -0.3863168561
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448764
+  Total charge density g-space grids:           2.1685448764
+
+
+  Core Hamiltonian energy:                                          4.4079981751
+  Hartree energy:                                                  23.7998400182
+  Exchange-correlation energy:                                     -1.5051922534
+  Coulomb (electron-electron) energy:                               2.5271804807
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    65 P_Mix/Diag. 0.40E+00    0.0     1.24728627        16.4446535117 -1.72E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168557       -0.3863168557
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448768
+  Total charge density g-space grids:           2.1685448768
+
+
+  Core Hamiltonian energy:                                          4.4079981715
+  Hartree energy:                                                  23.7998400373
+  Exchange-correlation energy:                                     -1.5051922619
+  Coulomb (electron-electron) energy:                               2.5271804966
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    66 P_Mix/Diag. 0.40E+00    0.0     1.24728656        16.4446535187  7.00E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168562       -0.3863168562
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448764
+  Total charge density g-space grids:           2.1685448764
+
+
+  Core Hamiltonian energy:                                          4.4079981754
+  Hartree energy:                                                  23.7998400304
+  Exchange-correlation energy:                                     -1.5051922589
+  Coulomb (electron-electron) energy:                               2.5271804931
+        Maximum deviation from MO S-orthonormality                    0.2220E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    67 P_Mix/Diag. 0.40E+00    0.0     1.24728636        16.4446535187 -2.40E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168558       -0.3863168558
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448768
+  Total charge density g-space grids:           2.1685448768
+
+
+  Core Hamiltonian energy:                                          4.4079981717
+  Hartree energy:                                                  23.7998400291
+  Exchange-correlation energy:                                     -1.5051922583
+  Coulomb (electron-electron) energy:                               2.5271804886
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    68 P_Mix/Diag. 0.40E+00    0.0     1.24728649        16.4446535144 -4.29E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168561       -0.3863168561
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448764
+  Total charge density g-space grids:           2.1685448764
+
+
+  Core Hamiltonian energy:                                          4.4079981749
+  Hartree energy:                                                  23.7998400353
+  Exchange-correlation energy:                                     -1.5051922611
+  Coulomb (electron-electron) energy:                               2.5271804977
+        Maximum deviation from MO S-orthonormality                    0.1249E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    69 P_Mix/Diag. 0.40E+00    0.0     1.24728641        16.4446535210  6.55E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168558       -0.3863168558
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448767
+  Total charge density g-space grids:           2.1685448767
+
+
+  Core Hamiltonian energy:                                          4.4079981723
+  Hartree energy:                                                  23.7998400266
+  Exchange-correlation energy:                                     -1.5051922572
+  Coulomb (electron-electron) energy:                               2.5271804867
+        Maximum deviation from MO S-orthonormality                    0.3331E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    70 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535136 -7.33E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448765
+  Total charge density g-space grids:           2.1685448765
+
+
+  Core Hamiltonian energy:                                          4.4079981743
+  Hartree energy:                                                  23.7998400360
+  Exchange-correlation energy:                                     -1.5051922614
+  Coulomb (electron-electron) energy:                               2.5271804978
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    71 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535207  7.11E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981729
+  Hartree energy:                                                  23.7998400271
+  Exchange-correlation energy:                                     -1.5051922574
+  Coulomb (electron-electron) energy:                               2.5271804876
+        Maximum deviation from MO S-orthonormality                    0.1221E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    72 P_Mix/Diag. 0.40E+00    0.0     1.24728643        16.4446535144 -6.30E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981738
+  Hartree energy:                                                  23.7998400349
+  Exchange-correlation energy:                                     -1.5051922609
+  Coulomb (electron-electron) energy:                               2.5271804963
+        Maximum deviation from MO S-orthonormality                    0.7008E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    73 P_Mix/Diag. 0.40E+00    0.0     1.24728645        16.4446535196  5.20E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981733
+  Hartree energy:                                                  23.7998400285
+  Exchange-correlation energy:                                     -1.5051922580
+  Coulomb (electron-electron) energy:                               2.5271804894
+        Maximum deviation from MO S-orthonormality                    0.2220E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    74 P_Mix/Diag. 0.40E+00    0.0     1.24728642        16.4446535156 -4.02E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981735
+  Hartree energy:                                                  23.7998400334
+  Exchange-correlation energy:                                     -1.5051922602
+  Coulomb (electron-electron) energy:                               2.5271804945
+        Maximum deviation from MO S-orthonormality                    0.1443E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    75 P_Mix/Diag. 0.40E+00    0.0     1.24728645        16.4446535185  2.91E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981735
+  Hartree energy:                                                  23.7998400299
+  Exchange-correlation energy:                                     -1.5051922587
+  Coulomb (electron-electron) energy:                               2.5271804910
+        Maximum deviation from MO S-orthonormality                    0.1554E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    76 P_Mix/Diag. 0.40E+00    0.0     1.24728643        16.4446535166 -1.95E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400322
+  Exchange-correlation energy:                                     -1.5051922597
+  Coulomb (electron-electron) energy:                               2.5271804932
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    77 P_Mix/Diag. 0.40E+00    0.0     1.24728645        16.4446535177  1.17E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981735
+  Hartree energy:                                                  23.7998400309
+  Exchange-correlation energy:                                     -1.5051922591
+  Coulomb (electron-electron) energy:                               2.5271804920
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    78 P_Mix/Diag. 0.40E+00    0.0     1.24728643        16.4446535172 -5.72E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981733
+  Hartree energy:                                                  23.7998400315
+  Exchange-correlation energy:                                     -1.5051922594
+  Coulomb (electron-electron) energy:                               2.5271804925
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    79 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173  1.50E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981735
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804925
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    80 P_Mix/Diag. 0.40E+00    0.0     1.24728643        16.4446535174  1.25E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400312
+  Exchange-correlation energy:                                     -1.5051922592
+  Coulomb (electron-electron) energy:                               2.5271804921
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    81 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535172 -2.84E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981735
+  Hartree energy:                                                  23.7998400316
+  Exchange-correlation energy:                                     -1.5051922594
+  Coulomb (electron-electron) energy:                               2.5271804927
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    82 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535175  3.55E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168559       -0.3863168559
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400311
+  Exchange-correlation energy:                                     -1.5051922592
+  Coulomb (electron-electron) energy:                               2.5271804921
+        Maximum deviation from MO S-orthonormality                    0.4441E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    83 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535172 -3.65E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981735
+  Hartree energy:                                                  23.7998400316
+  Exchange-correlation energy:                                     -1.5051922594
+  Coulomb (electron-electron) energy:                               2.5271804926
+        Maximum deviation from MO S-orthonormality                    0.5204E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    84 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535175  3.36E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400311
+  Exchange-correlation energy:                                     -1.5051922592
+  Coulomb (electron-electron) energy:                               2.5271804922
+        Maximum deviation from MO S-orthonormality                    0.1554E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    85 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535172 -2.87E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400315
+  Exchange-correlation energy:                                     -1.5051922594
+  Coulomb (electron-electron) energy:                               2.5271804926
+        Maximum deviation from MO S-orthonormality                    0.1221E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    86 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535174  2.29E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400312
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804923
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    87 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -1.71E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804925
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    88 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535174  1.19E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804923
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    89 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -7.57E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.3400E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    90 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173  4.16E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    91 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -1.66E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    92 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -4.87E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    93 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173  1.10E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.1221E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    94 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -1.64E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.1332E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    95 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173  1.83E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    96 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -1.76E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    97 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173  1.56E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.1110E-14
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    98 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -1.28E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400314
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.8882E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+    99 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173  9.90E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.7998400313
+  Exchange-correlation energy:                                     -1.5051922593
+  Coulomb (electron-electron) energy:                               2.5271804924
+        Maximum deviation from MO S-orthonormality                    0.6661E-15
+        Minimum/Maximum MO magnitude              0.1000E+01          0.3221E+01
+
+        DIIS | Current SCF DIIS buffer size:            4
+        DIIS | Maximum SCF DIIS error vector element:   4.974E-02
+        DIIS | Current SCF convergence:                 1.247E+00
+        DIIS | Threshold value for a DIIS step:         1.000E-01
+        DIIS | => The SCF DIIS buffer will be updated
+        DIIS | => No SCF DIIS step will be performed
+
+   100 P_Mix/Diag. 0.40E+00    0.0     1.24728644        16.4446535173 -7.14E-12
+
+  Leaving inner SCF loop after reaching   100 steps.
+
+
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:                -10.25799242814102
+  Core Hamiltonian energy:                                      4.40799817343231
+  Hartree energy:                                              23.79984003133944
+  Exchange-correlation energy:                                 -1.50519225930207
+  Coulomb Electron-Electron Interaction Energy 
+  - Already included in the total Hartree term                  2.52718049237990
+
+  Total energy:                                                16.44465351732866
+
+ *** WARNING in qs_scf.F:479 :: SCF run NOT converged ***
+
+
+ The electron density is written in cube file format to the file:
+
+ variable_test-ELECTRON_DENSITY-1_0.cube
+
+ !-----------------------------------------------------------------------------!
+                     Mulliken Population Analysis
+
+ #  Atom  Element  Kind  Atomic population                           Net charge
+       1     Si       1          4.000000                             -0.000000
+ # Total charge                              4.000000                 -0.000000
+
+ !-----------------------------------------------------------------------------!
+
+ !-----------------------------------------------------------------------------!
+                           Hirshfeld Charges
+
+  #Atom  Element  Kind  Ref Charge     Population                    Net charge
+      1       Si     1       4.000          4.257                        -0.257
+
+  Total Charge                                                           -0.257
+ !-----------------------------------------------------------------------------!
+  Electronic kinetic energy:                                   4.20339209480293
+
+
+ LOWDIN POPULATION ANALYSIS
+
+ #  Atom  Element  Kind  Atomic population                           Net charge
+       1     Si       1          4.000000                             -0.000000
+ # Total charge                              4.000000                 -0.000000
+
+  DDAP FULL DENSITY charges:
+  Atom     |    Charge
+
+     1  Si    2.168545
+  Total       2.168545
+
+
+ ELECTRIC/MAGNETIC MOMENTS
+  Reference Point [Bohr]           0.00000000    0.00000000    0.00000000
+  Charges
+    Electronic=      4.00000000    Core=    -4.00000000    Total=      0.00000000
+  Dipole vectors are based on the periodic (Berry phase) operator.
+  They are defined modulo integer multiples of the cell matrix [Debye].
+  [X] [   28.81922563     0.00000000     0.00000000 ] [i]
+  [Y]=[    0.00000000    28.81922563     0.00000000 ]*[j]
+  [Z] [    0.00000000     0.00000000    28.81922563 ] [k]
+  Dipole moment [Debye]
+    X=    0.00022816 Y=    0.00011132 Z=    0.00016062     Total=      0.00030041
+  
+  Eigenvalues of the occupied subspace spin            1
+ ---------------------------------------------
+      -1.01149713      -0.74940958
+ Fermi Energy [eV] :  -20.392472
+  
+  Lowest eigenvalues of the unoccupied subspace spin            1
+ ---------------------------------------------
+
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -4.3863168560       -0.3863168560
+  Core density on regular grids:                6.5548617325        2.5548617325
+  Total charge density on r-space grids:        2.1685448766
+  Total charge density g-space grids:           2.1685448766
+
+
+  Core Hamiltonian energy:                                          4.4079981734
+  Hartree energy:                                                  23.8835255543
+  Exchange-correlation energy:                                     -1.5585839464
+  Coulomb (electron-electron) energy:                               2.6108660154
+
+
+ FORCES [a.u.]
+
+  Atom    Kind        Component        X           Y           Z
+
+     1       1          overlap      0.000000    0.000000    0.000000
+     1       1     overlap_admm      0.000000    0.000000    0.000000
+     1       1          kinetic      0.000000    0.000000    0.000000
+     1       1          gth_ppl      0.000000    0.000000    0.000000
+     1       1         gth_nlcc      0.000000    0.000000    0.000000
+     1       1         gth_ppnl      0.000000    0.000000    0.000000
+     1       1     core_overlap      0.000000    0.000000    0.000000
+     1       1         rho_core      0.000008    0.000006    0.000007
+     1       1         rho_elec     -0.000069   -0.000041   -0.000061
+     1       1         rho_lri_el    0.000000    0.000000    0.000000
+     1       1         ch_pulay      0.000000    0.000000    0.000000
+     1       1       dispersion      0.000000    0.000000    0.000000
+     1       1            other      0.000000    0.000000    0.000000
+     1       1          fock_4c      0.000000    0.000000    0.000000
+     1       1        ehrenfest      0.000000    0.000000    0.000000
+     1       1           efield      0.000000    0.000000    0.000000
+     1       1              eev      0.000000    0.000000    0.000000
+     1       1      mp2_non_sep      0.000000    0.000000    0.000000
+     1       1          mp2_sep      0.000000    0.000000    0.000000
+     1       1            total     -0.000061   -0.000035   -0.000054
+
+  Sum of total                      -0.000061   -0.000035   -0.000054
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy (a.u.):               16.474947353199155
+
+
+ ATOMIC FORCES in [a.u.]
+
+ # Atom   Kind   Element          X              Y              Z
+      1      1      Si          0.00006086     0.00003517     0.00005354
+ SUM OF ATOMIC FORCES           0.00006086     0.00003517     0.00005354     0.00008836
+
+ *** WARNING in force_env_methods.F:344 :: To print the stress tensor ***
+ *** switch on the virial evaluation with the keyword: STRESS_TENSOR  ***
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops   13 x   13 x   13                    4394     100.0%      0.0%      0.0%
+ flops   13 x   13 x    2                   68276     100.0%      0.0%      0.0%
+ flops   13 x    2 x   13                   71656     100.0%      0.0%      0.0%
+ flops total                               144326     100.0%      0.0%      0.0%
+ flops max/rank                            144326     100.0%      0.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                                208     100.0%      0.0%      0.0%
+ number of processed stacks                   208     100.0%      0.0%      0.0%
+ average stack size                                     1.0       0.0       0.0
+ marketing flops                   144.326000E+03
+ -------------------------------------------------------------------------------
+ max memory usage/rank              65.581056E+06
+ # max total images/rank                        1
+ # MPI messages exchanged                       0
+ # MPI messages filtered                        0
+ MPI messages size (elements):
+  total size                         0.000000E+00
+  min size                           0.000000E+00
+  max size                           0.000000E+00
+  average size                       0.000000E+00
+ MPI breakdown and total messages size (bytes):
+             size <=      128                   0                        0
+       128 < size <=     8192                   0                        0
+      8192 < size <=    32768                   0                        0
+     32768 < size <=   131072                   0                        0
+    131072 < size <=  4194304                   0                        0
+   4194304 < size <= 16777216                   0                        0
+  16777216 < size                               0                        0
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                  63
+
+ -------------------------------------------------------------------------------
+ ----                             MULTIGRID INFO                            ----
+ -------------------------------------------------------------------------------
+ count for grid        1:            639          cutoff [a.u.]            2.50
+ count for grid        2:              9          cutoff [a.u.]            0.83
+ total gridlevel count  :            648
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS  TOT TIME [s]  AVE VOLUME [Bytes]  PERFORMANCE [MB/s]
+ MP_Group                3         0.000
+ MP_Bcast              104         0.000                  4.                2.93
+ MP_Allreduce         1715         0.000                  8.               36.30
+ MP_Sync               181         0.000
+ MP_Alltoall          4035         0.001                355.             1263.62
+ MP_Wait              4992         0.001
+ MP_ISend             1664         0.001                262.              321.05
+ MP_IRecv             1664         0.000                262.             1192.62
+ MP_Memory            7892         0.001
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 3.0, the CP2K developers group (2015).
+ CP2K is freely available from https://www.cp2k.org/ .
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ http://dx.doi.org/10.1016/j.parco.2014.03.012
+
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WILEY INTERDISCIPLINARY REVIEWS-COMPUTATIONAL MOLECULAR SCIENCE, 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ http://dx.doi.org/10.1002/wcms.1159
+
+
+ Krack, M. 
+ THEORETICAL CHEMISTRY ACCOUNTS, 114 (1-3), 145-152 (2005). 
+ Pseudopotentials for H to Kr optimized for gradient-corrected
+ exchange-correlation functionals.
+ http://dx.doi.org/10.1007/s00214-005-0655-y
+
+
+ VandeVondele, J; Krack, M; Mohamed, F; Parrinello, M; Chassaing, T;
+ Hutter, J. COMPUTER PHYSICS COMMUNICATIONS, 167 (2), 103-128 (2005). 
+ QUICKSTEP: Fast and accurate density functional calculations using a
+ mixed Gaussian and plane waves approach.
+ http://dx.doi.org/10.1016/j.cpc.2004.12.014
+
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ http://dx.doi.org/10.1109/JPROC.2004.840301
+
+
+ Hartwigsen, C; Goedecker, S; Hutter, J. 
+ PHYSICAL REVIEW B, 58 (7), 3641-3662 (1998). 
+ Relativistic separable dual-space Gaussian pseudopotentials from H to Rn.
+ http://dx.doi.org/10.1103/PhysRevB.58.3641
+
+
+ Lippert, G; Hutter, J; Parrinello, M. 
+ MOLECULAR PHYSICS, 92 (3), 477-487 (1997). 
+ A hybrid Gaussian and plane wave density functional scheme.
+ http://dx.doi.org/10.1080/002689797170220
+
+
+ Goedecker, S; Teter, M; Hutter, J. 
+ PHYSICAL REVIEW B, 54 (3), 1703-1710 (1996). 
+ Separable dual-space Gaussian pseudopotentials.
+ http://dx.doi.org/10.1103/PhysRevB.54.1703
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.002    0.002    0.226    0.226
+ qs_forces                            1  2.0    0.000    0.000    0.205    0.205
+ qs_energies                          1  3.0    0.000    0.000    0.204    0.204
+ scf_env_do_scf                       1  4.0    0.000    0.000    0.184    0.184
+ scf_env_do_scf_inner_loop          100  5.0    0.003    0.003    0.184    0.184
+ qs_scf_new_mos                     100  6.0    0.000    0.000    0.059    0.059
+ dbcsr_mm_cannon_multiply           208  9.5    0.003    0.003    0.048    0.048
+ qs_ks_update_qs_env                100  6.0    0.000    0.000    0.047    0.047
+ rebuild_ks_matrix                  101  7.0    0.000    0.000    0.047    0.047
+ qs_ks_build_kohn_sham_matrix       101  8.0    0.005    0.005    0.047    0.047
+ qs_scf_loop_print                  100  6.0    0.003    0.003    0.046    0.046
+ calculate_orthonormality           100  7.0    0.000    0.000    0.036    0.036
+ cp_dbcsr_sm_fm_multiply            107  7.9    0.000    0.000    0.035    0.035
+ calculate_dm_sparse                100  7.0    0.000    0.000    0.034    0.034
+ cp_dbcsr_plus_fm_fm_t_native       101  8.0    0.000    0.000    0.034    0.034
+ qs_rho_update_rho                  101  6.0    0.000    0.000    0.030    0.030
+ calculate_rho_elec                 101  7.0    0.020    0.020    0.030    0.030
+ sum_up_and_integrate               101  9.0    0.000    0.000    0.025    0.025
+ integrate_v_rspace                 101 10.0    0.018    0.018    0.025    0.025
+ cp_dbcsr_sm_fm_multiply_core       107  8.9    0.000    0.000    0.024    0.024
+ pw_transfer                       1022  9.9    0.013    0.013    0.021    0.021
+ dbcsr_make_images                  416 10.5    0.000    0.000    0.021    0.021
+ make_images                        416 11.5    0.009    0.009    0.021    0.021
+ dbcsr_complete_redistribute        517  9.4    0.006    0.006    0.017    0.017
+ copy_dbcsr_to_fm                   308  8.0    0.001    0.001    0.013    0.013
+ create_qs_kind_set                   1  2.0    0.000    0.000    0.012    0.012
+ read_qs_kind                         1  3.0    0.007    0.007    0.012    0.012
+ qs_diis_b_step                      99  7.0    0.002    0.002    0.012    0.012
+ cannon_multiply_low                208 10.5    0.005    0.005    0.012    0.012
+ scf_post_calculation_gpw             1  4.0    0.000    0.000    0.011    0.011
+ copy_fm_to_dbcsr                   209  8.9    0.001    0.001    0.010    0.010
+ density_rs2pw                      101  8.0    0.000    0.000    0.010    0.010
+ dbcsr_finalize                    1155 10.4    0.001    0.001    0.009    0.009
+ eigensolver                        100  7.0    0.002    0.002    0.009    0.009
+ cp_gemm                            405  8.0    0.000    0.000    0.008    0.008
+ cp_gemm_fm_gemm                    405  9.0    0.000    0.000    0.008    0.008
+ dbcsr_create_new                  3639 10.5    0.004    0.004    0.008    0.008
+ cp_fm_gemm                         405 10.0    0.008    0.008    0.008    0.008
+ dbcsr_data_release               15550 11.8    0.005    0.005    0.008    0.008
+ fft_wrap_pw1pw2                    617 10.9    0.001    0.001    0.007    0.007
+ pw_poisson_solve                   202  9.0    0.002    0.002    0.007    0.007
+ cp_fm_syevd                        201  8.0    0.000    0.000    0.007    0.007
+ cp_fm_syevd_base                   201  9.0    0.007    0.007    0.007    0.007
+ dbcsr_data_new                    9750 11.4    0.004    0.004    0.007    0.007
+ init_scf_run                         1  4.0    0.000    0.000    0.007    0.007
+ scf_env_initial_rho_setup            1  5.0    0.000    0.000    0.006    0.006
+ fft_wrap_pw1pw2_10                 617 11.9    0.001    0.001    0.006    0.006
+ calculate_magnitude                100  7.0    0.001    0.001    0.006    0.006
+ potential_pw2rs                    101 11.0    0.000    0.000    0.006    0.006
+ dbcsr_merge_all                    928 11.5    0.002    0.002    0.005    0.005
+ qs_init_subsys                       1  2.0    0.001    0.001    0.005    0.005
+ qs_scf_post_moments                  1  5.0    0.000    0.000    0.005    0.005
+ parser_read_line                  3297  4.0    0.001    0.001    0.005    0.005
+ qs_vxc_create                      101  9.0    0.000    0.000    0.005    0.005
+ calculate_first_density_matrix       1  6.0    0.000    0.000    0.005    0.005
+ calculate_atomic_block_dm            1  7.0    0.000    0.000    0.005    0.005
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 2
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2018-03-01 14:40:41.518
+ ***** ** ***  *** **   PROGRAM RAN ON                                 lenovo700
+ **    ****   ******    PROGRAM RAN BY                                     lauri
+ ***** **    ** ** **   PROGRAM PROCESS ID                                  8746
+  **** **  *******  **  PROGRAM STOPPED IN /home/lauri/Dropbox/nomad-dev/WP1/nom
+                                           ad-lab-base/parsers/cp2k/regtests/cp2
+                                           k_2.6.2/input_preprocessing/variable_
+                                           multiple

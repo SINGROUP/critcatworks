@@ -1,0 +1,538 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"cpmd_general",
+  "description":"meta info used by the CPMD parser, all names are expected to start with x_cpmd_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_cpmd_atom_kind_label",
+    "description":"The label of the atomic kind.",
+    "superNames":["x_cpmd_section_atom_kind"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_atom_kind_mass",
+    "description":"The mass of the atomic kind.",
+    "superNames":["x_cpmd_section_atom_kind"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_atom_kind_nlcc",
+    "description":"The nonlinear core correction (NLCC) of the atomic kind.",
+    "superNames":["x_cpmd_section_atom_kind"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_atom_kind_pseudopotential_l",
+    "description":"The angular part of the pseudopotential for the atomic kind.",
+    "superNames":["x_cpmd_section_atom_kind"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_atom_kind_pseudopotential_type",
+    "description":"The type of the pseudopotential for the atomic kind.",
+    "superNames":["x_cpmd_section_atom_kind"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_atom_kind_raggio",
+    "description":"The width of the ionic charge distribution (RAGGIO) of the atomic kind.",
+    "superNames":["x_cpmd_section_atom_kind"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_cell_dimension",
+    "description":"The cell dimension.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_cell_lattice_constant",
+    "description":"The cell lattice constant.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_cell_symmetry",
+    "description":"The symmetry of the cell.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_cell_volume",
+    "description":"The cell volume.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_classical_energy_mean",
+    "description":"The mean classical energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_classical_energy_std",
+    "description":"The standard deviation of classical energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_compilation_date",
+    "description":"CPMD compilation date.",
+    "superNames":["x_cpmd_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_conserved_energy_mean",
+    "description":"The mean conserved energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_conserved_energy_std",
+    "description":"The standard deviation of conserved energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_constraints_energy_mean",
+    "description":"The mean constrains energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_constraints_energy_std",
+    "description":"The standard deviation of constraints energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_cpu_time_mean",
+    "description":"The mean cpu time.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_density_cutoff",
+    "description":"Place wave cutoff energy for density.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_density_functional_energy_mean",
+    "description":"The mean density functional energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_density_functional_energy_std",
+    "description":"The standard deviation of density functional energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_electron_kinetic_energy_mean",
+    "description":"The mean electron kinetic energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_electron_kinetic_energy_std",
+    "description":"The standard deviation of electron kinetic energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_geo_opt_initialization_time",
+    "description":"Time for initialization.",
+    "superNames":["x_cpmd_section_geo_opt_initialization"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_geo_opt_method",
+    "description":"The geometry optimization method.",
+    "superNames":["x_cpmd_section_run_type_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_geo_opt_scf_cnorm",
+    "description":"Average of the off-diagonal components (CNORM) during SCF step within geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_scf_iteration"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_geo_opt_scf_detot",
+    "description":"The difference in total energy to the previous SCF energy (DETOT) within geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_scf_iteration"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cpmd_geo_opt_scf_etot",
+    "description":"The total energy (ETOT) during SCF step within geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_scf_iteration"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cpmd_geo_opt_scf_gemax",
+    "description":"Largest off-diagonal component (GEMAX) during SCF step within geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_scf_iteration"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_geo_opt_scf_nfi",
+    "description":"The scf step number (NFI) within geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_scf_iteration"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_geo_opt_scf_tcpu",
+    "description":"The CPU time used during SCF step (TCPU) within geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_scf_iteration"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_geo_opt_step_cnstr",
+    "description":"The largest absolute component of a constraint force on the atoms (CNSTR).",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_geo_opt_step_detot",
+    "description":"The difference in total energy to the previous geometry optimization step (DETOT).",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cpmd_geo_opt_step_etot",
+    "description":"The total energy at the end of a geometry optimization step (ETOT).",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cpmd_geo_opt_step_forces",
+    "description":"The forces from a geometry optimization step. The ith row corresponds to the force for atom number i.",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_cpmd_geo_opt_step_gnmax",
+    "description":"The largest absolute component of the force on any atom (GNMAX).",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_geo_opt_step_gnorm",
+    "description":"Average force on the atoms (GNORM).",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_geo_opt_step_number",
+    "description":"Geometry optimization step number.",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_geo_opt_step_positions",
+    "description":"The positions from a geometry optimization step. The ith row corresponds to the position for atom number i.",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_cpmd_geo_opt_step_tcpu",
+    "description":"The CPU time used during geometry optimization step (TCPU).",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_geo_opt_step_total_number_of_scf_steps",
+    "description":"Total number of SCF steps at the end of this geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_step"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_initialized_forces",
+    "description":"The initialized forces for geometry optimization. The ith row corresponds to the force for atom number i.",
+    "superNames":["x_cpmd_section_geo_opt_initialization"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_cpmd_initialized_positions",
+    "description":"The initialized positions for geometry optimization. The ith row corresponds to the position for atom number i.",
+    "superNames":["x_cpmd_section_geo_opt_initialization"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_cpmd_input_filename",
+    "description":"CPMD input file name.",
+    "superNames":["x_cpmd_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_ion_displacement_mean",
+    "description":"The mean ion displacement.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Bohr"
+  },{
+    "name":"x_cpmd_ion_displacement_std",
+    "description":"The standard deviation of ion displacement.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Bohr"
+  },{
+    "name":"x_cpmd_ion_temperature_control",
+    "description":"The temperature control method for ion dynamics.",
+    "superNames":["x_cpmd_section_run_type_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_ionic_temperature_mean",
+    "description":"The mean ionic temperature.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cpmd_ionic_temperature_std",
+    "description":"The standard deviation of ionic temperature.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cpmd_lattice_vector_a1",
+    "description":"Lattice vector A1",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_lattice_vector_a2",
+    "description":"Lattice vector A2",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_lattice_vector_a3",
+    "description":"Lattice vector A3",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_max_steps",
+    "description":"The maximum number of steps requested. In MD, this is the number of MD steps, in single point calculations this is the number of scf cycles, in geometry optimization this is the number of optimization steps.",
+    "superNames":["x_cpmd_section_run_type_information"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_nose_energy_electrons_mean",
+    "description":"The mean Nosé energy for electrons.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_nose_energy_electrons_std",
+    "description":"The standard deviation of Nosé energy for elctrons.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_nose_energy_ions_mean",
+    "description":"The mean Nosé energy for ions.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_nose_energy_ions_std",
+    "description":"The standard deviation of Nosé energy for ions.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_number_of_planewaves_density",
+    "description":"Number of plane waves for density cutoff.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_number_of_planewaves_wave_function",
+    "description":"Number of plane waves for wave_function cutoff.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_process_id",
+    "description":"The process id for this calculation.",
+    "superNames":["x_cpmd_section_start_information"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_real_space_mesh",
+    "description":"Number of points in the real space mesh.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_reciprocal_lattice_vector_b1",
+    "description":"Reciprocal lattice vector B1",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_reciprocal_lattice_vector_b2",
+    "description":"Reciprocal lattice vector B2",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_reciprocal_lattice_vector_b3",
+    "description":"Reciprocal lattice vector B3",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_restraints_energy_mean",
+    "description":"The mean restraints energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_restraints_energy_std",
+    "description":"The standard deviation of restraints energy.",
+    "superNames":["x_cpmd_section_md_averaged_quantities"],
+    "dtypeStr":"f",
+    "unit":"Hartree"
+  },{
+    "name":"x_cpmd_run_host_name",
+    "description":"The host on which this calculation was made on.",
+    "superNames":["x_cpmd_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_run_user_name",
+    "description":"The user who launched this calculation.",
+    "superNames":["x_cpmd_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_scf_cnorm",
+    "description":"Average of the off-diagonal components (CNORM) during SCF step.",
+    "superNames":["x_cpmd_section_scf_iteration"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_scf_detot",
+    "description":"The difference in total energy to the previous SCF energy (DETOT).",
+    "superNames":["x_cpmd_section_scf_iteration"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cpmd_scf_etot",
+    "description":"The total energy (ETOT) during SCF step.",
+    "superNames":["x_cpmd_section_scf_iteration"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cpmd_scf_gemax",
+    "description":"Largest off-diagonal component (GEMAX) during SCF step.",
+    "superNames":["x_cpmd_section_scf_iteration"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cpmd_scf_nfi",
+    "description":"The scf step number (NFI).",
+    "superNames":["x_cpmd_section_scf_iteration"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_scf_tcpu",
+    "description":"The CPU time used during SCF step (TCPU).",
+    "superNames":["x_cpmd_section_scf_iteration"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_section_atom_kind",
+    "kindStr":"type_section",
+    "description":"Contains information about one atomic kind.",
+    "superNames":["x_cpmd_section_atom_kinds"]
+  },{
+    "name":"x_cpmd_section_atom_kinds",
+    "kindStr":"type_section",
+    "description":"Contains information about the atomic kinds present in the calculation.",
+    "superNames":["section_method"]
+  },{
+    "name":"x_cpmd_section_end_information",
+    "kindStr":"type_section",
+    "description":"Contains information printed at the end of a calculation.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_final_results",
+    "kindStr":"type_section",
+    "description":"The final results after a single point calculation.",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_cpmd_section_geo_opt_initialization",
+    "kindStr":"type_section",
+    "description":"Geometry optimization initialization information.",
+    "superNames":["section_frame_sequence"]
+  },{
+    "name":"x_cpmd_section_geo_opt_scf_iteration",
+    "kindStr":"type_section",
+    "description":"Contains information about the self-consistent field iteration within a geometry optimization step.",
+    "superNames":["x_cpmd_section_geo_opt_step"]
+  },{
+    "name":"x_cpmd_section_geo_opt_step",
+    "kindStr":"type_section",
+    "description":"Contains information for a single geometry optimization step.",
+    "superNames":["section_frame_sequence"]
+  },{
+    "name":"x_cpmd_section_md_averaged_quantities",
+    "kindStr":"type_section",
+    "description":"Averaged quantities from a MD calculation.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_md_initialization",
+    "kindStr":"type_section",
+    "description":"Molecular dynamics initialization information.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_pseudopotential_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the pseudopotentials.",
+    "superNames":["section_method"]
+  },{
+    "name":"x_cpmd_section_run_type_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the run type.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_scf",
+    "kindStr":"type_section",
+    "description":"Contains information about self-consistent field calculation",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_cpmd_section_scf_iteration",
+    "kindStr":"type_section",
+    "description":"Contains information about the self-consistent field iteration within a wavefunction optimization.",
+    "superNames":["x_cpmd_section_scf"]
+  },{
+    "name":"x_cpmd_section_start_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the starting conditions for this run",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_supercell",
+    "kindStr":"type_section",
+    "description":"Contains information about the supercell.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_system_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the system.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_timing",
+    "kindStr":"type_section",
+    "description":"Contains information about the timings.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_wave_function_initialization",
+    "kindStr":"type_section",
+    "description":"Contains information about the wave function initialization",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cpmd_section_xc_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the exchange-correlation functional.",
+    "superNames":["section_method"]
+  },{
+    "name":"x_cpmd_start_datetime",
+    "description":"CPMD run start time and date",
+    "superNames":["x_cpmd_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cpmd_time_step_electrons",
+    "description":"The time step for electrons.",
+    "superNames":["x_cpmd_section_run_type_information"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_time_step_ions",
+    "description":"The time step for ions.",
+    "superNames":["x_cpmd_section_run_type_information"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cpmd_total_number_of_molecular_structures",
+    "description":"Total number of molecular structures.",
+    "superNames":["x_cpmd_section_geo_opt_initialization"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cpmd_wave_function_cutoff",
+    "description":"Place wave cutoff energy for wave function.",
+    "superNames":["x_cpmd_section_supercell"],
+    "dtypeStr":"f"
+  }]
+}

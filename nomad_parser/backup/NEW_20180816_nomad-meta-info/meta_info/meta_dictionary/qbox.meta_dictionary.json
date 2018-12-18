@@ -1,0 +1,340 @@
+{
+  "metadict_name":"qbox",
+  "metadict_description":"meta info used by the qbox parser",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_qbox_atom_force_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of atomic force",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_qbox_atom_force_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of atomic force",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_qbox_atom_force_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of atomic force",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_qbox_atoms_dyn",
+    "meta_type":"type-value",
+    "meta_description":"atom dynamics control variable",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qbox_cell_dyn",
+    "meta_type":"type-value",
+    "meta_description":"cell dynamics control variable",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qbox_dipole_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of dipole",
+    "meta_parent_section":"x_qbox_section_dipole",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"electron Bohr"
+  },{
+    "meta_name":"x_qbox_dipole_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of dipole",
+    "meta_parent_section":"x_qbox_section_dipole",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"electron Bohr"
+  },{
+    "meta_name":"x_qbox_dipole_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of dipole",
+    "meta_parent_section":"x_qbox_section_dipole",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"electron Bohr"
+  },{
+    "meta_name":"x_qbox_ecut",
+    "meta_type":"type-value",
+    "meta_description":[
+      "plane-wave basis energy cutoff, according to qbox,  it must given in Rydberg ",
+      "units."],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_qbox_efield_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of efield",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Hartree/(electron*Bohr)"
+  },{
+    "meta_name":"x_qbox_efield_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of efield",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Hartree/(electron*Bohr)"
+  },{
+    "meta_name":"x_qbox_efield_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of efield",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Hartree/(electron*Bohr)"
+  },{
+    "meta_name":"x_qbox_functional_name",
+    "meta_type":"type-value",
+    "meta_description":"xc function",
+    "meta_parent_section":"x_qbox_section_functionals",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qbox_geometry_atom_labels",
+    "meta_type":"type-value",
+    "meta_description":"labels of atom",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qbox_geometry_atom_positions_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of atomic position",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_atom_positions_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of atomic position",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_atom_positions_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of atomic position",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_lattice_vector_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of vector of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_lattice_vector_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of vector of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_lattice_vector_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of vector of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_mlwf_atom_positions_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "x component of atomic position in maximally localized Wannier ",
+      "functions(MLWF)"],
+    "meta_parent_section":"x_qbox_section_mlwf",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_mlwf_atom_positions_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "y component of atomic position in maximally localized Wannier ",
+      "functions(MLWF)"],
+    "meta_parent_section":"x_qbox_section_mlwf",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_mlwf_atom_positions_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "z component of atomic position in maximally localized Wannier ",
+      "functions(MLWF)"],
+    "meta_parent_section":"x_qbox_section_mlwf",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_geometry_mlwf_atom_spread",
+    "meta_type":"type-value",
+    "meta_description":[
+      "spread of atomic position in maximally localized Wannier ",
+      "functions(MLWF)"],
+    "meta_parent_section":"x_qbox_section_mlwf",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_qbox_k_point_weight",
+    "meta_type":"type-value",
+    "meta_description":"weight k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qbox_k_point_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of vector of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qbox_k_point_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of vector of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qbox_k_point_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of vector of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qbox_loading_xml_file",
+    "meta_type":"type-value",
+    "meta_description":"The xml file used in this calculation",
+    "meta_parent_section":"x_qbox_section_xml_file",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qbox_nodename",
+    "meta_type":"type-value",
+    "meta_description":"compute node",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qbox_section_dipole",
+    "meta_type":"type-section",
+    "meta_description":"-",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qbox_section_efield",
+    "meta_type":"type-section",
+    "meta_description":"-",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qbox_section_functionals",
+    "meta_type":"type-section",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qbox_section_mlwf",
+    "meta_type":"type-section",
+    "meta_description":"-",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qbox_section_stress_tensor",
+    "meta_type":"type-section",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qbox_section_xml_file",
+    "meta_type":"type-section",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qbox_stress_tensor_xx",
+    "meta_type":"type-value",
+    "meta_description":"xx component of stress tensor",
+    "meta_parent_section":"x_qbox_section_stress_tensor",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_qbox_stress_tensor_xy",
+    "meta_type":"type-value",
+    "meta_description":"xy component of stress tensor",
+    "meta_parent_section":"x_qbox_section_stress_tensor",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_qbox_stress_tensor_xz",
+    "meta_type":"type-value",
+    "meta_description":"xz component of stress tensor",
+    "meta_parent_section":"x_qbox_section_stress_tensor",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_qbox_stress_tensor_yy",
+    "meta_type":"type-value",
+    "meta_description":"yy component of stress tensor",
+    "meta_parent_section":"x_qbox_section_stress_tensor",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_qbox_stress_tensor_yz",
+    "meta_type":"type-value",
+    "meta_description":"yz component of stress tensor",
+    "meta_parent_section":"x_qbox_section_stress_tensor",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_qbox_stress_tensor_zz",
+    "meta_type":"type-value",
+    "meta_description":"zz component of stress tensor",
+    "meta_parent_section":"x_qbox_section_stress_tensor",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_qbox_wf_dyn",
+    "meta_type":"type-value",
+    "meta_description":"wave function dynamics control variable",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  }]
+}

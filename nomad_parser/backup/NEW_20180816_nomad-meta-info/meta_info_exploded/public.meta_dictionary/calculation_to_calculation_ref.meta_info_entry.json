@@ -1,0 +1,15 @@
+{
+  "meta_name":"calculation_to_calculation_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to another calculation. If both this and ",
+    "calculation_to_calculation_external_url are given, then ",
+    "calculation_to_calculation_ref is a local copy of the URL given in ",
+    "calculation_to_calculation_external_url. The kind of relationship between the ",
+    "present and the referenced section_single_configuration_calculation is ",
+    "specified by calculation_to_calculation_kind."],
+  "meta_parent_section":"section_calculation_to_calculation_refs",
+  "meta_data_type":"reference",
+  "meta_repeats":true,
+  "meta_referenced_section":"section_single_configuration_calculation"
+}

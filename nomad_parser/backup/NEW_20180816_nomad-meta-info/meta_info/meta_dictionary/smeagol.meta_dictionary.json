@@ -1,0 +1,11 @@
+{
+  "metadict_name":"smeagol",
+  "metadict_description":[
+    "meta info used by the smeagol parser.  All names are expected to start with ",
+    "x_smeagol_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[]
+}

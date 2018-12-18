@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_species_projected_dos",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section collecting the information on a species-projected density of states ",
+    "(DOS) evaluation."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

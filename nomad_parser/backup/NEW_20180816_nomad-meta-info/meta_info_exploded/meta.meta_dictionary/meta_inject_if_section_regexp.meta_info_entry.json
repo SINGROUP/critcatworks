@@ -1,0 +1,14 @@
+{
+  "meta_name":"meta_inject_if_section_regexp",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A regular expression (or meta name) that the sections this is injected in need ",
+    "to satisfy. Can be defined only in top level sections.\n",
+    "Together with meta_inject_if_abstract_type it can be used to define the sections ",
+    "in which all the values and sections contained in this section are added ",
+    "(injected).\n",
+    "If empty this is injected in *no* section."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"topology_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to the topology used for this system; if not given, the trivial ",
+    "topology should be assumed."],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_topology"
+}

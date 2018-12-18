@@ -1,0 +1,10 @@
+{
+  "meta_name":"calculation_context",
+  "meta_type":"type-section",
+  "meta_description":"Contains information relating to a calculation.",
+  "meta_repeats":true,
+  "meta_context_identifier":[],
+  "contains":[
+    "section_run",
+    "section_stats"]
+}

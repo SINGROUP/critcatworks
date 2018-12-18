@@ -1,0 +1,1580 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"charmm",
+  "description":"meta info used by the charmm parser, all names are expected to start with x_charmm_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"number_of_atoms_per_type",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms involved in this type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_atom_element",
+    "description":"Atom type of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_atom_name",
+    "description":"Atom name of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_atom_positions_image_index",
+    "description":"PBC image flag index.",
+    "superNames":["section_system"],
+    "units":" ",
+    "dtypeStr":"i",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_charmm_atom_positions_scaled",
+    "description":"Position of the atoms in a scaled format [0, 1].",
+    "superNames":["section_system"],
+    "units":" ",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_charmm_atom_positions_wrapped",
+    "description":"Position of the atoms wrapped back to the periodic box.",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_charmm_atom_to_atom_type_ref",
+    "description":"Reference to the atoms of each atom type.",
+    "superNames":["x_charmm_section_atom_to_atom_type_ref"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_type"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_charmm_atom_type",
+    "description":"Atom type of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_atom_type_element",
+    "description":"Element symbol of an atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_atom_type_radius",
+    "description":"van der Waals radius of an atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_barostat_target_pressure",
+    "description":"MD barostat target pressure.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "units":"Pa",
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_barostat_tau",
+    "description":"MD barostat relaxation time.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_barostat_type",
+    "description":"MD barostat type, valid values are defined in the barostat_type wiki page.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_build_osarch",
+    "description":"Program Build OS/ARCH",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_angle_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_data_angle_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_angles_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_atom_types_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_data_bond_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_data_bond_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_bond_types_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_data_dihedral_coeff_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_dihedral_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_data_dihedral_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_file_store",
+    "description":"Filename of data file",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_data_topo_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_dummy",
+    "description":"dummy",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_frame_sequence_angle_energy",
+    "description":"Array containing the values of the angle_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_angle_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_angle_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_angle_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_angle_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_angle_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_bond_energy",
+    "description":"Array containing the values of the bond_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_bond_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_bond_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_bond_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_bond_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_bond_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_boundary",
+    "description":"Array containing the values of the boundary along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_boundary_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_boundary_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_boundary_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_boundary values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_boundary_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_cmap_dihedral_energy",
+    "description":"Array containing the values of the cmap_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_cmap_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_cmap_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_cmap_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_cmap_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_cmap_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_density",
+    "description":"Array containing the values of the density along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_density_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_densities_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_density_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_densities values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_densities_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_electrostatic_energy",
+    "description":"Array containing the values of the electrostatic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_electrostatic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_electrostatic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_electrostatic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_electrostatic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_electrostatic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_high_frequency_correction_energy",
+    "description":"Array containing the values of the high_frequency_correction_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_high_frequency_correction_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_high_frequency_correction_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_high_frequency_correction_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_high_frequency_correction_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_high_frequency_correction_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_high_frequency_correction_kinetic_energy",
+    "description":"Array containing the values of the high_frequency_correction_kinetic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_high_frequency_correction_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_high_frequency_correction_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_high_frequency_correction_kinetic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_high_frequency_correction_kinetic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_high_frequency_correction_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_high_frequency_correction_total_energy",
+    "description":"Array containing the values of the high_frequency_correction_total_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_high_frequency_correction_total_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_high_frequency_correction_total_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_high_frequency_correction_total_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_high_frequency_correction_total_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_high_frequency_correction_total_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_improper_dihedral_energy",
+    "description":"Array containing the values of the improper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_improper_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_improper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_improper_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_improper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_improper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_misc_energy",
+    "description":"Array containing the values of the misc_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_misc_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_misc_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_misc_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_misc_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_misc_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_proper_dihedral_energy",
+    "description":"Array containing the values of the proper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_proper_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_proper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_proper_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_proper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_proper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_total_energy",
+    "description":"Array containing the values of the total_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_total_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_total_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_total_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_total_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_total_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_total_kinetic_energy",
+    "description":"Array containing the values of the total_kinetic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_total_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_total_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_total_kinetic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_total_kinetic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_total_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_urey_energy",
+    "description":"Array containing the values of the urey_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_urey_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_urey_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_urey_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_urey_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_urey_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_vdw_energy",
+    "description":"Array containing the values of the vdw_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_vdw_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_vdw_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_vdw_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_vdw_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_vdw_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_virial_kinetic_energy",
+    "description":"Array containing the values of the virial_kinetic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_virial_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_virial_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_virial_kinetic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_virial_kinetic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_virial_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_volume",
+    "description":"Array containing the values of the volume along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_volume_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_volumes_in_sequence"]
+  },{
+    "name":"x_charmm_frame_sequence_volume_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_charmm_frame_sequence_volume values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_charmm_number_of_volumes_in_sequence"]
+  },{
+    "name":"x_charmm_inout_control_1_4_electrostatics_scale",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_a_length",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_acceptor_antecedents",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_akmastp",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_alpha",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_atoms",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_b_length",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_beta",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_c_length",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_cdie",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_cgofnb",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_cgonnb",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_coupling_temperature",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_crystal",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_crystal_type",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ctexnb",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ctofnb",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ctonnb",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_cutnb",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_dielectric",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_dyna",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_e14fac",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_eps",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_excluded_species_or_groups",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_finalt",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_firstt",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_gamma",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_gaussian_option",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_gaussian_option_is",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_deletions_due_to_best_option",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_deletions_due_to_duplications",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_deletions_due_to_exclusion",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_deletions_due_to_fixed_atoms",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_exclusions_due_to_angle_cutoff",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_exclusions_due_to_distance_cutoff",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hbond_exclusions_due_to_duplications",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hoover",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bond_cutoff_angle",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bond_cutoff_distance",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bond_switching_off_angle",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bond_switching_off_distance",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bond_switching_on_angle",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bond_switching_on_distance",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_hydrogen_bonds_present",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iasors",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iasvel",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ichecw",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ieqfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ihbfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ihtfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ilbfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_imgfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_inbfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_initial_temperature",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iprfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iscale",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iscvel",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iseed",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_isvfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iuncrd",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iunos",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iunrea",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iunvel",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iunwri",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_iunxyz",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_kunit",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_damping_coefficient_unit",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_decay_time",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_dynamics",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_integrator",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_oscillation_period",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_piston_temperature",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_langevin_temperature",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_mini",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_minimization",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_minimization_exit_status",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nbxmod",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ncgcyc",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ncycle",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nonbond_option_flags",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nprint",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nsavc",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nsavv",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nsavx",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nsnos",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_nstep",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_ntrfrq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_number_of_degrees_of_freedom",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_number_of_parameters",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_inout_control_number_of_steps",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_parameter_file",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_parameters",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C",
+    "shape":["x_charmm_inout_control_number_of_parameters"]
+  },{
+    "name":"x_charmm_inout_control_particle_mesh_ewald",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pcons",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pcut",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pmass",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pme_ewald_coefficient",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pme_grid_dimensions",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pme_interpolation_order",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pme_maximum_grid_spacing",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pme_tolerance",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_pressure_control",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_prtmin",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_qref",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_random_num_gen_seeds",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_random_number_seed",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_reft",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_rest",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_seeds",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_shake_tolerance",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_step",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_steps_per_cycle",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_strt",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_structure_file",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_switch",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_target_pressure",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_teminc",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_temperature_coupling",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tfreq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_time_step",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tmass",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tolfun",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tolgrd",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tolitr",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tolstp",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tref",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_tstruc",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_twindh",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_twindl",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_velocities_assigned_at_temperature",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_velocity_reassignment_freq",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_velocity_reassignment_temp",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_velocity_rescale_temp",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_verlet_integrator",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_vswitch",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_wmin",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_control_wrnmxd",
+    "description":"charmm running environment and control parameters.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_cor_file",
+    "description":"charmm CRD coordinates file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_in_coor_str",
+    "description":"charmm input coordinate on log file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_input_coord",
+    "description":"charmm input coordinates file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_input_vel",
+    "description":"charmm input velocities file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_out_coor_str",
+    "description":"charmm output coordinates on log.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_output_coord",
+    "description":"charmm output coordinates file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_output_force",
+    "description":"charmm output forces file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_output_log",
+    "description":"charmm MD output log file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_output_vel",
+    "description":"charmm output velocities file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_par_str",
+    "description":"charmm stream parameter input.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_prm_file",
+    "description":"charmm PRM parameter file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_restart_coord",
+    "description":"charmm restart coordinates file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_restart_vel",
+    "description":"charmm restart velocities file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_rtf_file",
+    "description":"charmm RTF residue file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_rtf_str",
+    "description":"charmm stream RTF input.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_stream",
+    "description":"charmm stream input/output.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_structure",
+    "description":"charmm input topology file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_traj_coord",
+    "description":"charmm output trajectory file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_traj_force",
+    "description":"charmm output file for forces in the trajectory.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_traj_vel",
+    "description":"charmm output file for velocities in the trajectory.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_inout_file_trajectory",
+    "description":"charmm output trajectory file.",
+    "superNames":["x_charmm_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_input_units_store",
+    "description":"It determines the units of all quantities specified in the input script and data file, as well as quantities output to the screen, log file, and dump files.",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_integrator_dt",
+    "description":"MD integration time step.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_integrator_type",
+    "description":"MD integrator type, valid values are defined in the integrator_type wiki page.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_interaction_atom_to_atom_type_ref",
+    "description":"Reference to the atom type of each interaction atoms.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_charmm_langevin_gamma",
+    "description":"Langevin thermostat damping factor.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_lattice_angles",
+    "description":"Angles of lattice vectors. Vector includes [alpha, beta, gamma] in degrees.",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_charmm_lattice_lengths",
+    "description":"Lattice dimensions in a vector. Vector includes [a, b, c] lengths.",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_charmm_masses_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_mdin_control_parameters",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to x_charmm_section_control_parameters.",
+    "superNames":[]
+  },{
+    "name":"x_charmm_mdin_finline",
+    "description":"finline in mdin",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_mdin_header",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_mdin_input_output_files",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to x_charmm_section_control_parameters.",
+    "superNames":[]
+  },{
+    "name":"x_charmm_mdin_method",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to section method.",
+    "superNames":[]
+  },{
+    "name":"x_charmm_mdin_run",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to settings run.",
+    "superNames":["settings_run"]
+  },{
+    "name":"x_charmm_mdin_wt",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_mdout_method",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to section method.",
+    "superNames":[]
+  },{
+    "name":"x_charmm_mdout_run",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to settings run.",
+    "superNames":["settings_run"]
+  },{
+    "name":"x_charmm_mdout_single_configuration_calculation",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdout belonging to section_single_configuration_calculation.",
+    "superNames":[]
+  },{
+    "name":"x_charmm_molecule_interaction_atom_to_atom_type_ref",
+    "description":"Reference to the atom type of each molecule interaction atoms.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_charmm_most_severe_warning_level",
+    "description":"Highest charmm warning level in the run.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_number_of_angle_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of angle_energies in this sequence of frames, see x_charmm_frame_sequence_angle_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_bond_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_charmm_frame_sequence_bond_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_boundary_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of boundary_energies in this sequence of frames, see x_charmm_frame_sequence_boundary_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_cmap_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of cmap_dihedral_energies in this sequence of frames, see x_charmm_frame_sequence_cmap_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_defined_molecule_pair_interactions",
+    "description":"Number of defined pair interactions within a molecule (L-J pairs).",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_defined_pair_interactions",
+    "description":"Number of defined pair interactions (L-J pairs).",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_densities_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of densities in this sequence of frames, see x_charmm_frame_sequence_density.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_electrostatic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of electrostatic_energies in this sequence of frames, see x_charmm_frame_sequence_electrostatic_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_high_frequency_correction_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_charmm_frame_sequence_high_frequency_correction_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_high_frequency_correction_kinetic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_charmm_frame_sequence_high_frequency_correction_kinetic_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_high_frequency_correction_total_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_charmm_frame_sequence_high_frequency_correction_total_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_improper_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of improper_dihedral_energies in this sequence of frames, see x_charmm_frame_sequence_improper_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_misc_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of misc_energies in this sequence of frames, see x_charmm_frame_sequence_misc_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_proper_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of proper_dihedral_energies in this sequence of frames, see x_charmm_frame_sequence_proper_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_steps_requested",
+    "description":"Number of requested MD integration time steps.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_number_of_tasks",
+    "description":"Number of tasks in parallel program (MPI).",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_number_of_total_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of total_energies in this sequence of frames, see x_charmm_frame_sequence_total_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_total_kinetic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of total_kinetic_energies in this sequence of frames, see x_charmm_frame_sequence_total_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_urey_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_charmm_frame_sequence_urey_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_vdw_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of vdw_energies in this sequence of frames, see x_charmm_frame_sequence_vdw_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_virial_kinetic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_charmm_frame_sequence_virial_kinetic_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_number_of_volumes_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of volumes in this sequence of frames, see x_charmm_frame_sequence_volume.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_charmm_output_created_by_user",
+    "description":"Output file creator",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_pair_interaction_atom_type_ref",
+    "description":"Reference to the atom type for pair interactions.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["x_charmm_number_of_defined_pair_interactions","number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_charmm_pair_interaction_parameters",
+    "description":"Pair interactions parameters.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"f",
+    "shape":["x_charmm_number_of_defined_pair_interactions",2]
+  },{
+    "name":"x_charmm_pair_molecule_interaction_parameters",
+    "description":"Molecule pair interactions parameters.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"f",
+    "shape":["number_of_defined_molecule_pair_interactions",2]
+  },{
+    "name":"x_charmm_pair_molecule_interaction_to_atom_type_ref",
+    "description":"Reference to the atom type for pair interactions within a molecule.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["x_charmm_number_of_defined_pair_interactions","number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_charmm_parallel_task_nr",
+    "description":"Program task no.",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_periodicity_type",
+    "description":"Periodic boundary condition type in the sampling (non-PBC or PBC).",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_build_date",
+    "description":"Program Build date",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_citation",
+    "description":"Program citations",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_copyright",
+    "description":"Program copyright",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_execution_date",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_execution_host",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_execution_path",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_execution_time",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_license",
+    "description":"charmm program license.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_module",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_module_version",
+    "description":"charmm program module version.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_version_date",
+    "description":"Program version date.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_program_working_path",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_section_atom_to_atom_type_ref",
+    "kindStr":"type_section",
+    "description":"Section to store atom label to atom type definition list",
+    "superNames":["section_topology"]
+  },{
+    "name":"x_charmm_section_control_parameters",
+    "kindStr":"type_section",
+    "description":"Section to store the input and output control parameters",
+    "superNames":["section_run"]
+  },{
+    "name":"x_charmm_section_input_output_files",
+    "kindStr":"type_section",
+    "description":"Section to store input and output file names",
+    "superNames":["x_charmm_section_control_parameters"]
+  },{
+    "name":"x_charmm_section_single_configuration_calculation",
+    "kindStr":"type_section",
+    "description":"section for gathering values for MD steps",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_charmm_thermostat_level",
+    "description":"MD thermostat level (see wiki: single, multiple, regional).",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_thermostat_target_temperature",
+    "description":"MD thermostat target temperature.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"K",
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_thermostat_tau",
+    "description":"MD thermostat relaxation time.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_charmm_thermostat_type",
+    "description":"MD thermostat type, valid values are defined in the thermostat_type wiki page.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_traj_atoms_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_traj_box_bound_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_traj_box_bounds_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_traj_number_of_atoms_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_traj_timestep_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_traj_variables_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_charmm_xlo_xhi",
+    "description":"test",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  }]
+}

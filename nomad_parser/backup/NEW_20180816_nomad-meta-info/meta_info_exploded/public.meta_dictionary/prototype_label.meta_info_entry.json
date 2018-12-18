@@ -1,0 +1,11 @@
+{
+  "meta_name":"prototype_label",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Label of the prototype identified on the basis of the space_group and ",
+    "normalized_wyckoff. The label is in the same format as in the read_prototypes ",
+    "function: <space_group_number>-<prototype_name>-<Pearson's ",
+    "symbol>)."],
+  "meta_parent_section":"section_prototype",
+  "meta_data_type":"string"
+}

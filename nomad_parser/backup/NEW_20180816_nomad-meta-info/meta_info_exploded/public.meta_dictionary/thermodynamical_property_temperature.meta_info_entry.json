@@ -1,0 +1,13 @@
+{
+  "meta_name":"thermodynamical_property_temperature",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the temperatures at which properties such as the Helmholtz free ",
+    "energy are calculated."],
+  "meta_parent_section":"section_thermodynamical_properties",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+  }],
+  "meta_units":"K"
+}

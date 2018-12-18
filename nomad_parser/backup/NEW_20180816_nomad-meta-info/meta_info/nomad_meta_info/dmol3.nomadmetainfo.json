@@ -1,0 +1,299 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"dmol3",
+  "description":"meta info used by the gaussian parser, all names are expected to start with gaussian",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"dmol3_aux_density",
+    "description":"dmol3 aux density",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_aux_partition",
+    "description":"dmol3 aux parition",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"dmol3_basis_name",
+    "description":"dmol3 basis name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_binding_energy_scf_iteration",
+    "description":"dmol3 binding energy at every SCF",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_calculation_type",
+    "description":"dmol3 calculation type",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_charge",
+    "description":"dmol3 system charge",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_convergence_scf_iteration",
+    "description":"dmol3 convergence at every SCF",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_eigenvalue_eigenvalue",
+    "description":"Single eigenvalue",
+    "superNames":["section_eigenvalues"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_eigenvalue_occupation",
+    "description":"Occupation of single eigenfunction",
+    "superNames":["section_eigenvalues"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_electrostatic_moments",
+    "description":"dmol3 Electrostatic_Moments",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_functional_name",
+    "description":"dmol3 functional name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_geometry_atom_labels",
+    "description":"labels of atom",
+    "superNames":["section_system"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"dmol3_geometry_atom_positions_x",
+    "description":"x component of atomic position",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_geometry_atom_positions_y",
+    "description":"y component of atomic position",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_geometry_atom_positions_z",
+    "description":"z component of atomic position",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_hirshfeld_analysis",
+    "description":"dmol3 Hirshfeld_Analysis",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_hirshfeld_population",
+    "description":"Hirshfeld Population Analysis",
+    "superNames":["dmol3_section_hirshfeld_population"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_integration_grid",
+    "description":"dmol3 integration grid",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_kpoints",
+    "description":"dmol3 Kpoints",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_mulliken_analysis",
+    "description":"dmol3 Mulliken_Analysis",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_mulliken_population",
+    "description":"Mulliken Population Analysis",
+    "superNames":["dmol3_section_mulliken_population"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"dmol3_nuclear_efg",
+    "description":"dmol3 Nuclear_EFG",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_number_scf_iteration",
+    "description":"dmol3 iteration number at every SCF",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"i"
+  },{
+    "name":"dmol3_occupation_name",
+    "description":"dmol3 Occupation name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_occupation_width",
+    "description":"dmol3 Occupation width",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_opt_coordinate_system",
+    "description":"dmol3 OPT_Coordinate_System",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_opt_displacement_convergence",
+    "description":"dmol3 OPT_Displacement_Convergence",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_opt_energy_convergence",
+    "description":"dmol3 OPT_Energy_Convergence",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_opt_gdiis",
+    "description":"dmol3 OPT_Gdiis",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_opt_gradient_convergence",
+    "description":"dmol3 OPT_Gradient_Convergence",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_opt_hessian_project",
+    "description":"dmol3 OPT_Hessian_Project",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_opt_iterations",
+    "description":"dmol3 OPT_Iterations",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"dmol3_opt_max_displacement",
+    "description":"dmol3 OPT_Max_Displacement",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_opt_steep_tol",
+    "description":"dmol3 OPT_Steep_Tol",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_optical_absorption",
+    "description":"dmol3 Optical_Absorption",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_partial_dos",
+    "description":"dmol3 Partial_Dos",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_program_compilation_date",
+    "description":"dmol3 compilation date",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_program_compilation_time",
+    "description":"dmol compilation date",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_pseudopotential_name",
+    "description":"dmol3 pseudopotential name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_rcut",
+    "description":"dmol3 atom R_cut",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_scf_charge_mixing",
+    "description":"dmol3 SCF_Charge_Mixing",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_scf_density_convergence",
+    "description":"dmol3 SCF_Density_Convergence",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_scf_diis_name",
+    "description":"dmol3 SCF_DIIS name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_scf_diis_number",
+    "description":"dmol3 SCF_DIIS number",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_scf_direct",
+    "description":"dmol3 SCF_Direct",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_scf_iterations",
+    "description":"dmol3 SCF_Iterations",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"dmol3_scf_number_bad_steps",
+    "description":"dmol3 SCF_Number_Bad_Steps",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"dmol3_scf_restart",
+    "description":"dmol3 SCF_Restart",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_scf_spin_mixing",
+    "description":"dmol3 SCF_Spin_Mixing",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"dmol3_section_hirshfeld_population",
+    "kindStr":"type_section",
+    "description":"Hirshfeld Population Analysis Section",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"dmol3_section_mulliken_population",
+    "kindStr":"type_section",
+    "description":"Mulliken Population Analysis Section",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"dmol3_spin",
+    "description":"dmol3 number of unpaired electrons",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"dmol3_spin_polarization",
+    "description":"dmol3 spin polarization",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_symmetry",
+    "description":"dmol3 sysmmetry",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dmol3_time_scf_iteration",
+    "description":"dmol3 time at every SCF",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  }]
+}

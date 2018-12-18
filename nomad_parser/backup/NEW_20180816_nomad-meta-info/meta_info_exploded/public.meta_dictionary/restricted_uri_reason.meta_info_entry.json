@@ -1,0 +1,11 @@
+{
+  "meta_name":"restricted_uri_reason",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The reason of restriction for the uri or file. The reason can be 'propriety ",
+    "license', 'open-source redistribution restricted license', 'other license', or ",
+    "'author restricted'."],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

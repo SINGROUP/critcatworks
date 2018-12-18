@@ -1,0 +1,8 @@
+{
+  "meta_name":"atom_forces_type",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "The types of forces acting on the atoms (i.e., minus derivatives of the ",
+    "specific type of energy with respect to the atom ",
+    "position)."]
+}

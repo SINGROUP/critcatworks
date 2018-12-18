@@ -1,0 +1,13 @@
+{
+  "meta_name":"atomic_multipole_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String describing the method used to obtain the electrostatic multipoles ",
+    "(including the electric charge, dipole, etc.) for each atom. Such multipoles ",
+    "require a charge-density partitioning scheme, specified by the value of this ",
+    "metadata. Allowed values are listed in the [atomic_multipole_kind wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/atomi",
+    "c-multipole-kind)."],
+  "meta_parent_section":"section_atomic_multipoles",
+  "meta_data_type":"string"
+}

@@ -1,0 +1,20 @@
+{
+  "meta_name":"transformation_matrix",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Matrix $\\mathbf{P}$ that is used to transform the standardized coordinates to ",
+    "the original coordinates. Together with the vector $\\mathbf{p}$, found in ",
+    "space_group_3D_origin_shift, the transformation between the standardized ",
+    "coordinates $\\mathbf{x}_s$ and original coordinates $\\mathbf{x}$ is then given ",
+    "by $\\mathbf{x}_s = \\mathbf{P} \\mathbf{x} + ",
+    "\\mathbf{p}$."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

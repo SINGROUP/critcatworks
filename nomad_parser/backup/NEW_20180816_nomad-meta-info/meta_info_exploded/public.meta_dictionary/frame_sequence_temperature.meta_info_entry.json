@@ -1,0 +1,17 @@
+{
+  "meta_name":"frame_sequence_temperature",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Array containing the values of the instantaneous temperature (a ",
+    "quantity, proportional to frame_sequence_kinetic_energy, whose ensemble average ",
+    "equals the thermodynamic temperature) along this sequence of frames (i.e., a ",
+    "trajectory, a frame is one section_single_configuration_calculation). If not ",
+    "all frames have a value the indices of the frames that have a value are stored ",
+    "in frame_sequence_temperature_frames."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_temperatures_in_sequence"
+  }],
+  "meta_units":"K"
+}

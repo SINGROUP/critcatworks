@@ -1,0 +1,10 @@
+{
+  "meta_name":"time_run_cpu1_start",
+  "meta_type":"type-value",
+  "meta_description":"Stores the start time of the run on CPU 1.",
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "time_info"],
+  "meta_data_type":"float",
+  "meta_units":"s"
+}

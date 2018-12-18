@@ -1,0 +1,8 @@
+{
+  "meta_name":"gw_polarizability_number_of_empty_states",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Number of empty states used to compute the polarizability ",
+    "P"],
+  "meta_parent_section":"section_method"
+}

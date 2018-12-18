@@ -1,0 +1,9 @@
+{
+  "meta_name":"energy_type_reference",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "This metadata stores an energy used as reference ",
+    "point."],
+  "meta_abstract_types":[
+    "energy_value"]
+}

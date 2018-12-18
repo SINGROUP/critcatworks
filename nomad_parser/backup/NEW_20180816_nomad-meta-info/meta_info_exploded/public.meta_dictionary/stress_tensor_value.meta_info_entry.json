@@ -1,0 +1,22 @@
+{
+  "meta_name":"stress_tensor_value",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains the value of the stress tensor of the kind defined in ",
+    "stress_tensor_kind. This is an *alternative* to the stress tensor defined in ",
+    "stress_tensor_method.\n",
+    "\n",
+    "This field allows for multiple definitions and evaluated values of the stress ",
+    "tensor, while only one definition is used for, e.g., molecular dynamics and ",
+    "geometry optimization."],
+  "meta_parent_section":"section_stress_tensor",
+  "meta_abstract_types":[
+    "stress_tensor_type"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }],
+  "meta_units":"Pa"
+}

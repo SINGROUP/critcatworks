@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_dos_values",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of energy values for the density of states (DOS), see ",
+    "dos_energies."],
+  "meta_parent_section":"section_dos"
+}

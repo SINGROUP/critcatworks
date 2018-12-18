@@ -1,0 +1,9 @@
+{
+  "metadict_name":"main",
+  "metadict_description":"main meta info (common and meta_types)",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[]
+}

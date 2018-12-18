@@ -1,0 +1,24 @@
+{
+  "meta_name":"frame_sequence_continuation_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Type of continuation that has been performed from the previous sequence of ",
+    "frames (i.e., a trajectory, a frame is one ",
+    "section_single_configuration_calculation), upon ",
+    "restart."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"all",
+    "meta_enum_description":[
+      "Restart everything, including, e.g., thermostats, ",
+      "etc."]
+  },{
+    "meta_enum_value":"pos",
+    "meta_enum_description":"Position of atom and cell only"
+  },{
+    "meta_enum_value":"pos_vel",
+    "meta_enum_description":"Restart atom positions, cells and velocities"
+  }],
+  "meta_referenced_section":"section_frame_sequence"
+}

@@ -1,0 +1,42 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "metainfo for the asap_parser",
+  "dependencies": [ {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }, {
+      "relativePath": "common.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Friction coeffient used in Langevin dynamics",
+      "dtypeStr": "f",
+      "name": "x_asap_langevin_friction",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "Maxstep in Angstrom for geometry optimization",
+      "dtypeStr": "f",
+      "name": "x_asap_maxstep",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "Temperature used in molecular-dynamics",
+      "dtypeStr": "f",
+      "name": "x_asap_temperature",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "Timestep in molecular dynamics",
+      "dtypeStr": "f",
+      "name": "x_asap_timestep",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }]
+}

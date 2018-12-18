@@ -1,0 +1,16 @@
+{
+  "meta_name":"geometry_optimization_energy_change",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of threshold for the energy_total change between two geometry ",
+    "optimization steps, as convergence criterion of the ",
+    "geometry_optimization_method. A geometry optimization is considered converged ",
+    "when the energy_total change between two geometry optimization steps is below ",
+    "the threshold (possibly in combination with other ",
+    "criteria)"],
+  "meta_parent_section":"section_sampling_method",
+  "meta_abstract_types":[
+    "settings_geometry_optimization"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

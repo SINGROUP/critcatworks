@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_constraint",
+  "meta_type":"type-section",
+  "meta_description":[
+    "A constraint on the values corresponding to the section that defines ",
+    "it."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

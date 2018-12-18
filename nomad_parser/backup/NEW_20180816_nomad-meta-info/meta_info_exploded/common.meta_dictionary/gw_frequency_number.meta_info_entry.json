@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_frequency_number",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Number referring to the frequency used in the calculation of the self ",
+    "energy."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"int",
+  "meta_repeats":true
+}

@@ -1,0 +1,659 @@
+{
+  "metadict_name":"turbomole",
+  "metadict_description":[
+    "meta info used by the TURBOMOLE parser, all names are expected to start with ",
+    "x_turbomole_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_turbomole_controlin_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"The label of the atoms in the system",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_atom_number",
+    "meta_type":"type-value",
+    "meta_description":"The number of atoms in the system",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_basis_status",
+    "meta_type":"type-value",
+    "meta_description":"Status mean here ON or OFF",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_cartesian_status",
+    "meta_type":"type-value",
+    "meta_description":"Status mean here ON or OFF",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_damping_parameter_min",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_damping_parameter_start",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_damping_parameter_step",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_dipole_status",
+    "meta_type":"type-value",
+    "meta_description":"Status mean here ON or OFF",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_global_status",
+    "meta_type":"type-value",
+    "meta_description":"Status mean here ON or OFF",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_hessian_status",
+    "meta_type":"type-value",
+    "meta_description":"Status mean here ON or OFF",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_interconversion_status",
+    "meta_type":"type-value",
+    "meta_description":"Status mean here ON or OFF",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_number_of_integral_stored",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_operating_system",
+    "meta_type":"type-value",
+    "meta_description":"The kind of operating system",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_pople_kind",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_scf_conv",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_scf_iter_limit",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_scfintunit_file",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_scfintunit_size",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_scfintunit_unit",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_symmetry",
+    "meta_type":"type-value",
+    "meta_description":"The given symmetry of the system",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlin_time_for_integral_calc",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_integration",
+    "meta_type":"type-value",
+    "meta_description":"type of the used grid integration",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_integration_cells",
+    "meta_type":"type-value",
+    "meta_description":"The integration cells",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_partition_func",
+    "meta_type":"type-value",
+    "meta_description":"Type of the partition function used",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_partition_sharpness",
+    "meta_type":"type-value",
+    "meta_description":"Sharpness of the partition function",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_points_number",
+    "meta_type":"type-value",
+    "meta_description":"Grid points number",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_radial_grid_size",
+    "meta_type":"type-value",
+    "meta_description":"The size of the radial grid",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_radial_integration",
+    "meta_type":"type-value",
+    "meta_description":"The radial integration type",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_controlinout_grid_size",
+    "meta_type":"type-value",
+    "meta_description":"The size of the used grid",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_damping_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Damping of the two-electron contributions to Fock matrix in the present SCF ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_delta_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":[
+      "change of the eigenvalues in the current SCF ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_dft_d3_version",
+    "meta_type":"type-value",
+    "meta_description":[
+      "version of the DFT-D3 van-der-Waals correction that is ",
+      "used"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_eigenvalue_correlation_perturbativegw",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Correlation energy at a given eigenstate from perturbative ",
+      "GW"],
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_eigenvalue_exactexchange_perturbativegw",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Exact exchange energy at given eigenstate from perturbative ",
+      "GW"],
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_eigenvalue_exchangecorrelation_perturbativegw",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Self-energy at a given eigenstate from perturbative ",
+      "GW"],
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_eigenvalue_ks_exchangecorrelation",
+    "meta_type":"type-value",
+    "meta_description":[
+      "KS exchange correlation energy at a given eigenstate needed to calculate the ",
+      "quasi-particle energy in perturbative GW"],
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_eigenvalue_ks_groundstate",
+    "meta_type":"type-value",
+    "meta_description":[
+      "KS ground state energy at a given eigenstate needed in perturbative ",
+      "GW"],
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_eigenvalue_quasiparticle_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quasiparticle energy at a given eigenstate from perturbative ",
+      "GW"],
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_eigenvalues_irreducible_representation",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Irreducible representation the eigenstates belong ",
+      "to."],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues"
+    }]
+  },{
+    "meta_name":"x_turbomole_energy_1electron_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total energy contribution from one-electron ",
+      "integrals"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_energy_2electron_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total energy contribution from two-electron ",
+      "integrals"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_exchangecorrelation_perturbativegw_derivation",
+    "meta_type":"type-value",
+    "meta_description":"TODO:",
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_functional_type_correlation",
+    "meta_type":"type-value",
+    "meta_description":"type of the used correlation functional",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_functional_type_exchange",
+    "meta_type":"type-value",
+    "meta_description":"type of the used exchange functional",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_geometry_optimization_cycle_index",
+    "meta_type":"type-value",
+    "meta_description":[
+      "By default Turbomole only keeps the output of the final iteration once the ",
+      "geometry has been converged, thus the entire optimization trajectory cannot be ",
+      "rebuild in most cases. Instead, this value contains the optimization cycle ",
+      "index to indicate how many iterations have preceded this ",
+      "one."],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_turbomole_geometry_optimization_geometry_change_rms",
+    "meta_type":"type-value",
+    "meta_description":[
+      "geometry optimization convergence criterion - Root Mean Square of ",
+      "displacements"],
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_turbomole_geometry_optimization_threshold_force_rms",
+    "meta_type":"type-value",
+    "meta_description":[
+      "geometry optimization convergence criterion - Root Mean Square of ",
+      "forces"],
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float",
+    "meta_units":"N"
+  },{
+    "meta_name":"x_turbomole_geometry_optimization_trustregion_initial",
+    "meta_type":"type-value",
+    "meta_description":[
+      "geometry optimization trust region - initial ",
+      "radius"],
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_turbomole_geometry_optimization_trustregion_max",
+    "meta_type":"type-value",
+    "meta_description":[
+      "geometry optimization trust region - maximum ",
+      "radius"],
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_turbomole_geometry_optimization_trustregion_min",
+    "meta_type":"type-value",
+    "meta_description":[
+      "geometry optimization trust region - minimum ",
+      "radius"],
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_turbomole_gw_approximation",
+    "meta_type":"type-value",
+    "meta_description":"The employed GW approximation.",
+    "meta_parent_section":"section_method",
+    "meta_abstract_types":[
+      "settings_gw"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_gw_eta_factor",
+    "meta_type":"type-value",
+    "meta_description":[
+      "[TO BE VERIFIED]Infinitesimal complex energy shift. Negative value switches to ",
+      "calculating at that value but extrapolating to 0 in linear ",
+      "approximation."],
+    "meta_parent_section":"section_method",
+    "meta_abstract_types":[
+      "settings_gw"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_gw_use_rpa_response",
+    "meta_type":"type-value",
+    "meta_description":[
+      "If true, the pure RPA response function is calculated. Otherwise, the TDDFT ",
+      "response function is calculated and used to screen the coulomb ",
+      "interaction."],
+    "meta_parent_section":"section_method",
+    "meta_abstract_types":[
+      "settings_gw"],
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_turbomole_module",
+    "meta_type":"type-value",
+    "meta_description":[
+      "The name of the Turbomole module used for this single configuration ",
+      "calculation."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_nodename",
+    "meta_type":"type-value",
+    "meta_description":"compute node",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_norm_diis_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Norm of the DIIS error in an SCF-iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_norm_fia_orbital_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "orbital with the largest residual norm for the Fia block in this ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_norm_fia_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Maximal resid. norm for Fia-block in an SCF-iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_norm_fock_orbital_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "orbital with the largest residual Fock norm in this ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_turbomole_norm_fock_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Maximal resid. fock norm in an SCF-iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_pceem_charges",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Charges of the point charges in the unit cell used by the PCEEM embedding ",
+      "model"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_turbomole_pceem_max_multipole",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Maximum multipole moment used in the PCEEM ",
+      "embedding"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_turbomole_pceem_min_separation_cells",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Minimum separation between cells in PCEEM embedding for periodic fast multipole ",
+      "treatment"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_pceem_multipole_precision",
+    "meta_type":"type-value",
+    "meta_description":"Multipole precision parameter for PCEEM embedding",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_potential_energy_final",
+    "meta_type":"type-value",
+    "meta_description":"Final potential energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_turbomole_section_eigenvalues_gw",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for the eigenvalues of a GW calculation (at present only pertubative ",
+      "G0W0)"],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_turbomole_section_functionals",
+    "meta_type":"type-section",
+    "meta_description":"section for one list of XC functionals",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_turbomole_uhfmo_type",
+    "meta_type":"type-value",
+    "meta_description":"Type of UHF molecular orbital",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_vibrations_infrared_activity",
+    "meta_type":"type-value",
+    "meta_description":"IR activicity for vibration modes",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_turbomole_vibrations_num_modes"
+    }]
+  },{
+    "meta_name":"x_turbomole_vibrations_intensities",
+    "meta_type":"type-value",
+    "meta_description":[
+      "IR Intensity for each vibrational normal ",
+      "mode"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_turbomole_vibrations_num_modes"
+    }]
+  },{
+    "meta_name":"x_turbomole_vibrations_mode_energies",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Excitation energy associated with the vibrational normal ",
+      "modes."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_turbomole_vibrations_num_modes"
+    }]
+  },{
+    "meta_name":"x_turbomole_vibrations_normal_modes",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Nuclear displacements for each vibrational normal ",
+      "mode"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_turbomole_vibrations_num_modes"
+    },{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_turbomole_vibrations_num_modes",
+    "meta_type":"type-value",
+    "meta_description":"Number of vibrational normal modes",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_turbomole_vibrations_raman_activity",
+    "meta_type":"type-value",
+    "meta_description":"Raman activicity for vibration modes",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_turbomole_vibrations_num_modes"
+    }]
+  },{
+    "meta_name":"x_turbomole_virial_theorem",
+    "meta_type":"type-value",
+    "meta_description":"Final value from the virial theorem",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_wave_func_norm",
+    "meta_type":"type-value",
+    "meta_description":"Final Wave Function Norm",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_turbomole_xc_functional_type",
+    "meta_type":"type-value",
+    "meta_description":"XC functional type",
+    "meta_parent_section":"x_turbomole_section_functionals",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_turbomole_z_factor",
+    "meta_type":"type-value",
+    "meta_description":"TODO:",
+    "meta_parent_section":"x_turbomole_section_eigenvalues_gw",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  }]
+}

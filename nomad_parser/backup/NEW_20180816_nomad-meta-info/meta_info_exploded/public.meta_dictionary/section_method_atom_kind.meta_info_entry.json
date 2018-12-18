@@ -1,0 +1,18 @@
+{
+  "meta_name":"section_method_atom_kind",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Every section_method_atom_kind section contains method-related information about ",
+    "a kind of atom, and is identified by one or more strings stored in ",
+    "method_atom_kind_label.\n",
+    "\n",
+    "This categorization into atom kinds is more flexible than just atomic species, ",
+    "because to different atoms of the same species different atom-centered basis ",
+    "sets or pseudo-potentials may be assigned. For instance, if two different ",
+    "oxygen atoms are assigned to different basis sets or pseudo-potentials, they ",
+    "have to distinguished into two different *kinds* of O atoms, by creating two ",
+    "distinct section_method_atom_kind sections."],
+  "meta_parent_section":"section_method",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

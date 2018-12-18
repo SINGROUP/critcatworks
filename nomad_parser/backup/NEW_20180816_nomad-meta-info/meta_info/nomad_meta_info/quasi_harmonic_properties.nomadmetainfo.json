@@ -1,0 +1,49 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"quasi_harmonic_properties",
+  "description":"quasi harmonic meta info, not specific to any code",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_qhp_formula",
+    "description":"The chemical formula of the material for which the quasi-harmonic properties were calculated",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qhp_quasi_harmonic_bulk_modulus",
+    "description":"Holds the bulk modulus that is calculated from the helmolz free energy calculated from the quasi harmonic approximation",
+    "superNames":["section_thermodynamical_properties"],
+    "units":"J*m**-3",
+    "dtypeStr":"f",
+    "shape":["number_of_thermodynamical_property_values"]
+  },{
+    "name":"x_qhp_quasi_harmonic_free_energy",
+    "description":"Holds the quasi harmonic free energy per atom",
+    "superNames":["section_thermodynamical_properties"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_thermodynamical_property_values"]
+  },{
+    "name":"x_qhp_quasi_harmonic_thermal_expansion",
+    "description":"Holds the quasi harmonic thermal expansion",
+    "superNames":["section_thermodynamical_properties"],
+    "units":"K**-1",
+    "dtypeStr":"f",
+    "shape":["number_of_thermodynamical_property_values"]
+  },{
+    "name":"x_qhp_quasi_harmonic_volume",
+    "description":"Holds the temperature dependent volume calculated using the quasi harmonic approximation",
+    "superNames":["section_thermodynamical_properties"],
+    "units":"m**3",
+    "dtypeStr":"f",
+    "shape":["number_of_thermodynamical_property_values"]
+  },{
+    "name":"x_qhp_space_group_3d_number",
+    "description":"space group detected (and used) by the quasi harmonic program",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  }]
+}

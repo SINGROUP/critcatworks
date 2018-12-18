@@ -1,0 +1,403 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"gulp",
+  "description":"meta info used by the gulp parser.  All names are expected to start with x_gulp_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_gulp_cell_a",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_cell_alpha",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_cell_b",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_cell_beta",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_cell_c",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_cell_gamma",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_attachment_energy",
+    "description":"GULP energy term for attachment_energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_attachment_energy_unit",
+    "description":"GULP energy term for attachment_energy_unit",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_bond_order_potentials",
+    "description":"GULP energy term for bond_order_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_brenner_potentials",
+    "description":"GULP energy term for brenner_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_bulk_energy",
+    "description":"GULP energy term for bulk_energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_dispersion_real_recip",
+    "description":"GULP energy term for dispersion_real_recip",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_electric_field_times_distance",
+    "description":"GULP energy term for electric_field_times_distance",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_energy_shift",
+    "description":"GULP energy term for energy_shift",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_four_body_potentials",
+    "description":"GULP energy term for four_body_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_improper_torsions",
+    "description":"GULP energy term for improper_torsions",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_interatomic_potentials",
+    "description":"GULP energy term for interatomic_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_many_body_potentials",
+    "description":"GULP energy term for many_body_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_monopole_monopole_real",
+    "description":"GULP energy term for monopole_monopole_real",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_monopole_monopole_recip",
+    "description":"GULP energy term for monopole_monopole_recip",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_monopole_monopole_total",
+    "description":"GULP energy term for monopole_monopole_total",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_neutralising_energy",
+    "description":"GULP energy term for neutralising_energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_non_primitive_unit_cell",
+    "description":"GULP energy term for non_primitive_unit_cell",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_out_of_plane_potentials",
+    "description":"GULP energy term for out_of_plane_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_primitive_unit_cell",
+    "description":"GULP energy term for primitive_unit_cell",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_reaxff_force_field",
+    "description":"GULP energy term for reaxff_force_field",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_region_1_2_interaction",
+    "description":"GULP energy term for region_1_2_interaction",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_region_2_2_interaction",
+    "description":"GULP energy term for region_2_2_interaction",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_self_energy_eem_qeq_sm",
+    "description":"GULP energy term for self_energy_eem_qeq_sm",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_sm_coulomb_correction",
+    "description":"GULP energy term for sm_coulomb_correction",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_solvation_energy",
+    "description":"GULP energy term for solvation_energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_three_body_potentials",
+    "description":"GULP energy term for three_body_potentials",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_energy_total_lattice_energy",
+    "description":"GULP energy term for total_lattice_energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_cutoff_max",
+    "description":"GULP force field cutoff max",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_cutoff_min",
+    "description":"GULP force field cutoff min (can also be a string like 3Bond for some reason)",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_fourbody_force_constant",
+    "description":"GULP 4-body force field parameter force constant",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_fourbody_phase",
+    "description":"GULP 4-body force field parameter phase",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_fourbody_phi0",
+    "description":"GULP 4-body force field parameter phi0",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_fourbody_sign",
+    "description":"GULP 4-body force field parameter sign",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_parameter_a",
+    "description":"GULP force field parameter A",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_parameter_b",
+    "description":"GULP force field parameter B",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_parameter_c",
+    "description":"GULP force field parameter C",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_parameter_d",
+    "description":"GULP force field parameter D",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_potential_name",
+    "description":"GULP force field potential name",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_species_1",
+    "description":"GULP force field species 1",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_species_2",
+    "description":"GULP force field species 2",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_species_3",
+    "description":"GULP force field species 3",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_species_4",
+    "description":"GULP force field species 4",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_speciestype_1",
+    "description":"GULP force field speciestype 1",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_speciestype_2",
+    "description":"GULP force field speciestype 2",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_speciestype_3",
+    "description":"GULP force field speciestype 3",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_speciestype_4",
+    "description":"GULP force field speciestype 4",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_threebody_1",
+    "description":"GULP 3-body force field parameter 1",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_forcefield_threebody_2",
+    "description":"GULP 3-body force field parameter 2",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_threebody_3",
+    "description":"GULP 3-body force field parameter 3",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_forcefield_threebody_theta",
+    "description":"GULP 3-body force field parameter theta",
+    "superNames":["x_gulp_section_forcefield"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_formula",
+    "description":"GULP chemical formula",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_main_keyword",
+    "description":"GULP calculation mode input variable",
+    "superNames":["x_gulp_section_main_keyword"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_md_kinetic_energy",
+    "description":"GULP molecular dynamics kinetic energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_md_potential_energy",
+    "description":"GULP molecular dynamics potential energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_md_pressure",
+    "description":"GULP molecular dynamics pressure",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_md_temperature",
+    "description":"GULP molecular dynamics temperature",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_md_time",
+    "description":"GULP molecular dynamics time",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_md_total_energy",
+    "description":"GULP molecular dynamics total energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_number_of_species",
+    "kindStr":"type_dimension",
+    "description":"Number of species in GULP",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gulp_patterson_group",
+    "description":"Patterson group",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_pbc",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gulp_prim_cell_a",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_prim_cell_alpha",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_prim_cell_b",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_prim_cell_beta",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_prim_cell_c",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_prim_cell_gamma",
+    "description":"grrr",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gulp_section_forcefield",
+    "kindStr":"type_section",
+    "description":"Section for GULP force field specification",
+    "superNames":["section_method"]
+  },{
+    "name":"x_gulp_section_main_keyword",
+    "kindStr":"type_section",
+    "description":"Section for GULP calculation mode input variable",
+    "superNames":["section_run"]
+  },{
+    "name":"x_gulp_space_group",
+    "description":"Space group",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gulp_species_charge",
+    "description":"Number of species in GULP",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "shape":["x_gulp_number_of_species"]
+  },{
+    "name":"x_gulp_title",
+    "description":"Title of GULP calculation",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  }]
+}

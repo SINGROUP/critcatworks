@@ -1,0 +1,13 @@
+{
+  "meta_name":"section_basis_functions_atom_centered",
+  "meta_type":"type-section",
+  "meta_description":[
+    "This section contains the description of the basis functions (at least one ",
+    "function) of the (atom-centered) basis set defined in ",
+    "section_basis_set_atom_centered."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_atoms_per_molecule_constraint",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "(deprecated) Number of atoms, in this molecule, involved in this ",
+    "constraint."],
+  "meta_parent_section":"section_molecule_constraint",
+  "meta_abstract_types":[
+    "settings_constraint"]
+}

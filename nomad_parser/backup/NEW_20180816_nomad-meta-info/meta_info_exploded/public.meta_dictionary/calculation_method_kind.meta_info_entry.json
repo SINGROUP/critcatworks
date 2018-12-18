@@ -1,0 +1,13 @@
+{
+  "meta_name":"calculation_method_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Kind of method in calculation_method_current.\n",
+    "\n",
+    "Accepted values are:\n",
+    "\n",
+    "- absolute\n",
+    "- perturbative."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

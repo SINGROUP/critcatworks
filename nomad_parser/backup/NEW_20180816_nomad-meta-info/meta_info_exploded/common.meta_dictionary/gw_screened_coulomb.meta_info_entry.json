@@ -1,0 +1,14 @@
+{
+  "meta_name":"gw_screened_coulomb",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Model used to calculate the dinamically-screened Coulomb potential: 'rpa' - ",
+    "Full-frequency random-phase approximation; 'ppm' - Godby-Needs plasmon-pole ",
+    "model Godby and Needs, Phys. Rev. Lett. 62, 1169 (1989); 'ppm_hl' - Hybertsen ",
+    "and Louie, Phys. Rev. B 34, 5390 (1986); 'ppm_lh' - von der Linden and P. ",
+    "Horsh, Phys. Rev. B 37, 8351 (1988); 'ppm_fe' - Farid and Engel, Phys. Rev. B ",
+    "47,15931 (1993); 'cdm' - Contour deformation method, Phys. Rev. B 67, 155208 ",
+    "(2003).)"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

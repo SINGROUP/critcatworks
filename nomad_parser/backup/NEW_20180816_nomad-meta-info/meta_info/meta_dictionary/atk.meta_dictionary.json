@@ -1,0 +1,38 @@
+{
+  "metadict_name":"atk",
+  "metadict_description":"metainfo for the atk_parser",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_atk_density_convergence_criterion",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Density convergence criteria to break the SCF ",
+      "cycle"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_atk_mix_old",
+    "meta_type":"type-value",
+    "meta_description":"Number of old densities in the density mixer",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_atk_mix_weight",
+    "meta_type":"type-value",
+    "meta_description":"Mixing weight in density mixer",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_atk_monkhorstpack_sampling",
+    "meta_type":"type-value",
+    "meta_description":"Monkhorstpack grid sampling",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  }]
+}

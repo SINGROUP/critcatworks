@@ -1,0 +1,12 @@
+{
+  "meta_name":"volumetric_data_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The kind of function, e.g. density, potential_hartree, potential_effective.  ",
+    "The unit of measurement for \"volumetric_data_values\" depends on the kind: ",
+    "Densities are 1/m^3 and potentials are J/m^3.  See [full specification on the ",
+    "wiki](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/volum",
+    "etric-data)."],
+  "meta_parent_section":"section_volumetric_data",
+  "meta_data_type":"string"
+}

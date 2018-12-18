@@ -1,0 +1,192 @@
+{
+  "metadict_name":"stats",
+  "metadict_description":[
+    "meta info describing statistics, i.e. collected ",
+    "info"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"section_stats",
+    "meta_type":"type-section",
+    "meta_description":[
+      "statistics on the calculation data either of a calculation or a group of ",
+      "calculations. All the values here should be collectable by merging various ",
+      "section_stats, to build a common section_stats. Reference to the single entries ",
+      "should normally be avoided. Try to keep the size of this limited, the goal ",
+      "should be that one could cache this in memory."],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_per_atom",
+    "meta_type":"type-section",
+    "meta_description":"stats by atom number",
+    "meta_parent_section":"section_stats",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_per_composition",
+    "meta_type":"type-section",
+    "meta_description":"stats by unreduced composition",
+    "meta_parent_section":"section_stats",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_per_electronic_structure_method",
+    "meta_type":"type-section",
+    "meta_description":"stats by electronic structure value",
+    "meta_parent_section":"section_stats",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_per_geometry",
+    "meta_type":"type-section",
+    "meta_description":"unique geometry ids and related statistics",
+    "meta_parent_section":"section_stats_per_composition",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_per_meta_info",
+    "meta_type":"type-section",
+    "meta_description":"statistics per meta info",
+    "meta_parent_section":"section_stats",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_per_parser",
+    "meta_type":"type-section",
+    "meta_description":"statistics per parser",
+    "meta_parent_section":"section_stats",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_stats_values",
+    "meta_type":"type-section",
+    "meta_description":"unique values for selected meta infos",
+    "meta_parent_section":"section_stats",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"stats_meta_count",
+    "meta_type":"type-value",
+    "meta_description":"length of meta info",
+    "meta_parent_section":"section_stats",
+    "meta_data_type":"int64",
+    "meta_repeats":true
+  },{
+    "meta_name":"stats_meta_present",
+    "meta_type":"type-value",
+    "meta_description":"meta infos contained in this calculation",
+    "meta_parent_section":"section_stats",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"stats_per_atom_atom_number",
+    "meta_type":"type-value",
+    "meta_description":[
+      "atom number of an atom present in the calculations, 0 is an undefined atom ",
+      "X"],
+    "meta_parent_section":"section_stats_per_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"stats_per_composition_composition_formula",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Chemical formula of the composition using chemical atom names in alphabetic ",
+      "order and the amount in the simulation cell if not ",
+      "1."],
+    "meta_parent_section":"section_stats_per_composition",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"stats_per_composition_n_geometries",
+    "meta_type":"type-value",
+    "meta_description":[
+      "number of geometries (as defined by stats_per_geometry_geometry_id) with the ",
+      "current composition"],
+    "meta_parent_section":"section_stats_per_composition",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_composition_n_single_configuration_calculations",
+    "meta_type":"type-value",
+    "meta_description":[
+      "number of section_single_configuration_calculation with the current ",
+      "composition"],
+    "meta_parent_section":"section_stats_per_composition",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_electronic_structure_method_value",
+    "meta_type":"type-value",
+    "meta_description":"value of the electronic structure method",
+    "meta_parent_section":"section_stats_per_electronic_structure_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"stats_per_geometry_geometry_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "geometry id, a checksum calculated using cell, atom position, and labels. This ",
+      "finds geometries that are trivially equivalent, geometries that are effectively ",
+      "equivalent might still have different ids."],
+    "meta_parent_section":"section_stats_per_geometry",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_geometry_n_single_configuration_calculations",
+    "meta_type":"type-value",
+    "meta_description":[
+      "number of section_single_configuration_calculation that have the current ",
+      "geometry"],
+    "meta_parent_section":"section_stats_per_geometry",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_meta_info_n_values",
+    "meta_type":"type-value",
+    "meta_description":"number of values of that meta info",
+    "meta_parent_section":"section_stats_per_parser",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_meta_info_name",
+    "meta_type":"type-value",
+    "meta_description":"name of the meta info",
+    "meta_parent_section":"section_stats_per_parser",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"stats_per_parser_n_assigned",
+    "meta_type":"type-value",
+    "meta_description":"number of main files assigned to this parser",
+    "meta_parent_section":"section_stats_per_parser",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_parser_n_failed",
+    "meta_type":"type-value",
+    "meta_description":"number of main files that failed to be parsed",
+    "meta_parent_section":"section_stats_per_parser",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_parser_n_parsed",
+    "meta_type":"type-value",
+    "meta_description":"number of main files sucessfully parsed",
+    "meta_parent_section":"section_stats_per_parser",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"stats_per_parser_parser_id",
+    "meta_type":"type-value",
+    "meta_description":"Parser id of the current parser",
+    "meta_parent_section":"section_stats_per_parser",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"stats_values_meta_name",
+    "meta_type":"type-value",
+    "meta_description":"meta info whose values are cached here",
+    "meta_parent_section":"section_stats_values",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"stats_values_string_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "unique string values for the meta info cached ",
+      "here"],
+    "meta_parent_section":"section_stats_values",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  }]
+}

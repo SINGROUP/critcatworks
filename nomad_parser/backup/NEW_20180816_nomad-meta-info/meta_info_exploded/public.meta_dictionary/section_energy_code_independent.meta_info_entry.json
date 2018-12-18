@@ -1,0 +1,13 @@
+{
+  "meta_name":"section_energy_code_independent",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section describing a code-independent total energy obtained by subtracting some ",
+    "reference energy calculated with the same code. It contains the type in ",
+    "energy_code_independent_kind and the computed code-independent total energy in ",
+    "energy_code_independent_value. The computed energy allows for comparisons among ",
+    "different codes and numerical settings."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

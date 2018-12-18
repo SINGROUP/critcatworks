@@ -1,0 +1,15 @@
+{
+  "meta_name":"eigenvalues_kpoints",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Coordinates of the $k$ points (in the basis of the reciprocal lattice vectors) ",
+    "used for the evaluation of the eigenvalues tabulated in ",
+    "eigenvalues_values."],
+  "meta_parent_section":"section_eigenvalues",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

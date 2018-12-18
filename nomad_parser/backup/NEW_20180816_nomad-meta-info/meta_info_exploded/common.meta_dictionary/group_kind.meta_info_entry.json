@@ -1,0 +1,10 @@
+{
+  "meta_name":"group_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Short and unique name for this group type. Valid names are described in the ",
+    "[group\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wi",
+    "kis/metainfo/group-kind)."],
+  "meta_parent_section":"section_group",
+  "meta_data_type":"string"
+}

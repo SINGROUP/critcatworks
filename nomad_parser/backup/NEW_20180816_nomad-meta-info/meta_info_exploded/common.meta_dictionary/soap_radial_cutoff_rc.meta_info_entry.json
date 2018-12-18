@@ -1,0 +1,9 @@
+{
+  "meta_name":"soap_radial_cutoff_rc",
+  "meta_type":"type-value",
+  "meta_description":"radial cutoff",
+  "meta_parent_section":"section_soap",
+  "meta_abstract_types":[
+    "soap_parameter"],
+  "meta_data_type":"float"
+}

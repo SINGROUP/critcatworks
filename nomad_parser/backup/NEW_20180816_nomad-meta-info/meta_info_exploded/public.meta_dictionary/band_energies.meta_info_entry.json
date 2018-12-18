@@ -1,0 +1,22 @@
+{
+  "meta_name":"band_energies",
+  "meta_type":"type-value",
+  "meta_description":[
+    "$k$-dependent or $q$-dependent  energies of the electronic or vibrational band ",
+    "segment (electronic/vibrational band structure). This is a third-order tensor, ",
+    "with one dimension used for the spin channels (1 in case of a vibrational band ",
+    "structure), one for the $k$ or $q$ points for each segment, and one for the ",
+    "eigenvalue sequence."],
+  "meta_parent_section":"section_k_band_segment",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_k_points_per_segment"
+  },{
+    "meta_dimension_symbolic":"number_of_band_segment_eigenvalues"
+  }],
+  "meta_units":"J"
+}

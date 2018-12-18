@@ -1,0 +1,33 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"phonopy",
+  "description":"Phonopy meta info, not specific to any code",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_phonopy_displacement",
+    "description":"Amplitude of the atom diplacement for the phonopy supercell",
+    "superNames":["section_method","x_phonopy_input"],
+    "units":"m",
+    "dtypeStr":"f"
+  },{
+    "name":"x_phonopy_input",
+    "kindStr":"type_abstract_document_content",
+    "description":"Information about properties that concern phonopy calculations.",
+    "superNames":[]
+  },{
+    "name":"x_phonopy_original_system_ref",
+    "description":"Original cell from which the supercell for the DFT calculations was constructed",
+    "superNames":["section_system"],
+    "dtypeStr":"r"
+  },{
+    "name":"x_phonopy_symprec",
+    "description":"Symmetry threshold for the space group identification of the crystal for which the vibrational properties are to be calculated",
+    "superNames":["section_method","x_phonopy_input"],
+    "units":"m",
+    "dtypeStr":"f"
+  }]
+}

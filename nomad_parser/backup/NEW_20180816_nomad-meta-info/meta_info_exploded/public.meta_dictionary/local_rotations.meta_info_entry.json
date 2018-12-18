@@ -1,0 +1,17 @@
+{
+  "meta_name":"local_rotations",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A rotation matrix defining the orientation of each atom. If the rotation matrix ",
+    "only needs to be specified for some atoms, the remaining atoms should set it to ",
+    "the zero matrix (not the identity!)"],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms"
+  },{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

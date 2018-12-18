@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_total_scf_iteration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of the total electronic energy calculated with the method described in ",
+    "xc_method during each self-consistent field (SCF) ",
+    "iteration."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "energy_total_potential",
+    "scf_info"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

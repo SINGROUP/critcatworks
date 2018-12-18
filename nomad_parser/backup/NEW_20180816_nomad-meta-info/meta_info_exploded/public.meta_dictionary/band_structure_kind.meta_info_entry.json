@@ -1,0 +1,9 @@
+{
+  "meta_name":"band_structure_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String to specify the kind of band structure (either electronic or ",
+    "vibrational)."],
+  "meta_parent_section":"section_k_band",
+  "meta_data_type":"string"
+}

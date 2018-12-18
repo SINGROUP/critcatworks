@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_species",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of species for the species-projected density of states (DOS) ",
+    "defined in section_species_projected_dos."],
+  "meta_parent_section":"section_species_projected_dos"
+}

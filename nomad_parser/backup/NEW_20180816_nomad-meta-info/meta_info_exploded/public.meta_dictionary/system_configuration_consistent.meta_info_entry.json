@@ -1,0 +1,9 @@
+{
+  "meta_name":"system_configuration_consistent",
+  "meta_type":"type-value",
+  "meta_description":"Flag set is the configuration is consistent",
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"boolean"
+}

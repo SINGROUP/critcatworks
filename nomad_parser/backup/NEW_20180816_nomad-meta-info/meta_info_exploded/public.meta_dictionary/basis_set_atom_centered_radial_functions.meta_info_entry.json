@@ -1,0 +1,20 @@
+{
+  "meta_name":"basis_set_atom_centered_radial_functions",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Values of the radial function of the different basis function kinds. The values ",
+    "are numerically tabulated on a default 0.01-nm equally spaced grid from 0 to 4 ",
+    "nm. The 5 tabulated values are $r$, $f(r)$, $f'(r)$, $f(r) \\cdot r$, ",
+    "$\\frac{d}{dr}(f(r) \\cdot r)$."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_kinds_in_basis_set_atom_centered"
+  },{
+    "meta_dimension_fixed":401
+  },{
+    "meta_dimension_fixed":5
+  }]
+}

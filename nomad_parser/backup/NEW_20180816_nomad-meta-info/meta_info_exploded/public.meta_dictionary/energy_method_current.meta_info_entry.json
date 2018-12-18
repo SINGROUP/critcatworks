@@ -1,0 +1,13 @@
+{
+  "meta_name":"energy_method_current",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of the energy calculated with the method calculation_method_current. ",
+    "Depending on calculation_method_kind it might be a total energy or only a ",
+    "correction."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

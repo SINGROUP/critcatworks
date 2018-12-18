@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_frequency_weights",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Weights of the frequency used in the calculation of the self ",
+    "energy."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"float",
+  "meta_repeats":true
+}

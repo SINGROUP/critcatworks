@@ -1,0 +1,695 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the gamess parser, all names are expected to start with x_gamess",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "values of eigenenergies for alpha MOs",
+      "dtypeStr": "C",
+      "name": "x_gamess_alpha_eigenvalues_values",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "Initial positions of all the atoms, in Cartesian coordinates.",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_positions_initial",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "configuration_core"
+      ],
+      "units": "m"
+    }, {
+      "description": "Initial positions of all the atoms, in Cartesian coordinates.",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_positions",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_gamess_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "x coordinate for the atoms of the initial geometry",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_x_coord_initial",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "x coordinate for the atoms",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_x_coord",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_x_force",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_atom_forces"
+      ],
+      "units": "N"
+    }, {
+      "description": "y coordinate for the atoms of the initial geometry",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_y_coord_initial",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "y coordinate for the atoms",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_y_coord",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_y_force",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_atom_forces"
+      ],
+      "units": "N"
+    }, {
+      "description": "z coordinate for the atoms of the initial geometry",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_z_coord_initial",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "z coordinate for the atoms",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_z_coord",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_gamess_atom_z_force",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_atom_forces"
+      ],
+      "units": "N"
+    }, {
+      "description": "number of electrons for system",
+      "dtypeStr": "f",
+      "name": "x_gamess_number_of_electrons",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "atomic number for atoms",
+      "dtypeStr": "f",
+      "name": "x_gamess_atomic_number",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Include a set of SP diffuse functions on heavy atoms or not",
+      "dtypeStr": "C",
+      "name": "x_gamess_basis_set_diffsp",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Incluse a set of S diffuse functions on light atoms or not",
+      "dtypeStr": "C",
+      "name": "x_gamess_basis_set_diffs",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Gaussian basis set main name",
+      "dtypeStr": "C",
+      "name": "x_gamess_basis_set_gbasis",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of main Gaussians",
+      "dtypeStr": "i",
+      "name": "x_gamess_basis_set_igauss",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of polarization d function sets on heavy atoms",
+      "dtypeStr": "i",
+      "name": "x_gamess_basis_set_ndfunc",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of polarization f function sets on heavy atoms",
+      "dtypeStr": "i",
+      "name": "x_gamess_basis_set_nffunc",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of polarization p function sets on light atoms",
+      "dtypeStr": "C",
+      "name": "x_gamess_basis_set_npfunc",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Exponents of polarization functions",
+      "dtypeStr": "C",
+      "name": "x_gamess_basis_set_polar",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "values of eigenenergies for occupied beta MOs",
+      "dtypeStr": "C",
+      "name": "x_gamess_beta_eigenvalues_values",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "Type of coupled cluster method employed",
+      "dtypeStr": "C",
+      "name": "x_gamess_cctype",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Value of the excitation energies for configuration interaction singles excited states.",
+      "dtypeStr": "f",
+      "name": "x_gamess_cis_excitation_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_cis"
+      ],
+      "units": "J"
+    }, {
+      "description": "Value of the oscillator strengths for configuration interaction singles excited states.",
+      "dtypeStr": "f",
+      "name": "x_gamess_cis_oscillator_strength",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_cis"
+      ]
+    }, {
+      "description": "Determinant or CSF method for multiconfigurational SCF calculation",
+      "dtypeStr": "C",
+      "name": "x_gamess_cistep",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Type of configuration interaction method employed",
+      "dtypeStr": "C",
+      "name": "x_gamess_citype",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Control if the G3MP2 composite method has been defined",
+      "dtypeStr": "C",
+      "name": "x_gamess_comp_method",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Name of electronic structure method.",
+      "dtypeStr": "C",
+      "name": "x_gamess_electronic_structure_method",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_elstruc_method"
+      ]
+    }, {
+      "description": "Value of the MCSCF total energy, normally CASSCF, during the iterations.",
+      "dtypeStr": "f",
+      "name": "x_gamess_energy_mcscf_iteration",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mcscf"
+      ],
+      "units": "J"
+    }, {
+      "description": "values of frequencies, in cm-1",
+      "dtypeStr": "f",
+      "name": "x_gamess_frequencies",
+      "shape": [
+        "number_of_frequencies"
+      ],
+      "superNames": [
+        "x_gamess_section_frequencies"
+      ]
+    }, {
+      "description": "values of frequencies, in cm-1",
+      "dtypeStr": "C",
+      "name": "x_gamess_frequency_values",
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_frequencies"
+      ]
+    }, {
+      "description": "Specifies whether a geometry optimization is converged.",
+      "dtypeStr": "C",
+      "name": "x_gamess_geometry_optimization_converged",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_geometry_optimization_info"
+      ]
+    }, {
+      "description": "Number of MCSCF active electrons in the calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mcscf_active_electrons",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mcscf"
+      ]
+    }, {
+      "description": "Number of MCSCF active orbitals in the calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mcscf_active_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mcscf"
+      ]
+    }, {
+      "description": "This indicates whether the multiconfigurational SCF calculation is a complete active space SCF calculation or not",
+      "dtypeStr": "C",
+      "name": "x_gamess_mcscf_casscf",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of MCSCF inactive orbitals in the calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mcscf_inactive_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mcscf"
+      ]
+    }, {
+      "description": "Total memory for GAMESS job",
+      "dtypeStr": "i",
+      "name": "x_gamess_memory",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "String identifying in an unique way the WF method used for the final wavefunctions.",
+      "dtypeStr": "C",
+      "name": "x_gamess_method",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Level of second-orden Moller-Plesset perturbation theory",
+      "dtypeStr": "C",
+      "name": "x_gamess_mplevel",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of active electrons in MRPT2 calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mrpt2_active_electrons",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Number of active orbitals in MRPT2 calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mrpt2_active_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Number of doubly occupied orbitals in MRPT2 calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mrpt2_doubly_occupied_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Number of external orbitals in MRPT2 calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mrpt2_external_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Number of frozen core orbitals in MRPT2 calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mrpt2_frozen_core_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Number of frozen virtual orbitals in MRPT2 calculation.",
+      "dtypeStr": "i",
+      "name": "x_gamess_mrpt2_frozen_virtual_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Determinant (MRPT2) or CSF (MC-QDPT) method for second-order perturbation theory calculation",
+      "dtypeStr": "C",
+      "name": "x_gamess_mrpt2_method_type",
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_mrpt2"
+      ]
+    }, {
+      "description": "Name of the pseudopotential employed",
+      "dtypeStr": "C",
+      "name": "x_gamess_pptype",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gamess_program_execution_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gamess_program_implementation",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "values of normal mode reduced masses",
+      "dtypeStr": "f",
+      "name": "x_gamess_red_masses",
+      "shape": [
+        "number_of_frequencies"
+      ],
+      "superNames": [
+        "x_gamess_section_frequencies"
+      ]
+    }, {
+      "description": "values of normal mode reduced masses",
+      "dtypeStr": "C",
+      "name": "x_gamess_reduced_masses",
+      "shape": [
+        "number_of_reduced_masses_rows"
+      ],
+      "superNames": [
+        "x_gamess_section_frequencies"
+      ]
+    }, {
+      "description": "Type of relativistic method employed",
+      "dtypeStr": "C",
+      "name": "x_gamess_relatmethod",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Type of SCF method employed.",
+      "dtypeStr": "C",
+      "name": "x_gamess_scf_hf_method",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_scf_hf_method"
+      ]
+    }, {
+      "description": "String identifying in an unique way the SCF method used in the calculation.",
+      "dtypeStr": "C",
+      "name": "x_gamess_scf_method",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Final value of the total electronic energy calculated with the method described in XC_method.",
+      "dtypeStr": "f",
+      "name": "x_gamess_energy_scf",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Value of the total electronic energy calculated with the method described in XC_method during each self-consistent field (SCF) iteration.",
+      "dtypeStr": "f",
+      "name": "x_gamess_energy_total_scf_iteration",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "String identifying in an unique way the SCF method used in the calculation.",
+      "dtypeStr": "C",
+      "name": "x_gamess_scf_type",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "section that contains Cartesian forces of the system for a given geometry",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_atom_forces",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Configuration interaction singles excitation energies and oscillator strengths.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_cis",
+      "superNames": [
+        "x_gamess_section_excited_states"
+      ]
+    }, {
+      "description": "Configuration interaction energies.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_ci",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Coupled cluster energies.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_coupled_cluster",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Section containing electronic structure method.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_elstruc_method",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Time-dependent DFT and configuration interaction singles results.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_excited_states",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "section for the values of the frequencies, reduced masses and normal mode vectors",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_frequencies",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Specifies whether a geometry optimization is converged.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_geometry_optimization_info",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "section that contains Cartesian coordinates of the system for a given geometry",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_geometry",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Multiconfigurational SCF energies.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_mcscf",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Perturbative Moller-Plesset energies.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_moller_plesset",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Multiference multiconfigurational energies at second order of perturbation theory.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_mrpt2",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Section containing type of SCF method employed (RHF,UHF,ROHF or GVB).",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_scf_hf_method",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Time-dependent DFT excitation energies and oscillator strengths.",
+      "kindStr": "type_section",
+      "name": "x_gamess_section_tddft",
+      "superNames": [
+        "x_gamess_section_excited_states"
+      ]
+    }, {
+      "description": "Target (user-imposed) value of the spin multiplicity $M=2S+1$, where $S$ is the total spin. It is an integer value. This value is not necessarly the value obtained at the end of the calculation. See spin_S2 for the converged value of the spin moment.",
+      "dtypeStr": "i",
+      "name": "x_gamess_spin_target_multiplicity",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Value of the excitation energies for time-dependent DFT excited states.",
+      "dtypeStr": "f",
+      "name": "x_gamess_tddft_excitation_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_tddft"
+      ],
+      "units": "J"
+    }, {
+      "description": "Value of the oscillator strengths for time-dependent DFT excited states.",
+      "dtypeStr": "f",
+      "name": "x_gamess_tddft_oscillator_strength",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gamess_section_tddft"
+      ]
+    }, {
+      "description": "Type of time-dependent DFT calculation",
+      "dtypeStr": "C",
+      "name": "x_gamess_tddfttype",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Total charge of the system.",
+      "dtypeStr": "i",
+      "name": "x_gamess_total_charge",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Type of valence bond method employed",
+      "dtypeStr": "C",
+      "name": "x_gamess_vbtype",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "String identifying in an unique way the XC method used for the final wavefunctions.",
+      "dtypeStr": "C",
+      "name": "x_gamess_xc",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }]
+}

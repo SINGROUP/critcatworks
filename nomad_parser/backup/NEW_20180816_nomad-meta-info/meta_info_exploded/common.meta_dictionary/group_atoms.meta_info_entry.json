@@ -1,0 +1,14 @@
+{
+  "meta_name":"group_atoms",
+  "meta_type":"type-value",
+  "meta_description":[
+    "List of the indexes involved in this group. The fist atom has index 1, the last ",
+    "number_of_topology_atoms."],
+  "meta_parent_section":"section_group",
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_groups"
+  },{
+    "meta_dimension_symbolic":"number_of_atoms_per_group"
+  }]
+}

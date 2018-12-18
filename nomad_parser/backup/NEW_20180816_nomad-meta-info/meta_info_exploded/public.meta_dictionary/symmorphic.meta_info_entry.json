@@ -1,0 +1,9 @@
+{
+  "meta_name":"symmorphic",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Is the space group symmorphic? Set to True if all translations are ",
+    "zero."],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"boolean"
+}

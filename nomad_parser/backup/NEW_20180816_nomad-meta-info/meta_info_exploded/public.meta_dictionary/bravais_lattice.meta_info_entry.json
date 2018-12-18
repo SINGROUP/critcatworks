@@ -1,0 +1,15 @@
+{
+  "meta_name":"bravais_lattice",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Identifier for the Bravais lattice in Pearson notation. The first lowercase ",
+    "letter identifies the crystal family and can be one of the following: a ",
+    "(triclinic), b (monoclinic), o (orthorhombic), t (tetragonal), h (hexagonal) or ",
+    "c (cubic). The second uppercase letter identifies the centring and can be one ",
+    "of the following: P (primitive), S (face centred), I (body centred), R ",
+    "(rhombohedral centring) or F (all faces centred)."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

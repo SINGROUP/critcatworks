@@ -1,0 +1,14 @@
+{
+  "meta_name":"meta_context_identifier",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The value should be the meta_name of a value (meta_info_entry with meta_type = ",
+    "*type-value*) contained in this meta_info_entry. I.e. its meta_parent_section ",
+    "should be equal to the meta_name of the current meta_info_entry (which should ",
+    "be of *type-section*).That value should uniquely and globally identifies every ",
+    "section value, even if one does not know the type of the current section. In ",
+    "NOMAD we always used the a gid for this purpose."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

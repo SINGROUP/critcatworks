@@ -1,0 +1,13 @@
+{
+  "meta_name":"instant_temperature",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The values of the instantaneous temperature (a quantity, proportional to ",
+    "frame_sequence_kinetic_energy, whose ensemble average equals the thermodynamic ",
+    "temperature) along this frame. If not all frames have a value the indices of ",
+    "the frames that have a value are stored in ",
+    "frame_sequence_temperature_frames."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_units":"K"
+}

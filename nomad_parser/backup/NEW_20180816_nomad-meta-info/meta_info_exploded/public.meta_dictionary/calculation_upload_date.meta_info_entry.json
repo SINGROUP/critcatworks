@@ -1,0 +1,10 @@
+{
+  "meta_name":"calculation_upload_date",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Upload date of the calculation, given as total number of milliseconds is the ",
+    "elapsed since the unix epoch (1 January 1970)"],
+  "meta_parent_section":"section_calculation_info",
+  "meta_data_type":"int64",
+  "meta_repeats":true
+}

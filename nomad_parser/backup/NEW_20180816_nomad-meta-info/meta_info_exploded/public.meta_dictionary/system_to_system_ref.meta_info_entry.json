@@ -1,0 +1,11 @@
+{
+  "meta_name":"system_to_system_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to another system. The kind of relationship between the present and ",
+    "the referenced section_system is specified by ",
+    "system_to_system_kind."],
+  "meta_parent_section":"section_system_to_system_refs",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_system"
+}

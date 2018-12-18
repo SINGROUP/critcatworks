@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_query_values",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The equivalent values that can be sugested for ",
+    "autocompletion"],
+  "meta_parent_section":"meta_query_enum",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

@@ -1,0 +1,16 @@
+{
+  "meta_name":"band_segm_labels_normalized",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Start and end labels of the points in the segment (one-dimensional pathways) ",
+    "sampled in the $k$-space, using the conventional symbols, e.g., Gamma, K, L. ",
+    "The coordinates (fractional, in the reciprocal space) of the start and end ",
+    "points for each segment are given in band_segm_start_end_normalized"],
+  "meta_parent_section":"section_k_band_segment_normalized",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string",
+  "meta_dimension":[{
+    "meta_dimension_fixed":2
+  }]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_restricted_uri",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The number of restricted uris in restricted_uri ",
+    "list."],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"int",
+  "meta_repeats":true
+}

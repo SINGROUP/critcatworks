@@ -1,0 +1,12 @@
+{
+  "meta_name":"symmetry_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Identifies the source of the symmetry information contained within this ",
+    "section. If equal to 'spg_normalized' the information comes from a ",
+    "normalization step."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

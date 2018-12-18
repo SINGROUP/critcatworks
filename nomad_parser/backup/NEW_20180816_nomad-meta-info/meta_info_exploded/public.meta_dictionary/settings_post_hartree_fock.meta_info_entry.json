@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_post_hartree_fock",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters for the post Hartree-Fock ",
+    "method."],
+  "meta_abstract_types":[
+    "settings_xc"]
+}

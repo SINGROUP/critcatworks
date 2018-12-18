@@ -1,0 +1,856 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"common",
+  "description":"Common meta info, not specific to any code",
+  "dependencies":[{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"atom_charge",
+    "description":"Charge of the atom type.",
+    "superNames":["section_atom"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"atom_in_molecule_charge",
+    "description":"(deprecated) Charge of each atom in the molecule.",
+    "superNames":["section_molecule_type","settings_atom_in_molecule"],
+    "units":"C",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms_in_molecule"]
+  },{
+    "name":"atom_in_molecule_name",
+    "description":"(deprecated) Name (label) of each atom in the molecule.",
+    "superNames":["section_molecule_type","settings_atom_in_molecule"],
+    "dtypeStr":"C",
+    "shape":["number_of_atoms_in_molecule"]
+  },{
+    "name":"atom_in_molecule_to_atom_type_ref",
+    "description":"(deprecated) Reference to the atom type of each atom in the molecule.",
+    "superNames":["section_molecule_type","settings_atom_in_molecule"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_in_molecule"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"atom_mass",
+    "description":"Mass of the atom type.",
+    "superNames":["section_atom"],
+    "units":"kg",
+    "dtypeStr":"f"
+  },{
+    "name":"atom_name",
+    "description":"Name (label) of the atom type.",
+    "superNames":["section_atom"],
+    "dtypeStr":"C"
+  },{
+    "name":"atom_number",
+    "description":"Atomic number Z of the atom.",
+    "superNames":["section_atom"],
+    "dtypeStr":"i"
+  },{
+    "name":"atom_species",
+    "description":"Species of the atom (normally the atomic number Z, 0 or negative for unidentifed species or particles that are not atoms.",
+    "superNames":["section_topology","derived_quantity"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"atom_to_molecule",
+    "description":"(deprecated) Table mapping atom to molecules: the first column is the index of the molecule and the second column the index of the atom, signifying that the atom in the second column belongs to the molecule in the first column in the same row.",
+    "superNames":["section_topology"],
+    "dtypeStr":"i",
+    "shape":["number_of_topology_atoms",2]
+  },{
+    "name":"atom_type_charge",
+    "description":"(deprecated) Charge of the atom type.",
+    "superNames":["section_atom_type"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"atom_type_mass",
+    "description":"(deprecated) Mass of the atom type.",
+    "superNames":["section_atom_type"],
+    "units":"kg",
+    "dtypeStr":"f"
+  },{
+    "name":"atom_type_name",
+    "description":"(deprecated) Name (label) of the atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"constraint_atoms",
+    "description":"List of the indexes involved in this constraint. The fist atom has index 1, the last number_of_topology_atoms.",
+    "superNames":["section_constraint","settings_constraint"],
+    "dtypeStr":"i",
+    "shape":["number_of_constraints","number_of_atoms_per_constraint"]
+  },{
+    "name":"constraint_kind",
+    "description":"Short and unique name for this constraint type. Valid names are described in the [constraint\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/constraint-kind).",
+    "superNames":["section_constraint","settings_constraint"],
+    "dtypeStr":"C"
+  },{
+    "name":"constraint_parameters",
+    "description":"Explicit constraint parameters for this kind of constraint (depending on the constraint type, some might be given implicitly through other means).",
+    "superNames":["section_constraint","settings_constraint"],
+    "dtypeStr":"D"
+  },{
+    "name":"constraint_to_topology_group_ref",
+    "description":"Reference to the topological group of atoms which is used to define contraint on it.",
+    "superNames":["section_constraint","settings_constraint"],
+    "dtypeStr":"r",
+    "referencedSections":["section_group"]
+  },{
+    "name":"dft_plus_u_functional",
+    "description":"Type of DFT+U functional (such as DFT/DFT+U double-counting compensation). Valid names are described in the [dft\\_plus\\_u\\_functional wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/dft-plus-u-functional).",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"dft_plus_u_orbital_atom",
+    "description":"DFT+U-orbital setting: atom index (references index of atom_labels/atom_positions)",
+    "superNames":["section_dft_plus_u_orbital"],
+    "dtypeStr":"i"
+  },{
+    "name":"dft_plus_u_orbital_j",
+    "description":"DFT+U-orbital setting: value J (exchange interaction)",
+    "superNames":["section_dft_plus_u_orbital","energy_value"],
+    "dtypeStr":"f"
+  },{
+    "name":"dft_plus_u_orbital_label",
+    "description":"DFT+U-orbital setting: orbital label (normally (n,l)), notation: '3d', '4f', ...",
+    "superNames":["section_dft_plus_u_orbital"],
+    "dtypeStr":"C"
+  },{
+    "name":"dft_plus_u_orbital_u",
+    "description":"DFT+U-orbital setting: value U (on-site Coulomb interaction)",
+    "superNames":["section_dft_plus_u_orbital","energy_value"],
+    "dtypeStr":"f"
+  },{
+    "name":"dft_plus_u_orbital_u_effective",
+    "description":"DFT+U-orbital setting: value U_{effective} (U-J), if implementation uses it",
+    "superNames":["section_dft_plus_u_orbital","energy_value"],
+    "dtypeStr":"f"
+  },{
+    "name":"dft_plus_u_projection_type",
+    "description":"DFT+U: Type of orbitals used for projection in order to calculate occupation numbers. Valid names are described in the [dft\\_plus\\_u\\_projection\\_type wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/dft-plus-u-projection-type).",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"energy_c_mgga",
+    "description":"Component of the correlation (C) energy at the GGA (or MetaGGA) level using the self-consistent density of the target XC functional (full unscaled value, i.e., not scaled due to exact-exchange mixing).",
+    "superNames":["section_single_configuration_calculation","energy_type_c"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"energy_reference_fermi",
+    "description":"Fermi energy (separates occupied from unoccupied single-particle states in metals)",
+    "superNames":["section_single_configuration_calculation","energy_type_reference"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"energy_reference_fermi_iteration",
+    "description":"Fermi energy (separates occupied from unoccupied single-particle states in metals) during the self-consistent field (SCF) iterations.",
+    "superNames":["section_scf_iteration","energy_type_reference","scf_info"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"energy_reference_highest_occupied",
+    "description":"Highest occupied single-particle state energy (in insulators or HOMO energy in finite systems)",
+    "superNames":["section_single_configuration_calculation","energy_type_reference"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"energy_reference_highest_occupied_iteration",
+    "description":"Highest occupied single-particle state energy (in insulators or HOMO energy in finite systems) during the self-consistent field (SCF) iterations.",
+    "superNames":["section_scf_iteration","energy_type_reference","scf_info"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"energy_reference_lowest_unoccupied",
+    "description":"Lowest unoccupied single-particle state energy (in insulators or LUMO energy in finite systems)",
+    "superNames":["section_single_configuration_calculation","energy_type_reference"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"energy_reference_lowest_unoccupied_iteration",
+    "description":"Lowest unoccupied single-particle state energy (in insulators or LUMO energy in finite systems) during the self-consistent field (SCF) iterations.",
+    "superNames":["section_scf_iteration","energy_type_reference","scf_info"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"energy_x_mgga",
+    "description":"Component of the exchange (X) energy at the GGA (or MetaGGA) level using the self consistent density of the target functional (full unscaled value, i.e., not scaled due to exact-exchange mixing).",
+    "superNames":["section_single_configuration_calculation","energy_type_x"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"energy_x_mgga_scaled",
+    "description":"Component of the exchange (X) energy at the GGA (or MetaGGA) level, using the self consistent density of the target functional, scaled accordingly to the mixing parameter.",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"excitation_energies",
+    "description":"Excitation energies.",
+    "superNames":["section_excited_states","energy_value"],
+    "dtypeStr":"f",
+    "shape":["number_of_excited_states"]
+  },{
+    "name":"group_atoms",
+    "description":"List of the indexes involved in this group. The fist atom has index 1, the last number_of_topology_atoms.",
+    "superNames":["section_group"],
+    "dtypeStr":"i",
+    "shape":["number_of_groups","number_of_atoms_per_group"]
+  },{
+    "name":"group_kind",
+    "description":"Short and unique name for this group type. Valid names are described in the [group\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/group-kind).",
+    "superNames":["section_group"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_bare_coulomb_cutofftype",
+    "description":"Cutoff type for the calculation of the bare Coulomb potential: none, 0d, 1d, 2d. See Rozzi et al., PRB 73, 205119 (2006)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_bare_coulomb_gmax",
+    "description":"Maximum G for the pw basis for the Coulomb potential.",
+    "superNames":["section_method"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"gw_basis_set",
+    "description":"Auxillary basis set used for non-local operators: mixed - mixed basis set, Kotani and Schilfgaarde, Solid State Comm. 121, 461 (2002).",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_core_treatment",
+    "description":"It specifies whether the core states are treated in the GW calculation: all - All electron calculation; val - Valence electron only calculation; vab - Core electrons are excluded from the mixed product basis; xal - All electron treatment of the exchange self-energy only",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_fermi_energy",
+    "description":"GW Fermi energy",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"gw_frequency_grid_type",
+    "description":"Frequency integration grid type for the correlational self energy: 'eqdis' - equidistant frequencies from 0 to freqmax; 'gaulag' - Gauss-Laguerre quadrature from 0 to infinity; 'gauleg' - Gauss-Legendre quadrature from 0 to freqmax; 'gaule2' (default) - double Gauss-Legendre quadrature from 0 to freqmax and from freqmax to infinity.",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_frequency_number",
+    "description":"Number referring to the frequency used in the calculation of the self energy.",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"gw_frequency_values",
+    "description":"Values of the frequency used in the calculation of the self energy.",
+    "superNames":["section_method"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"gw_frequency_weights",
+    "description":"Weights of the frequency used in the calculation of the self energy.",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"gw_fundamental_gap",
+    "description":"GW fundamental band gap",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"gw_max_frequency",
+    "description":"Maximum frequency for the calculation of the self energy.",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"gw_mixed_basis_gmax",
+    "description":"Cut-off parameter for the truncation of the expansion of the plane waves in the interstitial region.",
+    "superNames":["section_method"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"gw_mixed_basis_lmax",
+    "description":"Maximum l value used for the radial functions within the muffin-tin.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"gw_mixed_basis_tolerance",
+    "description":"Eigenvalue threshold below which the egenvectors are discarded in the construction of the radial basis set.",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"gw_ngridq",
+    "description":"k/q-point grid size used in the GW calculation.",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "shape":[3]
+  },{
+    "name":"gw_number_of_frequencies",
+    "description":"Number of frequency points used in the calculation of the self energy.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"gw_optical_gap",
+    "description":"GW optical band gap",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"gw_polarizability_number_of_empty_states",
+    "kindStr":"type_dimension",
+    "description":"Number of empty states used to compute the polarizability P",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"gw_qp_equation_treatment",
+    "description":"Methods to solve the quasi-particle equation: 'linearization', 'self-consistent'",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_qp_linearization_prefactor",
+    "description":"Linearization prefactor",
+    "superNames":["section_eigenvalues"],
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_eigenvalues_kpoints","number_of_eigenvalues"]
+  },{
+    "name":"gw_screened_coulomb",
+    "description":"Model used to calculate the dinamically-screened Coulomb potential: 'rpa' - Full-frequency random-phase approximation; 'ppm' - Godby-Needs plasmon-pole model Godby and Needs, Phys. Rev. Lett. 62, 1169 (1989); 'ppm_hl' - Hybertsen and Louie, Phys. Rev. B 34, 5390 (1986); 'ppm_lh' - von der Linden and P. Horsh, Phys. Rev. B 37, 8351 (1988); 'ppm_fe' - Farid and Engel, Phys. Rev. B 47,15931 (1993); 'cdm' - Contour deformation method, Phys. Rev. B 67, 155208 (2003).)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_screened_coulomb_volume_average",
+    "description":"Type of volume averaging for the dynamically screened Coulomb potential: isotropic - Simple averaging along a specified direction using only diagonal components of the dielectric tensor; anisotropic - Anisotropic screening by C. Freysoldt et al., CPC 176, 1-13 (2007)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_self_energy_c",
+    "description":"Diagonal matrix elements of the correlation self-energy",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_eigenvalues_kpoints","number_of_eigenvalues"]
+  },{
+    "name":"gw_self_energy_c_analytical_continuation",
+    "description":"Models for the correlation self-energy analytical continuation: 'pade' -  Pade's approximant (by H. J. Vidberg and J. W. Serence, J. Low Temp. Phys. 29, 179 (1977)); 'mpf' -  Multi-Pole Fitting (by H. N Rojas, R. W. Godby and R. J. Needs, Phys. Rev. Lett. 74, 1827 (1995)); 'cd' - contour deformation; 'ra' - real axis",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_self_energy_c_number_of_empty_states",
+    "description":"Number of empty states to be used to calculate the correlation self energy.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"gw_self_energy_c_number_of_poles",
+    "kindStr":"type_dimension",
+    "description":"Number of poles used in the analytical continuation.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"gw_self_energy_singularity_treatment",
+    "description":"Treatment of the integrable singular terms in the calculation of the self energy. Values: 'mpb' - Auxiliary function method by S. Massidda, M. Posternak, and A. Baldereschi, PRB 48, 5058 (1993); 'crg' - Auxiliary function method by P. Carrier, S. Rohra, and A. Goerling, PRB 75, 205126 (2007).",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_self_energy_x",
+    "description":"Diagonal matrix elements of the exchange self-energy",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_eigenvalues_kpoints","number_of_eigenvalues"]
+  },{
+    "name":"gw_starting_point",
+    "description":"Exchange-correlation functional of the ground-state calculation. See xc_functional list at https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/XC-functional",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_type",
+    "description":"GW methodology: G0W0; ev-scGW: (eigenvalues self-consistent GW) \u2013 Phys.Rev.B 34, 5390 (1986); qp-scGW: (quasi-particle self-consistent GW) \u2013 Phys. Rev. Lett. 96, 226402 (2006)  scGW0: (self-consistent G with fixed W0) \u2013 Phys.Rev.B 54, 8411 (1996); scG0W: (self-consistent W with fixed G0); scGW: (self-consistent GW) \u2013 Phys. Rev. B 88, 075105 (2013)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_type_test",
+    "description":"GW methodology: exciting test variable",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"gw_xc_potential",
+    "description":"Diagonal matrix elements of the exchange-correlation potential ",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_eigenvalues_kpoints","number_of_eigenvalues"]
+  },{
+    "name":"interaction_atoms",
+    "description":"List of the indexes involved in this interaction. The fist atom has index 1, the last atom index number_of_topology_atoms.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"i",
+    "shape":["number_of_interactions","number_of_atoms_per_interaction"]
+  },{
+    "name":"interaction_kind",
+    "description":"Short and unique name for this interaction type. Valid names are described in the [interaction\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/interaction-kind).",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"C"
+  },{
+    "name":"interaction_parameters",
+    "description":"Explicit interaction parameters for this kind of interaction (depending on the interaction_kind some might be given implicitly through other means).",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"D"
+  },{
+    "name":"interaction_to_topology_group_ref",
+    "description":"Reference to the topological group of atoms which is used to define contraint on it.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "referencedSections":["section_topology"]
+  },{
+    "name":"mapping_section_method_basis_set_cell_associated",
+    "description":"Reference to a cell-associated basis set.",
+    "superNames":["section_method_basis_set"],
+    "dtypeStr":"r",
+    "referencedSections":["section_basis_set_cell_dependent"]
+  },{
+    "name":"method_basis_set_kind",
+    "description":"String describing the use of the basis set, i.e, if it used for expanding a wavefunction or an electron density. Allowed values are listed in the [basis\\_set\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/basis-set-kind).",
+    "superNames":["section_method_basis_set"],
+    "dtypeStr":"C"
+  },{
+    "name":"method_basis_set_to_atom_centered_ref",
+    "description":"Reference to an atom-centered basis set defined in section_basis_set_atom_centered and to the atom kind as defined in section_method_atom_kind.",
+    "superNames":["section_method_basis_set"],
+    "dtypeStr":"r",
+    "shape":["number_of_basis_sets_atom_centered"],
+    "referencedSections":["section_basis_set_atom_centered"]
+  },{
+    "name":"method_basis_set_to_atom_kind_ref",
+    "description":"Reference to an atom-centered basis set defined in section_basis_set_atom_centered and to the atom kind as defined in section_method_atom_kind.",
+    "superNames":["section_method_basis_set"],
+    "dtypeStr":"r",
+    "shape":["number_of_basis_sets_atom_centered"],
+    "referencedSections":["section_method_atom_kind"]
+  },{
+    "name":"method_to_topology_ref",
+    "description":"Reference to the topology and force fields to be used.",
+    "superNames":["section_method"],
+    "dtypeStr":"r",
+    "referencedSections":["section_topology"]
+  },{
+    "name":"molecule_constraint_atoms",
+    "description":"(deprecated) List of the indexes involved in this constraint. The fist atom has index 1, the last index is number_of_atoms_in_molecule.",
+    "superNames":["section_molecule_constraint","settings_constraint"],
+    "dtypeStr":"i",
+    "shape":["number_of_molecule_constraints","number_of_atoms_per_molecule_constraint"]
+  },{
+    "name":"molecule_constraint_kind",
+    "description":"(deprecated) Short and unique name for this constraint type. Valid names are described in the [constraint\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/constraint-kind).",
+    "superNames":["section_molecule_constraint","settings_constraint"],
+    "dtypeStr":"C"
+  },{
+    "name":"molecule_constraint_parameters",
+    "description":"(deprecated) Explicit constraint parameters for this kind of constraint (depending on the constraint type some might be given implicitly through other means).",
+    "superNames":["section_molecule_constraint","settings_constraint"],
+    "dtypeStr":"D"
+  },{
+    "name":"molecule_interaction_atoms",
+    "description":"(deprecated) List of the indexes involved in this bonded interaction within a molecule. The first atom has index 1, the last index is number_of_atoms_in_.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"i",
+    "shape":["number_of_molecule_interactions","number_of_atoms_per_molecule_interaction"]
+  },{
+    "name":"molecule_interaction_kind",
+    "description":"(deprecated) Short and unique name for this interaction type, used for bonded interactions for atoms in a molecule. Valid names are described in the [interaction\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/interaction-kind).",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"C"
+  },{
+    "name":"molecule_interaction_parameters",
+    "description":"(deprecated) Explicit interaction parameters for this kind of interaction (depending on the interaction type some might be given implicitly through other means), used for bonded interactions for atoms in a molecule.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"D"
+  },{
+    "name":"molecule_to_molecule_type_map",
+    "description":"(deprecated) Mapping from molecules to molecule types.",
+    "superNames":["section_topology"],
+    "dtypeStr":"r",
+    "shape":["number_of_topology_molecules"],
+    "referencedSections":["section_molecule_type"]
+  },{
+    "name":"molecule_type_name",
+    "description":"(deprecated) Name of the molecule.",
+    "superNames":["section_molecule_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"number_of_atoms_in_molecule",
+    "kindStr":"type_dimension",
+    "description":"(deprecated) Number of atoms in this molecule.",
+    "superNames":["section_molecule_type"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_atoms_per_constraint",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms involved in this constraint.",
+    "superNames":["section_constraint","settings_constraint"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_atoms_per_group",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms involved in this group.",
+    "superNames":["section_group"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_atoms_per_interaction",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms involved in this interaction.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_atoms_per_molecule_constraint",
+    "kindStr":"type_dimension",
+    "description":"(deprecated) Number of atoms, in this molecule, involved in this constraint.",
+    "superNames":["section_molecule_constraint","settings_constraint"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_atoms_per_molecule_interaction",
+    "kindStr":"type_dimension",
+    "description":"(deprecated) Number of atoms, in this molecule, involved in this interaction.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_basis_sets_atom_centered",
+    "kindStr":"type_dimension",
+    "description":"String describing the use of the basis set, i.e, if it used for expanding a wavefunction or an electron density. Allowed values are listed in the [basis\\_set\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/basis-set-kind).",
+    "superNames":["section_method_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_constraints",
+    "kindStr":"type_dimension",
+    "description":"Number of constraints of this type.",
+    "superNames":["section_constraint","settings_constraint"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_electrons",
+    "description":"Number of electrons in system",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels"]
+  },{
+    "name":"number_of_excited_states",
+    "kindStr":"type_dimension",
+    "description":"Number of excited states.",
+    "superNames":["section_excited_states"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_groups",
+    "kindStr":"type_dimension",
+    "description":"Number of groups of this type.",
+    "superNames":["section_group"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_interactions",
+    "kindStr":"type_dimension",
+    "description":"Number of interactions of this type.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_molecule_constraints",
+    "kindStr":"type_dimension",
+    "description":"(deprecated) Number of constraints of this type.",
+    "superNames":["section_molecule_constraint","settings_constraint"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_molecule_interactions",
+    "kindStr":"type_dimension",
+    "description":"(deprecated) Number of bonded interactions of this type.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_soap_coefficients",
+    "kindStr":"type_dimension",
+    "description":"number of soap coefficients",
+    "superNames":["section_soap_coefficients"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_topology_atoms",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms in the system described by this topology.",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"number_of_topology_molecules",
+    "kindStr":"type_dimension",
+    "description":"(deprecated) Number of molecules in the system, as described by this topology.",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"oscillator_strengths",
+    "description":"Excited states oscillator strengths.",
+    "superNames":["section_excited_states"],
+    "dtypeStr":"f",
+    "shape":["number_of_excited_states"]
+  },{
+    "name":"response_context",
+    "kindStr":"type_section",
+    "description":"The top level context containing the reponse to an api query, when using jsonAPI they are tipically in the meta part",
+    "superNames":[]
+  },{
+    "name":"response_message",
+    "description":"Message outputted by the program formatting the data in the current format",
+    "superNames":["section_response_message"],
+    "dtypeStr":"C"
+  },{
+    "name":"response_message_count",
+    "description":"How many times this message was repeated",
+    "superNames":["section_response_message"],
+    "dtypeStr":"i"
+  },{
+    "name":"response_message_level",
+    "description":"level of the message: 0 fatal, 1 error, 2 warning, 3 debug",
+    "superNames":["section_response_message"],
+    "dtypeStr":"i"
+  },{
+    "name":"section_atom",
+    "kindStr":"type_section",
+    "description":"Section describing an atom in the system.",
+    "superNames":["section_topology"]
+  },{
+    "name":"section_atom_type",
+    "kindStr":"type_section",
+    "description":"(deprecated) Section describing a type of atom in the system.",
+    "superNames":["section_topology"]
+  },{
+    "name":"section_constraint",
+    "kindStr":"type_section",
+    "description":"Section describing a constraint between arbitrary atoms.",
+    "superNames":["section_constraints","settings_constraint"]
+  },{
+    "name":"section_constraints",
+    "kindStr":"type_section",
+    "description":"Section describing a constraint between arbitrary atoms.",
+    "superNames":["section_run"]
+  },{
+    "name":"section_dft_plus_u_orbital",
+    "kindStr":"type_section",
+    "description":"Section for DFT+U-settings of a single orbital",
+    "superNames":["section_method"]
+  },{
+    "name":"section_excited_states",
+    "kindStr":"type_section",
+    "description":"Excited states properties.",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"section_group",
+    "kindStr":"type_section",
+    "description":"Section describing a group (pairs, angles, molecules, etc.) between arbitrary atoms.",
+    "superNames":["section_topology"]
+  },{
+    "name":"section_interaction",
+    "kindStr":"type_section",
+    "description":"Section containing the description of a bonded interaction between arbitrary atoms.",
+    "superNames":["section_method","settings_interaction"]
+  },{
+    "name":"section_method_basis_set",
+    "kindStr":"type_section",
+    "description":"This section contains the definition of the basis sets that are defined independently of the atomic configuration.",
+    "superNames":["section_method"]
+  },{
+    "name":"section_molecule_constraint",
+    "kindStr":"type_section",
+    "description":"(deprecated) Section describing a constraint between atoms within a molecule.",
+    "superNames":["section_molecule_type","settings_constraint"]
+  },{
+    "name":"section_molecule_interaction",
+    "kindStr":"type_section",
+    "description":"(deprecated) Section describing a bonded interaction between atoms within a molecule.",
+    "superNames":["section_molecule_type","settings_interaction"]
+  },{
+    "name":"section_molecule_type",
+    "kindStr":"type_section",
+    "description":"(deprecated) Section describing a type of molecule in the system.",
+    "superNames":["section_topology"]
+  },{
+    "name":"section_response_message",
+    "kindStr":"type_section",
+    "description":"Messages outputted by the program formatting the data in the current response",
+    "superNames":["response_context"]
+  },{
+    "name":"section_soap",
+    "kindStr":"type_section",
+    "description":"Stores a soap descriptor for this configuration.",
+    "superNames":["section_system"]
+  },{
+    "name":"section_soap_coefficients",
+    "kindStr":"type_section",
+    "description":"Stores the soap coefficients for the pair of atoms given in soap_coefficients_atom_pair.",
+    "superNames":["section_soap"]
+  },{
+    "name":"section_topology",
+    "kindStr":"type_section",
+    "description":"Section containing the definition of topology (connectivity among atoms) of a system.",
+    "superNames":["section_run"]
+  },{
+    "name":"settings_atom_in_molecule",
+    "kindStr":"type_abstract_document_content",
+    "description":"(deprecated) Parameters of an atom within a molecule.",
+    "superNames":[]
+  },{
+    "name":"settings_constraint",
+    "kindStr":"type_abstract_document_content",
+    "description":"Some parameters that describe a constraint",
+    "superNames":[]
+  },{
+    "name":"settings_interaction",
+    "kindStr":"type_abstract_document_content",
+    "description":"Some parameters that describe a bonded interaction.",
+    "superNames":[]
+  },{
+    "name":"shortened_meta_info",
+    "description":"A meta info whose corresponding data has been shortened",
+    "superNames":["response_context"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"single_configuration_calculation_to_constraints_ref",
+    "description":"Reference to the constraints used for this system.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"r",
+    "referencedSections":["section_constraints"]
+  },{
+    "name":"single_configuration_calculation_to_topology_ref",
+    "description":"Reference to the topology used for this system.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"r",
+    "referencedSections":["section_topology"]
+  },{
+    "name":"soap_angular_basis_l",
+    "description":"angular basis L",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"i"
+  },{
+    "name":"soap_angular_basis_type",
+    "description":"angular basis type",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"C",
+    "values":{
+      "spherical-harmonic":"Uses spherical harmonics for the angular basis"
+    }
+  },{
+    "name":"soap_coefficients",
+    "description":"Compressed coefficient of the soap descriptor for the atom pair soap_coefficients_atom_pair",
+    "superNames":["section_soap_coefficients"],
+    "dtypeStr":"f",
+    "shape":["number_of_soap_coefficients"]
+  },{
+    "name":"soap_coefficients_atom_pair",
+    "description":"Pair of atoms described in the current section",
+    "superNames":["section_soap_coefficients"],
+    "dtypeStr":"C"
+  },{
+    "name":"soap_kernel_adaptor",
+    "description":"kernel adaptor",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"C",
+    "values":{
+      "specific-unique-dmap":"..."
+    }
+  },{
+    "name":"soap_parameter",
+    "kindStr":"type_abstract_document_content",
+    "description":"A soap parameter",
+    "superNames":[]
+  },{
+    "name":"soap_parameters_gid",
+    "description":"Unique checksum of all the soap parameters (all those with abstract type soap_parameter) with prefix psoap",
+    "superNames":["section_soap","derived_quantity"],
+    "dtypeStr":"C"
+  },{
+    "name":"soap_radial_basis_integration_steps",
+    "description":"radial basis integration steps",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"i"
+  },{
+    "name":"soap_radial_basis_mode",
+    "description":"radial basis mode",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"C"
+  },{
+    "name":"soap_radial_basis_n",
+    "description":"radial basis N",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"i"
+  },{
+    "name":"soap_radial_basis_sigma",
+    "description":"radial basis sigma",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"f"
+  },{
+    "name":"soap_radial_basis_type",
+    "description":"radial basis type",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"C"
+  },{
+    "name":"soap_radial_cutoff_center_weight",
+    "description":"radial cutoff center weight",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"f"
+  },{
+    "name":"soap_radial_cutoff_rc",
+    "description":"radial cutoff",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"f"
+  },{
+    "name":"soap_radial_cutoff_rc_width",
+    "description":"radial cutoff width",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"i"
+  },{
+    "name":"soap_radial_cutoff_type",
+    "description":"radial cutoff type",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"C"
+  },{
+    "name":"soap_spectrum_2l1_norm",
+    "description":"2l1 norm spectrum",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"b"
+  },{
+    "name":"soap_spectrum_global",
+    "description":"global spectrum",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"b"
+  },{
+    "name":"soap_spectrum_gradients",
+    "description":"gradients in specturm",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"b"
+  },{
+    "name":"soap_type_list",
+    "description":"Type list",
+    "superNames":["section_soap","soap_parameter"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"topology_force_field_name",
+    "description":"(deprecated) A unique string idenfiying the force field defined in this section. Strategies to define it are discussed in the [topology\\_force\\_field\\_name](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/topology-force-field-name).",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"topology_ref",
+    "description":"Reference to the topology used for this system; if not given, the trivial topology should be assumed.",
+    "superNames":["section_system"],
+    "dtypeStr":"r",
+    "referencedSections":["section_topology"]
+  },{
+    "name":"transition_dipole_moments",
+    "description":"Transition dipole moments.",
+    "superNames":["section_excited_states"],
+    "dtypeStr":"f",
+    "shape":["number_of_excited_states",3]
+  }]
+}

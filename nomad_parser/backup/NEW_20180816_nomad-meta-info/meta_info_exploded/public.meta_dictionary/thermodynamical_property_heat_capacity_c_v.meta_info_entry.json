@@ -1,0 +1,13 @@
+{
+  "meta_name":"thermodynamical_property_heat_capacity_c_v",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the heat capacity per cell unit at constant ",
+    "volume."],
+  "meta_parent_section":"section_thermodynamical_properties",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_thermodynamical_property_values"
+  }],
+  "meta_units":"J*K**(-1)"
+}

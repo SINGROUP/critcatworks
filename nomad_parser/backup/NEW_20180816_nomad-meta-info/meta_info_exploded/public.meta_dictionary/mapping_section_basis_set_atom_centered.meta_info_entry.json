@@ -1,0 +1,16 @@
+{
+  "meta_name":"mapping_section_basis_set_atom_centered",
+  "meta_type":"type-value",
+  "meta_description":[
+    "An array of the dimension of number_of_atoms where each atom (identified by the ",
+    "index in the array) is assigned to an atom-centered basis set, for this ",
+    "section_single_configuration_calculation. The actual definition of the ",
+    "atom-centered basis set is in the section_basis_set_atom_centered that is ",
+    "referred to by this metadata."],
+  "meta_parent_section":"section_basis_set",
+  "meta_data_type":"reference",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms"
+  }],
+  "meta_referenced_section":"section_basis_set_atom_centered"
+}

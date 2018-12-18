@@ -1,0 +1,9 @@
+{
+  "meta_name":"message_info",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "An information message of the computational ",
+    "program."],
+  "meta_abstract_types":[
+    "message_debug"]
+}

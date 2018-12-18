@@ -1,0 +1,8 @@
+{
+  "meta_name":"stress_tensor_type",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains the final value of the default stress tensor (stress_tensor) and/or ",
+    "the value of the stress tensor (stress_tensor_value) of the kind defined in ",
+    "stress_tensor_kind."]
+}

@@ -1,0 +1,497 @@
+{
+  "metadict_name":"repository",
+  "metadict_description":"Meta Info that is used in the Nomad Repository",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"public"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"author_first_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "First name of a author of NOMAD repository data (includes middle ",
+      "names)"],
+    "meta_parent_section":"section_author_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"author_last_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Last name of a author to NOMAD repository ",
+      "data"],
+    "meta_parent_section":"section_author_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"author_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name (fista and last name) of an author of NOMAD repository ",
+      "data"],
+    "meta_parent_section":"section_author_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"author_repo_id",
+    "meta_type":"type-value",
+    "meta_description":"Identifier of the author used in the repository",
+    "meta_parent_section":"section_author_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"citation_repo_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "internal ID of the citation (primary key in Postgres ",
+      "DB)"],
+    "meta_parent_section":"section_citation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"citation_value",
+    "meta_type":"type-value",
+    "meta_description":"String defining the citation",
+    "meta_parent_section":"section_citation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dataset_calc_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "internal ID of the data set (primary key in Postgres DB calculations ",
+      "table)"],
+    "meta_parent_section":"section_repository_dataset",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"dataset_checksum",
+    "meta_type":"type-value",
+    "meta_description":"Checksum idendifying the dataset in the repository",
+    "meta_parent_section":"section_repository_dataset",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dataset_doi_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "the internal ID assigned to a NOMAD DOI (primary key in Postgres ",
+      "DB)"],
+    "meta_parent_section":"section_dataset_doi",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"dataset_doi_name",
+    "meta_type":"type-value",
+    "meta_description":"the name of the DOI",
+    "meta_parent_section":"section_dataset_doi",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"dataset_name",
+    "meta_type":"type-value",
+    "meta_description":"Name of NOMAD repository dataset",
+    "meta_parent_section":"section_repository_dataset",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dataset_parent_calc_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "internal ID of the (optional) parent data set (primary key in Postgres DB ",
+      "calculations table)"],
+    "meta_parent_section":"section_repository_dataset",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"dataset_parent_pid",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Unique identifier of the parent NOMAD repository ",
+      "dataset"],
+    "meta_parent_section":"section_repository_dataset",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dataset_pid",
+    "meta_type":"type-value",
+    "meta_description":"Unique identifier of a NOMAD repository dataset",
+    "meta_parent_section":"section_repository_dataset",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"raw_data_base_path",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Base path of the raw data in the upload, these directories are *not* created in ",
+      "the archive"],
+    "meta_parent_section":"section_raw_data",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"raw_data_content_roots",
+    "meta_type":"type-value",
+    "meta_description":[
+      "paths stored in the archive, all subfiles are stored along with ",
+      "these"],
+    "meta_parent_section":"section_raw_data",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"raw_data_creation_date",
+    "meta_type":"type-value",
+    "meta_description":"When the raw data archive was created",
+    "meta_parent_section":"section_raw_data",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"raw_data_gid",
+    "meta_type":"type-value",
+    "meta_description":"Unique identifier of the raw data archive",
+    "meta_parent_section":"section_raw_data",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_access_now",
+    "meta_type":"type-value",
+    "meta_description":"kind of access this data has currently",
+    "meta_parent_section":"section_repository_userdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_archive_gid",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Gid of a raw data archives that contains this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"repository_atomic_elements",
+    "meta_type":"type-value",
+    "meta_description":"Atomic elements used in this calculation",
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"repository_basis_set_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying the type of basis set used in this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_calc_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "calc_id, an internal identifier in the database of a file/calculation in NOMAD ",
+      "repository"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"repository_calc_pid",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Permanent identifier of a file/calculation in NOMAD ",
+      "repository"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_checksum",
+    "meta_type":"type-value",
+    "meta_description":"checksum of the calculation",
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_chemical_formula",
+    "meta_type":"type-value",
+    "meta_description":"Chemical formula (composition) calculation",
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_code_version",
+    "meta_type":"type-value",
+    "meta_description":[
+      "version of the code that was used to generate the ",
+      "calculation"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_comment",
+    "meta_type":"type-value",
+    "meta_description":"Comment on data uploaded to NOMAD repository",
+    "meta_parent_section":"section_repository_userdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_crystal_system",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying the crystal system of this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_filepaths",
+    "meta_type":"type-value",
+    "meta_description":[
+      "paths to the files associated with this calculation on the file ",
+      "system"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"repository_grouping_checksum",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Checksum of the fields used in the NOMAD repository search result table: ",
+      "repository_chemical_formula, repository_spacegroup_nr, ",
+      "repository_basis_set_type, repository_xc_treatment, repository_code_version, ",
+      "repository_access_now, citation_repo_id, repository_comment, ",
+      "author_repository_id. Checksum is Base64 (url safe) encoding of the first 168 ",
+      "bit of SHA-512 prefixed with 'g'"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Db identifier for a file/calculation in NOMAD ",
+      "repository"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"int64"
+  },{
+    "meta_name":"repository_location",
+    "meta_type":"type-value",
+    "meta_description":[
+      "path to the primary file of this calculation on the file ",
+      "system"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_nomad_uri",
+    "meta_type":"type-value",
+    "meta_description":[
+      "A nomad uri to normalized calculation corresponding to this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"repository_open_date",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Date this calculation did become, or will become open ",
+      "access"],
+    "meta_parent_section":"section_repository_userdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_parser_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying the parser used to parse the information for the ",
+      "repository"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_program_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying the program used to generate this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_spacegroup_nr",
+    "meta_type":"type-value",
+    "meta_description":"space group of the geometry of this calculation",
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"repository_system_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying the type of system of this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_uri",
+    "meta_type":"type-value",
+    "meta_description":[
+      "URI referring to the parsed file in the original upload to repository ",
+      "(equivalent of mainFileUri before repackaging)"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"repository_xc_treatment",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying the xc treatment used in this ",
+      "calculation"],
+    "meta_parent_section":"section_repository_parserdata",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"section_author_info",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Information about the authors of data uploaded to NOMAD ",
+      "repository"],
+    "meta_parent_section":"section_repository_userdata",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_citation",
+    "meta_type":"type-section",
+    "meta_description":"Section describing a citation",
+    "meta_parent_section":"section_repository_userdata",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_dataset_doi",
+    "meta_type":"type-section",
+    "meta_description":"the NOMAD DOIs assigned to the dataset",
+    "meta_parent_section":"section_repository_dataset",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_raw_data",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Information on a raw data archive that contain open access data of this ",
+      "upload"],
+    "meta_parent_section":"section_repository_info",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_repository_dataset",
+    "meta_type":"type-section",
+    "meta_description":"NOMAD repository dataset tagging info",
+    "meta_parent_section":"section_repository_userdata",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_repository_info",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section containing information about the original upload to NOMAD ",
+      "repository"],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_repository_parserdata",
+    "meta_type":"type-section",
+    "meta_description":[
+      "data about the calculation which can be modified by ",
+      "parsers"],
+    "meta_parent_section":"section_repository_info",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_repository_userdata",
+    "meta_type":"type-section",
+    "meta_description":[
+      "data about the calculation which can be modified by the ",
+      "owner"],
+    "meta_parent_section":"section_repository_info",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_shared_with",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Information about the person with whom this calculation is shared ",
+      "with"],
+    "meta_parent_section":"section_repository_userdata",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"section_uploader_info",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Information about the person who uploaded the data to NOMAD ",
+      "repository"],
+    "meta_parent_section":"section_repository_info",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"shared_with_first_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "First name of someone this calculation is shared ",
+      "with"],
+    "meta_parent_section":"section_shared_with",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"shared_with_last_name",
+    "meta_type":"type-value",
+    "meta_description":"Last name of the uploader to NOMAD repository",
+    "meta_parent_section":"section_shared_with",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"shared_with_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "full name of the user the calculation has been shared ",
+      "with"],
+    "meta_parent_section":"section_shared_with",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"shared_with_repo_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "repository-internal ID of the user the calculation has been shared ",
+      "with"],
+    "meta_parent_section":"section_shared_with",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"shared_with_username",
+    "meta_type":"type-value",
+    "meta_description":[
+      "username of a person this calculation is shared ",
+      "with"],
+    "meta_parent_section":"section_shared_with",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"upload_date",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Date/time when the data was uploaded to NOMAD repository (offset from *Unix ",
+      "epoch* (00:00:00 UTC on 1 January 1970) in ",
+      "seconds)"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"upload_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Unique ID of the upload 'block' (upload could have been split into many ",
+      "archives)"],
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"upload_repository_pid",
+    "meta_type":"type-value",
+    "meta_description":"identifier for an upload",
+    "meta_parent_section":"section_repository_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"uploader_first_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "First name of the uploader to NOMAD repository (includes middle ",
+      "names)"],
+    "meta_parent_section":"section_uploader_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"uploader_last_name",
+    "meta_type":"type-value",
+    "meta_description":"Last name of the uploader to NOMAD repository",
+    "meta_parent_section":"section_uploader_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"uploader_name",
+    "meta_type":"type-value",
+    "meta_description":"full name of the user who uploaded the calculation",
+    "meta_parent_section":"section_uploader_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"uploader_repo_id",
+    "meta_type":"type-value",
+    "meta_description":[
+      "First name of the uploader to NOMAD repository (includes middle ",
+      "names)"],
+    "meta_parent_section":"section_uploader_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"uploader_username",
+    "meta_type":"type-value",
+    "meta_description":"username of the uploader",
+    "meta_parent_section":"section_uploader_info",
+    "meta_data_type":"string"
+  }]
+}

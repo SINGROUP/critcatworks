@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_topology_molecules",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "(deprecated) Number of molecules in the system, as described by this ",
+    "topology."],
+  "meta_parent_section":"section_topology"
+}

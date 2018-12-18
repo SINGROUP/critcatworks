@@ -1,0 +1,11 @@
+{
+  "meta_name":"dft_plus_u_functional",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Type of DFT+U functional (such as DFT/DFT+U double-counting compensation). ",
+    "Valid names are described in the [dft\\_plus\\_u\\_functional wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/dft-p",
+    "lus-u-functional)."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

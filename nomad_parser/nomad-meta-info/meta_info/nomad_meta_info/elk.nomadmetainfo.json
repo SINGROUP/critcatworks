@@ -1,0 +1,702 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the elk parser, all names are expected to start with x_elk",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Brillouin zone volume",
+      "dtypeStr": "f",
+      "name": "x_elk_brillouin_zone_volume",
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m^-3"
+    },  {
+      "description": "x component of lattice vector",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_lattice_vector_x",
+      "shape": [],
+      "superNames": [
+        "x_elk_section_lattice_vectors"
+      ],
+      "units": "m"
+    }, {
+      "description": "y component of lattice vector",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_lattice_vector_y",
+      "shape": [],
+      "superNames": [
+        "x_elk_section_lattice_vectors"
+      ],
+      "units": "m"
+    }, {
+      "description": "z component of lattice vector",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_lattice_vector_z",
+      "shape": [],
+      "superNames": [
+        "x_elk_section_lattice_vectors"
+      ],
+      "units": "m"
+    }, {
+      "description": "x component of reciprocal lattice vector",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_reciprocal_lattice_vector_x",
+      "shape": [],
+      "superNames": [
+        "x_elk_section_reciprocal_lattice_vectors"
+      ],
+      "units": "m^-1"
+    }, {
+      "description": "y component of reciprocal lattice vector",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_reciprocal_lattice_vector_y",
+      "shape": [],
+      "superNames": [
+        "x_elk_section_reciprocal_lattice_vectors"
+      ],
+      "units": "m^-1"
+    }, {
+      "description": "z component of reciprocal lattice vector",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_reciprocal_lattice_vector_z",
+      "shape": [],
+      "superNames": [
+        "x_elk_section_reciprocal_lattice_vectors"
+      ],
+      "units": "m^-1"
+    },  {
+      "description": "lattice vectors",
+      "kindStr": "type_section",
+      "name": "x_elk_section_lattice_vectors",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "reciprocal lattice vectors",
+      "kindStr": "type_section",
+      "name": "x_elk_section_reciprocal_lattice_vectors",
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "Reciprocal lattice vectors of the simulation cell.",
+      "dtypeStr": "f",
+      "name": "x_elk_simulation_reciprocal_cell",
+      "repeats": false,
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "configuration_core"
+      ],
+      "units": "m"
+    }, {
+      "description": "unit cell volume",
+      "dtypeStr": "f",
+      "name": "x_elk_unit_cell_volume",
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m^3"
+    },  {
+      "description": "labels of atom",
+      "dtypeStr": "C",
+      "name": "x_elk_geometry_atom_labels",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_elk_section_atoms_group"
+      ]
+    },  {
+      "description": "muffin-tin radius",
+      "dtypeStr": "f",
+      "name": "x_elk_muffin_tin_radius",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    },  {
+      "description": "muffin-tin points",
+      "dtypeStr": "i",
+      "name": "x_elk_muffin_tin_points",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    },   {
+      "description": "number to identify the atoms of a species",
+      "dtypeStr": "C",
+      "name": "x_elk_geometry_atom_number",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_elk_section_atoms_group"
+      ]
+    },  {
+      "description": "x component of atomic position",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_atom_positions_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_elk_section_atoms_group"
+      ],
+      "units": "m"
+    }, {
+      "description": "y component of atomic position",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_atom_positions_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_elk_section_atoms_group"
+      ],
+      "units": "m"
+    }, {
+      "description": "z component of atomic position",
+      "dtypeStr": "f",
+      "name": "x_elk_geometry_atom_positions_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_elk_section_atoms_group"
+      ],
+      "units": "m"
+    }, {
+      "description": "a group of atoms of the same type",
+      "kindStr": "type_section",
+      "name": "x_elk_section_atoms_group",
+      "superNames": [
+        "section_system"
+      ]
+    },   {
+      "description": "number k-points x",
+      "dtypeStr": "i",
+      "name": "x_elk_number_kpoint_x",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "number k-points y",
+      "dtypeStr": "i",
+      "name": "x_elk_number_kpoint_y",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "number k-points z",
+      "dtypeStr": "i",
+      "name": "x_elk_number_kpoint_z",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "number k-points",
+      "dtypeStr": "i",
+      "name": "x_elk_number_kpoints",
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "K-points offset x component",
+      "dtypeStr": "f",
+      "name": "x_elk_kpoint_offset_x",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "K-points offset y component",
+      "dtypeStr": "f",
+      "name": "x_elk_kpoint_offset_y",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "K-points offset z component",
+      "dtypeStr": "f",
+      "name": "x_elk_kpoint_offset_z",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Radius MT * Gmax",
+      "dtypeStr": "f",
+      "name": "x_elk_rgkmax",
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "G-vector grid size x",
+      "dtypeStr": "i",
+      "name": "x_elk_gvector_size_x",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "G-vector grid size y",
+      "dtypeStr": "i",
+      "name": "x_elk_gvector_size_y",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "G-vector grid size z",
+      "dtypeStr": "i",
+      "name": "x_elk_gvector_size_z",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "G-vector total",
+      "dtypeStr": "i",
+      "name": "x_elk_gvector_total",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Angular momentum cut-off for the APW functions",
+      "dtypeStr": "i",
+      "name": "x_elk_lmaxapw",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Maximum length of |G+k| for APW functions",
+      "dtypeStr": "f",
+      "name": "x_elk_gkmax",
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m^-1"
+    }, {
+      "description": "Smearing width for KS occupancies",
+      "dtypeStr": "f",
+      "name": "x_elk_smearing_width",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Spin treatment",
+      "dtypeStr": "C",
+      "name": "x_elk_spin_treatment",
+      "superNames": [
+        "x_elk_section_spin"
+      ]
+    },{
+      "description": "section for exciting spin treatment",
+      "kindStr": "type_section",
+      "name": "x_elk_section_spin",
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "Total number of local-orbitals",
+      "dtypeStr": "i",
+      "name": "x_elk_lo",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Maximum length of |G|",
+      "dtypeStr": "f",
+      "name": "x_elk_gmaxvr",
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m^-1"
+    }, {
+      "description": "Total number of valence states",
+      "dtypeStr": "i",
+      "name": "x_elk_valence_states",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Total number of core states",
+      "dtypeStr": "i",
+      "name": "x_elk_core_states",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Number of empty states",
+      "dtypeStr": "i",
+      "name": "x_elk_empty_states",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Effective Wigner radius",
+      "dtypeStr": "f",
+      "name": "x_elk_wigner_radius",
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "index for elk functional",
+      "kindStr": "type_section",
+      "name": "x_elk_section_xc",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "index for elk functional",
+      "dtypeStr": "i",
+      "name": "x_elk_xc_functional",
+      "superNames": [
+        "x_elk_section_xc"
+      ]
+    }, {
+      "description": "Electronic charge",
+      "dtypeStr": "f",
+      "name": "x_elk_electronic_charge",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Valence charge",
+      "dtypeStr": "f",
+      "name": "x_elk_valence_charge",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Nuclear charge",
+      "dtypeStr": "f",
+      "name": "x_elk_nuclear_charge",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Core charge",
+      "dtypeStr": "f",
+      "name": "x_elk_core_charge",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Core charge scf iteration",
+      "dtypeStr": "f",
+      "name": "x_elk_core_charge_scf_iteration",
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Core charge final",
+      "dtypeStr": "f",
+      "name": "x_elk_core_charge_final",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Valence charge scf iteration",
+      "dtypeStr": "f",
+      "name": "x_elk_valence_charge_scf_iteration",
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Valence charge final",
+      "dtypeStr": "f",
+      "name": "x_elk_valence_charge_final",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Interstitial charge scf iteration",
+      "dtypeStr": "f",
+      "name": "x_elk_interstitial_charge_scf_iteration",
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Interstitial charge final",
+      "dtypeStr": "f",
+      "name": "x_elk_interstitial_charge_final",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Fermi energy",
+      "dtypeStr": "f",
+      "name": "x_elk_fermi_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Fermi energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_fermi_energy",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Core-electron kinetic energy",
+      "dtypeStr": "f",
+      "name": "x_elk_core_electron_kinetic_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Core-electron kinetic energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_core_electron_kinetic_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Coulomb energy",
+      "dtypeStr": "f",
+      "name": "x_elk_coulomb_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Coulomb energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_coulomb_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Coulomb potential energy",
+      "dtypeStr": "f",
+      "name": "x_elk_coulomb_potential_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Coulomb potential energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_coulomb_potential_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Nuclear-nuclear energy",
+      "dtypeStr": "f",
+      "name": "x_elk_nuclear_nuclear_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Nuclear-nuclear energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_nuclear_nuclear_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Electron-nuclear energy",
+      "dtypeStr": "f",
+      "name": "x_elk_electron_nuclear_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Electron-nuclear energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_electron_nuclear_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Hartree energy",
+      "dtypeStr": "f",
+      "name": "x_elk_hartree_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Hartree energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_hartree_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Madelung energy",
+      "dtypeStr": "f",
+      "name": "x_elk_madelung_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Madelung energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_madelung_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Exchange energy",
+      "dtypeStr": "f",
+      "name": "x_elk_exchange_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Exchange energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_exchange_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Correlation energy",
+      "dtypeStr": "f",
+      "name": "x_elk_correlation_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Correlation energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_correlation_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Electron entropic energy",
+      "dtypeStr": "f",
+      "name": "x_elk_electron_entropic_energy_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Electron entropic energy final",
+      "dtypeStr": "f",
+      "name": "x_elk_electron_entropic_energy",
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "DOS at Fermi energy",
+      "dtypeStr": "f",
+      "name": "x_elk_dos_fermi_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J^-1"
+    }, {
+      "description": "DOS at Fermi energy",
+      "dtypeStr": "f",
+      "name": "x_elk_dos_fermi",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ],
+      "units": "J^-1"
+    }, {
+      "description": "Estimated fundamental direct gap",
+      "dtypeStr": "f",
+      "name": "x_elk_direct_gap_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Estimated fundamental direct gap final",
+      "dtypeStr": "f",
+      "name": "x_elk_direct_gap",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Estimated fundamental indirect gap",
+      "dtypeStr": "f",
+      "name": "x_elk_indirect_gap_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Estimated fundamental indirect gap final",
+      "dtypeStr": "f",
+      "name": "x_elk_indirect_gap",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }]
+}

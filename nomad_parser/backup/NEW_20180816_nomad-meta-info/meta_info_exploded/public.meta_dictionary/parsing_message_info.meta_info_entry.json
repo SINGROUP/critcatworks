@@ -1,0 +1,9 @@
+{
+  "meta_name":"parsing_message_info",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "This field is used for info messages of the parsing ",
+    "program."],
+  "meta_abstract_types":[
+    "parsing_message_debug"]
+}

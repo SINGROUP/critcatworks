@@ -1,0 +1,15 @@
+{
+  "meta_name":"atom_in_molecule_to_atom_type_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Reference to the atom type of each atom in the ",
+    "molecule."],
+  "meta_parent_section":"section_molecule_type",
+  "meta_abstract_types":[
+    "settings_atom_in_molecule"],
+  "meta_data_type":"reference",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms_in_molecule"
+  }],
+  "meta_referenced_section":"section_atom_type"
+}

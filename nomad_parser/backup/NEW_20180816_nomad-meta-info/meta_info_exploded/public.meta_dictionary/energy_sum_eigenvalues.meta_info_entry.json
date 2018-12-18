@@ -1,0 +1,12 @@
+{
+  "meta_name":"energy_sum_eigenvalues",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Sum of the eigenvalues of the Hamiltonian matrix defined by ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

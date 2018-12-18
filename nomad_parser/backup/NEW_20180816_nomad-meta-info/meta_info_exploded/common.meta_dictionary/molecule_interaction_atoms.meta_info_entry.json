@@ -1,0 +1,17 @@
+{
+  "meta_name":"molecule_interaction_atoms",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) List of the indexes involved in this bonded interaction within a ",
+    "molecule. The first atom has index 1, the last index is ",
+    "number_of_atoms_in_."],
+  "meta_parent_section":"section_molecule_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_molecule_interactions"
+  },{
+    "meta_dimension_symbolic":"number_of_atoms_per_molecule_interaction"
+  }]
+}

@@ -1,0 +1,13 @@
+{
+  "meta_name":"molecule_interaction_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Short and unique name for this interaction type, used for bonded ",
+    "interactions for atoms in a molecule. Valid names are described in the ",
+    "[interaction\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-i",
+    "nfo/wikis/metainfo/interaction-kind)."],
+  "meta_parent_section":"section_molecule_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_data_type":"string"
+}

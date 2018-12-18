@@ -1,0 +1,44 @@
+ *******************************************************************************
+ *                            RESTART INFORMATION                              *
+ *******************************************************************************
+ *                                                                             *
+ *    RESTART FILE NAME: ./md_trajectory-restart-1.restart                     *
+ *                                                                             *
+ * RESTARTED QUANTITIES:                                                       *
+ *                       CELL                                                  *
+ *                       COORDINATES                                           *
+ *                       RANDOM NUMBER GENERATOR                               *
+ *                       VELOCITIES                                            *
+ *                       MD COUNTERS                                           *
+ *                       MD AVERAGES                                           *
+ *                       BAROSTAT                                              *
+ *                       THERMOSTAT OF BAROSTAT                                *
+ *                       PARTICLE THERMOSTAT                                   *
+ *                       REAL TIME PROPAGATION                                 *
+ *                       PINT BEAD POSITIONS                                   *
+ *                       PINT BEAD VELOCITIES                                  *
+ *                       PINT NOSE THERMOSTAT                                  *
+ *                       PINT GLE THERMOSTAT                                   *
+ *                       HELIUM BEAD POSITIONS                                 *
+ *                       HELIUM PERMUTATION STATE                              *
+ *                       HELIUM FORCES ON SOLUTE                               *
+ *                       HELIUM RNG STATE                                      *
+ *******************************************************************************
+
+ DBCSR| Multiplication driver                                               BLAS
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Randmat seed                                                    12341313
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use MPI memory allocation                                              T
+ DBCSR| Use RMA algorithm                                                      F
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2017-06-22 08:42:05.697
+ ***** ** ***  *** **   PROGRAM STARTED ON                         mpp2r04c06s08
+ **    ****   ******    PROGRAM STARTED BY                              root ;-)
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 19346
+  **** **  *******  **  PROGRAM STARTED IN /naslx/projects/t3881/ga68gak2/SoS17/

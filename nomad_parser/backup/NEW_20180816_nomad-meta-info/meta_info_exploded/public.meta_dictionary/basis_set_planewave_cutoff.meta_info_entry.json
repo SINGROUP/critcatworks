@@ -1,0 +1,15 @@
+{
+  "meta_name":"basis_set_planewave_cutoff",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Spherical cutoff  in reciprocal space for a plane-wave basis set. It is the ",
+    "energy of the highest plan-ewave ($\\frac{\\hbar^2|k+G|^2}{2m_e}$) included in ",
+    "the basis set. Note that normally this basis set is used for the wavefunctions, ",
+    "and the density would have 4 times the cutoff, but this actually depends on the ",
+    "use of the basis set by the method."],
+  "meta_parent_section":"section_basis_set_cell_dependent",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

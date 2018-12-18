@@ -1,0 +1,20 @@
+{
+  "meta_name":"xc_functional",
+  "meta_type":"type-value",
+  "meta_description":[
+    "This value describes a DFT exchange-correlation (XC) functional used for ",
+    "evaluating the energy value stored in energy_xc_functional and related ",
+    "quantities (e.g., forces).\n",
+    "\n",
+    "It is a unique short name obtained by combining the data stored in ",
+    "section_xc_functionals, more specifically by combining different ",
+    "xc_functional_name as described in the [xc_functional wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/XC-fu",
+    "nctional)."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_physical_parameter",
+    "settings_xc_functional",
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

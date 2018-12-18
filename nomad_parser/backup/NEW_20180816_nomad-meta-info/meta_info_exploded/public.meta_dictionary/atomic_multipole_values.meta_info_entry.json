@@ -1,0 +1,15 @@
+{
+  "meta_name":"atomic_multipole_values",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of the multipoles (including the monopole/charge for $l$ = 0, the dipole ",
+    "for $l$ = 1, etc.) for each atom, calculated as described in ",
+    "atomic_multipole_kind."],
+  "meta_parent_section":"section_atomic_multipoles",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_lm_atomic_multipoles"
+  },{
+    "meta_dimension_symbolic":"number_of_atoms"
+  }]
+}

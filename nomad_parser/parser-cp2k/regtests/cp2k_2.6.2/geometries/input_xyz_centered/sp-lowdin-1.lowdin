@@ -1,0 +1,9 @@
+
+
+ LOWDIN POPULATION ANALYSIS
+
+ #  Atom  Element  Kind  Atomic population (alpha,beta) Net charge  Spin moment
+       1     H        1         0.500000     0.500000     0.000000     0.000000
+       2     H        1         0.500000     0.500000    -0.000000     0.000000
+ # Total charge and spin        1.000000     1.000000    -0.000000     0.000000
+

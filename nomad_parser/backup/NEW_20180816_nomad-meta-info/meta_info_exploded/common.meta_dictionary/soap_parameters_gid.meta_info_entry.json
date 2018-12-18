@@ -1,0 +1,11 @@
+{
+  "meta_name":"soap_parameters_gid",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Unique checksum of all the soap parameters (all those with abstract type ",
+    "soap_parameter) with prefix psoap"],
+  "meta_parent_section":"section_soap",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

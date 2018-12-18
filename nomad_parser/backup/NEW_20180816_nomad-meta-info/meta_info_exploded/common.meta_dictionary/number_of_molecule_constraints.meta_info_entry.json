@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_molecule_constraints",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "(deprecated) Number of constraints of this ",
+    "type."],
+  "meta_parent_section":"section_molecule_constraint",
+  "meta_abstract_types":[
+    "settings_constraint"]
+}

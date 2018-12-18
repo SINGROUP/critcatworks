@@ -1,0 +1,11 @@
+{
+  "meta_name":"restricted_uri_issue_authority",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The issue authority is the restriction owner for the uri or file. This can be ",
+    "license owner such as 'VASP' or 'AMBER', 'NOMAD', or the author of the uri. For ",
+    "example the repository user name of the author."],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

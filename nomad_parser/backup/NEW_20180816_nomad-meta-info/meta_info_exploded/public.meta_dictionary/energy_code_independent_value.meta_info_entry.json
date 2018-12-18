@@ -1,0 +1,15 @@
+{
+  "meta_name":"energy_code_independent_value",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of the code-independent total energy (obtained by subtracting a reference ",
+    "energy calculated with the same code). This value is created to be comparable ",
+    "among different codes and numerical settings. Details can be found on the ",
+    "[energy_code_independent wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-",
+    "meta-info/wikis/metainfo/energy-code-independent)."],
+  "meta_parent_section":"section_energy_code_independent",
+  "meta_abstract_types":[
+    "energy_total_potential"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

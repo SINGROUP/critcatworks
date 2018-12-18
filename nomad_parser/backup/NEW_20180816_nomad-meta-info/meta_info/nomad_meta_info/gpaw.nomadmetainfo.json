@@ -1,0 +1,112 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"gpaw",
+  "description":"meta info used by the GPAW parser, all names are expected to start with x_gpaw_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_gpaw_atomic_density_matrices",
+    "description":"atomic density matrices in the PAW formalism",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","x_gpaw_number_of_packed_ap_elements"]
+  },{
+    "name":"x_gpaw_density_convergence_criterion",
+    "description":"Density convergence criteria for break the SCF cycle",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gpaw_fix_density",
+    "description":"Was it a calculation with a fixed density?",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_gpaw_fix_magnetic_moment",
+    "description":"Was the magnetic moment fixed? If yes the x_gpaw_fixed_sZ is set",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_gpaw_fixed_spin_sz",
+    "description":"Target value (fixed) of the z projection of the spin moment operator $S^z$ for the converged calculation with the xc_method.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gpaw_magnetic_moments",
+    "description":"Magnetic moments projected onto atoms. The sum gives the total magnetic moment",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_gpaw_maximum_angular_momentum",
+    "description":"Maxium angular momentum (L) for projectors",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gpaw_mix_beta",
+    "description":"Damping parameter in the density mixer",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gpaw_mix_class",
+    "description":"The density mixer class name (Mixer, MixerSum, MixerDiff)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gpaw_mix_old",
+    "description":"Number of old densities in the density mixer",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gpaw_mix_weight",
+    "description":"Mixing weight in density mixer",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gpaw_number_of_packed_ap_elements",
+    "kindStr":"type_dimension",
+    "description":"number of PAW projector matrix elements in packed format",
+    "superNames":["x_gpaw_section_paw_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gpaw_number_of_projectors",
+    "kindStr":"type_dimension",
+    "description":"number of PAW projectors",
+    "superNames":["x_gpaw_section_paw_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gpaw_projections_imag",
+    "description":"projections in the PAW formalism (imaginary part)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_eigenvalues_kpoints","number_of_eigenvalues","x_gpaw_number_of_projectors"]
+  },{
+    "name":"x_gpaw_projections_real",
+    "description":"projections in the PAW formalism (real part)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_eigenvalues_kpoints","number_of_eigenvalues","x_gpaw_number_of_projectors"]
+  },{
+    "name":"x_gpaw_section_paw_method",
+    "kindStr":"type_section",
+    "description":"GPAW PAW specific information",
+    "superNames":["section_method"]
+  },{
+    "name":"x_gpaw_spin_sz",
+    "description":"Value of the z projection of the spin moment operator $S^z$ for the converged calculation with the xc_method.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gpaw_symmetry_time_reversal_switch",
+    "description":"Was time reserval symmetry used",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_gpaw_xc_functional",
+    "description":"The XC functional name used in gpaw as input",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  }]
+}

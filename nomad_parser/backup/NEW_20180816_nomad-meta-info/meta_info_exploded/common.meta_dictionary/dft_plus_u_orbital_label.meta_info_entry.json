@@ -1,0 +1,9 @@
+{
+  "meta_name":"dft_plus_u_orbital_label",
+  "meta_type":"type-value",
+  "meta_description":[
+    "DFT+U-orbital setting: orbital label (normally (n,l)), notation: '3d', '4f', ",
+    "..."],
+  "meta_parent_section":"section_dft_plus_u_orbital",
+  "meta_data_type":"string"
+}

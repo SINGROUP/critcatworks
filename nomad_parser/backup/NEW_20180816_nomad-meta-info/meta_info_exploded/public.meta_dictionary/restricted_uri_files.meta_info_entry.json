@@ -1,0 +1,14 @@
+{
+  "meta_name":"restricted_uri_files",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The list of files that are subject to restriction. The files are given with ",
+    "their relative paths to the main_file of ",
+    "parsing."],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"string",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_restricted_uri_files"
+  }],
+  "meta_repeats":true
+}

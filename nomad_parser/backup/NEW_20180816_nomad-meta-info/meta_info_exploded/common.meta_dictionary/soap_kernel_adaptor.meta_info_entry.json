@@ -1,0 +1,13 @@
+{
+  "meta_name":"soap_kernel_adaptor",
+  "meta_type":"type-value",
+  "meta_description":"kernel adaptor",
+  "meta_parent_section":"section_soap",
+  "meta_abstract_types":[
+    "soap_parameter"],
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"specific-unique-dmap",
+    "meta_enum_description":"..."
+  }]
+}

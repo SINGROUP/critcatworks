@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_normalized_k_points_per_segment",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of $k$ points in the segment of the normalized band structure ",
+    "(see section_k_band_segment_normalized)."],
+  "meta_parent_section":"section_k_band_segment_normalized"
+}

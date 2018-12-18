@@ -1,0 +1,17 @@
+{
+  "meta_name":"dos_values",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Values (number of states for a given energy, the set of discrete energy values ",
+    "is given in dos_energies) of density (electronic-energy or vibrational-energy) ",
+    "of states. This refers to the simulation cell, i.e. integrating over all ",
+    "energies will give the number of electrons in the simulation ",
+    "cell."],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_dos_values"
+  }]
+}

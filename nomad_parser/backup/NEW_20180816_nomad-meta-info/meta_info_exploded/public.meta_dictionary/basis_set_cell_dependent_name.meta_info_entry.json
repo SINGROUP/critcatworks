@@ -1,0 +1,14 @@
+{
+  "meta_name":"basis_set_cell_dependent_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A label identifying the cell-dependent basis set (i.e., non atom centered such ",
+    "as plane-waves). Allowed values are listed in the ",
+    "[basis_set_cell_dependent_name wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/",
+    "nomad-meta-info/wikis/metainfo/basis-set-cell-dependent-name)."],
+  "meta_parent_section":"section_basis_set_cell_dependent",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"string",
+  "repeat":false
+}

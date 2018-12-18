@@ -1,0 +1,7 @@
+{
+  "meta_name":"meta_query_expansion",
+  "meta_type":"type-value",
+  "meta_description":"The query this entry is equivalent to.",
+  "meta_parent_section":"meta_query_enum",
+  "meta_data_type":"string"
+}

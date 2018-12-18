@@ -1,0 +1,9 @@
+{
+  "meta_name":"meta_query_regex",
+  "meta_type":"type-value",
+  "meta_description":[
+    "a regular expression to use instead of the meta_query_values to identify this ",
+    "entry"],
+  "meta_parent_section":"meta_query_enum",
+  "meta_data_type":"string"
+}

@@ -1,0 +1,12 @@
+{
+  "meta_name":"energy_hartree_fock_x",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Converged exact-exchange (Hartree-Fock) energy. Defined consistently with ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_type_x"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

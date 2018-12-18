@@ -1,0 +1,7 @@
+{
+  "meta_name":"meta_enum_value",
+  "meta_type":"type-value",
+  "meta_description":"One of the possible values of an enumeration.",
+  "meta_parent_section":"meta_enum",
+  "meta_data_type":"string"
+}

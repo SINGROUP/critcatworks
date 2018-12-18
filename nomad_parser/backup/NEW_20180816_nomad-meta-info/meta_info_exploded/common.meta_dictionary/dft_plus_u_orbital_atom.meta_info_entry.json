@@ -1,0 +1,9 @@
+{
+  "meta_name":"dft_plus_u_orbital_atom",
+  "meta_type":"type-value",
+  "meta_description":[
+    "DFT+U-orbital setting: atom index (references index of ",
+    "atom_labels/atom_positions)"],
+  "meta_parent_section":"section_dft_plus_u_orbital",
+  "meta_data_type":"int"
+}

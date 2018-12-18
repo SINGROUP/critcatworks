@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_method_basis_set",
+  "meta_type":"type-section",
+  "meta_description":[
+    "This section contains the definition of the basis sets that are defined ",
+    "independently of the atomic configuration."],
+  "meta_parent_section":"section_method",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

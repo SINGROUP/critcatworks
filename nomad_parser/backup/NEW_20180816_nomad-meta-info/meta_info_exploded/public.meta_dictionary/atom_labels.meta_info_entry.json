@@ -1,0 +1,21 @@
+{
+  "meta_name":"atom_labels",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Labels of the atoms. These strings identify the atom kind and conventionally ",
+    "start with the symbol of the atomic species, possibly followed by the atomic ",
+    "number. The same atomic species can be labeled with more than one atom_labels ",
+    "in order to distinguish, e.g., atoms of the same species assigned to different ",
+    "atom-centered basis sets or pseudo-potentials, or simply atoms in different ",
+    "locations in the structure (e.g., bulk and surface). These labels can also be ",
+    "used for *particles* that do not correspond to physical atoms (e.g., ghost ",
+    "atoms in some codes using atom-centered basis sets). This metadata defines a ",
+    "configuration and is therefore required."],
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "configuration_core"],
+  "meta_data_type":"string",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms"
+  }]
+}

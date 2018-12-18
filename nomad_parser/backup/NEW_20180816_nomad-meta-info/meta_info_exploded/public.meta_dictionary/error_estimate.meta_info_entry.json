@@ -1,0 +1,9 @@
+{
+  "meta_name":"error_estimate",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "An estimate of the error on the converged (final) ",
+    "value."],
+  "meta_abstract_types":[
+    "error_estimate_contribution"]
+}

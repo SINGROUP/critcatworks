@@ -1,0 +1,9 @@
+{
+  "meta_name":"springer_id",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Id of the classified material according to Springer ",
+    "Materials"],
+  "meta_parent_section":"section_springer_id",
+  "meta_data_type":"string"
+}

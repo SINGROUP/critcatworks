@@ -1,0 +1,9 @@
+{
+  "meta_name":"section_processor_info",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section with information about a processor that generated or added information ",
+    "to the current calculation."],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

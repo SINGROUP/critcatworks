@@ -1,0 +1,11 @@
+{
+  "meta_name":"section_springer_material",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Every section_springer_material contains results of classification of materials ",
+    "with the same formula according to Springer Materials - it contains ",
+    "section_springer_classsification, section_springer_compound, ",
+    "section_springer_id, section_springer_references"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

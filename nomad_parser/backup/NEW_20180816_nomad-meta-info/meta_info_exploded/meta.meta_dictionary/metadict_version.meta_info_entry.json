@@ -1,0 +1,9 @@
+{
+  "meta_name":"metadict_version",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A string containing the version of the dictionary using [Semantic Versioning ",
+    "2.0.0](http://semver.org/spec/v2.0.0.html)"],
+  "meta_parent_section":"meta_dictionary",
+  "meta_data_type":"string"
+}

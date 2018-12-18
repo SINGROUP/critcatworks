@@ -1,0 +1,11 @@
+{
+  "meta_name":"program_compilation_host",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the host on which the program was ",
+    "compiled."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "program_info"],
+  "meta_data_type":"string"
+}

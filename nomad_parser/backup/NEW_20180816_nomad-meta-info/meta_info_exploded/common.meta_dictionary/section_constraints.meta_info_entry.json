@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_constraints",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section describing a constraint between arbitrary ",
+    "atoms."],
+  "meta_parent_section":"section_run",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

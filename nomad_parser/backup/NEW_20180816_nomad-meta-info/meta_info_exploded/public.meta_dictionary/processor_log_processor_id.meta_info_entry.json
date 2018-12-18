@@ -1,0 +1,9 @@
+{
+  "meta_name":"processor_log_processor_id",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The processor id of the processor creating this ",
+    "log"],
+  "meta_parent_section":"section_processor_log",
+  "meta_data_type":"string"
+}

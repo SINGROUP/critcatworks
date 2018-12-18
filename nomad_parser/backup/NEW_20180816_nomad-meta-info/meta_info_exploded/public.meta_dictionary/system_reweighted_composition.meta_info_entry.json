@@ -1,0 +1,12 @@
+{
+  "meta_name":"system_reweighted_composition",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Composition, i.e. cumulative chemical with atoms ordered by decreasing atomic ",
+    "number Z reweighted so that the sum is close to 100, and values are rounded up, ",
+    "and are stable (i.e. it is a fixed point)."],
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

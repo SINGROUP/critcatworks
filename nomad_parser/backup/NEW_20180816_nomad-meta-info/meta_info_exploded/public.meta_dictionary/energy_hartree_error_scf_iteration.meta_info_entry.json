@@ -1,0 +1,15 @@
+{
+  "meta_name":"energy_hartree_error_scf_iteration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Error in the Hartree (electrostatic) potential energy during each ",
+    "self-consistent field (SCF) iteration. Defined consistently with ",
+    "xc_method."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "energy_value",
+    "error_estimate_contribution",
+    "scf_info"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

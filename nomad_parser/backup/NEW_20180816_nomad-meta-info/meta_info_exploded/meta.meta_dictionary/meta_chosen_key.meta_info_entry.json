@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_chosen_key",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The meta_name of a *type-value* (that should be with meta_data_type = *string*) ",
+    "that can be used as main unique key for the sections contained in a ",
+    "meta_parent_section."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string"
+}

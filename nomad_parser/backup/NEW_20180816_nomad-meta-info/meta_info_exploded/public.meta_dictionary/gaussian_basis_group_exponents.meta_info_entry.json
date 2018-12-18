@@ -1,0 +1,16 @@
+{
+  "meta_name":"gaussian_basis_group_exponents",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Exponents $\\alpha_j$ of the Gaussian functions defining this basis set ",
+    "$exp(-\\alpha_j r^2)$. One should be careful about the units of the ",
+    "coefficients."],
+  "meta_parent_section":"section_gaussian_basis_group",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_gaussian_basis_group_exponents"
+  }],
+  "meta_units":"1/m^2"
+}

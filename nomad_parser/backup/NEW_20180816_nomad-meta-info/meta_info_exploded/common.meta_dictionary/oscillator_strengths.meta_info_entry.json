@@ -1,0 +1,10 @@
+{
+  "meta_name":"oscillator_strengths",
+  "meta_type":"type-value",
+  "meta_description":"Excited states oscillator strengths.",
+  "meta_parent_section":"section_excited_states",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_excited_states"
+  }]
+}

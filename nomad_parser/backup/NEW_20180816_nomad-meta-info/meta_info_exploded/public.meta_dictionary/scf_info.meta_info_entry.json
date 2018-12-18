@@ -1,0 +1,9 @@
+{
+  "meta_name":"scf_info",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains information on the self-consistent field (SCF) procedure, i.e. the ",
+    "number of SCF iterations (number_of_scf_iterations) or a section_scf_iteration ",
+    "section with detailed information on the SCF procedure of specified ",
+    "quantities."]
+}

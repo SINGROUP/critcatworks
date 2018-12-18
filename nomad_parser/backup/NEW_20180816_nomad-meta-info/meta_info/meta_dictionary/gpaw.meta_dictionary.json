@@ -1,0 +1,166 @@
+{
+  "metadict_name":"gpaw",
+  "metadict_description":[
+    "meta info used by the GPAW parser, all names are expected to start with ",
+    "x_gpaw_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_gpaw_atomic_density_matrices",
+    "meta_type":"type-value",
+    "meta_description":"atomic density matrices in the PAW formalism",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"x_gpaw_number_of_packed_ap_elements"
+    }]
+  },{
+    "meta_name":"x_gpaw_density_convergence_criterion",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Density convergence criteria for break the SCF ",
+      "cycle"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gpaw_fix_density",
+    "meta_type":"type-value",
+    "meta_description":"Was it a calculation with a fixed density?",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_gpaw_fix_magnetic_moment",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Was the magnetic moment fixed? If yes the x_gpaw_fixed_sZ is ",
+      "set"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_gpaw_fixed_spin_sz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Target value (fixed) of the z projection of the spin moment operator $S^z$ for ",
+      "the converged calculation with the xc_method."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gpaw_magnetic_moments",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Magnetic moments projected onto atoms. The sum gives the total magnetic ",
+      "moment"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_gpaw_maximum_angular_momentum",
+    "meta_type":"type-value",
+    "meta_description":"Maxium angular momentum (L) for projectors",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gpaw_mix_beta",
+    "meta_type":"type-value",
+    "meta_description":"Damping parameter in the density mixer",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gpaw_mix_class",
+    "meta_type":"type-value",
+    "meta_description":[
+      "The density mixer class name (Mixer, MixerSum, ",
+      "MixerDiff)"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gpaw_mix_old",
+    "meta_type":"type-value",
+    "meta_description":"Number of old densities in the density mixer",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gpaw_mix_weight",
+    "meta_type":"type-value",
+    "meta_description":"Mixing weight in density mixer",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gpaw_number_of_packed_ap_elements",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "number of PAW projector matrix elements in packed ",
+      "format"],
+    "meta_parent_section":"x_gpaw_section_paw_method"
+  },{
+    "meta_name":"x_gpaw_number_of_projectors",
+    "meta_type":"type-dimension",
+    "meta_description":"number of PAW projectors",
+    "meta_parent_section":"x_gpaw_section_paw_method"
+  },{
+    "meta_name":"x_gpaw_projections_imag",
+    "meta_type":"type-value",
+    "meta_description":[
+      "projections in the PAW formalism (imaginary ",
+      "part)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues"
+    },{
+      "meta_dimension_symbolic":"x_gpaw_number_of_projectors"
+    }]
+  },{
+    "meta_name":"x_gpaw_projections_real",
+    "meta_type":"type-value",
+    "meta_description":"projections in the PAW formalism (real part)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues"
+    },{
+      "meta_dimension_symbolic":"x_gpaw_number_of_projectors"
+    }]
+  },{
+    "meta_name":"x_gpaw_section_paw_method",
+    "meta_type":"type-section",
+    "meta_description":"GPAW PAW specific information",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gpaw_spin_sz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the z projection of the spin moment operator $S^z$ for the converged ",
+      "calculation with the xc_method."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gpaw_symmetry_time_reversal_switch",
+    "meta_type":"type-value",
+    "meta_description":"Was time reserval symmetry used",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_gpaw_xc_functional",
+    "meta_type":"type-value",
+    "meta_description":"The XC functional name used in gpaw as input",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  }]
+}

@@ -1,0 +1,15 @@
+{
+  "meta_name":"section_energy_van_der_waals",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing the Van der Waals energy value (energy_van_der_waals_value) ",
+    "of type van_der_Waals_kind. This is used when more than one Van der Waals ",
+    "methods are applied in the same *single configuration calculation*, see ",
+    "section_single_configuration_calculation. The main Van der Waals method (the ",
+    "one concurring to energy_current, and used, e.g., for evaluating the forces for ",
+    "a relaxation or dynamics) is given in energy_van_der_waals and is defined in ",
+    "settings_van_der_waals."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,11 @@
+{
+  "meta_name":"section_std_system",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing symmetry information that is specific to the standardized ",
+    "system. The standardized system is defined as given by spglib and the details ",
+    "can be found from https://arxiv.org/abs/1506.01455"],
+  "meta_parent_section":"section_symmetry",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

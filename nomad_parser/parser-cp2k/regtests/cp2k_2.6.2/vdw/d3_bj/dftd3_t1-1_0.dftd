@@ -1,0 +1,11 @@
+
+  Pair potential vdW calculation
+  Dispersion potential type: DFT-D3(BJ)
+  Scaling parameter (s6)    1.0000000000000000     
+  Scaling parameter (s8)   0.78749999999999998     
+  BJ Damping parameter (a1)   0.42890000000000000     
+  BJ Damping parameter (a2)    4.4406999999999996     
+  Cutoff coordination numbers   9.9999999999999995E-007
+  Total vdW energy [au]     :  -3.5512378384574906E-003
+  Total vdW energy [kcal]   :  -2.2284353692865868     
+

@@ -1,0 +1,10 @@
+{
+  "meta_name":"shortened_meta_info",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A meta info whose corresponding data has been ",
+    "shortened"],
+  "meta_parent_section":"response_context",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

@@ -1,0 +1,17 @@
+{
+  "meta_name":"gw_self_energy_x",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Diagonal matrix elements of the exchange ",
+    "self-energy"],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+  },{
+    "meta_dimension_symbolic":"number_of_eigenvalues"
+  }],
+  "meta_units":"J"
+}

@@ -1,0 +1,8 @@
+{
+  "meta_name":"section_springer_id",
+  "meta_type":"type-section",
+  "meta_description":"Identifiers used by Springer Materials",
+  "meta_parent_section":"section_springer_material",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,13 @@
+{
+  "meta_name":"atom_concentrations",
+  "meta_type":"type-value",
+  "meta_description":[
+    "concentration of the atom species in a variable composition, by default it ",
+    "should be considered an array of ones. Summing these should give the ",
+    "number_of_sites"],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms"
+  }]
+}

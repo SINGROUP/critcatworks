@@ -1,0 +1,33 @@
+{
+  "meta_name":"meta_range_kind",
+  "meta_type":"type-value",
+  "meta_description":"Defines the quantity the range is about.",
+  "meta_parent_section":"meta_range_expected",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"value",
+    "meta_enum_description":[
+      "The range is for the scalar value (or every component for ",
+      "arrays)"]
+  },{
+    "meta_enum_value":"abs-value",
+    "meta_enum_description":[
+      "The range is for the absolute value of the scalar value (or every component for ",
+      "arrays)"]
+  },{
+    "meta_enum_value":"norm2",
+    "meta_enum_description":[
+      "The range is for the euclidean norm of the ",
+      "value"]
+  },{
+    "meta_enum_value":"utf8-length",
+    "meta_enum_description":[
+      "The length of the string value using utf-8 ",
+      "encoding"]
+  },{
+    "meta_enum_value":"repetitions",
+    "meta_enum_description":[
+      "The number of repetitions for a repeating ",
+      "value"]
+  }]
+}

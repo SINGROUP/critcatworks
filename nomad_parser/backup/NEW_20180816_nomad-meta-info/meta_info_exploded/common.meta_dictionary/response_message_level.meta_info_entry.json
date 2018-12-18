@@ -1,0 +1,9 @@
+{
+  "meta_name":"response_message_level",
+  "meta_type":"type-value",
+  "meta_description":[
+    "level of the message: 0 fatal, 1 error, 2 warning, 3 ",
+    "debug"],
+  "meta_parent_section":"section_response_message",
+  "meta_data_type":"int"
+}

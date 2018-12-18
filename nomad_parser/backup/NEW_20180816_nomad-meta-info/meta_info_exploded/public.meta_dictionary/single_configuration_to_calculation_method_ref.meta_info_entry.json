@@ -1,0 +1,10 @@
+{
+  "meta_name":"single_configuration_to_calculation_method_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Reference to the method used for the calculation in ",
+    "section_single_configuration_calculation."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_method"
+}

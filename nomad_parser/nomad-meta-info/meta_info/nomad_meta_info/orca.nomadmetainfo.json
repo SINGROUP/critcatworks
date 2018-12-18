@@ -1,0 +1,1880 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "Metainfo for the values parsed from a orca file, should start with x_orca_.",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_1_elect_energy_change",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_angular_grid_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_angular_grid",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_atom_labels_geo_opt",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_final_geometry"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_atom_labels",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_atom_positions"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_atom_nb_mroc",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_atom_nb",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_atom_orbital_mroc",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_atom_positions_x_geo_opt",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_final_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_atom_positions_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_atom_positions"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_atom_positions_y_geo_opt",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_final_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_atom_positions_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_atom_positions"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_atom_positions_z_geo_opt",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_final_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_atom_positions_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_orca_atom_positions"
+      ],
+      "units": "m"
+    }, {
+      "description": "positions of an atom",
+      "kindStr": "type_section",
+      "name": "x_orca_atom_positions",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_atom_species_mroc",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_atom_species",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_atomic_orbital_integral_source",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_auxiliary_basis_set_contracted",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_auxiliary_basis_set",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_avg_nb_grid_pts_per_atom_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_avg_nb_grid_pts_per_atom",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_avg_nb_points_per_batch_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_avg_nb_points_per_batch",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_basis_fn_cutoff_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_basis_fn_cutoff",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_basis_fn_evaluation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_basis_set_atom_labels",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_basis_set_contracted",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_basis_set",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_beckes_beta_param",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_Brueckner_orbitals_calc_on_off",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsd_correlation_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsd_final_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsd_t_final_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsd_total_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsdt_aaa_triples_contribution",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsdt_aab_triples_contribution",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsdt_aba_triples_contribution",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsdt_bbb_triples_contribution",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsdt_final_corr_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ccsdt_total_triples_correction",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ci_correl_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ci_deltaE_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ci_half_s_and_s_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_ci_iteration_nb",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ci_iteration_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ci_residual_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_ci_total_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_convergence_check_mode",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_convergence_tol_max_residuum",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_coords_choice_name",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_coords_choice",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_correl_functional",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_correlation_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_coulomb_formation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_coulomb_transformation_dimension_basis",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_coulomb_transformation_type",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_density_evaluation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_density_matrix_formation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_diagonalization",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_diis_solution",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_elec_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_energy_change_tol_value",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_energy_change_tolerance",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_energy_change_tol",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_exchange_correlation_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_exchange_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_exchange_functional",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_excitation_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_excited_states"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_f12_correction_on_off",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "final optimized positions of an atom",
+      "kindStr": "type_section",
+      "name": "x_orca_final_geometry",
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_final_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_fock_matrix_formation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_frozen_core_treatment",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_geo_opt_cycle",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_gral_integ_accuracy_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_gral_integ_accuracy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_grid_generation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_grid_pruning_method_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_grid_pruning_method",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_hf_method",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_hf_type",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_highest_angular_moment_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_highest_angular_moment",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_initial_guess",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_initial_hessian_name",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_initial_hessian",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_integr_weight_cutoff_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_integr_weight_cutoff",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_integral_package_used",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_integral_transformation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_iteration_nb",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_K_C_formation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_kinetc_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_last_energy_change_tolerance",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_last_energy_change",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_last_max_density_change",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_last_max_density_tolerance",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_last_rms_density_change",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_last_rms_density_tolerance",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_lda_part_of_gga_corr",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_level_shift_amplitude_update",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_max_displacement_tol_value",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_max_displacement_tol",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_max_gradient_tol_value",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_max_gradient_tol",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_maximum_contraction_depth_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_maximum_contraction_depth",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_mp2_aux_basis_dimension",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_mp2_basis_dimension",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_corr_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_energy_spin_aa",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_energy_spin_ab",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_energy_spin_bb",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_initial_guess",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mp2_total_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mulliken_atom_charge",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mulliken_partial_orbital_charge_mroc",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_mulliken_total_charge",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_dos"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_multiplicity",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_alpha_pairs_included",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_beta_pairs_included",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_nb_elect_alpha_channel",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_nb_elect_beta_channel",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_nb_elect_total",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_grid_pts_after_initial_pruning_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_grid_pts_after_initial_pruning",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_grid_pts_after_weights_screening_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_grid_pts_after_weights_screening",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_internal_alpha_mol_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_internal_beta_mol_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_atomic_orbitals",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_contracted_basis_functions_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_contracted_basis_functions",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_contracted_shells_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_contracted_shells",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_correlated_electrons",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_electrons",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_primitive_gaussian_functions_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_primitive_gaussian_functions",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_primitive_gaussian_shells_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_of_primitive_gaussian_shells",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_primitive_gaussian_shells_aux",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_nb_primitive_gaussian_shells",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_basis_set"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_nelectrons",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_nuc_repulsion",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_nuclear_repulsion",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_one_elec_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_orbital_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_orbital_nb",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_orbital_occupation_nb",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_orbital_opt_on_off",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_orbital_orthonormalization",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_orbital_transformation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_oscillator_strength",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_excited_states"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_pair_cutoff",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_perturbative_triple_excitations_on_off",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_population_analysis",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_potential_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_potential_evaluation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_program_compilation_date",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_program_compilation_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "svn revision of the program",
+      "dtypeStr": "C",
+      "name": "x_orca_program_svn",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_program_version",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_radial_grid_type_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_radial_grid_type",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_reference_wave_function",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_rms_displacement_tol_value",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_rms_displacement_tol",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_rms_gradient_tol_value",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_rms_gradient_tol",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_scalar_relativistic_method",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_scaling_mp2_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "XC functional",
+      "kindStr": "type_section",
+      "name": "x_orca_section_functionals",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_single_excitations_on_off",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_single_norm_half_ss",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_speed_of_light_used",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_split_rj",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_sum_individual_times",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_t1_diagnostic",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_T_and_T_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_total_charge",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_days_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_hours_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_mins_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_nb_batches_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_nb_batches",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_nb_grid_pts_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_nb_grid_pts",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_nb_pairs_included",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_orca_total_secs_time",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_transition_dipole_moment_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_excited_states"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_transition_dipole_moment_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_excited_states"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_transition_dipole_moment_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_excited_states"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_two_elec_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_update_method_name",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_update_method",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_virial_ratio",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_wave_function_correlation_treatment",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_weight_gener_scheme_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_weight_gener_scheme",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_xalpha_param",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_xc_functional_evaluation",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_XC_functional_type",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_orca_xc_integration",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_orca_z_vector_calc_on_off",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }]
+}

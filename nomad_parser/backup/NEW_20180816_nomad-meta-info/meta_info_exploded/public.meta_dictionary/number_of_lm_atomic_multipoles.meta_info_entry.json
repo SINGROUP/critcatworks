@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_lm_atomic_multipoles",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of $l$, $m$ combinations for atomic multipoles ",
+    "atomic_multipole_lm."],
+  "meta_parent_section":"section_atomic_multipoles"
+}

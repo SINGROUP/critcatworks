@@ -1,0 +1,9 @@
+{
+  "meta_name":"gw_mixed_basis_tolerance",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Eigenvalue threshold below which the egenvectors are discarded in the ",
+    "construction of the radial basis set."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"float"
+}

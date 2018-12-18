@@ -1,0 +1,20 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "Meta Info that is used in the Nomad Archive",
+  "dependencies": [ {
+      "relativePath": "all.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "number of single_configuration_calculations performed in the calculation",
+      "dtypeStr": "i32",
+      "name": "number_of_single_configurations",
+      "superNames": [
+        "section_query_auxiliary_data"
+      ]
+    }, {
+      "description": "Additional information that is used to support ElasticSearch queries",
+      "kindStr": "type_section",
+      "name": "section_query_auxiliary_data",
+      "superNames": []
+    }]
+}

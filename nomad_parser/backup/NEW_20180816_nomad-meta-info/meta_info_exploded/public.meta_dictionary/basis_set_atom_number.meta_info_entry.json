@@ -1,0 +1,12 @@
+{
+  "meta_name":"basis_set_atom_number",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Atomic number (i.e., number of protons) of the atom for which this basis set is ",
+    "constructed (0 means unspecified or a pseudo ",
+    "atom)."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"int"
+}

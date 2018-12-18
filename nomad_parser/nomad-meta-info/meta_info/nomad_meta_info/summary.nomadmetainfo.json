@@ -1,0 +1,21 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info describing summary information on one or more calculations",
+  "dependencies": [ {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Main section for the summary information",
+      "kindStr": "type_section",
+      "name": "section_summary",
+      "superNames": []
+    }, {
+      "description": "Uri of the object on which the summary information was collected (if defined)",
+      "dtypeStr": "f",
+      "name": "summary_source_uri",
+      "shape": [],
+      "superNames": [
+        "section_summary"
+      ]
+    }]
+}

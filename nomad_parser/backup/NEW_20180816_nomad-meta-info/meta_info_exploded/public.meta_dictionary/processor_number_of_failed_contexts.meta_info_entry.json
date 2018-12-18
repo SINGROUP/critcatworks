@@ -1,0 +1,9 @@
+{
+  "meta_name":"processor_number_of_failed_contexts",
+  "meta_type":"type-value",
+  "meta_description":[
+    "number of contexts in the current current calculation that had failure for this ",
+    "processor."],
+  "meta_parent_section":"section_processor_info",
+  "meta_data_type":"int64"
+}

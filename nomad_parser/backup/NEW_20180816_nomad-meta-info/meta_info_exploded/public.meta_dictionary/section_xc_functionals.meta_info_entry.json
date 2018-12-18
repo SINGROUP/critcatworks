@@ -1,0 +1,13 @@
+{
+  "meta_name":"section_xc_functionals",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing one of the exchange-correlation (XC) functionals for the ",
+    "present section_method that are combined to form the ",
+    "xc_functional."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_xc_functional"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,17 @@
+{
+  "meta_name":"k_mesh_points",
+  "meta_type":"type-value",
+  "meta_description":[
+    "List of all the k points in the $k$-point mesh. These are the k point used to ",
+    "evaluate energy_total, and are in fractional coordinates (in the basis of the ",
+    "reciprocal-lattice vectors)."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_k_points"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_k_mesh_points"
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

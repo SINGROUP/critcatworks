@@ -1,0 +1,7 @@
+{
+  "meta_name":"settings_atom_in_molecule",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "(deprecated) Parameters of an atom within a ",
+    "molecule."]
+}

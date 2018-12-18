@@ -1,0 +1,9 @@
+{
+  "meta_name":"hall_symbol",
+  "meta_type":"type-value",
+  "meta_description":"The Hall symbol for this system.",
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_total_t0_per_atom",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of the total energy, calculated with the method described in xc_method ",
+    "per atom extrapolated to $T=0$, based on a free-electron gas ",
+    "argument."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_total_potential_per_atom",
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

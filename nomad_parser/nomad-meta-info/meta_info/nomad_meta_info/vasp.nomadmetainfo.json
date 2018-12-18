@@ -1,0 +1,1253 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the Vasp parser, all names are expected to start with x_vasp_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "build date as string",
+      "dtypeStr": "C",
+      "name": "vasp_build_date",
+      "shape": [],
+      "superNames": [
+        "program_info"
+      ]
+    }, {
+      "description": "date of last modification of the source as string",
+      "dtypeStr": "C",
+      "name": "vasp_src_date",
+      "shape": [],
+      "superNames": [
+        "program_info"
+      ]
+    }, {
+      "description": "reference to the atom kinds of each atom",
+      "dtypeStr": "r",
+      "name": "x_vasp_atom_kind_refs",
+      "referencedSections": [
+        "section_method_atom_kind"
+      ],
+      "shape": [
+        "number_of_atoms"
+      ],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "algorithm: Normal (Davidson) | Fast | Very_Fast (RMM-DIIS) | Conjugate | All | Damped | Subrot | Eigenval | None | Nothing | Exact | Diag. Value stored in incar.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incar_ALGO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "mixing amount. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_AMIX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "maximum distance for pair correlation function. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_APACO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "tags for mixing. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_BMIX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "relative energy change error. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_DEPER",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "center of cell for dipol. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_DIPOL",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "fine tuning of diagonalization accuracy (EDIFF/N-BANDS/4). Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_EBREAK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "stopping-criterion for ionic upd. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_EDIFFG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "stopping-criterion for electronic upd. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_EDIFF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "EMAX energy-range for DOSCAR file. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_EMIN,",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "energy cutoff in eV. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_ENCUT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param",
+        "settings_numerical_parameter"
+      ]
+    }, {
+      "description": "Maximum cutoff (normally specified only in POTCAR). Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_ENMAX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "xc-type: 91 Perdew -Wang 91, PE Perdew-Burke-Ernzerhof, RP revised Perdew-Burke-Ernzerhof, AM AM05 (Ref. [49,50], VASP tests see Ref. [51]), PS Perdew-Burke-Ernzerhof revised for solids (PBEsol, see Ref. [52]). Value stored in incar.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incar_GGA",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "algorithm: use only 8 (CG) or 48 (RMM DIIS). Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_IALGO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "ionic relaxation: 0-MD 1-quasi-New 2-CG. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_IBRION",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "charge: 1-file 2-atom 10-const. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_ICHARG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "initial electr wf. : 0-lowe 1-rand. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_INIWAV",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "calculate stress and what to relax. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_ISIF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "part. occupancies: -5 Bloechl -4-tet -1-fermi 0-gaus >0 MP. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_ISMEAR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "spin polarized calculation (2-yes 1-no). Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_ISPIN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "ISTART startjob: 0-new 1-cont 2-samecut. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_ISTART",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "symmetry: 0-nonsym 1-usesym. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_ISYM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "prediction of wf.: 0-non 1-charg 2-wave 3-comb. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_IWAVPR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "outer block. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_KBLOCK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "overlap communcation with calculations. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LASYNC",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "create CHGCAR. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LCHARG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Harris-correction to forces. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LCORR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Switches on the L(S)DA+U approach. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LDAU",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "create ELFCAR. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LELF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "create PROOUT. Value stored in incar.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incar_LORBIT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "if data distribution in real space is done plane wise. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LPLANE",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "non-local projectors in real space. Value stored in incar.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incar_LREAL",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "switch off scaLAPACK. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LSCALAPACK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "switch off LU decomposition. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LSCALU",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Determines whether the total local potential (file LOCPOT ) contains the entire local potential (ionic plus Hartree plus exchange correlation) or the electrostatic contributions only (ionic plus Hartree). Note that in VASP.5.2.12, the default is to write the entire local potential, including the exchange correlation potential. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LVHAR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "create LOCPOT. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LVTOT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "create WAVECAR. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_LWAVE",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "initial magnetic moments. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_MAGMOM",
+      "shape": [
+        "numer_of_magmom"
+      ],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of bands included in the calculation. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NBANDS",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Blocking for some BLAS calls. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NBLK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "inner block. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NBLOCK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "total number of electrons. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_NELECT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "number of non self consistent electronic steps. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NELMDL",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "min nr. of electronic steps. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NELMIN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "max nr. of electronic steps. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NELM",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the charges along the first lattice vector. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NGXF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the orbitals along the first lattice vector. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NGX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the charges along the second lattice vector. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NGYF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the orbitals along the second lattice vector. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NGY",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the charges along the third lattice vector. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NGZF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the orbitals along the third lattice vector. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NGZ",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "number of slots in pair correlation function. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NPACO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "parallelization over bands. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NPAR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "number of bands are optimized at the same time with RMM-DIIS (IALGO=48). Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NSIM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "number of steps for ionic upd. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NSW",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "fix spin moment to specified value. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NUPDOWN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "verbosity (how much information is written by vasp). Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_NWRITE",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Incar parameters. Value stored in incar.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_vasp_incar_param",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "mass of ions in am. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_POMASS",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "time-step for ion-motion (fs). Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_POTIM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "precision: medium, high or low, normal, accurate. Value stored in incar.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incar_PREC",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "determines how precise the projectors are represented in real space. Value stored in incar.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incar_ROPT",
+      "shape": [
+        "number_of_atom_types"
+      ],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Wigner-Seitz radius for each atom type. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_RWIGS",
+      "shape": [
+        "numer_of_atom_types"
+      ],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "broadening in eV -4-tet -1-fermi 0-gaus. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_SIGMA",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Nose mass-parameter (am). Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_SMASS",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "precision in symmetry routines. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_SYMPREC",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "Name for the system (user given denomination). Value stored in incar.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incar_SYSTEM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "temperature at the start of the run. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_TEBEG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "temperature at the end of the run. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_TEEND",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "trial time step size during steepest descent phase. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_TIME",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "use Vosko, Wilk, Nusair interpolation. Value stored in incar.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incar_VOSKOWN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "fine tuning of diagonalization accuracy (eigenvalues within this thrshold are considered occupied). Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_WEIMIN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "ionic valence. Value stored in incar.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incar_ZVAL",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "algorithm: Normal (Davidson) | Fast | Very_Fast (RMM-DIIS) | Conjugate | All | Damped | Subrot | Eigenval | None | Nothing | Exact | Diag. Value prinded out after evaluating the input.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incarOut_ALGO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "mixing amount. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_AMIX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "maximum distance for pair correlation function. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_APACO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "tags for mixing. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_BMIX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "relative energy change error. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_DEPER",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "center of cell for dipol. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_DIPOL",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "fine tuning of diagonalization accuracy (EDIFF/N-BANDS/4). Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_EBREAK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "stopping-criterion for ionic upd. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_EDIFFG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "stopping-criterion for electronic upd. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_EDIFF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "EMAX energy-range for DOSCAR file. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_EMIN,",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "energy cutoff in eV. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_ENCUT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Maximum cutoff (normally specified only in POTCAR). Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_ENMAX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "xc-type: 91 Perdew -Wang 91, PE Perdew-Burke-Ernzerhof, RP revised Perdew-Burke-Ernzerhof, AM AM05 (Ref. [49,50], VASP tests see Ref. [51]), PS Perdew-Burke-Ernzerhof revised for solids (PBEsol, see Ref. [52]). Value prinded out after evaluating the input.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incarOut_GGA",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "algorithm: use only 8 (CG) or 48 (RMM DIIS). Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_IALGO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "ionic relaxation: 0-MD 1-quasi-New 2-CG. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_IBRION",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "charge: 1-file 2-atom 10-const. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_ICHARG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "initial electr wf. : 0-lowe 1-rand. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_INIWAV",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "calculate stress and what to relax. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_ISIF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "part. occupancies: -5 Bloechl -4-tet -1-fermi 0-gaus >0 MP. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_ISMEAR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "spin polarized calculation (2-yes 1-no). Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_ISPIN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "ISTART startjob: 0-new 1-cont 2-samecut. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_ISTART",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "symmetry: 0-nonsym 1-usesym. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_ISYM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "prediction of wf.: 0-non 1-charg 2-wave 3-comb. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_IWAVPR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "outer block. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_KBLOCK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "overlap communcation with calculations. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LASYNC",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "create CHGCAR. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LCHARG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Harris-correction to forces. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LCORR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Switches on the L(S)DA+U approach. Value printed out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LDAU",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "create ELFCAR. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LELF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "create PROOUT. Value prinded out after evaluating the input.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incarOut_LORBIT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "if data distribution in real space is done plane wise. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LPLANE",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "non-local projectors in real space. Value prinded out after evaluating the input.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incarOut_LREAL",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "switch off scaLAPACK. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LSCALAPACK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "switch off LU decomposition. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LSCALU",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Determines whether the total local potential (file LOCPOT ) contains the entire local potential (ionic plus Hartree plus exchange correlation) or the electrostatic contributions only (ionic plus Hartree). Note that in VASP.5.2.12, the default is to write the entire local potential, including the exchange correlation potential. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LVHAR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "create LOCPOT. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LVTOT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "create WAVECAR. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_LWAVE",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "initial magnetic moments. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_MAGMOM",
+      "shape": [
+        "numer_of_magmom"
+      ],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of bands included in the calculation. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NBANDS",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Blocking for some BLAS calls. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NBLK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "inner block. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NBLOCK",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "total number of electrons. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_NELECT",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "number of non self consistent electronic steps. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NELMDL",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "min nr. of electronic steps. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NELMIN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "max nr. of electronic steps. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NELM",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the charges along the first lattice vector. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NGXF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the orbitals along the first lattice vector. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NGX",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the charges along the second lattice vector. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NGYF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the orbitals along the second lattice vector. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NGY",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the charges along the third lattice vector. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NGZF",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Number of points of the FFT mesh for the orbitals along the third lattice vector. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NGZ",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "number of slots in pair correlation function. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NPACO",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "parallelization over bands. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NPAR",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "number of bands are optimized at the same time with RMM-DIIS (IALGO=48). Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NSIM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "number of steps for ionic upd. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NSW",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "fix spin moment to specified value. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NUPDOWN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "verbosity (how much information is written by vasp). Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_NWRITE",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Incar parameters. Value prinded out after evaluating the input.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_vasp_incarOut_param",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "mass of ions in am. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_POMASS",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "time-step for ion-motion (fs). Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_POTIM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "precision: medium, high or low, normal, accurate. Value prinded out after evaluating the input.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incarOut_PREC",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "determines how precise the projectors are represented in real space. Value prinded out after evaluating the input.",
+      "dtypeStr": "b",
+      "name": "x_vasp_incarOut_ROPT",
+      "shape": [
+        "number_of_atom_types"
+      ],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Wigner-Seitz radius for each atom type. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_RWIGS",
+      "shape": [
+        "numer_of_atom_types"
+      ],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "broadening in eV -4-tet -1-fermi 0-gaus. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_SIGMA",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Nose mass-parameter (am). Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_SMASS",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "precision in symmetry routines. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_SYMPREC",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "Name for the system (user given denomination). Value prinded out after evaluating the input.",
+      "dtypeStr": "C",
+      "name": "x_vasp_incarOut_SYSTEM",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "temperature at the start of the run. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_TEBEG",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "temperature at the end of the run. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_TEEND",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "trial time step size during steepest descent phase. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_TIME",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "use Vosko, Wilk, Nusair interpolation. Value prinded out after evaluating the input.",
+      "dtypeStr": "i",
+      "name": "x_vasp_incarOut_VOSKOWN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "fine tuning of diagonalization accuracy (eigenvalues within this thrshold are considered occupied). Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_WEIMIN",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "ionic valence. Value prinded out after evaluating the input.",
+      "dtypeStr": "f",
+      "name": "x_vasp_incarOut_ZVAL",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incarOut_param"
+      ]
+    }, {
+      "description": "k points generation  method",
+      "dtypeStr": "C",
+      "name": "x_vasp_k_points_generation_method",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param",
+        "settings_k_points"
+      ]
+    }, {
+      "description": "k points",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_vasp_k_points",
+      "shape": [
+        "x_vasp_number_of_k_points"
+      ],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }, {
+      "description": "number of magnetic moments, number_of_atoms for ISPIN = 2, 3*number of atoms for non-collinear magnetic systems",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_vasp_numer_of_magmom",
+      "shape": [],
+      "superNames": [
+        "x_vasp_incar_param"
+      ]
+    }]
+}

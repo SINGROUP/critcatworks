@@ -1,0 +1,12 @@
+{
+  "meta_name":"section_system",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Every section_system contains all needed properties required to describe the ",
+    "simulated physical system, e.g. the given atomic configuration, the definition ",
+    "of periodic cell (if present), the external potentials and other ",
+    "parameters."],
+  "meta_parent_section":"section_run",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

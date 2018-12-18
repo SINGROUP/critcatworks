@@ -1,0 +1,8 @@
+{
+  "meta_name":"section_dft_plus_u_orbital",
+  "meta_type":"type-section",
+  "meta_description":"Section for DFT+U-settings of a single orbital",
+  "meta_parent_section":"section_method",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

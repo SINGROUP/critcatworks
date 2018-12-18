@@ -1,0 +1,13 @@
+{
+  "meta_name":"atom_projected_dos_energies",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Array containing the set of discrete energy values for the atom-projected ",
+    "density (electronic-energy) of states (DOS)."],
+  "meta_parent_section":"section_atom_projected_dos",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atom_projected_dos_values"
+  }],
+  "meta_units":"J"
+}

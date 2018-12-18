@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_mixed_basis_gmax",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Cut-off parameter for the truncation of the expansion of the plane waves in the ",
+    "interstitial region."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"float",
+  "meta_units":"m^-1"
+}

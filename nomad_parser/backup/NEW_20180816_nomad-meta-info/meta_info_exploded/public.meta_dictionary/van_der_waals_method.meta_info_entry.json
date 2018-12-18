@@ -1,0 +1,50 @@
+{
+  "meta_name":"van_der_waals_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Describes the Van der Waals method. If skipped or an empty string is used, it ",
+    "means no Van der Waals correction is applied.\n"],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_van_der_waals"],
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"None",
+    "meta_enum_description":[
+      "No Van der Waals correction (also if the meta info is fully ",
+      "absent)"]
+  },{
+    "meta_enum_value":"TS",
+    "meta_enum_description":[
+      "A. Tkatchenko and M. Scheffler, [Phys. Rev. Lett. **102**, 073005 ",
+      "(2009)](http://dx.doi.org/10.1103/PhysRevLett.102.073005)"]
+  },{
+    "meta_enum_value":"OBS",
+    "meta_enum_description":[
+      "F. Ortmann, F. Bechstedt, and W. G. Schmidt, [Phys. Rev. B **73**, 205101 ",
+      "(2006)](http://dx.doi.org/10.1103/PhysRevB.73.205101)"]
+  },{
+    "meta_enum_value":"G06",
+    "meta_enum_description":[
+      "S. Grimme, [J. Comput. Chem. **27**, 1787 ",
+      "(2006)](http://dx.doi.org/10.1002/jcc.20495)"]
+  },{
+    "meta_enum_value":"JCHS",
+    "meta_enum_description":[
+      "P. Jurečka, J. Černý, P. Hobza, and D. R. Salahub, [Journal of Computational ",
+      "Chemistry **28**, 555 (2007)](http://dx.doi.org/10.1002/jcc.20570)"]
+  },{
+    "meta_enum_value":"MDB",
+    "meta_enum_description":[
+      "Many-body dispersion. A. Tkatchenko, R. A. Di Stasio Jr, R. Car, and M. ",
+      "Scheffler, [Physical Review Letters **108**, 236402 ",
+      "(2012)](http://dx.doi.org/10.1103/PhysRevLett.108.236402) and A. Ambrosetti, A. ",
+      "M. Reilly, R. A. Di Stasio Jr, and A. Tkatchenko, [The Journal of Chemical ",
+      "Physics **140**, 18A508 (2014)](http://dx.doi.org/10.1063/1.4865104)"]
+  },{
+    "meta_enum_value":"XC",
+    "meta_enum_description":[
+      "The method to calculate the Van der Waals energy uses a non-local functional ",
+      "which is described in section_xc_functionals."]
+  }]
+}

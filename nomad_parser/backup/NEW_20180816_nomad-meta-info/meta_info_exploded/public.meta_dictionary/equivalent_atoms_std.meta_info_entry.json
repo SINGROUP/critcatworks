@@ -1,0 +1,15 @@
+{
+  "meta_name":"equivalent_atoms_std",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Gives a mapping table of atoms to symmetrically independent atoms in the ",
+    "standardized cell. This is used to find symmetrically equivalent ",
+    "atoms."],
+  "meta_parent_section":"section_std_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms_std"
+  }]
+}

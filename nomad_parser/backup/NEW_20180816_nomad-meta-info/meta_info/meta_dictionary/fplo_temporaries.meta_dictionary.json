@@ -1,0 +1,261 @@
+{
+  "metadict_name":"fplo_temporaries",
+  "metadict_description":[
+    "meta info for temporaries used by the FPLO parser, all names are expected to ",
+    "start with x_fplo_t_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_fplo_t_atom_cpa_block",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO CPA block of each ",
+      "atom"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_atom_idx",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for FPLO atom index",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_atom_labels",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for FPLO atom labels",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_atom_positions_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for atom positions, x-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_atom_positions_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for atom positions, y-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_atom_positions_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for atom positions, z-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_atom_wyckoff_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO Wyckoff position index of each ",
+      "atom"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_site_element",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per site DFT+U ",
+      "element"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_site_index",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per site DFT+U ",
+      "index"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_site_species",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per site DFT+U ",
+      "species"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_site_subshell",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per site DFT+U ",
+      "(n,l)subshell"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_site_ubi1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per site DFT+U ",
+      "ubi1"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_site_ubi2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per site DFT+U ",
+      "ubi2"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_element",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "element"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_f0",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "F0"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_f2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "F2"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_f4",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "F4"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_f6",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "F6"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_j",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "J"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_species",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "species"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_subshell",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "(n,l)subshell"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_dft_plus_u_species_subshell_u",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO per species/(n,l)subshell DFT+U ",
+      "U"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_energy_reference_fermi_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for FPLO Fermi energy in ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_type_reference",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_fplo_t_program_version_main",
+    "meta_type":"type-value",
+    "meta_description":"temporary: FPLO main version",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_program_version_release",
+    "meta_type":"type-value",
+    "meta_description":"temporary: FPLO release number",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_relativity_method",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for FPLO relativistic method",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_run_hosts",
+    "meta_type":"type-value",
+    "meta_description":"temporary: FPLO run hosts",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fplo_t_vec_a_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "x-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_vec_a_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "y-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_vec_a_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "z-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_vec_b_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for reciprocal lattice vectors, ",
+      "x-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_vec_b_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for reciprocal lattice vectors, ",
+      "y-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fplo_t_vec_b_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for reciprocal lattice vectors, ",
+      "z-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  }]
+}

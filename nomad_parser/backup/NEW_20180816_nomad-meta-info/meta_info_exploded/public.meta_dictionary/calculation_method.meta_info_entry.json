@@ -1,0 +1,17 @@
+{
+  "meta_name":"calculation_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String that uniquely represents the method used to calculate energy_total, If ",
+    "the present calculation_method_current is a perturbative method Y that uses ",
+    "method X as starting point, this string is automatically created as X@Y, where ",
+    "X is taken from calculation_method_current and Y from method_to_method_ref. In ",
+    "order to activate this, method_to_method_kind must have the value ",
+    "starting_point (see the [method_to_method_kind wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/metho",
+    "d-to-method-kind))."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"gw_max_frequency",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Maximum frequency for the calculation of the self ",
+    "energy."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"float"
+}

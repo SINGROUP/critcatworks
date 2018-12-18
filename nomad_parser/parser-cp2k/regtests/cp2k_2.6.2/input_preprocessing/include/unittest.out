@@ -1,0 +1,390 @@
+ DBCSR| Multiplication driver                                                SMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use subcommunicators                                                   T
+ DBCSR| Use MPI combined types                                                 F
+ DBCSR| Use MPI memory allocation                                              T
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2015-12-08 10:41:37.255
+ ***** ** ***  *** **   PROGRAM STARTED ON                   lauri-Lenovo-Z50-70
+ **    ****   ******    PROGRAM STARTED BY                                 lauri
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 10504
+  **** **  *******  **  PROGRAM STARTED IN /home/lauri/Dropbox/nomad-dev/gitlab/
+                                           parser-cp2k/cp2kparser/tests/cp2k_2.6
+                                           .2/preprocessing/include
+
+ CP2K| version string:                                        CP2K version 2.6.2
+ CP2K| source code revision number:                                    svn:15893
+ CP2K| is freely available from                             http://www.cp2k.org/
+ CP2K| Program compiled at                           ke 4.11.2015 08.48.42 +0200
+ CP2K| Program compiled on                                   lauri-Lenovo-Z50-70
+ CP2K| Program compiled for                          Linux-x86-64-gfortran_basic
+ CP2K| Input file name                                                  main.inp
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                ../../data/BASIS_SET
+ GLOBAL| Geminal file name                                         BASIS_GEMINAL
+ GLOBAL| Potential file name                           ../../data/GTH_POTENTIALS
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                      __STD_INPUT__
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                    si_bulk
+ GLOBAL| Preferred FFT library                                             FFTW3
+ GLOBAL| Preferred diagonalization lib.                                       SL
+ GLOBAL| Run type                                                   ENERGY_FORCE
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Global print level                                                  LOW
+ GLOBAL| Total number of message passing processes                             1
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal              8070392       8070392       8070392       8070392
+ MEMORY| MemFree               3264056       3264056       3264056       3264056
+ MEMORY| Buffers                705588        705588        705588        705588
+ MEMORY| Cached                2541528       2541528       2541528       2541528
+ MEMORY| Slab                   430060        430060        430060        430060
+ MEMORY| SReclaimable           393828        393828        393828        393828
+ MEMORY| MemLikelyFree         6905000       6905000       6905000       6905000
+
+
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K Developers Group (2000 - 2014)           **
+ **                                                                           **
+ *******************************************************************************
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        1.00E-03
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        --------------------------------------------------------
+                        Mixing method:                           DIRECT_P_MIXING
+                        --------------------------------------------------------
+                        No outer SCF
+
+ Number of electrons:                                                          4
+ Number of occupied orbitals:                                                  2
+ Number of molecular orbitals:                                                 2
+
+ Number of orbital functions:                                                 13
+ Number of independent orbital functions:                                     13
+
+ Extrapolation method: initial_guess
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 P_Mix/Diag. 0.40E+00    0.1     0.74330726        -3.7598777522 -3.76E+00
+     2 P_Mix/Diag. 0.40E+00    0.0     1.18951813        -3.7551065407  4.77E-03
+     3 P_Mix/Diag. 0.40E+00    0.0     1.03914579        -3.7542350804  8.71E-04
+     4 P_Mix/Diag. 0.40E+00    0.0     0.95382681        -3.7545873699 -3.52E-04
+     5 P_Mix/Diag. 0.40E+00    0.0     1.37569841        -3.7533070792  1.28E-03
+     6 P_Mix/Diag. 0.40E+00    0.0     1.12741826        -3.7529837978  3.23E-04
+     7 P_Mix/Diag. 0.40E+00    0.0     1.15161657        -3.7530998000 -1.16E-04
+     8 P_Mix/Diag. 0.40E+00    0.0     1.45034931        -3.7527369992  3.63E-04
+     9 P_Mix/Diag. 0.40E+00    0.0     1.36631042        -3.7526472894  8.97E-05
+    10 P_Mix/Diag. 0.40E+00    0.0     1.39188371        -3.7526864466 -3.92E-05
+    11 P_Mix/Diag. 0.40E+00    0.0     1.48454520        -3.7525790168  1.07E-04
+    12 P_Mix/Diag. 0.40E+00    0.0     1.46699629        -3.7525600544  1.90E-05
+    13 P_Mix/Diag. 0.40E+00    0.0     1.47401665        -3.7525706048 -1.06E-05
+    14 P_Mix/Diag. 0.40E+00    0.0     1.49441097        -3.7525436783  2.69E-05
+    15 P_Mix/Diag. 0.40E+00    0.0     1.49133752        -3.7525402694  3.41E-06
+    16 P_Mix/Diag. 0.40E+00    0.0     1.49258154        -3.7525428101 -2.54E-06
+    17 P_Mix/Diag. 0.40E+00    0.0     1.49656558        -3.7525367060  6.10E-06
+    18 P_Mix/Diag. 0.40E+00    0.0     1.49604940        -3.7525361018  6.04E-07
+    19 P_Mix/Diag. 0.40E+00    0.0     1.49623705        -3.7525366433 -5.41E-07
+    20 P_Mix/Diag. 0.40E+00    0.0     1.49699133        -3.7525353383  1.31E-06
+    21 P_Mix/Diag. 0.40E+00    0.0     1.49690779        -3.7525352237  1.15E-07
+    22 P_Mix/Diag. 0.40E+00    0.0     1.49693294        -3.7525353226 -9.89E-08
+    23 P_Mix/Diag. 0.40E+00    0.0     1.49707325        -3.7525350595  2.63E-07
+    24 P_Mix/Diag. 0.40E+00    0.0     1.49706111        -3.7525350347  2.47E-08
+    25 P_Mix/Diag. 0.40E+00    0.0     1.49706396        -3.7525350476 -1.28E-08
+    26 P_Mix/Diag. 0.40E+00    0.0     1.49708921        -3.7525349993  4.83E-08
+    27 P_Mix/Diag. 0.40E+00    0.0     1.49708809        -3.7525349930  6.32E-09
+    28 P_Mix/Diag. 0.40E+00    0.0     1.49708833        -3.7525349923  6.12E-10
+    29 P_Mix/Diag. 0.40E+00    0.0     1.49709250        -3.7525349853  7.02E-09
+    30 P_Mix/Diag. 0.40E+00    0.0     1.49709272        -3.7525349834  1.91E-09
+    31 P_Mix/Diag. 0.40E+00    0.0     1.49709273        -3.7525349820  1.45E-09
+    32 P_Mix/Diag. 0.40E+00    0.0     1.49709325        -3.7525349818  1.69E-10
+    33 P_Mix/Diag. 0.40E+00    0.0     1.49709346        -3.7525349811  6.57E-10
+    34 P_Mix/Diag. 0.40E+00    0.0     1.49709347        -3.7525349803  8.42E-10
+    35 P_Mix/Diag. 0.40E+00    0.0     1.49709345        -3.7525349808 -5.07E-10
+    36 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349805  2.46E-10
+    37 P_Mix/Diag. 0.40E+00    0.0     1.49709357        -3.7525349802  3.98E-10
+    38 P_Mix/Diag. 0.40E+00    0.0     1.49709351        -3.7525349805 -3.34E-10
+    39 P_Mix/Diag. 0.40E+00    0.0     1.49709357        -3.7525349804  9.75E-11
+    40 P_Mix/Diag. 0.40E+00    0.0     1.49709357        -3.7525349802  1.76E-10
+    41 P_Mix/Diag. 0.40E+00    0.0     1.49709354        -3.7525349804 -1.66E-10
+    42 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  3.98E-11
+    43 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  7.62E-11
+    44 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -7.57E-11
+    45 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  1.66E-11
+    46 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  3.27E-11
+    47 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -3.33E-11
+    48 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  6.99E-12
+    49 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  1.40E-11
+    50 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -1.44E-11
+    51 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.97E-12
+    52 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  5.98E-12
+    53 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -6.22E-12
+    54 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.27E-12
+    55 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.56E-12
+    56 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.67E-12
+    57 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  5.41E-13
+    58 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.10E-12
+    59 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -1.14E-12
+    60 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.31E-13
+    61 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.69E-13
+    62 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.90E-13
+    63 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  9.86E-14
+    64 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.01E-13
+    65 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.10E-13
+    66 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.26E-14
+    67 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.62E-14
+    68 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.97E-14
+    69 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.78E-14
+    70 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  3.69E-14
+    71 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -3.86E-14
+    72 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  7.99E-15
+    73 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.60E-14
+    74 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -1.73E-14
+    75 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  5.33E-15
+    76 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-15
+    77 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -6.66E-15
+    78 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.78E-15
+    79 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.66E-15
+    80 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.66E-15
+    81 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.88E-16
+    82 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.78E-15
+    83 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.22E-15
+    84 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-16
+    85 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.88E-16
+    86 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.88E-16
+    87 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.88E-16
+    88 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-16
+    89 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.33E-15
+    90 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+    91 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+    92 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+    93 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+    94 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.88E-16
+    95 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.88E-16
+    96 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-16
+    97 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+    98 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+    99 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+   100 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+
+  *** SCF run NOT converged ***
+
+
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:                -10.25799242814102
+  Core Hamiltonian energy:                                      1.92653566196091
+  Hartree energy:                                               5.54684889362145
+  Exchange-correlation energy:                                 -0.96792710775123
+
+  Total energy:                                                -3.75253498030989
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy (a.u.):               -3.731585307966530
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                      CPU                  ACC      ACC%
+ number of processed stacks                   101                    0       0.0
+ matmuls inhomo. stacks                         0                    0       0.0
+ matmuls total                                101                    0       0.0
+ flops  13 x   13 x    2                    68276                    0       0.0
+ flops total                                68276                    0       0.0
+ marketing flops                            68276
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS  TOT TIME [s]  AVE VOLUME [Bytes]  PERFORMANCE [MB/s]
+ MP_Group                3         0.000
+ MP_Bcast              102         0.016                  4.                0.03
+ MP_Allreduce         1060         0.001                  8.               11.99
+ MP_Sync                 2         0.000
+ MP_Alltoall          2316         0.002                522.              684.24
+ MP_Wait              2424         0.001
+ MP_ISend              808         0.002                228.              100.49
+ MP_IRecv              808         0.001                228.              362.12
+ MP_Memory            2424         0.001
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 2.6.2, the CP2K developers group (2015).
+ CP2K is freely available from http://www.cp2k.org/ .
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ http://dx.doi.org/10.1016/j.parco.2014.03.012
+
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WILEY INTERDISCIPLINARY REVIEWS-COMPUTATIONAL MOLECULAR SCIENCE, 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ http://dx.doi.org/10.1002/wcms.1159
+
+
+ Krack, M. 
+ THEORETICAL CHEMISTRY ACCOUNTS, 114 (1-3), 145-152 (2005). 
+ Pseudopotentials for H to Kr optimized for gradient-corrected
+ exchange-correlation functionals.
+ http://dx.doi.org/10.1007/s00214-005-0655-y
+
+
+ VandeVondele, J; Krack, M; Mohamed, F; Parrinello, M; Chassaing, T;
+ Hutter, J. COMPUTER PHYSICS COMMUNICATIONS, 167 (2), 103-128 (2005). 
+ QUICKSTEP: Fast and accurate density functional calculations using a
+ mixed Gaussian and plane waves approach.
+ http://dx.doi.org/10.1016/j.cpc.2004.12.014
+
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ http://dx.doi.org/10.1109/JPROC.2004.840301
+
+
+ Hartwigsen, C; Goedecker, S; Hutter, J. 
+ PHYSICAL REVIEW B, 58 (7), 3641-3662 (1998). 
+ Relativistic separable dual-space Gaussian pseudopotentials from H to Rn.
+ http://dx.doi.org/10.1103/PhysRevB.58.3641
+
+
+ Lippert, G; Hutter, J; Parrinello, M. 
+ MOLECULAR PHYSICS, 92 (3), 477-487 (1997). 
+ A hybrid Gaussian and plane wave density functional scheme.
+ http://dx.doi.org/10.1080/002689797170220
+
+
+ Goedecker, S; Teter, M; Hutter, J. 
+ PHYSICAL REVIEW B, 54 (3), 1703-1710 (1996). 
+ Separable dual-space Gaussian pseudopotentials.
+ http://dx.doi.org/10.1103/PhysRevB.54.1703
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.086    0.086    1.598    1.598
+ qs_forces                            1  2.0    0.001    0.001    1.007    1.007
+ qs_energies_scf                      1  3.0    0.010    0.010    1.001    1.001
+ scf_env_do_scf                       1  4.0    0.000    0.000    0.783    0.783
+ scf_env_do_scf_inner_loop          100  5.0    0.013    0.013    0.768    0.768
+ rebuild_ks_matrix                  101  7.0    0.000    0.000    0.348    0.348
+ qs_ks_build_kohn_sham_matrix       101  8.0    0.007    0.007    0.347    0.347
+ qs_ks_update_qs_env                100  6.0    0.001    0.001    0.345    0.345
+ quickstep_create_force_env           1  2.0    0.036    0.036    0.342    0.342
+ fft3d_s                            608 12.0    0.139    0.139    0.313    0.313
+ fft_wrap_pw1pw2                    607 10.0    0.004    0.004    0.216    0.216
+ fft_wrap_pw1pw2_30                 405 10.7    0.011    0.011    0.199    0.199
+ qs_rho_update_rho                  101  6.0    0.000    0.000    0.188    0.188
+ calculate_rho_elec                 101  7.0    0.082    0.082    0.187    0.187
+ get_fft_scratch                    608 13.0    0.174    0.174    0.174    0.174
+ qs_init_subsys                       1  3.0    0.074    0.074    0.173    0.173
+ sum_up_and_integrate               101  9.0    0.003    0.003    0.159    0.159
+ integrate_v_rspace                 101 10.0    0.088    0.088    0.156    0.156
+ init_scf_run                         1  4.0    0.001    0.001    0.117    0.117
+ density_rs2pw                      101  8.0    0.001    0.001    0.104    0.104
+ eigensolver                        100  6.0    0.000    0.000    0.099    0.099
+ qs_vxc_create                      101  9.0    0.002    0.002    0.098    0.098
+ xc_vxc_pw_create                   101 10.0    0.009    0.009    0.096    0.096
+ xc_rho_set_and_dset_create         101 11.0    0.002    0.002    0.086    0.086
+ xc_functional_eval                 101 12.0    0.082    0.082    0.082    0.082
+ qs_energies_init_hamiltonians        1  4.0    0.000    0.000    0.079    0.079
+ qs_env_setup                         1  4.0    0.000    0.000    0.075    0.075
+ create_qs_kind_set                   1  3.0    0.000    0.000    0.074    0.074
+ read_qs_kind                         1  4.0    0.038    0.038    0.074    0.074
+ scf_env_initial_rho_setup            1  5.0    0.001    0.001    0.072    0.072
+ calculate_dm_sparse                100  6.0    0.000    0.000    0.071    0.071
+ cp_dbcsr_plus_fm_fm_t_native       101  7.0    0.002    0.002    0.071    0.071
+ potential_pw2rs                    101 11.0    0.001    0.001    0.062    0.062
+ topology_control                     1  3.0    0.016    0.016    0.059    0.059
+ calculate_first_density_matrix       1  6.0    0.000    0.000    0.058    0.058
+ calculate_atomic_block_dm            1  7.0    0.014    0.014    0.058    0.058
+ qs_env_rebuild_pw_env                3  3.7    0.000    0.000    0.058    0.058
+ pw_env_rebuild                       1  6.0    0.001    0.001    0.058    0.058
+ dbcsr_mm_cannon_multiply           101  8.0    0.005    0.005    0.052    0.052
+ pw_grid_setup                        2  7.0    0.026    0.026    0.051    0.051
+ cp_fm_cholesky_restore             300  7.0    0.048    0.048    0.048    0.048
+ qs_env_update_s_mstruct              1  5.0    0.001    0.001    0.046    0.046
+ qs_diis_b_step                      99  6.0    0.001    0.001    0.043    0.043
+ cp_fm_cholesky_decompose             1  5.0    0.043    0.043    0.043    0.043
+ connectivity_control                 1  4.0    0.002    0.002    0.038    0.038
+ cp_fm_syevd                        100  7.0    0.000    0.000    0.037    0.037
+ cp_fm_syevd_base                   100  8.0    0.037    0.037    0.037    0.037
+ calculate_rho_core                   1  6.0    0.010    0.010    0.036    0.036
+ parser_read_line                  3297  5.0    0.001    0.001    0.036    0.036
+ parser_read_line_low                 4  6.0    0.034    0.034    0.034    0.034
+ topology_generate_bond               1  5.0    0.000    0.000    0.034    0.034
+ -------------------------------------------------------------------------------
+
+  **** **** ******  **  PROGRAM ENDED AT                 2015-12-08 10:41:39.495
+ ***** ** ***  *** **   PROGRAM RAN ON                       lauri-Lenovo-Z50-70
+ **    ****   ******    PROGRAM RAN BY                                     lauri
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 10504
+  **** **  *******  **  PROGRAM STOPPED IN /home/lauri/Dropbox/nomad-dev/gitlab/
+                                           parser-cp2k/cp2kparser/tests/cp2k_2.6
+                                           .2/preprocessing/include

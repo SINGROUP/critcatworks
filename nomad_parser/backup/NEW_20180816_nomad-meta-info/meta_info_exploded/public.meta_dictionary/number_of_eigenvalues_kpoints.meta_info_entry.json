@@ -1,0 +1,9 @@
+{
+  "meta_name":"number_of_eigenvalues_kpoints",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of $k$ points, see eigenvalues_kpoints. $k$ points are ",
+    "calculated within a run and are irreducible if a symmetry is ",
+    "used."],
+  "meta_parent_section":"section_eigenvalues"
+}

@@ -1,0 +1,12 @@
+{
+  "meta_name":"volumetric_data_origin",
+  "meta_type":"type-value",
+  "meta_description":[
+    "location of the first grid point; same coordinate system as atom_positions when ",
+    "applicable."],
+  "meta_parent_section":"section_volumetric_data",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  }]
+}

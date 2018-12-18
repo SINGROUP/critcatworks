@@ -1,0 +1,12 @@
+{
+  "meta_name":"atomic_numbers_primitive",
+  "meta_type":"type-value",
+  "meta_description":"Atomic numbers in the primitive cell.",
+  "meta_parent_section":"section_primitive_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms_primitive"
+  }]
+}

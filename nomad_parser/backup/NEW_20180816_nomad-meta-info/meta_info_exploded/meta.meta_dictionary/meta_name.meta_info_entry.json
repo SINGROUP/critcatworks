@@ -1,0 +1,16 @@
+{
+  "meta_name":"meta_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "This is one of the most important properties of a Meta Info as it is used to ",
+    "identify it.\n",
+    "Only lowercase roman letters, numbers and underscore are allowed.\n",
+    "The prefixes t\\_, u\\_, \\_, x\\_ are reserved for temporary, user defined, non ",
+    "standard, and code specific Meta Info respectively.\n",
+    "Explicit names are preferred to abbreviations, and the name should always ",
+    "contain at least an `\\_'.\n",
+    "The name can uniquely identify the meta_info_entry in a meta_dictionary or in ",
+    "its context section."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string"
+}

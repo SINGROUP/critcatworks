@@ -1,0 +1,11 @@
+{
+  "meta_name":"kinetic_energy",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The values of the kinetic energy along this frame. If not all frames have a ",
+    "value the indices of the frames that have a value are stored in ",
+    "frame_sequence_kinetic_energy_frames."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

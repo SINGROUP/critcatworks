@@ -1,0 +1,7 @@
+{
+  "meta_name":"processor_log_event_message",
+  "meta_type":"type-value",
+  "meta_description":"The log message",
+  "meta_parent_section":"section_processor_log_event",
+  "meta_data_type":"string"
+}

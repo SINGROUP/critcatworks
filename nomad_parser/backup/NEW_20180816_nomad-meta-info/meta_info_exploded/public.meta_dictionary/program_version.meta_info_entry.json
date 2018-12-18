@@ -1,0 +1,12 @@
+{
+  "meta_name":"program_version",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the version of the program that was used. This should be the version ",
+    "number of an official release, the version tag or a commit id as well as the ",
+    "location of the repository."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "program_info"],
+  "meta_data_type":"string"
+}

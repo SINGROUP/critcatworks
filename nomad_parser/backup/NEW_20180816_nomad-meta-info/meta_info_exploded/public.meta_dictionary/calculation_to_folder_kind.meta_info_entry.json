@@ -1,0 +1,10 @@
+{
+  "meta_name":"calculation_to_folder_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String defining the relationship between the referenced ",
+    "section_single_configuration_calculation and a folder containing ",
+    "calculations."],
+  "meta_parent_section":"section_calculation_to_folder_refs",
+  "meta_data_type":"string"
+}

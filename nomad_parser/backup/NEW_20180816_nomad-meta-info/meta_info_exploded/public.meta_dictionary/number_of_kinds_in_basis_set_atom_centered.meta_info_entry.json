@@ -1,0 +1,12 @@
+{
+  "meta_name":"number_of_kinds_in_basis_set_atom_centered",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of different *kinds* of radial basis functions in the ",
+    "section_basis_set_atom_centered section. Specifically, basis functions with the ",
+    "same $n$ and $l$ quantum numbers are grouped in sets. Each set counts as one ",
+    "*kind*."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"]
+}

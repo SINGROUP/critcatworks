@@ -1,0 +1,14 @@
+{
+  "meta_name":"time_single_configuration_calculation_date_end",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the end date of the *single configuration calculation* (see ",
+    "section_single_configuration_calculation) as time since the *Unix epoch* ",
+    "(00:00:00 UTC on 1 January 1970) in seconds. For date and times without a ",
+    "timezone, the default timezone GMT is used."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "time_info"],
+  "meta_data_type":"float",
+  "meta_units":"s"
+}

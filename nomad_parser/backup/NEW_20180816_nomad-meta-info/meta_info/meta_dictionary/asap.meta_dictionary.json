@@ -1,0 +1,33 @@
+{
+  "metadict_name":"asap",
+  "metadict_description":"metainfo for the asap_parser",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_asap_langevin_friction",
+    "meta_type":"type-value",
+    "meta_description":"Friction coeffient used in Langevin dynamics",
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_asap_maxstep",
+    "meta_type":"type-value",
+    "meta_description":"Maxstep in Angstrom for geometry optimization",
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_asap_temperature",
+    "meta_type":"type-value",
+    "meta_description":"Temperature used in molecular-dynamics",
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_asap_timestep",
+    "meta_type":"type-value",
+    "meta_description":"Timestep in molecular dynamics",
+    "meta_parent_section":"section_sampling_method",
+    "meta_data_type":"float"
+  }]
+}

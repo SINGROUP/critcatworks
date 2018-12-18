@@ -1,0 +1,12 @@
+{
+  "meta_name":"meta_info_entry",
+  "meta_type":"type-section",
+  "meta_description":[
+    "A dictionary collection some meta_info_entry entries, their dependencies.\n",
+    "The dictionary is versioned using sematic ",
+    "versioning."],
+  "meta_parent_section":"meta_dictionary",
+  "meta_repeats":true,
+  "meta_context_identifier":[],
+  "meta_chosen_key":"meta_name"
+}

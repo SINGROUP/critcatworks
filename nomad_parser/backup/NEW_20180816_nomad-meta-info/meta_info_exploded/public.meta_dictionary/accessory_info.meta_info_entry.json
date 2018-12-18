@@ -1,0 +1,7 @@
+{
+  "meta_name":"accessory_info",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Information that *in theory* should not affect the results of the calculations ",
+    "(e.g., timing)."]
+}

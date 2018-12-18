@@ -1,0 +1,93 @@
+{
+  "metadict_name":"molcas",
+  "metadict_description":[
+    "meta info used by the molcas parser.  All names are expected to start with ",
+    "x_molcas_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_molcas_basis_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Molcas basis set atom label.",
+    "meta_parent_section":"x_molcas_section_basis",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_molcas_basis_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Molcas basis set name.  Repeated strings of '.' are compressed to a single '.'. ",
+      " Any leading or trailing '.' are stripped."],
+    "meta_parent_section":"x_molcas_section_basis",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_molcas_frequency_intensity",
+    "meta_type":"type-value",
+    "meta_description":"Molcas intensity value",
+    "meta_parent_section":"x_molcas_section_frequency",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_molcas_frequency_symmetry",
+    "meta_type":"type-value",
+    "meta_description":"Molcas symmetry for frequencies",
+    "meta_parent_section":"x_molcas_section_frequency",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_molcas_frequency_value",
+    "meta_type":"type-value",
+    "meta_description":"Molcas frequency value",
+    "meta_parent_section":"x_molcas_section_frequency",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_molcas_imaginary_frequency_value",
+    "meta_type":"type-value",
+    "meta_description":"Molcas imaginary frequency value",
+    "meta_parent_section":"x_molcas_section_frequency",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_molcas_method_name",
+    "meta_type":"type-value",
+    "meta_description":"Molcas method name (without UHF; see x_molcas_uhf)",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_molcas_section_basis",
+    "meta_type":"type-section",
+    "meta_description":"Section for Molcas basis sets",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_molcas_section_frequency",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section for Molcas frequency (symmetry, frequency, ",
+      "intensity)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_molcas_slapaf_grad_max",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Molcas slapaf (geometry optimization) grad (force) ",
+      "max"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_molcas_slapaf_grad_norm",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Molcas slapaf (geometry optimization) grad (force) ",
+      "norm"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_molcas_uhf",
+    "meta_type":"type-value",
+    "meta_description":"If the Molcas method is UHF.",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  }]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"single_configuration_calculation_converged",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Determines whether a *single configuration calculation* in ",
+    "section_single_configuration_calculation is ",
+    "converged."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"boolean"
+}

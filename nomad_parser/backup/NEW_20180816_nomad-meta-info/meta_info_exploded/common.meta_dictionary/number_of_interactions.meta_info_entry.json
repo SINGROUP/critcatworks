@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_interactions",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of interactions of this type.",
+  "meta_parent_section":"section_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"]
+}

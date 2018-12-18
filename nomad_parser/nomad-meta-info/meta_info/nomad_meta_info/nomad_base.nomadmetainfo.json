@@ -1,0 +1,267 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used internally by the nomad base infrastructure",
+  "metaInfos": [ {
+      "description": "A document containing files and directories",
+      "kindStr": "DocumentType",
+      "name": "Archive",
+      "superNames": []
+    }, {
+      "description": "A compressed document using the bzip2 format",
+      "kindStr": "DocumentType",
+      "name": "Bzip2Compressed",
+      "superNames": [
+        "Compressed"
+      ]
+    }, {
+      "description": "An output of a calculation (often partial)",
+      "kindStr": "DocumentType",
+      "name": "CalculationOutput",
+      "superNames": []
+    }, {
+      "description": "A selection of documents that is stored as list of egids",
+      "kindStr": "DocumentType",
+      "name": "CompactDocumentSelection",
+      "superNames": [
+        "DocumentSelection"
+      ]
+    }, {
+      "description": "A compressed document",
+      "kindStr": "DocumentType",
+      "name": "Compressed",
+      "superNames": []
+    }, {
+      "description": "Connection from a document to its contents",
+      "kindStr": "ConnectionType",
+      "name": "Containing",
+      "superNames": [
+        "SystemConnections"
+      ]
+    }, {
+      "description": "Connection from a document to a document partially derived from it",
+      "kindStr": "ConnectionType",
+      "name": "Derived",
+      "superNames": [
+        "SystemConnections"
+      ]
+    }, {
+      "description": "A document containing directory meta info in json format",
+      "kindStr": "DocumentType",
+      "name": "DirectoryMetaInfo",
+      "superNames": [
+        "JsonDocument"
+      ]
+    }, {
+      "description": "A selection of documents",
+      "kindStr": "DocumentType",
+      "name": "DocumentSelection",
+      "superNames": [
+        "Selection"
+      ]
+    }, {
+      "description": "A selection of documents that is explicitly stored in the db as Containing connetions",
+      "kindStr": "DocumentType",
+      "name": "ExplicitDocumentSelection",
+      "superNames": [
+        "DocumentSelection"
+      ]
+    }, {
+      "description": "A normalized information about an Fhi Aims simulation.",
+      "kindStr": "DocumentType",
+      "name": "FhiAimsNormalizedRunInfoV1_0",
+      "superNames": [
+        "NormalizedRunInfoV1_0"
+      ]
+    }, {
+      "description": "A compressed document using the gnu zip (gzip) format",
+      "kindStr": "DocumentType",
+      "name": "GzipCompressed",
+      "superNames": [
+        "Compressed"
+      ]
+    }, {
+      "description": "A document in hdf5 format",
+      "kindStr": "DocumentType",
+      "name": "Hdf5Document",
+      "superNames": []
+    }, {
+      "description": "An information document in hdf5 format, with properties, data and connections",
+      "kindStr": "DocumentType",
+      "name": "Hdf5NomadInfo",
+      "superNames": [
+        "InfoType",
+        "Hdf5Document"
+      ]
+    }, {
+      "description": "An information document in hdf5 format, with properties, data and connections using the version 1.0 format",
+      "kindStr": "DocumentType",
+      "name": "Hdf5NomadInfoV1_0",
+      "superNames": [
+        "Hdf5NomadInfo"
+      ]
+    }, {
+      "description": "A trajectory in hdf5 format",
+      "kindStr": "DocumentType",
+      "name": "Hdf5Trajectory",
+      "superNames": [
+        "Hdf5NomadInfo",
+        "Trajectory"
+      ]
+    }, {
+      "description": "A trajectory in hdf5 format",
+      "kindStr": "DocumentType",
+      "name": "Hdf5TrajectoryV1_0",
+      "superNames": [
+        "Hdf5Trajectory",
+        "Hdf5NomadInfoV1_0"
+      ]
+    }, {
+      "description": "An html document",
+      "kindStr": "DocumentType",
+      "name": "HtmlDocument",
+      "superNames": [
+        "TextDocument"
+      ]
+    }, {
+      "description": "A document containing an image",
+      "kindStr": "DocumentType",
+      "name": "Image",
+      "superNames": []
+    }, {
+      "description": "An information document with properties, data and connections",
+      "kindStr": "DocumentType",
+      "name": "InfoType",
+      "superNames": []
+    }, {
+      "description": "A document in json format",
+      "kindStr": "DocumentType",
+      "name": "JsonDocument",
+      "superNames": [
+        "TextDocument"
+      ]
+    }, {
+      "description": "An information document in json format, with properties, data and connections",
+      "kindStr": "DocumentType",
+      "name": "JsonInfo",
+      "superNames": [
+        "JsonDocument",
+        "InfoType"
+      ]
+    }, {
+      "description": "The data part of an information document in json format.\n      Together with an optional used_keys.json or all_keys.json that contains\n      all possible keys, and a meta_keys.json (also optional) a self contained\n      info can be built.",
+      "kindStr": "DocumentType",
+      "name": "JsonInfoData",
+      "superNames": [
+        "JsonDocument"
+      ]
+    }, {
+      "description": "A document containing InfoKinds in json format",
+      "kindStr": "DocumentType",
+      "name": "JsonInfoKinds",
+      "superNames": [
+        "JsonDocument"
+      ]
+    }, {
+      "description": "A trajectory in hdf5 format",
+      "kindStr": "DocumentType",
+      "name": "JsonTrajectory",
+      "superNames": [
+        "JsonInfo",
+        "Trajectory"
+      ]
+    }, {
+      "description": "A normalized information about a simulation run using the version 1.0 format",
+      "kindStr": "DocumentType",
+      "name": "NormalizedRunInfoV1_0",
+      "superNames": [
+        "Hdf5TrajectoryV1_0"
+      ]
+    }, {
+      "description": "An output of a calculation as written by the calculation program (often partial)",
+      "kindStr": "DocumentType",
+      "name": "RawCalculationOutput",
+      "superNames": [
+        "CalculationOutput"
+      ]
+    }, {
+      "description": "Connection from a document to its replacement",
+      "kindStr": "ConnectionType",
+      "name": "Replaces",
+      "superNames": [
+        "SystemConnections"
+      ]
+    }, {
+      "description": "A selection of documents or pieces of documents",
+      "kindStr": "DocumentType",
+      "name": "Selection",
+      "superNames": []
+    }, {
+      "description": "Connections used by the storage system",
+      "kindStr": "ConnectionType",
+      "name": "SystemConnections",
+      "superNames": []
+    }, {
+      "description": "A document containing files and directories stored in the tar format",
+      "kindStr": "DocumentType",
+      "name": "TarArchive",
+      "superNames": [
+        "Archive"
+      ]
+    }, {
+      "description": "A text document",
+      "kindStr": "DocumentType",
+      "name": "TextDocument",
+      "superNames": []
+    }, {
+      "description": "A document containing block of timestamps",
+      "kindStr": "DocumentType",
+      "name": "TimestampBlock",
+      "superNames": []
+    }, {
+      "description": "A trajectory, result of a simulation, can have a single or multiple configurations",
+      "kindStr": "DocumentType",
+      "name": "Trajectory",
+      "superNames": [
+        "InfoType",
+        "CalculationOutput"
+      ]
+    }, {
+      "description": "An unknown document type",
+      "kindStr": "DocumentType",
+      "name": "UnknownDocumentType",
+      "superNames": []
+    }, {
+      "description": "A list pieces of documents stored as nomad uris",
+      "kindStr": "DocumentType",
+      "name": "UriSelection",
+      "superNames": [
+        "Selection"
+      ]
+    }, {
+      "description": "A document containing a video",
+      "kindStr": "DocumentType",
+      "name": "Video",
+      "superNames": []
+    }, {
+      "description": "An xml document",
+      "kindStr": "DocumentType",
+      "name": "XmlDocument",
+      "superNames": [
+        "TextDocument"
+      ]
+    }, {
+      "description": "A compressed document using the xz format",
+      "kindStr": "DocumentType",
+      "name": "XzCompressed",
+      "superNames": [
+        "Compressed"
+      ]
+    }, {
+      "description": "A document containing files and directories stored in the zip format",
+      "kindStr": "DocumentType",
+      "name": "ZipArchive",
+      "superNames": [
+        "Archive"
+      ]
+    }]
+}

@@ -1,0 +1,177 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"fplo_temporaries",
+  "description":"meta info for temporaries used by the FPLO parser, all names are expected to start with x_fplo_t_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_fplo_t_atom_cpa_block",
+    "description":"Temporary storage for FPLO CPA block of each atom",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_atom_idx",
+    "description":"Temporary storage for FPLO atom index",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_atom_labels",
+    "description":"Temporary storage for FPLO atom labels",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_atom_positions_x",
+    "description":"Temporary storage for atom positions, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_atom_positions_y",
+    "description":"Temporary storage for atom positions, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_atom_positions_z",
+    "description":"Temporary storage for atom positions, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_atom_wyckoff_idx",
+    "description":"Temporary storage for FPLO Wyckoff position index of each atom",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_dft_plus_u_site_element",
+    "description":"Temporary storage for FPLO per site DFT+U element",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_dft_plus_u_site_index",
+    "description":"Temporary storage for FPLO per site DFT+U index",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_dft_plus_u_site_species",
+    "description":"Temporary storage for FPLO per site DFT+U species",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_dft_plus_u_site_subshell",
+    "description":"Temporary storage for FPLO per site DFT+U (n,l)subshell",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_dft_plus_u_site_ubi1",
+    "description":"Temporary storage for FPLO per site DFT+U ubi1",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_dft_plus_u_site_ubi2",
+    "description":"Temporary storage for FPLO per site DFT+U ubi2",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_element",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U element",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_f0",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U F0",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_f2",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U F2",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_f4",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U F4",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_f6",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U F6",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_j",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U J",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_species",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U species",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_subshell",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U (n,l)subshell",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_dft_plus_u_species_subshell_u",
+    "description":"Temporary storage for FPLO per species/(n,l)subshell DFT+U U",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_energy_reference_fermi_iteration",
+    "description":"Temporary storage for FPLO Fermi energy in iteration",
+    "superNames":["section_scf_iteration","energy_type_reference","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_program_version_main",
+    "description":"temporary: FPLO main version",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_program_version_release",
+    "description":"temporary: FPLO release number",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_relativity_method",
+    "description":"Temporary storage for FPLO relativistic method",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_run_hosts",
+    "description":"temporary: FPLO run hosts",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_fplo_t_vec_a_x",
+    "description":"Temporary storage for direct lattice vectors, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_vec_a_y",
+    "description":"Temporary storage for direct lattice vectors, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_vec_a_z",
+    "description":"Temporary storage for direct lattice vectors, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_vec_b_x",
+    "description":"Temporary storage for reciprocal lattice vectors, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_vec_b_y",
+    "description":"Temporary storage for reciprocal lattice vectors, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_fplo_t_vec_b_z",
+    "description":"Temporary storage for reciprocal lattice vectors, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  }]
+}

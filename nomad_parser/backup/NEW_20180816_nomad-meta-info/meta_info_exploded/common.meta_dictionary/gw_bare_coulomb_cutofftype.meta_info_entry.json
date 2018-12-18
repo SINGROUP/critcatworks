@@ -1,0 +1,9 @@
+{
+  "meta_name":"gw_bare_coulomb_cutofftype",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Cutoff type for the calculation of the bare Coulomb potential: none, 0d, 1d, ",
+    "2d. See Rozzi et al., PRB 73, 205119 (2006)"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

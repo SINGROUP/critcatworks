@@ -1,0 +1,9 @@
+{
+  "meta_name":"processor_number_of_successful_contexts",
+  "meta_type":"type-value",
+  "meta_description":[
+    "number of contexts in the current calculation that where successfully handled ",
+    "by this processor."],
+  "meta_parent_section":"section_processor_info",
+  "meta_data_type":"int64"
+}

@@ -1,0 +1,14 @@
+{
+  "meta_name":"smearing_width",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the width of the smearing in energy for the electron occupation used ",
+    "to calculate the free energy (see energy_free).\n",
+    "\n",
+    "*NOTE:* Not all methods specified in smearing_kind uses this ",
+    "value."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_smearing"],
+  "meta_data_type":"float"
+}

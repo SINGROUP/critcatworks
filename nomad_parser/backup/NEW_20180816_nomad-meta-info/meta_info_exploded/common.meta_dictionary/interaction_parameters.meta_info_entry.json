@@ -1,0 +1,12 @@
+{
+  "meta_name":"interaction_parameters",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Explicit interaction parameters for this kind of interaction (depending on the ",
+    "interaction_kind some might be given implicitly through other ",
+    "means)."],
+  "meta_parent_section":"section_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_data_type":"json"
+}

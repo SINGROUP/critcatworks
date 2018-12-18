@@ -1,0 +1,11 @@
+{
+  "meta_name":"section_calculation_to_folder_refs",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section that describes the relationship between ",
+    "section_single_configuration_calculationa and the folder containing the ",
+    "original calulations"],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

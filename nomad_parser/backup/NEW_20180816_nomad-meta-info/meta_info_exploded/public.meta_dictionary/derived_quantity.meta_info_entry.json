@@ -1,0 +1,7 @@
+{
+  "meta_name":"derived_quantity",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Quantity that is not directly outputted by the parser, but is computed using ",
+    "other quantities."]
+}

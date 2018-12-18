@@ -1,0 +1,11 @@
+{
+  "meta_name":"calculation_file_uri",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains the nomad uri of a raw the data file connected to the current run. ",
+    "There should be an value for the main_file_uri and all ancillary ",
+    "files."],
+  "meta_parent_section":"section_run",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

@@ -1,0 +1,7 @@
+{
+  "meta_name":"error_estimate_contribution",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "An estimate of a partial quantity contributing to the error for a given ",
+    "quantity."]
+}

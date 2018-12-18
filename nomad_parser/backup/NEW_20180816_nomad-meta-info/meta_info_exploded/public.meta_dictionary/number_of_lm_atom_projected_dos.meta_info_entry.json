@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_lm_atom_projected_dos",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of $l$, $m$ combinations for the atom projected density of ",
+    "states (DOS) defined in section_atom_projected_dos."],
+  "meta_parent_section":"section_atom_projected_dos"
+}

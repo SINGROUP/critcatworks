@@ -1,0 +1,13 @@
+{
+  "meta_name":"molecule_interaction_parameters",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Explicit interaction parameters for this kind of interaction ",
+    "(depending on the interaction type some might be given implicitly through other ",
+    "means), used for bonded interactions for atoms in a ",
+    "molecule."],
+  "meta_parent_section":"section_molecule_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_data_type":"json"
+}

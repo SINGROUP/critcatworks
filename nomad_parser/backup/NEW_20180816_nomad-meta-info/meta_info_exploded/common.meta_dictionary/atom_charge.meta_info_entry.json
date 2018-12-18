@@ -1,0 +1,8 @@
+{
+  "meta_name":"atom_charge",
+  "meta_type":"type-value",
+  "meta_description":"Charge of the atom type.",
+  "meta_parent_section":"section_atom",
+  "meta_data_type":"float",
+  "meta_units":"C"
+}

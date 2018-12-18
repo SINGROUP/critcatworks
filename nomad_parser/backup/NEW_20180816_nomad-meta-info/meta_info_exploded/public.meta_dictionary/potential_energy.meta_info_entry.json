@@ -1,0 +1,13 @@
+{
+  "meta_name":"potential_energy",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The value of the potential energy along this frame. This is equal to ",
+    "energy_total of the corresponding section_single_configuration_calculation and ",
+    "repeated here in a summary array for easier access. If not all frames have a ",
+    "value the indices of the frames that have a value are stored in ",
+    "frame_sequence_potential_energy_frames."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

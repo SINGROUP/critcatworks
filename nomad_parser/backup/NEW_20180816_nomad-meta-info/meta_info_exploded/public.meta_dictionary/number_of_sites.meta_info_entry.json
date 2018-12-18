@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_sites",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "number of sites in a variable composition representation. By default (no ",
+    "variable composition) it is the same as number_of_atoms."],
+  "meta_parent_section":"section_system"
+}

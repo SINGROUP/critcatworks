@@ -1,0 +1,18 @@
+{
+  "meta_name":"number_of_user_quantity_components",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of user-defined quantity defined by ",
+    "frame_sequence_user_quantity_name and monitored in a sequence of frames. A ",
+    "sequence is a trajectory, which can have number_of_frames_in_sequence each ",
+    "representing one section_single_configuration_calculation section.\n",
+    "\n",
+    "Dedicated metadata monitored along a sequence of frames are created for the ",
+    "conserved energy-like quantity (frame_sequence_conserved_quantity), the kinetic ",
+    "and potential energies ([frame_sequence_kinetic_energy and ",
+    "frame_sequence_potential_energy](frame_sequence_kinetic_energy and ",
+    "frame_sequence_potential_energy)), the instantaneous temperature ",
+    "(frame_sequence_temperature) and the pressure ",
+    "(frame_sequence_pressure)."],
+  "meta_parent_section":"section_user_quantity_definition"
+}

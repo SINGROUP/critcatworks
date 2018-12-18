@@ -1,0 +1,7 @@
+{
+  "meta_name":"processor_log_start",
+  "meta_type":"type-value",
+  "meta_description":"Start of the log (in ansi notation YYYY-MM-TT...)",
+  "meta_parent_section":"section_processor_log",
+  "meta_data_type":"string"
+}

@@ -1,0 +1,265 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"meta",
+  "description":"dictionary describing the meta info itself",
+  "dependencies":[],
+  "metaInfos":[{
+    "name":"meta_abstract_types",
+    "description":"A list of all Meta Info of type *type-abstract* of this value",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"meta_chosen_key",
+    "description":"The meta_name of a *type-value* (that should be with meta_data_type = *string*) that can be used as main unique key for the sections contained in a meta_parent_section.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_constraint",
+    "kindStr":"type_section",
+    "description":"A constraint on the values corresponding to the section that defines it.",
+    "superNames":["meta_info_entry"]
+  },{
+    "name":"meta_constraint_description",
+    "description":"Description of the constraint.",
+    "superNames":["meta_constraint"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_constraint_expected_meta_info",
+    "description":"Either a meta_name or a '!' and a meta_name.If the meta_info_entry corresponding to it has meta_type type-value or type-section then the corrsponding value must be either present or absent. type-abstract are evaluated all together at the end. The type-value and type-section meta_info_entry that are not already given explicitly in other meta_constraint_expected_meta_info that have all the type-abstract in meta_abstract_types or in their parents (through meta_abstract_types) must be present, whereas those that have all the '!' type-abstract must be absent.",
+    "superNames":["meta_constraint"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"meta_constraint_name",
+    "description":"A name for the constraint (should be unique within meta_parent_section).",
+    "superNames":["meta_constraint"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_constraint_required_query",
+    "description":"This query if given must be true for all selected values",
+    "superNames":["meta_constraint"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_constraint_select_query",
+    "description":"Query that must be true for the values that have to satisfy this constraint. Typically this is for example a field having a given value.",
+    "superNames":["meta_constraint"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_context_identifier",
+    "description":"The value should be the meta_name of a value (meta_info_entry with meta_type = *type-value*) contained in this meta_info_entry. I.e. its meta_parent_section should be equal to the meta_name of the current meta_info_entry (which should be of *type-section*).That value should uniquely and globally identifies every section value, even if one does not know the type of the current section. In NOMAD we always used the a gid for this purpose.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"meta_data_type",
+    "description":"The basic type of the data corresponding to this meta_info_entry.\nFormally also *binary* and *json* could be used, but they were avoided until now because opaque, and more difficult to document.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C",
+    "values":{
+      "boolean":"A boolean value (true or false)",
+      "float":"A double precision (64 bit) floating point value (equivalent to float64)",
+      "float32":"A single precision (32 bit) floating point value",
+      "float64":"A double precision (64 bit) floating point value",
+      "int":"A 32 bit signed integer (equivalent to int32)",
+      "int32":"A 32 bit signed integer",
+      "int64":"A 64 bit signed integer",
+      "json":"A json value. Its use is discouraged, as it does lead to inferior documentation compared to using the meta info directly.",
+      "reference":"An internal reference. This contains the index of the referenced meta_referenced_sections. For references to other documents a string with a nomad uri should be used.",
+      "string":"A string of unicode characters"
+    }
+  },{
+    "name":"meta_description",
+    "description":"Contains a text meant for the users of the meta info, using [mark down format](https://daringfireball.net/markdown) with the following extensions:\n  * \\$ is used to introduce mathematical notation using the latex format,\n * names containing an ``\\_'' are assumed to refer to other meta info.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_dictionary",
+    "kindStr":"type_section",
+    "description":"A dictionary collection some meta_info_entry entries, their dependencies.\nThe dictionary is versioned using semantic versioning.",
+    "superNames":[]
+  },{
+    "name":"meta_dimension",
+    "kindStr":"type_section",
+    "description":"The shape of the multidimensional array used to store the data corrsponding to this meta info, either meta_dimension_fixed or meta_dimension_symbolic.\nExample: [{ ``meta_dimension_symbolic'': ``number_of_atoms''}, {``meta_dimension_fixed'': 3 }].\nIf no meta_dimension are given the data is a scalar.",
+    "superNames":["meta_info_entry"]
+  },{
+    "name":"meta_dimension_fixed",
+    "description":"A fixed dimension of exactly the given size.",
+    "superNames":["meta_dimension"],
+    "dtypeStr":"i64"
+  },{
+    "name":"meta_dimension_symbolic",
+    "description":"A symbolic (variable) dimension, contains the name of a meta_info_entry with meta_type *type-dimension* that represents this dimension.",
+    "superNames":["meta_dimension"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_enum",
+    "kindStr":"type_section",
+    "description":"Describes each of the possible values of an enumeration meta_info_entry",
+    "superNames":["meta_info_entry"]
+  },{
+    "name":"meta_enum_description",
+    "description":"The description of the meaning of the meta_enum_value.",
+    "superNames":["meta_enum"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_enum_from",
+    "description":"The meta_name of a meta_info_entry from which to take the meta_enum to easily share enumeration values across several meta_info_entry",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_enum_value",
+    "description":"One of the possible values of an enumeration.",
+    "superNames":["meta_enum"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_info_entry",
+    "kindStr":"type_section",
+    "description":"A dictionary collection some meta_info_entry entries, their dependencies.\nThe dictionary is versioned using sematic versioning.",
+    "superNames":["meta_dictionary"],
+    "meta_chosen_key":"meta_name"
+  },{
+    "name":"meta_inject_if_abstract_type",
+    "description":"Either the name of an abstract type that is required by all sections this is injected in, or '!' and the name of an abstract type that should not be parent of any of the sections that this section should be injected in. This further refines the selection done by meta_inject_if_section_regexp",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"meta_inject_if_section_regexp",
+    "description":"A regular expression (or meta name) that the sections this is injected in need to satisfy. Can be defined only in top level sections.\nTogether with meta_inject_if_abstract_type it can be used to define the sections in which all the values and sections contained in this section are added (injected).\nIf empty this is injected in *no* section.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"meta_name",
+    "description":"This is one of the most important properties of a Meta Info as it is used to identify it.\nOnly lowercase roman letters, numbers and underscore are allowed.\nThe prefixes t\\_, u\\_, \\_, x\\_ are reserved for temporary, user defined, non standard, and code specific Meta Info respectively.\nExplicit names are preferred to abbreviations, and the name should always contain at least an `\\_'.\nThe name can uniquely identify the meta_info_entry in a meta_dictionary or in its context section.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_parent_section",
+    "description":"The name of the meta_info_entry with meta_type *type-section*. It is required, for *type-value* and optional for type-section. It is what structures the data.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_query_enum",
+    "kindStr":"type_section",
+    "description":"Describes possible values that can be used to query this field, but are not really stored in it.",
+    "superNames":["meta_info_entry"],
+    "meta_chosen_key":"meta_query_value"
+  },{
+    "name":"meta_query_expansion",
+    "description":"The query this entry is equivalent to.",
+    "superNames":["meta_query_enum"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_query_regex",
+    "description":"a regular expression to use instead of the meta_query_values to identify this entry",
+    "superNames":["meta_query_enum"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_query_values",
+    "description":"The equivalent values that can be sugested for autocompletion",
+    "superNames":["meta_query_enum"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"meta_range_expected",
+    "kindStr":"type_section",
+    "description":"Gives the expected range for the values corresponding to this meta_info_entry",
+    "superNames":["meta_info_entry"]
+  },{
+    "name":"meta_range_kind",
+    "description":"Defines the quantity the range is about.",
+    "superNames":["meta_range_expected"],
+    "dtypeStr":"C",
+    "values":{
+      "abs-value":"The range is for the absolute value of the scalar value (or every component for arrays)",
+      "norm2":"The range is for the euclidean norm of the value",
+      "repetitions":"The number of repetitions for a repeating value",
+      "utf8-length":"The length of the string value using utf-8 encoding",
+      "value":"The range is for the scalar value (or every component for arrays)"
+    }
+  },{
+    "name":"meta_range_maximum",
+    "description":"The maximum expected value",
+    "superNames":["meta_range_expected"],
+    "dtypeStr":"f"
+  },{
+    "name":"meta_range_minimum",
+    "description":"The minimum expected value",
+    "superNames":["meta_range_expected"],
+    "dtypeStr":"f"
+  },{
+    "name":"meta_range_units",
+    "description":"The units used for the range",
+    "superNames":["meta_range_expected"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_referenced_section",
+    "description":"If the datatype is a reference this attribute must give the name of the sections that is referenced.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_repeats",
+    "description":"If the value (section) can be repeated several times within a meta_parent_section.\nThe default is true for *type-section* and false for *type-value*.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"b"
+  },{
+    "name":"meta_required",
+    "description":"If each meta_parent_section requires at least a value of this type.\nDefaults to false.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"b"
+  },{
+    "name":"meta_type",
+    "description":"Defines the type of meta_info_entry",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C",
+    "values":{
+      "type-abstract":"An abstract type is used only to classify meta_info_entry.\nAbstract types have no influence on how the data is stored, that is defined exclusively by sections and values, but have two important functions: Help describing values or sections (augmenting the textual description), and enable simpler or automatic handling of conceptually related quantities.\nFor instance all energies can have the abstract type energy_type, and all parameters that influence the computation of the xc functional have the abstract type settings_xc. This way one can treat all energies in the same way, or compute a checksum or compare all settings that influence the xc calculation, even code specific ones that are not part of the public Meta Info, as long as they correctly set their abstract types.",
+      "type-dimension":"Represents a ``symbolic'' dimension, its name should begin with number\\_of\\_.\nThe dimension does not need to be explicitly stored anywhere, but can be extracted form the shape of a value that uses it.",
+      "type-section":"A section, this is a bit like a class in object oriented programming, or table in a relational database.\nThere might be many objects (rows) corresponding to this.\nSections structure the data by grouping together the values contained in them, and their subsections.",
+      "type-value":"A concrete data value. For example the meta info program_name has this meta_type. Conceptually meta info of this type corresponds to a column in a relational database.\nThis is the default type if not specified."
+    }
+  },{
+    "name":"meta_units",
+    "description":"String giving the units used by default for the data of this Meta Info. They should be SI units, or combination of them using ``*'' and ``^$exponent$''.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"meta_value_validate",
+    "description":"Either a regexp or ')uri' or ')uri-reference'.",
+    "superNames":["meta_info_entry"],
+    "dtypeStr":"C"
+  },{
+    "name":"metadict_dependency_gid",
+    "description":"A Gid uniquely identifying the dependency (and recursively all its dependencies)",
+    "superNames":["metadict_require"],
+    "dtypeStr":"C"
+  },{
+    "name":"metadict_description",
+    "description":"A string describing the group of Meta Info contained in the dictionary.",
+    "superNames":["meta_dictionary"],
+    "dtypeStr":"C"
+  },{
+    "name":"metadict_gid",
+    "description":"A Gid uniquely identifying the dictionary and recursively all its dependencies",
+    "superNames":["meta_dictionary"],
+    "dtypeStr":"C"
+  },{
+    "name":"metadict_name",
+    "description":"The name of the dictionary.",
+    "superNames":["meta_dictionary"],
+    "dtypeStr":"C"
+  },{
+    "name":"metadict_require",
+    "description":"A list of other dictionaries that should be loaded to undestand this dictionary.",
+    "superNames":["meta_dictionary"],
+    "dtypeStr":"C"
+  },{
+    "name":"metadict_version",
+    "description":"A string containing the version of the dictionary using [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html)",
+    "superNames":["meta_dictionary"],
+    "dtypeStr":"C"
+  }]
+}

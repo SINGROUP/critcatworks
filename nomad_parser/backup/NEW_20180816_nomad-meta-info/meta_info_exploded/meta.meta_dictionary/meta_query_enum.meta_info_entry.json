@@ -1,0 +1,11 @@
+{
+  "meta_name":"meta_query_enum",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Describes possible values that can be used to query this field, but are not ",
+    "really stored in it."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_repeats":true,
+  "meta_context_identifier":[],
+  "meta_chosen_key":"meta_query_value"
+}

@@ -1,0 +1,7 @@
+{
+  "meta_name":"parser_id",
+  "meta_type":"type-value",
+  "meta_description":"id of the parser used to extract this information",
+  "meta_parent_section":"section_calculation_info",
+  "meta_data_type":"string"
+}

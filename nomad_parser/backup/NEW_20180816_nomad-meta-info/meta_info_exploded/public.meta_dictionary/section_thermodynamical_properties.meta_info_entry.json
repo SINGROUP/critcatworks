@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_thermodynamical_properties",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section that defines thermodynamical properties about the system in a ",
+    "section_frame_sequence."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

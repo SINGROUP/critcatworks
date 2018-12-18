@@ -1,0 +1,136 @@
+{
+  "metadict_name":"dl_poly",
+  "metadict_description":[
+    "meta info used by the EP parser, all names are expected to start with ",
+    "x_dl_poly_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_dl_poly_barostat_target_pressure",
+    "meta_type":"type-value",
+    "meta_description":"MD barostat target pressure.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"float",
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_dl_poly_barostat_tau",
+    "meta_type":"type-value",
+    "meta_description":"MD barostat relaxation time.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_dl_poly_integrator_dt",
+    "meta_type":"type-value",
+    "meta_description":"MD integration time step.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_dl_poly_integrator_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD integrator type, valid values are defined in the integrator_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_dl_poly_md_molecular_types",
+    "meta_type":"type-value",
+    "meta_description":"Number of molecular types in topology",
+    "meta_parent_section":"x_dl_poly_section_md_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_dl_poly_md_molecule_type_id",
+    "meta_type":"type-value",
+    "meta_description":"Molecule type id",
+    "meta_parent_section":"x_dl_poly_section_md_molecule_type",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_dl_poly_md_molecule_type_name",
+    "meta_type":"type-value",
+    "meta_description":"Molecule type name",
+    "meta_parent_section":"x_dl_poly_section_md_molecule_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_dl_poly_number_of_steps_requested",
+    "meta_type":"type-value",
+    "meta_description":"Number of requested MD integration time steps.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_dl_poly_program_version_date",
+    "meta_type":"type-value",
+    "meta_description":"Program version date",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_dl_poly_section_md_molecule_type",
+    "meta_type":"type-section",
+    "meta_description":"Section to store molecule type information",
+    "meta_parent_section":"x_dl_poly_section_md_topology",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_dl_poly_section_md_topology",
+    "meta_type":"type-section",
+    "meta_description":"Section modelling the MD topology",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_dl_poly_step_number",
+    "meta_type":"type-value",
+    "meta_description":"MD total step number",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_dl_poly_step_number_equilibration",
+    "meta_type":"type-value",
+    "meta_description":"MD equilibration step number",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_dl_poly_system_description",
+    "meta_type":"type-value",
+    "meta_description":"Simulation run title",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_dl_poly_thermostat_target_temperature",
+    "meta_type":"type-value",
+    "meta_description":"MD thermostat target temperature.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"K"
+  },{
+    "meta_name":"x_dl_poly_thermostat_tau",
+    "meta_type":"type-value",
+    "meta_description":"MD thermostat relaxation time.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_dl_poly_thermostat_temperature",
+    "meta_type":"type-value",
+    "meta_description":"Thermostat coupling temperature",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  }]
+}

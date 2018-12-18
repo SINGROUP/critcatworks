@@ -1,0 +1,53 @@
+{
+  "meta_name":"meta_data_type",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The basic type of the data corresponding to this meta_info_entry.\n",
+    "Formally also *binary* and *json* could be used, but they were avoided until ",
+    "now because opaque, and more difficult to ",
+    "document."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"int",
+    "meta_enum_description":"A 32 bit signed integer (equivalent to int32)"
+  },{
+    "meta_enum_value":"int32",
+    "meta_enum_description":"A 32 bit signed integer"
+  },{
+    "meta_enum_value":"int64",
+    "meta_enum_description":"A 64 bit signed integer"
+  },{
+    "meta_enum_value":"reference",
+    "meta_enum_description":[
+      "An internal reference. This contains the index of the referenced ",
+      "meta_referenced_sections. For references to other documents a string with a ",
+      "nomad uri should be used."]
+  },{
+    "meta_enum_value":"float32",
+    "meta_enum_description":[
+      "A single precision (32 bit) floating point ",
+      "value"]
+  },{
+    "meta_enum_value":"float",
+    "meta_enum_description":[
+      "A double precision (64 bit) floating point value (equivalent to ",
+      "float64)"]
+  },{
+    "meta_enum_value":"float64",
+    "meta_enum_description":[
+      "A double precision (64 bit) floating point ",
+      "value"]
+  },{
+    "meta_enum_value":"boolean",
+    "meta_enum_description":"A boolean value (true or false)"
+  },{
+    "meta_enum_value":"json",
+    "meta_enum_description":[
+      "A json value. Its use is discouraged, as it does lead to inferior documentation ",
+      "compared to using the meta info directly."]
+  },{
+    "meta_enum_value":"string",
+    "meta_enum_description":"A string of unicode characters"
+  }]
+}

@@ -1,0 +1,15 @@
+{
+  "meta_name":"basis_set_atom_centered_short_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Code-specific, but explicative, base name for the basis set (not unique). ",
+    "Details are explained in the [basis_set_atom_centered_short_name wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/basis",
+    "-set-atom-centered-short-name), this name should not contain the *atom kind* ",
+    "(to simplify the use of a single name for multiple ",
+    "elements)."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"string"
+}

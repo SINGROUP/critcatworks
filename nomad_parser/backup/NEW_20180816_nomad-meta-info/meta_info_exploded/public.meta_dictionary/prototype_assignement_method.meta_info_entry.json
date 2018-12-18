@@ -1,0 +1,14 @@
+{
+  "meta_name":"prototype_assignement_method",
+  "meta_type":"type-value",
+  "meta_description":"Method used to identify the prototype",
+  "meta_parent_section":"section_prototype",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"normalized-wyckoff",
+    "meta_enum_description":[
+      "normalized wyckoff positions and spacegroups calculated with the default ",
+      "symmetry method were used to identify the ",
+      "prototype"]
+  }]
+}

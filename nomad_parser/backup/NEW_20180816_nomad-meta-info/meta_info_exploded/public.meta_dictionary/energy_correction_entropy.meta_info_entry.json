@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_correction_entropy",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Entropy correction to the potential energy to compensate for the change in ",
+    "occupation so that forces at finite T do not need to keep the change of ",
+    "occupation in account. Defined consistently with ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

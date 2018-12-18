@@ -1,0 +1,9 @@
+{
+  "meta_name":"springer_formula",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The formula of current material according to Springer ",
+    "Materials"],
+  "meta_parent_section":"section_springer_material",
+  "meta_data_type":"string"
+}

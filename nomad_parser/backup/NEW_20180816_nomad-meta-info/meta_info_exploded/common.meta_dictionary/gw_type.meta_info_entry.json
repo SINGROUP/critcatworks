@@ -1,0 +1,13 @@
+{
+  "meta_name":"gw_type",
+  "meta_type":"type-value",
+  "meta_description":[
+    "GW methodology: G0W0; ev-scGW: (eigenvalues self-consistent GW) \u2013 Phys.Rev.B ",
+    "34, 5390 (1986); qp-scGW: (quasi-particle self-consistent GW) \u2013 Phys. Rev. ",
+    "Lett. 96, 226402 (2006)  scGW0: (self-consistent G with fixed W0) \u2013 Phys.Rev.B ",
+    "54, 8411 (1996); scG0W: (self-consistent W with fixed G0); scGW: ",
+    "(self-consistent GW) \u2013 Phys. Rev. B 88, 075105 ",
+    "(2013)"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

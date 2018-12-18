@@ -1,0 +1,13 @@
+{
+  "meta_name":"run_hosts",
+  "meta_type":"type-value",
+  "meta_description":[
+    "An associative list of host(s) that performed this simulation. This is an ",
+    "associative list that contains program-dependent information (*key*) on how the ",
+    "host was used (*value*). Useful for debugging ",
+    "purposes."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "parallelization_info"],
+  "meta_data_type":"json"
+}

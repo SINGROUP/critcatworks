@@ -1,0 +1,15 @@
+{
+  "meta_name":"electronic_structure_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Non-unique string identifying the used electronic structure method. It is not ",
+    "unique in the sense that two calculations with the same ",
+    "electronic_structure_method string may have not been performed with exactly the ",
+    "same method. The allowed strings are given in the [electronic structure method ",
+    "wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/",
+    "electronic-structure-method)."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_xc"],
+  "meta_data_type":"string"
+}

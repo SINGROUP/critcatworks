@@ -1,0 +1,68 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "quasi harmonic meta info, not specific to any code",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "The chemical formula of the material for which the quasi-harmonic properties were calculated",
+      "dtypeStr": "C",
+      "name": "x_qhp_formula",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Holds the bulk modulus that is calculated from the helmolz free energy calculated from the quasi harmonic approximation",
+      "dtypeStr": "f",
+      "name": "x_qhp_quasi_harmonic_bulk_modulus",
+      "shape": [
+        "number_of_thermodynamical_property_values"
+      ],
+      "superNames": [
+        "section_thermodynamical_properties"
+      ],
+      "units": "J*m**-3"
+    }, {
+      "description": "Holds the quasi harmonic free energy per atom",
+      "dtypeStr": "f",
+      "name": "x_qhp_quasi_harmonic_free_energy",
+      "shape": [
+        "number_of_thermodynamical_property_values"
+      ],
+      "superNames": [
+        "section_thermodynamical_properties"
+      ],
+      "units": "J"
+    }, {
+      "description": "Holds the quasi harmonic thermal expansion",
+      "dtypeStr": "f",
+      "name": "x_qhp_quasi_harmonic_thermal_expansion",
+      "shape": [
+        "number_of_thermodynamical_property_values"
+      ],
+      "superNames": [
+        "section_thermodynamical_properties"
+      ],
+      "units": "K**-1"
+    }, {
+      "description": "Holds the temperature dependent volume calculated using the quasi harmonic approximation",
+      "dtypeStr": "f",
+      "name": "x_qhp_quasi_harmonic_volume",
+      "shape": [
+        "number_of_thermodynamical_property_values"
+      ],
+      "superNames": [
+        "section_thermodynamical_properties"
+      ],
+      "units": "m**3"
+    }, {
+      "description": "space group detected (and used) by the quasi harmonic program",
+      "dtypeStr": "i",
+      "name": "x_qhp_space_group_3D_number",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }]
+}

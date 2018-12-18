@@ -1,0 +1,11 @@
+{
+  "meta_name":"system_composition",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Composition, i.e. cumulative chemical formula with atoms ordered by decreasing ",
+    "atomic number Z."],
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

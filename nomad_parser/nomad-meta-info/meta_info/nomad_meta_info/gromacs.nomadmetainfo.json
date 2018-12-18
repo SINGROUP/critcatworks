@@ -1,0 +1,2722 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the GROMACS parser, all names are expected to start with x_gromacs_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "PBC image flag index.",
+      "dtypeStr": "i",
+      "name": "x_gromacs_atom_positions_image_index",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "units": " ",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Position of the atoms in a scaled format [0, 1].",
+      "dtypeStr": "f",
+      "name": "x_gromacs_atom_positions_scaled",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "units": " ",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Position of the atoms wrapped back to the periodic box.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_atom_positions_wrapped",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "units": "m",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Lattice dimensions in a vector. Vector includes [a, b, c] lengths.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_lattice_lengths",
+      "repeats": true,
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "section_system",
+        "configuration_core"
+      ]
+    }, {
+      "description": "Angles of lattice vectors. Vector includes [alpha, beta, gamma] in degrees.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_lattice_angles",
+      "repeats": true,
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "section_system",
+        "configuration_core"
+      ]
+    }, {
+      "description": "MD barostat target pressure.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_barostat_target_pressure",
+      "shape": [],
+      "units": "Pa",
+      "superNames": [
+        "settings_barostat"
+      ]
+    }, {
+      "description": "MD barostat relaxation time.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_barostat_tau",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_barostat"
+      ]
+    }, {
+      "description": "MD barostat type, valid values are defined in the barostat_type wiki page.",
+      "dtypeStr": "C",
+      "name": "x_gromacs_barostat_type",
+      "shape": [],
+      "superNames": [
+        "settings_barostat"
+      ]
+    }, {
+      "description": "MD integration time step.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_integrator_dt",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "MD integrator type, valid values are defined in the integrator_type wiki page.",
+      "dtypeStr": "C",
+      "name": "x_gromacs_integrator_type",
+      "shape": [],
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "Periodic boundary condition type in the sampling (non-PBC or PBC).",
+      "dtypeStr": "C",
+      "name": "x_gromacs_periodicity_type",
+      "shape": [],
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "Atom name of an atom in topology definition.",
+      "name": "x_gromacs_atom_name",
+      "dtypeStr": "C",
+      "shape": [], 
+      "superNames": [
+        "section_atom_type"
+      ]   
+    }, {
+      "description": "Atom type of an atom in topology definition.",
+      "name": "x_gromacs_atom_type",
+      "dtypeStr": "C",
+      "shape": [], 
+      "superNames": [
+        "section_atom_type"
+      ]   
+    }, {
+      "description": "Atom type of an atom in topology definition.",
+      "name": "x_gromacs_atom_element",
+      "dtypeStr": "C",
+      "shape": [], 
+      "superNames": [
+        "section_atom_type"
+      ]   
+    }, {
+      "description": "Element symbol of an atom type.",
+      "dtypeStr": "C",
+      "name": "x_gromacs_atom_type_element",
+      "shape": [],
+      "superNames": [
+        "section_atom_type"
+      ]
+    }, {
+      "description": "van der Waals radius of an atom type.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_atom_type_radius",
+      "shape": [],
+      "superNames": [
+        "section_atom_type"
+      ]
+    }, {
+      "description": "Reference to the atom type of each interaction atoms.",
+      "dtypeStr": "r",
+      "name": "x_gromacs_interaction_atom_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": ["number_of_atoms_per_interaction"],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Number of atoms involved in this type.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "number_of_atoms_per_type",
+      "shape": [],
+      "superNames": [
+        "section_atom_type"
+      ]
+    }, {
+      "description": "Reference to the atoms of each atom type.",
+      "dtypeStr": "r",
+      "name": "x_gromacs_atom_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type",
+        "x_gromacs_section_atom_to_atom_type_ref"
+      ],
+      "shape": ["number_of_atoms_per_type"],
+      "superNames": [
+        "section_topology",
+        "x_gromacs_section_atom_to_atom_type_ref"
+      ]
+    }, {
+      "description": "Langevin thermostat damping factor.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_langevin_gamma",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "Reference to the atom type of each molecule interaction atoms.",
+      "dtypeStr": "r",
+      "name": "x_gromacs_molecule_interaction_atom_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": ["number_of_atoms_per_interaction"],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "Number of defined pair interactions within a molecule (L-J pairs).",
+      "dtypeStr": "i",
+      "name": "x_gromacs_number_of_defined_molecule_pair_interactions",
+      "shape": [],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "Number of defined pair interactions (L-J pairs).",
+      "dtypeStr": "i",
+      "name": "x_gromacs_number_of_defined_pair_interactions",
+      "shape": [],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Number of requested MD integration time steps.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_number_of_steps_requested",
+      "shape": [],
+      "superNames": [
+        "settings_integrator"
+      ]
+    }, {
+      "description": "Reference to the atom type for pair interactions.",
+      "dtypeStr": "r",
+      "name": "x_gromacs_pair_interaction_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": [
+        "x_gromacs_number_of_defined_pair_interactions",
+        "number_of_atoms_per_interaction"
+      ],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Pair interactions parameters.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_pair_interaction_parameters",
+      "shape": [
+        "x_gromacs_number_of_defined_pair_interactions",
+        2
+      ],
+      "superNames": [
+        "section_interaction"
+      ]
+    }, {
+      "description": "Molecule pair interactions parameters.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_pair_molecule_interaction_parameters",
+      "shape": [
+        "number_of_defined_molecule_pair_interactions",
+        2
+      ],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "Reference to the atom type for pair interactions within a molecule.",
+      "dtypeStr": "r",
+      "name": "x_gromacs_pair_molecule_interaction_to_atom_type_ref",
+      "referencedSections": [
+        "section_atom_type"
+      ],
+      "shape": [
+        "x_gromacs_number_of_defined_pair_interactions",
+        "number_of_atoms_per_interaction"
+      ],
+      "superNames": [
+        "section_molecule_interaction"
+      ]
+    }, {
+      "description": "MD thermostat level (see wiki: single, multiple, regional).",
+      "dtypeStr": "C",
+      "name": "x_gromacs_thermostat_level",
+      "shape": [],
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "MD thermostat target temperature.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_thermostat_target_temperature",
+      "shape": [],
+      "units": "K",
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "MD thermostat relaxation time.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_thermostat_tau",
+      "shape": [],
+      "units": "s",
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "MD thermostat type, valid values are defined in the thermostat_type wiki page.",
+      "dtypeStr": "C",
+      "name": "x_gromacs_thermostat_type",
+      "shape": [],
+      "superNames": [
+        "settings_thermostat"
+      ]
+    }, {
+      "description": "Program version date.",
+      "dtypeStr": "C",
+      "name": "x_gromacs_program_version_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Program task no.",
+      "name": "x_gromacs_parallel_task_nr",
+      "dtypeStr": "f",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Number of tasks in parallel program (MPI).",
+      "name": "x_gromacs_number_of_tasks",
+      "dtypeStr": "f",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Gromacs program module (gmx) version.",
+      "name": "x_gromacs_program_module_version",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Gromacs program license.",
+      "name": "x_gromacs_program_license",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+    "description":"test",
+    "name": "x_gromacs_xlo_xhi",
+    "superNames": [
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  }, {
+    "description":"Filename of data file",
+    "name": "x_gromacs_data_file_store",
+    "superNames": [
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  }, {
+    "description":"dummy",
+    "name": "x_gromacs_dummy",
+    "superNames": [
+      "section_system",
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  },  {
+    "name": "x_gromacs_section_input_output_files",
+    "kindStr": "type_section",
+    "description": "Section to store input and output file names",
+    "repeats": true,
+    "shape": [],
+    "superNames": [
+      "section_run"
+    ]
+  }, {
+    "description": "Gromacs input topology file.",
+    "name": "x_gromacs_inout_file_topoltpr",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_input_output_files"
+    ]
+  }, {
+    "description": "Gromacs input trajectory file.",
+    "name": "x_gromacs_inout_file_trajtrr",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_input_output_files"
+    ]
+  }, {
+    "description": "Gromacs input compressed trajectory file.",
+    "name": "x_gromacs_inout_file_trajcompxtc",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_input_output_files"
+    ]
+  }, {
+    "description": "Gromacs input coordinates and state file.",
+    "name": "x_gromacs_inout_file_statecpt",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_input_output_files"
+    ]
+  }, {
+    "description": "Gromacs output configuration file.",
+    "name": "x_gromacs_inout_file_confoutgro",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_input_output_files"
+    ]
+  }, {
+    "description": "Gromacs output energies file.",
+    "name": "x_gromacs_inout_file_eneredr",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_input_output_files"
+    ]
+  }, {
+    "description": "Parameters of mdin belonging to x_gromacs_section_control_parameters.",
+    "kindStr": "type_abstract_document_content",
+    "name": "x_gromacs_mdin_input_output_files",
+    "repeats": true,
+    "superNames": [
+      "x_gromacs_section_input_output_files"
+    ]
+  },   {
+    "name": "x_gromacs_section_control_parameters",
+    "kindStr": "type_section",
+    "description": "Section to store the input and output control parameters",
+    "repeats": true,
+    "shape": [],
+    "superNames": [
+      "section_run"
+    ]
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gromacs_version",
+    "dtypeStr": "C",
+    "shape": [],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_precision",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_memory_model",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_mpi_library",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_openmp_support",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gpu_support",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_opencl_support",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_invsqrt_routine",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_simd_instructions",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_fft_library",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rdtscp_usage",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_cxx11_compilation",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_tng_support",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_tracing_support",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_built_on",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_built_by",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_build_osarch",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_build_cpu_vendor",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_build_cpu_brand",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_build_cpu_family",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_build_cpu_features",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_c_compiler",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_c_compiler_flags",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_cxx_compiler",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_cxx_compiler_flags",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_boost_version",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_integrator",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_tinit",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_dt",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nsteps",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_initstep",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_simulationpart",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_commmode",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstcomm",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_bdfric",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ldseed",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_emtol",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_emstep",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_niter",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_fcstep",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstcgsteep",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nbfgscorr",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rtpi",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstxout",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstvout",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstfout",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstlog",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstcalcenergy",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstenergy",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstxoutcompressed",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_compressedxprecision",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_cutoffscheme",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstlist",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstype",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_pbc",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_periodicmolecules",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_verletbuffertolerance",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rlist",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rlistlong",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstcalclr",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_coulombtype",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_coulombmodifier",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rcoulombswitch",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rcoulomb",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_epsilonr",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_epsilonrf",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_vdwtype",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_vdwmodifier",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rvdwswitch",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rvdw",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_dispcorr",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_tableextension",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_fourierspacing",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_fouriernx",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_fourierny",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_fouriernz",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_pmeorder",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ewaldrtol",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ewaldrtollj",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ljpmecombrule",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ewaldgeometry",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_epsilonsurface",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_implicitsolvent",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbalgorithm",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstgbradii",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rgbradii",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbepsilonsolvent",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbsaltconc",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbobcalpha",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbobcbeta",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbobcgamma",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_gbdielectricoffset",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_saalgorithm",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_sasurfacetension",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_tcoupl",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nsttcouple",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nhchainlength",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_printnosehooverchainvariables",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_pcoupl",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_pcoupltype",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstpcouple",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_taup",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_compressibility0",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_compressibility1",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_compressibility2",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_refp0",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_refp1",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_refp2",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_refcoordscaling",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_posrescom0",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_posrescom1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_posrescom2",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_posrescomb0",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_posrescomb1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_posrescomb2",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_qmmm",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_qmconstraints",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_qmmmscheme",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_mmchargescalefactor",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ngqm",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_constraintalgorithm",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_continuation",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_shakesor",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_shaketol",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_lincsorder",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_lincsiter",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_lincswarnangle",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nwall",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_walltype",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_wallrlinpot",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_wallatomtype0",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_wallatomtype1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_walldensity0",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_walldensity1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_wallewaldzfac",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_pull",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_rotation",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_interactivemd",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_disre",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_disreweighting",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_disremixed",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_drfc",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_drtau",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstdisreout",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_orirefc",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_oriretau",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nstorireout",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_freeenergy",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_cosacceleration",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_deform0",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_deform1",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_deform2",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_simulatedtempering",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ex",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ext",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ey",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_eyt",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ez",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_ezt",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_swapcoords",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_adress",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userint1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userint2",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userint3",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userint4",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userreal1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userreal2",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userreal3",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_userreal4",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nrdf",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_reft",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_taut",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_annealing",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_annealingnpoints",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_acc",
+    "dtypeStr": "f",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_nfreeze",
+    "dtypeStr": "C",
+    "shape": [
+      3
+    ],
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_energygrpflags0",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_energygrpflags1",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "description": "Gromacs running environment and control parameters.",
+    "name": "x_gromacs_inout_control_energygrpflags2",
+    "dtypeStr": "C",
+    "shape": [], 
+    "superNames": [
+      "section_run",
+      "x_gromacs_section_control_parameters"
+    ]   
+  }, {
+    "name": "x_gromacs_section_atom_to_atom_type_ref",
+    "kindStr": "type_section",
+    "description": "Section to store atom label to atom type definition list",
+    "repeats": true,
+    "shape": [],
+    "superNames": [
+      "section_topology"
+    ]
+  }, {
+    "description": "Parameters of mdin belonging to x_gromacs_section_control_parameters.",
+    "kindStr": "type_abstract_document_content",
+    "name": "x_gromacs_mdin_control_parameters",
+    "repeats": true,
+    "superNames": [
+      "x_gromacs_section_control_parameters"
+    ]
+  },   {
+    "description":"finline in mdin",
+    "name": "x_gromacs_mdin_finline",
+    "superNames": [
+      "section_system",
+      "section_run"
+    ],
+    "dtypeStr": "C",
+    "shape": []
+  },  {
+    "name": "x_gromacs_input_units_store",
+    "description": "It determines the units of all quantities specified in the input script and data file, as well as quantities output to the screen, log file, and dump files.",
+    "superNames": ["section_topology"],
+    "dtypeStr": "C",
+    "shape": []
+  },
+    {
+      "name": "x_gromacs_data_bond_types_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_bond_count_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_angle_count_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_atom_types_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_dihedral_count_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "i",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_angles_store",
+      "description": "store temporarly",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_angle_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_bond_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_dihedral_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_dihedral_coeff_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_masses_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_data_topo_list_store",
+      "description": "tmp",
+      "superNames": ["section_topology"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_traj_timestep_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_traj_number_of_atoms_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_traj_box_bound_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },    {
+      "name": "x_gromacs_traj_box_bounds_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_traj_variables_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_traj_atoms_store",
+      "description": "tmp",
+      "superNames": ["section_system"],
+      "dtypeStr": "C",
+      "shape": []
+    },
+    {
+      "name": "x_gromacs_program_working_path",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_program_execution_host",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_program_execution_path",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_program_module",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_program_execution_date",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_program_execution_time",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_mdin_header",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    },
+    {
+      "name": "x_gromacs_mdin_wt",
+      "description": "tmp",
+      "dtypeStr": "C",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Gives the number of volumes in this sequence of frames, see x_gromacs_frame_sequence_volume.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_volumes_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of densities in this sequence of frames, see x_gromacs_frame_sequence_density.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_densities_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of ubond_energies in this sequence of frames, see x_gromacs_frame_sequence_ubond_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_ubond_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of bond_energies in this sequence of frames, see x_gromacs_frame_sequence_bond_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_bond_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of coulomb_sr_energies in this sequence of frames, see x_gromacs_frame_sequence_coulomb_sr_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_coulomb_sr_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of coulomb_14_energies in this sequence of frames, see x_gromacs_frame_sequence_coulomb_14_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_coulomb_14_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of lj_sr_energies in this sequence of frames, see x_gromacs_frame_sequence_lj_sr_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_lj_sr_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of lj_14_energies in this sequence of frames, see x_gromacs_frame_sequence_lj_14_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_lj_14_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of proper_dihedral_energies in this sequence of frames, see x_gromacs_frame_sequence_proper_dihedral_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_proper_dihedral_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of improper_dihedral_energies in this sequence of frames, see x_gromacs_frame_sequence_improper_dihedral_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_improper_dihedral_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of cmap_dihedral_energies in this sequence of frames, see x_gromacs_frame_sequence_cmap_dihedral_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_cmap_dihedral_energies_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Gives the number of constrain_rmsd_energies in this sequence of frames, see x_gromacs_frame_sequence_constrain_rmsd_energy.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gromacs_number_of_constrain_rmsd_in_sequence",
+      "shape": [],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_densities values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_density_frames",
+      "shape": [
+        "x_gromacs_number_of_densities_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the density along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_density_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_density",
+      "shape": [
+        "x_gromacs_number_of_densities_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_ubond_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_ubond_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_ubond_energies_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the ubond_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_ubond_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_ubond_energy",
+      "shape": [
+        "x_gromacs_number_of_ubond_energies_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_coulomb_sr_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_coulomb_sr_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_coulomb_sr_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the coulomb_sr_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_coulomb_sr_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_coulomb_sr_energy",
+      "shape": [
+        "x_gromacs_number_of_coulomb_sr_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_coulomb_14_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_coulomb_14_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_coulomb_14_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the coulomb_14_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_coulomb_14_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_coulomb_14_energy",
+      "shape": [
+        "x_gromacs_number_of_coulomb_14_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_lj_sr_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_lj_sr_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_lj_sr_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the lj_sr_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_lj_sr_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_lj_sr_energy",
+      "shape": [
+        "x_gromacs_number_of_lj_sr_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_lj_14_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_lj_14_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_lj_14_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the lj_14_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_lj_14_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_lj_14_energy",
+      "shape": [
+        "x_gromacs_number_of_lj_14_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_constrain_rmsd_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_constrain_rmsd_frames",
+      "shape": [
+        "x_gromacs_number_of_constrain_rmsd_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the constrain_rmsd_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_constrain_rmsd_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_constrain_rmsd",
+      "shape": [
+        "x_gromacs_number_of_constrain_rmsd_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_cmap_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_cmap_dihedral_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_cmap_dihedral_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the cmap_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_cmap_dihedral_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_cmap_dihedral_energy",
+      "shape": [
+        "x_gromacs_number_of_cmap_dihedral_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_improper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_improper_dihedral_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_improper_dihedral_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the improper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_improper_dihedral_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_improper_dihedral_energy",
+      "shape": [
+        "x_gromacs_number_of_improper_dihedral_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_proper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_proper_dihedral_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_proper_dihedral_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the proper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_proper_dihedral_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_proper_dihedral_energy",
+      "shape": [
+        "x_gromacs_number_of_proper_dihedral_energy_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_bond_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_bond_energy_frames",
+      "shape": [
+        "x_gromacs_number_of_bond_energies_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the bond_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_bond_energy_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_bond_energy",
+      "shape": [
+        "x_gromacs_number_of_bond_energies_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the strictly increasing indices of the frames the x_gromacs_frame_sequence_volume values refers to. If not given it defaults to the trivial mapping 0,1,...",
+      "dtypeStr": "i",
+      "name": "x_gromacs_frame_sequence_volume_frames",
+      "shape": [
+        "x_gromacs_number_of_volumes_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Array containing the values of the volume along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_volume_frames.",
+      "dtypeStr": "f",
+      "name": "x_gromacs_frame_sequence_volume",
+      "shape": [
+        "x_gromacs_number_of_volumes_in_sequence"
+      ],
+      "superNames": [
+        "section_frame_sequence"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to section method.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gromacs_mdin_method",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "section for gathering values for MD steps",
+      "kindStr": "type_section",
+      "name": "x_gromacs_section_single_configuration_calculation",
+      "repeats": true,
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Parameters of mdout belonging to section_single_configuration_calculation.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gromacs_mdout_single_configuration_calculation",
+      "repeats": true,
+      "superNames": [
+        "x_gromacs_section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to section method.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gromacs_mdout_method",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to settings run.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gromacs_mdout_run",
+      "superNames": [
+        "settings_run"
+      ]
+    }, {
+      "description": "Parameters of mdin belonging to settings run.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gromacs_mdin_run",
+      "superNames": [
+        "settings_run"
+      ]
+    }
+  ]
+}

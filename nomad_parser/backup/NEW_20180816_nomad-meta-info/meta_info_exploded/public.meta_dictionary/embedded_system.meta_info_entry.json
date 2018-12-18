@@ -1,0 +1,9 @@
+{
+  "meta_name":"embedded_system",
+  "meta_type":"type-value",
+  "meta_description":"Is the system embedded into a host geometry?.",
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "configuration_core"],
+  "meta_data_type":"boolean"
+}

@@ -1,0 +1,17 @@
+{
+  "meta_name":"section_basis_set_atom_centered",
+  "meta_type":"type-section",
+  "meta_description":[
+    "This section describes the atom-centered basis set. The main contained ",
+    "information is a short, non unique but human-interpretable, name for ",
+    "identifying the basis set (basis_set_atom_centered_short_name), a longer, ",
+    "unique name (basis_set_atom_centered_unique_name), the atomic number of the ",
+    "atomic species the basis set is meant for (basis_set_atom_number), and a list ",
+    "of actual basis functions in the section_basis_functions_atom_centered ",
+    "section."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

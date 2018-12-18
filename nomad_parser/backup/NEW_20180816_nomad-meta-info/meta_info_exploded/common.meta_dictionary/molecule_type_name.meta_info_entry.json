@@ -1,0 +1,7 @@
+{
+  "meta_name":"molecule_type_name",
+  "meta_type":"type-value",
+  "meta_description":"(deprecated) Name of the molecule.",
+  "meta_parent_section":"section_molecule_type",
+  "meta_data_type":"string"
+}

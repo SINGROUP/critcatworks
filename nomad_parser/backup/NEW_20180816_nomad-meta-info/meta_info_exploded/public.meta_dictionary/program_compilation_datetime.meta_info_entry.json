@@ -1,0 +1,13 @@
+{
+  "meta_name":"program_compilation_datetime",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains the program compilation date and time from *Unix epoch* (00:00:00 UTC ",
+    "on 1 January 1970) in seconds. For date and times without a timezone, the ",
+    "default timezone GMT is used."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "program_info"],
+  "meta_data_type":"float",
+  "meta_units":"s"
+}

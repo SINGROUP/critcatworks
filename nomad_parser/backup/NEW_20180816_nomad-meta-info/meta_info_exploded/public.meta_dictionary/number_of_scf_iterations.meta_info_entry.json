@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_scf_iterations",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of performed self-consistent field (SCF) iterations at a ",
+    "specfied level of theory."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "scf_info"]
+}

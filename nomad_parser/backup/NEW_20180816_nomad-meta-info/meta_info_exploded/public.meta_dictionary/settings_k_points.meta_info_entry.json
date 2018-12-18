@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_k_points",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters that control the $k$-point ",
+    "mesh."],
+  "meta_abstract_types":[
+    "settings_potential_energy_surface"]
+}

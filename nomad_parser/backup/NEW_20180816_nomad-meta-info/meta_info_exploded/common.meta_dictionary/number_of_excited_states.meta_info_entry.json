@@ -1,0 +1,6 @@
+{
+  "meta_name":"number_of_excited_states",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of excited states.",
+  "meta_parent_section":"section_excited_states"
+}

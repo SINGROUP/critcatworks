@@ -1,0 +1,6 @@
+{
+  "meta_name":"number_of_groups",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of groups of this type.",
+  "meta_parent_section":"section_group"
+}

@@ -1,0 +1,8 @@
+{
+  "meta_name":"section_processor_log_event",
+  "meta_type":"type-section",
+  "meta_description":"A log event",
+  "meta_parent_section":"section_processor_log",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

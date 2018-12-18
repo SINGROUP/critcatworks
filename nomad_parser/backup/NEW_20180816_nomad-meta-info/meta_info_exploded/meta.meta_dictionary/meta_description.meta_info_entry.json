@@ -1,0 +1,12 @@
+{
+  "meta_name":"meta_description",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains a text meant for the users of the meta info, using [mark down ",
+    "format](https://daringfireball.net/markdown) with the following extensions:\n",
+    "  * \\$ is used to introduce mathematical notation using the latex format,\n",
+    " * names containing an ``\\_'' are assumed to refer to other meta ",
+    "info."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string"
+}

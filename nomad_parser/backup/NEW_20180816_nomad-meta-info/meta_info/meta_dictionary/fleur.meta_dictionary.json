@@ -1,0 +1,434 @@
+{
+  "metadict_name":"fleur",
+  "metadict_description":"metainfo for the fleur_parser",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_fleur_atom_coord_scale",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scales coordinates by 1/scale. If film=T, scales only x&y coordinates, if ",
+      "film=F also z"],
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_atom_name",
+    "meta_type":"type-value",
+    "meta_description":"name of atom, labelling non-equvalent atoms",
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_atom_pos_x",
+    "meta_type":"type-value",
+    "meta_description":"position of atom x",
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_atom_pos_y",
+    "meta_type":"type-value",
+    "meta_description":"position of atom y",
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_atom_pos_z",
+    "meta_type":"type-value",
+    "meta_description":"position of atom z",
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_atomic_number_z",
+    "meta_type":"type-value",
+    "meta_description":"atomic number Z",
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_energy_total",
+    "meta_type":"type-value",
+    "meta_description":"energy total",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_fleur_entropy",
+    "meta_type":"type-value",
+    "meta_description":"(tkb*entropy) TS",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_fleur_exch_pot",
+    "meta_type":"type-value",
+    "meta_description":"exchange-correlation potential, in out",
+    "meta_parent_section":"x_fleur_section_xc",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fleur_free_energy",
+    "meta_type":"type-value",
+    "meta_description":"free energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_fleur_g_max",
+    "meta_type":"type-value",
+    "meta_description":"Gmax",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_header",
+    "meta_type":"type-section",
+    "meta_description":"header (labels) of fleur.",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_fleur_iteration_number",
+    "meta_type":"type-value",
+    "meta_description":"scf iteration number",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fleur_k_max",
+    "meta_type":"type-value",
+    "meta_description":"Kmax is the plane wave cut-off",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_k_point_weight",
+    "meta_type":"type-value",
+    "meta_description":"weights of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_k_point_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of vector of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_k_point_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of vector of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_k_point_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of vector of k point",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_lattice_vector_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of vector of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_fleur_lattice_vector_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of vector of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_fleur_lattice_vector_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of vector of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_fleur_lexpansion_cutoff",
+    "meta_type":"type-value",
+    "meta_description":"l-expansion cutoff",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_logarythmic_increment",
+    "meta_type":"type-value",
+    "meta_description":"logarythmic increment",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_mt_gridpoints",
+    "meta_type":"type-value",
+    "meta_description":" muffin-tin gridpoints",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_mt_radius",
+    "meta_type":"type-value",
+    "meta_description":" muffin-tin radius",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_name_of_atom_type",
+    "meta_type":"type-value",
+    "meta_description":"name of atom type",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_nkptd",
+    "meta_type":"type-value",
+    "meta_description":"number of all the k-points",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_nr_equiv_atoms_in_this_atom_type",
+    "meta_type":"type-value",
+    "meta_description":"number_equiv_atoms_in_this_atom_type",
+    "meta_parent_section":"x_fleur_section_equiv_atoms",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_nr_of_atom_types",
+    "meta_type":"type-value",
+    "meta_description":"number of atom types",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_nr_of_valence_electrons",
+    "meta_type":"type-value",
+    "meta_description":[
+      "The number of electrons to be represented within the valence electron ",
+      "framework"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_nuclear_number",
+    "meta_type":"type-value",
+    "meta_description":"nuclear number",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_number_of_core_levels",
+    "meta_type":"type-value",
+    "meta_description":"x_fleur_number_of_core_levels",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_rec_lattice_vector_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of reciprocal lattice vector",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_fleur_rec_lattice_vector_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of reciprocal lattice vector",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_fleur_rec_lattice_vector_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of reciprocal lattice vector",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_fleur_section_equiv_atoms",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section containing a class of equivalent ",
+      "atoms"],
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_fleur_section_xc",
+    "meta_type":"type-section",
+    "meta_description":"exchange-correlation potential",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_fleur_smearing_kind",
+    "meta_type":"type-value",
+    "meta_description":[
+      "The Brillouin zone integration mode. It can be one of hist - Use the histogram ",
+      "mode, this is the default; gauss - Use Gaussian smearing, tria - Use the ",
+      "tetrahedron method"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fleur_smearing_temperature",
+    "meta_type":"type-value",
+    "meta_description":"Fermi smearing temperature set in Kelvin",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_units":"Kelvin"
+  },{
+    "meta_name":"x_fleur_smearing_width",
+    "meta_type":"type-value",
+    "meta_description":[
+      "specifies the width of the broadening, smearing for calculation of fermi-energy ",
+      "& weights. The Fermi smearing can be parametrized by this ",
+      "energy"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_fleur_space_group",
+    "meta_type":"type-value",
+    "meta_description":"space group",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fleur_system_name",
+    "meta_type":"type-value",
+    "meta_description":"user given name for this system",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fleur_system_namein",
+    "meta_type":"type-value",
+    "meta_description":[
+      "user given name for this system given in the inp ",
+      "file"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fleur_tot_elec_charge",
+    "meta_type":"type-value",
+    "meta_description":"total electronic charge",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_tot_for_fx",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL FORCE FOR ATOM TYPE, FX_TOT",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_tot_for_fy",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL FORCE FOR ATOM TYPE, FY_TOT",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_tot_for_fz",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL FORCE FOR ATOM TYPE, FZ_TOT",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_tot_for_x",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL FORCE FOR ATOM TYPE, X",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_tot_for_y",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL FORCE FOR ATOM TYPE, Y",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_tot_for_z",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL FORCE FOR ATOM TYPE, Z",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_fleur_tot_nucl_charge",
+    "meta_type":"type-value",
+    "meta_description":"total nuclear charge",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_total_atoms",
+    "meta_type":"type-value",
+    "meta_description":"total number of atoms",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_fleur_unit_cell_volume",
+    "meta_type":"type-value",
+    "meta_description":"unit cell volume",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"bohr^3"
+  },{
+    "meta_name":"x_fleur_unit_cell_volume_omega",
+    "meta_type":"type-value",
+    "meta_description":"unit cell volume omega tilda",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_version",
+    "meta_type":"type-value",
+    "meta_description":"Version of Fleur",
+    "meta_parent_section":"x_fleur_header",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_fleur_vol_interstitial",
+    "meta_type":"type-value",
+    "meta_description":"volume of interstitial region",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_fleur_xc_correction",
+    "meta_type":"type-value",
+    "meta_description":[
+      "informaion on relativistic correction for the exchange-correlation potential, ",
+      "in out"],
+    "meta_parent_section":"x_fleur_section_xc",
+    "meta_data_type":"string"
+  }]
+}
