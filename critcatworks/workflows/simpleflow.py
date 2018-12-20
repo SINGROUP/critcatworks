@@ -61,3 +61,26 @@ def dummy_workflow():
     firetask3 = FileTransferTask({'files': [{'src': 'words.txt', 'dest': '~/words.txt'}], 'mode': 'copy'})
     wf = Firework([firetask1, firetask2, firetask3])
     return wf
+
+if __name__ == "__main__":
+    import logging
+    IS_QUEUE = False
+    print("dummy workflow")
+    if IS_QUEUE:
+        logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
+    else:
+        logdir = str(pathlib.Path(".").resolve())
+        logging.basicConfig(filename = logdir + "/logfile_dummy_workflow.log", level=logging.INFO)
+
+    # set up the LaunchPad and reset it
+    launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
+    launchpad.reset('', require_password=False)
+
+    wf = dummy_workflow()
+
+    # store workflow and launch it locally, single shot
+    launchpad.add_wf(wf)
+
+
+    #launch_rocket(launchpad, FWorker())
+    rapidfire(launchpad, FWorker())

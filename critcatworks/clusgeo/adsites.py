@@ -8,6 +8,7 @@ from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
 import clusgeo
+import dscribe
 import numpy as np
 import logging
 
@@ -28,13 +29,6 @@ def adsorbate_pos_to_atoms_dict(structure, adspos, adsite_type):
 
     return ads_structures_dict
 
-
-def adsorbate_pos_to_descriptor(structure, adspos, adsite_type, all_atomtypes, rcut = 5.0):
-
-    all_atomtypes = [int(i) for i in all_atomtypes]
-    desc = clusgeo.environment.get_soap_sites(structure, adspos, rCut=rcut, NradBas=9, Lmax=6, 
-        crossOver=True, all_atomtypes=all_atomtypes)
-    return desc
 
 
 @explicit_serialize
@@ -72,6 +66,7 @@ class AdsiteCreationTask(FiretaskBase):
 
         # going through nc atoms
         all_atomtypes = fw_spec["nc_atomic_numbers"]
+        all_atomtypes = [int(i) for i in all_atomtypes]
         nc_structures_dict = fw_spec["nc_structures"]
         for idx, atoms_dict in enumerate(nc_structures_dict):
             logging.debug("ATOMS DICT")
@@ -88,19 +83,25 @@ class AdsiteCreationTask(FiretaskBase):
             ads_pos_lst = []
 
             # running clusgeo on cluster
-            surfatoms = clusgeo.surface.get_surface_atoms(atoms)
-            logging.debug(len(surfatoms))
+            cluster = clusgeo.ClusGeo(atoms)
+            cluster.get_surface_atoms()
+            descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
+                nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
+            cluster.descriptor_setup = descriptor_setup
+
             for adsite_type in adsite_types:
                 if adsite_type == "top":
-                    adsites = clusgeo.surface.get_top_sites(atoms, surfatoms)
+                    adsite_type_int = 1
                 elif adsite_type == "bridge":
-                    adsites = clusgeo.surface.get_edge_sites(atoms, surfatoms)
+                    adsite_type_int = 2
+
                 elif adsite_type == "hollow":
-                    adsites = clusgeo.surface.get_hollow_sites(atoms, surfatoms)
+                    adsite_type_int = 3
                 else:
                     logging.error("adsorption site type unknown, known types are: top, bridge, hollow")
                     exit(1)
-                
+                adsites = cluster.get_sites(adsite_type_int)
+
                 # get adsorption sites for a nanocluster
                 adsites_dict = adsorbate_pos_to_atoms_dict(atoms, adsites, adsorbate_name)
                  
@@ -119,7 +120,7 @@ class AdsiteCreationTask(FiretaskBase):
                 ads_structures.extend(adsites_dict)
 
                 # get descriptor
-                desc = adsorbate_pos_to_descriptor(atoms, adsites, adsite_type, all_atomtypes, rcut = 5.0)
+                desc = cluster.get_sites_descriptor(adsite_type_int)
                 for i in range(desc.shape[0]):
                     desc_lst.append(desc[i])
 
@@ -190,8 +191,7 @@ class AdsiteRankTask(FiretaskBase):
         logging.info("DESCRIPTOR matrix attributes")
         logging.info(descmatrix.shape)
         logging.info(np.sum(descmatrix))
-        fps_ranking = clusgeo.environment.rank_sites(descmatrix, K = None, idx=[], greedy = False, is_safe = True)
-
+        fps_ranking = clusgeo.cluster._rank_fps(descmatrix, K = None, greedy =False, is_safe = True)
         update_spec = fw_spec
         update_spec["fps_ranking"] = fps_ranking
         update_spec.pop("_category")

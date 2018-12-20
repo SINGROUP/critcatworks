@@ -8,34 +8,11 @@ from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
 import clusgeo
+
 import numpy as np
 import logging
 
 from critcatworks.database import atoms_dict_to_ase
-
-def adsorbate_pos_to_atoms_dict(structure, adspos, adsite_type):
-    atoms_lst = []
-    ads_structures_dict = []
-    for adatom, idx in zip(adspos, range(len(adspos))):
-        logging.debug(adsite_type)
-        logging.debug(adatom)
-        logging.debug(adatom.shape)
-        adatom = ase.Atoms(symbols=adsite_type, positions=adatom.reshape((1,3)))
-        clus_ads = structure + adatom
-        atoms_lst.append(clus_ads)
-        clus_ads_dict = clus_ads.__dict__
-        ads_structures_dict.append(clus_ads_dict)
-
-    return ads_structures_dict
-
-
-def adsorbate_pos_to_descriptor(structure, adspos, adsite_type, all_atomtypes, rcut = 5.0):
-
-    all_atomtypes = [int(i) for i in all_atomtypes]
-    desc = clusgeo.environment.get_soap_sites(structure, adspos, rCut=rcut, NradBas=9, Lmax=6, 
-        crossOver=True, all_atomtypes=all_atomtypes)
-    return desc
-
 
 @explicit_serialize
 class AdsorbateEliminationTask(FiretaskBase):
@@ -65,7 +42,7 @@ class AdsorbateEliminationTask(FiretaskBase):
             cluster_atoms = atoms[is_cluster]
             adsorbate_positions = adsorbate_atoms.get_positions()
             
-            kept_positions = clusgeo.surface.x2_to_x(adsorbate_positions, bondlength = self['bond_length'])
+            kept_positions = clusgeo.utils.x2_to_x(adsorbate_positions, bondlength = self['bond_length'])
             n_kept = kept_positions.shape[0]
             kept_adsorbate_atoms = ase.Atoms(symbols=[adsorbate_name] * n_kept, positions=kept_positions)
 
