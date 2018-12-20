@@ -57,9 +57,10 @@ class UpdateDataTask(FiretaskBase):
         print("reverse_connect_dict")
         pp(reverse_connect_dict)
         for ranked_id in ranked_ids_chunk:
+            # TODO check for not converged calculations and assign None to reaction_energies_list
             print(ranked_id, type(ranked_id))
             nc_id = reverse_connect_dict[str(ranked_id)]
-            reaction_energies_list[int(ranked_id)] = adsorbate_energies_list[int(ranked_id)] - reference_energy - nc_energies[int(nc_id)]
+            reaction_energies_list[int(ranked_id)] = float(adsorbate_energies_list[int(ranked_id)]) - float(reference_energy) - float(nc_energies[int(nc_id)])
 
 
 

@@ -333,11 +333,12 @@ class CP2KAnalysisTask(FiretaskBase):
                 {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : float(adsorbate_total_energy)}},
                 {'_set' : {'relaxed_structure_dict->' + str(ranked_id): atoms_dict}},
                 {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
+                {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
                 ]
             return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
         else:
             detours = Firework([CP2KRunTask(target_path=target_path, ranked_id = ranked_id, n_max_restarts = n_max_restarts)], 
-                spec = {'_category' : "dft", 'name' : 'CP2KRunTask'},
+                spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
                 name = 'CP2KRunWork')
             #keep track of number of restarts
             fw_spec["n_restarts"] += 1
@@ -346,7 +347,7 @@ class CP2KAnalysisTask(FiretaskBase):
                 return FWAction(update_spec = fw_spec, detours = detours)     
             else:
                 result_dict = {
-                    "is_converged" : is_converged,
+                    "is_converged" : False,
                     "n_restarts" : fw_spec["n_restarts"],
                 }
                 fw_spec.pop("_category")
@@ -356,6 +357,7 @@ class CP2KAnalysisTask(FiretaskBase):
                     {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : None}},
                     {'_set' : {'relaxed_structure_dict->' + str(ranked_id): None}},
                     {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
+                    {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
                     ]
                 # no more restarts
                 return FWAction(update_spec = fw_spec, mod_spec=mod_spec)

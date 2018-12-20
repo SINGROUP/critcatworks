@@ -65,7 +65,7 @@ def get_adsites_workflow(source_path, template_path, target_path = None, referen
 
         # FireWork: setup, run and extract DFT calculation
         # (involves checking for errors in DFT and rerunning)
-        fw_setup_cp2k = setup_cp2k(template_path = template_path, target_path = target_path, chunk_size = chunk_size, n_max_restarts = 4)
+        fw_setup_cp2k = setup_cp2k(template_path = template_path, target_path = target_path, chunk_size = chunk_size, n_max_restarts = 1)
         workflow_list.append(fw_setup_cp2k)
         if i == 0:
             links_dict[fw_setup_folders] = [fw_setup_cp2k]
@@ -116,8 +116,8 @@ if __name__ == "__main__":
         target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 12,
-        max_calculations = 30,
+        chunk_size = 4,
+        max_calculations = 15,
         )
 
     # store workflow and launch it locally, single shot

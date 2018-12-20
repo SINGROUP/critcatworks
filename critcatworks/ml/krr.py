@@ -36,6 +36,7 @@ class MLTask(FiretaskBase):
         logging.info("ML not tested yet")
 
         n_calcs_started = fw_spec["n_calcs_started"]
+        # TODO: move all ids that did not converge to to_predict_ids ? or ignore them completely ? make this choice a boolean variable ?
         ranked_ids = fw_spec["fps_ranking"][:n_calcs_started]
         to_predict_ids = fw_spec["fps_ranking"][n_calcs_started:]
 
