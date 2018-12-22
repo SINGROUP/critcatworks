@@ -123,7 +123,7 @@ class CP2KSetupTask(FiretaskBase):
         n_max_restarts = self["n_max_restarts"]
 
         # read template
-        cp2kinput = glob.glob(template_path + "/" + "*inp")[0]
+        cp2kinput = glob.glob(template_path)[0]
         print("cp2kinput")
         print(cp2kinput)
         is_copy_template = True

@@ -25,6 +25,7 @@ class MLTask(FiretaskBase):
     optional_params = []
 
     def run_task(self, fw_spec):
+        IS_PREDICT_FAILED = True
 
         target_path = self['target_path']
         parent_folder_name = 'ml_krr'
@@ -36,19 +37,31 @@ class MLTask(FiretaskBase):
         logging.info("ML not tested yet")
 
         n_calcs_started = fw_spec["n_calcs_started"]
-        # TODO: move all ids that did not converge to to_predict_ids ? or ignore them completely ? make this choice a boolean variable ?
+        is_converged_list = fw_spec["is_converged_list"]
+        is_converged_ids = np.nonzero(is_converged_list)
+
         ranked_ids = fw_spec["fps_ranking"][:n_calcs_started]
-        to_predict_ids = fw_spec["fps_ranking"][n_calcs_started:]
+        training_ids = np.intersect1d(ranked_ids, is_converged_ids)
+
+        # magic number due to 5-fold CV
+        if training_ids.shape[0] <= 5:
+            logging.warning('Problem detected: Too few datapoints to learn from! Something might be wrong with your DFT calculations!')
+            return FWAction(defuse_workflow=True)
+
+        if IS_PREDICT_FAILED == True:
+            to_predict_ids = is_converged_ids
+        else:
+            to_predict_ids = fw_spec["fps_ranking"][n_calcs_started:]
 
 
         descmatrix = np.array(fw_spec["descmatrix"])
         en = np.array(fw_spec["reaction_energies_list"])
         
-        features = descmatrix[ranked_ids]
+        features = descmatrix[training_ids]
         to_predict_features = descmatrix[to_predict_ids]
-        labels = en[ranked_ids]
+        labels = en[training_ids]
 
-        mae, y_to_predict, krr_parameters = ml_krr(features, labels, ranked_ids, to_predict_features, to_predict_ids, 
+        mae, y_to_predict, krr_parameters = ml_krr(features, labels, training_ids, to_predict_features, to_predict_ids, 
             is_scaled = False, path = parent_folder_path)
 
         update_spec = fw_spec
@@ -59,7 +72,7 @@ class MLTask(FiretaskBase):
         update_spec.pop("_category")
         update_spec.pop("name")
 
-        return FWAction(update_spec=update_spec)
+        return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
 
 
 def get_mae(target_path):

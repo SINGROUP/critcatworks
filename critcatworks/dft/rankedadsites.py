@@ -136,7 +136,7 @@ class CP2KSetupTask(FiretaskBase):
         n_max_restarts = self["n_max_restarts"]
 
         # read template
-        cp2kinput = glob.glob(template_path + "/" + "*inp")[0]
+        cp2kinput = glob.glob(template_path)[0]
         calc = pycp2k.cp2k.CP2K()
         inpparser = pycp2k.CP2KInputParser()
         calc = inpparser.parse(calc, cp2kinput)
@@ -278,7 +278,8 @@ class CP2KAnalysisTask(FiretaskBase):
             print("cp2k parser setup successfully")
             cp2koutput = glob.glob(target_path + "/" + "*out")[0]
             print("cp2k output file", cp2koutput)
-            results = parser.parse(cp2koutput)
+            print("cp2k output file type", type(cp2koutput))
+            results = parser.parse(str(cp2koutput))
             print("cp2k parser ran successfully")
     
             atom_positions = results["atom_positions"]
@@ -331,6 +332,7 @@ class CP2KAnalysisTask(FiretaskBase):
     
             mod_spec =[
                 {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : float(adsorbate_total_energy)}},
+                {'_set' : {'is_converged_dict->' + str(ranked_id) : 1}},
                 {'_set' : {'relaxed_structure_dict->' + str(ranked_id): atoms_dict}},
                 {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
                 {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
@@ -355,6 +357,7 @@ class CP2KAnalysisTask(FiretaskBase):
         
                 mod_spec =[
                     {'_set' : {'adsorbate_energies_dict->' + str(ranked_id) : None}},
+                    {'_set' : {'is_converged_dict->' + str(ranked_id) : 0}},
                     {'_set' : {'relaxed_structure_dict->' + str(ranked_id): None}},
                     {'_set' : {'dft_result_dict->' + str(ranked_id) : result_dict}},
                     {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},

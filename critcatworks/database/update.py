@@ -35,6 +35,9 @@ class UpdateDataTask(FiretaskBase):
         adsorbate_energies_list = fw_spec["adsorbate_energies_list"]
         adsorbate_energies_dict = fw_spec["adsorbate_energies_dict"]
 
+        is_converged_list = fw_spec["is_converged_list"]
+        is_converged_dict = fw_spec["is_converged_dict"]
+
         relaxed_structure_list = fw_spec["relaxed_structure_list"]
         relaxed_structure_dict = fw_spec["relaxed_structure_dict"]
 
@@ -50,17 +53,21 @@ class UpdateDataTask(FiretaskBase):
         for ranked_id in ranked_ids_chunk:
             adsorbate_energies_list[int(ranked_id)] = adsorbate_energies_dict[str(ranked_id)]
             relaxed_structure_list[int(ranked_id)] = relaxed_structure_dict[str(ranked_id)]
+            is_converged_list[int(ranked_id)] = is_converged_dict[str(ranked_id)]
 
         logging.debug("reverse_connect_dict")
         logging.debug(reverse_connect_dict)
 
-        print("reverse_connect_dict")
+        logging.info("reverse_connect_dict")
         pp(reverse_connect_dict)
         for ranked_id in ranked_ids_chunk:
-            # TODO check for not converged calculations and assign None to reaction_energies_list
-            print(ranked_id, type(ranked_id))
+            logging.info(ranked_id, type(ranked_id))
             nc_id = reverse_connect_dict[str(ranked_id)]
-            reaction_energies_list[int(ranked_id)] = float(adsorbate_energies_list[int(ranked_id)]) - float(reference_energy) - float(nc_energies[int(nc_id)])
+
+            if is_converged_list[int(ranked_id)] == True:
+                reaction_energies_list[int(ranked_id)] = float(adsorbate_energies_list[int(ranked_id)]) - float(reference_energy) - float(nc_energies[int(nc_id)])
+            else:
+                reaction_energies_list[int(ranked_id)] = 0.0
 
 
 
@@ -68,6 +75,7 @@ class UpdateDataTask(FiretaskBase):
         update_spec["relaxed_structure_list"] = relaxed_structure_list
         update_spec["adsorbate_energies_list"] = adsorbate_energies_list
         update_spec["reaction_energies_list"] = reaction_energies_list
+        update_spec["is_converged_list"] = is_converged_list 
         update_spec.pop("_category")
         update_spec.pop("name")
 

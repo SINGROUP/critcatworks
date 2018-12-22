@@ -1406,7 +1406,9 @@ def mainFunction(mainFileDescription,
         strValueTransform = {}
 
     ii = 1
-    while ii < len(sys.argv):
+    # while ii < len(sys.argv):
+    # interferes with FireWorks arguments
+    while False:
         arg = sys.argv[ii]
         ii += 1
         if arg == "--meta-info":

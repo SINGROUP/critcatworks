@@ -164,6 +164,10 @@ class AdsiteCreationTask(FiretaskBase):
         update_spec["relaxed_coverage_dict"] = {}
         update_spec["history_coverage_structures_dict"] = coverage_id_dict 
 
+        # dictionary and list for filling convergence later
+        update_spec["is_converged_dict"] = {}
+        update_spec["is_converged_list"] = np.zeros(descmatrix.shape[0])
+
         update_spec.pop("_category")
         update_spec.pop("name")
 
