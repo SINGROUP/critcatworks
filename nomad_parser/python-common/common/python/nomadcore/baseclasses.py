@@ -270,12 +270,8 @@ class FileService(object):
         old = self.map_id_to_path.get(file_id)
         if old is not None:
             raise LookupError("The path '{}' is already associated with id '{}'".format(old, file_id))
-        print("set_file_id, path before join", path)
         # Check that the file exists
         path = os.path.join(self.root_folder, path)
-        print("ALTERED")
-        print(self.root_folder)
-        print(path)
         if not os.path.isfile(path):
             logger.warning("Could not set the id for file '{}' as it cannot be found.".format(path))
             return None

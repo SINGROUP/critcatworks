@@ -73,10 +73,6 @@ class CP2KParser(ParserInterface):
 
         # Setup the root folder to the fileservice that is used to access files
         dirpath, filename = os.path.split(self.parser_context.main_file)
-        print("ALTERED")
-        print("main_file")
-        print(self.parser_context.main_file)
-        print(dirpath, filename)
 
         dirpath = os.path.abspath(dirpath)
         self.parser_context.file_service.setup_root_folder(dirpath)
