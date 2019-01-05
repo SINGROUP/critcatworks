@@ -1,6 +1,6 @@
 ############ General ############################
 @SET COORD_FILE coverage_structure.xyz 
-@SET SYSTEM cheap_gopt
+@SET SYSTEM coverage_cheap_gopt
 @SET CELLSIZE 25.0 25.0 25.0 
 
 #&EXT_RESTART

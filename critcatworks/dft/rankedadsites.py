@@ -192,18 +192,20 @@ class CP2KRunTask(FiretaskBase):
         print("ranked id", ranked_id)
         # shell command construction
         input_file = glob.glob(target_path + "/" + "*inp")[0]
+        input_file = os.path.basename(input_file)
         output_file = input_file.replace(".inp", ".out")
-       
         
         # check for restart file
         restart_file_list = glob.glob(target_path + "/" + "*restart")
         if len(restart_file_list) == 1:
             restart_file = restart_file_list[0]
             input_file = restart_file 
+            input_file = os.path.basename(input_file)
         elif len(restart_file_list) > 1:
             logging.warning("Found several .restart files. Taking first one.")
             restart_file = restart_file_list[0]
             input_file = restart_file 
+            input_file = os.path.basename(input_file)
         else:
             # otherwise use inp
             pass
@@ -284,7 +286,10 @@ class CP2KAnalysisTask(FiretaskBase):
     
             atom_positions = results["atom_positions"]
             number_of_frames_in_sequence = results["number_of_frames_in_sequence"]
-            is_converged = results["geometry_optimization_converged"]
+            try:
+                is_converged = results["geometry_optimization_converged"]
+            except KeyError:
+                is_converged = False
             atom_labels = results["atom_labels"]
             frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
     

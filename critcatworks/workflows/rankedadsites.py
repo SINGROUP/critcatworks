@@ -116,7 +116,7 @@ if __name__ == "__main__":
         target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 4,
+        chunk_size = 5,
         max_calculations = 15,
         )
 
