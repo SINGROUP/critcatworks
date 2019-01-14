@@ -62,7 +62,16 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/logfile_ranked_adsites.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
+    #launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
+    launchpad = LaunchPad(host = "austerity-shard-00-00-hgeov.mongodb.net:27017",
+        port = 27017,
+        name = "fireworks",
+        username = "mjcritcat",
+        password = "heterogeniuscatalysis",
+        logdir =  ".",
+        strm_lvl = "INFO",
+        ssl =  True,
+        authsource = "admin")
     launchpad.reset('', require_password=False)
 
     wf =  run_cp2k_dry(
