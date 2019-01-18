@@ -1,12 +1,13 @@
-from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, TemplateWriterTask, FileTransferTask, Workflow
+from fireworks import Firework, FWorker, LaunchPad, ScriptTask, TemplateWriterTask, FileTransferTask, Workflow
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
-from fireworks.queue.queue_launcher import launch_rocket_to_queue
-from fireworks.user_objects.queue_adapters.common_adapter import *
-import os,time
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
+
+import os,time
 from pprint import pprint as pp
 import pathlib
+
+import mylaunchpad
 
 @explicit_serialize
 class SimpleTestTask(FiretaskBase):
@@ -73,9 +74,8 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/logfile_dummy_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
+    launchpad = mylaunchpad.create_launchpad()
     launchpad.reset('', require_password=False)
-
     wf = dummy_workflow()
 
     # store workflow and launch it locally, single shot

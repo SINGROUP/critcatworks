@@ -65,6 +65,8 @@ cd path/to/critcatworks
 3.  slightly modified NOMAD CP2K parser Installation
 
 ```sh
+pip install numpy cython
+
 cd nomad_parser/python-common
 pip install -r requirements.txt
 pip install -e .

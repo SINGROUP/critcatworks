@@ -1,16 +1,10 @@
-from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, TemplateWriterTask, FileTransferTask, Workflow
-from fireworks.core.rocket_launcher import launch_rocket, rapidfire
-from fireworks.queue.queue_launcher import launch_rocket_to_queue
-from fireworks.user_objects.queue_adapters.common_adapter import *
-from fireworks import explicit_serialize, FiretaskBase, FWAction
-from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
-from fireworks.user_objects.queue_adapters.common_adapter import CommonAdapter
+from fireworks import LaunchPad, Workflow
 
-from pprint import pprint as pp
 import pathlib
 import os,time
 
 # internal modules
+import mylaunchpad
 from critcatworks.clusgeo import get_adsites, eliminate_pairs 
 from critcatworks.database import read_structures, update_coverage_data
 from critcatworks.dft import setup_coverage_folders, setup_coverage_cp2k
@@ -96,16 +90,7 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/logfile_ranked_adsites.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    #launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
-    launchpad = LaunchPad(host = "austerity-shard-00-00-hgeov.mongodb.net:27017",
-        port = 27017,
-        name = "fireworks",
-        username = "mjcritcat",
-        password = "heterogeniuscatalysis",
-        logdir =  ".",
-        strm_lvl = "INFO",
-        ssl =  True,
-        authsource = "admin")
+    launchpad = mylaunchpad.create_launchpad()
     launchpad.reset('', require_password=False)
 
     wf = reduce_overcoverage_workflow(
@@ -118,69 +103,5 @@ if __name__ == "__main__":
         bond_length = 1.5,
     )
 
-    # store workflow and launch it locally, single shot
+    # store workflow on launchpad
     launchpad.add_wf(wf)
-
-    # excecute workflow
-    if IS_QUEUE:
-        abspath = str(pathlib.Path(".").resolve())
-        dft = CommonAdapter(
-            q_type="SLURM",
-            template_file="../../utils/SLURM_template.txt",
-            queue="test",
-            nodes= None,
-            ntasks= 48,
-            mem_per_cpu= 4000,
-            walltime= '00:03:00',
-            constraint='hsw',
-            account= None,
-            job_name= 'dfttestrun',
-            pre_rocket= "module load cp2k-env/4.1-hsw",
-            post_rocket= "echo 'current fashion: post-modern rocket after running dft'",
-            logdir= abspath,
-            #rocket_launch= "rlaunch  singleshot --offline")
-            rocket_launch= "rlaunch  singleshot")
-        lightweight = CommonAdapter(
-            q_type="SLURM",
-            queue="test",
-            nodes= 1,
-            ntasks= 8,
-            walltime= '00:00:30',
-            constraint='hsw',
-            account= None,
-            job_name= 'light',
-            pre_rocket= None,
-            post_rocket= None,
-            logdir= abspath,
-            #rocket_launch= "rlaunch  singleshot --offline")
-            rocket_launch= "rlaunch  singleshot")
-        medium = CommonAdapter(
-            q_type="SLURM",
-            queue="test",
-            nodes= 1,
-            ntasks= 8,
-            walltime= '00:01:00',
-            constraint='hsw',
-            account= None,
-            job_name= 'medium',
-            pre_rocket= None,
-            post_rocket= None,
-            logdir= abspath,
-            #rocket_launch= "rlaunch  singleshot --offline")
-            rocket_launch= "rlaunch  singleshot")
-
-        for i in range(0, 4000):
-            launch_rocket_to_queue(launchpad, FWorker(category='dft'), dft, 
-                launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
-            time.sleep(3)
-            launch_rocket_to_queue(launchpad, FWorker(category='medium'), medium, 
-                launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
-            time.sleep(3)
-            launch_rocket_to_queue(launchpad, FWorker(category='lightweight'), lightweight, 
-                launcher_dir=abspath + "/fw_logs", create_launcher_dir=True, reserve=True)
-            time.sleep(3)
-    else:
-        #launch_rocket(launchpad, FWorker())
-        rapidfire(launchpad, FWorker(category=['dft', 'medium', 'lightweight']))
-
-

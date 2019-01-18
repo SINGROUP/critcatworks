@@ -2,5 +2,6 @@ launcher*/
 __pycache__/
 *egg-info/
 output/
+!output/.gitkeep 
 *log
 dist/
