@@ -18,6 +18,7 @@ if __name__ == "__main__":
             'pathlib',
             'pprint',
             'sklearn',
+            'dnspython',
         ],
         license="GNU General Public License v3.0",
         classifiers=[
