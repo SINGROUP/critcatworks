@@ -50,7 +50,7 @@ def _alt_recover_offline(lp):
 
 
 if __name__ == "__main__":
-    IS_QUEUE = True
+    IS_QUEUE = False
     IS_OFFLINE = False
     # path used to log info
 

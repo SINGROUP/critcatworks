@@ -4,10 +4,11 @@ import pathlib
 import os,time
 
 # internal modules
-import mylaunchpad
 from critcatworks.clusgeo import get_adsites, eliminate_pairs 
 from critcatworks.database import read_structures, update_coverage_data
 from critcatworks.dft import setup_coverage_folders, setup_coverage_cp2k
+from critcat.database import mylaunchpad
+from critcatworks.workflows.coverage import get_coverage_workflow
 
 if __name__ == "__main__":
     import logging
@@ -22,7 +23,7 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad()
     launchpad.reset('', require_password=False)
 
-    wf = reduce_coverage_workflow(
+    wf = get_coverage_workflow(
         source_path = str(pathlib.Path("../../tests/dummy_db/nc_structures/").resolve()),
         template_path = str(pathlib.Path("../../tests/dummy_db/templates/coverage_cheap_gopt.inp").resolve()), 
         target_path = str(pathlib.Path("../../tests/dummy_db/output/").resolve()),

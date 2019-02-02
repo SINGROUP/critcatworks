@@ -2,7 +2,6 @@ from fireworks import LaunchPad, Workflow
 
 import pathlib
 import os,time
-import mylaunchpad
 
 # internal modules
 from critcatworks.clusgeo import get_adsites, rank_adsites

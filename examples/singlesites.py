@@ -2,10 +2,10 @@ from fireworks import LaunchPad, Workflow
 
 import pathlib
 import os,time
-import mylaunchpad
 
 # internal modules
 from critcatworks.workflows import get_singlesites_workflow
+from critcat.database import mylaunchpad
 
 
 if __name__ == "__main__":

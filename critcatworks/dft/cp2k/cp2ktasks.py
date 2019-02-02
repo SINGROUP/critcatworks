@@ -34,14 +34,16 @@ class CP2KSetupTask(FiretaskBase):
 
         # read template
         cp2kinput = glob.glob(template_path)[0]
-        calc = pycp2k.cp2k.CP2K()
-        inpparser = pycp2k.CP2KInputParser()
-        calc = inpparser.parse(calc, cp2kinput)
+        #calc = pycp2k.cp2k.CP2K()
+        calc = pycp2k.CP2K()
+        #inpparser = pycp2k.CP2KInputParser()
+        #calc = inpparser.parse(calc, cp2kinput)
+        calc.parse(cp2kinput)
 
-        logging.info("info about input parser")
-        logging.info(inpparser)
-        logging.info("cp2k info storage \n")
-        logging.info(inpparser.storage_obj)
+        #logging.info("info about input parser")
+        #logging.info(inpparser)
+        #logging.info("cp2k info storage \n")
+        #logging.info(inpparser.storage_obj)
         logging.debug("target_path")
         logging.debug(target_path)
 
@@ -49,7 +51,7 @@ class CP2KSetupTask(FiretaskBase):
         # get cell size of nanocluster / system
         # atoms = fw_spec["temp"]["calc_structures"]["calc_id"] 
         
-        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 20 20 20"
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 25 25 25"
 
         calc.working_directory = str(target_path)
         logging.debug("working_directory: " + str(calc.working_directory))
@@ -276,7 +278,7 @@ def setup_cp2k(template_path, target_path, calc_id, name = "cp2k_run_id", n_max_
     #    n_max_restarts = n_max_restarts)
 
     
-    fw = Firework([setup_task,run_task], spec = {'_category' : "dft", 'name' : 'CP2KWork', "n_restarts" : 0}
+    fw = Firework([setup_task,run_task], spec = {'_category' : "dft", 'name' : 'CP2KWork', "n_restarts" : 0},
                      name = 'CP2KWork')
     return fw
 

@@ -9,7 +9,7 @@ from pprint import pprint as pp
 import ase, ase.io
 import logging
 import numpy as np
-from critcatworks.dft import setup_cp2k
+from critcatworks.dft.cp2k import setup_cp2k
 
 @explicit_serialize
 class CheckConvergenceTask(FiretaskBase):

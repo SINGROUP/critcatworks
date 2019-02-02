@@ -1,2 +1,3 @@
 from critcatworks.workflows.singlesites import get_singlesites_workflow
 from critcatworks.workflows.coverage import get_coverage_workflow
+from critcatworks.workflows.nanoclusters import get_nanoclusters_workflow

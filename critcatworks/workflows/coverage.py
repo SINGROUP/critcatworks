@@ -4,10 +4,9 @@ import pathlib
 import os,time
 
 # internal modules
-from critcat.database import mylaunchpad
 from critcatworks.dft import setup_folders, chunk_calculations
 
-def reduce_coverage_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
+def get_coverage_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
         adsorbate_name='H', max_iterations = 50, bond_length = 1.0):
     """
     Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 

@@ -1,12 +1,16 @@
 # functions to store data in an external MongoDB database
 import pymongo
-# DATABASE SERVER
-CLIENT = pymongo.MongoClient("mongodb+srv://austerity-hgeov.mongodb.net/test", username = "marc", password = 'marcrulez0r')
-DB = CLIENT["test"]
+
+def get_external_database(host = "mongodb+srv://austerity-hgeov.mongodb.net/test", 
+    database = "test",username = "marc", password = 'marcrulez0r'):
+    CLIENT = pymongo.MongoClient(host, username = username, password = password)
+    db = CLIENT[database]
+    return db
 
 
 # helper function to reset entry in collection IDs
-def _reset_IDs_collection(db = DB):
+def _reset_IDs_collection(db = None):
+
     # counting collection
     ids_collection = db['IDs']
     #print(id_collection)
@@ -28,7 +32,7 @@ def _reset_IDs_collection(db = DB):
 
 
 # helper function to query an ID and increase it by one
-def _query_id_counter_and_increment(collection, db = DB):
+def _query_id_counter_and_increment(collection, db):
     ids_collection = db['IDs']
     id_counter = ids_collection.find_one_and_update({}, {'$inc': {collection: 1}})[collection]
     return id_counter
@@ -40,7 +44,7 @@ def update_simulations_collection(wf_sim_id,
     source_id = -1, workflow_id = -1, 
     nanoclusters = [], adsorbates = [], substrates = [], 
     operations = [], inp = {}, output = {},
-    db = DB, **kwargs):
+    **kwargs):
     """
     IS wf_sim_id really necessary? update ids in internal database 
     after querying?
@@ -51,10 +55,12 @@ def update_simulations_collection(wf_sim_id,
     # generated coverage (added/removed adsorbates)
     # DFT simulation
     """
+    db = get_external_database()
     simulations = db['simulations']
-
     # request id counter
     simulation_id = _query_id_counter_and_increment('simulations', db)
+
+
 
     # construct dictionary
     dct = {'_id' : simulation_id,
@@ -79,10 +85,11 @@ def update_simulations_collection(wf_sim_id,
 def update_workflows_collection(username, creation_time, 
     parameters = {},
     name = "UNNAMED", workflow_type = "NO_TYPE",
-    db = DB, **kwargs):
+    **kwargs):
     """
     Update after workflow has finished
     """
+    db = get_external_database()
     workflows = db['workflows']
 
     # request id counter
@@ -109,10 +116,11 @@ def update_machine_learning_collection(method, workflow_id = -1,
     training_set = [], validation_set = [],
     metrics_training = {}, metrics_validation = {},
     output = {},
-    db = DB, **kwargs):
+    **kwargs):
     """
     update after each machine learning run
     """
+    db = get_external_database()
     machine_learning = db['machine_learning']
 
     # request id counter

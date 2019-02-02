@@ -2,10 +2,14 @@ from fabric import Connection
 
 FW_DIRECTORY = ".fireworks"
 REMOTE_HOST = 'jagermar@taito.csc.fi'
+#REMOTE_HOST = 'jagerm1@triton.aalto.fi'
 PYTHON_INSTRUCTIONS = "launch_instructions.py"
 
 def remote_launch():
-    c = Connection(REMOTE_HOST)
+    connect_kwargs={
+        "key_filename": "/home/myuser/.ssh/id_rsa_taito",
+         }
+    c = Connection(REMOTE_HOST, connect_kwargs)
     result = c.run('echo "Hello, world!"')
     result = c.run('mkdir -p .fireworks')
     #result = c.run('mkdir -p .fireworks/fw_logs')

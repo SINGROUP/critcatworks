@@ -6,7 +6,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 import pathlib, logging
 import ase, ase.io
 from critcatworks.database import atoms_dict_to_ase
-from critcatworks.dft import setup_cp2k
+from critcatworks.dft.cp2k import setup_cp2k
 
 @explicit_serialize
 class StructureFolderTask(FiretaskBase):
@@ -26,14 +26,17 @@ class StructureFolderTask(FiretaskBase):
         prefix = self['name']
         parent_folder_name = 'cp2k_calculations'
         parent_folder_path = target_path + "/" + parent_folder_name
+        simulations = fw_spec["simulations"]
+        calc_ids = fw_spec["temp"]["calc_ids"]
 
         if not os.path.exists(parent_folder_path):
             os.makedirs(parent_folder_path)
 
-        ads_structures = fw_spec["ads_structures"]
         calc_paths = []
         #iterating over available structures
-        for idx, atoms_dict in enumerate(ads_structures):
+        for idx, calc_id in enumerate(calc_ids):
+
+            atoms_dict = simulations[str(calc_id)]["atoms"]
             atoms = atoms_dict_to_ase(atoms_dict)
             structure_folder = prefix + '_' + str(idx)
 
@@ -48,7 +51,7 @@ class StructureFolderTask(FiretaskBase):
         update_spec = fw_spec
 
 
-        update_spec["calc_paths"] = calc_paths
+        update_spec["temp"]["calc_paths"] = calc_paths
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec = update_spec)
@@ -74,9 +77,8 @@ class ChunkCalculationsTask(FiretaskBase):
         simulation_method = self.get("simulation_method", "cp2k")
         name = self["name"]
         n_max_restarts = self["n_max_restarts"]
-        calc_paths = fw_spec["calc_paths"]
-        #fps_ranking = fw_spec["fps_ranking"]
-        calc_ids = fw_spec["calc_ids"]
+        calc_paths = fw_spec["temp"]["calc_paths"]
+        calc_ids = fw_spec["temp"]["calc_ids"]
 
 
         # define what chunk to run
@@ -91,14 +93,10 @@ class ChunkCalculationsTask(FiretaskBase):
         else:
             calc_ids = calc_ids[n_calcs_started : n_calcs_started+chunk_size]
 
-
-
-        #ranked_ids = fps_ranking[n_calcs_started : n_calcs_started+chunk_size]
-
         detours = []
-        for calc_id in calc_ids:
+        for idx, calc_id in enumerate(calc_ids):
             logging.info(calc_id)
-            target_path = calc_paths[int(calc_id)]
+            target_path = calc_paths[int(idx)]
 
             if simulation_method == "cp2k":
                 # create detour to setup cp2k calculation
@@ -130,7 +128,7 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     return fw
 
 
-def chunk_calculations(template_path, target_path, chunk_size = None, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k"):
+def chunk_calculations(template_path, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k"):
     firetask1  = ChunkCalculationsTask(
         template_path = template_path,
         target_path = target_path,
