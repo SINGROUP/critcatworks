@@ -54,7 +54,7 @@ class CP2KSetupTask(FiretaskBase):
         # atoms = fw_spec["temp"]["calc_structures"]["calc_id"] 
         
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 25 25 25"
-
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.TOPOLOGY.Coord_file_name = "structure.xyz"
         calc.working_directory = str(target_path)
         logging.debug("working_directory: " + str(calc.working_directory))
         calc.project_name = "gopt"
