@@ -107,7 +107,7 @@ class NCStartFromStructuresTask(FiretaskBase):
                 source_id = -1, workflow_id = workflow_id, 
                 nanoclusters = [nanocluster], adsorbates = [], substrates = [], 
                 operations = [], inp = {}, output = {},
-                db = ext_db)
+                )
 
             # update internal workflow data
             simulation_id = dct["_id"]

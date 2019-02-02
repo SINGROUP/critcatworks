@@ -152,6 +152,7 @@ class CP2KAnalysisTask(FiretaskBase):
         # read output
 
         # preparse for correct termination, warnings and exceeded walltime
+        # preparsing needed for parser to run without throwing error
         output_state, preparse_results = additional_parse_stdout(str(target_path))
 
         if output_state == "no_output":
@@ -170,9 +171,6 @@ class CP2KAnalysisTask(FiretaskBase):
             nwarnings = preparse_results['nwarnings']
             is_walltime_exceeded = preparse_results['exceeded_walltime']
 
-
-
-
             # cp2k parser
             parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)
             print("cp2k parser setup successfully")
@@ -190,15 +188,25 @@ class CP2KAnalysisTask(FiretaskBase):
             frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
     
             if is_converged:
-                adsorbate_total_energy = frame_sequence_potential_energy[-1]
+                total_energy = frame_sequence_potential_energy[-1]
             else:
                 output_state = "not_converged"
                 logging.info("CP2K not converged")
                 print("CP2K not converged")
-                adsorbate_total_energy = None
+                total_energy = None
 
-        if output_state == "ok":
-            logging.info("adsorbate_total_energy: " + str(adsorbate_total_energy))
+        # restart
+        if output_state == "no_output" or output_state == "incorrect_termination" or output_state == "not_converged":
+            if fw_spec["n_restarts"] < n_max_restarts:
+                fw_spec["n_restarts"] += 1
+                detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
+                    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
+                    name = 'CP2KRunWork')
+                return FWAction(update_spec = fw_spec, detours = detours)    
+
+        # update data
+        if output_state == "ok" or output_state == "not_converged":
+            logging.info("total_energy: " + str(total_energy))
             logging.debug("atom_labels")
             logging.debug(atom_labels.shape)
             logging.debug(atom_labels[-1])
@@ -220,47 +228,56 @@ class CP2KAnalysisTask(FiretaskBase):
                 "number_of_frames_in_sequence" : number_of_frames_in_sequence,
                 "nwarnings" : nwarnings,
                 "is_walltime_exceeded" : is_walltime_exceeded,
-                "adsorbate_total_energy" : adsorbate_total_energy,
+                "total_energy" : total_energy,
             }
     
-            
-            fw_spec.pop("_category")
-            fw_spec.pop("name")
-    
-            mod_spec =[
-                {'_set' : {'adsorbate_energies_dict->' + str(calc_id) : float(adsorbate_total_energy)}},
-                {'_set' : {'is_converged_dict->' + str(calc_id) : 1}},
-                {'_set' : {'relaxed_structure_dict->' + str(calc_id): atoms_dict}},
-                {'_set' : {'dft_result_dict->' + str(calc_id) : result_dict}},
-                {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
-                ]
-            return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
+
+            input_filename = results["x_cp2k_input_filename"]
+            with open(input_filename, "r") as f:
+                input_file = f.read()
+
         else:
-            detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
-                spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
-                name = 'CP2KRunWork')
-            #keep track of number of restarts
-            fw_spec["n_restarts"] += 1
-            if fw_spec["n_restarts"] <= n_max_restarts:
-                # restart
-                return FWAction(update_spec = fw_spec, detours = detours)     
-            else:
-                result_dict = {
-                    "is_converged" : False,
-                    "n_restarts" : fw_spec["n_restarts"],
-                }
-                fw_spec.pop("_category")
-                fw_spec.pop("name")
-        
-                mod_spec =[
-                    {'_set' : {'adsorbate_energies_dict->' + str(calc_id) : None}},
-                    {'_set' : {'is_converged_dict->' + str(calc_id) : 0}},
-                    {'_set' : {'relaxed_structure_dict->' + str(calc_id): None}},
-                    {'_set' : {'dft_result_dict->' + str(calc_id) : result_dict}},
-                    {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
-                    ]
-                # no more restarts
-                return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
+            # in case of no_output or incorrect_termination
+            # fill slots with empty placeholders
+            atoms_dict = {}
+            input_file = ""
+            result_dict = {"is_converged" : False, "output_state" : output_state}
+
+        ##
+        # get source simulation
+        source_simulation = fw_spec["simulations"][str(calc_id)]
+
+        # update external database
+        dct = source_simulation.copy()
+        # calculation originated from this:
+        dct["source_id"] = calc_id
+        dct["atoms"] = atoms_dict ### !!!
+        dct["operations"] = ["cp2k"]
+        dct["inp"] = {"input_file" : input_file}
+        dct["output"] = result_dict # might still be missing some output
+
+        simulation = update_simulations_collection(dct)
+
+        # update internal workflow data
+        simulation_id = simulation["_id"]
+        mod_spec =[
+            {"_set" : {"simulations->" + str(simulation_id) : simulation }},
+            ]
+
+        # update temp workflow data
+    
+            # mod_spec =[
+            #     {'_set' : {'adsorbate_energies_dict->' + str(calc_id) : float(total_energy)}},
+            #     {'_set' : {'is_converged_dict->' + str(calc_id) : is_converged}},
+            #     {'_set' : {'relaxed_structure_dict->' + str(calc_id): atoms_dict}},
+            #     {'_set' : {'dft_result_dict->' + str(calc_id) : result_dict}},
+            #     {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
+            #     ]
+
+
+        fw_spec.pop("_category")
+        fw_spec.pop("name")
+        return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
 
 def setup_cp2k(template, target_path, calc_id, name = "cp2k_run_id", n_max_restarts = 4):
