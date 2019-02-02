@@ -6,12 +6,15 @@ import os,time
 from critcatworks.database import start_from_structures, start_from_database, update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
 
-def get_nanoclusters_workflow(template_path, target_path = None, structures = None, extdb_ids = None, source_path = None, reference_energy=0.0):
+def get_nanoclusters_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None, source_path = None, reference_energy=0.0):
     """
     Workflow to relax the structure of a set of
     nanoclusters using CP2K
     The given paths have to be absolute paths on the location where Firework jobs will be run.
     """
+    with open (template_path, "r") as f:
+        template = f.read()
+
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information
     if structures != None:
@@ -28,12 +31,12 @@ def get_nanoclusters_workflow(template_path, target_path = None, structures = No
         raise ValueError('structures, extdb_ids or source_path contain no entries!')
 
     # Firework: setup folders for DFT calculations
-    fw_setup_folders = setup_folders(target_path = target_path, name = "cp2k_run_id")
+    fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_run_id")
 
 
     # FireWork: setup, run and extract DFT calculation
     # (involves checking for errors in DFT and rerunning)
-    fw_chunk_calculations = chunk_calculations(template_path = template_path, target_path = target_path, 
+    fw_chunk_calculations = chunk_calculations(template = template, target_path = worker_target_path, 
         n_max_restarts = 1, simulation_method = "cp2k")
 
     # add above Fireworks with links

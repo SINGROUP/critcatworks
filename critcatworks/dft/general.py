@@ -67,11 +67,11 @@ class ChunkCalculationsTask(FiretaskBase):
     """
 
     _fw_name = 'ChunkCalculationsTask'
-    required_params = ['template_path', 'target_path',  'name', 'n_max_restarts']
+    required_params = ['template', 'target_path',  'name', 'n_max_restarts']
     optional_params = ['chunk_size', 'simulation_method']
 
     def run_task(self, fw_spec):
-        template_path = self["template_path"]
+        template = self["template"]
         target_path = self["target_path"]
         chunk_size = self.get("chunk_size", -1)
         simulation_method = self.get("simulation_method", "cp2k")
@@ -100,7 +100,7 @@ class ChunkCalculationsTask(FiretaskBase):
 
             if simulation_method == "cp2k":
                 # create detour to setup cp2k calculation
-                new_fw = setup_cp2k(template_path = template_path,
+                new_fw = setup_cp2k(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
                     name = name,
@@ -128,9 +128,9 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     return fw
 
 
-def chunk_calculations(template_path, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k"):
+def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k"):
     firetask1  = ChunkCalculationsTask(
-        template_path = template_path,
+        template = template,
         target_path = target_path,
         chunk_size = chunk_size,
         name = name,

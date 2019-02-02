@@ -31,7 +31,7 @@ if __name__ == "__main__":
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
         logdir = str(pathlib.Path(".").resolve())
-        logging.basicConfig(filename = logdir + "/logfile_ranked_adsites.log", level=logging.INFO)
+        logging.basicConfig(filename = logdir + "/nanocluster_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
     launchpad = mylaunchpad.create_launchpad()
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     wf = get_nanoclusters_workflow(
         source_path = None,
         template_path = str(pathlib.Path("templates/rankedadsites_cheap_gopt.inp").resolve()), 
-        target_path = str(pathlib.Path("../tests/dummy_db/output/").resolve()),
+        worker_target_path = "../tests/dummy_db/output/",
         structures = structures,
         extdb_ids = None,
         )

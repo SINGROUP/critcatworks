@@ -19,7 +19,7 @@ class CP2KSetupTask(FiretaskBase):
     """
 
     _fw_name = 'CP2KSetupTask'
-    required_params = ['template_path', 'target_path', 'calc_id', "n_max_restarts"]
+    required_params = ['template', 'target_path', 'calc_id', "n_max_restarts"]
     optional_params = ['name']
 
     def run_task(self, fw_spec):
@@ -27,11 +27,13 @@ class CP2KSetupTask(FiretaskBase):
         logging.info("CP2KSetupTask not implemented yet")
         
         #prefix = self.get("name", "cp2k_run_id")      
-        template_path = self["template_path"]
+        template = self["template"]
         target_path = self["target_path"]
         calc_id = self["calc_id"]
         #n_max_restarts = self["n_max_restarts"]
-
+        template_path = "template.txt"
+        with open(template_path, "w") as the_file:
+            the_file.write(template)
         # read template
         cp2kinput = glob.glob(template_path)[0]
         #calc = pycp2k.cp2k.CP2K()
@@ -261,8 +263,8 @@ class CP2KAnalysisTask(FiretaskBase):
                 return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
 
-def setup_cp2k(template_path, target_path, calc_id, name = "cp2k_run_id", n_max_restarts = 4):
-    setup_task = CP2KSetupTask(template_path = template_path,
+def setup_cp2k(template, target_path, calc_id, name = "cp2k_run_id", n_max_restarts = 4):
+    setup_task = CP2KSetupTask(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
                     name = name,
