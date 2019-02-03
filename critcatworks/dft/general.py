@@ -100,11 +100,13 @@ class ChunkCalculationsTask(FiretaskBase):
 
             if simulation_method == "cp2k":
                 # create detour to setup cp2k calculation
+                simulation = fw_spec["simulations"][str(calc_ids)]
                 new_fw = setup_cp2k(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
                     name = name,
-                    n_max_restarts = n_max_restarts)
+                    n_max_restarts = n_max_restarts,
+                    spec = {"simulation" : simulation})
                 detours.append(new_fw)
 
             else:

@@ -247,7 +247,7 @@ class CP2KAnalysisTask(FiretaskBase):
 
         ##
         # get source simulation
-        source_simulation = fw_spec["simulations"][str(calc_id)]
+        source_simulation = fw_spec["simulation"]
 
         # update external database
         dct = source_simulation.copy()
