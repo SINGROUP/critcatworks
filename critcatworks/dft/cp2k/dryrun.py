@@ -11,7 +11,7 @@ import pycp2k, cp2kparser
 import ase, ase.io
 import subprocess
 
-from critcatworks.database import atoms_dict_to_ase
+from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 
 @explicit_serialize
 class StructureFolderTask(FiretaskBase):

@@ -5,6 +5,7 @@ import os,time
 # internal modules
 from critcatworks.database import start_from_structures, start_from_database, update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
+from critcatworks.database.format import ase_to_atoms_dict
 
 def get_nanoclusters_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None, source_path = None, reference_energy=0.0):
     """
@@ -20,7 +21,7 @@ def get_nanoclusters_workflow(template_path, worker_target_path = None, structur
     if structures != None:
         jsonified_structures = []
         for atoms in structures:
-            atoms_dict = atoms.__dict__
+            atoms_dict = ase_to_atoms_dict(atoms)
             jsonified_structures.append(atoms_dict) 
         fw_get_structures = start_from_structures(jsonified_structures)
     elif extdb_ids != None:

@@ -7,7 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 import pathlib, logging
 import pycp2k, cp2kparser
 import ase, ase.io
-from critcatworks.database import atoms_dict_to_ase
+from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database.extdb import update_simulations_collection
 
 @explicit_serialize
@@ -233,7 +233,7 @@ class CP2KAnalysisTask(FiretaskBase):
     
             relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1])
     
-            atoms_dict = relaxed_structure.__dict__
+            atoms_dict = ase_to_atoms_dict(relaxed_structure)
     
             result_dict = {
                 "is_converged" : is_converged,

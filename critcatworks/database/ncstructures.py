@@ -9,7 +9,7 @@ from pprint import pprint as pp
 import ase, ase.io
 import logging
 from critcatworks.database.extdb import update_simulations_collection
-from critcatworks.database.format import atoms_dict_to_ase
+from critcatworks.database.format import atoms_dict_to_ase, ase_to_atoms_dict
 
 @explicit_serialize
 class NCReadTask(FiretaskBase):
@@ -51,7 +51,7 @@ class NCReadTask(FiretaskBase):
                     logging.error("Unexpected error:", sys.exc_info()[0])
                 nc_names.append(p.stem)
                 atomic_numbers.extend(atoms.get_atomic_numbers())
-                atoms_dict = atoms.__dict__
+                atoms_dict = ase_to_atoms_dict(atoms)
                 nc_structures_ase.append(atoms)
                 nc_structures_dict.append(atoms_dict)
                 nc_ids.append(idx)

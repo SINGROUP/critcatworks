@@ -10,22 +10,39 @@ import ase, ase.io
 
 
 def atoms_dict_to_ase(atoms_dict):
-    calculator = atoms_dict['_calc']
-    cell = atoms_dict['_cell']
-    celldisp = atoms_dict['_celldisp']
-    constraint = atoms_dict['_constraints']
-    pbc = atoms_dict['_pbc']
-    numbers = atoms_dict['arrays']['numbers']
-    positions = atoms_dict['arrays']['positions']
-    info = atoms_dict['info']
+    cell = atoms_dict['cell']
+    celldisp = atoms_dict['celldisp']
+    constraints = atoms_dict['constraints']
+    pbc = atoms_dict['pbc']
+    numbers = atoms_dict['numbers']
+    positions = atoms_dict['positions']
 
     atoms = ase.Atoms(numbers=numbers,
         positions=positions,
-        calculator=calculator,
         cell = cell,
         celldisp = celldisp,
-        constraint = constraint,
-        pbc = pbc,
-        info = info)
-
+        constraint = constraints,
+        pbc = pbc,)
     return atoms
+
+
+def ase_to_atoms_dict(atoms):
+    positions = atoms.get_positions().tolist()
+    cell = atoms.get_cell().tolist()
+    pbc = atoms.get_pbc().tolist()
+    numbers = atoms.get_atomic_numbers().tolist()
+    try:
+        constraints = atoms.constraints.tolist()
+    except:
+        constraints = atoms.constraints
+    celldisp = atoms.get_celldisp().tolist()
+
+    atoms_dict = {
+        "positions" : positions,
+        "cell" : cell,
+        "pbc" : pbc,
+        "numbers" : numbers,
+        "constraints" : constraints,
+        "celldisp" : celldisp,    
+        }
+    return atoms_dict

@@ -5,7 +5,7 @@ import os,time, re, glob, sys, subprocess
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 import pathlib, logging
 import ase, ase.io
-from critcatworks.database import atoms_dict_to_ase
+from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.dft.cp2k import setup_cp2k
 
 @explicit_serialize

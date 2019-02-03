@@ -12,7 +12,7 @@ import clusgeo
 import numpy as np
 import logging
 
-from critcatworks.database import atoms_dict_to_ase
+from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 
 @explicit_serialize
 class AdsorbateEliminationTask(FiretaskBase):
@@ -47,7 +47,7 @@ class AdsorbateEliminationTask(FiretaskBase):
             kept_adsorbate_atoms = ase.Atoms(symbols=[adsorbate_name] * n_kept, positions=kept_positions)
 
             kept_atoms = cluster_atoms + kept_adsorbate_atoms
-            kept_atoms_dict = kept_atoms.__dict__
+            kept_atoms_dict = ase_to_atoms_dict(kept_atoms)
             coverage_structures_eliminated.append(kept_atoms_dict)
             print(kept_atoms_dict)
 
