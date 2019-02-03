@@ -49,16 +49,27 @@ class CP2KSetupTask(FiretaskBase):
         logging.debug("target_path")
         logging.debug(target_path)
 
+
         # TODO
         # get cell size of nanocluster / system
         # atoms = fw_spec["temp"]["calc_structures"]["calc_id"] 
         
+
+
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 25 25 25"
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.TOPOLOGY.Coord_file_name = "structure.xyz"
         calc.working_directory = str(target_path)
         logging.debug("working_directory: " + str(calc.working_directory))
         calc.project_name = "gopt"
         calc.write_input_file()
+
+
+        # update simulation internally. Use source simulation to store information
+        # before instance in external database is created
+
+        input_file = calc.get_input_string()
+        source_simulation = fw_spec["simulations"][str(calc_id)]
+        source_simulation["inp"]["input_file" : input_file]
 
         logging.info("cp2k input file written TO" + calc.project_name + ".inp")
         #pass_spec = fw_spec
@@ -230,11 +241,6 @@ class CP2KAnalysisTask(FiretaskBase):
                 "is_walltime_exceeded" : is_walltime_exceeded,
                 "total_energy" : total_energy,
             }
-    
-
-            input_filename = results["x_cp2k_input_filename"]
-            with open(input_filename, "r") as f:
-                input_file = f.read()
 
         else:
             # in case of no_output or incorrect_termination
@@ -253,7 +259,6 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["source_id"] = calc_id
         dct["atoms"] = atoms_dict ### !!!
         dct["operations"] = ["cp2k"]
-        dct["inp"] = {"input_file" : input_file}
         dct["output"] = result_dict # might still be missing some output
 
         simulation = update_simulations_collection(dct)
