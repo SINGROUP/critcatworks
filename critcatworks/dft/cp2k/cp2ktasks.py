@@ -62,16 +62,12 @@ class CP2KSetupTask(FiretaskBase):
         logging.debug("working_directory: " + str(calc.working_directory))
         calc.project_name = "gopt"
         calc.write_input_file()
-
-
-        # update simulation internally. Use source simulation to store information
-        # before instance in external database is created
-
-        input_file = calc.get_input_string()
-        source_simulation = fw_spec["simulations"][str(calc_id)]
-        source_simulation["inp"]["input_file" : input_file]
-
         logging.info("cp2k input file written TO" + calc.project_name + ".inp")
+
+
+        input_string = calc.get_input_string()
+        update_spec = fw_spec
+        update_spec["input_string"] = input_string
         #pass_spec = fw_spec
         #print("dummy outputs generated")
         #fw_spec.pop("_category")
@@ -80,7 +76,7 @@ class CP2KSetupTask(FiretaskBase):
         #    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', "n_restarts" : 0},
         #    name = 'CP2KRunWork')
         #return FWAction(update_spec = fw_spec, detours = detours)
-        return
+        return FWAction(update_spec = fw_spec)
 
 @explicit_serialize
 class CP2KRunTask(FiretaskBase):
@@ -259,6 +255,7 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["source_id"] = calc_id
         dct["atoms"] = atoms_dict ### !!!
         dct["operations"] = ["cp2k"]
+        dct["inp"]["input_string"] = fw_spec["input_string"]
         dct["output"] = result_dict # might still be missing some output
 
         simulation = update_simulations_collection(dct)
