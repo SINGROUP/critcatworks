@@ -52,11 +52,17 @@ class CP2KSetupTask(FiretaskBase):
 
         # TODO
         # get cell size of nanocluster / system
-        # atoms = fw_spec["temp"]["calc_structures"]["calc_id"] 
+        # atoms = fw_spec["temp"]["calc_structures"]["calc_id"]
+        simulation = fw_spec["simulation"]
+        atoms_dict = simulation["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
+        cell_size = atoms.get_cell()
         
 
 
-        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.Abc = "[angstrom] 25 25 25"
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.A = "[angstrom] " + str(cell_size[0][0]) + str(cell_size[0][1]) + str(cell_size[0][2]) 
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.B = "[angstrom] " + str(cell_size[1])+ str(cell_size[1][1]) + str(cell_size[1][2]) 
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.C = "[angstrom] " + str(cell_size[2])+ str(cell_size[2][1]) + str(cell_size[2][2]) 
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.TOPOLOGY.Coord_file_name = "structure.xyz"
         calc.working_directory = str(target_path)
         logging.debug("working_directory: " + str(calc.working_directory))
@@ -67,7 +73,7 @@ class CP2KSetupTask(FiretaskBase):
 
         input_string = calc.get_input_string()
         update_spec = fw_spec
-        update_spec["input_string"] = input_string
+        update_spec["simulation"]["inp"]["input_string"] = input_string
         #pass_spec = fw_spec
         #print("dummy outputs generated")
         #fw_spec.pop("_category")
@@ -132,7 +138,7 @@ class CP2KRunTask(FiretaskBase):
         fw_spec.pop("_category")
         fw_spec.pop("name")
         detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
-            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', "n_restarts" : n_restarts},
+            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"]},
             name = 'CP2KAnalysisWork')
         return FWAction(update_spec = fw_spec, detours = detours)
 
@@ -206,9 +212,10 @@ class CP2KAnalysisTask(FiretaskBase):
         if output_state == "no_output" or output_state == "incorrect_termination" or output_state == "not_converged":
             if fw_spec["n_restarts"] < n_max_restarts:
                 fw_spec["n_restarts"] += 1
-                detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
-                    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
-                    name = 'CP2KRunWork')
+                detours =  rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts = int(n_restarts) + 1, simulation = fw_spec["simulation"])
+                #detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
+                #    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
+                #    name = 'CP2KRunWork')
                 return FWAction(update_spec = fw_spec, detours = detours)    
 
         # update data
@@ -255,7 +262,6 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["source_id"] = calc_id
         dct["atoms"] = atoms_dict ### !!!
         dct["operations"] = ["cp2k"]
-        dct["inp"]["input_string"] = fw_spec["input_string"]
         dct["output"] = result_dict # might still be missing some output
 
         simulation = update_simulations_collection(dct)
@@ -282,7 +288,7 @@ class CP2KAnalysisTask(FiretaskBase):
         return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
 
-def setup_cp2k(template, target_path, calc_id, name = "cp2k_run_id", n_max_restarts = 4):
+def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id", n_max_restarts = 4):
     setup_task = CP2KSetupTask(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
@@ -299,17 +305,17 @@ def setup_cp2k(template, target_path, calc_id, name = "cp2k_run_id", n_max_resta
     #    n_max_restarts = n_max_restarts)
 
     
-    fw = Firework([setup_task,run_task], spec = {'_category' : "dft", 'name' : 'CP2KWork', "n_restarts" : 0},
+    fw = Firework([setup_task,run_task], spec = {'_category' : "dft", 'name' : 'CP2KWork', "n_restarts" : 0, "simulation" : simulation},
                      name = 'CP2KWork')
     return fw
 
 
-def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts):
+def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts, simulation):
     """
     Run and analyse
     """
     fw = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
-        spec = {'_category' : "dft", 'name' : 'CP2KRerunWork', 'n_restarts' : int(n_restarts) + 1 },
+        spec = {'_category' : "dft", 'name' : 'CP2KRerunWork', 'n_restarts' : int(n_restarts) + 1, "simulation" : simulation },
         name = 'CP2KRerunWork')
     return fw
 

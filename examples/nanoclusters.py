@@ -3,6 +3,7 @@ import pathlib
 import os,time, sys
 import logging
 import ase
+from scipy.spatial.distance import pdist
 
 # internal modules
 from critcatworks.workflows import get_nanoclusters_workflow
@@ -16,6 +17,12 @@ def read_structures_locally(path):
             logging.debug("nanocluster path " + str(p) + " stem " + str(p.stem))
             try:
                 atoms = ase.io.read(str(p))
+                # set cell to 2.5 the diameter
+                pos = atoms.get_positions()
+                pdist(pos)
+                diameter = pdist(pos).max()
+
+                atoms.set_cell([diameter, diameter, diameter])
                 structures.append(atoms)
                 logging.debug(atoms)
             except ValueError:
