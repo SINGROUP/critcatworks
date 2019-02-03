@@ -8,6 +8,7 @@ import pathlib, logging
 import pycp2k, cp2kparser
 import ase, ase.io
 from critcatworks.database import atoms_dict_to_ase
+from critcatworks.database.extdb import update_simulations_collection
 
 @explicit_serialize
 class CP2KSetupTask(FiretaskBase):
@@ -50,9 +51,6 @@ class CP2KSetupTask(FiretaskBase):
         logging.debug(target_path)
 
 
-        # TODO
-        # get cell size of nanocluster / system
-        # atoms = fw_spec["temp"]["calc_structures"]["calc_id"]
         simulation = fw_spec["simulation"]
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
@@ -60,9 +58,9 @@ class CP2KSetupTask(FiretaskBase):
         
 
 
-        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.A = "[angstrom] " + str(cell_size[0][0]) + str(cell_size[0][1]) + str(cell_size[0][2]) 
-        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.B = "[angstrom] " + str(cell_size[1])+ str(cell_size[1][1]) + str(cell_size[1][2]) 
-        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.C = "[angstrom] " + str(cell_size[2])+ str(cell_size[2][1]) + str(cell_size[2][2]) 
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.A = "[angstrom] " + str(cell_size[0][0]) + " " + str(cell_size[0][1]) + " " + str(cell_size[0][2]) 
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.B = "[angstrom] " + str(cell_size[1][0]) + " " + str(cell_size[1][1]) + " " + str(cell_size[1][2]) 
+        calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.C = "[angstrom] " + str(cell_size[2][0]) + " " + str(cell_size[2][1]) + " " + str(cell_size[2][2]) 
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.TOPOLOGY.Coord_file_name = "structure.xyz"
         calc.working_directory = str(target_path)
         logging.debug("working_directory: " + str(calc.working_directory))
@@ -250,7 +248,7 @@ class CP2KAnalysisTask(FiretaskBase):
             # fill slots with empty placeholders
             atoms_dict = {}
             input_file = ""
-            result_dict = {"is_converged" : False, "output_state" : output_state}
+            result_dict = {"is_converged" : 0, "output_state" : output_state}
 
         ##
         # get source simulation
@@ -264,6 +262,8 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["operations"] = ["cp2k"]
         dct["output"] = result_dict # might still be missing some output
 
+        print(dct)
+        logging.info(dct)
         simulation = update_simulations_collection(dct)
 
         # update internal workflow data

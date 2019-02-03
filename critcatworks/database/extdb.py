@@ -39,8 +39,8 @@ def _query_id_counter_and_increment(collection, db):
 
 
 # update simulation
-def update_simulations_collection(wf_sim_id, 
-    atoms, 
+def update_simulations_collection(wf_sim_id = -1, 
+    atoms = {}, 
     source_id = -1, workflow_id = -1, 
     nanoclusters = [], adsorbates = [], substrates = [], 
     operations = [], inp = {}, output = {},
@@ -156,8 +156,7 @@ if __name__ == "__main__":
 
     wfc = update_workflows_collection("random_dude", "Sunday")
 
-    sc = update_simulations_collection(-42, 
-        "HERE_SHOULD_BE_A_CUSTOM_TYPE", notes = "adding_keys_allowed")
+    sc = update_simulations_collection(wf_sim_id = -42, atoms = "HERE_SHOULD_BE_A_CUSTOM_TYPE", notes = "adding_keys_allowed")
 
     mlc = update_machine_learning_collection("krr", 
         russian_exchange_student = "Sakmiov")
