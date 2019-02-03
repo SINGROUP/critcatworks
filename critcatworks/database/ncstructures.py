@@ -113,7 +113,7 @@ class NCStartFromStructuresTask(FiretaskBase):
             simulation_id = dct["_id"]
 
             # update simulation internally.
-            dct["nanoclusters"]["reference_id"] = simulation_id
+            dct["nanoclusters"][0]["reference_id"] = simulation_id
 
             update_spec["simulations"][str(simulation_id)] = dct
             calc_ids.append(simulation_id)
