@@ -4,50 +4,80 @@ import pathlib
 import os,time
 
 # internal modules
-from critcatworks.clusgeo import get_adsites, rank_adsites
+from critcatworks.structure import get_adsites, rank_adsites
 from critcatworks.database import read_structures, update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
 from critcatworks.ml import get_mae, check_convergence
 
-def get_singlesites_workflow(source_path, template_path, target_path = None, reference_energy=0.0, 
-        adsorbate_name='H', chunk_size = 100, max_calculations = 10000):
+def get_singlesites_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None,
+        source_path  = None, reference_energy=0.0,
+        adsorbate_name='H', chunk_size = 100, max_calculations = 10000, username = "unknown", 
+        adsite_types = ["top", "bridge", "hollow"]):
     """
+
     Workflow to determine the adsorption sites and energies of a set of
     nanocluster structures using CP2K and Clusgeo
     """
+
+    with open (template_path, "r") as f:
+        template = f.read()
+
+    #FireWork: Initialize workflow with workflow_id from external database
+    parameters = {
+        "template" : template,
+        "template_path" : template_path,
+        "worker_target_path" : worker_target_path,
+        "extdb_ids" : extdb_ids,
+        "source_path" : source_path,
+        "reference_energy" : reference_energy,
+        "max_calculations" : max_calculations,
+        "adsorbate_name" : adsorbate_name,
+        "chunk_size" : chunk_size,
+        "adsite_types" : adsite_types,
+        }
+
+    fw_init = initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "singlesites")
+
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information
-    abspath = pathlib.Path(source_path).resolve()
-
-    if target_path == None:
-        target_path = os.getcwd()
+    if structures != None:
+        jsonified_structures = []
+        for atoms in structures:
+            atoms_dict = ase_to_atoms_dict(atoms)
+            jsonified_structures.append(atoms_dict) 
+        fw_get_structures = start_from_structures(jsonified_structures)
+    elif extdb_ids != None:
+        fw_get_structures = start_from_database(extdb_ids)
+    elif source_path != None:
+        fw_get_structures = read_structures(source_path)
     else:
-        target_path = pathlib.Path(target_path).resolve()
+        raise ValueError('structures, extdb_ids or source_path contain no entries!')
 
-    fw_read_structures = read_structures(abspath)
+
     # FireWork: Determine adsites and add to database
     fw_get_adsites = get_adsites(
-        reference_energy=0.0, 
-        adsorbate_name='H', 
-        #adsite_types = ["top", "bridge", "hollow"],
-        adsite_types = ["top"],
+        reference_energy= reference_energy, 
+        adsorbate_name= adsorbate_name, 
+        adsite_types = adsite_types,
         )
     # FireWork: FPS ranking
     fw_rank_adsites = rank_adsites()
 
     # Firework: setup folders for DFT calculations
-    fw_setup_folders = setup_folders(target_path = target_path)
+    fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_singlesites_id")
 
 
     # add above Fireworks with links
-    workflow_list = [fw_read_structures, 
+    workflow_list = [fw_init,
+        fw_get_structures, 
         fw_get_adsites, 
         fw_rank_adsites, 
         fw_setup_folders,
         ]
 
     links_dict = {
-            fw_read_structures: [fw_get_adsites], 
+            fw_init: [fw_get_structures],
+            fw_get_structures: [fw_get_adsites], 
             fw_get_adsites: [fw_rank_adsites],
             fw_rank_adsites : [fw_setup_folders],
             }

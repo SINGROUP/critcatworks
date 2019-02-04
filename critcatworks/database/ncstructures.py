@@ -102,8 +102,7 @@ class NCStartFromStructuresTask(FiretaskBase):
 
             # update external database
             # enter datapoint
-            dct = update_simulations_collection(wf_sim_id = -1, 
-                atoms = atoms_dict, 
+            dct = update_simulations_collection(atoms = atoms_dict, 
                 source_id = -1, workflow_id = workflow_id, 
                 nanoclusters = [nanocluster], adsorbates = [], substrates = [], 
                 operations = [], inp = {}, output = {},

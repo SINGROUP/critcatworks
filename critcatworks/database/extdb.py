@@ -39,16 +39,12 @@ def _query_id_counter_and_increment(collection, db):
 
 
 # update simulation
-def update_simulations_collection(wf_sim_id = -1, 
-    atoms = {}, 
+def update_simulations_collection(atoms = {}, 
     source_id = -1, workflow_id = -1, 
     nanoclusters = [], adsorbates = [], substrates = [], 
     operations = [], inp = {}, output = {},
     **kwargs):
     """
-    IS wf_sim_id really necessary? update ids in internal database 
-    after querying?
-    
     # generated cluster manual
     # and automated using clusterer
     # generated adsorption site
@@ -64,7 +60,6 @@ def update_simulations_collection(wf_sim_id = -1,
 
     # construct dictionary
     dct = {'_id' : simulation_id,
-        "wf_sim_id" : wf_sim_id,
         "atoms" : atoms, 
         "source_id" : source_id,
         "workflow_id" : workflow_id,
@@ -156,7 +151,7 @@ if __name__ == "__main__":
 
     wfc = update_workflows_collection("random_dude", "Sunday")
 
-    sc = update_simulations_collection(wf_sim_id = -42, atoms = "HERE_SHOULD_BE_A_CUSTOM_TYPE", notes = "adding_keys_allowed")
+    sc = update_simulations_collection(atoms = "HERE_SHOULD_BE_A_CUSTOM_TYPE", notes = "adding_keys_allowed")
 
     mlc = update_machine_learning_collection("krr", 
         russian_exchange_student = "Sakmiov")

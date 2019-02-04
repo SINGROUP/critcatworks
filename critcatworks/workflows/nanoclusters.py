@@ -6,15 +6,29 @@ import os,time
 from critcatworks.database import start_from_structures, start_from_database, update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
 from critcatworks.database.format import ase_to_atoms_dict
+from critcatworks.database.update import initialize_workflow_data
 
-def get_nanoclusters_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None, source_path = None, reference_energy=0.0):
+def get_nanoclusters_workflow(template_path, worker_target_path = None, structures = None, 
+    extdb_ids = None, source_path = None, reference_energy=0.0, username = "unknown"):
     """
     Workflow to relax the structure of a set of
     nanoclusters using CP2K
     The given paths have to be absolute paths on the location where Firework jobs will be run.
     """
+
     with open (template_path, "r") as f:
         template = f.read()
+
+    #FireWork: Initialize workflow with workflow_id from external database
+    parameters = {
+        "template" : template,
+        "template_path" : template_path,
+        "worker_target_path" : worker_target_path,
+        "extdb_ids" : extdb_ids,
+        "source_path" : source_path,
+        "reference_energy" : reference_energy,
+        }
+    fw_init = initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "relax_nanoclusters")
 
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information
@@ -32,7 +46,7 @@ def get_nanoclusters_workflow(template_path, worker_target_path = None, structur
         raise ValueError('structures, extdb_ids or source_path contain no entries!')
 
     # Firework: setup folders for DFT calculations
-    fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_run_id")
+    fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_nanoclusters_id")
 
 
     # FireWork: setup, run and extract DFT calculation
@@ -41,16 +55,19 @@ def get_nanoclusters_workflow(template_path, worker_target_path = None, structur
         n_max_restarts = 1, simulation_method = "cp2k")
 
     # add above Fireworks with links
-    workflow_list = [fw_get_structures, 
+    workflow_list = [fw_init,
+        fw_get_structures, 
         fw_setup_folders,
         fw_chunk_calculations
         ]
 
     links_dict = {
+            fw_init: [fw_get_structures],
             fw_get_structures: [fw_setup_folders],
             fw_setup_folders : [fw_chunk_calculations]
             }
 
     wf = Workflow(workflow_list, links_dict)
+
     return wf
 

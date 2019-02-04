@@ -157,7 +157,7 @@
     &END
     &CELL
       PERIODIC NONE
-      ABC ${CELLSIZE}
+      #ABC ${CELLSIZE}
     &END CELL
     &TOPOLOGY
       COORD_FILE_FORMAT XYZ
