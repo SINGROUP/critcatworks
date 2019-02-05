@@ -262,7 +262,6 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["operations"] = ["cp2k"]
         dct["output"] = result_dict # might still be missing some output
 
-        print(dct)
         logging.info(dct)
         simulation = update_simulations_collection(dct)
 

@@ -4,15 +4,20 @@ import pathlib
 import os,time
 
 # internal modules
+from critcatworks.database.update import initialize_workflow_data
+from critcatworks.database.format import ase_to_atoms_dict
+from critcatworks.database import start_from_structures, start_from_database, update_converged_data
 from critcatworks.structure import get_adsites, rank_adsites
-from critcatworks.database import read_structures, update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
+
+from critcatworks.database import update_converged_data
 from critcatworks.ml import get_mae, check_convergence
+
 
 def get_singlesites_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None,
         source_path  = None, reference_energy=0.0,
         adsorbate_name='H', chunk_size = 100, max_calculations = 10000, username = "unknown", 
-        adsite_types = ["top", "bridge", "hollow"]):
+        adsite_types = ["top", "bridge", "hollow"], threshold = 0.1, n_max_restarts = 1):
     """
 
     Workflow to determine the adsorption sites and energies of a set of
@@ -34,6 +39,13 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
         "adsorbate_name" : adsorbate_name,
         "chunk_size" : chunk_size,
         "adsite_types" : adsite_types,
+        "descriptor" : "soap",
+        "descriptor_params" : {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
+            "crossover" : True, "sparse" : False},
+        "simulation_method" : "cp2k",
+        "threshold" : threshold,
+        "n_max_restarts" : n_max_restarts,
+        "workflow_type" : "singlesites",
         }
 
     fw_init = initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "singlesites")
@@ -59,6 +71,9 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
         reference_energy= reference_energy, 
         adsorbate_name= adsorbate_name, 
         adsite_types = adsite_types,
+        descriptor = "soap",
+        descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
+            "crossover" : True, "sparse" : False},
         )
     # FireWork: FPS ranking
     fw_rank_adsites = rank_adsites()
@@ -88,8 +103,9 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
 
         # FireWork: setup, run and extract DFT calculation
         # (involves checking for errors in DFT and rerunning)
-        fw_chunk_calculations = chunk_calculations(template_path = template_path, target_path = target_path, 
-            chunk_size = chunk_size, n_max_restarts = 1, simulation_method = "cp2k")
+
+        fw_chunk_calculations = chunk_calculations(template = template, target_path = worker_target_path, 
+            chunk_size = chunk_size, n_max_restarts = n_max_restarts, simulation_method = "cp2k")
         workflow_list.append(fw_chunk_calculations)
         if i == 0:
             links_dict[fw_setup_folders] = [fw_chunk_calculations]
@@ -104,14 +120,14 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
 
 
         # FireWork: machine learning from database
-        fw_get_mae = get_mae(target_path = target_path)
+        fw_get_mae = get_mae(target_path = worker_target_path)
         workflow_list.append(fw_get_mae)
         links_dict[fw_update_converged_data] =[fw_get_mae]
 
 
         # FireWork: check if converged, give intermediary overview.
         # give summary when finished
-        fw_check_convergence = check_convergence(threshold = 0.1)
+        fw_check_convergence = check_convergence(threshold = threshold)
         workflow_list.append(fw_check_convergence)
         links_dict[fw_get_mae] =[fw_check_convergence]
 

@@ -46,15 +46,15 @@ if __name__ == "__main__":
 
     structures = read_structures_locally("./nc_structures")
     wf = get_singlesites_workflow(
-        template_path = str(pathlib.Path("../../tests/dummy_db/templates/rankedadsites_cheap_gopt.inp").resolve()), 
+        template_path = str(pathlib.Path("templates/rankedadsites_cheap_gopt.inp").resolve()), 
         worker_target_path = str(pathlib.Path("../tests/dummy_db/output/").resolve()),
-        structures = structures
+        structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         chunk_size = 5,
         max_calculations = 15,
-        adsite_types = ["top"] #, "bridge", "hollow"]
-        username = "marc"
+        adsite_types = ["top"], #, "bridge", "hollow"],
+        username = "marc",
         )
 
     # store workflow 

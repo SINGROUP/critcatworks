@@ -1,5 +1,6 @@
 # functions to store data in an external MongoDB database
 import pymongo
+from pprint import pprint as pp
 
 def get_external_database(host = "mongodb+srv://austerity-hgeov.mongodb.net/test", 
     database = "test",username = "marc", password = 'marcrulez0r'):
@@ -108,7 +109,7 @@ def update_workflows_collection(username, creation_time,
 def update_machine_learning_collection(method, workflow_id = -1, 
     method_params = {}, descriptor = "soap",
     descriptor_params = {},
-    training_set = [], validation_set = [],
+    training_set = [], validation_set = [], prediction_set = [],
     metrics_training = {}, metrics_validation = {},
     output = {},
     **kwargs):

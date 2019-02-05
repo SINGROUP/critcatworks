@@ -11,78 +11,73 @@ import logging, datetime
 from critcatworks.database.extdb import update_workflows_collection
 
 @explicit_serialize
-class UpdateDataTask(FiretaskBase):
+class GatherPropertyTask(FiretaskBase):
     """ 
-    Task to update database from converged chunk
-    of calculations.
+    Task to update database from chunk
+    of calculations. Computes properties of systems.
     """
 
-    _fw_name = 'UpdateDataTask'
+    _fw_name = 'GatherPropertyTask'
     required_params = ['chunk_size']
-    optional_params = []
+    optional_params = ['adsite_types']
 
     def run_task(self, fw_spec):
         chunk_size = int(self["chunk_size"])
+        adsite_types = self["adsite_types"]
         n_calcs_started = int(fw_spec["n_calcs_started"])
-        nc_energies = fw_spec["nc_energies"]
-        reverse_connect_dict = fw_spec["reverse_connect_dict"]
-        reference_energy = fw_spec["reference_energy"]
 
+        calc_ids_chunk = fw_spec["temp"]["calc_ids"][n_calcs_started - chunk_size : n_calcs_started]
+        logging.info(calc_ids_chunk)
 
-        ranked_ids_chunk = fw_spec["fps_ranking"][n_calcs_started - chunk_size : n_calcs_started]
+        simulations = fw_spec["simulations"]
 
-        logging.info(ranked_ids_chunk)
+        # compute reaction energy and store them as lists for ml
 
-        adsorbate_energies_list = fw_spec["adsorbate_energies_list"]
-        adsorbate_energies_dict = fw_spec["adsorbate_energies_dict"]
+        n_calcs = len(calc_ids)
+        reaction_energies_list = np.zeros(n_calcs)
+        is_converged_list = np.zeros(n_calcs)
 
-        is_converged_list = fw_spec["is_converged_list"]
-        is_converged_dict = fw_spec["is_converged_dict"]
+        for calc_id in calc_ids_chunk:
+            simulation = simulations[str(calc_id)]
 
-        relaxed_structure_list = fw_spec["relaxed_structure_list"]
-        relaxed_structure_dict = fw_spec["relaxed_structure_dict"]
+            structure = simulation["atoms"]
+            # TODO add how adsorbate moved
+            # get closest site classified
 
-        reaction_energies_list = fw_spec["reaction_energies_list"]
+            is_converged_list[int(calc_id)] = simulation["output"]["is_converged"]
 
-        logging.debug(adsorbate_energies_list)
-        logging.debug(relaxed_structure_list)
+            #if is_converged_list[int(calc_id)] == True:
+            
+            # get current simulation total_energy
+            simulation_total_energy = simulation["output"]["total_energy"]
+            # iterate over
+            # adsorbates
+            adsorbates = simulation["adsorbates"]
+            # nanoclusters
+            nanoclusters = simulation["nanoclusters"]
+            # substrates
+            substrates = simulation["substrates"]
 
-        logging.debug(adsorbate_energies_dict)
-        logging.debug(relaxed_structure_dict)
-
-
-        for ranked_id in ranked_ids_chunk:
-            adsorbate_energies_list[int(ranked_id)] = adsorbate_energies_dict[str(ranked_id)]
-            relaxed_structure_list[int(ranked_id)] = relaxed_structure_dict[str(ranked_id)]
-            is_converged_list[int(ranked_id)] = is_converged_dict[str(ranked_id)]
-
-        logging.debug("reverse_connect_dict")
-        logging.debug(reverse_connect_dict)
-
-        logging.info("reverse_connect_dict")
-        pp(reverse_connect_dict)
-        for ranked_id in ranked_ids_chunk:
-            logging.info(ranked_id, type(ranked_id))
-            nc_id = reverse_connect_dict[str(ranked_id)]
-
-            if is_converged_list[int(ranked_id)] == True:
-                reaction_energies_list[int(ranked_id)] = float(adsorbate_energies_list[int(ranked_id)]) - float(reference_energy) - float(nc_energies[int(nc_id)])
-            else:
-                reaction_energies_list[int(ranked_id)] = 0.0
-
-
+            component_types = [adsorbates, nanoclusters, substrates]
+            reaction_energy = simulation_total_energy
+            for components in component_types:
+                for component in components:
+                    reference_id = component["reference_id"]
+                    try:
+                        total_energy = simulations[str(reference_id)]["output"]["total_energy"]
+                    except:
+                        logging.warning("total_energy not found!")
+                        total_energy = 0.0
+                    reaction_energy -= total_energy
+                    reaction_energies_list[int(calc_id)] = reaction_energy
 
         update_spec = fw_spec
-        update_spec["relaxed_structure_list"] = relaxed_structure_list
-        update_spec["adsorbate_energies_list"] = adsorbate_energies_list
-        update_spec["reaction_energies_list"] = reaction_energies_list
-        update_spec["is_converged_list"] = is_converged_list 
+
+        update_spec["temp"]["property"] = reaction_energies_list
+        update_spec["temp"]["is_converged_list"] = is_converged_list 
+
         update_spec.pop("_category")
         update_spec.pop("name")
-
-        logging.debug(adsorbate_energies_list)
-        logging.debug(relaxed_structure_list)
-
         return FWAction(update_spec=update_spec)
 
 
@@ -120,10 +115,10 @@ class InitialTask(FiretaskBase):
 
 
 
-def update_converged_data(chunk_size):
-    firetask1  = UpdateDataTask(chunk_size = chunk_size)
-    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'UpdateDataTask'},
-             name = 'UpdateDataWork')
+def update_converged_data(chunk_size, adsite_types = ["top", "bridge", "hollow"]):
+    firetask1  = GatherPropertyTask(chunk_size = chunk_size, adsite_types = adsite_types)
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'GatherPropertyTask'},
+             name = 'GatherPropertyWork')
     return fw
 
 def initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "UNNAMED"):

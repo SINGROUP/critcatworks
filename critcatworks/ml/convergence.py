@@ -24,8 +24,12 @@ class CheckConvergenceTask(FiretaskBase):
 
     def run_task(self, fw_spec):
 
-        mae = fw_spec["mae"]
         threshold = self["threshold"]
+        convergence_criterion = self["convergence_criterion"]
+        
+        machine_learning_id = fw_spec["temp"]["current_ml_id"]
+        machine_learning = fw_spec["machine_learning"][str(machine_learning_id)]
+        mae = machine_learning["metrics_validation"][convergence_criterion]
 
         if mae < threshold:
             logging.info("Database is converged")
@@ -36,7 +40,7 @@ class CheckConvergenceTask(FiretaskBase):
             defuse_workflow = False
             # start new chunk of calculations
             # already defined as children in the workflow
-            logging.info("calculating next chunk of DFT")
+            logging.info("calculating next chunk. continue workflow as planned")
 
         update_spec = fw_spec
         update_spec.pop("_category")
@@ -45,8 +49,8 @@ class CheckConvergenceTask(FiretaskBase):
         return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
 
 
-def check_convergence(threshold):
-    firetask1  = CheckConvergenceTask(threshold = threshold)
+def check_convergence(threshold, convergence_criterion = "mae"):
+    firetask1  = CheckConvergenceTask(threshold = threshold, convergence_criterion = convergence_criterion)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'CheckConvergenceTask'},
              name = 'CheckConvergenceWork')
     return fw

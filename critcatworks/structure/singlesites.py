@@ -13,26 +13,9 @@ import numpy as np
 import logging
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
+from critcatworks.database.extdb import update_simulations_collection
 
-def adsorbate_pos_to_atoms_dict(structure, adspos, adsite_type):
-    """
-    out of use. TODO delete.
-    """
-    atoms_lst = []
-    ads_structures_dict = []
-    for adatom, idx in zip(adspos, range(len(adspos))):
-        logging.debug(adsite_type)
-        logging.debug(adatom)
-        logging.debug(adatom.shape)
-        adatom = ase.Atoms(symbols=adsite_type, positions=adatom.reshape((1,3)))
-        clus_ads = structure + adatom
-        atoms_lst.append(clus_ads)
-        clus_ads_dict = ase_to_atoms_dict(clus_ads)
-        ads_structures_dict.append(clus_ads_dict)
-
-    return ads_structures_dict
-
-def adsorbate_pos_to_atoms_lst(adspos, adsite_type):
+def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
     """
     works with only one adsorbate atom.
     TODO generalize cluskit to return list of adsorbates
@@ -41,12 +24,12 @@ def adsorbate_pos_to_atoms_lst(adspos, adsite_type):
     """
     atoms_lst = []
     ads_structures_dict = []
-    for adsorbate, idx in zip(adspos, range(len(adspos))):
-        logging.debug(adsite_type)
-        logging.debug(adatom)
-        logging.debug(adatom.shape)
-        adatom = ase.Atoms(symbols=adsite_type, positions=adatom.reshape((1,3)))
-        atoms_lst.append(clus_ads)
+    for adsorbate in adspos:
+        logging.debug(adsorbate_name)
+        logging.debug(adsorbate)
+        logging.debug(adsorbate.shape)
+        atoms = ase.Atoms(symbols=adsorbate_name, positions=adsorbate.reshape((1,3)))
+        atoms_lst.append(atoms)
     return atoms_lst
 
 def join_cluster_adsorbate(cluster, adsorbate):
@@ -56,7 +39,7 @@ def join_cluster_adsorbate(cluster, adsorbate):
 
     return joint_atoms, cluster_ids, adsorbate_ids
 
-def gather_all_atom_types(calc_ids, simulations_collection):
+def gather_all_atom_types(calc_ids, simulations):
     # going through nc atoms once to find atom types
     atomic_numbers = []
     for idx, calc_id in enumerate(calc_ids):
@@ -111,14 +94,14 @@ class AdsiteCreationTask(FiretaskBase):
         all_atomtypes = gather_all_atom_types(calc_ids, simulations)
 
         # looping over nc atoms 
-        for idx, atoms in enumerate(calc_ids):
-            logging.debug(atoms)
+        for idx, calc_id in enumerate(calc_ids):
 
             ##
             # get source simulation
             source_simulation = simulations[str(calc_id)]
-            # entries for adsorbate dictionary
-            ads_pos_lst = []
+            atoms_dict = source_simulation["atoms"]
+            atoms = atoms_dict_to_ase(atoms_dict)
+            logging.debug(atoms)
 
             # running clusgeo on cluster
             cluster = clusgeo.ClusGeo(atoms)
@@ -149,13 +132,12 @@ class AdsiteCreationTask(FiretaskBase):
                     desc_lst.append(desc[i])
 
 
-                adsorbate_lst = adsorbate_pos_to_atoms_lst(adspos, adsite_type)
-
+                adsorbate_lst = adsorbate_pos_to_atoms_lst(adspos, adsorbate_name)
                 #loop over each adsorbate
                 for adsorbate, surface_atoms in zip(adsorbate_lst, sites_surface_atoms):
 
                     #adsites_dict 
-                    joint_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(cluster, adsorbate)
+                    joint_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
                     joint_atoms_dict = ase_to_atoms_dict(joint_atoms)
 
                     # update external database
@@ -164,11 +146,11 @@ class AdsiteCreationTask(FiretaskBase):
                     dct["source_id"] = calc_id
                     dct["workflow_id"] = workflow_id
                     dct["atoms"] = joint_atoms_dict
-                    dct["operations"] = [{"add_adsorbate" : 1}]
-                    dct["adsorbates"].append({"atom_ids" : adsorbate_ids, "reference_id" : reference_id})
+                    dct["operations"] = [dict({"add_adsorbate" : 1})]
+                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
                     dct["inp"]["adsite_type"] = adsite_type
                     dct["inp"]["adsorbate_name"] = adsorbate_name
-                    dct["output"]["surface_atoms"] = surface_atoms
+                    dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
                     logging.info(dct)
                     simulation = update_simulations_collection(dct)
@@ -181,12 +163,6 @@ class AdsiteCreationTask(FiretaskBase):
 
 
             # move coverage to other task
-
-
-                ### full coverage addition : make coverage structure anyway and add to simulation
-                # get structure with all adsorbates
-                #ads_pos_lst.append(adsites)
-
             # get structure with all adsorbates, different sites combined
             #clus_cov = atoms.copy()
             #for pos in ads_pos_lst:
@@ -221,14 +197,20 @@ class AdsiteRankTask(FiretaskBase):
 
     def run_task(self, fw_spec):
         logging.debug(fw_spec)
+        calc_ids = fw_spec["temp"]["calc_ids"]
         descmatrix = fw_spec["temp"]["descmatrix"]
         descmatrix = np.array(descmatrix)
         logging.info("DESCRIPTOR matrix attributes")
         logging.info(descmatrix.shape)
         logging.info(np.sum(descmatrix))
-        fps_ranking = clusgeo.cluster._rank_fps(descmatrix, K = None, greedy =False, is_safe = True)
+        fps_ranking = clusgeo.cluster._rank_fps(descmatrix, K = None, greedy =False)
+
+        reordered_calc_ids = np.array(calc_ids)[fps_ranking]
+        reordered_descmatrix = descmatrix[fps_ranking]
         update_spec = fw_spec
-        update_spec["temp"]["fps_ranking"] = fps_ranking
+        update_spec["temp"]["fps_ranking"] = fps_ranking.tolist()
+        update_spec["temp"]["calc_ids"] = reordered_calc_ids.tolist()
+        update_spec["temp"]["descmatrix"] = reordered_descmatrix.tolist()
         update_spec.pop("_category")
         update_spec.pop("name")
 
@@ -239,16 +221,18 @@ class AdsiteRankTask(FiretaskBase):
 
 
 
-def get_adsites(adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"]):
+def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"], 
+        descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
+            "crossover" : True, "sparse" : False}):
     firetask1  = AdsiteCreationTask(
         adsorbate_name=adsorbate_name, 
         adsite_types = adsite_types,
+        reference_energy = reference_energy,
+        descriptor = descriptor,
+        descriptor_params = descriptor_params
         )
     fw = Firework([firetask1], 
-        spec={'adsorbate_name' : adsorbate_name, 
-        'adsite_types' : adsite_types,
-        '_category' : "lightweight",
-        'name' : 'AdsiteCreationTask'},
+        spec={'_category' : "lightweight", 'name' : 'AdsiteCreationTask'},
         name = 'AdsiteCreationWork'
         )
     return fw

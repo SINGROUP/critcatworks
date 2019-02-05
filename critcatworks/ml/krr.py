@@ -25,53 +25,91 @@ class MLTask(FiretaskBase):
     optional_params = []
 
     def run_task(self, fw_spec):
+        METHOD = "krr"
         IS_PREDICT_FAILED = True
-
-        target_path = self['target_path']
-        parent_folder_name = 'ml_krr'
+        N_CV = 5
+        parent_folder_name = 'ml_' + METHOD
         parent_folder_path = target_path + "/" + parent_folder_name
-
         if not os.path.exists(parent_folder_path):
             os.makedirs(parent_folder_path)
 
-        logging.info("ML not tested yet")
+        target_path = self['target_path']
 
         n_calcs_started = fw_spec["n_calcs_started"]
-        is_converged_list = fw_spec["is_converged_list"]
-        is_converged_ids = np.nonzero(is_converged_list)
+        calc_ids = fw_spec["temp"]["calc_ids"]
+        is_converged_list = fw_spec["temp"]["is_converged_list"]
+        property_lst = fw_spec["temp"]["property"]
+        descmatrix = fw_spec["temp"]["descmatrix"]
+        workflow_id = fw_spec["workflow"]["_id"]
+        workflow_parameters = fw_spec["workflow"]["parameters"]
 
-        ranked_ids = fw_spec["fps_ranking"][:n_calcs_started]
-        training_ids = np.intersect1d(ranked_ids, is_converged_ids)
+        enumerated_ids = np.arange.range(len(calc_ids))
 
-        # magic number due to 5-fold CV
-        if training_ids.shape[0] <= 5:
-            logging.warning('Problem detected: Too few datapoints to learn from! Something might be wrong with your DFT calculations!')
+        ### PREPARE, CHECK ###
+        is_converged_ids = np.array(calc_ids)[np.array(is_converged_list)]
+
+        finished_calc_ids = np.array(calc_ids)[:n_calcs_started]
+        simulation_ids_training = np.intersect1d(finished_calc_ids, is_converged_ids)
+        training_ids = np.array(enumerated_ids)[np.intersect1d(finished_calc_ids, is_converged_ids)]
+
+        # magic number due to n-fold CV
+        if training_ids.shape[0] <= N_CV:
+            logging.warning('Exiting workflow Problem detected: ' + 
+                'Too few datapoints to learn from! Something might be wrong with your DFT calculations!')
             return FWAction(defuse_workflow=True)
 
         if IS_PREDICT_FAILED == True:
-            to_predict_ids = is_converged_ids
+            simulation_ids_predict = np.array(calc_ids)[1 - np.array(is_converged_list)]
+            to_predict_ids = np.array(enumerated_ids)[1 - np.array(is_converged_list)]
         else:
-            to_predict_ids = fw_spec["fps_ranking"][n_calcs_started:]
+            to_predict_ids = np.array(calc_ids)[n_calcs_started:]
 
-
-        descmatrix = np.array(fw_spec["descmatrix"])
-        en = np.array(fw_spec["reaction_energies_list"])
         
         features = descmatrix[training_ids]
         to_predict_features = descmatrix[to_predict_ids]
-        labels = en[training_ids]
+        labels = np.array(property_lst)[training_ids]
 
-        mae, y_to_predict, krr_parameters = ml_krr(features, labels, training_ids, to_predict_features, to_predict_ids, 
-            is_scaled = False, path = parent_folder_path)
+        ### RUN ###
 
+        if METHOD == "krr":
+            mae, mse, y_to_predict, method_params = ml_krr(features, labels, training_ids, 
+                to_predict_features, to_predict_ids, 
+                is_scaled = False, n_cv = N_CV, path = parent_folder_path)
+        else:
+            logging.warning('Exiting workflow Problem detected: ' + 
+                'machine learning method  ' + METHOD + '  not implemented')
+            return FWAction(defuse_workflow=True)
+
+        ### DATABASE ###
+        # update machine learning data
+        # update external database
+        dct = update_machine_learning_collection(METHOD, workflow_id = workflow_id, 
+            method_params = method_params, 
+            descriptor = workflow_parameters["descriptor"],
+            descriptor_params = workflow_parameters["descriptor_params"],
+            training_set = simulation_ids_training.tolist(), 
+            validation_set = [], 
+            prediction_set = simulation_ids_predict.tolist(),
+            metrics_training = {"mae" : 0}, 
+            metrics_validation = {"mae" : 0},
+            output = {"mae" : 0, "mse" : 0, "predicted_property_lst" : y_predict.tolist()}
+            )
+        
+        # update internal workflow data
         update_spec = fw_spec
-        update_spec["mae"] = mae
-        update_spec["best_krr_parameters"] = krr_parameters
-        update_spec["ids_predicted"] = to_predict_ids
-        update_spec["predicted_energies"] = y_to_predict
+        machine_learning_id = dct["_id"]
+        update_spec["machine_learning"][str(machine_learning_id)] = dct
+
+        # update temp workflow data
+        update_spec["temp"]["last_machine_learning_id"] = machine_learning_id
+
+        #update_spec["mae"] = mae
+        #update_spec["best_krr_parameters"] = krr_parameters
+        #update_spec["ids_predicted"] = to_predict_ids
+        #update_spec["predicted_energies"] = y_to_predict
+
         update_spec.pop("_category")
         update_spec.pop("name")
-
         return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
 
 
@@ -88,13 +126,14 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
         kernel_list = ['rbf'], 
         sample_size=0.8,
         is_scaled = False,
+        n_cv = 5,
         path = "."):
     
     # load, split and scale data
     x_train, x_test, y_train, y_test, ids_train, ids_test = split_scale_data(features, labels, train_test_ids, sample_size, is_scaled)
 
     # Create kernel linear ridge regression object
-    learner = GridSearchCV(KernelRidge(kernel='rbf'), n_jobs = 8, cv=5,
+    learner = GridSearchCV(KernelRidge(kernel='rbf'), n_jobs = 8, cv=n_cv,
                 param_grid={"alpha": alpha_list, "gamma": gamma_list, 
                 "kernel": kernel_list}, scoring = 'neg_mean_absolute_error')
 
@@ -119,7 +158,7 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
         path,
         )
 
-    return mae, y_to_predict, learner.best_params_
+    return mae, mse, y_to_predict, learner.best_params_
 
 
 def scale_data(x_train, x_test, is_mean=True):

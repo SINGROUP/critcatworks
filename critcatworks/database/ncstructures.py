@@ -97,6 +97,10 @@ class NCStartFromStructuresTask(FiretaskBase):
         calc_ids = []
         for atoms_dict in ase_atoms_lst:
             atoms = atoms_dict_to_ase(atoms_dict)
+            dct = atoms.info
+            total_energy = dct.get("E", dct.get("energy", dct.get("total_energy", dct.get("TotalEnergy" , dct.get("totalenergy", "UNKNOWN")))))
+            if total_energy == "UNKNOWN":
+                logging.warning("total energy of cluster not specified in structure file")
             nanocluster_atom_ids = list(range(len(atoms)))
             nanocluster = {"atom_ids" : nanocluster_atom_ids, "reference_id" : -1}
 
@@ -105,7 +109,7 @@ class NCStartFromStructuresTask(FiretaskBase):
             dct = update_simulations_collection(atoms = atoms_dict, 
                 source_id = -1, workflow_id = workflow_id, 
                 nanoclusters = [nanocluster], adsorbates = [], substrates = [], 
-                operations = [], inp = {}, output = {},
+                operations = [], inp = {}, output = {"total_energy" : total_energy},
                 )
 
             # update internal workflow data
