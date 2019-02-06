@@ -7,7 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
-import clusgeo
+import cluskit
 import dscribe
 import numpy as np
 import logging
@@ -103,8 +103,8 @@ class AdsiteCreationTask(FiretaskBase):
             atoms = atoms_dict_to_ase(atoms_dict)
             logging.debug(atoms)
 
-            # running clusgeo on cluster
-            cluster = clusgeo.ClusGeo(atoms)
+            # running cluskit on cluster
+            cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
             descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
@@ -203,7 +203,7 @@ class AdsiteRankTask(FiretaskBase):
         logging.info("DESCRIPTOR matrix attributes")
         logging.info(descmatrix.shape)
         logging.info(np.sum(descmatrix))
-        fps_ranking = clusgeo.cluster._rank_fps(descmatrix, K = None, greedy =False)
+        fps_ranking = cluskit.cluster._rank_fps(descmatrix, K = None, greedy =False)
 
         reordered_calc_ids = np.array(calc_ids)[fps_ranking]
         reordered_descmatrix = descmatrix[fps_ranking]

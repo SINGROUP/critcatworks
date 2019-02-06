@@ -16,13 +16,15 @@ def atoms_dict_to_ase(atoms_dict):
     pbc = atoms_dict['pbc']
     numbers = atoms_dict['numbers']
     positions = atoms_dict['positions']
+    info = atoms_dict.get("info", {})
 
     atoms = ase.Atoms(numbers=numbers,
         positions=positions,
         cell = cell,
         celldisp = celldisp,
         constraint = constraints,
-        pbc = pbc,)
+        pbc = pbc,
+        info = info)
     return atoms
 
 
@@ -36,6 +38,7 @@ def ase_to_atoms_dict(atoms):
     except:
         constraints = atoms.constraints
     celldisp = atoms.get_celldisp().tolist()
+    info = atoms.info
 
     atoms_dict = {
         "positions" : positions,
@@ -43,6 +46,7 @@ def ase_to_atoms_dict(atoms):
         "pbc" : pbc,
         "numbers" : numbers,
         "constraints" : constraints,
-        "celldisp" : celldisp,    
+        "celldisp" : celldisp,
+        "info" : info,    
         }
     return atoms_dict

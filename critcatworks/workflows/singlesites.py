@@ -21,7 +21,7 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
     """
 
     Workflow to determine the adsorption sites and energies of a set of
-    nanocluster structures using CP2K and Clusgeo
+    nanocluster structures using CP2K and ClusKit
     """
 
     with open (template_path, "r") as f:

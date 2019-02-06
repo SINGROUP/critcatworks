@@ -7,7 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
-import clusgeo
+import cluskit
 
 import numpy as np
 import logging
@@ -42,7 +42,7 @@ class AdsorbateEliminationTask(FiretaskBase):
             cluster_atoms = atoms[is_cluster]
             adsorbate_positions = adsorbate_atoms.get_positions()
             
-            kept_positions = clusgeo.utils.x2_to_x(adsorbate_positions, bondlength = self['bond_length'])
+            kept_positions = cluskit.utils.x2_to_x(adsorbate_positions, bondlength = self['bond_length'])
             n_kept = kept_positions.shape[0]
             kept_adsorbate_atoms = ase.Atoms(symbols=[adsorbate_name] * n_kept, positions=kept_positions)
 

@@ -25,26 +25,24 @@ class GatherPropertyTask(FiretaskBase):
         chunk_size = int(self["chunk_size"])
         adsite_types = self["adsite_types"]
         n_calcs_started = int(fw_spec["n_calcs_started"])
+        calc_ids = fw_spec["temp"]["calc_ids"]
+        simulations = fw_spec["simulations"]
+        n_calcs = len(calc_ids)
+        reaction_energies_list = fw_spec["temp"].get("property", np.zeros(n_calcs).tolist())
+        is_converged_list = fw_spec["temp"].get("is_converged_list", np.zeros(n_calcs).tolist())
 
-        calc_ids_chunk = fw_spec["temp"]["calc_ids"][n_calcs_started - chunk_size : n_calcs_started]
+        calc_ids_chunk = calc_ids[n_calcs_started - chunk_size : n_calcs_started]
         logging.info(calc_ids_chunk)
 
-        simulations = fw_spec["simulations"]
-
         # compute reaction energy and store them as lists for ml
-
-        n_calcs = len(calc_ids)
-        reaction_energies_list = np.zeros(n_calcs)
-        is_converged_list = np.zeros(n_calcs)
-
-        for calc_id in calc_ids_chunk:
+        for idx, calc_id in zip(range(n_calcs_started - chunk_size, n_calcs_started), calc_ids_chunk):
             simulation = simulations[str(calc_id)]
 
             structure = simulation["atoms"]
             # TODO add how adsorbate moved
             # get closest site classified
 
-            is_converged_list[int(calc_id)] = simulation["output"]["is_converged"]
+            is_converged_list[idx] = simulation["output"]["is_converged"]
 
             #if is_converged_list[int(calc_id)] == True:
             
@@ -69,7 +67,7 @@ class GatherPropertyTask(FiretaskBase):
                         logging.warning("total_energy not found!")
                         total_energy = 0.0
                     reaction_energy -= total_energy
-                    reaction_energies_list[int(calc_id)] = reaction_energy
+                    reaction_energies_list[idx] = reaction_energy
 
         update_spec = fw_spec
 
