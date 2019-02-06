@@ -133,8 +133,8 @@ class CP2KRunTask(FiretaskBase):
 
         print("run done")
 
-        fw_spec.pop("_category")
-        fw_spec.pop("name")
+        #fw_spec.pop("_category")
+        #fw_spec.pop("name")
         detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
             spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"]},
             name = 'CP2KAnalysisWork')

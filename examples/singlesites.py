@@ -21,8 +21,9 @@ def read_structures_locally(path):
                 pos = atoms.get_positions()
                 pdist(pos)
                 diameter = pdist(pos).max()
+                mpl = 2.5
 
-                atoms.set_cell([diameter, diameter, diameter])
+                atoms.set_cell([diameter * mpl, diameter * mpl, diameter * mpl])
                 structures.append(atoms)
                 logging.debug(atoms)
             except ValueError:
@@ -52,9 +53,10 @@ if __name__ == "__main__":
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         chunk_size = 5,
-        max_calculations = 15,
+        max_calculations = 10,
         adsite_types = ["top"], #, "bridge", "hollow"],
         username = "marc",
+        n_max_restarts = 0,
         )
 
     # store workflow 
