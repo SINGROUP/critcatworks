@@ -9,6 +9,7 @@ from pprint import pprint as pp
 import ase, ase.io
 import logging, datetime
 from critcatworks.database.extdb import update_workflows_collection
+import numpy as np
 
 @explicit_serialize
 class GatherPropertyTask(FiretaskBase):
