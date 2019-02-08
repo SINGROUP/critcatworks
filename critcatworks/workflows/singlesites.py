@@ -6,7 +6,7 @@ import os,time
 # internal modules
 from critcatworks.database.update import initialize_workflow_data
 from critcatworks.database.format import ase_to_atoms_dict
-from critcatworks.database import start_from_structures, start_from_database, update_converged_data
+from critcatworks.database import start_from_structures, start_from_database, read_structures
 from critcatworks.structure import get_adsites, rank_adsites
 from critcatworks.dft import setup_folders, chunk_calculations
 

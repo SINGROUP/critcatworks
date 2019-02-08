@@ -3,8 +3,8 @@ import pathlib
 import os,time
 
 # internal modules
-from critcatworks.database import start_from_structures, start_from_database, update_converged_data, 
-from critcatworks.structures import compare_nanoclusters
+from critcatworks.database import start_from_structures, start_from_database, read_structures
+from critcatworks.structure import compare_nanoclusters, update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
 from critcatworks.database.format import ase_to_atoms_dict
 from critcatworks.database.update import initialize_workflow_data
