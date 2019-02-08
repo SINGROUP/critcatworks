@@ -27,12 +27,16 @@ class GatherPropertyTask(FiretaskBase):
         adsite_types = self["adsite_types"]
         n_calcs_started = int(fw_spec["n_calcs_started"])
         calc_ids = fw_spec["temp"]["calc_ids"]
+        # analysis ids becomes part of calc_ids
+        analysis_ids = fw_spec["temp"]["analysis_ids"]
         simulations = fw_spec["simulations"]
         n_calcs = len(calc_ids)
         reaction_energies_list = fw_spec["temp"].get("property", np.zeros(n_calcs).tolist())
         is_converged_list = fw_spec["temp"].get("is_converged_list", np.zeros(n_calcs).tolist())
 
-        calc_ids_chunk = calc_ids[n_calcs_started - chunk_size : n_calcs_started]
+        calc_ids[n_calcs_started - chunk_size : n_calcs_started] = analysis_ids
+        calc_ids_chunk = analysis_ids
+        logging.info("Gather Properties of following calculations:")
         logging.info(calc_ids_chunk)
 
         # compute reaction energy and store them as lists for ml
@@ -45,10 +49,12 @@ class GatherPropertyTask(FiretaskBase):
 
             is_converged_list[idx] = simulation["output"]["is_converged"]
 
+            print(is_converged_list[idx], idx)
+
             #if is_converged_list[int(calc_id)] == True:
             
             # get current simulation total_energy
-            simulation_total_energy = simulation["output"]["total_energy"]
+            simulation_total_energy = simulation["output"].get("total_energy", 0.0)
             # iterate over
             # adsorbates
             adsorbates = simulation["adsorbates"]
@@ -74,6 +80,9 @@ class GatherPropertyTask(FiretaskBase):
 
         update_spec["temp"]["property"] = reaction_energies_list
         update_spec["temp"]["is_converged_list"] = is_converged_list 
+        fw_spec["temp"]["analysis_ids"] = []
+        fw_spec["temp"]["calc_ids"] = calc_ids
+        print(is_converged_list)
 
         update_spec.pop("_category")
         update_spec.pop("name")

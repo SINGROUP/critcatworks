@@ -13,6 +13,8 @@ from sklearn.kernel_ridge import KernelRidge
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, train_test_split
 
+from critcatworks.database.extdb import update_machine_learning_collection
+
 @explicit_serialize
 class MLTask(FiretaskBase):
     """ 
@@ -25,6 +27,8 @@ class MLTask(FiretaskBase):
     optional_params = []
 
     def run_task(self, fw_spec):
+        target_path = self['target_path']
+
         METHOD = "krr"
         IS_PREDICT_FAILED = True
         N_CV = 5
@@ -33,34 +37,39 @@ class MLTask(FiretaskBase):
         if not os.path.exists(parent_folder_path):
             os.makedirs(parent_folder_path)
 
-        target_path = self['target_path']
 
         n_calcs_started = fw_spec["n_calcs_started"]
         calc_ids = fw_spec["temp"]["calc_ids"]
-        is_converged_list = fw_spec["temp"]["is_converged_list"]
+        is_converged_list = np.array(fw_spec["temp"]["is_converged_list"], dtype = 'bool')
         property_lst = fw_spec["temp"]["property"]
-        descmatrix = fw_spec["temp"]["descmatrix"]
+        descmatrix = np.array(fw_spec["temp"]["descmatrix"])
         workflow_id = fw_spec["workflow"]["_id"]
         workflow_parameters = fw_spec["workflow"]["parameters"]
 
-        enumerated_ids = np.arange.range(len(calc_ids))
+        enumerated_ids = np.arange(len(calc_ids))
 
         ### PREPARE, CHECK ###
-        is_converged_ids = np.array(calc_ids)[np.array(is_converged_list)]
+        is_converged_ids = np.array(calc_ids)[is_converged_list]
+
+        print("calc_ids", calc_ids)
+        print("is_converged_list", is_converged_list)
+        print("is_converged_ids", is_converged_ids)
 
         finished_calc_ids = np.array(calc_ids)[:n_calcs_started]
-        simulation_ids_training = np.intersect1d(finished_calc_ids, is_converged_ids)
-        training_ids = np.array(enumerated_ids)[np.intersect1d(finished_calc_ids, is_converged_ids)]
+        simulation_ids_training, _ , training_ids = np.intersect1d(finished_calc_ids, is_converged_ids, return_indices = True)
+        #training_ids = np.array(enumerated_ids)[np.intersect1d(finished_calc_ids, is_converged_ids)]
+
+        print("training_ids", training_ids)
 
         # magic number due to n-fold CV
-        if training_ids.shape[0] <= N_CV:
+        if training_ids.shape[0] < N_CV:
             logging.warning('Exiting workflow Problem detected: ' + 
                 'Too few datapoints to learn from! Something might be wrong with your DFT calculations!')
             return FWAction(defuse_workflow=True)
 
         if IS_PREDICT_FAILED == True:
-            simulation_ids_predict = np.array(calc_ids)[1 - np.array(is_converged_list)]
-            to_predict_ids = np.array(enumerated_ids)[1 - np.array(is_converged_list)]
+            simulation_ids_predict = np.array(calc_ids)[1 - is_converged_list]
+            to_predict_ids = np.array(enumerated_ids)[1 - is_converged_list]
         else:
             to_predict_ids = np.array(calc_ids)[n_calcs_started:]
 
@@ -72,7 +81,8 @@ class MLTask(FiretaskBase):
         ### RUN ###
 
         if METHOD == "krr":
-            mae, mse, y_to_predict, method_params = ml_krr(features, labels, training_ids, 
+            #mae, mse, y_to_predict, method_params = ml_krr(features, labels, training_ids, 
+            ml_results = ml_krr(features, labels, training_ids, 
                 to_predict_features, to_predict_ids, 
                 is_scaled = False, n_cv = N_CV, path = parent_folder_path)
         else:
@@ -82,17 +92,25 @@ class MLTask(FiretaskBase):
 
         ### DATABASE ###
         # update machine learning data
+        # translate to simulation ids
+        
+        ml_results["ids_train"] = simulation_ids_training[ml_results["ids_train"]]
+        ml_results["ids_test"] = simulation_ids_training[ml_results["ids_test"]]
+        ml_results["ids_predicted"] = simulation_ids_predict
+
         # update external database
         dct = update_machine_learning_collection(METHOD, workflow_id = workflow_id, 
-            method_params = method_params, 
+            method_params = ml_results["method_params"], 
             descriptor = workflow_parameters["descriptor"],
             descriptor_params = workflow_parameters["descriptor_params"],
-            training_set = simulation_ids_training.tolist(), 
+            training_set = ml_results["ids_train"].tolist(), 
             validation_set = [], 
+            test_set = ml_results["ids_test"].tolist(), 
             prediction_set = simulation_ids_predict.tolist(),
-            metrics_training = {"mae" : 0}, 
-            metrics_validation = {"mae" : 0},
-            output = {"mae" : 0, "mse" : 0, "predicted_property_lst" : y_predict.tolist()}
+            metrics_training = ml_results["metrics_training"], 
+            metrics_validation = ml_results["metrics_validation"],
+            metrics_test = ml_results["metrics_test"],
+            output = ml_results["output"]
             )
         
         # update internal workflow data
@@ -110,7 +128,7 @@ class MLTask(FiretaskBase):
 
         update_spec.pop("_category")
         update_spec.pop("name")
-        return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
+        return FWAction(update_spec=update_spec)
 
 
 def get_mae(target_path):
@@ -135,7 +153,7 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
     # Create kernel linear ridge regression object
     learner = GridSearchCV(KernelRidge(kernel='rbf'), n_jobs = 8, cv=n_cv,
                 param_grid={"alpha": alpha_list, "gamma": gamma_list, 
-                "kernel": kernel_list}, scoring = 'neg_mean_absolute_error')
+                "kernel": kernel_list}, scoring = 'neg_mean_absolute_error', return_train_score=True)
 
     t_ml0 = time.time()
     learner.fit(x_train, y_train)
@@ -158,7 +176,24 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
         path,
         )
 
-    return mae, mse, y_to_predict, learner.best_params_
+    #return mae, mse, y_to_predict, learner.best_params_
+    ml_results = {
+        "ids_train" : ids_train,
+        "ids_test" : ids_test,
+        "ids_predicted" : to_predict_ids,
+        "method_params" : learner.best_params_,
+        "output" : {"label_predicted" : y_to_predict.tolist(), "label_train" : train_y_pred.tolist(), "label_test" : y_pred.tolist()},
+        "metrics_test" : {"mae" : mae, "mse" : mse},
+        "metrics_validation" : {"mae" : -1 * learner.cv_results_['mean_test_score'][learner.best_index_],
+            "std" : learner.cv_results_['std_test_score'][learner.best_index_]},
+        "metrics_training" : {"mae" : -1 * learner.cv_results_['mean_train_score'][learner.best_index_],
+            "std" : learner.cv_results_['std_train_score'][learner.best_index_]},
+        }
+
+
+    return ml_results
+
+
 
 
 def scale_data(x_train, x_test, is_mean=True):

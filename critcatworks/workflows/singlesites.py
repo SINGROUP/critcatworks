@@ -17,7 +17,8 @@ from critcatworks.ml import get_mae, check_convergence
 def get_singlesites_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None,
         source_path  = None, reference_energy=0.0,
         adsorbate_name='H', chunk_size = 100, max_calculations = 10000, username = "unknown", 
-        adsite_types = ["top", "bridge", "hollow"], threshold = 0.1, n_max_restarts = 1):
+        adsite_types = ["top", "bridge", "hollow"], threshold = 0.1, n_max_restarts = 1,
+        skip_dft = False):
     """
 
     Workflow to determine the adsorption sites and energies of a set of
@@ -105,7 +106,8 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
         # (involves checking for errors in DFT and rerunning)
 
         fw_chunk_calculations = chunk_calculations(template = template, target_path = worker_target_path, 
-            chunk_size = chunk_size, n_max_restarts = n_max_restarts, simulation_method = "cp2k")
+            chunk_size = chunk_size, n_max_restarts = n_max_restarts, simulation_method = "cp2k",
+            skip_dft = skip_dft)
         workflow_list.append(fw_chunk_calculations)
         if i == 0:
             links_dict[fw_setup_folders] = [fw_chunk_calculations]

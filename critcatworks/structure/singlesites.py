@@ -2,7 +2,7 @@ from fireworks import Firework, FWorker, LaunchPad, PyTask, ScriptTask, Template
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
 from fireworks.queue.queue_launcher import launch_rocket_to_queue
 from fireworks.user_objects.queue_adapters.common_adapter import *
-import os,time, pathlib, sys
+import os,time, pathlib, sys, copy
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
@@ -98,7 +98,7 @@ class AdsiteCreationTask(FiretaskBase):
 
             ##
             # get source simulation
-            source_simulation = simulations[str(calc_id)]
+            source_simulation = copy.deepcopy(simulations[str(calc_id)])
             atoms_dict = source_simulation["atoms"]
             atoms = atoms_dict_to_ase(atoms_dict)
             logging.debug(atoms)
@@ -141,19 +141,24 @@ class AdsiteCreationTask(FiretaskBase):
                     joint_atoms_dict = ase_to_atoms_dict(joint_atoms)
 
                     # update external database
-                    dct = source_simulation.copy()
+                    dct = copy.deepcopy(source_simulation)
                     # calculation originated from this:
                     dct["source_id"] = calc_id
                     dct["workflow_id"] = workflow_id
                     dct["atoms"] = joint_atoms_dict
                     dct["operations"] = [dict({"add_adsorbate" : 1})]
                     dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+                    # empty previous input
+                    dct["inp"] = {}
                     dct["inp"]["adsite_type"] = adsite_type
                     dct["inp"]["adsorbate_name"] = adsorbate_name
+                    # empty previous output
+                    dct["output"] = {}
                     dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
-                    logging.info(dct)
-                    simulation = update_simulations_collection(dct)
+                    simulation = update_simulations_collection(**dct)
+                    logging.info("simulation after adding single adsorbates")
+                    logging.info(simulation)
 
                     # update internal workflow data
                     simulation_id = simulation["_id"]

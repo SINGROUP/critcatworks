@@ -1,6 +1,5 @@
 # This script instructs the remote worker to launch jobs
 import fireworks
-print("Hello world")
 import logging
 
 from fireworks import Firework, FWorker, LaunchPad, Workflow
@@ -54,7 +53,7 @@ if __name__ == "__main__":
     IS_OFFLINE = False
     # path used to log info
 
-    logpath = ".fireworks/fw_logs"
+    logpath = "fw_logs"
     try:
         os.makedirs(logpath)
     except OSError as e:
@@ -68,18 +67,8 @@ if __name__ == "__main__":
         logging.basicConfig(filename = abspath + "/logfile_ranked_adsites.log", level=logging.INFO)
 
     # set up the LaunchPad
-
-    data = dict(
-        A = 'a',
-        B = dict(
-            C = 'c',
-            D = 'd',
-            E = 'e',
-        )
-    )
-
     #launchpad = LaunchPad(logdir=".", strm_lvl='INFO')
-    launchpad = LaunchPad(host = "austerity-shard-00-00-hgeov.mongodb.net:27017",
+    launchpad = LaunchPad(host = "austerity-shard-00-01-hgeov.mongodb.net:27017",
         port = 27017,
         name = "fireworks",
         username = "mjcritcat",
@@ -150,8 +139,6 @@ if __name__ == "__main__":
             for category, adapter in zip(['dft', 'medium', 'lightweight'], [dft, medium, lightweight]):
                 launch_rocket_to_queue(launchpad, FWorker(category=category), adapter,
                     launcher_dir=abspath , create_launcher_dir=True, reserve=True)
-            launch_rocket_to_queue(launchpad, FWorker(), lightweight,
-                launcher_dir=abspath , create_launcher_dir=True, reserve=True)
             time.sleep(3)
             if IS_OFFLINE:
                 _recover_offline(lp = launchpad, fworker_name = None)

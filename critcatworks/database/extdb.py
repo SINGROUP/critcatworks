@@ -40,11 +40,12 @@ def _query_id_counter_and_increment(collection, db):
 
 
 # update simulation
-def update_simulations_collection(atoms = {}, 
-    source_id = -1, workflow_id = -1, 
-    nanoclusters = [], adsorbates = [], substrates = [], 
-    operations = [], inp = {}, output = {},
-    **kwargs):
+#def update_simulations_collection(atoms = {}, 
+#    source_id = -1, workflow_id = -1, 
+#    nanoclusters = [], adsorbates = [], substrates = [], 
+#    operations = [], inp = {}, output = {},
+#    **kwargs):
+def update_simulations_collection(**kwargs):
     """
     # generated cluster manual
     # and automated using clusterer
@@ -52,26 +53,28 @@ def update_simulations_collection(atoms = {},
     # generated coverage (added/removed adsorbates)
     # DFT simulation
     """
+    # construct dictionary
+    #dct = {
+    #    "atoms" : atoms, 
+    #    "source_id" : source_id,
+    #    "workflow_id" : workflow_id,
+    #    "nanoclusters" : nanoclusters,
+    #    "adsorbates" : adsorbates,
+    #    "substrates" : substrates,
+    #    "operations" : operations,
+    #    "inp" : inp,
+    #    "output" : output,
+    #    }
+    #dct.update(kwargs)
+
+    dct = kwargs
+
     db = get_external_database()
     simulations = db['simulations']
     # request id counter
     simulation_id = _query_id_counter_and_increment('simulations', db)
 
-
-
-    # construct dictionary
-    dct = {'_id' : simulation_id,
-        "atoms" : atoms, 
-        "source_id" : source_id,
-        "workflow_id" : workflow_id,
-        "nanoclusters" : nanoclusters,
-        "adsorbates" : adsorbates,
-        "substrates" : substrates,
-        "operations" : operations,
-        "inp" : inp,
-        "output" : output,
-        }
-    dct.update(kwargs)
+    dct['_id'] = simulation_id
 
     simulations.insert_one(dct)
     return dct
@@ -109,8 +112,8 @@ def update_workflows_collection(username, creation_time,
 def update_machine_learning_collection(method, workflow_id = -1, 
     method_params = {}, descriptor = "soap",
     descriptor_params = {},
-    training_set = [], validation_set = [], prediction_set = [],
-    metrics_training = {}, metrics_validation = {},
+    training_set = [], validation_set = [], test_set = [],prediction_set = [],
+    metrics_training = {}, metrics_validation = {}, metrics_test = {},
     output = {},
     **kwargs):
     """
@@ -132,8 +135,11 @@ def update_machine_learning_collection(method, workflow_id = -1,
         "descriptor_params" : descriptor_params,
         "training_set" : training_set,
         "validation_set" : validation_set,
+        "test_set" : test_set,
+        "prediction_set" : prediction_set,
         "metrics_training" : metrics_training,
         "metrics_validation" : metrics_validation,
+        "metrics_test" : metrics_test,
         "output" : output,
         }
     dct.update(kwargs)

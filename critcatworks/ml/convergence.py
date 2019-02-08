@@ -27,9 +27,9 @@ class CheckConvergenceTask(FiretaskBase):
         threshold = self["threshold"]
         convergence_criterion = self["convergence_criterion"]
         
-        machine_learning_id = fw_spec["temp"]["current_ml_id"]
+        machine_learning_id = fw_spec["temp"]["last_machine_learning_id"]
         machine_learning = fw_spec["machine_learning"][str(machine_learning_id)]
-        mae = machine_learning["metrics_validation"][convergence_criterion]
+        mae = machine_learning["metrics_test"][convergence_criterion]
 
         if mae < threshold:
             logging.info("Database is converged")

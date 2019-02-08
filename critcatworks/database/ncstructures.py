@@ -117,7 +117,9 @@ class NCStartFromStructuresTask(FiretaskBase):
 
             # update simulation internally.
             dct["nanoclusters"][0]["reference_id"] = simulation_id
-
+            logging.info("simulation after reading from structure")
+            logging.info(dct)
+            
             update_spec["simulations"][str(simulation_id)] = dct
             calc_ids.append(simulation_id)
 
@@ -171,6 +173,67 @@ class NCStartFromDatabaseTask(FiretaskBase):
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)
+
+@explicit_serialize
+class NCStabilityTask(FiretaskBase):
+    """ 
+    Task to compare the stability of clusters using cohesive or total energy.
+    Cohesive energy requires atomic total energies.
+
+    Args:
+
+    """
+
+    _fw_name = 'NCStabilityTask'
+    required_params = []
+    optional_params = ['atomic_energies']
+
+    def run_task(self, fw_spec):
+        atomic_energies = self.get("atomic_energies", {})
+        workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
+        logging.debug(fw_spec)
+        update_spec = fw_spec
+        calc_ids = fw_spec["calc_ids"]
+        simulations = fw_spec["simulations"]
+
+        cohesive_energy_dct = {}
+        cohesive_energy_lst = []
+        for calc_id in calc_ids:
+            # get total energy
+            total_energy = simulations["output"]["total_energy"]
+            atomic_numbers = simulations["atoms"]["numbers"]
+            cohesive_energy = total_energy
+
+            # get chemical formula
+            dct = ase.utils.formula._count_symbols(numbers)
+            for symbol, occurences in dct.items():
+                cohesive_energy = cohesive_energy + atomic_energies.get(float(symbol), 0.0)
+
+            formula_string = ase.utils.formula.formula_metal(atomic_numbers, empirical=False)
+            if formula_string in cohesive_energy_dct:
+                cohesive_energy_dct[formula_string] = {}
+            cohesive_energy_dct[formula_string][calc_id] = cohesive_energy
+            cohesive_energy_lst.append(cohesive_energy)
+
+
+        sort_ids = np.argsort(cohesive_energy_lst)
+        sorted_calc_ids = np.array(calc_ids)[sort_ids]
+
+        logging.info("cohesive_energy_dct")
+        logging.info("cohesive_energy_lst")
+        logging.info(cohesive_energy_dct)
+        logging.info(cohesive_energy_lst)
+
+        # make file with information ?
+        # cluster_stability ?
+
+        # preferrably updating workflow data
+
+        # fireworks
+        update_spec.pop("_category")
+        update_spec.pop("name")
+        return FWAction(update_spec=update_spec)
+
 
 def _empty_fields_spec(spec):
     if spec == {}:

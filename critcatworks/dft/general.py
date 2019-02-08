@@ -77,6 +77,7 @@ class ChunkCalculationsTask(FiretaskBase):
         simulation_method = self.get("simulation_method", "cp2k")
         name = self["name"]
         n_max_restarts = self["n_max_restarts"]
+        skip_dft = self["skip_dft"]
         calc_paths = fw_spec["temp"]["calc_paths"]
         calc_ids = fw_spec["temp"]["calc_ids"]
 
@@ -106,7 +107,9 @@ class ChunkCalculationsTask(FiretaskBase):
                     calc_id = calc_id,
                     name = name,
                     n_max_restarts = n_max_restarts,
-                    simulation = simulation)
+                    simulation = simulation,
+                    skip_dft = skip_dft,
+                    )
                 detours.append(new_fw)
 
             else:
@@ -130,7 +133,7 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     return fw
 
 
-def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k"):
+def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k", skip_dft = False):
     firetask1  = ChunkCalculationsTask(
         template = template,
         target_path = target_path,
@@ -138,6 +141,7 @@ def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_
         name = name,
         n_max_restarts = n_max_restarts,
         simulation_method = simulation_method,
+        skip_dft = skip_dft,
         )
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'ChunkCalculationsTask'},
                      name = 'ChunkCalculationsWork')
