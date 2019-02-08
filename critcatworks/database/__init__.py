@@ -1,12 +1,10 @@
-from critcatworks.database.ncstructures import read_structures
-from critcatworks.database.ncstructures import start_from_structures
-from critcatworks.database.ncstructures import start_from_database
+from critcatworks.database.read import read_structures
+from critcatworks.database.read import start_from_structures
+from critcatworks.database.read import start_from_database
 
 from critcatworks.database.format import atoms_dict_to_ase
 from critcatworks.database.format import ase_to_atoms_dict
 
-from critcatworks.database.update import update_converged_data
 from critcatworks.database.update import initialize_workflow_data
-from critcatworks.database.coverage import update_coverage_data
 import critcatworks.database.extdb
 import critcatworks.database.mylaunchpad

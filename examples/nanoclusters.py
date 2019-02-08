@@ -51,6 +51,7 @@ if __name__ == "__main__":
         worker_target_path = "../tests/dummy_db/output/",
         structures = structures,
         extdb_ids = None,
+        skip_dft = True,
         )
 
     # store workflow 

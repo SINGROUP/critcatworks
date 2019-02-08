@@ -236,7 +236,8 @@ class CP2KAnalysisTask(FiretaskBase):
             logging.debug("is_converged")
             logging.debug(is_converged)
     
-            relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1])
+            # conversion factor cp2kparser uses other units! WARNING, might change in the future! conversion always back to Angstrom.
+            relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1] * 10e9)
     
             atoms_dict = ase_to_atoms_dict(relaxed_structure)
     

@@ -10,7 +10,7 @@ from critcatworks.database import start_from_structures, start_from_database, up
 from critcatworks.structure import get_adsites, rank_adsites
 from critcatworks.dft import setup_folders, chunk_calculations
 
-from critcatworks.database import update_converged_data
+from critcatworks.structure import update_converged_data
 from critcatworks.ml import get_mae, check_convergence
 
 
