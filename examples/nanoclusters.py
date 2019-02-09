@@ -47,11 +47,11 @@ if __name__ == "__main__":
     structures = read_structures_locally("./nc_structures")
     wf = get_nanoclusters_workflow(
         source_path = None,
-        template_path = str(pathlib.Path("templates/rankedadsites_cheap_gopt.inp").resolve()), 
-        worker_target_path = "../tests/dummy_db/output/",
+        template_path = str(pathlib.Path("templates/gopt.inp").resolve()), 
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
         structures = structures,
         extdb_ids = None,
-        skip_dft = True,
+        skip_dft = False,
         )
 
     # store workflow 
