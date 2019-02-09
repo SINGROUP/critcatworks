@@ -52,8 +52,8 @@ if __name__ == "__main__":
     wf = get_singlesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
-        worker_target_path = "../tests/dummy_db/output/",
-        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
+        #worker_target_path = "../tests/dummy_db/output/",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/singlesites",
         structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         max_calculations = 15,
         adsite_types = ["top"], #, "bridge", "hollow"],
         n_max_restarts = 1,
-        skip_dft = True,
+        skip_dft = False,
         )
 
     # store workflow 

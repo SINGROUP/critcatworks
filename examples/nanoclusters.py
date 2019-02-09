@@ -51,11 +51,11 @@ if __name__ == "__main__":
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
         template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
-        worker_target_path = "../tests/dummy_db/output/",
-        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
+        #worker_target_path = "../tests/dummy_db/output/",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/nanoclusters",
         structures = structures,
         extdb_ids = None,
-        skip_dft = True,
+        skip_dft = False,
         )
 
     # store workflow 

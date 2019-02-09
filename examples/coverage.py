@@ -55,15 +55,15 @@ if __name__ == "__main__":
         password = PASSWORD,
         source_path = str(pathlib.Path("./nc_structures/").resolve()),
         template_path = str(pathlib.Path("./templates/cheap_gopt.inp").resolve()), 
-        worker_target_path = "../tests/dummy_db/output/",
-        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
+        #worker_target_path = "../tests/dummy_db/output/",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/coverage",
         structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 4,
         adsite_types = ["top"],
         n_max_restarts = 1,
-        skip_dft = True,
+        skip_dft = False,
         bond_length = 1.5,
     )
 
