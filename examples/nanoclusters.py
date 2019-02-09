@@ -4,6 +4,7 @@ import os,time, sys
 import logging
 import ase
 from scipy.spatial.distance import pdist
+import getpass
 
 # internal modules
 from critcatworks.workflows import get_nanoclusters_workflow
@@ -34,6 +35,8 @@ def read_structures_locally(path):
 
 if __name__ == "__main__":
     IS_QUEUE = True
+    USERNAME = "mjcritcat"
+    PASSWORD = getpass.getpass()
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -41,17 +44,18 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/nanocluster_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad()
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
     launchpad.reset('', require_password=False)
 
     structures = read_structures_locally("./nc_structures")
-    wf = get_nanoclusters_workflow(
+    wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
-        template_path = str(pathlib.Path("templates/gopt.inp").resolve()), 
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
+        template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
+        worker_target_path = "../tests/dummy_db/output/",
+        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
         structures = structures,
         extdb_ids = None,
-        skip_dft = False,
+        skip_dft = True,
         )
 
     # store workflow 

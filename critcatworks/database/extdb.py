@@ -2,10 +2,12 @@
 import pymongo
 from pprint import pprint as pp
 
-def get_external_database(host = "mongodb+srv://austerity-hgeov.mongodb.net/test", 
-    database = "test",username = "marc", password = 'marcrulez0r'):
-    CLIENT = pymongo.MongoClient(host, username = username, password = password)
-    db = CLIENT[database]
+def get_external_database(extdb_connect):
+    CLIENT = pymongo.MongoClient(extdb_connect["host"], 
+        username = extdb_connect["username"],
+        password = extdb_connect["password"],
+        authSource = extdb_connect["authsource"])
+    db = CLIENT[extdb_connect["db_name"]]
     return db
 
 
@@ -45,7 +47,7 @@ def _query_id_counter_and_increment(collection, db):
 #    nanoclusters = [], adsorbates = [], substrates = [], 
 #    operations = [], inp = {}, output = {},
 #    **kwargs):
-def update_simulations_collection(**kwargs):
+def update_simulations_collection(extdb_connect, **kwargs):
     """
     # generated cluster manual
     # and automated using clusterer
@@ -69,7 +71,7 @@ def update_simulations_collection(**kwargs):
 
     dct = kwargs
 
-    db = get_external_database()
+    db = get_external_database(extdb_connect)
     simulations = db['simulations']
     # request id counter
     simulation_id = _query_id_counter_and_increment('simulations', db)
@@ -81,14 +83,14 @@ def update_simulations_collection(**kwargs):
 
 # workflows
 
-def update_workflows_collection(username, creation_time, 
-    parameters = {},
+def update_workflows_collection(username, password, creation_time, 
+    extdb_connect, parameters = {},
     name = "UNNAMED", workflow_type = "NO_TYPE",
     **kwargs):
     """
     Update after workflow has finished
     """
-    db = get_external_database()
+    db = get_external_database(extdb_connect)
     workflows = db['workflows']
 
     # request id counter
@@ -109,7 +111,7 @@ def update_workflows_collection(username, creation_time,
 
 # machine_learning
 
-def update_machine_learning_collection(method, workflow_id = -1, 
+def update_machine_learning_collection(extdb_connect, method, workflow_id = -1, 
     method_params = {}, descriptor = "soap",
     descriptor_params = {},
     training_set = [], validation_set = [], test_set = [],prediction_set = [],
@@ -119,7 +121,7 @@ def update_machine_learning_collection(method, workflow_id = -1,
     """
     update after each machine learning run
     """
-    db = get_external_database()
+    db = get_external_database(extdb_connect)
     machine_learning = db['machine_learning']
 
     # request id counter

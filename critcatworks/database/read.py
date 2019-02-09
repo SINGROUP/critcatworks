@@ -8,7 +8,7 @@ from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
 import logging
-from critcatworks.database.extdb import update_simulations_collection
+from critcatworks.database.extdb import update_simulations_collection, get_external_database
 from critcatworks.database.format import atoms_dict_to_ase, ase_to_atoms_dict
 import json
 import numpy as np
@@ -110,7 +110,7 @@ class NCStartFromStructuresTask(FiretaskBase):
 
             # update external database
             # enter datapoint
-            dct = update_simulations_collection(atoms = atoms_dict, 
+            dct = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], atoms = atoms_dict, 
                 source_id = -1, workflow_id = workflow_id, 
                 nanoclusters = [nanocluster], adsorbates = [], substrates = [], 
                 operations = [], inp = {}, output = {"total_energy" : total_energy},
@@ -155,6 +155,8 @@ class NCStartFromDatabaseTask(FiretaskBase):
     def run_task(self, fw_spec):
         db_ids_lst = self["db_ids_lst"]
         ext_db = self.get("ext_db", None)
+        if ext_db == None:
+            ext_db =get_external_database(fw_spec["extdb_connect"])
         workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
         logging.debug(fw_spec)
         update_spec = fw_spec

@@ -14,11 +14,12 @@ from critcatworks.structure import update_converged_data
 from critcatworks.ml import get_mae, check_convergence
 
 
-def get_singlesites_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None,
+def get_singlesites_workflow(template_path, username, password, 
+        worker_target_path = None, structures = None, extdb_ids = None,
         source_path  = None, reference_energy=0.0,
-        adsorbate_name='H', chunk_size = 100, max_calculations = 10000, username = "unknown", 
+        adsorbate_name='H', chunk_size = 100, max_calculations = 10000,
         adsite_types = ["top", "bridge", "hollow"], threshold = 0.1, n_max_restarts = 1,
-        skip_dft = False):
+        skip_dft = False, extdb_connect = {}):
     """
 
     Workflow to determine the adsorption sites and energies of a set of
@@ -49,7 +50,9 @@ def get_singlesites_workflow(template_path, worker_target_path = None, structure
         "workflow_type" : "singlesites",
         }
 
-    fw_init = initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "singlesites")
+    fw_init = initialize_workflow_data(username, password, parameters, 
+        name = "UNNAMED", workflow_type = "singlesites",
+        extdb_connect = extdb_connect)
 
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information

@@ -9,8 +9,10 @@ from critcatworks.dft import setup_folders, chunk_calculations
 from critcatworks.database.format import ase_to_atoms_dict
 from critcatworks.database.update import initialize_workflow_data
 
-def get_nanoclusters_workflow(template_path, worker_target_path = None, structures = None, 
-    extdb_ids = None, source_path = None, reference_energy=0.0, username = "unknown", skip_dft = False):
+def get_nanoclusters_workflow(template_path, username, password, 
+    worker_target_path = None, structures = None, 
+    extdb_ids = None, source_path = None, reference_energy=0.0, 
+    skip_dft = False, extdb_connect = {}):
     """
     Workflow to relax the structure of a set of
     nanoclusters using CP2K
@@ -28,8 +30,13 @@ def get_nanoclusters_workflow(template_path, worker_target_path = None, structur
         "extdb_ids" : extdb_ids,
         "source_path" : source_path,
         "reference_energy" : reference_energy,
+        "simulation_method" : "cp2k",
+        "n_max_restarts" : 1,
+        "workflow_type" : "relax_nanoclusters",
         }
-    fw_init = initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "relax_nanoclusters")
+    fw_init = initialize_workflow_data(username, password, parameters, 
+        name = "UNNAMED", workflow_type = "relax_nanoclusters",
+        extdb_connect = extdb_connect)
 
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information

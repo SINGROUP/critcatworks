@@ -99,7 +99,7 @@ class MLTask(FiretaskBase):
         ml_results["ids_predicted"] = simulation_ids_predict
 
         # update external database
-        dct = update_machine_learning_collection(METHOD, workflow_id = workflow_id, 
+        dct = update_machine_learning_collection(METHOD, extdb_connect = fw_spec["extdb_connect"], workflow_id = workflow_id, 
             method_params = ml_results["method_params"], 
             descriptor = workflow_parameters["descriptor"],
             descriptor_params = workflow_parameters["descriptor_params"],

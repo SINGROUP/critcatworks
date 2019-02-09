@@ -8,18 +8,48 @@ from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
 import cluskit
-
+import dscribe
 import numpy as np
 import logging
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
-
+from critcatworks.database.extdb import update_simulations_collection
 def join_cluster_adsorbate(cluster, adsorbate):
     joint_atoms = cluster + adsorbate
     cluster_ids = list(range(len(cluster)))
     adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
 
     return joint_atoms, cluster_ids, adsorbate_ids
+
+def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
+    """
+    works with only one adsorbate atom.
+    TODO generalize cluskit to return list of adsorbates
+    already in ase format.
+    Makes this function superfluous.
+    """
+    atoms_lst = []
+    ads_structures_dict = []
+    for adsorbate in adspos:
+        logging.debug(adsorbate_name)
+        logging.debug(adsorbate)
+        logging.debug(adsorbate.shape)
+        atoms = ase.Atoms(symbols=adsorbate_name, positions=adsorbate.reshape((1,3)))
+        atoms_lst.append(atoms)
+    return atoms_lst
+
+def gather_all_atom_types(calc_ids, simulations):
+    # going through nc atoms once to find atom types
+    atomic_numbers = []
+    for idx, calc_id in enumerate(calc_ids):
+        atoms_dict = simulations[str(calc_id)]["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
+        atomic_numbers.extend(atoms.get_atomic_numbers())
+
+    sorted_list_atomic_numbers = list(sorted(set(atomic_numbers)))
+
+    all_atomtypes = sorted_list_atomic_numbers
+    return all_atomtypes
 
 @explicit_serialize
 class AdsorbateEliminationTask(FiretaskBase):
@@ -35,14 +65,15 @@ class AdsorbateEliminationTask(FiretaskBase):
     def run_task(self, fw_spec):
         logging.debug(fw_spec)
         adsorbate_name = self['adsorbate_name']
-        bond_length - self['bond_length']
+        bond_length = self['bond_length']
 
-        calc_ids = fw_spec["calc_ids"]
+        calc_ids = fw_spec["temp"]["calc_ids"]
         new_calc_ids = []
+        update_spec = fw_spec
 
         # divide adsorbate and nanocluster
         for idx, calc_id in enumerate(calc_ids):
-            source_simulation = fw_spec["simulations"][calc_id]
+            source_simulation = fw_spec["simulations"][str(calc_id)]
             atoms = atoms_dict_to_ase(source_simulation["atoms"])
             dct = copy.deepcopy(source_simulation)
             dct["source_id"] = calc_id
@@ -53,18 +84,19 @@ class AdsorbateEliminationTask(FiretaskBase):
             dct["output"] = {}
 
             adsorbate_ids = []
-            for adsorbate in atoms["adsorbates"]:
+
+            for adsorbate in source_simulation["adsorbates"]:
                 adsorbate_ids.append(adsorbate["atom_ids"])
             adsorbate_atoms = atoms[np.array(adsorbate_ids, dtype = int)]
 
             cluster_ids = []
-            for nanocluster in atoms["nanoclusters"]:
+            for nanocluster in source_simulation["nanoclusters"]:
                 cluster_ids.append(nanocluster["atom_ids"])
             cluster_atoms = atoms[np.array(cluster_ids, dtype = int)]
 
             adsorbate_positions = adsorbate_atoms.get_positions()
             
-            kept_positions = cluskit.utils.x2_to_x(adsorbate_positions, bondlength = bond_length)
+            kept_positions = cluskit.utils.x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
             n_kept = kept_positions.shape[0]
             kept_adsorbate_atoms = ase.Atoms(symbols=[adsorbate_name] * n_kept, positions=kept_positions)
 
@@ -73,18 +105,24 @@ class AdsorbateEliminationTask(FiretaskBase):
             for adsorbate in kept_adsorbate_atoms:
                 new_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
 
-                add_adsorbate += 1
+                #add_adsorbate += 1
                 atoms, _ , adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
-                dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+                # TODO reference ID through keeping track of which atoms are removed
+                dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : "NONE"}))
                 # info about surface atoms not there
-                # elimination function does not keep track of atom indices            
-            dct["operations"] = [dict({"add_adsorbate" : len(dct[adsorbates]) - len(adsorbate_atoms)})]
+                # elimination function does not keep track of atom indices
+            n_adsorbates = len(dct["adsorbates"]) - len(adsorbate_atoms)            
+            dct["operations"] = [dict({"add_adsorbate" : n_adsorbates})]
+            if n_adsorbates == 0:
+                defuse_workflow = True
+            else:
+                defuse_workflow = False
             dct["atoms"] = ase_to_atoms_dict(new_atoms)
 
             # update simulation dict
             # refresh adsorbates list
             # create new simulation
-            simulation = update_simulations_collection(**dct)
+            simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
             logging.info("simulation after adding single adsorbates")
             logging.info(simulation)
 
@@ -93,12 +131,11 @@ class AdsorbateEliminationTask(FiretaskBase):
             update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
 
-        update_spec = fw_spec
-        #update_spec["coverage_structures"] = coverage_structures_eliminated
+        update_spec["temp"]["calc_ids"] = new_calc_ids
         update_spec.pop("_category")
         update_spec.pop("name")
 
-        return FWAction(update_spec=update_spec)
+        return FWAction(update_spec=update_spec, defuse_workflow = defuse_workflow)
 
 @explicit_serialize
 class PerTypeCoverageCreationTask(FiretaskBase):
@@ -130,7 +167,7 @@ class PerTypeCoverageCreationTask(FiretaskBase):
 
         # create reference of adsorbate in order to store its total energy
         # for later constructing adsorption energies
-        reference_simulation = update_simulations_collection(atoms = {}, 
+        reference_simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], atoms = {}, 
             source_id = -1, workflow_id = workflow_id, 
             nanoclusters = [], adsorbates = [], substrates = [], 
             operations = [""], inp = {"adsorbate_name" : adsorbate_name}, 
@@ -164,7 +201,7 @@ class PerTypeCoverageCreationTask(FiretaskBase):
             dct["source_id"] = calc_id
             dct["workflow_id"] = workflow_id
             dct["inp"] = {}
-            dct["inp"]["adsite_types"] = adsite_type
+            dct["inp"]["adsite_types"] = adsite_types
             dct["inp"]["adsorbate_name"] = adsorbate_name
 
 
@@ -204,7 +241,7 @@ class PerTypeCoverageCreationTask(FiretaskBase):
             dct["operations"] = [dict({"add_adsorbate" : add_adsorbate})]
 
             # update external database
-            simulation = update_simulations_collection(**dct)
+            simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
             logging.info("simulation after adsorbate coverage")
             logging.info(simulation)
 

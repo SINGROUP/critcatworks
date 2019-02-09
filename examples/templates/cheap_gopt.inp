@@ -1,19 +1,11 @@
 ############ General ############################
-@SET COORD_FILE coverage_structure.xyz 
-@SET SYSTEM cheap_gopt
-@SET CELLSIZE 25.0 25.0 25.0 
-
-#&EXT_RESTART
-#  RESTART_FILE_NAME ${SYSTEM}-1.restart
-#&END EXT_RESTART
-
 
 &GLOBAL
-  RUN_TYPE GEO_OPT           # ENERGY_FORCE, GEO_OPT
+  RUN_TYPE GEO_OPT           
   PREFERRED_FFT_LIBRARY FFTSG
   EXTENDED_FFT_LENGTHS
   PRINT_LEVEL MEDIUM            
-  PROJECT ${SYSTEM}          # Name of calculation 
+  PROJECT gopt          
 &END GLOBAL
 
 ##################################################
@@ -36,14 +28,13 @@
 #    CHARGE 0
 
     &MGRID
-      CUTOFF 300             # plane-wave cutoff for the charge density [Rydbergs]
-      NGRIDS 4
+      CUTOFF 200             # plane-wave cutoff for the charge density [Rydbergs]
+      NGRIDS 5
       REL_CUTOFF 30
     &END MGRID  
-# Periodic poisson solver as a trick to speed up calculation
     &POISSON
-      PERIODIC NONE
-      POISSON_SOLVER WAVELET
+      PERIODIC XYZ
+      POISSON_SOLVER PERIODIC
     &END POISSON
     &QS
       METHOD GPW                        
@@ -90,11 +81,11 @@
       SCF_GUESS RESTART
       EPS_LUMOS  0.000001    # for MO_CUBES
       MAX_ITER_LUMOS 10000   # for MO_CUBES
-      EPS_SCF 1.0E-6         # convergence threshold for total energy
+      EPS_SCF 1.0E-4         # convergence threshold for total energy
       CHOLESKY INVERSE_DBCSR
 
 ### STANDARD DIAGONALIZATION with SMEARING
-     MAX_SCF 1 
+     MAX_SCF 100 
      ADDED_MOS  200 
      &SMEAR  ON 
          METHOD FERMI_DIRAC 
@@ -113,8 +104,8 @@
      &OUTER_SCF
      # Start again if not converged
      # Must be smaller than the one in inner loop, default 1.0E-5
-          EPS_SCF 1.0E-6
-          MAX_SCF 1
+          EPS_SCF 1.0E-4
+          MAX_SCF 2
      &END OUTER_SCF
 
 ### END OF ST DIAG #######################
@@ -156,12 +147,12 @@
       &END
     &END
     &CELL
-      PERIODIC NONE
-      #ABC ${CELLSIZE}
+      PERIODIC XYZ
+      ABC 20.0 20.0 20.0
     &END CELL
     &TOPOLOGY
       COORD_FILE_FORMAT XYZ
-      COORD_FILE_NAME ${COORD_FILE}  
+      COORD_FILE_NAME structure.xyz  
       &CENTER_COORDINATES T
       &END
     &END TOPOLOGY
@@ -235,11 +226,6 @@
     MAX_FORCE 4.5E-4  #9.75E-5
     RMS_FORCE 3.0E-4  #5.0E-5
     OPTIMIZER BFGS
-#  OPTIMIZER CG
-#  &CG
-#    MAX_STEEP_STEPS  0
-#    RESTART_LIMIT 9.0E-01
-#  &END CG
   &END GEO_OPT
 
 &END MOTION

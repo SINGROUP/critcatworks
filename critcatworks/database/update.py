@@ -19,34 +19,51 @@ class InitialTask(FiretaskBase):
     Task to initialize workflow database  """
 
     _fw_name = 'InitialTask'
-    required_params = ['username', 'parameters', 'name', 'workflow_type']
-    optional_params = []
+    required_params = ['username', 'password', 'parameters', 'name', 'workflow_type']
+    optional_params = ['extdb_connect']
 
     def run_task(self, fw_spec):
 
         username = self["username"]
+        password = self["password"]
         parameters = self["parameters"]
+        extdb_connect = self["extdb_connect"]
         name = self["name"]
         workflow_type = self["workflow_type"]
 
         creation_time = str(datetime.datetime.now(tz=None))
 
+        extdb_connect["username"] = username
+        extdb_connect["password"] = password
+        extdb_connect["host"] = extdb_connect.get("host",
+            "nanolayers.dyndns.org:27017")
+
+        extdb_connect["db_name"] = extdb_connect.get("db_name",
+            "testdb")        
+        extdb_connect["authsource"] = extdb_connect.get("authsource",
+            extdb_connect["db_name"])
+
         #
-        workflow = update_workflows_collection(username, creation_time, parameters = parameters,
-            name = name, workflow_type = workflow_type)
+        workflow = update_workflows_collection(username, password, 
+            creation_time, parameters = parameters,
+            name = name, workflow_type = workflow_type, extdb_connect = extdb_connect)
 
         update_spec = fw_spec
         update_spec["temp"] = {}
         update_spec["simulations"] = {}
         update_spec["workflow"] = workflow
         update_spec["machine_learning"] = {}
+        update_spec["extdb_connect"] = extdb_connect
 
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)
 
-def initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "UNNAMED"):
-    firetask1  = InitialTask(username = username, parameters = parameters, name = name, workflow_type = workflow_type)
+def initialize_workflow_data(username, password, parameters, name = "UNNAMED", 
+        workflow_type = "UNNAMED", extdb_connect = {}):
+    firetask1  = InitialTask(username = username, password = password, 
+        parameters = parameters, name = name, 
+        workflow_type = workflow_type, extdb_connect = extdb_connect)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'InitialTask'},
              name = 'InitialWork')
     return fw

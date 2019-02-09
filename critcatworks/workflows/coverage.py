@@ -12,11 +12,12 @@ from critcatworks.dft import setup_folders, chunk_calculations
 from critcatworks.structure import get_per_type_coverage, eliminate_pairs
 
 
-def get_coverage_workflow(template_path, worker_target_path = None, structures = None, extdb_ids = None,
+def get_coverage_workflow(template_path, username, password, 
+        worker_target_path = None, structures = None, extdb_ids = None,
         source_path  = None, reference_energy=0.0,
-        adsorbate_name='H',max_iterations = 10000, username = "unknown", 
+        adsorbate_name='H',max_iterations = 10000,  
         adsite_types = ["top", "bridge", "hollow"], n_max_restarts = 1, 
-        skip_dft = False, bond_length = 1.0):
+        skip_dft = False, bond_length = 1.0, extdb_connect = {}):
     """
     Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 
     adsorbates are put on top, bridge and hollow sites. Once the structure is relaxed by DFT,
@@ -46,7 +47,9 @@ def get_coverage_workflow(template_path, worker_target_path = None, structures =
         "workflow_type" : "pertype_coverage",
         }
 
-    fw_init = initialize_workflow_data(username, parameters, name = "UNNAMED", workflow_type = "singlesites")
+    fw_init = initialize_workflow_data(username, password, parameters, 
+        name = "UNNAMED", workflow_type = "coverage",
+        extdb_connect = extdb_connect)
 
     # FireWork: Read nanocluster structures and initialise a database
     # object containing set information
@@ -75,18 +78,20 @@ def get_coverage_workflow(template_path, worker_target_path = None, structures =
         )
 
     # add above Fireworks with links
-    workflow_list = [fw_read_structures, 
+    workflow_list = [fw_init,
+        fw_get_structures, 
         fw_get_per_type_coverage, 
         ]
 
     links_dict = {
-            fw_read_structures: [fw_get_per_type_coverage], 
+            fw_init : [fw_get_structures],
+            fw_get_structures: [fw_get_per_type_coverage], 
             }
 
     ### loop starts ###
     for i in range(max_iterations):
         # Firework: setup folders for DFT calculations,
-        fw_setup_folders = setup_folders(target_path = target_path, name = "cp2k_coverage_iter_" + str(i))
+        fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_coverage_iter_" + str(i))
         workflow_list.append(fw_setup_folders)
         if i == 0:
             links_dict[fw_get_per_type_coverage] = [fw_setup_folders]

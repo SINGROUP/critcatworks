@@ -40,14 +40,15 @@ class NCStabilityTask(FiretaskBase):
         cohesive_energy_dct = {}
         cohesive_energy_lst = []
         for calc_id in calc_ids:
+            simulation = simulations[str(calc_id)]
             # get total energy
             try:
-                total_energy = simulations["output"]["total_energy"]
+                total_energy = simulation["output"]["total_energy"]
             except:
                 logging.warning("simulation" + str(calc_id) + " did not seam to have total_energy in its output.")
                 continue
 
-            atomic_numbers = simulations["atoms"]["numbers"]
+            atomic_numbers = simulation["atoms"]["numbers"]
             cohesive_energy = total_energy
 
             # get chemical formula

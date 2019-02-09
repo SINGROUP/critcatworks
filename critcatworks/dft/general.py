@@ -109,6 +109,7 @@ class ChunkCalculationsTask(FiretaskBase):
                     n_max_restarts = n_max_restarts,
                     simulation = simulation,
                     skip_dft = skip_dft,
+                    extdb_connect = fw_spec["extdb_connect"]
                     )
                 detours.append(new_fw)
 

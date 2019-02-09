@@ -4,9 +4,10 @@ import os,time, sys
 import logging
 import ase
 from scipy.spatial.distance import pdist
+import getpass
 
 # internal modules
-from critcat.database import mylaunchpad
+from critcatworks.database import mylaunchpad
 from critcatworks.workflows.coverage import get_coverage_workflow
 
 def read_structures_locally(path):
@@ -36,6 +37,9 @@ def read_structures_locally(path):
 if __name__ == "__main__":
     import logging
     IS_QUEUE = True
+    USERNAME = "mjcritcat"
+    #PASSWORD = getpass.getpass()
+    PASSWORD = "heterogeniuscatalysis"
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -43,20 +47,23 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/coverage_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad()
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
     launchpad.reset('', require_password=False)
-
-    wf = get_coverage_workflow(
+    
+    structures = read_structures_locally("./nc_structures")
+    wf = get_coverage_workflow(username = "mjcritcat", 
+        password = PASSWORD,
         source_path = str(pathlib.Path("./nc_structures/").resolve()),
-        template_path = str(pathlib.Path("./templates/gopt.inp").resolve()), 
+        template_path = str(pathlib.Path("./templates/cheap_gopt.inp").resolve()), 
         worker_target_path = "../tests/dummy_db/output/",
+        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns",
+        structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 4,
         adsite_types = ["top"],
-        username = "marc",
         n_max_restarts = 1,
-        skipt_dft = True,
+        skip_dft = True,
         bond_length = 1.5,
     )
 

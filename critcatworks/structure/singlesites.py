@@ -83,7 +83,7 @@ class AdsiteCreationTask(FiretaskBase):
 
         # create reference of adsorbate in order to store its total energy
         # for later constructing adsorption energies
-        reference_simulation = update_simulations_collection(atoms = {}, 
+        reference_simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], atoms = {}, 
             source_id = -1, workflow_id = workflow_id, 
             nanoclusters = [], adsorbates = [], substrates = [], 
             operations = [""], inp = {"adsorbate_name" : adsorbate_name}, 
@@ -156,7 +156,7 @@ class AdsiteCreationTask(FiretaskBase):
                     dct["output"] = {}
                     dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
-                    simulation = update_simulations_collection(**dct)
+                    simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
                     logging.info("simulation after adding single adsorbates")
                     logging.info(simulation)
 

@@ -9,6 +9,7 @@ import pycp2k, cp2kparser
 import ase, ase.io
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database.extdb import update_simulations_collection
+import copy
 
 @explicit_serialize
 class CP2KSetupTask(FiretaskBase):
@@ -139,7 +140,9 @@ class CP2KRunTask(FiretaskBase):
         #fw_spec.pop("_category")
         #fw_spec.pop("name")
         detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
-            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"]},
+            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
+                "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"],
+                "extdb_connect" : fw_spec["extdb_connect"]},
             name = 'CP2KAnalysisWork')
         return FWAction(update_spec = fw_spec, detours = detours)
 
@@ -201,7 +204,8 @@ class CP2KAnalysisTask(FiretaskBase):
                 is_converged = False
             atom_labels = results["atom_labels"]
             frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
-    
+            cell = results["simulation_cell"][-1]
+
             if is_converged:
                 total_energy = frame_sequence_potential_energy[-1]
             else:
@@ -215,7 +219,7 @@ class CP2KAnalysisTask(FiretaskBase):
             if fw_spec["n_restarts"] < n_max_restarts:
                 fw_spec["n_restarts"] += 1
                 detours =  rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts = int(n_restarts) + 1, 
-                    simulation = fw_spec["simulation"], skip_dft = skip_dft)
+                    simulation = fw_spec["simulation"], skip_dft = skip_dft, extdb_connect = fw_spec["extdb_connect"])
                 #detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
                 #    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
                 #    name = 'CP2KRunWork')
@@ -237,7 +241,8 @@ class CP2KAnalysisTask(FiretaskBase):
             logging.debug(is_converged)
     
             # conversion factor cp2kparser uses other units! WARNING, might change in the future! conversion always back to Angstrom.
-            relaxed_structure = ase.Atoms(symbols = atom_labels[-1], positions = atom_positions[-1] * 10e9)
+            relaxed_structure = ase.Atoms(symbols = atom_labels[-1], 
+                positions = atom_positions[-1] * 10e9, cell = cell)
     
             atoms_dict = ase_to_atoms_dict(relaxed_structure)
     
@@ -252,8 +257,7 @@ class CP2KAnalysisTask(FiretaskBase):
         else:
             # in case of no_output or incorrect_termination
             # fill slots with empty placeholders
-            atoms_dict = {}
-            input_file = ""
+            atoms_dict = fw_spec["simulation"]["atoms"]
             result_dict = {"is_converged" : 0, "output_state" : output_state}
 
         ##
@@ -261,7 +265,7 @@ class CP2KAnalysisTask(FiretaskBase):
         source_simulation = fw_spec["simulation"]
 
         # update external database
-        dct = source_simulation.copy()
+        dct = copy.deepcopy(source_simulation)
         # calculation originated from this:
         dct["source_id"] = calc_id
         dct["atoms"] = atoms_dict ### !!!
@@ -270,7 +274,7 @@ class CP2KAnalysisTask(FiretaskBase):
 
         logging.info("simulation after analysis")
 
-        simulation = update_simulations_collection(**dct)
+        simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
 
         logging.info(simulation)
 
@@ -299,7 +303,7 @@ class CP2KAnalysisTask(FiretaskBase):
 
 
 def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id", n_max_restarts = 4,
-        skip_dft = False):
+        skip_dft = False, extdb_connect = {}):
     setup_task = CP2KSetupTask(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
@@ -318,17 +322,25 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
     #    n_max_restarts = n_max_restarts)
 
     
-    fw = Firework([setup_task,run_task], spec = {'_category' : "dft", 'name' : 'CP2KWork', "n_restarts" : 0, "simulation" : simulation},
+    fw = Firework([setup_task,run_task], 
+        spec = {'_category' : "dft", 'name' : 'CP2KWork', 
+            "n_restarts" : 0, "simulation" : simulation,
+            "extdb_connect" : extdb_connect },
+
                      name = 'CP2KWork')
     return fw
 
 
-def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts, simulation, skip_dft = False):
+def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts, 
+        simulation, skip_dft = False, extdb_connect = {}):    
     """
     Run and analyse
     """
-    fw = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
-        spec = {'_category' : "dft", 'name' : 'CP2KRerunWork', 'n_restarts' : int(n_restarts) + 1, "simulation" : simulation },
+    fw = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, 
+        n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
+        spec = {'_category' : "dft", 'name' : 'CP2KRerunWork', 
+            'n_restarts' : int(n_restarts) + 1, "simulation" : simulation,
+            "extdb_connect" : extdb_connect },
         name = 'CP2KRerunWork')
     return fw
 
