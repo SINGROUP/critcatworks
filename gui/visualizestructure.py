@@ -2,6 +2,10 @@ from critcatworks.database.format import atoms_dict_to_ase, ase_to_atoms_dict
 import ase, ase.io
 from ase.visualize import view
 import pymongo
+from pprint import pprint as pp
+import argparse
+
+
 
 def get_external_database(**extdb_connect):
     #extdb_connect["username"] = username
@@ -30,8 +34,16 @@ def get_simulation(simulation_id):
     return simulation
 
 if __name__ == '__main__':
-    ID = 170
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('ids', metavar='N', type=int, nargs='+',
+                    help='simulation id')
+
+    args = parser.parse_args()
+    print(args.ids)
+    ID = args.ids[0]
     simulation = get_simulation(ID)
+
+    pp(simulation)
 
     atoms = atoms_dict_to_ase(simulation["atoms"])
 

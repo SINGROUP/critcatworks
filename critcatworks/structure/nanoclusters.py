@@ -41,6 +41,7 @@ class NCStabilityTask(FiretaskBase):
         cohesive_energy_lst = []
         for calc_id in calc_ids:
             simulation = simulations[str(calc_id)]
+            print(simulation["output"])
             # get total energy
             try:
                 total_energy = simulation["output"]["total_energy"]
@@ -50,6 +51,10 @@ class NCStabilityTask(FiretaskBase):
 
             atomic_numbers = simulation["atoms"]["numbers"]
             cohesive_energy = total_energy
+
+            if cohesive_energy == None:
+                logging.warning("simulation" + str(calc_id) + " has a total_energy of None.")
+                continue                
 
             # get chemical formula
             dct = ase.utils.formula._count_symbols(atomic_numbers)

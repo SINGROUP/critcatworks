@@ -237,7 +237,7 @@ def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top
         descriptor_params = descriptor_params
         )
     fw = Firework([firetask1], 
-        spec={'_category' : "lightweight", 'name' : 'AdsiteCreationTask'},
+        spec={'_category' : "medium", 'name' : 'AdsiteCreationTask'},
         name = 'AdsiteCreationWork'
         )
     return fw

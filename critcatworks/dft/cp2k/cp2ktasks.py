@@ -137,8 +137,8 @@ class CP2KRunTask(FiretaskBase):
                 subprocess.call(command_list, shell = False)
                 print("run done")
 
-        #fw_spec.pop("_category")
-        #fw_spec.pop("name")
+        fw_spec.pop("_category")
+        fw_spec.pop("name")
         detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
             spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
                 "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"],
@@ -212,7 +212,8 @@ class CP2KAnalysisTask(FiretaskBase):
                 output_state = "not_converged"
                 logging.info("CP2K not converged")
                 print("CP2K not converged")
-                total_energy = None
+                # not converged energy is stored
+                total_energy = frame_sequence_potential_energy[-1]
 
         # restart
         if output_state == "no_output" or output_state == "incorrect_termination" or output_state == "not_converged":
@@ -220,9 +221,9 @@ class CP2KAnalysisTask(FiretaskBase):
                 fw_spec["n_restarts"] += 1
                 detours =  rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts = int(n_restarts) + 1, 
                     simulation = fw_spec["simulation"], skip_dft = skip_dft, extdb_connect = fw_spec["extdb_connect"])
-                #detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
-                #    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', 'n_restarts' : int(n_restarts) + 1 },
-                #    name = 'CP2KRunWork')
+
+                fw_spec.pop("_category")
+                fw_spec.pop("name")
                 return FWAction(update_spec = fw_spec, detours = detours)    
 
         # update data
@@ -280,22 +281,14 @@ class CP2KAnalysisTask(FiretaskBase):
 
         # update internal workflow data
         simulation_id = simulation["_id"]
+
+        # update temp workflow data
         mod_spec =[
             {"_set" : {"simulations->" + str(simulation_id) : simulation }},
             {"_push" : {"temp->" + "analysis_ids" : simulation_id }},
             ]
 
         logging.info("pushing new ids to analysis_ids")
-        # update temp workflow data
-    
-            # mod_spec =[
-            #     {'_set' : {'adsorbate_energies_dict->' + str(calc_id) : float(total_energy)}},
-            #     {'_set' : {'is_converged_dict->' + str(calc_id) : is_converged}},
-            #     {'_set' : {'relaxed_structure_dict->' + str(calc_id): atoms_dict}},
-            #     {'_set' : {'dft_result_dict->' + str(calc_id) : result_dict}},
-            #     {'_set' : {'n_restarts' : fw_spec["n_restarts"]}},
-            #     ]
-
 
         fw_spec.pop("_category")
         fw_spec.pop("name")
