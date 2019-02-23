@@ -243,7 +243,7 @@ class CP2KAnalysisTask(FiretaskBase):
     
             # conversion factor cp2kparser uses other units! WARNING, might change in the future! conversion always back to Angstrom.
             relaxed_structure = ase.Atoms(symbols = atom_labels[-1], 
-                positions = atom_positions[-1] * 10e9, cell = cell)
+                positions = atom_positions[-1] * 10e9, cell = cell * 10e9)
     
             atoms_dict = ase_to_atoms_dict(relaxed_structure)
     

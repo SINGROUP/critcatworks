@@ -77,15 +77,22 @@ def get_coverage_workflow(template_path, username, password,
             "crossover" : True, "sparse" : False},
         )
 
+    # FireWork: before running DFT eliminate too close adsorbates 
+    # eliminate adsorbate pairs too close
+    fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
+
+
     # add above Fireworks with links
     workflow_list = [fw_init,
         fw_get_structures, 
-        fw_get_per_type_coverage, 
+        fw_get_per_type_coverage,
+        fw_eliminate_pairs,
         ]
 
     links_dict = {
             fw_init : [fw_get_structures],
             fw_get_structures: [fw_get_per_type_coverage], 
+            fw_get_per_type_coverage : [fw_eliminate_pairs],
             }
 
     ### loop starts ###
@@ -93,11 +100,7 @@ def get_coverage_workflow(template_path, username, password,
         # Firework: setup folders for DFT calculations,
         fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_coverage_iter_" + str(i))
         workflow_list.append(fw_setup_folders)
-        if i == 0:
-            links_dict[fw_get_per_type_coverage] = [fw_setup_folders]
-        else:
-            links_dict[fw_eliminate_pairs] = [fw_setup_folders]
-
+        links_dict[fw_eliminate_pairs] = [fw_setup_folders]
 
         # FireWork: setup, run and extract DFT calculation
         # (involves checking for errors in DFT and rerunning)

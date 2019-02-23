@@ -22,8 +22,9 @@ def read_structures_locally(path):
                 pos = atoms.get_positions()
                 pdist(pos)
                 diameter = pdist(pos).max()
-
-                atoms.set_cell([diameter, diameter, diameter])
+                mpl = 2.5
+                
+                atoms.set_cell([diameter * mpl, diameter * mpl, diameter * mpl])
                 structures.append(atoms)
                 logging.debug(atoms)
             except ValueError:
@@ -50,7 +51,8 @@ if __name__ == "__main__":
     structures = read_structures_locally("./nc_structures")
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
-        template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
+        #template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
+        template_path = str(pathlib.Path("templates/cp2k_mm_energy.inp").resolve()), 
         #worker_target_path = "../tests/dummy_db/output/",
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/nanoclusters",
         structures = structures,

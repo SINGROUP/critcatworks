@@ -86,12 +86,12 @@ class AdsorbateEliminationTask(FiretaskBase):
             adsorbate_ids = []
 
             for adsorbate in source_simulation["adsorbates"]:
-                adsorbate_ids.append(adsorbate["atom_ids"])
+                adsorbate_ids.extend(adsorbate["atom_ids"])
             adsorbate_atoms = atoms[np.array(adsorbate_ids, dtype = int)]
 
             cluster_ids = []
             for nanocluster in source_simulation["nanoclusters"]:
-                cluster_ids.append(nanocluster["atom_ids"])
+                cluster_ids.extend(nanocluster["atom_ids"])
             cluster_atoms = atoms[np.array(cluster_ids, dtype = int)]
 
             adsorbate_positions = adsorbate_atoms.get_positions()
@@ -103,10 +103,8 @@ class AdsorbateEliminationTask(FiretaskBase):
 
             new_atoms = cluster_atoms
             for adsorbate in kept_adsorbate_atoms:
-                new_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
+                new_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(new_atoms, adsorbate)
 
-                #add_adsorbate += 1
-                atoms, _ , adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
                 # TODO reference ID through keeping track of which atoms are removed
                 dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : "NONE"}))
                 # info about surface atoms not there

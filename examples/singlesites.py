@@ -37,7 +37,9 @@ def read_structures_locally(path):
 if __name__ == "__main__":
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    PASSWORD = getpass.getpass()
+    #PASSWORD = getpass.getpass()
+    PASSWORD = "heterogeniuscatalysis"
+
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -46,12 +48,13 @@ if __name__ == "__main__":
 
     # set up the LaunchPad and reset it
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
-    #launchpad.reset('', require_password=False)
+    launchpad.reset('', require_password=False)
 
     structures = read_structures_locally("./nc_structures")
     wf = get_singlesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
+        #template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
+        template_path = str(pathlib.Path("templates/cp2k_mm_energy.inp").resolve()), 
         #worker_target_path = "../tests/dummy_db/output/",
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/singlesites",
         structures = structures,
