@@ -81,7 +81,8 @@ class CP2KSetupTask(FiretaskBase):
         #    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', "n_restarts" : 0},
         #    name = 'CP2KRunWork')
         #return FWAction(update_spec = fw_spec, detours = detours)
-        return FWAction(update_spec = fw_spec)
+        #return FWAction(update_spec = fw_spec)
+        return FWAction()
 
 @explicit_serialize
 class CP2KRunTask(FiretaskBase):

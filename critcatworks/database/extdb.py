@@ -111,7 +111,7 @@ def update_workflows_collection(username, password, creation_time,
 
 # machine_learning
 
-def update_machine_learning_collection(extdb_connect, method, workflow_id = -1, 
+def update_machine_learning_collection(method, extdb_connect, workflow_id = -1, 
     method_params = {}, descriptor = "soap",
     descriptor_params = {},
     training_set = [], validation_set = [], test_set = [],prediction_set = [],
