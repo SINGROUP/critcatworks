@@ -1,8 +1,10 @@
-@SET CFN coverage_structure.xyz
+@SET CFN structure.xyz
 
 
 &GLOBAL                  ! section to select the kind of calculation
-   RUN_TYPE ENERGY       ! select type of calculation. In this case: ENERGY (=Single point calculation)
+   RUN_TYPE GEO_OPT   
+   PRINT_LEVEL LOW
+   PROJECT cp2k_mm_energy.inp
 &END GLOBAL
 &FORCE_EVAL              ! section with parameters and system description
   METHOD FIST            ! Molecular Mechanics method
@@ -15,20 +17,56 @@
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms Cu Cu
           EPSILON    [K_e] 164.56
-          SIGMA [angstrom]   3.601
-          RCUT  [angstrom]  15.0
+          SIGMA [angstrom]   2.601
+          RCUT  [angstrom]  10.0
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms Pt Pt
           EPSILON    [K_e] 164.56
-          SIGMA [angstrom]   3.601
-          RCUT  [angstrom]  15.0
+          SIGMA [angstrom]   2.601
+          RCUT  [angstrom]  10.0
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H H
-          EPSILON    [K_e] 104.56
-          SIGMA [angstrom]   2.601
-          RCUT  [angstrom]  5.0
+          EPSILON    [K_e] 14.56
+          SIGMA [angstrom]   1.201
+          RCUT  [angstrom]  3.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H Pt
+          EPSILON    [K_e] 54.56
+          SIGMA [angstrom]   1.501
+          RCUT  [angstrom]  4.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H Cu
+          EPSILON    [K_e] 54.56
+          SIGMA [angstrom]   1.501
+          RCUT  [angstrom]  4.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H N
+          EPSILON    [K_e] 54.56
+          SIGMA [angstrom]   1.101
+          RCUT  [angstrom]  4.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms N N
+          EPSILON    [K_e] 4.56
+          SIGMA [angstrom]   1.501
+          RCUT  [angstrom]  4.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms N Cu
+          EPSILON    [K_e] 154.56
+          SIGMA [angstrom]   2.501
+          RCUT  [angstrom]  4.0
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms N Pt
+          EPSILON    [K_e] 154.56
+          SIGMA [angstrom]   2.501
+          RCUT  [angstrom]  4.0
         &END LENNARD-JONES
       &END NONBONDED
       &CHARGE
@@ -43,6 +81,10 @@
         ATOM H
         CHARGE 0.0
       &END CHARGE
+      &CHARGE
+        ATOM N
+        CHARGE 0.0
+      &END CHARGE
     &END FORCEFIELD
     &POISSON              ! solver for non periodic calculations
      PERIODIC NONE
@@ -53,7 +95,6 @@
   &END MM
   &SUBSYS                 ! system description 
     &CELL
-     ABC [angstrom] 20 20 20  
      PERIODIC NONE
     &END CELL
     &TOPOLOGY
@@ -64,3 +105,11 @@
     &END TOPOLOGY
    &END SUBSYS
 &END FORCE_EVAL
+&MOTION
+  &GEO_OPT
+    TYPE MINIMIZATION
+    MAX_ITER 1000
+    OPTIMIZER BFGS
+  &END GEO_OPT
+
+&END MOTION

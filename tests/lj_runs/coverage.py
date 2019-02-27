@@ -50,18 +50,20 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
     launchpad.reset('', require_password=False)
     
-    structures = read_structures_locally("../nc_structures")
+    #structures = read_structures_locally("../nc_structures")
+    structures = read_structures_locally("../selected_ptcu_structures")
     wf = get_coverage_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        source_path = str(pathlib.Path("../nc_structures/").resolve()),
+        #source_path = str(pathlib.Path("../nc_structures/").resolve()),
+        source_path = str(pathlib.Path("../selected_ptcu_structures/").resolve()),
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        worker_target_path = "../dummy_db/output/",
-        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/coverage",
+        #worker_target_path = "../dummy_db/output/",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptcu_structures/",
         structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        max_iterations = 4,
-        adsite_types = ["top"],
+        max_iterations = 20,
+        adsite_types = ["top", "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
         bond_length = 1.5,

@@ -48,7 +48,7 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
     launchpad.reset('', require_password=False)
 
-    structures = read_structures_locally("../nc_structures")
+    structures = read_structures_locally("../selected_ptcu_structures")
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 

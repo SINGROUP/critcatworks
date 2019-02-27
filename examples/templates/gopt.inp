@@ -148,7 +148,7 @@
     &END
     &CELL
       PERIODIC XYZ
-      ABC 25.0 25.0 25.0
+      #ABC 25.0 25.0 25.0
     &END CELL
     &TOPOLOGY
       COORD_FILE_FORMAT XYZ

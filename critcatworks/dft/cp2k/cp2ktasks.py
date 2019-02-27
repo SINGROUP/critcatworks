@@ -73,6 +73,7 @@ class CP2KSetupTask(FiretaskBase):
         input_string = calc.get_input_string()
         update_spec = fw_spec
         update_spec["simulation"]["inp"]["input_string"] = input_string
+        update_spec["simulation"]["inp"]["path"] = str(target_path)
         #pass_spec = fw_spec
         #print("dummy outputs generated")
         #fw_spec.pop("_category")

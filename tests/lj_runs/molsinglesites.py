@@ -5,9 +5,9 @@ import logging
 import ase
 from scipy.spatial.distance import pdist
 import getpass
-
+import numpy as np
 # internal modules
-from critcatworks.workflows import get_nanoclusters_workflow
+from critcatworks.workflows import get_molsinglesites_workflow
 from critcatworks.database import mylaunchpad
 
 def read_structures_locally(path):
@@ -23,7 +23,7 @@ def read_structures_locally(path):
                 pdist(pos)
                 diameter = pdist(pos).max()
                 mpl = 2.5
-                
+
                 atoms.set_cell([diameter * mpl, diameter * mpl, diameter * mpl])
                 structures.append(atoms)
                 logging.debug(atoms)
@@ -37,30 +37,42 @@ def read_structures_locally(path):
 if __name__ == "__main__":
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    PASSWORD = getpass.getpass()
+    #PASSWORD = getpass.getpass()
+    PASSWORD = "heterogeniuscatalysis"
+
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
         logdir = str(pathlib.Path(".").resolve())
-        logging.basicConfig(filename = logdir + "/nanocluster_workflow.log", level=logging.INFO)
+        logging.basicConfig(filename = logdir + "/singlesites_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
     launchpad.reset('', require_password=False)
 
-    #structures = read_structures_locally("./nc_structures")
-    structures = read_structures_locally("./selected_ptcu_structures")
-    wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
-        source_path = None,
-        template_path = str(pathlib.Path("templates/gopt.inp").resolve()), 
-        #template_path = str(pathlib.Path("templates/cp2k_mm_energy.inp").resolve()), 
-        #worker_target_path = "../tests/dummy_db/output/",
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/production/ptcu_selected_clusters",
+    structures = read_structures_locally("../nc_structures")
+
+    # setup nh3 molecule with anchor x
+    pos = np.array([[ 0.00000000e+00,  0.00000000e+00,  1.16489000e-01],
+       [ 0.00000000e+00,  9.39731000e-01, -2.71808000e-01],
+       [ 8.13831000e-01, -4.69865000e-01, -2.71808000e-01],
+       [-8.13831000e-01, -4.69865000e-01, -2.71808000e-01],
+       [ 0.00000000e+00, -1.54520895e-06,  1.91648900e+00]])
+
+    adsorbate_x = ase.Atoms('NH3X', positions=pos)
+
+    wf = get_molsinglesites_workflow(username = "mjcritcat", 
+        password = PASSWORD,
+        template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/singlesites",
         structures = structures,
-        extdb_ids = None,
+        reference_energy = -1.16195386047558 * 0.5,
+        adsorbate = adsorbate_x,
+        chunk_size = 7,
+        max_calculations = 15,
+        adsite_types = ["top"], #, "bridge", "hollow"],
+        n_max_restarts = 1,
         skip_dft = False,
-        extdb_connect = {"db_name": "ncdb"},
-        #extdb_connect = {"db_name": "testdb"}
         )
 
     # store workflow 
