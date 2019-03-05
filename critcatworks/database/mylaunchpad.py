@@ -2,12 +2,9 @@ from fireworks import LaunchPad
 
 def create_launchpad(username, password, server = "serenity"):
     if server == "atlas":
-        if username == "mjcritcat":
-            name = "fireworks"
-        else:
-            name = username[:2] + "fireworks"
+        name = username[:2] + "fireworks"
 
-        lp = LaunchPad(host = "austerity-shard-00-01-hgeov.mongodb.net:27017",
+        lp = LaunchPad(host = "austerity-shard-00-00-hgeov.mongodb.net:27017",
             port = 27017,
             name = name,
             username = username,

@@ -248,11 +248,19 @@ class PerTypeCoverageCreationTask(FiretaskBase):
             update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
         
-        descmatrix = np.array(desc_lst)
+        descmatrix = np.array(desc_lst).tolist()
             
         update_spec["temp"]["descmatrix"] = descmatrix
         update_spec["temp"]["calc_ids"] = new_calc_ids
-
+        print("spec bytes")
+        print(sys.getsizeof(update_spec))
+        #print("descmatrix bytes")
+        #print(descmatrix.nbytes)
+        #print(descmatrix.shape)
+        import json
+        print(len(json.dumps(update_spec["temp"]["descmatrix"])))
+        print(len(json.dumps(update_spec["simulations"])))
+        print(len(json.dumps(update_spec)))
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)
