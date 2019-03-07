@@ -37,7 +37,8 @@ def read_structures_locally(path):
 if __name__ == "__main__":
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    PASSWORD = getpass.getpass()
+    #PASSWORD = getpass.getpass()
+    PASSWORD = "heterogeniuscatalysis"
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -52,7 +53,7 @@ if __name__ == "__main__":
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/nanoclusters",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/",
         structures = structures,
         extdb_ids = None,
         skip_dft = False,

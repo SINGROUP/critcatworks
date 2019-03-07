@@ -18,13 +18,13 @@
           atoms Cu Cu
           EPSILON    [eV] 2.04
           SIGMA [angstrom]   2.35
-          RCUT  [angstrom]  9.4
+          RCUT  [angstrom]  4.5  #9.4
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms Pt Pt
           EPSILON    [eV] 3.14
           SIGMA [angstrom]   2.42
-          RCUT  [angstrom]  9.68
+          RCUT  [angstrom]  4.5  #9.68
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H H
@@ -34,15 +34,15 @@
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H Pt
-          EPSILON    [eV] 3.75
-          SIGMA [angstrom]   1.49
-          RCUT  [angstrom]  5.94
+          EPSILON    [eV] 1.75  #3.75
+          SIGMA [angstrom]   2.49  #1.49
+          RCUT  [angstrom]  3.8  #5.94
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H Cu
-          EPSILON    [eV] 3.02
-          SIGMA [angstrom]   1.45
-          RCUT  [angstrom]  5.8
+          EPSILON    [eV] 1.5  #3.02
+          SIGMA [angstrom]   2.45  #1.45
+          RCUT  [angstrom]  3.8  #5.8
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H N
@@ -72,7 +72,7 @@
           atoms Cu Pt
           EPSILON    [eV] 2.53
           SIGMA [angstrom]   2.39
-          RCUT  [angstrom]  9.54
+          RCUT  [angstrom]  4.54 #9.54
         &END LENNARD-JONES
       &END NONBONDED
       &CHARGE
@@ -115,7 +115,7 @@
   &GEO_OPT
     TYPE MINIMIZATION
     MAX_ITER 1000
-    OPTIMIZER BFGS
+    OPTIMIZER LBFGS
   &END GEO_OPT
 
 &END MOTION

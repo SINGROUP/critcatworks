@@ -14,6 +14,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, train_test_split
 
 from critcatworks.database.extdb import update_machine_learning_collection
+from critcatworks.database import read_descmatrix, write_descmatrix
 
 @explicit_serialize
 class MLTask(FiretaskBase):
@@ -42,7 +43,8 @@ class MLTask(FiretaskBase):
         calc_ids = fw_spec["temp"]["calc_ids"]
         is_converged_list = np.array(fw_spec["temp"]["is_converged_list"], dtype = 'bool')
         property_lst = fw_spec["temp"]["property"]
-        descmatrix = np.array(fw_spec["temp"]["descmatrix"])
+        #descmatrix = np.array(fw_spec["temp"]["descmatrix"])
+        descmatrix = read_descmatrix(fw_spec)
         workflow_id = fw_spec["workflow"]["_id"]
         workflow_parameters = fw_spec["workflow"]["parameters"]
 

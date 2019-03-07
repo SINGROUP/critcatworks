@@ -13,6 +13,7 @@ import numpy as np
 import logging
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
+from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
 def join_cluster_adsorbate(cluster, adsorbate):
     joint_atoms = cluster + adsorbate
@@ -250,7 +251,9 @@ class PerTypeCoverageCreationTask(FiretaskBase):
         
         descmatrix = np.array(desc_lst).tolist()
             
-        update_spec["temp"]["descmatrix"] = descmatrix
+        #update_spec["temp"]["descmatrix"] = descmatrix
+        # saves descmatrix as a path to a numpy array
+        update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
         print("spec bytes")
         print(sys.getsizeof(update_spec))

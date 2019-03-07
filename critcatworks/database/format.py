@@ -7,7 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
-
+import numpy as np
 
 def atoms_dict_to_ase(atoms_dict):
     cell = atoms_dict['cell']
@@ -50,3 +50,17 @@ def ase_to_atoms_dict(atoms):
         "info" : info,    
         }
     return atoms_dict
+
+def write_descmatrix(descmatrix):
+    time_str = time.strftime("%Y-%m-%d-%H-%M")
+    path = "descmatrix_" + time_str +  ".npy"
+    path = os.path.abspath(path)
+    np.save(path, descmatrix)
+    return path
+
+def read_descmatrix(fw_spec):
+    path = fw_spec["temp"]["descmatrix"]
+    descmatrix = np.load(path)
+    return descmatrix
+
+

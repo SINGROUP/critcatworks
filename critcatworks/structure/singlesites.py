@@ -13,6 +13,7 @@ import numpy as np
 import logging
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
+from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
 
 def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
@@ -168,7 +169,9 @@ class AdsiteCreationTask(FiretaskBase):
         descmatrix = np.array(desc_lst)
 
             
-        update_spec["temp"]["descmatrix"] = descmatrix
+        #update_spec["temp"]["descmatrix"] = descmatrix
+        # saves descmatrix as a path to a numpy array
+        update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
 
         update_spec.pop("_category")
@@ -294,7 +297,9 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
         descmatrix = np.array(desc_lst)
 
             
-        update_spec["temp"]["descmatrix"] = descmatrix
+        #update_spec["temp"]["descmatrix"] = descmatrix
+        # saves descmatrix as a path to a numpy array
+        update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
 
         update_spec.pop("_category")
@@ -317,8 +322,9 @@ class AdsiteRankTask(FiretaskBase):
     def run_task(self, fw_spec):
         logging.debug(fw_spec)
         calc_ids = fw_spec["temp"]["calc_ids"]
-        descmatrix = fw_spec["temp"]["descmatrix"]
-        descmatrix = np.array(descmatrix)
+        #descmatrix = fw_spec["temp"]["descmatrix"]
+        #descmatrix = np.array(descmatrix)
+        descmatrix = read_descmatrix(fw_spec)
         logging.info("DESCRIPTOR matrix attributes")
         logging.info(descmatrix.shape)
         logging.info(np.sum(descmatrix))
@@ -329,7 +335,7 @@ class AdsiteRankTask(FiretaskBase):
         update_spec = fw_spec
         update_spec["temp"]["fps_ranking"] = fps_ranking.tolist()
         update_spec["temp"]["calc_ids"] = reordered_calc_ids.tolist()
-        update_spec["temp"]["descmatrix"] = reordered_descmatrix.tolist()
+        update_spec["temp"]["descmatrix"] = write_descmatrix(reordered_descmatrix)
         update_spec.pop("_category")
         update_spec.pop("name")
 

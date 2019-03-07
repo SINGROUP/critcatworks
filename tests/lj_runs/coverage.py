@@ -64,10 +64,11 @@ if __name__ == "__main__":
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 20,
-        adsite_types = ["top", "bridge", "hollow"],
+        #adsite_types = ["top", "bridge", "hollow"],
+        adsite_types = ["top", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
-        bond_length = 1.5,
+        bond_length = 2.0,
     )
 
     # store workflow on launchpad
