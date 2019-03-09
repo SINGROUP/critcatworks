@@ -60,11 +60,12 @@ if __name__ == "__main__":
         extdb_ids = [1922,1923,1924,1925,1926,1927],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 15,
-        max_calculations = 155,
-        adsite_types = ["top"], #, "bridge", "hollow"],
+        chunk_size = 50,
+        max_calculations = 250,
+        adsite_types = ["top",], #  "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
+        threshold = 0.1 / 27.2114,  # in Hartree!
         )
 
     # store workflow 

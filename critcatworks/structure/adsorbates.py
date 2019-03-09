@@ -9,6 +9,7 @@ from pprint import pprint as pp
 import ase, ase.io
 import logging, datetime
 from critcatworks.database.extdb import update_workflows_collection
+from critcatworks.database.extdb import get_external_database
 import numpy as np
 
 @explicit_serialize
@@ -39,6 +40,7 @@ class GatherPropertyTask(FiretaskBase):
         logging.info("Gather Properties of following calculations:")
         logging.info(calc_ids_chunk)
 
+        ext_db =get_external_database(fw_spec["extdb_connect"])
         # compute reaction energy and store them as lists for ml
         for idx, calc_id in zip(range(n_calcs_started - chunk_size, n_calcs_started), calc_ids_chunk):
             simulation = simulations[str(calc_id)]
@@ -68,10 +70,16 @@ class GatherPropertyTask(FiretaskBase):
             for components in component_types:
                 for component in components:
                     reference_id = component["reference_id"]
+                    print(reference_id)
                     try:
-                        total_energy = simulations[str(reference_id)]["output"]["total_energy"]
+                        reference_simulation = simulations[str(reference_id)]
                     except:
-                        logging.warning("total_energy not found!")
+                        logging.info("getting reference from database")
+                        reference_simulation  = ext_db["simulations"].find_one({"_id": reference_id})
+                    try:
+                        total_energy = reference_simulation["output"]["total_energy"]
+                    except:
+                        logging.warning("total_energy not found! Not contributing to reaction energy!")
                         total_energy = 0.0
                     reaction_energy -= total_energy
                     reaction_energies_list[idx] = reaction_energy

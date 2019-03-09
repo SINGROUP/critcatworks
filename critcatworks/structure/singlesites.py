@@ -15,6 +15,7 @@ import logging
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
+from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
 
 def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
     """
@@ -81,6 +82,7 @@ class AdsiteCreationTask(FiretaskBase):
         logging.debug(fw_spec)
         desc_lst = []
         new_calc_ids = []
+        db = get_external_database(fw_spec["extdb_connect"])
 
         # create reference of adsorbate in order to store its total energy
         # for later constructing adsorption energies
@@ -96,7 +98,7 @@ class AdsiteCreationTask(FiretaskBase):
 
         # looping over nc atoms 
         for idx, calc_id in enumerate(calc_ids):
-
+            simulations_chunk_list = []
             ##
             # get source simulation
             source_simulation = copy.deepcopy(simulations[str(calc_id)])
@@ -157,14 +159,17 @@ class AdsiteCreationTask(FiretaskBase):
                     dct["output"] = {}
                     dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
-                    simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
-                    logging.info("simulation after adding single adsorbates")
-                    logging.info(simulation)
+                    # getting only id for uploading simulations in chunks
+                    dct["_id"] = _query_id_counter_and_increment('simulations', db)
+                    #simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
+                    simulations_chunk_list.append(dct)
 
                     # update internal workflow data
-                    simulation_id = simulation["_id"]
+                    simulation_id = dct["_id"]
                     update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
+
+            db["simulations"].insert_many(simulations_chunk_list)
         
         descmatrix = np.array(desc_lst)
 
@@ -205,6 +210,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
         logging.debug(fw_spec)
         desc_lst = []
         new_calc_ids = []
+        db = get_external_database(fw_spec["extdb_connect"])
 
         # adsorbate atom with anchor x
         adsorbate_x = atoms_dict_to_ase(adsorbate_dict)
@@ -224,7 +230,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
 
         # looping over nc atoms 
         for idx, calc_id in enumerate(calc_ids):
-
+            simulations_chunk_list = []
             ##
             # get source simulation
             source_simulation = copy.deepcopy(simulations[str(calc_id)])
@@ -285,15 +291,17 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
                     dct["output"] = {}
                     dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
-                    simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
-                    logging.info("simulation after adding single adsorbates")
-                    logging.info(simulation)
+                    # getting only id for uploading simulations in chunks
+                    dct["_id"] = _query_id_counter_and_increment('simulations', db)
+                    #simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
+                    simulations_chunk_list.append(dct)
 
                     # update internal workflow data
-                    simulation_id = simulation["_id"]
+                    simulation_id = dct["_id"]
                     update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
         
+            db["simulations"].insert_many(simulations_chunk_list)
         descmatrix = np.array(desc_lst)
 
             

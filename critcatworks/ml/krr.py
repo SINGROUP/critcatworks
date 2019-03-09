@@ -15,6 +15,7 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 
 from critcatworks.database.extdb import update_machine_learning_collection
 from critcatworks.database import read_descmatrix, write_descmatrix
+import time
 
 @explicit_serialize
 class MLTask(FiretaskBase):
@@ -33,7 +34,8 @@ class MLTask(FiretaskBase):
         METHOD = "krr"
         IS_PREDICT_FAILED = True
         N_CV = 5
-        parent_folder_name = 'ml_' + METHOD
+        time_str = time.strftime("%Y-%m-%d-%H-%M")
+        parent_folder_name = 'ml_' + METHOD + time_str
         parent_folder_path = target_path + "/" + parent_folder_name
         if not os.path.exists(parent_folder_path):
             os.makedirs(parent_folder_path)
@@ -70,8 +72,8 @@ class MLTask(FiretaskBase):
             return FWAction(defuse_workflow=True)
 
         if IS_PREDICT_FAILED == True:
-            simulation_ids_predict = np.array(calc_ids)[1 - is_converged_list]
-            to_predict_ids = np.array(enumerated_ids)[1 - is_converged_list]
+            simulation_ids_predict = np.array(calc_ids)[is_converged_list == 0]
+            to_predict_ids = np.array(enumerated_ids)[is_converged_list == 0]
         else:
             to_predict_ids = np.array(calc_ids)[n_calcs_started:]
 

@@ -164,11 +164,24 @@ class NCStartFromDatabaseTask(FiretaskBase):
         calc_ids = []
         for db_id in db_ids_lst:
             simulation = ext_db["simulations"].find_one({"_id": db_id})
-            
+            simulation["nanoclusters"][0]["reference_id"] = db_id
+            simulation["source_id"] = db_id
+            simulation["workflow_id"] = workflow_id
+            # update external database
+            # enter datapoint
+            #dct = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], atoms = atoms_dict,
+            #    source_id = db_id, workflow_id = workflow_id,
+            #    nanoclusters = [nanocluster], adsorbates = [], substrates = [],
+            #    operations = [], inp = {}, output = {"total_energy" : total_energy},
+            #    )
+            dct = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"],
+                **simulation)
             # update internal workflow data
-            simulation_id = simulation["_id"]
+            simulation_id = dct["_id"]
 
-            update_spec["simulations"][str(simulation_id)] = simulation
+            # update simulation internally.
+
+            update_spec["simulations"][str(simulation_id)] = dct
             calc_ids.append(simulation_id)
 
         # update temp workflow data
