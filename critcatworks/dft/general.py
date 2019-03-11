@@ -94,6 +94,7 @@ class ChunkCalculationsTask(FiretaskBase):
             pass
         else:
             calc_ids = calc_ids[n_calcs_started : n_calcs_started+chunk_size]
+            calc_paths = calc_paths[n_calcs_started : n_calcs_started+chunk_size]
 
         detours = []
         for idx, calc_id in enumerate(calc_ids):

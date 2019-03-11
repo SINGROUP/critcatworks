@@ -294,6 +294,8 @@ class CP2KAnalysisTask(FiretaskBase):
 
         fw_spec.pop("_category")
         fw_spec.pop("name")
+        # update spec no longer necessary
+        #return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
         return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
 
 

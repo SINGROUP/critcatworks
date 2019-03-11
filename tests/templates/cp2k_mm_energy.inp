@@ -27,6 +27,18 @@
           RCUT  [angstrom]  4.5  #9.68
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
+          atoms Ni Ni
+          EPSILON    [eV] 3.14
+          SIGMA [angstrom]   2.42
+          RCUT  [angstrom]  4.5  #9.68
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms Pt Ni
+          EPSILON    [eV] 3.14
+          SIGMA [angstrom]   2.42
+          RCUT  [angstrom]  4.5  #9.68
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
           atoms H H
           EPSILON    [eV] 4.48
           SIGMA [angstrom]   0.55
@@ -40,6 +52,12 @@
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H Cu
+          EPSILON    [eV] 1.5  #3.02
+          SIGMA [angstrom]   2.45  #1.45
+          RCUT  [angstrom]  3.8  #5.8
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H Ni
           EPSILON    [eV] 1.5  #3.02
           SIGMA [angstrom]   2.45  #1.45
           RCUT  [angstrom]  3.8  #5.8
@@ -89,6 +107,10 @@
       &END CHARGE
       &CHARGE
         ATOM N
+        CHARGE 0.0
+      &END CHARGE
+      &CHARGE
+        ATOM Ni
         CHARGE 0.0
       &END CHARGE
     &END FORCEFIELD

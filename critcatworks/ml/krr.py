@@ -82,6 +82,10 @@ class MLTask(FiretaskBase):
         to_predict_features = descmatrix[to_predict_ids]
         labels = np.array(property_lst)[training_ids]
 
+        print("features", features.shape)
+        print("features", labels, labels.shape)
+        print("training_ids", training_ids)
+        print("to_predict_ids", to_predict_ids)
         ### RUN ###
 
         if METHOD == "krr":

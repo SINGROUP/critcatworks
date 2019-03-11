@@ -68,6 +68,7 @@ class GatherPropertyTask(FiretaskBase):
 
             component_types = [adsorbates, nanoclusters, substrates]
             reaction_energy = simulation_total_energy
+            print("energy before adding references", reaction_energy)
             for components in component_types:
                 for component in components:
                     reference_id = component["reference_id"]
@@ -83,14 +84,19 @@ class GatherPropertyTask(FiretaskBase):
                         logging.warning("total_energy not found! Not contributing to reaction energy!")
                         total_energy = 0.0
                     reaction_energy -= total_energy
-                    reaction_energies_list[idx] = reaction_energy
+                    print(reaction_energy, "reference", reference_id)
+            reaction_energies_list[idx] = reaction_energy
 
         update_spec = fw_spec
 
         update_spec["temp"]["property"] = reaction_energies_list
+        print("reaction_energies_list")
+        print(reaction_energies_list)
+        print(len(reaction_energies_list))
         update_spec["temp"]["is_converged_list"] = is_converged_list 
         fw_spec["temp"]["analysis_ids"] = []
         fw_spec["temp"]["calc_ids"] = calc_ids
+        print("is_converged_list")
         print(is_converged_list)
 
         update_spec.pop("_category")
