@@ -149,22 +149,43 @@ def update_machine_learning_collection(method, extdb_connect, workflow_id = -1,
     machine_learning.insert_one(dct)
     return dct
 
+def fetch_simulations(extdb_connect, simulation_ids):
+    print(simulation_ids, "before") 
+    db = get_external_database(extdb_connect)
+    cursor =   db['simulations'].find({"_id" : {"$in" : simulation_ids }})
+    simulations_list = [document for document in cursor]
+    simulation_ids = [str(document["_id"]) for document in simulations_list]
+    simulations  = dict(zip(simulation_ids, simulations_list))
+    print(simulation_ids, len(simulation_ids))
+    return simulations
+
+
 ### custom types conversion functions
 
 if __name__ == "__main__":
     #reset = _reset_IDs_collection()
     #print(reset)
 
-    id_counter = _query_id_counter_and_increment("simulations")
-    print(id_counter)
+    #id_counter = _query_id_counter_and_increment("simulations")
+    #print(id_counter)
+    ids = [2222,2500, 3333, 2225, 2000, 2400, 3001]
+    simulations = fetch_simulations({"host" : "nanolayers.dyndns.org:27017", "username" : "mjcritcat", "password" : "heterogeniuscatalysis", "db_name" : "testdb", "authsource" : "testdb"}, ids)
+    #print(len(simulations))
+    #for document in cursor:
+    #    print(document)
+    print(len(simulations))
+    print(simulations.keys())
+    for idx in ids:
+        print(simulations[str(idx)]["_id"], "==", idx)
 
-    wfc = update_workflows_collection("random_dude", "Sunday")
 
-    sc = update_simulations_collection(atoms = "HERE_SHOULD_BE_A_CUSTOM_TYPE", notes = "adding_keys_allowed")
+    #wfc = update_workflows_collection("random_dude", "Sunday")
 
-    mlc = update_machine_learning_collection("krr", 
-        russian_exchange_student = "Sakmiov")
+    #sc = update_simulations_collection(atoms = "HERE_SHOULD_BE_A_CUSTOM_TYPE", notes = "adding_keys_allowed")
 
-    print(sc)
-    print(wfc)
-    print(mlc)
+    #mlc = update_machine_learning_collection("krr", 
+    #    russian_exchange_student = "Sakmiov")
+
+    #print(sc)
+    #print(wfc)
+    #print(mlc)

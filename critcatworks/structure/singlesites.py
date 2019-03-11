@@ -16,6 +16,7 @@ from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
+from critcatworks.database.extdb import fetch_simulations
 
 def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
     """
@@ -75,7 +76,7 @@ class AdsiteCreationTask(FiretaskBase):
         adsite_types = self["adsite_types"]
         reference_energy = self["reference_energy"]
         calc_ids = fw_spec["temp"]["calc_ids"]
-        simulations = fw_spec["simulations"]
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
         workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
         update_spec = fw_spec
 
@@ -166,7 +167,7 @@ class AdsiteCreationTask(FiretaskBase):
 
                     # update internal workflow data
                     simulation_id = dct["_id"]
-                    update_spec["simulations"][str(simulation_id)] = dct
+                    #update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
 
             db["simulations"].insert_many(simulations_chunk_list)
@@ -203,7 +204,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
         adsite_types = self["adsite_types"]
         reference_energy = self["reference_energy"]
         calc_ids = fw_spec["temp"]["calc_ids"]
-        simulations = fw_spec["simulations"]
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
         workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
         update_spec = fw_spec
 
@@ -298,7 +299,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
 
                     # update internal workflow data
                     simulation_id = dct["_id"]
-                    update_spec["simulations"][str(simulation_id)] = dct
+                    #update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
         
             db["simulations"].insert_many(simulations_chunk_list)

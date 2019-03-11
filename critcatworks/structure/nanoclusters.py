@@ -10,6 +10,7 @@ import ase, ase.io
 import logging
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.format import atoms_dict_to_ase, ase_to_atoms_dict
+from critcatworks.database.extdb import fetch_simulations
 import json
 import numpy as np
 
@@ -35,7 +36,7 @@ class NCStabilityTask(FiretaskBase):
         analysis_ids = fw_spec["temp"]["analysis_ids"]
         # analysis_ids becomes calc_ids
         calc_ids = analysis_ids
-        simulations = fw_spec["simulations"]
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
 
         cohesive_energy_dct = {}
         cohesive_energy_lst = []

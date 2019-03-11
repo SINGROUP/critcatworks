@@ -15,6 +15,7 @@ import logging
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
+from critcatworks.database.extdb import fetch_simulations
 def join_cluster_adsorbate(cluster, adsorbate):
     joint_atoms = cluster + adsorbate
     cluster_ids = list(range(len(cluster)))
@@ -71,10 +72,10 @@ class AdsorbateEliminationTask(FiretaskBase):
         calc_ids = fw_spec["temp"]["calc_ids"]
         new_calc_ids = []
         update_spec = fw_spec
-
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
         # divide adsorbate and nanocluster
         for idx, calc_id in enumerate(calc_ids):
-            source_simulation = fw_spec["simulations"][str(calc_id)]
+            source_simulation = simulations[str(calc_id)]
             atoms = atoms_dict_to_ase(source_simulation["atoms"])
             dct = copy.deepcopy(source_simulation)
             dct["source_id"] = calc_id
@@ -127,7 +128,7 @@ class AdsorbateEliminationTask(FiretaskBase):
 
             # update internal workflow data
             simulation_id = simulation["_id"]
-            update_spec["simulations"][str(simulation_id)] = dct
+            #update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
 
         update_spec["temp"]["calc_ids"] = new_calc_ids
@@ -156,7 +157,7 @@ class PerTypeCoverageCreationTask(FiretaskBase):
         adsite_types = self["adsite_types"]
         reference_energy = self["reference_energy"]
         calc_ids = fw_spec["temp"]["calc_ids"]
-        simulations = fw_spec["simulations"]
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
         workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
         update_spec = fw_spec
 
@@ -246,7 +247,7 @@ class PerTypeCoverageCreationTask(FiretaskBase):
 
             # update internal workflow data
             simulation_id = simulation["_id"]
-            update_spec["simulations"][str(simulation_id)] = dct
+            #update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
         
         descmatrix = np.array(desc_lst).tolist()
@@ -261,9 +262,9 @@ class PerTypeCoverageCreationTask(FiretaskBase):
         #print(descmatrix.nbytes)
         #print(descmatrix.shape)
         import json
-        print(len(json.dumps(update_spec["temp"]["descmatrix"])))
-        print(len(json.dumps(update_spec["simulations"])))
-        print(len(json.dumps(update_spec)))
+        #print(len(json.dumps(update_spec["temp"]["descmatrix"])))
+        #print(len(json.dumps(update_spec["simulations"])))
+        print("lenght of spec in json", len(json.dumps(update_spec)))
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)

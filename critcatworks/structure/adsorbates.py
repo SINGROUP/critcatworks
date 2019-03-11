@@ -11,6 +11,7 @@ import logging, datetime
 from critcatworks.database.extdb import update_workflows_collection
 from critcatworks.database.extdb import get_external_database
 import numpy as np
+from critcatworks.database.extdb import fetch_simulations
 
 @explicit_serialize
 class GatherPropertyTask(FiretaskBase):
@@ -30,13 +31,13 @@ class GatherPropertyTask(FiretaskBase):
         calc_ids = fw_spec["temp"]["calc_ids"]
         # analysis ids becomes part of calc_ids
         analysis_ids = fw_spec["temp"]["analysis_ids"]
-        simulations = fw_spec["simulations"]
         n_calcs = len(calc_ids)
         reaction_energies_list = fw_spec["temp"].get("property", np.zeros(n_calcs).tolist())
         is_converged_list = fw_spec["temp"].get("is_converged_list", np.zeros(n_calcs).tolist())
 
         calc_ids[n_calcs_started - chunk_size : n_calcs_started] = analysis_ids
         calc_ids_chunk = analysis_ids
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids_chunk)
         logging.info("Gather Properties of following calculations:")
         logging.info(calc_ids_chunk)
 

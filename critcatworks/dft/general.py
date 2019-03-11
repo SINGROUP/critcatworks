@@ -7,6 +7,7 @@ import pathlib, logging
 import ase, ase.io
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.dft.cp2k import setup_cp2k
+from critcatworks.database.extdb import fetch_simulations
 
 @explicit_serialize
 class StructureFolderTask(FiretaskBase):
@@ -26,8 +27,8 @@ class StructureFolderTask(FiretaskBase):
         prefix = self['name']
         parent_folder_name = 'cp2k_calculations'
         parent_folder_path = target_path + "/" + parent_folder_name
-        simulations = fw_spec["simulations"]
         calc_ids = fw_spec["temp"]["calc_ids"]
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids) 
 
         if not os.path.exists(parent_folder_path):
             os.makedirs(parent_folder_path)
@@ -80,7 +81,7 @@ class ChunkCalculationsTask(FiretaskBase):
         skip_dft = self["skip_dft"]
         calc_paths = fw_spec["temp"]["calc_paths"]
         calc_ids = fw_spec["temp"]["calc_ids"]
-
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
 
         # define what chunk to run
         try:
@@ -101,7 +102,7 @@ class ChunkCalculationsTask(FiretaskBase):
 
             if simulation_method == "cp2k":
                 # create detour to setup cp2k calculation
-                simulation = fw_spec["simulations"][str(calc_id)]
+                simulation = simulations[str(calc_id)]
                 new_fw = setup_cp2k(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
