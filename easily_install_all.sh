@@ -21,6 +21,6 @@ echo "Installing critcatworks"
 
 cd ../..
 
-python3 setup.py install
+pip install -e .
 
 echo "Done installing"

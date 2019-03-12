@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     # set up the LaunchPad and reset it
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
-    launchpad.reset('', require_password=False)
+    #launchpad.reset('', require_password=False)
 
     structures = read_structures_locally("../nc_structures")
 

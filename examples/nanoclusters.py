@@ -46,16 +46,18 @@ if __name__ == "__main__":
 
     # set up the LaunchPad and reset it
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
-    launchpad.reset('', require_password=False)
+    #launchpad.reset('', require_password=False)
 
     #structures = read_structures_locally("./nc_structures")
-    structures = read_structures_locally("./selected_ptcu_structures")
+    #structures = read_structures_locally("./selected_ptcu_structures")
+    structures = read_structures_locally("./selected_ptni_structures")
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
-        template_path = str(pathlib.Path("templates/gopt.inp").resolve()), 
+        template_path = str(pathlib.Path("templates/triton_gopt.inp").resolve()), 
         #template_path = str(pathlib.Path("templates/cp2k_mm_energy.inp").resolve()), 
         #worker_target_path = "../tests/dummy_db/output/",
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/production/ptcu_selected_clusters",
+        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/production/ptcu_selected_clusters",
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/nanoclusters/production/selected_ptni_clusters",
         structures = structures,
         extdb_ids = None,
         skip_dft = False,
