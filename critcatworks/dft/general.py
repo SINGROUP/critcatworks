@@ -96,7 +96,8 @@ class ChunkCalculationsTask(FiretaskBase):
             calc_ids = calc_ids[n_calcs_started : n_calcs_started+chunk_size]
             calc_paths = calc_paths[n_calcs_started : n_calcs_started+chunk_size]
 
-        detours = []
+        wfs = []
+        links_dict = {}
         for idx, calc_id in enumerate(calc_ids):
             logging.info(calc_id)
             target_path = calc_paths[int(idx)]
@@ -104,7 +105,7 @@ class ChunkCalculationsTask(FiretaskBase):
             if simulation_method == "cp2k":
                 # create detour to setup cp2k calculation
                 simulation = simulations[str(calc_id)]
-                new_fw = setup_cp2k(template = template,
+                new_fw, links = setup_cp2k(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
                     name = name,
@@ -113,11 +114,12 @@ class ChunkCalculationsTask(FiretaskBase):
                     skip_dft = skip_dft,
                     extdb_connect = fw_spec["extdb_connect"]
                     )
-                detours.append(new_fw)
+                wfs.extend(new_fw)
+                links_dict.update(links_dict)
 
             else:
                 logging.warning("WARNING! " + str(simulation_method) + " unknown simulation method.")
-
+        detours = Workflow(wfs, links_dict)
 
         update_spec = fw_spec
         update_spec["n_calcs_started"] = n_calcs_started + chunk_size

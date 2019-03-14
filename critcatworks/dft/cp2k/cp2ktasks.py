@@ -141,12 +141,13 @@ class CP2KRunTask(FiretaskBase):
 
         fw_spec.pop("_category")
         fw_spec.pop("name")
-        detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
-            spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
-                "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"],
-                "extdb_connect" : fw_spec["extdb_connect"]},
-            name = 'CP2KAnalysisWork')
-        return FWAction(update_spec = fw_spec, detours = detours)
+        # remove detour 
+        #detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
+        #    spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
+        #        "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"],
+        #        "extdb_connect" : fw_spec["extdb_connect"]},
+        #    name = 'CP2KAnalysisWork')
+        return FWAction(update_spec = fw_spec) #, detours = detours)
 
 
 @explicit_serialize
@@ -226,7 +227,11 @@ class CP2KAnalysisTask(FiretaskBase):
 
                 fw_spec.pop("_category")
                 fw_spec.pop("name")
-                return FWAction(update_spec = fw_spec, detours = detours)    
+                return FWAction(update_spec = fw_spec, detours = detours)
+            else:
+                is_defused = True   
+        else:
+            is_defused = False 
 
         # update data
         if output_state == "ok" or output_state == "not_converged":
@@ -296,7 +301,7 @@ class CP2KAnalysisTask(FiretaskBase):
         fw_spec.pop("name")
         # update spec no longer necessary
         #return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
-        return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
+        return FWAction(mod_spec=mod_spec, defuse_children = is_defused)
 
 
 def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id", n_max_restarts = 4,
@@ -313,19 +318,34 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
         n_max_restarts = n_max_restarts,
         skip_dft = skip_dft)
     
-    # currently not part of setup to ensure robustness when cp2k fails
-    #analysis_task = CP2KAnalysisTask(target_path = target_path, 
-    #    calc_id = calc_id, 
-    #    n_max_restarts = n_max_restarts)
+    # add analysis as an additional Firework as a child. Ensures
+    # that Firework exists even if CP2K fails
+    analysis_task = CP2KAnalysisTask(target_path = target_path, 
+        calc_id = calc_id, 
+        n_max_restarts = n_max_restarts,
+        skip_dft = skip_dft)
 
     
-    fw = Firework([setup_task,run_task], 
+    fw1 = Firework([setup_task,run_task], 
         spec = {'_category' : "dft", 'name' : 'CP2KWork', 
             "n_restarts" : 0, "simulation" : simulation,
-            "extdb_connect" : extdb_connect },
+            "extdb_connect" : extdb_connect,
+            "_priority": 10,},
+        name = 'CP2KWork')
 
-                     name = 'CP2KWork')
-    return fw
+    fw2 = Firework([analysis_task], 
+        spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
+            "n_restarts" : 0,
+            "simulation" : simulation,
+            "extdb_connect" : extdb_connect,
+            "_allow_fizzled_parents" : True,
+            "_priority": 8,},
+        name = 'CP2KAnalysisWork',
+        )
+        #parents = [fw1]) 
+    #return Workflow([fw1,fw2], {fw1 : [fw2]})
+    #return [fw1,fw2], {fw1 : [fw2]}
+    return [fw1,fw2], {fw1 : [fw2]}
 
 
 def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts, 
@@ -333,13 +353,32 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
     """
     Run and analyse
     """
-    fw = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, 
+    fw1 = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, 
         n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
         spec = {'_category' : "dft", 'name' : 'CP2KRerunWork', 
-            'n_restarts' : int(n_restarts) + 1, "simulation" : simulation,
+            'n_restarts' : int(n_restarts), "simulation" : simulation,
+            "_priority": 10,
             "extdb_connect" : extdb_connect },
         name = 'CP2KRerunWork')
-    return fw
+
+    # add analysis as an additional Firework as a child. Ensures
+    # that Firework exists even if CP2K fails
+    analysis_task = CP2KAnalysisTask(target_path = target_path, 
+        calc_id = calc_id, 
+        n_max_restarts = n_max_restarts,
+        skip_dft = skip_dft)
+
+    fw2 = Firework([analysis_task], 
+        spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
+            'n_restarts' : int(n_restarts), "simulation" : simulation,
+            "extdb_connect" : extdb_connect,
+            "_priority": 8,
+            "_allow_fizzled_parents" : True},
+        name = 'CP2KAnalysisWork',)
+        #parents = [fw1]) 
+    return Workflow([fw1,fw2],)
+    #return Workflow([fw1,fw2], {fw1 : [fw2]})
+    #return [fw1,fw2], {fw1 : [fw2]}
 
 class cd:
     """Context manager for changing the current working directory"""
