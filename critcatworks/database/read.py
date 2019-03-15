@@ -8,7 +8,7 @@ from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 from pprint import pprint as pp
 import ase, ase.io
 import logging
-from critcatworks.database.extdb import update_simulations_collection, get_external_database
+from critcatworks.database.extdb import update_simulations_collection, get_external_database, _query_id_counter_and_increment
 from critcatworks.database.format import atoms_dict_to_ase, ase_to_atoms_dict
 import json
 import numpy as np
@@ -106,25 +106,22 @@ class NCStartFromStructuresTask(FiretaskBase):
             if total_energy == "UNKNOWN":
                 logging.warning("total energy of cluster not specified in structure file")
             nanocluster_atom_ids = list(range(len(atoms)))
-            nanocluster = {"atom_ids" : nanocluster_atom_ids, "reference_id" : -1}
 
+            db = get_external_database(fw_spec["extdb_connect"])
+            simulations = db['simulations']
+            # request id counter
+            simulation_id = _query_id_counter_and_increment('simulations', db)
+
+            nanocluster = {"atom_ids" : nanocluster_atom_ids, "reference_id" : simulation_id}
+
+            dct = {"_id" : simulation_id, "atoms" : atoms_dict, 
+                "source_id" : -1, "workflow_id" : workflow_id, 
+                "nanoclusters" : [nanocluster], "adsorbates" : [], "substrates" : [], 
+                "operations" : [], "inp" : {}, "output" : {"total_energy" : total_energy},
+                }
             # update external database
-            # enter datapoint
-            dct = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], atoms = atoms_dict, 
-                source_id = -1, workflow_id = workflow_id, 
-                nanoclusters = [nanocluster], adsorbates = [], substrates = [], 
-                operations = [], inp = {}, output = {"total_energy" : total_energy},
-                )
-
-            # update internal workflow data
-            simulation_id = dct["_id"]
-
-            # update simulation internally.
-            dct["nanoclusters"][0]["reference_id"] = simulation_id
-            logging.info("simulation after reading from structure")
-            logging.info(dct)
-
-            update_spec["simulations"][str(simulation_id)] = dct
+            simulations.insert_one(dct)
+            #update_spec["simulations"][str(simulation_id)] = dct
             calc_ids.append(simulation_id)
 
         # update temp workflow data

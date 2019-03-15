@@ -11,6 +11,7 @@ import cluskit
 import dscribe
 import numpy as np
 import logging
+from scipy.spatial.distance import cdist
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
@@ -53,6 +54,28 @@ def gather_all_atom_types(calc_ids, simulations):
     all_atomtypes = sorted_list_atomic_numbers
     return all_atomtypes
 
+def sparse_subset(points, r):
+    """Return a maximal list of elements of points such that no pairs of
+    points in the result have distance less than r.
+    """
+    result = []
+    ids = []
+    for idx, p in enumerate(points):
+        if all(dist(p, q) >= r for q in result):
+            result.append(p)
+            ids.append(idx)
+    return ids, result
+
+
+
+def x2_to_x(points, bondlength = 1.5):
+    dmat = cdist(points, points)
+    ids = cluskit.cluster._rank_fps(points, K = None, greedy =False)
+    dmat = np.triu(dmat[ids, :][:, ids])
+    remaining_ids = np.all((dmat > bondlength) | (dmat == 0), axis =0)
+    return ids[remaining_ids == 1]
+
+
 @explicit_serialize
 class AdsorbateEliminationTask(FiretaskBase):
     """ 
@@ -86,9 +109,15 @@ class AdsorbateEliminationTask(FiretaskBase):
             dct["output"] = {}
 
             adsorbate_ids = []
+            reference_ids = []
+            site_class_list = []
+            site_ids_list = []
 
             for adsorbate in source_simulation["adsorbates"]:
                 adsorbate_ids.extend(adsorbate["atom_ids"])
+                reference_ids.append(adsorbate["reference_id"])
+                site_class_list.append(adsorbate.get("site_class",""))
+                site_ids_list.append(adsorbate.get("site_ids_list", []))
             adsorbate_atoms = atoms[np.array(adsorbate_ids, dtype = int)]
 
             cluster_ids = []
@@ -98,25 +127,25 @@ class AdsorbateEliminationTask(FiretaskBase):
 
             adsorbate_positions = adsorbate_atoms.get_positions()
             
-            kept_positions = cluskit.utils.x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
-            n_kept = kept_positions.shape[0]
-            kept_adsorbate_atoms = ase.Atoms(symbols=[adsorbate_name] * n_kept, positions=kept_positions)
-
+            #kept_positions = cluskit.utils.x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
+            remaining_ids = x2_to_x(adsorbate_positions, bondlength = bond_length)
+            #remaining_ids = x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
+            print("bondlength", bond_length)
+            n_kept = remaining_ids.shape[0]
 
             new_atoms = cluster_atoms
-            for adsorbate in kept_adsorbate_atoms:
+            for idx in remaining_ids:
+                adsorbate = adsorbate_atoms[idx]
                 new_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(new_atoms, adsorbate)
-
-                # TODO reference ID through keeping track of which atoms are removed
-                dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : "NONE"}))
+                dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_ids[idx], 
+                    "site_class" : site_class_list[idx], "site_ids" : site_ids_list[idx]}))
                 # info about surface atoms not there
-                # elimination function does not keep track of atom indices
             n_adsorbates = len(dct["adsorbates"]) - len(adsorbate_atoms)            
             dct["operations"] = [dict({"add_adsorbate" : n_adsorbates})]
             if n_adsorbates == 0:
-                defuse_workflow = True
+                is_done = True
             else:
-                defuse_workflow = False
+                is_done = False
             dct["atoms"] = ase_to_atoms_dict(new_atoms)
 
             # update simulation dict
@@ -129,11 +158,16 @@ class AdsorbateEliminationTask(FiretaskBase):
             # update internal workflow data
             simulation_id = simulation["_id"]
             #update_spec["simulations"][str(simulation_id)] = dct
-            new_calc_ids.append(simulation_id)
+            if not is_done:
+                new_calc_ids.append(simulation_id)
 
         update_spec["temp"]["calc_ids"] = new_calc_ids
         update_spec.pop("_category")
         update_spec.pop("name")
+        if len(new_calc_ids) == 0:
+            defuse_workflow = True
+        else:
+            defuse_workflow = False
 
         return FWAction(update_spec=update_spec, defuse_workflow = defuse_workflow)
 
