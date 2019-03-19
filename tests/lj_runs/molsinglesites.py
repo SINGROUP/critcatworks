@@ -51,6 +51,7 @@ if __name__ == "__main__":
     launchpad.reset('', require_password=False)
 
     structures = read_structures_locally("../nc_structures")
+    structures = read_structures_locally("../selected_ptcu_structures")
 
     # setup nh3 molecule with anchor x
     pos = np.array([[ 0.00000000e+00,  0.00000000e+00,  1.16489000e-01],
@@ -63,14 +64,15 @@ if __name__ == "__main__":
 
     wf = get_molsinglesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
+        extdb_ids = [1922,1923,1924,1925,1926,1927],
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/singlesites",
-        structures = structures,
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/molsinglesites/testruns/molsinglesites/selected_ptcu_structures/",
+        #structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate = adsorbate_x,
-        chunk_size = 7,
-        max_calculations = 15,
-        adsite_types = ["top"], #, "bridge", "hollow"],
+        chunk_size = 10,
+        max_calculations = 25,
+        adsite_types = ["top", "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
         )

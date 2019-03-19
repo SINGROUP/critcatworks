@@ -69,7 +69,7 @@ class MLTask(FiretaskBase):
         if training_ids.shape[0] < N_CV:
             logging.warning('Exiting workflow Problem detected: ' + 
                 'Too few datapoints to learn from! Something might be wrong with your DFT calculations!')
-            return FWAction(defuse_workflow=True)
+            return FWAction(defuse_workflow=True, update_spec = fw_spec)
 
         if IS_PREDICT_FAILED == True:
             simulation_ids_predict = np.array(calc_ids)[is_converged_list == 0]

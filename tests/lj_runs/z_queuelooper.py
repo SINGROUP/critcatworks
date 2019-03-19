@@ -143,7 +143,20 @@ if __name__ == "__main__":
 
         for i in range(0, 20000):
             for category, adapter in zip(['dft', 'medium', 'lightweight'], [dft, medium, lightweight]):
-                launch_rocket_to_queue(launchpad, FWorker(category=category), adapter,
+                lowprio_query = {"$and" : [{"$or" : [{"state" : "RUNNING"}, {"state" : "RESERVED"}, {"state" : "READY"}]}, {"spec._priority" : 8}]}
+                lowprio_ids = launchpad.get_fw_ids(lowprio_query)
+                highprio_query = {"$and" : [{"$or" : [{"state" : "RUNNING"}, {"state" : "RESERVED"}, {"state" : "READY"}]}, {"spec._priority" : 10}]}
+                highprio_ids = launchpad.get_fw_ids(highprio_query)
+                if len(highprio_ids) > 0:
+                    print("Jobs with high priority still not completed")
+                    query = {"spec._priority" : 10}
+                elif len(lowprio_ids) > 0 :
+                    print("Jobs with low priority still not completed")
+                    query = {"spec._priority" : 8}
+                else:
+                    print("Jobs with no priority are being sent")
+                    query = None
+                launch_rocket_to_queue(launchpad, FWorker(category=category, query = query), adapter,
                     launcher_dir=abspath , create_launcher_dir=True, reserve=True)
             time.sleep(5)
             if IS_OFFLINE:

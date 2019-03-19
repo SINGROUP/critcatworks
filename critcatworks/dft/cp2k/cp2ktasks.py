@@ -279,7 +279,7 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["atoms"] = atoms_dict ### !!!
         dct["operations"] = ["cp2k"]
         dct["output"] = result_dict # might still be missing some output
-
+        dct["inp"]["path"] = str(target_path)
         logging.info("simulation after analysis")
 
         simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)

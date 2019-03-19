@@ -57,7 +57,7 @@ if __name__ == "__main__":
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/",
         structures = structures,
         extdb_ids = None,
-        skip_dft = True,
+        skip_dft = False,
         )
 
     # store workflow 
