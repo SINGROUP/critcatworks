@@ -4,7 +4,7 @@ from ase.visualize import view
 import pymongo
 from pprint import pprint as pp
 import argparse
-
+import numpy as np
 
 
 def get_external_database(**extdb_connect):
@@ -29,6 +29,8 @@ def get_simulation(simulation_id):
     ext_db = get_external_database(
         username = "mjcritcat",
         password = "heterogeniuscatalysis",
+        db_name = "testdb",
+        #db_name = "ncdb",
         )
     simulation = ext_db["simulations"].find_one({"_id": simulation_id})
     return simulation
@@ -40,11 +42,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     print(args.ids)
-    ID = args.ids[0]
-    simulation = get_simulation(ID)
-
-    pp(simulation)
-
-    atoms = atoms_dict_to_ase(simulation["atoms"])
-
-    view(atoms)
+    for idx in args.ids:
+        simulation = get_simulation(idx)
+        pp(simulation)
+        print("positions:", np.array(simulation["atoms"]["positions"]).shape)
+        atoms = atoms_dict_to_ase(simulation["atoms"])
+        view(atoms)
