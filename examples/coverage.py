@@ -38,8 +38,7 @@ if __name__ == "__main__":
     import logging
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    #PASSWORD = getpass.getpass()
-    PASSWORD = "heterogeniuscatalysis"
+    PASSWORD = getpass.getpass()
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -50,22 +49,19 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
     #launchpad.reset('', require_password=False)
     
-    structures = read_structures_locally("./nc_structures")
     wf = get_coverage_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        source_path = str(pathlib.Path("./nc_structures/").resolve()),
-        template_path = str(pathlib.Path("./templates/gopt.inp").resolve()), 
-        #template_path = str(pathlib.Path("templates/cp2k_mm_energy.inp").resolve()), 
-        #worker_target_path = "../tests/dummy_db/output/",
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/coverage",
-        structures = structures,
+        template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters",
+        extdb_ids = [32, 33],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 4,
-        adsite_types = ["top"],
+        adsite_types = ["top", "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
-        bond_length = 1.5,
+        bond_length = 0.8,
+        extdb_connect = {"db_name": "ncdb"},
     )
 
     # store workflow on launchpad
