@@ -209,6 +209,10 @@ class CP2KAnalysisTask(FiretaskBase):
             frame_sequence_potential_energy = results["frame_sequence_potential_energy"]
             cell = results["simulation_cell"][-1]
 
+            input_filename = results["x_cp2k_input_filename"]
+            with open(target_path + "/" + input_filename, "r") as f:
+                input_string = f.read()
+
             if is_converged:
                 total_energy = frame_sequence_potential_energy[-1]
             else:
@@ -280,6 +284,7 @@ class CP2KAnalysisTask(FiretaskBase):
         dct["operations"] = ["cp2k"]
         dct["output"] = result_dict # might still be missing some output
         dct["inp"]["path"] = str(target_path)
+        dct["inp"]["input_string"] = str(input_string)
         logging.info("simulation after analysis")
 
         simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)

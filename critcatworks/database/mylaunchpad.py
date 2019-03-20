@@ -1,6 +1,6 @@
 from fireworks import LaunchPad
 
-def create_launchpad(username, password, server = "serenity"):
+def create_launchpad(username, password, server = "serenity", lpadname = None):
     if server == "atlas":
         name = username[:2] + "fireworks"
 
@@ -14,7 +14,10 @@ def create_launchpad(username, password, server = "serenity"):
             ssl =  True,
             authsource = "admin")
     elif server == "serenity":
-        name = username[:2] + "fireworks"
+        if lpadname:
+            name = lpadname
+        else:
+            name = username[:2] + "fireworks"
         lp = LaunchPad(host = "nanolayers.dyndns.org:27017",
         port = 27017,
         name = name,
