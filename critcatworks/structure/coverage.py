@@ -131,7 +131,7 @@ class AdsorbateEliminationTask(FiretaskBase):
             if bond_length:
                 remaining_ids = x2_to_x(adsorbate_positions, bondlength = bond_length)
             elif n_remaining:
-                remaining_ids = cluskit.cluster._rank_fps(points, K = n_remaining, greedy =False)
+                remaining_ids = cluskit.cluster._rank_fps(adsorbate_positions, K = n_remaining, greedy =False)
 
             else:
                 logging.warning("give either argument bond_length or n_remaining")

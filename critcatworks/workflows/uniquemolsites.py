@@ -70,7 +70,7 @@ def get_uniquemolsites_workflow(template_path, username, password,
         raise ValueError('structures, extdb_ids or source_path contain no entries!')
 
     # FireWork: Determine adsites and add to database
-    fw_get_adsites = get_monodentate_unique_sites(
+    fw_get_adsites = get_monodentate_unique_adsites(
         reference_energy= reference_energy, 
         adsorbate = adsorbate_dict, 
         adsite_types = adsite_types,
@@ -108,7 +108,7 @@ def get_uniquemolsites_workflow(template_path, username, password,
 
     # FireWork: update database, 
     # (includes reading relaxed structure and energy)
-    fw_update_converged_data = update_converged_data()
+    fw_update_converged_data = update_converged_data(chunk_size=-1)
     workflow_list.append(fw_update_converged_data)
     links_dict[fw_chunk_calculations] =[fw_update_converged_data]
 

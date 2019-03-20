@@ -9,7 +9,7 @@ from critcatworks.database.format import ase_to_atoms_dict
 from critcatworks.database import start_from_structures, start_from_database, read_structures
 from critcatworks.structure import update_converged_data
 from critcatworks.dft import setup_folders, chunk_calculations
-from critcatworks.structure import get_per_type_coverage, eliminate_pairs
+from critcatworks.structure import get_per_type_coverage, eliminate_pairs, eliminate_closest
 
 
 def get_coverage_workflow(template_path, username, password, 
@@ -17,7 +17,7 @@ def get_coverage_workflow(template_path, username, password,
         source_path  = None, reference_energy=0.0,
         adsorbate_name='H',max_iterations = 10000,  
         adsite_types = ["top", "bridge", "hollow"], n_max_restarts = 1, 
-        skip_dft = False, bond_length = "", n_remaining = "",
+        skip_dft = False, bond_length = 1.4, n_remaining = "",
         extdb_connect = {}):
     """
     Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 
@@ -80,13 +80,10 @@ def get_coverage_workflow(template_path, username, password,
 
     # FireWork: before running DFT eliminate too close adsorbates 
     # eliminate adsorbate pairs too close
-    if bond_length:
-        fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
-    elif n_remaining:
+    if n_remaining:
         fw_eliminate_pairs = eliminate_closest(adsorbate_name = adsorbate_name, n_remaining = n_remaining)
     else:
-        print("give either argument bond_length or n_remaining")
-        exit(1)
+        fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
 
 
     # add above Fireworks with links

@@ -50,7 +50,7 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
     #launchpad.reset('', require_password=False)
 
-    structures = read_structures_locally("../nc_structures")
+    structures = read_structures_locally("../selected_ptni_structures")
 
     # setup nh3 molecule with anchor x
     pos = np.array([[ 0.00000000e+00,  0.00000000e+00,  1.16489000e-01],
@@ -64,9 +64,9 @@ if __name__ == "__main__":
     wf = get_uniquemolsites_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/uniquemolsites",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/uniquemolsites/testruns/selected_ptni_structures",
         structures = structures,
-        threshold = threshold,
+        threshold = 0.001,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate = adsorbate_x,
         adsite_types = ["top", "bridge", "hollow"],

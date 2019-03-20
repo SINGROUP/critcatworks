@@ -271,6 +271,7 @@ class CP2KAnalysisTask(FiretaskBase):
             # fill slots with empty placeholders
             atoms_dict = fw_spec["simulation"]["atoms"]
             result_dict = {"is_converged" : 0, "output_state" : output_state}
+            input_string = "no output or incorrect termination of CP2K calculation"
 
         ##
         # get source simulation

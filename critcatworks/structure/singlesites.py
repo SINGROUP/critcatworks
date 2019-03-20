@@ -533,8 +533,8 @@ def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsit
         adsite_types = adsite_types,
         reference_energy = reference_energy,
         descriptor = descriptor,
-        descriptor_params = descriptor_params
-        threshold = threshold
+        descriptor_params = descriptor_params,
+        threshold = threshold,
         )
     fw = Firework([firetask1], 
         spec={'_category' : "medium", 'name' : 'MonodentateUniqueAdsiteCreationTask'},
