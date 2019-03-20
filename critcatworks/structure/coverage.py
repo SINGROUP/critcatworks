@@ -75,7 +75,6 @@ def x2_to_x(points, bondlength = 1.5):
     remaining_ids = np.all((dmat > bondlength) | (dmat == 0), axis =0)
     return ids[remaining_ids == 1]
 
-
 @explicit_serialize
 class AdsorbateEliminationTask(FiretaskBase):
     """ 
@@ -84,13 +83,14 @@ class AdsorbateEliminationTask(FiretaskBase):
     """
 
     _fw_name = 'AdsorbateEliminationTask'
-    required_params = ['adsorbate_name', 'bond_length']
-    optional_params = []
+    required_params = ['adsorbate_name', ]
+    optional_params = ['bond_length', 'n_remaining']
 
     def run_task(self, fw_spec):
         logging.debug(fw_spec)
         adsorbate_name = self['adsorbate_name']
-        bond_length = self['bond_length']
+        bond_length = self.get('bond_length', "")
+        n_remaining = self.get('n_remaining', "")
 
         calc_ids = fw_spec["temp"]["calc_ids"]
         new_calc_ids = []
@@ -128,7 +128,14 @@ class AdsorbateEliminationTask(FiretaskBase):
             adsorbate_positions = adsorbate_atoms.get_positions()
             
             #kept_positions = cluskit.utils.x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
-            remaining_ids = x2_to_x(adsorbate_positions, bondlength = bond_length)
+            if bond_length:
+                remaining_ids = x2_to_x(adsorbate_positions, bondlength = bond_length)
+            elif n_remaining:
+                remaining_ids = cluskit.cluster._rank_fps(points, K = n_remaining, greedy =False)
+
+            else:
+                logging.warning("give either argument bond_length or n_remaining")
+
             #remaining_ids = x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
             print("bondlength", bond_length)
             n_kept = remaining_ids.shape[0]
@@ -342,6 +349,12 @@ def get_per_type_coverage(reference_energy = 0.0, adsorbate_name='H', adsite_typ
 
 def eliminate_pairs(adsorbate_name, bond_length):
     firetask1  = AdsorbateEliminationTask(adsorbate_name = adsorbate_name, bond_length = bond_length)
+    fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AdsorbateEliminationTask'},
+             name = 'AdsorbateEliminationWork')
+    return fw
+
+def eliminate_closest(adsorbate_name, n_remaining):
+    firetask1  = AdsorbateEliminationTask(adsorbate_name = adsorbate_name, n_remaining = n_remaining)
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AdsorbateEliminationTask'},
              name = 'AdsorbateEliminationWork')
     return fw

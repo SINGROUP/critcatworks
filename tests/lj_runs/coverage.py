@@ -72,6 +72,7 @@ if __name__ == "__main__":
         n_max_restarts = 1,
         skip_dft = False,
         bond_length = 2.1,
+        n_remaining = None,
     )
 
     # store workflow on launchpad

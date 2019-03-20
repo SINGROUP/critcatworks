@@ -17,7 +17,8 @@ def get_coverage_workflow(template_path, username, password,
         source_path  = None, reference_energy=0.0,
         adsorbate_name='H',max_iterations = 10000,  
         adsite_types = ["top", "bridge", "hollow"], n_max_restarts = 1, 
-        skip_dft = False, bond_length = 1.0, extdb_connect = {}):
+        skip_dft = False, bond_length = "", n_remaining = "",
+        extdb_connect = {}):
     """
     Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 
     adsorbates are put on top, bridge and hollow sites. Once the structure is relaxed by DFT,
@@ -79,7 +80,13 @@ def get_coverage_workflow(template_path, username, password,
 
     # FireWork: before running DFT eliminate too close adsorbates 
     # eliminate adsorbate pairs too close
-    fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
+    if bond_length:
+        fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
+    elif n_remaining:
+        fw_eliminate_pairs = eliminate_closest(adsorbate_name = adsorbate_name, n_remaining = n_remaining)
+    else:
+        print("give either argument bond_length or n_remaining")
+        exit(1)
 
 
     # add above Fireworks with links
