@@ -5,10 +5,10 @@ import logging
 import ase
 from scipy.spatial.distance import pdist
 import getpass
-
+import numpy as np
 # internal modules
+from critcatworks.workflows import get_uniquemolsites_workflow
 from critcatworks.database import mylaunchpad
-from critcatworks.workflows.coverage import get_coverage_workflow
 
 def read_structures_locally(path):
     structures = []
@@ -35,35 +35,44 @@ def read_structures_locally(path):
     return structures
 
 if __name__ == "__main__":
-    import logging
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    PASSWORD = getpass.getpass()
+    #PASSWORD = getpass.getpass()
+    PASSWORD = "heterogeniuscatalysis"
+
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
         logdir = str(pathlib.Path(".").resolve())
-        logging.basicConfig(filename = logdir + "/coverage_workflow.log", level=logging.INFO)
+        logging.basicConfig(filename = logdir + "/uniquemolsites_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
     #launchpad.reset('', require_password=False)
-    
-    wf = get_coverage_workflow(username = "mjcritcat", 
+
+    structures = read_structures_locally("../nc_structures")
+
+    # setup nh3 molecule with anchor x
+    pos = np.array([[ 0.00000000e+00,  0.00000000e+00,  1.16489000e-01],
+       [ 0.00000000e+00,  9.39731000e-01, -2.71808000e-01],
+       [ 8.13831000e-01, -4.69865000e-01, -2.71808000e-01],
+       [-8.13831000e-01, -4.69865000e-01, -2.71808000e-01],
+       [ 0.00000000e+00, -1.54520895e-06,  1.91648900e+00]])
+
+    adsorbate_x = ase.Atoms('NH3X', positions=pos)
+
+    wf = get_uniquemolsites_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
-        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters",
-        extdb_ids = [32, 33],
+        template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/uniquemolsites",
+        structures = structures,
+        threshold = threshold,
         reference_energy = -1.16195386047558 * 0.5,
-        adsorbate_name = "H",
-        max_iterations = 4,
+        adsorbate = adsorbate_x,
         adsite_types = ["top", "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
-        bond_length = 0.8,
-        n_remaining = None,
-        extdb_connect = {"db_name": "ncdb"},
-    )
+        )
 
-    # store workflow on launchpad
+    # store workflow 
     launchpad.add_wf(wf)

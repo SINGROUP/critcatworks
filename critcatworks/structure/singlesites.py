@@ -318,6 +318,143 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
 
 
 @explicit_serialize
+class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
+    """ 
+    Task to determine adsorption site structures.
+
+    Args:
+        adsorbate  (str) : Adsorbate molecule with anchor atom x in json format.
+
+        adsite_types  (list of str) : Can be "top", "bridge" or "hollow".
+    """
+
+    _fw_name = 'MonodentateUniqueAdsiteCreationTask'
+    required_params = ['reference_energy', 'adsorbate', 'adsite_types', 'threshold']
+    optional_params = []
+
+    def run_task(self, fw_spec):
+        adsorbate_dict = self["adsorbate"]
+        adsite_types = self["adsite_types"]
+        reference_energy = self["reference_energy"]
+        calc_ids = fw_spec["temp"]["calc_ids"]
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
+        workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
+        update_spec = fw_spec
+
+        logging.debug(fw_spec)
+        desc_lst = []
+        new_calc_ids = []
+        db = get_external_database(fw_spec["extdb_connect"])
+
+        # adsorbate atom with anchor x
+        adsorbate_x = atoms_dict_to_ase(adsorbate_dict)
+
+
+        # create reference of adsorbate in order to store its total energy
+        # for later constructing adsorption energies
+        reference_simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], atoms = adsorbate_dict, 
+            source_id = -1, workflow_id = workflow_id, 
+            nanoclusters = [], adsorbates = [], substrates = [], 
+            operations = [""], inp = {"adsorbate" : "monodentate_molecule"}, 
+            output = {"total_energy" : reference_energy},)
+        reference_id = reference_simulation["_id"]
+
+
+        all_atomtypes = gather_all_atom_types(calc_ids, simulations)
+
+        # looping over nc atoms 
+        for idx, calc_id in enumerate(calc_ids):
+            simulations_chunk_list = []
+            ##
+            # get source simulation
+            source_simulation = copy.deepcopy(simulations[str(calc_id)])
+            atoms_dict = source_simulation["atoms"]
+            atoms = atoms_dict_to_ase(atoms_dict)
+            logging.debug(atoms)
+
+            # running cluskit on cluster
+            cluster = cluskit.Cluster(atoms)
+            cluster.get_surface_atoms()
+            descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
+                nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
+            cluster.descriptor_setup = descriptor_setup
+
+            #looping over adsorption site type
+            for adsite_type in adsite_types:
+                if adsite_type == "top":
+                    adsite_type_int = 1
+                elif adsite_type == "bridge":
+                    adsite_type_int = 2
+
+                elif adsite_type == "hollow":
+                    adsite_type_int = 3
+                else:
+                    logging.error("adsorption site type unknown, known types are: top, bridge, hollow")
+                    exit(1)
+                # get adsorption sites for a nanocluster
+                _ = cluster.get_sites(adsite_type_int, distance = 0.0)
+                sites_surface_atoms = cluster.site_surface_atom_ids[adsite_type_int]
+
+                # get descriptor
+                desc = cluster.get_sites_descriptor(adsite_type_int)
+                for i in range(desc.shape[0]):
+                    desc_lst.append(desc[i])
+
+                adsorbate_lst = cluster.place_adsorbates(adsorbate_x, sitetype = adsite_type_int)
+
+                # reduce to unique sites per site type
+                unique_ids = cluster.get_unique_sites(sitetype = adsite_type_int)
+                adsorbate_lst = [adsorbate_lst[idx] for idx in unique_ids]
+
+                #loop over each adsorbate
+                for adsorbate, surface_atoms in zip(adsorbate_lst, sites_surface_atoms):
+
+                    #adsites_dict 
+                    joint_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
+                    joint_atoms_dict = ase_to_atoms_dict(joint_atoms)
+
+                    # update external database
+                    dct = copy.deepcopy(source_simulation)
+                    # calculation originated from this:
+                    dct["source_id"] = calc_id
+                    dct["workflow_id"] = workflow_id
+                    dct["atoms"] = joint_atoms_dict
+                    dct["operations"] = [dict({"add_adsorbate" : 1})]
+                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+                    # empty previous input
+                    dct["inp"] = {}
+                    dct["inp"]["adsite_type"] = adsite_type
+                    dct["inp"]["adsorbate"] = adsorbate_dict
+                    # empty previous output
+                    dct["output"] = {}
+                    dct["output"]["surface_atoms"] = surface_atoms.tolist()
+
+                    # getting only id for uploading simulations in chunks
+                    dct["_id"] = _query_id_counter_and_increment('simulations', db)
+                    #simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
+                    simulations_chunk_list.append(dct)
+
+                    # update internal workflow data
+                    simulation_id = dct["_id"]
+                    #update_spec["simulations"][str(simulation_id)] = dct
+                    new_calc_ids.append(simulation_id)
+        
+            db["simulations"].insert_many(simulations_chunk_list)
+        descmatrix = np.array(desc_lst)
+
+            
+        #update_spec["temp"]["descmatrix"] = descmatrix
+        # saves descmatrix as a path to a numpy array
+        update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
+        update_spec["temp"]["calc_ids"] = new_calc_ids
+
+        update_spec.pop("_category")
+        update_spec.pop("name")
+        return FWAction(update_spec=update_spec)
+
+
+
+@explicit_serialize
 class AdsiteRankTask(FiretaskBase):
     """ 
     Task to determine ranking of adsorption site structures.
@@ -384,6 +521,24 @@ def get_monodentate_adsites(reference_energy = 0.0, adsorbate = {}, adsite_types
     fw = Firework([firetask1], 
         spec={'_category' : "medium", 'name' : 'MonodentateAdsiteCreationTask'},
         name = 'MonodentateAdsiteCreationWork'
+        )
+    return fw
+
+def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsite_types = ["top", "bridge", "hollow"],
+        threshold = 0.001, descriptor = "soap", 
+        descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
+            "crossover" : True, "sparse" : False}):
+    firetask1  = MonodentateUniqueAdsiteCreationTask(
+        adsorbate = adsorbate, 
+        adsite_types = adsite_types,
+        reference_energy = reference_energy,
+        descriptor = descriptor,
+        descriptor_params = descriptor_params,
+        threshold = threshold,
+        )
+    fw = Firework([firetask1], 
+        spec={'_category' : "medium", 'name' : 'MonodentateUniqueAdsiteCreationTask'},
+        name = 'MonodentateUniqueAdsiteCreationWork'
         )
     return fw
 

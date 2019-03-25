@@ -1,0 +1,16 @@
+authsource: admin
+host: austerity-shard-00-00-hgeov.mongodb.net:27017
+logdir: .
+name: mjfireworks
+password: heterogeniuscatalysis
+port: 27017
+ssl: true
+ssl_ca_certs: null
+ssl_certfile: null
+ssl_keyfile: null
+ssl_pem_passphrase: null
+strm_lvl: INFO
+user_indices: []
+username: mjcritcat
+wf_user_indices: []
+
