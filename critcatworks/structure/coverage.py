@@ -128,10 +128,10 @@ class AdsorbateEliminationTask(FiretaskBase):
             adsorbate_positions = adsorbate_atoms.get_positions()
             
             #kept_positions = cluskit.utils.x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
-            if bond_length:
-                remaining_ids = x2_to_x(adsorbate_positions, bondlength = bond_length)
-            elif n_remaining:
+            if n_remaining:
                 remaining_ids = cluskit.cluster._rank_fps(adsorbate_positions, K = n_remaining, greedy =False)
+            elif bond_length:
+                remaining_ids = x2_to_x(adsorbate_positions, bondlength = bond_length)
 
             else:
                 logging.warning("give either argument bond_length or n_remaining")
