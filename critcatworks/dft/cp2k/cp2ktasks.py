@@ -186,11 +186,11 @@ class CP2KAnalysisTask(FiretaskBase):
             logging.info("parser confirmed that CP2K terminated correctly")
             print("parser confirmed that CP2K terminated correctly")
         ####
-        if output_state == "no_output" or output_state == "incorrect_termination":
+        if output_state == "no_output": # or output_state == "incorrect_termination":
             pass
         else:
-            nwarnings = preparse_results['nwarnings']
-            is_walltime_exceeded = preparse_results['exceeded_walltime']
+            nwarnings = preparse_results.get('nwarnings', 0)
+            is_walltime_exceeded = preparse_results.get('exceeded_walltime', False)
 
             # cp2k parser
             parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)

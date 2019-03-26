@@ -46,22 +46,22 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/coverage_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, lpadname = "mjfireworkstriton")
     #launchpad.reset('', require_password=False)
     
     wf = get_coverage_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
-        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters",
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_topbridge",
         extdb_ids = [32, 33],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 4,
-        adsite_types = ["top", "bridge", "hollow"],
+        adsite_types = ["top", "bridge", "hollow", ], 
         n_max_restarts = 1,
         skip_dft = False,
-        bond_length = 0.8,
-        n_remaining = None,
+        bond_length = 1.5,
+        n_remaining = 100,
         extdb_connect = {"db_name": "ncdb"},
     )
 
