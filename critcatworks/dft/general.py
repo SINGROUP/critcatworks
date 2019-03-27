@@ -25,7 +25,9 @@ class StructureFolderTask(FiretaskBase):
     def run_task(self, fw_spec):
         target_path = self['target_path']
         prefix = self['name']
-        parent_folder_name = 'cp2k_calculations'
+        time_str = time.strftime("%Y-%m-%d-%H-%M")
+
+        parent_folder_name = 'cp2k_calculations_' + time_str
         parent_folder_path = target_path + "/" + parent_folder_name
         calc_ids = fw_spec["temp"]["calc_ids"]
         simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids) 
