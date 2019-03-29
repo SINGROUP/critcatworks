@@ -121,12 +121,15 @@ if __name__ == "__main__":
             rocket_launch= rlaunch_command
             )
 
-        for i in range(0, 20000):
+        for i in range(0, 200000):
             for category, adapter in zip(['dft', 'medium', 'lightweight'], [dft, medium, lightweight]):
                 lowprio_query = {"$and" : [{"$or" : [{"state" : "RUNNING"}, {"state" : "RESERVED"}, {"state" : "READY"}]}, {"spec._priority" : 8}]}
                 lowprio_ids = launchpad.get_fw_ids(lowprio_query)
+                #print("low priority", lowprio_ids)
                 highprio_query = {"$and" : [{"$or" : [{"state" : "RUNNING"}, {"state" : "RESERVED"}, {"state" : "READY"}]}, {"spec._priority" : 10}]}
                 highprio_ids = launchpad.get_fw_ids(highprio_query)
+                #print("high priority", highprio_ids)
+
                 if len(highprio_ids) > 0:
                     print("Jobs with high priority still not completed")
                     query = {"spec._priority" : 10}
@@ -136,9 +139,14 @@ if __name__ == "__main__":
                 else:
                     print("Jobs with no priority are being sent")
                     query = None
+                noprio_query = {"spec._priority" : None}
+                #print("no priority", launchpad.get_fw_ids(noprio_query))
                 launch_rocket_to_queue(launchpad, FWorker(category=category, query = query), adapter,
                     launcher_dir=abspath , create_launcher_dir=True, reserve=True)
-            time.sleep(5)
+                print("submitting jobs with no priority either way")
+                launch_rocket_to_queue(launchpad, FWorker(category=category, query = noprio_query), adapter,
+                    launcher_dir=abspath , create_launcher_dir=True, reserve=True)
+            time.sleep(15)
             if IS_OFFLINE:
                 _recover_offline(lp = launchpad, fworker_name = None)
 
