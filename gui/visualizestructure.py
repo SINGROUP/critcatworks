@@ -47,4 +47,5 @@ if __name__ == '__main__':
         pp(simulation)
         print("positions:", np.array(simulation["atoms"]["positions"]).shape)
         atoms = atoms_dict_to_ase(simulation["atoms"])
+        ase.io.write("testout_" + str(idx) + ".xyz", atoms)
         view(atoms)
