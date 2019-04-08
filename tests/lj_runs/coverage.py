@@ -62,17 +62,17 @@ if __name__ == "__main__":
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
         #worker_target_path = "../dummy_db/output/",
         #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptcu_structures/",
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptni_structures2/",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptni_structures3/",
         structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 5,
-        adsite_types = ["top", "bridge", "hollow"],
-        #adsite_types = ["top", "hollow"],
+        #adsite_types = ["top", "bridge", "hollow"],
+        adsite_types = ["top", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
         bond_length = 2.1,
-        n_remaining = 100,
+        #n_remaining = 50,
     )
 
     # store workflow on launchpad

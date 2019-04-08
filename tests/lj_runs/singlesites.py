@@ -48,15 +48,16 @@ if __name__ == "__main__":
 
     # set up the LaunchPad and reset it
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
+    #launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "serenity")
     #launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "serenity", lpadname = "mjfireworkstriton")
     launchpad.reset('', require_password=False)
 
     #structures = read_structures_locally("../nc_structures")
-    structures = read_structures_locally("../selected_ptcu_structures")
+    structures = read_structures_locally("../ptcu_converged_str")
     wf = get_singlesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/singlesites/testruns/selected_ptcu_structures2",
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/singlesites/testruns/ptcu_converged_str",
         #structures = structures,
         extdb_ids = [1922,1923,1924,1925,1926,1927],
         reference_energy = -1.16195386047558 * 0.5,

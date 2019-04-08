@@ -35,7 +35,14 @@ class GatherPropertyTask(FiretaskBase):
         reaction_energies_list = fw_spec["temp"].get("property", np.zeros(n_calcs).tolist())
         is_converged_list = fw_spec["temp"].get("is_converged_list", np.zeros(n_calcs).tolist())
 
-        calc_ids[n_calcs_started - chunk_size : n_calcs_started] = analysis_ids
+
+        print(chunk_size, type(chunk_size))
+        if chunk_size == -1:
+            calc_ids = analysis_ids
+            id_range = range(len(calc_ids))
+        else:
+            calc_ids[n_calcs_started - chunk_size : n_calcs_started] = analysis_ids
+            id_range = range(n_calcs_started - chunk_size, n_calcs_started)
         calc_ids_chunk = analysis_ids
         simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids_chunk)
         logging.info("Gather Properties of following calculations:")
@@ -43,7 +50,8 @@ class GatherPropertyTask(FiretaskBase):
 
         ext_db =get_external_database(fw_spec["extdb_connect"])
         # compute reaction energy and store them as lists for ml
-        for idx, calc_id in zip(range(n_calcs_started - chunk_size, n_calcs_started), calc_ids_chunk):
+        print("id_range", id_range)
+        for idx, calc_id in zip(id_range, calc_ids_chunk):
             simulation = simulations[str(calc_id)]
 
             structure = simulation["atoms"]
@@ -83,7 +91,12 @@ class GatherPropertyTask(FiretaskBase):
                     except:
                         logging.warning("total_energy not found! Not contributing to reaction energy!")
                         total_energy = 0.0
-                    reaction_energy -= total_energy
+                    try:
+                        reaction_energy -= float(total_energy)
+                    except:
+                        logging.warning("Energy not understood!")
+                        logging.warning(total_energy)
+
                     print(reaction_energy, "reference", reference_id)
             reaction_energies_list[idx] = reaction_energy
 
@@ -98,6 +111,7 @@ class GatherPropertyTask(FiretaskBase):
         fw_spec["temp"]["calc_ids"] = calc_ids
         print("is_converged_list")
         print(is_converged_list)
+        print("calc_ids", calc_ids)
 
         update_spec.pop("_category")
         update_spec.pop("name")

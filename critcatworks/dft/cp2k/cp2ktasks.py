@@ -347,8 +347,7 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
             "_allow_fizzled_parents" : True,
             "_priority": 8,},
         name = 'CP2KAnalysisWork',
-        )
-        #parents = [fw1]) 
+        parents = [fw1]) 
     #return Workflow([fw1,fw2], {fw1 : [fw2]})
     #return [fw1,fw2], {fw1 : [fw2]}
     return [fw1,fw2], {fw1 : [fw2]}
@@ -380,8 +379,8 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
             "extdb_connect" : extdb_connect,
             "_priority": 8,
             "_allow_fizzled_parents" : True},
-        name = 'CP2KAnalysisWork',)
-        #parents = [fw1]) 
+        name = 'CP2KAnalysisWork',
+        parents = [fw1]) 
     return Workflow([fw1,fw2],)
     #return Workflow([fw1,fw2], {fw1 : [fw2]})
     #return [fw1,fw2], {fw1 : [fw2]}
