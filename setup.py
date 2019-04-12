@@ -2,19 +2,19 @@ from setuptools import setup, find_packages, Extension
 
 if __name__ == "__main__":
     setup(name='critcatworks',
-        version='0.5.2',
+        version='0.5.3',
         url="https://github.com/singroup/critcatworks/",
         description='A Python package for creating DFT workflows for nanoclusters.',
         long_description='A Python package for creating workflows for nanoclusters.',
         packages=find_packages(),
         install_requires=[
-            'fireworks>=1.8.4',
+            'fireworks>=1.8.8',
             'pymongo>=3.6.1'
             'numpy',
             'scipy',
             'ase',
             'future',
-            'cluskit>=4.1.1',
+            'cluskit>=4.1.2',
             'pathlib',
             'pprint',
             'sklearn',
