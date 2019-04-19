@@ -49,14 +49,14 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
     launchpad.reset('', require_password=False)
 
-    structures = read_structures_locally("../selected_ptcu_structures")
-    #structures = read_structures_locally("../selected_ptni_structures")
+    #structures = read_structures_locally("../selected_ptcu_structures")
+    structures = read_structures_locally("../selected_ptni_structures")
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/",
-        structures = structures,
-        extdb_ids = None,
+        #structures = structures,
+        extdb_ids = [20743, 20744],
         skip_dft = False,
         )
 
