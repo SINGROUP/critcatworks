@@ -52,7 +52,7 @@ if __name__ == "__main__":
     wf = get_coverage_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
-        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_tophollow",
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_topbridgehollow_nremaining80",
         extdb_ids = [32, 33],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         n_max_restarts = 1,
         skip_dft = False,
         bond_length = 1.5,
-        #n_remaining = 100,
+        n_remaining = 80,
         extdb_connect = {"db_name": "ncdb"},
     )
 
