@@ -5,4 +5,8 @@ from critcatworks.structure.singlesites import rank_adsites
 from critcatworks.structure.nanoclusters import compare_nanoclusters
 from critcatworks.structure.coverage import eliminate_pairs, eliminate_closest
 from critcatworks.structure.coverage import get_per_type_coverage
+from critcatworks.structure.coverage import start_coverage_ladder
+from critcatworks.structure.coverage import add_remove_adsorbate
+from critcatworks.structure.coverage import gather_ladder
+from critcatworks.structure.coverage import step_coverage_ladder
 from critcatworks.structure.adsorbates import update_converged_data
