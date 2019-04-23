@@ -121,5 +121,5 @@ def visualize_branches(branch_dct):
             dol[key[0]] = v
 
     print("dict of lists", dol)
-    graph_from_dol(dol)
+    #graph_from_dol(dol)
     return

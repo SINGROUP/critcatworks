@@ -20,7 +20,6 @@ from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import fetch_simulations
 
-from graph import graph_from_dol
 from ase.visualize import view
 
 def join_cluster_adsorbate(cluster, adsorbate):
