@@ -29,8 +29,8 @@ def get_simulation(simulation_id):
     ext_db = get_external_database(
         username = "mjcritcat",
         password = "heterogeniuscatalysis",
-        #db_name = "testdb",
-        db_name = "ncdb",
+        db_name = "testdb",
+        #db_name = "ncdb",
         )
     simulation = ext_db["simulations"].find_one({"_id": simulation_id})
     return simulation

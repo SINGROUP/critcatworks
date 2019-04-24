@@ -33,8 +33,7 @@ def get_coverage_ladder_workflow(template_path, username, password,
         "template" : template,
         "template_path" : template_path,
         "worker_target_path" : worker_target_path,
-        "extdb_ids" : extdb_ids,
-        "source_path" : source_path,
+        "start_ids" : start_ids,
         "reference_energy" : reference_energy,
         "max_iterations" : max_iterations,
         "adsorbate_name" : adsorbate_name,
@@ -107,19 +106,3 @@ def get_coverage_ladder_workflow(template_path, username, password,
 
     wf = Workflow(workflow_list, links_dict)
     return wf
-
-def visualize_branches(branch_dct):
-    # Init
-    dol = {}
-    for key, v in branch_dct.items():
-        if not isinstance(v, list):
-            v = v.tolist()
-
-        if key[0] in dol:
-            dol[key[0]].extend(v)
-        else:
-            dol[key[0]] = v
-
-    print("dict of lists", dol)
-    #graph_from_dol(dol)
-    return
