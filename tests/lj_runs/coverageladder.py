@@ -31,7 +31,7 @@ if __name__ == "__main__":
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()),     
         #worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_topbridgehollow_nremaining80",
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptni_structures3/",
-        start_ids = [7510],
+        start_ids = [7600], #[7510],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 4,
@@ -42,8 +42,7 @@ if __name__ == "__main__":
         ranking_metric = "similarity",
         d = 4,
         l = 2, 
-        k = 7, 
-        extdb_connect = {"db_name": "ncdb"},
+        k = 3, 
     )
 
     # store workflow on launchpad

@@ -94,6 +94,12 @@ def get_coverage_ladder_workflow(template_path, username, password,
         links_dict[fw_setup_folders] = [fw_chunk_calculations] 
 
         # FireWork: update database, 
+        # (includes reading relaxed structure and energy)
+        #fw_update_converged_data = update_converged_data(chunk_size = -1)
+        #workflow_list.append(fw_update_converged_data)
+        #links_dict[fw_chunk_calculations] =[fw_update_converged_data]
+
+        # FireWork: update ladder
         fw_gather_ladder = gather_ladder()
         workflow_list.append(fw_gather_ladder)
         links_dict[fw_chunk_calculations] = [fw_gather_ladder]

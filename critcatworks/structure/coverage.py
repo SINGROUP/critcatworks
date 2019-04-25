@@ -19,6 +19,7 @@ from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import fetch_simulations
+from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
 
 from ase.visualize import view
 
@@ -365,7 +366,7 @@ class CoverageLadderTask(FiretaskBase):
 
         lowenergy_calc_ids, energies = self.find_lowest_energy_structures(l, calc_ids, energies)
 
-        lowest_energy, idx = energies.min(), np.argmin(energies)
+        lowest_energy, idx = np.array(energies).min(), np.argmin(np.array(energies))
         lowest_idx = lowenergy_calc_ids[idx]
 
         is_new_root = self.check_new_root(is_new_root, branch_dct,
@@ -428,9 +429,9 @@ class CoverageLadderTask(FiretaskBase):
         return FWAction(update_spec=fw_spec)
 
     def find_lowest_energy_structures(self, l, calc_ids, energies):
-        calc_ids = calc_ids[:l]
-        energies = energies[:l]
-        # TODO add logic to find lowest energy ids and energies
+        ids = np.argsort(energies)[:l] 
+        calc_ids = np.array(calc_ids)[ids].tolist()
+        energies = np.array(energies)[ids].tolist()
         return calc_ids, energies
 
     def level_check_new_root(self, idx, ne_dct, n_adsorbates_root, n_adsorbates):
@@ -469,24 +470,24 @@ class CoverageLadderTask(FiretaskBase):
 
     def compute_dg_diff(self, idx, branch_dct, ne_dct):
         # search where idx appears in branch_dct
-        # print(branch_dct)
-        # print(idx)
-
+        print("IDX", idx, type(idx))
         for key, ids in zip(branch_dct.keys(), branch_dct.values()):
-            if idx in list(ids):
-                parent_idx = key[0]
+            if int(idx) in list(ids):
+                parent_idx = key
                 break
         # get energies
         # energy = find(idx, ne_dct)
         # parent_energy = find(parent_idx, ne_dct)
+        
+        print("parent IDX", parent_idx, type(idx))
 
         for n_adsorbates, v in ne_dct.items():
-            if idx in v.keys():
-                energy = v[idx]
-                child_n_adsorbates = n_adsorbates
-            if parent_idx in v.keys():
-                parent_energy = v[parent_idx]
-                parent_n_adsorbates = n_adsorbates
+            if str(idx) in v.keys():
+                energy = v[str(idx)]
+                child_n_adsorbates = int(n_adsorbates)
+            if str(parent_idx) in v.keys():
+                parent_energy = v[str(parent_idx)]
+                parent_n_adsorbates = int(n_adsorbates)
 
         assert (parent_n_adsorbates - child_n_adsorbates) == 1 or (parent_n_adsorbates - child_n_adsorbates) == -1
 
@@ -509,6 +510,7 @@ class CoverageLadderTask(FiretaskBase):
         return direction, calc_ids, new_n_adsorbates
 
 
+@explicit_serialize
 class GatherLadderTask(FiretaskBase):
     """
     Task for Gathering properties for coverage ladder
@@ -519,17 +521,34 @@ class GatherLadderTask(FiretaskBase):
     optional_params = []
 
     def run_task(self, fw_spec):
-
+        # NOTE also here analysis_ids needs to be in the right order
+        calc_analysis_ids_dict = fw_spec["temp"]["calc_analysis_ids_dict"]
         analysis_ids = fw_spec["temp"]["analysis_ids"]
         calc_ids = fw_spec["temp"]["calc_ids"]
         calc_parents = fw_spec["temp"]["calc_parents"]
         branch_dct = fw_spec["temp"]["branch_dct"]
         direction = fw_spec["temp"]["direction"]
         is_return = fw_spec["temp"]["is_return"]
-        energies = fw_spec["temp"]["property"]
         ne_dct = fw_spec["temp"]["ne_dct"]
         n_adsorbates = fw_spec["temp"]["n_adsorbates"]
-        l = fw_spec["temp"]["l"]
+
+        # reorder analysis_ids
+        reordered_analysis_ids = []
+        for calc_id in calc_ids:
+            analysis_id = calc_analysis_ids_dict[str(calc_id)]
+            reordered_analysis_ids.append(analysis_id)
+
+
+        print("COMPARISON ANALYSIS IDS, AND ORDERED")
+        print(calc_ids)
+        print(analysis_ids)
+        print(reordered_analysis_ids)
+
+        simulations = fetch_simulations(fw_spec["extdb_connect"], analysis_ids)
+        energies = []
+        for idx in analysis_ids:
+            simulation = simulations[str(idx)]
+            energies.append(simulation["output"]["total_energy"]) 
 
         # find calc_id in calc_parents and replace with analysis_id
         #print(calc_ids, len(calc_ids))
@@ -546,20 +565,23 @@ class GatherLadderTask(FiretaskBase):
 
 
         # add calc_parents to branch_dct
-        # TODO check if if-statement is necessary
         if is_return:
             current_direction = not direction
         else:
             current_direction = direction
 
         for parent, children in calc_parents.items():
-            branch_dct[(parent, current_direction)] = children
+            branch_dct.setdefault(parent, []).extend(children)
 
         # add total energies to dictionary
         for calc_id, energy in zip(calc_ids, energies):
-            ne_dct[n_adsorbates][calc_id] = energy
+            ne_dct.setdefault(str(n_adsorbates), {})[str(calc_id)] = energy
 
+
+        fw_spec["temp"]["branch_dct"] = branch_dct
+        fw_spec["temp"]["property"] = energies 
         fw_spec["temp"]["calc_ids"] = calc_ids
+        fw_spec["temp"]["ne_dct"] = ne_dct
         fw_spec["temp"]["analysis_ids"] = [] # TODO check if push from Analysis requires array
         fw_spec["temp"]["calc_parents"] = calc_parents
         fw_spec.pop("_category")
@@ -567,6 +589,7 @@ class GatherLadderTask(FiretaskBase):
         return FWAction(update_spec=fw_spec)
 
 
+@explicit_serialize
 class AddRemoveLadderTask(FiretaskBase):
 
     _fw_name = 'AddRemoveLadderTask'
@@ -581,17 +604,16 @@ class AddRemoveLadderTask(FiretaskBase):
         calc_ids = fw_spec["temp"]["calc_ids"]
         n_adsorbates = fw_spec["temp"]["n_adsorbates"]
         workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
-
-        parents = deepcopy(calc_ids)
+        db = get_external_database(fw_spec["extdb_connect"])
         calc_parents = {}
         new_calc_ids = []
-        simulations = fetch_sample_simulations()
-        for simulation, parent_id in zip(simulations, parents):
-
+        simulations = fetch_simulations(fw_spec["extdb_connect"], calc_ids)
+        for parent_id, source_simulation  in simulations.items():
+            simulation = deepcopy(source_simulation)
             if direction == 1:
-                new_ids = self.add_adsorbate(simulation, bond_length, ranking_metric = ranking_metric, k = k, workflow_id = workflow_id)
+                new_ids = self.add_adsorbate(simulation, bond_length, db, ranking_metric = ranking_metric, k = k, workflow_id = workflow_id)
             else:
-                new_ids = self.remove_adsorbate(simulation, bond_length, ranking_metric = ranking_metric, k = k, workflow_id = workflow_id)
+                new_ids = self.remove_adsorbate(simulation, bond_length, db, ranking_metric = ranking_metric, k = k, workflow_id = workflow_id)
             calc_parents[parent_id] = new_ids
             new_calc_ids.extend(new_ids)
 
@@ -607,10 +629,10 @@ class AddRemoveLadderTask(FiretaskBase):
         fw_spec.pop("name")
         return FWAction(update_spec=fw_spec)
 
-    def add_adsorbate(self, simulation, bond_length, ranking_metric = "proximity", k = 7, 
+    def add_adsorbate(self, simulation, bond_length, db, ranking_metric = "proximity", k = 7, 
         adsorbate_name = "H", reference_id = -1, workflow_id = -1):
-        global counter
-        atoms = simulation["atoms"]
+        atoms_dict = simulation["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
         cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(simulation)
 
         # get sites of nanocluster
@@ -649,8 +671,8 @@ class AddRemoveLadderTask(FiretaskBase):
         adsorbate_lst = adsorbate_pos_to_atoms_lst(adsorption_sites[remaining_ids], adsorbate_name)
 
         # TODO delete visualizer
-        added_adsorbates = ase.Atoms("X" * len(remaining_ids), adsorption_sites[remaining_ids])
-        view(atoms + added_adsorbates)
+        #added_adsorbates = ase.Atoms("X" * len(remaining_ids), adsorption_sites[remaining_ids])
+        #view(atoms + added_adsorbates)
         ####
 
         # create new simulations
@@ -679,8 +701,7 @@ class AddRemoveLadderTask(FiretaskBase):
             #dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
             # getting only id for uploading simulations in chunks
-            # TODO uncomment
-            #dct["_id"] = _query_id_counter_and_increment('simulations', db)
+            dct["_id"] = _query_id_counter_and_increment('simulations', db)
 
             # simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
             simulations_chunk_list.append(dct)
@@ -690,18 +711,12 @@ class AddRemoveLadderTask(FiretaskBase):
             # update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
 
-        # TODO uncomment
-        #db["simulations"].insert_many(simulations_chunk_list)
-
-        # DUMMY new id
-        # TODO upload to database
-        new_calc_ids = [counter + 1, counter + 2]
-        counter += 2
+        db["simulations"].insert_many(simulations_chunk_list)
         return new_calc_ids
 
-    def remove_adsorbate(self, simulation, bond_length, ranking_metric = "similarity", k = 7, adsorbate_name = "H", workflow_id = -1):
-        global counter
-        atoms = simulation["atoms"]
+    def remove_adsorbate(self, simulation, bond_length, db, ranking_metric = "similarity", k = 7, adsorbate_name = "H", workflow_id = -1):
+        atoms_dct = simulation["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
         cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(
             simulation)
 
@@ -776,8 +791,7 @@ class AddRemoveLadderTask(FiretaskBase):
             #dct["output"]["surface_atoms"] = surface_atoms.tolist()
 
             # getting only id for uploading simulations in chunks
-            # TODO uncomment
-            #dct["_id"] = _query_id_counter_and_increment('simulations', db)
+            dct["_id"] = _query_id_counter_and_increment('simulations', db)
 
             # simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
             simulations_chunk_list.append(dct)
@@ -787,21 +801,16 @@ class AddRemoveLadderTask(FiretaskBase):
             # update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
 
-        # TODO uncomment
-        #db["simulations"].insert_many(simulations_chunk_list)
-
-        # DUMMY new id
-        # TODO upload to database
-        new_ids = [counter + 1, counter + 2]
-        counter += 2
-        return new_ids
+        db["simulations"].insert_many(simulations_chunk_list)
+        return new_calc_ids
 
     def split_nanocluster_and_adsorbates(self, simulation):
         adsorbate_ids = []
         reference_ids = []
         site_class_list = []
         site_ids_list = []
-        atoms = simulation["atoms"]
+        atoms_dict = simulation["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
 
         for adsorbate in simulation["adsorbates"]:
             adsorbate_ids.extend(adsorbate["atom_ids"])
@@ -837,7 +846,7 @@ class AddRemoveLadderTask(FiretaskBase):
         mindist = dmat.min(axis = 1)
         ids = np.argsort(-mindist)
         mindist = mindist[ids]
-        remaining_ids = mindist > bondlength
+        remaining_ids = mindist > bond_length
         return ids[remaining_ids == 1]
 
     def join_cluster_adsorbate(self, cluster, adsorbate):
@@ -847,6 +856,7 @@ class AddRemoveLadderTask(FiretaskBase):
 
         return joint_atoms, cluster_ids, adsorbate_ids
 
+@explicit_serialize
 class NewLadderRootTask(FiretaskBase):
     """
     Task to start CoverageLadder Workflow
@@ -863,17 +873,16 @@ class NewLadderRootTask(FiretaskBase):
         start_id = start_ids[0]
 
 
-        # TODO get energy and number of adsorbates from simulation
         simulations = fetch_simulations(fw_spec["extdb_connect"], start_ids)
-        start_simulation = simulations[start_id]
+        start_simulation = simulations[str(start_id)]
         atoms = start_simulation["atoms"]
         n_adsorbates = len(start_simulation["adsorbates"])
-        start_simulation["output"].get("total_energy", 0.0)
+        energy = start_simulation["output"].get("total_energy", 0.0)
         if energy == 0.0:
             logging.warning("total_energy for starting structure not found! Will continue without it, however, first two steps might go in the wrong direction")
         n_adsorbates_root = n_adsorbates
         ne_dct = defaultdict(dict) # dictionary of energies, per number of adsorbates
-        ne_dct[n_adsorbates][start_id] = energy
+        ne_dct[str(n_adsorbates)][str(start_id)] = energy
 
         branch_dct = {"root" : np.array(start_ids)}
 

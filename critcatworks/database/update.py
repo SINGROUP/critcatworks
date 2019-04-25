@@ -54,7 +54,8 @@ class InitialTask(FiretaskBase):
         update_spec["workflow"] = workflow
         update_spec["machine_learning"] = {}
         update_spec["extdb_connect"] = extdb_connect
-
+        update_spec["temp"]["calc_analysis_ids_dict"] = {}
+        update_spec["analysis_ids"] = []
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)

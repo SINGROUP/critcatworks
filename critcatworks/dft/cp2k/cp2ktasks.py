@@ -297,7 +297,7 @@ class CP2KAnalysisTask(FiretaskBase):
 
         # update temp workflow data
         mod_spec =[
-            #{"_set" : {"simulations->" + str(simulation_id) : simulation }},
+            {"_set" : {"temp->" + "calc_analysis_ids_dict->" + str(calc_id) : simulation_id }},
             {"_push" : {"temp->" + "analysis_ids" : simulation_id }},
             ]
 
