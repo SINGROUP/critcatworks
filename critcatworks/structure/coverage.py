@@ -298,19 +298,9 @@ class PerTypeCoverageCreationTask(FiretaskBase):
         
         descmatrix = np.array(desc_lst).tolist()
             
-        #update_spec["temp"]["descmatrix"] = descmatrix
         # saves descmatrix as a path to a numpy array
         update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
-        print("spec bytes")
-        print(sys.getsizeof(update_spec))
-        #print("descmatrix bytes")
-        #print(descmatrix.nbytes)
-        #print(descmatrix.shape)
-        import json
-        #print(len(json.dumps(update_spec["temp"]["descmatrix"])))
-        #print(len(json.dumps(update_spec["simulations"])))
-        print("lenght of spec in json", len(json.dumps(update_spec)))
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)
@@ -362,6 +352,8 @@ class CoverageLadderTask(FiretaskBase):
         n_adsorbates_root = fw_spec["temp"]["n_adsorbates_root"]
         n_adsorbates = fw_spec["temp"]["n_adsorbates"]
         open_branches = fw_spec["temp"]["open_branches"]
+        root_history = fw_spec["temp"]["root_history"]
+        step_history = fw_spec["temp"]["step_history"]
 
 
         lowenergy_calc_ids, energies = self.find_lowest_energy_structures(l, calc_ids, energies)
@@ -378,6 +370,7 @@ class CoverageLadderTask(FiretaskBase):
         if is_new_root == True:
             calc_ids = [lowest_idx]
             is_return = False
+            root_history.append(lowest_idx)
         else:
             # add regular branch to end
             # is_return variable ensures
@@ -404,6 +397,7 @@ class CoverageLadderTask(FiretaskBase):
             else:
                 direction = 0
             n_adsorbates_root = n_adsorbates
+            logging.info("NEW ROOT "  + str(calc_ids))
 
             # add opposite direction to open_branches
             open_branches = [(calc_ids, not direction)]
@@ -411,6 +405,7 @@ class CoverageLadderTask(FiretaskBase):
             # decision for next branch
             # check for open branches
             direction, calc_ids, n_adsorbates = self.decide_next_branch(open_branches, ne_dct)
+            step_history.append((calc_ids, direction))
 
             # in tuple next_branch
             pass
@@ -470,7 +465,7 @@ class CoverageLadderTask(FiretaskBase):
 
     def compute_dg_diff(self, idx, branch_dct, ne_dct):
         # search where idx appears in branch_dct
-        print("IDX", idx, type(idx))
+        #print("IDX", idx, type(idx))
         for key, ids in zip(branch_dct.keys(), branch_dct.values()):
             if int(idx) in list(ids):
                 parent_idx = key
@@ -479,7 +474,7 @@ class CoverageLadderTask(FiretaskBase):
         # energy = find(idx, ne_dct)
         # parent_energy = find(parent_idx, ne_dct)
         
-        print("parent IDX", parent_idx, type(idx))
+        #print("parent IDX", parent_idx, type(idx))
 
         for n_adsorbates, v in ne_dct.items():
             if str(idx) in v.keys():
@@ -543,6 +538,7 @@ class GatherLadderTask(FiretaskBase):
         print(calc_ids)
         print(analysis_ids)
         print(reordered_analysis_ids)
+        analysis_ids =  reordered_analysis_ids
 
         simulations = fetch_simulations(fw_spec["extdb_connect"], analysis_ids)
         energies = []
@@ -621,6 +617,9 @@ class AddRemoveLadderTask(FiretaskBase):
             n_adsorbates += 1
         else:
             n_adsorbates -= 1
+
+        logging.info("number of adsorbates: " + str(n_adsorbates))
+        logging.info("after adding / removing one adsorbate: " + str(direction))
 
         fw_spec["temp"]["calc_parents"] = calc_parents
         fw_spec["temp"]["calc_ids"] = new_calc_ids
@@ -889,9 +888,12 @@ class NewLadderRootTask(FiretaskBase):
         # direction to start from root
         direction = initial_direction
         open_branches = [(start_ids, not direction)]
+        root_history = [start_id]
 
 
 
+        fw_spec["temp"]["step_history"] = [(start_ids, direction)] 
+        fw_spec["temp"]["root_history"] = root_history
         fw_spec["temp"]["is_return"] = False,
         fw_spec["temp"]["start_id"] = start_id,
         fw_spec["temp"]["is_new_root"] = True,

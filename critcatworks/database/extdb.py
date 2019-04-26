@@ -150,7 +150,6 @@ def update_machine_learning_collection(method, extdb_connect, workflow_id = -1,
     return dct
 
 def fetch_simulations(extdb_connect, simulation_ids):
-    print(simulation_ids, "before") 
     db = get_external_database(extdb_connect)
     cursor =   db['simulations'].find({"_id" : {"$in" : simulation_ids }})
     simulations_list = [document for document in cursor]
