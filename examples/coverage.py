@@ -53,7 +53,7 @@ if __name__ == "__main__":
         password = PASSWORD,
         template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
         worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_topbridgehollow_nremaining80",
-        extdb_ids = [32, 33],
+        extdb_ids = [245, 251],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 4,
