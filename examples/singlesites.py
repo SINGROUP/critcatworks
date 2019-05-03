@@ -37,8 +37,7 @@ def read_structures_locally(path):
 if __name__ == "__main__":
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    #PASSWORD = getpass.getpass()
-    PASSWORD = "heterogeniuscatalysis"
+    PASSWORD = getpass.getpass()
 
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
@@ -47,22 +46,20 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/singlesites_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD)
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, lpadname = "mjfireworkstriton")
     #launchpad.reset('', require_password=False)
 
-    structures = read_structures_locally("./nc_structures")
+    structures = read_structures_locally("ptcu_converged_str")
     wf = get_singlesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        #template_path = str(pathlib.Path("templates/cheap_gopt.inp").resolve()), 
-        template_path = str(pathlib.Path("templates/cp2k_mm_energy.inp").resolve()), 
-        #worker_target_path = "../tests/dummy_db/output/",
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/singlesites",
+        template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/singlesites/production/selected_ptcu_structures",
         structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
-        chunk_size = 7,
-        max_calculations = 15,
-        adsite_types = ["top"], #, "bridge", "hollow"],
+        chunk_size = 50,
+        max_calculations = 500,
+        adsite_types = ["top", "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
         )
