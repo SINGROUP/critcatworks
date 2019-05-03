@@ -195,7 +195,7 @@ class CP2KAnalysisTask(FiretaskBase):
             # cp2k parser
             parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)
             print("cp2k parser setup successfully")
-            cp2koutput = glob.glob(target_path + "/" + "*out")[0]
+            cp2koutput = glob.glob(target_path + "/" + "gopt.out")[0]
             results = parser.parse(str(cp2koutput))
             print("cp2k parser ran successfully")
     
@@ -399,7 +399,7 @@ class cd:
                                    
 
 def additional_parse_stdout(target_path):
-    output_files = glob.glob(target_path + "/" + "*out")
+    output_files = glob.glob(target_path + "/" + "gopt.out")
     if len(output_files) == 0:
         logging.warning("Cp2k output file not retrieved")
         return "no_output", None

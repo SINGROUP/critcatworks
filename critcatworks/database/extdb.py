@@ -77,6 +77,7 @@ def update_simulations_collection(extdb_connect, **kwargs):
     simulation_id = _query_id_counter_and_increment('simulations', db)
 
     dct['_id'] = simulation_id
+    print("new simulation id: " , str(simulation_id))
 
     simulations.insert_one(dct)
     return dct

@@ -711,6 +711,7 @@ class AddRemoveLadderTask(FiretaskBase):
             new_calc_ids.append(simulation_id)
 
         db["simulations"].insert_many(simulations_chunk_list)
+        #print("new simulation id list: " , str(simulations_chunk_list))
         return new_calc_ids
 
     def remove_adsorbate(self, simulation, bond_length, db, ranking_metric = "similarity", k = 7, adsorbate_name = "H", workflow_id = -1):
