@@ -38,14 +38,11 @@ class GatherPropertyTask(FiretaskBase):
 
         # reorder analysis_ids
         reordered_analysis_ids = []
-        #for calc_id in calc_ids:
-            #analysis_id = calc_analysis_ids_dict[str(calc_id)]
-            #reordered_analysis_ids.append(analysis_id)
+        for calc_id in calc_ids:
+            analysis_id = calc_analysis_ids_dict[str(calc_id)]
+            reordered_analysis_ids.append(analysis_id)
 
-        print("COMPARISON ANALYSIS IDS, AND ORDERED")
-        print(analysis_ids)
-        #print(reordered_analysis_ids)
-        #analysis_ids =  reordered_analysis_ids
+        analysis_ids =  reordered_analysis_ids
 
         print(chunk_size, type(chunk_size))
         if chunk_size == -1:
