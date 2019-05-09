@@ -39,8 +39,9 @@ class GatherPropertyTask(FiretaskBase):
         # reorder analysis_ids
         reordered_analysis_ids = []
         for calc_id in calc_ids:
-            analysis_id = calc_analysis_ids_dict[str(calc_id)]
-            reordered_analysis_ids.append(analysis_id)
+            if str(calc_id) in calc_analysis_ids_dict:
+                analysis_id = calc_analysis_ids_dict[str(calc_id)]
+                reordered_analysis_ids.append(analysis_id)
 
         analysis_ids =  reordered_analysis_ids
 
@@ -108,22 +109,21 @@ class GatherPropertyTask(FiretaskBase):
                     print(reaction_energy, "reference", reference_id)
             reaction_energies_list[idx] = reaction_energy
 
-        update_spec = fw_spec
-
-        update_spec["temp"]["property"] = reaction_energies_list
+        fw_spec["temp"]["calc_analysis_ids_dict"] ={}
+        fw_spec["temp"]["property"] = reaction_energies_list
         print("reaction_energies_list")
         print(reaction_energies_list)
         print(len(reaction_energies_list))
-        update_spec["temp"]["is_converged_list"] = is_converged_list 
+        fw_spec["temp"]["is_converged_list"] = is_converged_list 
         fw_spec["temp"]["analysis_ids"] = []
         fw_spec["temp"]["calc_ids"] = calc_ids
         print("is_converged_list")
         print(is_converged_list)
         print("calc_ids", calc_ids)
 
-        update_spec.pop("_category")
-        update_spec.pop("name")
-        return FWAction(update_spec=update_spec)
+        fw_spec.pop("_category")
+        fw_spec.pop("name")
+        return FWAction(update_spec=fw_spec)
 
 def update_converged_data(chunk_size, adsite_types = ["top", "bridge", "hollow"]):
     firetask1  = GatherPropertyTask(chunk_size = chunk_size, adsite_types = adsite_types)
