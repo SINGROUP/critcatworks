@@ -14,7 +14,7 @@ from critcatworks.structure import get_per_type_coverage, eliminate_pairs, elimi
 
 
 def get_coverage_ladder_workflow(template_path, username, password,
-        worker_target_path = None, start_ids = None, reference_energy=0.0,
+        worker_target_path = None, start_ids = None, reference_energy=0.0, free_energy_correction = 0.0,
         adsorbate_name='H', max_iterations = 100, n_max_restarts = 1,
         skip_dft = False, bond_length = 1.5,
         d = 4, l = 2, k = 7, initial_direction = 1, ranking_metric = "similarity",
@@ -55,7 +55,8 @@ def get_coverage_ladder_workflow(template_path, username, password,
         extdb_connect = extdb_connect)
 
     # FireWork: Initialize coverage ladder
-    fw_start_coverage_ladder = start_coverage_ladder(start_ids, initial_direction = initial_direction)
+    fw_start_coverage_ladder = start_coverage_ladder(start_ids, initial_direction = initial_direction, 
+        reference_energy = reference_energy, free_energy_correction = free_energy_correction )
 
     # add above Fireworks with links
     workflow_list = [fw_init,

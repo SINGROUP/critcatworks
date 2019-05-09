@@ -345,16 +345,16 @@ class CoverageLadderTask(FiretaskBase):
         is_return = fw_spec["temp"]["is_return"]
         energies = fw_spec["temp"]["property"]
         ne_dct = fw_spec["temp"]["ne_dct"]
-        n_adsorbates = fw_spec["temp"]["n_adsorbates"]
         l = self["l"]
-        d = self["d"] # TODO implement stop criterion d
+        d = self["d"]
         is_new_root = fw_spec["temp"]["is_new_root"]
-        n_adsorbates_root = fw_spec["temp"]["n_adsorbates_root"]
-        n_adsorbates = fw_spec["temp"]["n_adsorbates"]
+        n_adsorbates_root = int(fw_spec["temp"]["n_adsorbates_root"])
+        n_adsorbates = int(fw_spec["temp"]["n_adsorbates"])
         open_branches = fw_spec["temp"]["open_branches"]
         root_history = fw_spec["temp"]["root_history"]
         step_history = fw_spec["temp"]["step_history"]
-
+        reference_energy = fw_spec["temp"]["reference_energy "]
+        free_energy_correction  = fw_spec["temp"]["free_energy_correction"]
 
         lowenergy_calc_ids, energies = self.find_lowest_energy_structures(l, calc_ids, energies)
 
@@ -362,7 +362,8 @@ class CoverageLadderTask(FiretaskBase):
         lowest_idx = lowenergy_calc_ids[idx]
 
         is_new_root = self.check_new_root(is_new_root, branch_dct,
-                                       lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates)
+                                       lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates, 
+                                       reference_energy = reference_energy, free_energy_correction = free_energy_correction)
         calc_ids = lowenergy_calc_ids
 
 
@@ -391,7 +392,7 @@ class CoverageLadderTask(FiretaskBase):
         ## Task for direction ##
         if is_new_root == True:
             # decision up or down
-            dg_diff, assignment = self.compute_dg_diff(lowest_idx, branch_dct, ne_dct)
+            dg_diff, assignment = self.compute_dg_diff(lowest_idx, branch_dct, ne_dct, reference_energy = reference_energy, free_energy_correction = free_energy_correction)
             if dg_diff <= 0:
                 direction = 1
             else:
@@ -421,7 +422,11 @@ class CoverageLadderTask(FiretaskBase):
 
         fw_spec.pop("_category")
         fw_spec.pop("name")
-        return FWAction(update_spec=fw_spec)
+        if (abs(n_adsorbates - n_adsorbates_root) == d) and ((n_adsorbates - n_adsorbates_root > 0) == direction):
+            defuse_workflow = True
+        else:
+            defuse_workflow = False
+        return FWAction(update_spec=fw_spec, defuse_workflow = defuse_workflow)
 
     def find_lowest_energy_structures(self, l, calc_ids, energies):
         ids = np.argsort(energies)[:l] 
@@ -439,17 +444,17 @@ class CoverageLadderTask(FiretaskBase):
         else:
             return False
         # requires dictionary of energies
-        energies = ne_dct[n_adsorbates]
-        is_new_root = energies[idx] <= min(energies.values())
+        energies = ne_dct[str(n_adsorbates)]
+        is_new_root = energies[str(idx)] <= min(energies.values())
         return is_new_root
 
-    def check_new_root(self, is_new_root, branch_dct, lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates):
+    def check_new_root(self, is_new_root, branch_dct, lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates, reference_energy = 0.0, free_energy_correction = 0.0):
         """
         checks if current lowest-energy configuration is eligible for new root
         """
         # first iteration after new root has been set
         if is_new_root:
-            dg_diff, assignment = self.compute_dg_diff(lowest_idx, branch_dct, ne_dct)
+            dg_diff, assignment = self.compute_dg_diff(lowest_idx, branch_dct, ne_dct, reference_energy = reference_energy, free_energy_correction = free_energy_correction )
             if (
                     ((dg_diff <= 0.0) and (assignment == "child")) or
                     ((dg_diff > 0.0) and (assignment == "parent"))
@@ -463,7 +468,7 @@ class CoverageLadderTask(FiretaskBase):
             is_new_root = self.level_check_new_root(lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates)
         return is_new_root
 
-    def compute_dg_diff(self, idx, branch_dct, ne_dct):
+    def compute_dg_diff(self, idx, branch_dct, ne_dct, reference_energy = 0.0, free_energy_correction = 0.0):
         # search where idx appears in branch_dct
         #print("IDX", idx, type(idx))
         for key, ids in zip(branch_dct.keys(), branch_dct.values()):
@@ -488,11 +493,13 @@ class CoverageLadderTask(FiretaskBase):
 
         if parent_n_adsorbates > child_n_adsorbates:
             # dg diff
-            dg_diff = parent_energy - energy
+            dg_diff = parent_energy - energy - reference_energy + free_energy_correction 
             assignment = "parent"
         else:
-            dg_diff = energy - parent_energy
+            dg_diff = energy - parent_energy - reference_energy + free_energy_correction 
             assignment = "child"
+        print("dG_diff", dg_diff, assignment)
+        print("dG_diff components", energy, parent_energy, reference_energy ,free_energy_correction )
         return dg_diff, assignment
 
     def decide_next_branch(self, open_branches, ne_dct):
@@ -500,8 +507,8 @@ class CoverageLadderTask(FiretaskBase):
         direction = next_branch[1]
         calc_ids = next_branch[0]
         for n_adsorbates, v in ne_dct.items():
-            if calc_ids[0] in v.keys():
-                new_n_adsorbates = n_adsorbates
+            if str(calc_ids[0]) in v.keys():
+                new_n_adsorbates = int(n_adsorbates)
         return direction, calc_ids, new_n_adsorbates
 
 
@@ -630,6 +637,7 @@ class AddRemoveLadderTask(FiretaskBase):
 
     def add_adsorbate(self, simulation, bond_length, db, ranking_metric = "proximity", k = 7, 
         adsorbate_name = "H", reference_id = -1, workflow_id = -1):
+        print("adding 1 adsorbate")
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
         cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(simulation)
@@ -715,10 +723,16 @@ class AddRemoveLadderTask(FiretaskBase):
         return new_calc_ids
 
     def remove_adsorbate(self, simulation, bond_length, db, ranking_metric = "similarity", k = 7, adsorbate_name = "H", workflow_id = -1):
-        atoms_dct = simulation["atoms"]
+        atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
         cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(
             simulation)
+        print("removing 1 adsorbate")
+        #print("cluster_atoms", cluster_atoms)
+        #print("adsorbate_atoms", adsorbate_atoms)
+        #print("site_ids_list", site_ids_list)
+        #print("reference_ids", reference_ids)
+        #print("adsorbate_ids", adsorbate_ids)
 
 
         # get descriptor of adsorbate atoms
@@ -749,8 +763,8 @@ class AddRemoveLadderTask(FiretaskBase):
         adsorbate_lst = adsorbate_pos_to_atoms_lst(adsorbate_atoms.get_positions()[remaining_ids], adsorbate_name)
 
         # TODO delete visualizer
-        removed_adsorbates = ase.Atoms("Xe" * len(remaining_ids), adsorbate_atoms.get_positions()[remaining_ids])
-        view(atoms + removed_adsorbates)
+        #removed_adsorbates = ase.Atoms("Xe" * len(remaining_ids), adsorbate_atoms.get_positions()[remaining_ids])
+        #view(atoms + removed_adsorbates)
         ####
 
         # create new simulations
@@ -759,22 +773,28 @@ class AddRemoveLadderTask(FiretaskBase):
         new_calc_ids = []
 
 
+        #print("remaining ids", remaining_ids)
         for idx in remaining_ids:
+            print("idx of atom to remove", idx)
             joint_atoms = cluster_atoms
             dct = deepcopy(simulation)
             dct["adsorbates"] = []
+            #print("adsorbate_ids", adsorbate_ids)
             for i, adsorbate_id in zip(np.arange(len(adsorbate_ids)), adsorbate_ids):
                 if idx == i:
+                    #print("removed atom excluded")
                     # removed atom is excluded
                     pass
                 else:
-                    adsorbate = adsorbate_atoms[idx]
-                    joint_atoms, cluster_ids, adsorbate_ids = self.join_cluster_adsorbate(joint_atoms, adsorbate)
-                    dct["adsorbates"].append(dict({"atom_ids": adsorbate_ids, "reference_id": reference_ids[idx],
+                    #print("adding adsorbate atom")
+                    adsorbate = adsorbate_atoms[i]
+                    joint_atoms, cluster_ids, new_adsorbate_ids = self.join_cluster_adsorbate(joint_atoms, adsorbate)
+                    dct["adsorbates"].append(dict({"atom_ids": new_adsorbate_ids, "reference_id": reference_ids[idx],
                                                    "site_class": site_class_list[idx], "site_ids": site_ids_list[idx]}))
             # info about surface atoms not there
 
             # adsites_dict
+            print("length of structure", joint_atoms)
             joint_atoms_dict = ase_to_atoms_dict(joint_atoms)
 
             # calculation originated from this:
@@ -863,12 +883,14 @@ class NewLadderRootTask(FiretaskBase):
     """
 
     _fw_name = 'NewLadderRootTask'
-    required_params = ['start_ids',]
+    required_params = ['start_ids', 'reference_energy', 'free_energy_correction']
     optional_params = ['initial_direction']
 
     def run_task(self, fw_spec):
         start_ids = self["start_ids"]
         initial_direction = self["initial_direction"]
+        reference_energy = self["reference_energy"]
+        free_energy_correction = self["free_energy_correction"]
         # currently, only one structure per workflow supported
         start_id = start_ids[0]
 
@@ -905,13 +927,16 @@ class NewLadderRootTask(FiretaskBase):
         fw_spec["temp"]["ne_dct"] = ne_dct
         fw_spec["temp"]["direction"] = direction
         fw_spec["temp"]["calc_ids"] = start_ids
+        fw_spec["temp"]["reference_energy "] = reference_energy 
+        fw_spec["temp"]["free_energy_correction"] = free_energy_correction
         fw_spec.pop("_category")
         fw_spec.pop("name")
         return FWAction(update_spec=fw_spec)
 
 
-def start_coverage_ladder(start_ids, initial_direction = 1):
-    firetask1  = NewLadderRootTask(start_ids = start_ids, initial_direction = initial_direction)
+def start_coverage_ladder(start_ids, initial_direction = 1, reference_energy = 0.0, free_energy_correction = 0.0):
+    firetask1  = NewLadderRootTask(start_ids = start_ids, initial_direction = initial_direction, 
+        reference_energy = reference_energy, free_energy_correction = free_energy_correction)
     fw = Firework([firetask1], spec = {'_category' : "small", 'name' : 'NewLadderRootTask'},
              name = 'NewLadderRootWork')
     return fw

@@ -193,7 +193,7 @@ class CP2KAnalysisTask(FiretaskBase):
             is_walltime_exceeded = preparse_results.get('exceeded_walltime', False)
 
             # cp2k parser
-            parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.INFO)
+            parser = cp2kparser.CP2KParser(default_units=["hartree"], log_level=logging.ERROR)
             print("cp2k parser setup successfully")
             cp2koutput = glob.glob(target_path + "/" + "gopt.out")[0]
             results = parser.parse(str(cp2koutput))
