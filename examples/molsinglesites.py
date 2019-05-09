@@ -50,8 +50,6 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, lpadname = "mjfireworkstriton")
     #launchpad.reset('', require_password=False)
 
-    structures = read_structures_locally("../nc_structures")
-
     # setup nh3 molecule with anchor x
     pos = np.array([[ 0.00000000e+00,  0.00000000e+00,  1.16489000e-01],
        [ 0.00000000e+00,  9.39731000e-01, -2.71808000e-01],
@@ -63,16 +61,17 @@ if __name__ == "__main__":
 
     wf = get_molsinglesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/testruns/singlesites",
-        structures = structures,
+        template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/singlesites/production/ptcu55_structures",
+        extdb_ids = [311, 312, 314, 316, 318, 331, 336, 338],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate = adsorbate_x,
-        chunk_size = 7,
-        max_calculations = 15,
-        adsite_types = ["top"], #, "bridge", "hollow"],
+        chunk_size = 50,
+        max_calculations = 1000,
+        adsite_types = ["top", "bridge", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,
+        extdb_connect = {"db_name": "ncdb"},
         )
 
     # store workflow 

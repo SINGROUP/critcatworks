@@ -48,8 +48,7 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, lpadname = "mjfireworkstriton")
     #launchpad.reset('', require_password=False)
 
-    #structures = read_structures_locally("./selected_ptcu_structures")
-    structures = read_structures_locally("./selected_ptni_structures")
+    structures = read_structures_locally("./ptx55")
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
         template_path = str(pathlib.Path("templates/triton_gopt.inp").resolve()), 
