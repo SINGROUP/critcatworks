@@ -14,7 +14,8 @@ if __name__ == "__main__":
     import logging
     IS_QUEUE = True
     USERNAME = "mjcritcat"
-    PASSWORD = getpass.getpass()
+    #PASSWORD = getpass.getpass()
+    PASSWORD = "heterogeniuscatalysis"
     if IS_QUEUE:
         logging.basicConfig(format='%(name)s:%(levelname)s:%(message)s', level=logging.INFO)
     else:
@@ -28,18 +29,19 @@ if __name__ == "__main__":
     wf = get_coverage_ladder_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
-        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_topbridgehollow_nremaining80",
-        start_ids = [32, 33],
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverageladder/production/pt12ni42",
+        start_ids = [250],
         reference_energy = -1.16195386047558 * 0.5,
+        free_energy_correction = 0.24 / 27.211,
         adsorbate_name = "H",
-        max_iterations = 4,
+        max_iterations = 100,
         n_max_restarts = 1,
         skip_dft = False,
         bond_length = 1.5,
         initial_direction = 1,
         ranking_metric = "similarity",
         d = 4,
-        l = 2, 
+        l = 3, 
         k = 7, 
         extdb_connect = {"db_name": "ncdb"},
     )
