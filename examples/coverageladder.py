@@ -34,7 +34,7 @@ if __name__ == "__main__":
         reference_energy = -1.16195386047558 * 0.5,
         free_energy_correction = 0.24 / 27.211,
         adsorbate_name = "H",
-        max_iterations = 100,
+        max_iterations = 10,
         n_max_restarts = 1,
         skip_dft = False,
         bond_length = 1.5,

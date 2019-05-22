@@ -937,7 +937,7 @@ class NewLadderRootTask(FiretaskBase):
 def start_coverage_ladder(start_ids, initial_direction = 1, reference_energy = 0.0, free_energy_correction = 0.0):
     firetask1  = NewLadderRootTask(start_ids = start_ids, initial_direction = initial_direction, 
         reference_energy = reference_energy, free_energy_correction = free_energy_correction)
-    fw = Firework([firetask1], spec = {'_category' : "small", 'name' : 'NewLadderRootTask'},
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'NewLadderRootTask'},
              name = 'NewLadderRootWork')
     return fw
 
@@ -949,13 +949,13 @@ def add_remove_adsorbate(bond_length, k = 7, ranking_metric = "similarity"):
 
 def gather_ladder():
     firetask1  = GatherLadderTask()
-    fw = Firework([firetask1], spec = {'_category' : "small", 'name' : 'GatherLadderTask'},
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'GatherLadderTask'},
              name = 'GatherLadderWork')    
     return fw
 
 def step_coverage_ladder(l = 2, d = 4):
     firetask1  = CoverageLadderTask(l = l, d = d)
-    fw = Firework([firetask1], spec = {'_category' : "small", 'name' : 'CoverageLadderTask'},
+    fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'CoverageLadderTask'},
              name = 'CoverageLadderWork')    
     return fw
 
