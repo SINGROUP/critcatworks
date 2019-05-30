@@ -1,0 +1,15 @@
+authsource: mjfireworkstriton
+host: nanolayers.dyndns.org:27017
+logdir: .
+name: mjfireworkstriton
+password: heterogeniuscatalysis
+port: 27017
+ssl: false
+ssl_ca_certs: null
+ssl_certfile: null
+ssl_keyfile: null
+ssl_pem_passphrase: null
+strm_lvl: INFO
+user_indices: []
+username: mjcritcat
+wf_user_indices: []

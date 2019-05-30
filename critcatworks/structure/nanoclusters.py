@@ -13,7 +13,9 @@ from critcatworks.database.format import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database.extdb import fetch_simulations
 import json
 import numpy as np
-
+from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
+import cluskit
+import dscribe
 @explicit_serialize
 class NCStabilityTask(FiretaskBase):
     """ 
@@ -95,9 +97,156 @@ class NCStabilityTask(FiretaskBase):
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)
 
+
+@explicit_serialize
+class NCGenerationTask(FiretaskBase):
+    """ 
+    Task to generate binary nanoclusters.
+
+    """
+
+    _fw_name = 'NCGenerationTask'
+    required_params = ['n_initial_configurations', 'n_configurations',
+        'shape', 'nanocluster_size', 'compositions', 'elements',]
+    optional_params = ['generate_pure_nanoclusters', 'bondlength_dct']
+
+    def run_task(self, fw_spec):
+        workflow_id = fw_spec.get("workflow", {"_id" : -1 }).get("_id", -1)
+        n_initial_configurations = self["n_initial_configurations"] 
+        n_configurations = self["n_configurations"]
+        shape = self["shape"]
+        nanocluster_size = self["nanocluster_size"]
+        compositions = self["compositions"]
+        elements = self["elements"]
+        generate_pure_nanoclusters = self["generate_pure_nanoclusters"], 
+        bondlength_dct = self["bondlength_dct"]
+
+        db = get_external_database(fw_spec["extdb_connect"])
+        simulations = db['simulations']
+
+        # generate clusters
+        nanoclusters, calc_ids = self.generate(n_initial_configurations, n_configurations, 
+            shape, nanocluster_size, 
+            compositions, elements, 
+            generate_pure_nanoclusters = generate_pure_nanoclusters, bondlength_dct = bondlength_dct,
+            db = db, workflow_id = workflow_id)
+
+        # upload all simulations at once
+        simulations.insert_many(nanoclusters)
+
+        # fireworks
+        update_spec = fw_spec
+        update_spec["calc_ids"] = calc_ids
+
+        update_spec.pop("_category")
+        update_spec.pop("name")
+        return FWAction(update_spec=update_spec)
+
+
+    def generate(self, n_initial_configurations, n_configurations, shape, 
+        nanocluster_size, compositions, elements, 
+        generate_pure_nanoclusters = True, bondlength_dct = {}, db = None, workflow_id = -1):
+        
+        test_scaffold = cluskit.build.get_scaffold(shape, nanocluster_size, 3.0)
+        NATOMS = len(test_scaffold)
+        count = 0
+        calc_ids = []
+        nanoclusters_lst = []
+        simulations = db['simulations']
+
+        # lattice_constants fcc
+        tm_dict = {'Sc': 4.6796, 'Ti': 4.1731, 'V': 4.2851, 'Cr': 4.1154, 'Mn': 1.2604, 'Fe': 4.0538, 
+               'Co': 3.5456, 'Zn': 3.7687, 'Y': 5.1582, 'Zr': 4.5707, 'Nb': 4.6675, 'Mo': 4.4505, 
+               'Tc': 3.8679, 'Ru': 3.8267, 'Cd': 4.2135, 'Hf': 4.5204, 'Ta': 4.6687, 'W': 4.4763, 
+               'Re': 3.9046, 'Os': 3.8670, 'Hg': 4.2497}
+
+        # manage compositions
+        for i, el1 in enumerate(elements):
+            for j, el2 in enumerate(elements):
+                print(el1, el2)
+                if j < i:
+                    print("skipping double-counted combinations")
+                    continue
+                elif (j == i) and (generate_pure_nanoclusters == False):
+                    print("skipping pure nanoclusters")        
+                    continue
+            
+
+                for composition in compositions:
+                    # estimate bondlength
+                    bondlength_el1 = bondlength_dct.get(el1, tm_dict.get(el1, 4.0) / 1.41)
+                    bondlength_el2 = bondlength_dct.get(el2, tm_dict.get(el2, 4.0) / 1.41)
+
+                    bondlength = composition / NATOMS * bondlength_el1 + (NATOMS - composition) / NATOMS * bondlength_el2
+
+                    # create scaffold
+                    print("creating scaffold")
+                    scaffold = cluskit.build.get_scaffold(shape, nanocluster_size, bondlength * 1.41)
+
+                    atnum1 = ase.data.atomic_numbers[el1]
+                    atnum2 = ase.data.atomic_numbers[el2]
+
+                    scaffold.descriptor_setup = dscribe.descriptors.SOAP(
+                        atomic_numbers=[atnum1, atnum2],
+                        periodic=False,
+                        rcut=5.0,
+                        nmax=8,
+                        lmax=6,
+                        sparse=False,
+                        average=True
+                    )
+                    # run cluster generator
+                    print("cluster generator")
+                    if i == j:
+                        cluster_lst = scaffold.get_unique_clusters_in_range(typeA = atnum1, typeB = atnum2, 
+                            ntypeB = NATOMS - composition, n_clus = 1)
+                    else:
+                        cluster_lst = scaffold.get_unique_clusters_in_range(typeA = atnum1, typeB = atnum2, 
+                            ntypeB = NATOMS - composition, n_clus = n_initial_configurations)
+                        cluster_lst = cluster_lst[:n_configurations]
+
+                    count += n_configurations
+                    for count, cluster in enumerate(cluster_lst):
+                        name = el1 + str(composition) + el2 + str(NATOMS - composition) + "_" + str(count) + ".xyz"
+                        # simulation format
+                        simulation_id = _query_id_counter_and_increment('simulations', db)
+                        atoms = cluster.ase_object
+                        nanocluster_atom_ids = list(range(len(atoms)))
+                        atoms_dict = ase_to_atoms_dict(atoms)
+
+                        nanocluster = {"atom_ids" : nanocluster_atom_ids, "reference_id" : simulation_id}
+
+                        dct = {"_id" : simulation_id, "atoms" : atoms_dict, 
+                            "source_id" : -1, "workflow_id" : workflow_id, 
+                            "nanoclusters" : [nanocluster], "adsorbates" : [], "substrates" : [], 
+                            "operations" : [], "inp" : cluster.info,
+                            }
+
+                        nanoclusters_lst.append(dct)
+                        calc_ids.append(simulation_id)
+
+                    if i == j:
+                        break
+        return nanoclusters_lst, calc_ids
+
+
 def compare_nanoclusters(atomic_energies = {}):
     firetask1  = NCStabilityTask(atomic_energies = atomic_energies)
     dct = {'_category' : "lightweight", 'name' : 'NCStabilityTask'}
     fw = Firework([firetask1], spec=dct,
              name = 'NCStabilityWork')
+    return fw
+
+
+def generate_nanoclusters(n_initial_configurations, n_configurations, 
+            shape, nanocluster_size, 
+            compositions, elements, 
+            generate_pure_nanoclusters = True, bondlength_dct = {}):
+    firetask1  = NCGenerationTask(n_initial_configurations = n_initial_configurations, 
+        n_configurations = n_configurations, shape = shape, nanocluster_size = nanocluster_size,
+        compositions = compositions, elements = elements,
+        generate_pure_nanoclusters = True, bondlength_dct = {})
+    dct = {'_category' : "large", 'name' : 'NCGenerationTask'}
+    fw = Firework([firetask1], spec=dct,
+             name = 'NCGenerationWork')
     return fw

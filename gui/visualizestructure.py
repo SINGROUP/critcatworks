@@ -25,12 +25,16 @@ def get_external_database(**extdb_connect):
 
 
 
-def get_simulation(simulation_id):
+def get_simulation(simulation_id, is_test):
+    if is_test:
+        db_name = "testdb"
+    else:
+        db_name = "ncdb"
+
     ext_db = get_external_database(
         username = "mjcritcat",
         password = "heterogeniuscatalysis",
-        db_name = "testdb",
-        #db_name = "ncdb",
+        db_name = db_name,
         )
     simulation = ext_db["simulations"].find_one({"_id": simulation_id})
     return simulation
@@ -39,11 +43,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('ids', metavar='N', type=int, nargs='+',
                     help='simulation id')
+    parser.add_argument('--test', action='store_true')
 
     args = parser.parse_args()
     print(args.ids)
+    is_test = args.test
     for idx in args.ids:
-        simulation = get_simulation(idx)
+        simulation = get_simulation(idx, is_test)
         pp(simulation)
         print("positions:", np.array(simulation["atoms"]["positions"]).shape)
         atoms = atoms_dict_to_ase(simulation["atoms"])
