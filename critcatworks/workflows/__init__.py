@@ -4,3 +4,4 @@ from critcatworks.workflows.uniquemolsites import get_uniquemolsites_workflow
 from critcatworks.workflows.coverage import get_coverage_workflow
 from critcatworks.workflows.coverageladder import get_coverage_ladder_workflow
 from critcatworks.workflows.nanoclusters import get_nanoclusters_workflow
+from critcatworks.workflows.clusgen import generate_nanoclusters_workflow
