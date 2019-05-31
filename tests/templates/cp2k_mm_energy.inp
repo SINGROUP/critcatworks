@@ -41,8 +41,8 @@
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H H
-          EPSILON    [eV] 0.48
-          SIGMA [angstrom]   1.35
+          EPSILON    [eV] 0.1
+          SIGMA [angstrom]   2.2
           RCUT  [angstrom]  3.2
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
@@ -53,7 +53,7 @@
         &END LENNARD-JONES
         &LENNARD-JONES ! Lennard-Jones parameters
           atoms H Cu
-          EPSILON    [eV] 0.8  
+          EPSILON    [eV] 1.5  
           SIGMA [angstrom]   2.45  #1.45
           RCUT  [angstrom]  3.8  #5.8
         &END LENNARD-JONES

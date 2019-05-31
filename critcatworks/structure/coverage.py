@@ -498,8 +498,11 @@ class CoverageLadderTask(FiretaskBase):
         else:
             dg_diff = energy - parent_energy - reference_energy + free_energy_correction 
             assignment = "child"
+        print("#################################################")
         print("dG_diff", dg_diff, assignment)
         print("dG_diff components", energy, parent_energy, reference_energy ,free_energy_correction )
+        print("n_adsorbates", "parent", parent_n_adsorbates, "child", child_n_adsorbates)
+        print("#################################################")
         return dg_diff, assignment
 
     def decide_next_branch(self, open_branches, ne_dct):

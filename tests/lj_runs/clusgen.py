@@ -21,13 +21,19 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/nanocluster_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
-    launchpad.reset('', require_password=False)
-
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD,)
+    #launchpad.reset('', require_password=False)
+    bondlength_dct = { 
+        "Fe" : 2.3,
+        "Co" : 2.3,
+        "Ni" : 2.4,
+        "Cu" : 2.5,
+        "Ti" : 2.7,
+        "Pt" : 2.6,}   
     wf = generate_nanoclusters_workflow(username = USERNAME, password = PASSWORD,
-        worker_target_path = "/l/to_delete_temp/generate_nanoclusters", extdb_connect = {},
-        shape = "ico", nanocluster_size = 3, compositions = [28,], elements = ["Ti", "W"], generate_pure_nanoclusters = True,
-        n_configurations = 5, n_initial_configurations = 30, bondlength_dct = {},
+        worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/generator/testruns", extdb_connect = {},
+        shape = "ico", nanocluster_size = 3, compositions = [6, 13, 28, 42, 49], elements = ["Fe","Co", "Ni","Cu","Ti", "Pt"], generate_pure_nanoclusters = True,
+        n_configurations = 10, n_initial_configurations = 100, bondlength_dct = bondlength_dct ,
         )    
 
     # store workflow 
