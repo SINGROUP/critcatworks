@@ -234,7 +234,7 @@ def compare_nanoclusters(atomic_energies = {}):
     firetask1  = NCStabilityTask(atomic_energies = atomic_energies)
     dct = {'_category' : "lightweight", 'name' : 'NCStabilityTask'}
     fw = Firework([firetask1], spec=dct,
-             name = 'NCStabilityWork')
+             name = 'NCStabWork')
     return fw
 
 

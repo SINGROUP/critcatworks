@@ -136,7 +136,7 @@ def setup_folders(target_path, name = "cp2k_run_id",):
         target_path = target_path,
         name = name)
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'StructureFolderTask'},
-             name = 'StructureFolderWork')
+             name = 'StrucFoldWork')
     return fw
 
 
@@ -151,5 +151,5 @@ def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_
         skip_dft = skip_dft,
         )
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'ChunkCalculationsTask'},
-                     name = 'ChunkCalculationsWork')
+                     name = 'ChunkCalcWork')
     return fw

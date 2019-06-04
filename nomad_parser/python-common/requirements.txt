@@ -13,5 +13,4 @@ pandas
 pyyaml
 h5py
 hjson
-enum34
 systax==0.1.3

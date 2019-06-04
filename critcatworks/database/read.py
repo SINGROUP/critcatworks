@@ -220,6 +220,6 @@ def start_from_database(db_ids_lst, ext_db = None, spec = {}):
     dct = {'_category' : "lightweight", 'name' : 'NCStartFromDatabaseTask'}
     dct.update(_empty_fields_spec(spec))
     fw = Firework([firetask1], spec=dct,
-             name = 'NCStartFromDatabaseWork')
+             name = 'NCStartDBWork')
     return fw
 

@@ -1,7 +1,7 @@
 import ase.io
 import ase.io.formats
-import mdtraj as md
-import mdtraj.formats
+#import mdtraj as md
+#import mdtraj.formats
 import numpy as np
 import logging
 logger = logging.getLogger("nomad")
@@ -40,36 +40,37 @@ def iread(filename, file_format=None):
     # "chunk" of frames, and still serve the individual frames one by one. ASE
     # on the other hand will iteratively read frames one by one (unnecessary
     # IO).
-    mdtraj_chunk = 100  # How many frames MDTraj will load at once
-    mdtraj_failed = False
+    #mdtraj_chunk = 100  # How many frames MDTraj will load at once
+    #mdtraj_failed = False
+    mdtraj_failed = True
 
     # Must use the low level MDTraj API to open files without topology.
-    class_format_map = {
-            "dcd": mdtraj.formats.DCDTrajectoryFile,
-            "xyz": mdtraj.formats.XYZTrajectoryFile,
-            "pdb": mdtraj.formats.PDBTrajectoryFile,
-    }
-    traj_class = class_format_map.get(file_format)
-    if traj_class is not None:
-        try:
-            with traj_class(filename, mode="r") as f:
-                empty = False
-                while not empty:
-                    data = f.read(mdtraj_chunk)
-                    if isinstance(data, tuple):
-                        positions = data[0]
-                    else:
-                        positions = data
-                    if len(positions) == 0:
-                        empty = True
-                    else:
-                        for pos in positions:
-                            yield pos
-        except IOError:
-            logger.warning("MDTraj could not read the file '{}' with format '{}'. The contents might be malformed or wrong format used.".format(filename, file_format))
-            return
-    else:
-        mdtraj_failed = True
+    #class_format_map = {
+    #        "dcd": mdtraj.formats.DCDTrajectoryFile,
+    #        "xyz": mdtraj.formats.XYZTrajectoryFile,
+    #        "pdb": mdtraj.formats.PDBTrajectoryFile,
+    #}
+    #traj_class = class_format_map.get(file_format)
+    #if traj_class is not None:
+    #    try:
+    #        with traj_class(filename, mode="r") as f:
+    #            empty = False
+    #            while not empty:
+    #                data = f.read(mdtraj_chunk)
+    #                if isinstance(data, tuple):
+    #                    positions = data[0]
+    #                else:
+    #                    positions = data
+    #                if len(positions) == 0:
+    #                    empty = True
+    #                else:
+    #                    for pos in positions:
+    #                        yield pos
+    #    except IOError:
+    #        logger.warning("MDTraj could not read the file '{}' with format '{}'. The contents might be malformed or wrong format used.".format(filename, file_format))
+    #        return
+    #else:
+    #    mdtraj_failed = True
 
     # If MDTraj didn't support the format, try ASE instead
     if mdtraj_failed:

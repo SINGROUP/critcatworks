@@ -126,7 +126,8 @@ class CP2KRunTask(FiretaskBase):
             pass
         
         cp2k_bin="cp2k.popt"
-        run_command = "srun " + cp2k_bin  + " -o " + output_file + " -i " + input_file
+        #run_command = "srun " + cp2k_bin  + " -o " + output_file + " -i " + input_file
+        run_command = "mpiexec_mpt " + cp2k_bin  + " -o " + output_file + " -i " + input_file
         command_list = run_command.split()
         print("shell command:")
         print(command_list)
@@ -346,7 +347,7 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
             "extdb_connect" : extdb_connect,
             "_allow_fizzled_parents" : True,
             "_priority": 8,},
-        name = 'CP2KAnalysisWork',
+        name = 'CP2KAnaWork',
         parents = [fw1]) 
     #return Workflow([fw1,fw2], {fw1 : [fw2]})
     #return [fw1,fw2], {fw1 : [fw2]}
@@ -364,7 +365,7 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
             'n_restarts' : int(n_restarts), "simulation" : simulation,
             "_priority": 10,
             "extdb_connect" : extdb_connect },
-        name = 'CP2KRerunWork')
+        name = 'CP2KReWork')
 
     # add analysis as an additional Firework as a child. Ensures
     # that Firework exists even if CP2K fails
@@ -379,7 +380,7 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
             "extdb_connect" : extdb_connect,
             "_priority": 8,
             "_allow_fizzled_parents" : True},
-        name = 'CP2KAnalysisWork',
+        name = 'CP2KAnaWork',
         parents = [fw1]) 
     return Workflow([fw1,fw2],)
     #return Workflow([fw1,fw2], {fw1 : [fw2]})
