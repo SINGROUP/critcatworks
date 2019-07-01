@@ -21,11 +21,49 @@ def get_molsinglesites_workflow(template_path, username, password,
         adsite_types = ["top", "bridge", "hollow"], threshold = 0.1, n_max_restarts = 1,
         skip_dft = False, extdb_connect = {}):
     """
-
     Workflow to determine the adsorption sites and energies of a set of
-    nanocluster structures using CP2K and ClusKit
-    """
+    nanocluster structures. The adsorption sites are determined by the 
+    python package cluskit and then ranked by farthest point sampling
+    based on their structural local dissimilarity.
+    The adsorption energy is determined by a simulation code (e.g. CP2K) 
+    in chunks in a loop. The adsorption energies of the uncalculated
+    structures are inferred by machine learning. 
+    Once, the generalization error is low enough, the workflow stops.
 
+    Args:
+        template_path (str) :   absolute path to input file for calculations. 
+                                It works as a template which is later modified by the
+                                simulation-specific Firework.
+        username (str) :        user who executed the workflow
+        password (str) :        password for user to upload to the database
+        worker_target_path (str) :  absolute path on computing resource 
+                                    directory needs to exist
+        structures (list) : list of ase.Atoms objects from where the workflow is started.
+        extdb_ids (list) :  unique identifiers of the simulations collection which
+                            are used to start the workflow
+        source_path (str) : absolute path on the computing resource to the directory 
+                            where to read the structures from        
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an "X" dummy atom
+                            which indicates the anchor point to the nanocluster
+        chunk_size (int) :  number of calculations to be run simulataneously. Default -1
+                            means all calculations are run at once.
+        max_calculations (int) : maximum number of iterations in the workflow
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        threshold (float) :     ML accuracy of convergence criterion. When below, the workflow
+                                is defused. 
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+        extdb_connect (dict):   dictionary containing the keys host,
+                                username, password, authsource and db_name.
+        
+    Returns:
+        fireworks.Workflow : molsinglesites Fireworks Workflow object
+    """
     with open (template_path, "r") as f:
         template = f.read()
 
@@ -87,7 +125,6 @@ def get_molsinglesites_workflow(template_path, username, password,
     # Firework: setup folders for DFT calculations
     fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_molsinglesites_id")
 
-
     # add above Fireworks with links
     workflow_list = [fw_init,
         fw_get_structures, 
@@ -125,12 +162,10 @@ def get_molsinglesites_workflow(template_path, username, password,
         workflow_list.append(fw_update_converged_data)
         links_dict[fw_chunk_calculations] =[fw_update_converged_data]
 
-
         # FireWork: machine learning from database
         fw_get_mae = get_mae(target_path = worker_target_path)
         workflow_list.append(fw_get_mae)
         links_dict[fw_update_converged_data] =[fw_get_mae]
-
 
         # FireWork: check if converged, give intermediary overview.
         # give summary when finished
@@ -139,7 +174,5 @@ def get_molsinglesites_workflow(template_path, username, password,
         links_dict[fw_get_mae] =[fw_check_convergence]
 
     ### loop ends ###
-
     wf = Workflow(workflow_list, links_dict)
     return wf
-

@@ -15,8 +15,11 @@ import numpy as np
 
 @explicit_serialize
 class InitialTask(FiretaskBase):
-    """ 
-    Task to initialize workflow database  """
+    """
+    Custom Firetask to initialize a new workflow instance 
+    in the database.
+    Additionally, initializes a few entries in the fw_spec.
+    """
 
     _fw_name = 'InitialTask'
     required_params = ['username', 'password', 'parameters', 'name', 'workflow_type']
@@ -43,7 +46,6 @@ class InitialTask(FiretaskBase):
         extdb_connect["authsource"] = extdb_connect.get("authsource",
             extdb_connect["db_name"])
 
-        #
         workflow = update_workflows_collection(username, password, 
             creation_time, parameters = parameters,
             name = name, workflow_type = workflow_type, extdb_connect = extdb_connect)
@@ -62,6 +64,24 @@ class InitialTask(FiretaskBase):
 
 def initialize_workflow_data(username, password, parameters, name = "UNNAMED", 
         workflow_type = "UNNAMED", extdb_connect = {}):
+    """
+    Creates a custom Firework object to initialize the workflow. 
+    It updates the workflow collection and makes a few entries in 
+    the fw_spec.
+
+    Args:
+        username (str) : username for the mongodb database
+        password (str) : password for the mongodb database 
+        parameters (dict) : workflow-specific input parameters
+        name (str) :  custom name of the workflow
+        workflow_type (str) :  custom workflow type
+        extdb_connect (dict):   dictionary optionally containing the keys host,
+                                authsource and db_name. All fields have a default
+                                value.
+
+    Returns:
+        Firework object : InitialWork 
+    """
     firetask1  = InitialTask(username = username, password = password, 
         parameters = parameters, name = name, 
         workflow_type = workflow_type, extdb_connect = extdb_connect)

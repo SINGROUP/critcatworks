@@ -22,10 +22,16 @@ class NCStabilityTask(FiretaskBase):
     Task to compare the stability of clusters using cohesive or total energy.
     Cohesive energy requires atomic total energies.
 
+    Writes a file called cohesive_energy.json where the energies are summarized
+    split by nanocluster composition.
+
     Args:
+        atomic_energies (list) :    atomic energies provided using the same 
+                                    simulation parameters
 
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
-
     _fw_name = 'NCStabilityTask'
     required_params = []
     optional_params = ['atomic_energies']
@@ -79,13 +85,9 @@ class NCStabilityTask(FiretaskBase):
         logging.info(cohesive_energy_dct)
         logging.info(cohesive_energy_lst)
 
-        # make file with information ?
-        # cluster_stability ?
+        # cluster_stability
         with open('cohesive_energy.json', 'w') as outfile:
             json.dump(cohesive_energy_dct, outfile)
-
-        # preferrably updating workflow data
-
 
         # fireworks
         update_spec = fw_spec
@@ -101,8 +103,35 @@ class NCStabilityTask(FiretaskBase):
 @explicit_serialize
 class NCGenerationTask(FiretaskBase):
     """ 
-    Task to generate binary nanoclusters.
+    Firetask to generate binary nanoclusters of defined size and shape.
+    For each binary element combination, for each composition, n_configurations
+    maximally dissimilar structures are created and uploaded to the
+    simulations collection of the mongodb database.
+    For further information on the generation algorithm, 
+    consult the documentation of cluskit.
 
+    The new structures are added to the simulation collection of
+    the mongodb database.
+
+    Args:
+        n_initial_configurations (int) : number of initial configurations per 
+                                         composition to choose from (higher number
+                                         will make the grid finer)
+        n_configurations (int) :    number of configurations per composition 
+                                    (chosen based on maximally different 
+                                    structural features)
+        shape (str) : determines shape of nanoclusters. 'ico', 'octa' and 'wulff' 
+        nanocluster_size (int) : determines nanocluster size. Meaning depends on shape 
+        compositions (list) : each element determines the amount of atoms of type 1. 
+        elements (list) : elements (str) to iterate over
+        generate_pure_nanoclusters (bool) : if set to True, also pure 
+                                            nanoclusters are generated
+        bondlength_dct (dict) :     bond lengths to use for specific elements. 
+                                    Some default bond lenghts are provided for
+                                    common elements
+
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
 
     _fw_name = 'NCGenerationTask'
@@ -146,7 +175,33 @@ class NCGenerationTask(FiretaskBase):
     def generate(self, n_initial_configurations, n_configurations, shape, 
         nanocluster_size, compositions, elements, 
         generate_pure_nanoclusters = True, bondlength_dct = {}, db = None, workflow_id = -1):
-        
+        """
+        Generates binary nanoclusters. For further information, 
+        consult the documentation of cluskit
+
+        Args:
+            n_initial_configurations (int) : number of initial configurations per 
+                                             composition to choose from (higher number
+                                             will make the grid finer)
+            n_configurations (int) :    number of configurations per composition 
+                                        (chosen based on maximally different 
+                                        structural features)
+            shape (str) : determines shape of nanoclusters. 'ico', 'octa' and 'wulff' 
+            nanocluster_size (int) : determines nanocluster size. Meaning depends on shape 
+            compositions (list) : each element determines the amount of atoms of type 1. 
+            elements (list) : elements (str) to iterate over
+            generate_pure_nanoclusters (bool) : if set to True, also pure 
+                                                nanoclusters are generated
+            bondlength_dct (dict) :     bond lengths to use for specific elements. 
+                                        Some default bond lenghts are provided for
+                                        common elements
+            db (pymongo object) :       connection to the mongodb database
+            workflow_id (int) :     unique identifier of the current workflow
+
+        Returns:
+            tuple : list of nanocluster ase.Atoms objects,
+                    list of simulation ids
+        """
         test_scaffold = cluskit.build.get_scaffold(shape, nanocluster_size, 3.0)
         NATOMS = len(test_scaffold)
         count = 0
@@ -230,7 +285,21 @@ class NCGenerationTask(FiretaskBase):
         return nanoclusters_lst, calc_ids
 
 
-def compare_nanoclusters(atomic_energies = {}):
+def compare_nanoclusters(atomic_energies = {}):    
+    """ 
+    Firework to compare the stability of clusters using cohesive or total energy.
+    Cohesive energy requires atomic total energies.
+
+    Writes a file called cohesive_energy.json where the energies are summarized
+    split by nanocluster composition.
+
+    Args:
+        atomic_energies (list) :    atomic energies provided using the same 
+                                    simulation parameters
+
+    Returns:
+        Firework : Firework NCStabilityWork
+    """
     firetask1  = NCStabilityTask(atomic_energies = atomic_energies)
     dct = {'_category' : "lightweight", 'name' : 'NCStabilityTask'}
     fw = Firework([firetask1], spec=dct,
@@ -239,9 +308,39 @@ def compare_nanoclusters(atomic_energies = {}):
 
 
 def generate_nanoclusters(n_initial_configurations, n_configurations, 
-            shape, nanocluster_size, 
-            compositions, elements, 
-            generate_pure_nanoclusters = True, bondlength_dct = {}):
+    shape, nanocluster_size, compositions, elements, 
+    generate_pure_nanoclusters = True, bondlength_dct = {}):
+    """
+    Firework to generate binary nanoclusters of defined size and shape.
+    For each binary element combination, for each composition, n_configurations
+    maximally dissimilar structures are created and uploaded to the
+    simulations collection of the mongodb database.
+    For further information on the generation algorithm, 
+    consult the documentation of cluskit.
+
+    The new structures are added to the simulation collection of
+    the mongodb database.
+
+    Args:
+        n_initial_configurations (int) : number of initial configurations per 
+                                         composition to choose from (higher number
+                                         will make the grid finer)
+        n_configurations (int) :    number of configurations per composition 
+                                    (chosen based on maximally different 
+                                    structural features)
+        shape (str) : determines shape of nanoclusters. 'ico', 'octa' and 'wulff' 
+        nanocluster_size (int) : determines nanocluster size. Meaning depends on shape 
+        compositions (list) : each element determines the amount of atoms of type 1. 
+        elements (list) : elements (str) to iterate over
+        generate_pure_nanoclusters (bool) : if set to True, also pure 
+                                            nanoclusters are generated
+        bondlength_dct (dict) :     bond lengths to use for specific elements. 
+                                    Some default bond lenghts are provided for
+                                    common elements
+
+    Returns:
+        Firework : Firework NCGenerationWork
+    """
     firetask1  = NCGenerationTask(n_initial_configurations = n_initial_configurations, 
         n_configurations = n_configurations, shape = shape, nanocluster_size = nanocluster_size,
         compositions = compositions, elements = elements,

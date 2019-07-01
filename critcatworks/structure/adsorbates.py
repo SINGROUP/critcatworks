@@ -16,10 +16,22 @@ from critcatworks.database.extdb import fetch_simulations
 @explicit_serialize
 class GatherPropertyTask(FiretaskBase):
     """ 
-    Task to update database from chunk
-    of calculations. Computes properties of systems.
-    """
+    Task to update database from chunk of calculations. 
+    Computes properties of systems. Currently, only
+    reaction energies (adsorption energies) are computed.
+    The ids of the input structures in calc_ids are 
+    replaced by the ids of the post-simulation structures 
+    from analysis_ids.
 
+    Args:
+        chunk_size (int) :  number of calculations that are run simulataneously. 
+                            Default -1 means all calculations are run at once.
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"    
+
+    Returns:
+        FWAction : Firework action, updates fw_spec
+    """
     _fw_name = 'GatherPropertyTask'
     required_params = ['chunk_size']
     optional_params = ['adsite_types']
@@ -70,8 +82,6 @@ class GatherPropertyTask(FiretaskBase):
             is_converged_list[idx] = simulation["output"]["is_converged"]
 
             print(is_converged_list[idx], idx)
-
-            #if is_converged_list[int(calc_id)] == True:
             
             # get current simulation total_energy
             simulation_total_energy = simulation["output"].get("total_energy", 0.0)
@@ -126,6 +136,23 @@ class GatherPropertyTask(FiretaskBase):
         return FWAction(update_spec=fw_spec)
 
 def update_converged_data(chunk_size, adsite_types = ["top", "bridge", "hollow"]):
+    """ 
+    Updates the internal fw_spec data from chunk of calculations. 
+    Computes properties of systems. Currently, only
+    reaction energies (adsorption energies) are computed.
+    The ids of the input structures in calc_ids are 
+    replaced by the ids of the post-simulation structures 
+    from analysis_ids.
+
+    Args:
+        chunk_size (int) :  number of calculations that are run simulataneously. 
+                            Default -1 means all calculations are run at once.
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"    
+
+    Returns:
+        Firework : Firework GatherPropertyWork
+    """
     firetask1  = GatherPropertyTask(chunk_size = chunk_size, adsite_types = adsite_types)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'GatherPropertyTask'},
              name = 'GatherPropertyWork')

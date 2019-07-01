@@ -24,6 +24,19 @@ from critcatworks.database.extdb import get_external_database, _query_id_counter
 from ase.visualize import view
 
 def join_cluster_adsorbate(cluster, adsorbate):
+    """
+    Helper function to merge the structures
+    cluster and adsorbate while retaining information
+    about the ids
+
+    Args:
+        cluster (ase.Atoms) : nanocluster structure
+        adsorbate (ase.Atoms) : single adsorbate
+
+    Returns:
+        tuple : ase.Atoms object of merged structure, ids of the
+                nanocluster, ids of the adsorbate
+    """
     joint_atoms = cluster + adsorbate
     cluster_ids = list(range(len(cluster)))
     adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
@@ -32,10 +45,19 @@ def join_cluster_adsorbate(cluster, adsorbate):
 
 def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
     """
-    works with only one adsorbate atom.
-    TODO generalize cluskit to return list of adsorbates
-    already in ase format.
-    Makes this function superfluous.
+    Helper function to turn positions for adsorbates into
+    ase atoms objects while the species is defined by
+    adsorbate_name
+    Attention! Works with only one adsorbate atom.
+    In the future, cluskit might generalize to return a 
+    list of adsorbates already in ase format.
+    
+    Args:
+        adspos (2D ndarray) : positions of the adsorbate atoms
+        adsorbate_name (str) : chemical symbol of the adsorbate atoms
+
+    Returns:
+        list : ase.Atoms objects of single atoms at each position
     """
     atoms_lst = []
     ads_structures_dict = []
@@ -48,6 +70,17 @@ def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
     return atoms_lst
 
 def gather_all_atom_types(calc_ids, simulations):
+    """
+    Helper function to determine all atom types in the dataset
+
+    Args:
+        calc_ids (list) : ids of the simulation collection
+        simulations (list) : simulation documents
+
+    Returns:
+        list :  a sorted unique list of atomic numbers in the
+                dataset
+    """
     # going through nc atoms once to find atom types
     atomic_numbers = []
     for idx, calc_id in enumerate(calc_ids):
@@ -60,20 +93,22 @@ def gather_all_atom_types(calc_ids, simulations):
     all_atomtypes = sorted_list_atomic_numbers
     return all_atomtypes
 
-def sparse_subset(points, r):
-    """Return a maximal list of elements of points such that no pairs of
-    points in the result have distance less than r.
-    """
-    result = []
-    ids = []
-    for idx, p in enumerate(points):
-        if all(dist(p, q) >= r for q in result):
-            result.append(p)
-            ids.append(idx)
-    return ids, result
-
 
 def x2_to_x(points, bondlength = 1.5):
+    """
+    Helper function to determine the points closest to all other 
+    points. It ranks them removing one by one until no points
+    are closer than the specified parameter bondlength.
+
+    Args:
+        points (2D ndarray) : Points in n-dimensional space
+        bondlength (float) :    criterion up to which points should
+                                be removed.
+
+    Returns:
+        1D ndarray :    ids of the remaining points, ordered by minimum
+                        distance
+    """
     dmat = cdist(points, points)
     ids = cluskit.cluster._rank_fps(points, K = None, greedy =False)
     dmat = np.triu(dmat[ids, :][:, ids])
@@ -83,8 +118,24 @@ def x2_to_x(points, bondlength = 1.5):
 @explicit_serialize
 class AdsorbateEliminationTask(FiretaskBase):
     """ 
-    Task to eliminate too close adsorbate atoms.
+    Task to eliminate too close adsorbate atoms on a covered
+    nanocluster. The adsorbates
+    can be eliminated either based on a minimum distance
+    'bond_length' or the closest ones can be eliminated until
+    only n_remaining adsorbates are left.
 
+    The workflow is defused if no adsorbate atoms were removed.
+
+    Args:
+        adsorbate_name (str) : element symbol of the adsorbed atom
+        bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                considered bound, hence too close
+        n_remaining (int) : number of adsorbates which should remain after the
+                            first pre-DFT pruning of the adsorbate coverage
+    
+    Returns:
+        FWAction :  Firework action, updates fw_spec, possible defuses
+                    workflow.
     """
 
     _fw_name = 'AdsorbateEliminationTask'
@@ -132,7 +183,6 @@ class AdsorbateEliminationTask(FiretaskBase):
 
             adsorbate_positions = adsorbate_atoms.get_positions()
             
-            #kept_positions = cluskit.utils.x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
             if n_remaining:
                 remaining_ids = cluskit.cluster._rank_fps(adsorbate_positions, K = n_remaining, greedy =False)
             elif bond_length:
@@ -141,7 +191,6 @@ class AdsorbateEliminationTask(FiretaskBase):
             else:
                 logging.warning("give either argument bond_length or n_remaining")
 
-            #remaining_ids = x2_to_x(adsorbate_positions.reshape((-1,3)), bondlength = bond_length)
             print("bondlength", bond_length)
             n_kept = remaining_ids.shape[0]
 
@@ -169,7 +218,6 @@ class AdsorbateEliminationTask(FiretaskBase):
 
             # update internal workflow data
             simulation_id = simulation["_id"]
-            #update_spec["simulations"][str(simulation_id)] = dct
             if not is_done:
                 new_calc_ids.append(simulation_id)
 
@@ -188,12 +236,18 @@ class PerTypeCoverageCreationTask(FiretaskBase):
     """ 
     Task to cover cluster fully with adsorbates based on a type of site.
 
+    Additionally, a reference simulation document is created and
+    the descriptors of the sites are stored.
+
     Args:
+        reference_energy (float) : reference energy of the adsorbate
         adsorbate_name  (str) : Adsorbate atom name to be placed
                                 on all sites found.
         adsite_types  (list of str) : Can be "top", "bridge" or "hollow".
-    """
 
+    Returns:
+        FWAction : Firework action, updates fw_spec
+    """
     _fw_name = 'PerTypeCoverageCreationTask'
     required_params = ['reference_energy', 'adsorbate_name', 'adsite_types']
     optional_params = []
@@ -219,7 +273,6 @@ class PerTypeCoverageCreationTask(FiretaskBase):
             operations = [""], inp = {"adsorbate_name" : adsorbate_name}, 
             output = {"total_energy" : reference_energy},)
         reference_id = reference_simulation["_id"]
-
 
         all_atomtypes = gather_all_atom_types(calc_ids, simulations)
 
@@ -250,7 +303,6 @@ class PerTypeCoverageCreationTask(FiretaskBase):
             dct["inp"]["adsite_types"] = adsite_types
             dct["inp"]["adsorbate_name"] = adsorbate_name
 
-
             add_adsorbate = 0 
             for adsite_type in adsite_types:
                 if adsite_type == "top":
@@ -274,7 +326,6 @@ class PerTypeCoverageCreationTask(FiretaskBase):
 
                 adsorbate_lst = adsorbate_pos_to_atoms_lst(adspos, adsorbate_name)
 
-
                 #loop over each adsorbate
                 for adsorbate, surface_atoms in zip(adsorbate_lst, sites_surface_atoms):
                     add_adsorbate += 1
@@ -293,7 +344,6 @@ class PerTypeCoverageCreationTask(FiretaskBase):
 
             # update internal workflow data
             simulation_id = simulation["_id"]
-            #update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
         
         descmatrix = np.array(desc_lst).tolist()
@@ -309,26 +359,22 @@ class PerTypeCoverageCreationTask(FiretaskBase):
 @explicit_serialize
 class CoverageLadderTask(FiretaskBase):
     """
-    # scheme for coverage ladder workflow
-    # pure layout of logic
+    This Task is at the heart of the coverage ladder workflow.
+    It manages the following steps:
+        - gets lowest energy structures from the previous step
+        - checks if a new root structure has been found
+        - manages branches
+        - computes adsorption free energy
+        - decides upon termination based on parameter d
+        - decides direction of next step
 
-        # ladder variables: l = number of minimum energies selected
-        #                   d = maximum depth of branches (convergence criterion)
-        #                   n0 = starting number of adsorbates
-        #                   structure0 = starting structure with adsorbates
-
-        # DAG dictionary of jobs, simulation_ids
-
-        # dictionary of jobs per number of adsorbates (key = n, value = dict of (simulation_id : energy))
-
-        # tracing variable how many adsorbates on the surface: n_adsorbates
-
-        # if root calculation
-        # decision to go up or down the ladder
-        # based on adsorption energy
-
-        # similarity of occupied / unoccupied sites
-        # 
+    Args:
+        d (int) : maximum depth of the coverage ladder (termination criterion)
+        l (int) : number of low-energy structures to carry over to the next step
+        
+    Returns:
+        FWAction :  Firework action, updates fw_spec, possible defuses
+                    workflow.
     """
 
     _fw_name = 'CoverageLadderTask'
@@ -365,7 +411,6 @@ class CoverageLadderTask(FiretaskBase):
                                        lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates, 
                                        reference_energy = reference_energy, free_energy_correction = free_energy_correction)
         calc_ids = lowenergy_calc_ids
-
 
         # action upon new root
         if is_new_root == True:
@@ -429,6 +474,18 @@ class CoverageLadderTask(FiretaskBase):
         return FWAction(update_spec=fw_spec, defuse_workflow = defuse_workflow)
 
     def find_lowest_energy_structures(self, l, calc_ids, energies):
+        """
+        Finds the l lowest energy structures based on the 
+        given total energies.
+
+        Args:
+            l (int) : number of lowest-energy structures
+            calc_ids (list) : simulation ids
+            energies (list) : total energies of the systems
+
+        Returns:
+            tuple : list of l calc_ids, list of l total energies
+        """
         ids = np.argsort(energies)[:l] 
         calc_ids = np.array(calc_ids)[ids].tolist()
         energies = np.array(energies)[ids].tolist()
@@ -436,9 +493,11 @@ class CoverageLadderTask(FiretaskBase):
 
     def level_check_new_root(self, idx, ne_dct, n_adsorbates_root, n_adsorbates):
         """
-        Has to compare with root, if on the same coverage level.
+        Has to compare with root, if it is 
+        on the same coverage level.
+        The new structure becomes the new root if its total energy
+        is lower.
         """
-
         if n_adsorbates == n_adsorbates_root:
             pass
         else:
@@ -448,9 +507,34 @@ class CoverageLadderTask(FiretaskBase):
         is_new_root = energies[str(idx)] <= min(energies.values())
         return is_new_root
 
-    def check_new_root(self, is_new_root, branch_dct, lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates, reference_energy = 0.0, free_energy_correction = 0.0):
+    def check_new_root(self, is_new_root, branch_dct, lowest_idx, 
+        ne_dct, n_adsorbates_root, n_adsorbates, 
+        reference_energy = 0.0, free_energy_correction = 0.0):
         """
-        checks if current lowest-energy configuration is eligible for new root
+        Checks if current lowest-energy configuration is eligible
+        for new root. 
+        A special check is done after the first step after root.
+        It depends on the direction of the last step and checks the
+        sign of the adsorption free energy.
+        Otherwise, the method level_check_new_root is called.
+
+        Args:
+            is_new_root (bool) :    if True, the current step is the first step after
+                                    root
+            branch_dct (dict) : parent simulation : list of child simulations
+            lowest_idx (int) : lowest-energy simulation id
+            ne_dct (dict) : stores total energies of all calculations with respect to
+                            the number of adsorbates and their ids
+            n_adsorbates_root (int) : number of adsorbates of the root structure
+            n_adsorbates (int) : number of adsorbates of the current step
+            reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                        total energy of the isolated adsorbate molecule
+                                        or a different reference point
+            free_energy_correction (float) :    free energy correction of the adsorption 
+                                                reaction at hand
+
+            Returns:
+            bool : new root
         """
         # first iteration after new root has been set
         if is_new_root:
@@ -468,19 +552,35 @@ class CoverageLadderTask(FiretaskBase):
             is_new_root = self.level_check_new_root(lowest_idx, ne_dct, n_adsorbates_root, n_adsorbates)
         return is_new_root
 
-    def compute_dg_diff(self, idx, branch_dct, ne_dct, reference_energy = 0.0, free_energy_correction = 0.0):
+    def compute_dg_diff(self, idx, branch_dct, ne_dct, 
+        reference_energy = 0.0, free_energy_correction = 0.0):
+        """
+        Helper function to compute the adsorption free energy
+
+        In the case of hydrogen the property is:
+        dGdiff(nH) = G(nH) - G(nH-1)) - 0.5 G(H2)
+
+        Args:
+            idx (int) : simulation id
+            branch_dct (dict) : parent simulation : list of child simulations
+            ne_dct (dict) : stores total energies of all calculations with respect to
+                            the number of adsorbates and their ids
+            reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                        total energy of the isolated adsorbate molecule
+                                        or a different reference point
+            free_energy_correction (float) :    free energy correction of the adsorption 
+                                                reaction at hand
+
+            Returns:
+            tuple : adsorption free energy (float), 
+                    assignment of property to 'parent' or 'child' simulation
+        """
         # search where idx appears in branch_dct
-        #print("IDX", idx, type(idx))
         for key, ids in zip(branch_dct.keys(), branch_dct.values()):
             if int(idx) in list(ids):
                 parent_idx = key
                 break
-        # get energies
-        # energy = find(idx, ne_dct)
-        # parent_energy = find(parent_idx, ne_dct)
-        
-        #print("parent IDX", parent_idx, type(idx))
-
+        # get energies     
         for n_adsorbates, v in ne_dct.items():
             if str(idx) in v.keys():
                 energy = v[str(idx)]
@@ -503,6 +603,23 @@ class CoverageLadderTask(FiretaskBase):
         return dg_diff, assignment
 
     def decide_next_branch(self, open_branches, ne_dct):
+        """
+        The next branch from the collected possible branches is
+        picked. The first element is removed from the list
+        which contains information about direction and
+        parent simulation ids
+
+        Args:
+            open_branches (list) :  each element is a tuple containing 
+                                    parent simulation ids and direction
+            ne_dct (dict) : stores total energies of all calculations with respect to
+                            the number of adsorbates and their ids
+
+        Returns:
+            tuple : direction (bool),
+                    simulation ids (list),
+                    updated number of adsorbates (int)
+        """
         next_branch = open_branches.pop(0)
         direction = next_branch[1]
         calc_ids = next_branch[0]
@@ -515,7 +632,18 @@ class CoverageLadderTask(FiretaskBase):
 @explicit_serialize
 class GatherLadderTask(FiretaskBase):
     """
-    Task for Gathering properties for coverage ladder
+    Task for Gathering properties for coverage ladder.
+    Update database from previous calculations. 
+    Computes properties of systems. Currently, only
+    reaction energies (adsorption energies) are computed.
+    The ids of the input structures in calc_ids are 
+    replaced by the ids of the post-simulation structures 
+    from analysis_ids.
+
+    Args:
+
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
 
     _fw_name = 'GatherLadderTask'
@@ -540,11 +668,6 @@ class GatherLadderTask(FiretaskBase):
             analysis_id = calc_analysis_ids_dict[str(calc_id)]
             reordered_analysis_ids.append(analysis_id)
 
-
-        print("COMPARISON ANALYSIS IDS, AND ORDERED")
-        print(calc_ids)
-        print(analysis_ids)
-        print(reordered_analysis_ids)
         analysis_ids =  reordered_analysis_ids
 
         simulations = fetch_simulations(fw_spec["extdb_connect"], analysis_ids)
@@ -554,18 +677,12 @@ class GatherLadderTask(FiretaskBase):
             energies.append(simulation["output"]["total_energy"]) 
 
         # find calc_id in calc_parents and replace with analysis_id
-        #print(calc_ids, len(calc_ids))
-        #print(analysis_ids, len(analysis_ids))
-        #print("calc_parents")
-        #print(calc_parents)
         for _, children in calc_parents.items():
             for i, child in enumerate(children):
                 if child in calc_ids:
                     idx = calc_ids.index(child)
                     children[i] = analysis_ids[idx]
-                    #print("replacing ", calc_ids[idx], "with ", analysis_ids[idx])
         calc_ids = analysis_ids
-
 
         # add calc_parents to branch_dct
         if is_return:
@@ -594,7 +711,29 @@ class GatherLadderTask(FiretaskBase):
 
 @explicit_serialize
 class AddRemoveLadderTask(FiretaskBase):
+    """
+    Task in the coverage ladder workflow to either add
+    or remove an adsorbate (at k different positions)
 
+    The decision where to add or remove adsorbates is
+    quantified by the ranking_metric, either through
+    a similarity or spatial distance metric.
+
+    The bond_length parameters ensures that the positions
+    are not too cramped, hence adsorbates never 
+    come too close to each other.
+
+    Args:
+        bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                considered bound, hence too close
+        k (int) :   number of empty candidate sites for adding / 
+                    adsorbed atoms for removing to consider per step
+        ranking_metric (str) : 'similarity' or 'proximity'. Metric based on which to choose
+                                k candidates (empty sites / adsorbates)
+
+    Returns:
+        FWAction : Firework action, updates fw_spec
+    """
     _fw_name = 'AddRemoveLadderTask'
     required_params = ["bond_length", "k", "ranking_metric"]
     optional_params = []
@@ -635,8 +774,34 @@ class AddRemoveLadderTask(FiretaskBase):
         fw_spec.pop("name")
         return FWAction(update_spec=fw_spec)
 
-    def add_adsorbate(self, simulation, bond_length, db, ranking_metric = "proximity", k = 7, 
+    def add_adsorbate(self, simulation, bond_length, db, 
+        ranking_metric = "proximity", k = 7, 
         adsorbate_name = "H", reference_id = -1, workflow_id = -1):
+        """
+        Adds one adsorbate to the structure at k different positions,
+        predefined by adsorption sites.
+
+        The new structures are added to the simulation collection.
+
+        Only supports atomic adsorbates so far.
+
+        Args:
+            simulation (dict) : simulation document in custom format
+            bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                    considered bound, hence too close
+            db (pymongo object) : connection to the mongodb database
+            k (int) :   number of empty candidate sites for adding / 
+                        adsorbed atoms for removing to consider per step
+            ranking_metric (str) : 'similarity' or 'proximity'. Metric based on which to choose
+                                    k candidates (empty sites / adsorbates)
+
+            adsorbate_name (str) :  element symbol of the adsorbed atom
+            reference_id (int) :    simulation id of the adsorbate reference
+            workflow_id (int) :  unique identifier of the current workflow
+
+        Returns:
+            list : new simulation ids
+        """
         print("adding 1 adsorbate")
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
@@ -672,15 +837,9 @@ class AddRemoveLadderTask(FiretaskBase):
             remaining_ids = ids
         else:
             remaining_ids = ids[:k]
-        #pp(remaining_ids)
 
         # construct structures
         adsorbate_lst = adsorbate_pos_to_atoms_lst(adsorption_sites[remaining_ids], adsorbate_name)
-
-        # TODO delete visualizer
-        #added_adsorbates = ase.Atoms("X" * len(remaining_ids), adsorption_sites[remaining_ids])
-        #view(atoms + added_adsorbates)
-        ####
 
         # create new simulations
         # loop over each adsorbate
@@ -710,37 +869,52 @@ class AddRemoveLadderTask(FiretaskBase):
             # getting only id for uploading simulations in chunks
             dct["_id"] = _query_id_counter_and_increment('simulations', db)
 
-            # simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
             simulations_chunk_list.append(dct)
 
             # update internal workflow data
             simulation_id = dct["_id"]
-            # update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
 
         db["simulations"].insert_many(simulations_chunk_list)
-        #print("new simulation id list: " , str(simulations_chunk_list))
         return new_calc_ids
 
-    def remove_adsorbate(self, simulation, bond_length, db, ranking_metric = "similarity", k = 7, adsorbate_name = "H", workflow_id = -1):
+    def remove_adsorbate(self, simulation, bond_length, db, 
+        ranking_metric = "similarity", k = 7, adsorbate_name = "H", 
+        workflow_id = -1):
+        """
+        Removew one adsorbate from the structure at k different positions.
+
+        The new structures are added to the simulation collection.
+
+        Only supports atomic adsorbates so far.
+
+        Args:
+            simulation (dict) : simulation document in custom format
+            bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                    considered bound, hence too close
+            db (pymongo object) : connection to the mongodb database
+            k (int) :   number of empty candidate sites for adding / 
+                        adsorbed atoms for removing to consider per step
+            ranking_metric (str) : 'similarity' or 'proximity'. Metric based on which to choose
+                                    k candidates (empty sites / adsorbates)
+
+            adsorbate_name (str) :  element symbol of the adsorbed atom
+            workflow_id (int) :  unique identifier of the current workflow
+
+        Returns:
+            list : new simulation ids
+        """
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
         cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(
             simulation)
         print("removing 1 adsorbate")
-        #print("cluster_atoms", cluster_atoms)
-        #print("adsorbate_atoms", adsorbate_atoms)
-        #print("site_ids_list", site_ids_list)
-        #print("reference_ids", reference_ids)
-        #print("adsorbate_ids", adsorbate_ids)
-
 
         # get descriptor of adsorbate atoms
         cluster = cluskit.Cluster(cluster_atoms + adsorbate_atoms)
         #cluster.get_sites(-1)
         desc = cluster.get_cluster_descriptor()[len(cluster_atoms) :]
         desc.shape
-
 
         # optional: exclude similar adsorbates based on similarity threshold
 
@@ -757,36 +931,25 @@ class AddRemoveLadderTask(FiretaskBase):
             remaining_ids = ids
         else:
             remaining_ids = ids[:k]
-        #pp(remaining_ids)
 
         # construct structures
         adsorbate_lst = adsorbate_pos_to_atoms_lst(adsorbate_atoms.get_positions()[remaining_ids], adsorbate_name)
-
-        # TODO delete visualizer
-        #removed_adsorbates = ase.Atoms("Xe" * len(remaining_ids), adsorbate_atoms.get_positions()[remaining_ids])
-        #view(atoms + removed_adsorbates)
-        ####
 
         # create new simulations
         # loop over each adsorbate
         simulations_chunk_list = []
         new_calc_ids = []
 
-
-        #print("remaining ids", remaining_ids)
         for idx in remaining_ids:
             print("idx of atom to remove", idx)
             joint_atoms = cluster_atoms
             dct = deepcopy(simulation)
             dct["adsorbates"] = []
-            #print("adsorbate_ids", adsorbate_ids)
             for i, adsorbate_id in zip(np.arange(len(adsorbate_ids)), adsorbate_ids):
                 if idx == i:
-                    #print("removed atom excluded")
                     # removed atom is excluded
                     pass
                 else:
-                    #print("adding adsorbate atom")
                     adsorbate = adsorbate_atoms[i]
                     joint_atoms, cluster_ids, new_adsorbate_ids = self.join_cluster_adsorbate(joint_atoms, adsorbate)
                     dct["adsorbates"].append(dict({"atom_ids": new_adsorbate_ids, "reference_id": reference_ids[idx],
@@ -818,13 +981,28 @@ class AddRemoveLadderTask(FiretaskBase):
 
             # update internal workflow data
             simulation_id = dct["_id"]
-            # update_spec["simulations"][str(simulation_id)] = dct
             new_calc_ids.append(simulation_id)
 
         db["simulations"].insert_many(simulations_chunk_list)
         return new_calc_ids
 
     def split_nanocluster_and_adsorbates(self, simulation):
+        """
+        Helper function to split a given structure in a simulation
+        document into two ase atoms objects containing only
+        the nanocluster or the adsorbate atoms.
+
+        Args:
+            simulation (dict) :
+
+        Returns:
+            tuple : cluster atoms (ase.Atoms),
+                    adsorbate atoms (ase.Atoms),
+                    adsorption site ids (list), 
+                    adsorption site classes (list), 
+                    reference ids (list), 
+                    adsorbate ids (list)                    
+        """
         adsorbate_ids = []
         reference_ids = []
         site_class_list = []
@@ -847,20 +1025,41 @@ class AddRemoveLadderTask(FiretaskBase):
         return cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids
 
     def x2_to_x(self, points, bond_length = 1.5):
+        """
+        Helper function to determine the points closest to all other 
+        points. It ranks them removing one by one until no points
+        are closer than the specified parameter bondlength.
+
+        Args:
+            points (2D ndarray) : Points in n-dimensional space
+            bondlength (float) :    criterion up to which points should
+                                    be removed.
+
+        Returns:
+            1D ndarray :    ids of the remaining points, ordered by minimum
+                            distance
+        """
         dmat = cdist(points, points)
         ids = cluskit.cluster._rank_fps(points, K = None, greedy =False)
         dmat = np.triu(dmat[ids, :][:, ids])
         remaining_ids = np.all((dmat > bondlength) | (dmat == 0), axis =0)
         return ids[remaining_ids == 1]
 
-    def get_empty_sites(self, site_positions, adsorbate_positions, bond_length = 1.5):
+    def get_empty_sites(self, site_positions, 
+        adsorbate_positions, bond_length = 1.5):
         """
-        ordered by distance to next adsorbate
-
-        :param site_positions:
-        :param adsorbate_positions:
-        :param bondlength:
-        :return:
+        From a set of predefined adsorption sites, it is reduced
+        to contain only sites which are not too close to existing
+        adsorbate atoms (with respect to parameter bond_length).
+        Args:
+            site_positions (2D ndarray) : adsorption site positions
+            adsorbate_positions (2D ndarray) : positions of all adsorbate atoms
+            bond_length (float) :   distance criterion up to which a site
+                                    is considered occupied by neighbouring atoms
+        
+        Returns:
+            1D ndarray :    ids of the remaining site positions, ordered by 
+                            minimum distance to the adsorbates
         """
         dmat = cdist(site_positions, adsorbate_positions)
         mindist = dmat.min(axis = 1)
@@ -870,6 +1069,19 @@ class AddRemoveLadderTask(FiretaskBase):
         return ids[remaining_ids == 1]
 
     def join_cluster_adsorbate(self, cluster, adsorbate):
+        """
+        Helper function to merge the structures
+        cluster and adsorbate while retaining information
+        about the ids
+
+        Args:
+            cluster (ase.Atoms) : nanocluster structure
+            adsorbate (ase.Atoms) : single adsorbate
+
+        Returns:
+            tuple : ase.Atoms object of merged structure, ids of the
+                    nanocluster, ids of the adsorbate
+        """
         joint_atoms = cluster + adsorbate
         cluster_ids = list(range(len(cluster)))
         adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
@@ -879,7 +1091,36 @@ class AddRemoveLadderTask(FiretaskBase):
 @explicit_serialize
 class NewLadderRootTask(FiretaskBase):
     """
-    Task to start CoverageLadder Workflow
+    Task to start CoverageLadder Workflow. It initiates a few
+    fw_spec["temp"] entries:
+        "step_history" 
+        "root_history"
+        "is_return"
+        "start_id"
+        "is_new_root"
+        "n_adsorbates"
+        "n_adsorbates_root"
+        "branch_dct"
+        "open_branches" 
+        "ne_dct" 
+        "direction"
+        "calc_ids"
+        "reference_energy"
+        "free_energy_correction"
+
+    Args:
+        start_ids (list) :  unique identifiers of the simulations collection which
+                            are used to start the workflow
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        free_energy_correction (float) :    free energy correction of the adsorption 
+                                            reaction at hand
+        initial_direction (bool) :  True will force the initial step to add an adsorbate,
+                                    False will force the initial step to remove an adsorbate
+
+    Returns:
+        FWAction : Firework action, updates fw_spec    
     """
 
     _fw_name = 'NewLadderRootTask'
@@ -914,7 +1155,6 @@ class NewLadderRootTask(FiretaskBase):
         root_history = [start_id]
 
 
-
         fw_spec["temp"]["step_history"] = [(start_ids, direction)] 
         fw_spec["temp"]["root_history"] = root_history
         fw_spec["temp"]["is_return"] = False,
@@ -935,6 +1175,38 @@ class NewLadderRootTask(FiretaskBase):
 
 
 def start_coverage_ladder(start_ids, initial_direction = 1, reference_energy = 0.0, free_energy_correction = 0.0):
+    """
+    Firework to start CoverageLadder Workflow. It initiates a few
+    fw_spec["temp"] entries:
+        "step_history" 
+        "root_history"
+        "is_return"
+        "start_id"
+        "is_new_root"
+        "n_adsorbates"
+        "n_adsorbates_root"
+        "branch_dct"
+        "open_branches" 
+        "ne_dct" 
+        "direction"
+        "calc_ids"
+        "reference_energy"
+        "free_energy_correction"
+
+    Args:
+        start_ids (list) :  unique identifiers of the simulations collection which
+                            are used to start the workflow
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        free_energy_correction (float) :    free energy correction of the adsorption 
+                                            reaction at hand
+        initial_direction (bool) :  True will force the initial step to add an adsorbate,
+                                    False will force the initial step to remove an adsorbate
+
+    Returns:
+        Firework : Firework NewLadderRootWork
+    """
     firetask1  = NewLadderRootTask(start_ids = start_ids, initial_direction = initial_direction, 
         reference_energy = reference_energy, free_energy_correction = free_energy_correction)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'NewLadderRootTask'},
@@ -942,18 +1214,72 @@ def start_coverage_ladder(start_ids, initial_direction = 1, reference_energy = 0
     return fw
 
 def add_remove_adsorbate(bond_length, k = 7, ranking_metric = "similarity"):
+    """
+    Firework in the coverage ladder workflow to either add
+    or remove an adsorbate (at k different positions)
+
+    The decision where to add or remove adsorbates is
+    quantified by the ranking_metric, either through
+    a similarity or spatial distance metric.
+
+    The bond_length parameters ensures that the positions
+    are not too cramped, hence adsorbates never 
+    come too close to each other.
+
+    Args:
+        bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                considered bound, hence too close
+        k (int) :   number of empty candidate sites for adding / 
+                    adsorbed atoms for removing to consider per step
+        ranking_metric (str) : 'similarity' or 'proximity'. Metric based on which to choose
+                                k candidates (empty sites / adsorbates)
+
+    Returns:
+        Firework : Firework AddRemoveLadderWork
+    """
     firetask1  = AddRemoveLadderTask(bond_length = bond_length, k = k, ranking_metric = ranking_metric)
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AddRemoveLadderTask'},
              name = 'AddRemoveLadderWork')    
     return fw
 
 def gather_ladder():
+    """
+    Firework for Gathering properties for coverage ladder.
+    Update database from previous calculations. 
+    Computes properties of systems. Currently, only
+    reaction energies (adsorption energies) are computed.
+    The ids of the input structures in calc_ids are 
+    replaced by the ids of the post-simulation structures 
+    from analysis_ids.
+
+    Args:
+
+    Returns:
+        Firework : Firework GatherLadderWork
+    """
     firetask1  = GatherLadderTask()
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'GatherLadderTask'},
              name = 'GatherLadderWork')    
     return fw
 
 def step_coverage_ladder(l = 2, d = 4):
+    """
+    This Firework is at the heart of the coverage ladder workflow.
+    It manages the following steps:
+        - gets lowest energy structures from the previous step
+        - checks if a new root structure has been found
+        - manages branches
+        - computes adsorption free energy
+        - decides upon termination based on parameter d
+        - decides direction of next step
+
+    Args:
+        d (int) : maximum depth of the coverage ladder (termination criterion)
+        l (int) : number of low-energy structures to carry over to the next step
+        
+    Returns:
+        Firework : Firework CoverageLadderWork
+    """
     firetask1  = CoverageLadderTask(l = l, d = d)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'CoverageLadderTask'},
              name = 'CoverageLadderWork')    
@@ -961,8 +1287,27 @@ def step_coverage_ladder(l = 2, d = 4):
 
 
 def get_per_type_coverage(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"], 
-        descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
+    descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
+    """
+    Firework to cover cluster fully with adsorbates based on a type of site.
+
+    Additionally, a reference simulation document is created and
+    the descriptors of the sites are stored.
+
+    Args:
+        reference_energy (float) : reference energy of the adsorbate
+        adsorbate_name  (str) : Adsorbate atom name to be placed
+                                on all sites found.
+        adsite_types  (list of str) : Can be "top", "bridge" or "hollow".
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
+
+    Returns:
+        Firework : Firework PerTypeCoverageCreationWork
+    """
     firetask1  = PerTypeCoverageCreationTask(
         adsorbate_name=adsorbate_name, 
         adsite_types = adsite_types,
@@ -977,12 +1322,42 @@ def get_per_type_coverage(reference_energy = 0.0, adsorbate_name='H', adsite_typ
     return fw
 
 def eliminate_pairs(adsorbate_name, bond_length):
+    """
+    Firework to eliminate too close adsorbate atoms on a covered
+    nanocluster. The adsorbates closest to each other are 
+    eliminated based on a minimum distance 'bond_length'.
+
+    The workflow is defused if no adsorbate atoms were removed.
+
+    Args:
+        adsorbate_name (str) : element symbol of the adsorbed atom
+        bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                considered bound, hence too close
+    
+    Returns:
+        Firework : Firework AdsorbateEliminationWork
+    """
     firetask1  = AdsorbateEliminationTask(adsorbate_name = adsorbate_name, bond_length = bond_length)
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AdsorbateEliminationTask'},
              name = 'AdsorbateEliminationWork')
     return fw
 
 def eliminate_closest(adsorbate_name, n_remaining):
+    """
+    Firework to eliminate too close adsorbate atoms on a covered
+    nanocluster. The adsorbates closest to each other are 
+    eliminated until only n_remaining adsorbates are left.
+
+    The workflow is defused if no adsorbate atoms were removed.
+
+    Args:
+        adsorbate_name (str) : element symbol of the adsorbed atom
+        n_remaining (int) : number of adsorbates which should remain after the
+                            first pre-DFT pruning of the adsorbate coverage
+    
+    Returns:
+        Firework : Firework AdsorbateEliminationWork
+    """
     firetask1  = AdsorbateEliminationTask(adsorbate_name = adsorbate_name, n_remaining = n_remaining)
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AdsorbateEliminationTask'},
              name = 'AdsorbateEliminationWork')

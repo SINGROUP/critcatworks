@@ -24,6 +24,39 @@ def get_coverage_workflow(template_path, username, password,
     adsorbates are put on top, bridge and hollow sites. Once the structure is relaxed by DFT,
     formed adsorbate molecules (pairs of atoms) are replaced by a single adsorbate.
     The procedure is repeated until no adsorbate molecules form.
+    
+    Args:
+        template_path (str) :   absolute path to input file for calculations. 
+                                It works as a template which is later modified by the
+                                simulation-specific Firework.
+        username (str) :        user who executed the workflow
+        password (str) :        password for user to upload to the database
+        worker_target_path (str) :  absolute path on computing resource 
+                                    directory needs to exist
+        structures (list) : list of ase.Atoms objects from where the workflow is started.
+        extdb_ids (list) :  unique identifiers of the simulations collection which
+                            are used to start the workflow
+        source_path (str) : absolute path on the computing resource to the directory 
+                            where to read the structures from
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate_name (str) : element symbol of the adsorbed atom
+        max_iterations (int) : maximum number of iterations in the workflow
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+        bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                considered bound, hence too close
+        n_remaining (int) : number of adsorbates which should remain after the
+                            first pre-DFT pruning of the adsorbate coverage
+        extdb_connect (dict):   dictionary containing the keys host,
+                                username, password, authsource and db_name.
+        
+    Returns:
+        fireworks.Workflow : coverage Fireworks Workflow object
     """
     
     with open (template_path, "r") as f:
@@ -85,7 +118,6 @@ def get_coverage_workflow(template_path, username, password,
     else:
         fw_eliminate_pairs = eliminate_pairs(adsorbate_name = adsorbate_name, bond_length = bond_length)
 
-
     # add above Fireworks with links
     workflow_list = [fw_init,
         fw_get_structures, 
@@ -129,9 +161,7 @@ def get_coverage_workflow(template_path, username, password,
         workflow_list.append(fw_eliminate_pairs)
         links_dict[fw_update_converged_data] = [fw_eliminate_pairs]
 
-
     ### loop ends ###
-
     wf = Workflow(workflow_list, links_dict)
     return wf
 

@@ -1,6 +1,7 @@
 from critcatworks.database.read import read_structures
 from critcatworks.database.read import start_from_structures
 from critcatworks.database.read import start_from_database
+from critcatworks.database.read import read_structures_locally
 
 from critcatworks.database.format import atoms_dict_to_ase
 from critcatworks.database.format import ase_to_atoms_dict

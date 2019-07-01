@@ -14,12 +14,21 @@ from critcatworks.dft.cp2k import setup_cp2k
 @explicit_serialize
 class CheckConvergenceTask(FiretaskBase):
     """ 
-    Task to check the convergence of the database
+    Task to check the convergence of the database.
     If not converged, the workflow continues.
+
+    Args:
+        threshold (float) : If the convergence_criterion (default MAE of property) is below the given threshold, 
+                            the workflow is defused early
+        convergence_criterion (str) :   Type of machine learning criterion, based on which to stop
+                                        the workflow. Defaults to mae (MAE)
+
+    Returns:
+        FWAction : Firework action, updates fw_spec, possible defuses the workflow
     """
 
     _fw_name = 'CheckConvergenceTask'
-    required_params = []
+    required_params = ['threshold', 'convergence_criterion']
     optional_params = []
 
     def run_task(self, fw_spec):
@@ -50,6 +59,19 @@ class CheckConvergenceTask(FiretaskBase):
 
 
 def check_convergence(threshold, convergence_criterion = "mae"):
+    """
+    Checks the convergence of the database.
+    If not converged, the workflow continues.
+
+    Args:
+        threshold (float) : If the convergence_criterion (default MAE of property) is below the given threshold, 
+                            the workflow is defused early
+        convergence_criterion (str) :   Type of machine learning criterion, based on which to stop
+                                        the workflow. Defaults to mae (MAE)
+
+    Returns:
+        Firework : Firework CheckConvergenceWork
+    """
     firetask1  = CheckConvergenceTask(threshold = threshold, convergence_criterion = convergence_criterion)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'CheckConvergenceTask'},
              name = 'CheckConvergenceWork')

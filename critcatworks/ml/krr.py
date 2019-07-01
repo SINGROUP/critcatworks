@@ -20,10 +20,21 @@ import time
 @explicit_serialize
 class MLTask(FiretaskBase):
     """ 
-    Task to update database from converged chunk
-    of calculations.
-    """
+    Machine Learning Task. It predicts the property of all uncomputed structures
+    in the workflow. It is trained on all converged structures. Crossvalidation 
+    is used to infer the optimal machine learning hyperparameters.
+    Currently, only KRR (kernel ridge regression) is implemented. 
 
+    A new document is added to the machine_learning collection. 
+    
+    Args:
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+    
+    Returns:
+        FWAction :  Firework action, updates fw_spec, possibly defuses
+                    workflow upon failure.
+    """
     _fw_name = 'MLTask'
     required_params = ['target_path']
     optional_params = []
@@ -45,7 +56,6 @@ class MLTask(FiretaskBase):
         calc_ids = fw_spec["temp"]["calc_ids"]
         is_converged_list = np.array(fw_spec["temp"]["is_converged_list"], dtype = 'bool')
         property_lst = fw_spec["temp"]["property"]
-        #descmatrix = np.array(fw_spec["temp"]["descmatrix"])
         descmatrix = read_descmatrix(fw_spec)
         workflow_id = fw_spec["workflow"]["_id"]
         workflow_parameters = fw_spec["workflow"]["parameters"]
@@ -61,7 +71,6 @@ class MLTask(FiretaskBase):
 
         finished_calc_ids = np.array(calc_ids)[:n_calcs_started]
         simulation_ids_training, _ , training_ids = np.intersect1d(finished_calc_ids, is_converged_ids, return_indices = True)
-        #training_ids = np.array(enumerated_ids)[np.intersect1d(finished_calc_ids, is_converged_ids)]
 
         print("training_ids", training_ids)
 
@@ -89,7 +98,6 @@ class MLTask(FiretaskBase):
         ### RUN ###
 
         if METHOD == "krr":
-            #mae, mse, y_to_predict, method_params = ml_krr(features, labels, training_ids, 
             ml_results = ml_krr(features, labels, training_ids, 
                 to_predict_features, to_predict_ids, 
                 is_scaled = False, n_cv = N_CV, path = parent_folder_path)
@@ -128,18 +136,28 @@ class MLTask(FiretaskBase):
 
         # update temp workflow data
         update_spec["temp"]["last_machine_learning_id"] = machine_learning_id
-
-        #update_spec["mae"] = mae
-        #update_spec["best_krr_parameters"] = krr_parameters
-        #update_spec["ids_predicted"] = to_predict_ids
-        #update_spec["predicted_energies"] = y_to_predict
-
         update_spec.pop("_category")
         update_spec.pop("name")
         return FWAction(update_spec=update_spec)
 
 
 def get_mae(target_path):
+    """ 
+    Creates Firework from MLTask. It predicts the property of all uncomputed structures
+    in the workflow. It is trained on all converged structures. Crossvalidation 
+    is used to infer the optimal machine learning hyperparameters.
+    Currently, only KRR (kernel ridge regression) is implemented. 
+
+    A new document is added to the machine_learning collection. 
+    
+    Args:
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+    
+    Returns:
+        FWAction :  Firework action, updates fw_spec, possibly defuses
+                    workflow upon failure.
+    """
     firetask1  = MLTask(target_path=target_path)
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'MLTask'},
              name = 'MLWork')
@@ -154,7 +172,37 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
         is_scaled = False,
         n_cv = 5,
         path = "."):
-    
+    """
+    Helper function to estimate the generalization error (MAE, MSE). The hyperparameters alpha and gamma are
+    by default scanned on a logarithmic scale. The data set is split randomly into training and test set.
+    The ratio of the split is defined by sample_size.
+    The training set is used for cross validation.
+
+    Args:
+        features (2D ndarray) : descriptor input for the machine learning algorithm for training/testing
+        labels (1D ndarray) :   property labels for the machine learning algorithm for training/testing
+        train_test_ids (1D ndarray) :   pythonic ids (of features and labels) for training and
+                                        testing. 
+        to_predict_features (1D ndarray) :  descriptor input for the machine learning algorithm 
+                                            for prediction
+        to_predict_ids (1D ndarray) :   pythonic ids (of features and labels) ommited from training and
+                                        testing. 
+        alpha_list (lsit) :     Regularization parameter. Defaults to np.logspace(-1, -9, 9)
+        gamma_list (list) :     Kernel function scaling parameter. Defaults to np.logspace(-1, -9, 9)
+        kernel_list (list) :    List of kernel functions (see sklearn documentation for options).
+                                Defaults to ['rbf']
+        sample_size (float) : The ratio of the training-test split is defined by this. Defaults to 0.8
+        is_scaled (bool) : If set to True, the features are scaled. Defaults to False
+        n_cv (int) :    Number of cross-validation splits. Defaults to 5
+        path (str) :    path whereto to write the machine learning output. Defaults to the
+                        current working directory
+
+    Returns:
+        dict :  machine learning results with the following keys:
+                ids_train, ids_test, ids_predicted, method_params, 
+                output (.label_predicted, .label_train, .label_test),
+                metrics_test, metrics_validation, metrics_training
+    """
     # load, split and scale data
     x_train, x_test, y_train, y_test, ids_train, ids_test = split_scale_data(features, labels, train_test_ids, sample_size, is_scaled)
 
@@ -184,7 +232,6 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
         path,
         )
 
-    #return mae, mse, y_to_predict, learner.best_params_
     ml_results = {
         "ids_train" : ids_train,
         "ids_test" : ids_test,
@@ -201,10 +248,20 @@ def ml_krr(features, labels, train_test_ids, to_predict_features, to_predict_ids
 
     return ml_results
 
-
-
-
 def scale_data(x_train, x_test, is_mean=True):
+    """
+    Helper function to the scale the data with respect
+    to the mean.
+
+    Args:
+        x_train (2D ndarray) : training data which is scaled
+        x_test (2D ndarray) : test data scaled accordingly
+        is_mean (bool) :    if set to False, scaled between 0 and 1.
+                            Otherwise, scaled centered around the mean of x_train.
+
+    Returns:
+        tuple : the scaled arrays x_train, x_test
+    """
     # Scale
     scaler = StandardScaler(with_mean=is_mean)  
         # fit only on training data
@@ -215,7 +272,21 @@ def scale_data(x_train, x_test, is_mean=True):
     return x_train, x_test
 
 def split_scale_data(x_data, y_data, ids_data, sample_size, is_scaled):
-    
+    """
+    Helper function to split and scale the data.
+
+    Args:
+        x_data (2D ndarray) : features of the training and test data
+        y_data (1D ndarray) : labels of the training and test data
+        ids_data (1D ndarray) : complete list of ids of datapoints used for training and testing
+        sample_size (float) : The ratio of the training-test split is defined by this
+        is_scaled (bool) : True scales the features centered around the mean
+
+    Returns:
+        tuple : ndarrays    x_train, x_test (split from x_data) 
+                            y_train, y_test (split from y_data)
+                            ids_train, ids_test (split from ids_data)
+    """
     x_train, x_test, y_train, y_test, ids_train, ids_test = train_test_split(x_data, y_data, ids_data, test_size = 1 - sample_size)
 
         # scale
@@ -224,7 +295,19 @@ def split_scale_data(x_data, y_data, ids_data, sample_size, is_scaled):
     return x_train, x_test, y_train, y_test, ids_train, ids_test
 
 def predict_and_error(learner, x_test, x_train, y_test):
+    """
+    Helper function to predict the property on a training and a test set.
 
+
+    Args:
+        learner (sklearn.learner) : learner object with which the training set was fitted
+        x_test (2D ndarray) :   test data scaled accordingly
+        x_train (2D ndarray) :  training data which is scaled
+        y_test (1D ndarray) :   labels of the test data
+
+    Returns:
+        tuple : mae, mse, y_pred, train_y_pred, learner
+    """
     y_pred = learner.predict(x_test)
 
     # run also on training set
@@ -242,6 +325,9 @@ def predict_and_error(learner, x_test, x_train, y_test):
 def write_output(learner, sample_size, ml_method, mae, mse, runtype, 
     ids_test, y_test, y_pred, ids_train, y_train, train_y_pred,
     to_predict_ids, y_to_predict, path):
+    """
+    Helper function to write the machine learning output.
+    """
     ### OUTPUT ###
     # y_test vs y_predict
     y_tmp = np.array([ids_test, y_test, y_pred])
@@ -263,8 +349,6 @@ def write_output(learner, sample_size, ml_method, mae, mse, runtype,
 
     np.savetxt(path + "/" + ml_method + str("_") + runtype + "_size" + str(sample_size) + ".remaining_predictions", y_compare, 
         header = "###ids_remaining   y_pred_remaining")
-
-
 
     with open(path + "/" + ml_method + str("_") + runtype + "_size" + str(sample_size) + ".out", "w") as f:
         f.write("MAE " + str(mae) + "\n")
@@ -292,5 +376,4 @@ def write_output(learner, sample_size, ml_method, mae, mse, runtype,
             for mean, std, params in zip(means, stds, learner.cv_results_['params']):
                 f.write("%0.4f (+/-%0.04f) for %r"
                       % (mean, std * 2, params) + "\n")
-
     return None
