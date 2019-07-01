@@ -14,59 +14,39 @@ import logging
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
+from critcatworks.database import adsorbate_pos_to_atoms_lst
+from critcatworks.database import join_cluster_adsorbate
+from critcatworks.database.extdb import gather_all_atom_types
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
 from critcatworks.database.extdb import fetch_simulations
-
-def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
-    """
-    works with only one adsorbate atom.
-    TODO generalize cluskit to return list of adsorbates
-    already in ase format.
-    Makes this function superfluous.
-    """
-    atoms_lst = []
-    ads_structures_dict = []
-    for adsorbate in adspos:
-        logging.debug(adsorbate_name)
-        logging.debug(adsorbate)
-        logging.debug(adsorbate.shape)
-        atoms = ase.Atoms(symbols=adsorbate_name, positions=adsorbate.reshape((1,3)))
-        atoms_lst.append(atoms)
-    return atoms_lst
-
-def join_cluster_adsorbate(cluster, adsorbate):
-    joint_atoms = cluster + adsorbate
-    cluster_ids = list(range(len(cluster)))
-    adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
-
-    return joint_atoms, cluster_ids, adsorbate_ids
-
-def gather_all_atom_types(calc_ids, simulations):
-    # going through nc atoms once to find atom types
-    atomic_numbers = []
-    for idx, calc_id in enumerate(calc_ids):
-        atoms_dict = simulations[str(calc_id)]["atoms"]
-        atoms = atoms_dict_to_ase(atoms_dict)
-        atomic_numbers.extend(atoms.get_atomic_numbers())
-
-    sorted_list_atomic_numbers = list(sorted(set(atomic_numbers)))
-
-    all_atomtypes = sorted_list_atomic_numbers
-    return all_atomtypes
 
 
 @explicit_serialize
 class AdsiteCreationTask(FiretaskBase):
     """ 
-    Task to determine adsorption site structures.
+    Firetask to determine adsorption site structures. The adsorbate
+    can only be a single atom. For a molecular adsorbate (binding
+    to only one site), please use the Firetask 
+    MonodentateAdsiteCreationTask.
+    On a set of nanoclusters, a combination of top/bridge/hollow sites
+    is classified and populated. Hence, the simulation collection
+    of the mongodb database is updated with structures which each
+    contain a single adsorbate on a nanocluster.
+
+    Besides, a descriptor matrix is written to a file for later use.
 
     Args:
-        adsorbate_name  (str) : Adsorbate atom name to be placed
-                                on all sites found.
-        adsite_types  (list of str) : Can be "top", "bridge" or "hollow".
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate_name (str) :  element symbold of the adsorbed atom
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+                
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
-
     _fw_name = 'AdsiteCreationTask'
     required_params = ['reference_energy', 'adsorbate_name', 'adsite_types']
     optional_params = []
@@ -110,6 +90,8 @@ class AdsiteCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
+            # TODO allow for other descriptors than default
+            # TODO read descriptor_params
             descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
@@ -162,20 +144,16 @@ class AdsiteCreationTask(FiretaskBase):
 
                     # getting only id for uploading simulations in chunks
                     dct["_id"] = _query_id_counter_and_increment('simulations', db)
-                    #simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
                     simulations_chunk_list.append(dct)
 
                     # update internal workflow data
                     simulation_id = dct["_id"]
-                    #update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
 
             db["simulations"].insert_many(simulations_chunk_list)
         
         descmatrix = np.array(desc_lst)
 
-            
-        #update_spec["temp"]["descmatrix"] = descmatrix
         # saves descmatrix as a path to a numpy array
         update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
@@ -187,14 +165,31 @@ class AdsiteCreationTask(FiretaskBase):
 @explicit_serialize
 class MonodentateAdsiteCreationTask(FiretaskBase):
     """ 
-    Task to determine adsorption site structures.
+    Firetask to determine adsorption site structures. The adsorbate
+    is specified as a molecule with an anchor X which binds to
+    only one site. The position of the binding atom is exactly
+    determined by the adsorption vector of the adsorption site
+    and the bond length between X and the closest, later binding,
+    atom. On a set of nanoclusters, a combination of 
+    top/bridge/hollow sites is classified and populated. 
+    Hence, the simulation collection of the mongodb database 
+    is updated with structures which each
+    contain a single adsorbate on a nanocluster.
+
+    Besides, a descriptor matrix is written to a file for later use.
 
     Args:
-        adsorbate  (str) : Adsorbate molecule with anchor atom x in json format.
-
-        adsite_types  (list of str) : Can be "top", "bridge" or "hollow".
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an "X" dummy atom
+                            which indicates the anchor point to the nanocluster
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+                
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
-
     _fw_name = 'MonodentateAdsiteCreationTask'
     required_params = ['reference_energy', 'adsorbate', 'adsite_types']
     optional_params = []
@@ -242,6 +237,8 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
+            # TODO allow for other descriptors than default
+            # TODO read descriptor_params
             descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
@@ -294,19 +291,15 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
 
                     # getting only id for uploading simulations in chunks
                     dct["_id"] = _query_id_counter_and_increment('simulations', db)
-                    #simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
                     simulations_chunk_list.append(dct)
 
                     # update internal workflow data
                     simulation_id = dct["_id"]
-                    #update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
         
             db["simulations"].insert_many(simulations_chunk_list)
         descmatrix = np.array(desc_lst)
 
-            
-        #update_spec["temp"]["descmatrix"] = descmatrix
         # saves descmatrix as a path to a numpy array
         update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
@@ -316,18 +309,42 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
         return FWAction(update_spec=update_spec)
 
 
-
 @explicit_serialize
 class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
     """ 
-    Task to determine adsorption site structures.
+    Firetask to determine unique adsorption site structures. The 
+    adsorbate is specified as a molecule with an anchor X which 
+    binds to only one site. The position of the binding atom is 
+    exactly determined by the adsorption vector of the adsorption 
+    site and the bond length between X and the closest, later 
+    binding, atom. On a set of nanoclusters, a combination of 
+    top/bridge/hollow sites is classified.
+    The sites are ranked for their dissimilarity based on a 
+    local descriptor (default soap), then uniqueness is defined
+    by a threshold parameter. Only the unique sites are kept and
+    populated with the adsorbate. 
+
+    Hence, the simulation collection of the mongodb database 
+    is updated with structures which each contain a single adsorbate 
+    on a nanocluster.
+
+    Besides, a descriptor matrix is written to a file for later use.
 
     Args:
-        adsorbate  (str) : Adsorbate molecule with anchor atom x in json format.
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an "X" dummy atom
+                            which indicates the anchor point to the nanocluster
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        threshold (float) :     threshold of similarity metric between the local structures
+                                of the adsorption sites. Only sites which are more dissimilar 
+                                than the given threshold are computed
 
-        adsite_types  (list of str) : Can be "top", "bridge" or "hollow".
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
-
     _fw_name = 'MonodentateUniqueAdsiteCreationTask'
     required_params = ['reference_energy', 'adsorbate', 'adsite_types', 'threshold']
     optional_params = []
@@ -348,7 +365,6 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
 
         # adsorbate atom with anchor x
         adsorbate_x = atoms_dict_to_ase(adsorbate_dict)
-
 
         # create reference of adsorbate in order to store its total energy
         # for later constructing adsorption energies
@@ -375,6 +391,8 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
+            # TODO allow for other descriptors than default
+            # TODO read descriptor_params
             descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
@@ -431,19 +449,15 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
 
                     # getting only id for uploading simulations in chunks
                     dct["_id"] = _query_id_counter_and_increment('simulations', db)
-                    #simulation = update_simulations_collection(extdb_connect = fw_spec["extdb_connect"], **dct)
                     simulations_chunk_list.append(dct)
 
                     # update internal workflow data
                     simulation_id = dct["_id"]
-                    #update_spec["simulations"][str(simulation_id)] = dct
                     new_calc_ids.append(simulation_id)
         
             db["simulations"].insert_many(simulations_chunk_list)
         descmatrix = np.array(desc_lst)
 
-            
-        #update_spec["temp"]["descmatrix"] = descmatrix
         # saves descmatrix as a path to a numpy array
         update_spec["temp"]["descmatrix"] = write_descmatrix(descmatrix)
         update_spec["temp"]["calc_ids"] = new_calc_ids
@@ -457,8 +471,21 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
 @explicit_serialize
 class AdsiteRankTask(FiretaskBase):
     """ 
-    Task to determine ranking of adsorption site structures.
+    Firetask to determine ranking of adsorption site structures.
+    Based on a previously calculated descriptor matrix (in
+    the fw_spec as a path to a file), the adsorbate structure 
+    sites are ranked are ranked for their dissimilarity.
 
+    Hence, the calc_ids, the structures to be simulated are
+    reordered. 
+
+    Besides, the descriptor matrix is reordered and written 
+    to a file for later use.
+
+    Args:
+
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
 
     _fw_name = 'AdsiteRankTask'
@@ -468,8 +495,6 @@ class AdsiteRankTask(FiretaskBase):
     def run_task(self, fw_spec):
         logging.debug(fw_spec)
         calc_ids = fw_spec["temp"]["calc_ids"]
-        #descmatrix = fw_spec["temp"]["descmatrix"]
-        #descmatrix = np.array(descmatrix)
         descmatrix = read_descmatrix(fw_spec)
         logging.info("DESCRIPTOR matrix attributes")
         logging.info(descmatrix.shape)
@@ -488,13 +513,36 @@ class AdsiteRankTask(FiretaskBase):
         return FWAction(update_spec=update_spec)
 
 
-
-
-
-
 def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"], 
         descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
+    """ 
+    Firetask to determine adsorption site structures. The adsorbate
+    can only be a single atom. For a molecular adsorbate (binding
+    to only one site), please use the Firetask 
+    MonodentateAdsiteCreationTask.
+    On a set of nanoclusters, a combination of top/bridge/hollow sites
+    is classified and populated. Hence, the simulation collection
+    of the mongodb database is updated with structures which each
+    contain a single adsorbate on a nanocluster.
+
+    Besides, a descriptor matrix is written to a file for later use.
+
+    Args:
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate_name (str) :  element symbold of the adsorbed atom
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
+                    
+    Returns:
+        FWAction : Firework action, updates fw_spec
+    """
     firetask1  = AdsiteCreationTask(
         adsorbate_name=adsorbate_name, 
         adsite_types = adsite_types,
@@ -511,6 +559,36 @@ def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top
 def get_monodentate_adsites(reference_energy = 0.0, adsorbate = {}, adsite_types = ["top", "bridge", "hollow"], 
         descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
+    """ 
+    Firetask to determine adsorption site structures. The adsorbate
+    is specified as a molecule with an anchor X which binds to
+    only one site. The position of the binding atom is exactly
+    determined by the adsorption vector of the adsorption site
+    and the bond length between X and the closest, later binding,
+    atom. On a set of nanoclusters, a combination of 
+    top/bridge/hollow sites is classified and populated. 
+    Hence, the simulation collection of the mongodb database 
+    is updated with structures which each
+    contain a single adsorbate on a nanocluster.
+
+    Besides, a descriptor matrix is written to a file for later use.
+
+    Args:
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an "X" dummy atom
+                            which indicates the anchor point to the nanocluster
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
+
+    Returns:
+        Firework : Firework MonodentateAdsiteCreationWork
+    """
     firetask1  = MonodentateAdsiteCreationTask(
         adsorbate = adsorbate, 
         adsite_types = adsite_types,
@@ -528,6 +606,44 @@ def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsit
         threshold = 0.001, descriptor = "soap", 
         descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
+    """ 
+    Firework to determine unique adsorption site structures. The 
+    adsorbate is specified as a molecule with an anchor X which 
+    binds to only one site. The position of the binding atom is 
+    exactly determined by the adsorption vector of the adsorption 
+    site and the bond length between X and the closest, later 
+    binding, atom. On a set of nanoclusters, a combination of 
+    top/bridge/hollow sites is classified.
+    The sites are ranked for their dissimilarity based on a 
+    local descriptor (default soap), then uniqueness is defined
+    by a threshold parameter. Only the unique sites are kept and
+    populated with the adsorbate. 
+
+    Hence, the simulation collection of the mongodb database 
+    is updated with structures which each contain a single adsorbate 
+    on a nanocluster.
+
+    Besides, a descriptor matrix is written to a file for later use.
+
+    Args:
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an "X" dummy atom
+                            which indicates the anchor point to the nanocluster
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        threshold (float) :     threshold of similarity metric between the local structures
+                                of the adsorption sites. Only sites which are more dissimilar 
+                                than the given threshold are computed
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
+
+    Returns:
+        Firework : Firework MonodentateUniqueAdsiteCreationWork
+    """
     firetask1  = MonodentateUniqueAdsiteCreationTask(
         adsorbate = adsorbate, 
         adsite_types = adsite_types,
@@ -543,6 +659,23 @@ def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsit
     return fw
 
 def rank_adsites():
+    """    
+    Firework to determine ranking of adsorption site structures.
+    Based on a previously calculated descriptor matrix (in
+    the fw_spec as a path to a file), the adsorbate structure 
+    sites are ranked are ranked for their dissimilarity.
+
+    Hence, the calc_ids, the structures to be simulated are
+    reordered. 
+
+    Besides, the descriptor matrix is reordered and written 
+    to a file for later use.
+
+    Args:
+
+    Returns:
+        Firework : Firework AdsiteRankWork
+    """
     firetask1  = AdsiteRankTask()
     fw = Firework([firetask1], spec = {'_category' : "medium", 'name' : 'AdsiteRankTask'},
              name = 'AdsiteRankWork')

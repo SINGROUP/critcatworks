@@ -118,3 +118,48 @@ def read_descmatrix(fw_spec):
     return descmatrix
 
 
+def join_cluster_adsorbate(cluster, adsorbate):
+    """
+    Helper function to merge the structures
+    cluster and adsorbate while retaining information
+    about the ids
+
+    Args:
+        cluster (ase.Atoms) : nanocluster structure
+        adsorbate (ase.Atoms) : single adsorbate
+
+    Returns:
+        tuple : ase.Atoms object of merged structure, ids of the
+                nanocluster, ids of the adsorbate
+    """
+    joint_atoms = cluster + adsorbate
+    cluster_ids = list(range(len(cluster)))
+    adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
+
+    return joint_atoms, cluster_ids, adsorbate_ids
+
+def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
+    """
+    Helper function to turn positions for adsorbates into
+    ase atoms objects while the species is defined by
+    adsorbate_name
+    Attention! Works with only one adsorbate atom.
+    In the future, cluskit might generalize to return a 
+    list of adsorbates already in ase format.
+    
+    Args:
+        adspos (2D ndarray) : positions of the adsorbate atoms
+        adsorbate_name (str) : chemical symbol of the adsorbate atoms
+
+    Returns:
+        list : ase.Atoms objects of single atoms at each position
+    """
+    atoms_lst = []
+    ads_structures_dict = []
+    for adsorbate in adspos:
+        logging.debug(adsorbate_name)
+        logging.debug(adsorbate)
+        logging.debug(adsorbate.shape)
+        atoms = ase.Atoms(symbols=adsorbate_name, positions=adsorbate.reshape((1,3)))
+        atoms_lst.append(atoms)
+    return atoms_lst

@@ -17,81 +17,14 @@ from collections import defaultdict
 
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
+from critcatworks.database import adsorbate_pos_to_atoms_lst
+from critcatworks.database import join_cluster_adsorbate
+from critcatworks.database.extdb import gather_all_atom_types
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import fetch_simulations
 from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
 
 from ase.visualize import view
-
-def join_cluster_adsorbate(cluster, adsorbate):
-    """
-    Helper function to merge the structures
-    cluster and adsorbate while retaining information
-    about the ids
-
-    Args:
-        cluster (ase.Atoms) : nanocluster structure
-        adsorbate (ase.Atoms) : single adsorbate
-
-    Returns:
-        tuple : ase.Atoms object of merged structure, ids of the
-                nanocluster, ids of the adsorbate
-    """
-    joint_atoms = cluster + adsorbate
-    cluster_ids = list(range(len(cluster)))
-    adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
-
-    return joint_atoms, cluster_ids, adsorbate_ids
-
-def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
-    """
-    Helper function to turn positions for adsorbates into
-    ase atoms objects while the species is defined by
-    adsorbate_name
-    Attention! Works with only one adsorbate atom.
-    In the future, cluskit might generalize to return a 
-    list of adsorbates already in ase format.
-    
-    Args:
-        adspos (2D ndarray) : positions of the adsorbate atoms
-        adsorbate_name (str) : chemical symbol of the adsorbate atoms
-
-    Returns:
-        list : ase.Atoms objects of single atoms at each position
-    """
-    atoms_lst = []
-    ads_structures_dict = []
-    for adsorbate in adspos:
-        logging.debug(adsorbate_name)
-        logging.debug(adsorbate)
-        logging.debug(adsorbate.shape)
-        atoms = ase.Atoms(symbols=adsorbate_name, positions=adsorbate.reshape((1,3)))
-        atoms_lst.append(atoms)
-    return atoms_lst
-
-def gather_all_atom_types(calc_ids, simulations):
-    """
-    Helper function to determine all atom types in the dataset
-
-    Args:
-        calc_ids (list) : ids of the simulation collection
-        simulations (list) : simulation documents
-
-    Returns:
-        list :  a sorted unique list of atomic numbers in the
-                dataset
-    """
-    # going through nc atoms once to find atom types
-    atomic_numbers = []
-    for idx, calc_id in enumerate(calc_ids):
-        atoms_dict = simulations[str(calc_id)]["atoms"]
-        atoms = atoms_dict_to_ase(atoms_dict)
-        atomic_numbers.extend(atoms.get_atomic_numbers())
-
-    sorted_list_atomic_numbers = list(sorted(set(atomic_numbers)))
-
-    all_atomtypes = sorted_list_atomic_numbers
-    return all_atomtypes
 
 
 def x2_to_x(points, bondlength = 1.5):
@@ -847,7 +780,7 @@ class AddRemoveLadderTask(FiretaskBase):
         new_calc_ids = []
         for adsorbate in adsorbate_lst:
             # adsites_dict
-            joint_atoms, cluster_ids, adsorbate_ids = self.join_cluster_adsorbate(atoms, adsorbate)
+            joint_atoms, cluster_ids, adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
             joint_atoms_dict = ase_to_atoms_dict(joint_atoms)
 
             # update external database
@@ -924,7 +857,7 @@ class AddRemoveLadderTask(FiretaskBase):
         if ranking_metric == "similarity":
             ids = cluskit.cluster._rank_fps(desc, K=None, greedy=False)
         else:
-            ids = self.x2_to_x(adsorbate_atoms.get_positions(), bond_length = bond_length)
+            ids = x2_to_x(adsorbate_atoms.get_positions(), bond_length = bond_length)
 
         # keep first k adsorbates
         if len(ids) < k:
@@ -951,7 +884,7 @@ class AddRemoveLadderTask(FiretaskBase):
                     pass
                 else:
                     adsorbate = adsorbate_atoms[i]
-                    joint_atoms, cluster_ids, new_adsorbate_ids = self.join_cluster_adsorbate(joint_atoms, adsorbate)
+                    joint_atoms, cluster_ids, new_adsorbate_ids = join_cluster_adsorbate(joint_atoms, adsorbate)
                     dct["adsorbates"].append(dict({"atom_ids": new_adsorbate_ids, "reference_id": reference_ids[idx],
                                                    "site_class": site_class_list[idx], "site_ids": site_ids_list[idx]}))
             # info about surface atoms not there
@@ -1024,27 +957,6 @@ class AddRemoveLadderTask(FiretaskBase):
 
         return cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids
 
-    def x2_to_x(self, points, bond_length = 1.5):
-        """
-        Helper function to determine the points closest to all other 
-        points. It ranks them removing one by one until no points
-        are closer than the specified parameter bondlength.
-
-        Args:
-            points (2D ndarray) : Points in n-dimensional space
-            bondlength (float) :    criterion up to which points should
-                                    be removed.
-
-        Returns:
-            1D ndarray :    ids of the remaining points, ordered by minimum
-                            distance
-        """
-        dmat = cdist(points, points)
-        ids = cluskit.cluster._rank_fps(points, K = None, greedy =False)
-        dmat = np.triu(dmat[ids, :][:, ids])
-        remaining_ids = np.all((dmat > bondlength) | (dmat == 0), axis =0)
-        return ids[remaining_ids == 1]
-
     def get_empty_sites(self, site_positions, 
         adsorbate_positions, bond_length = 1.5):
         """
@@ -1067,26 +979,6 @@ class AddRemoveLadderTask(FiretaskBase):
         mindist = mindist[ids]
         remaining_ids = mindist > bond_length
         return ids[remaining_ids == 1]
-
-    def join_cluster_adsorbate(self, cluster, adsorbate):
-        """
-        Helper function to merge the structures
-        cluster and adsorbate while retaining information
-        about the ids
-
-        Args:
-            cluster (ase.Atoms) : nanocluster structure
-            adsorbate (ase.Atoms) : single adsorbate
-
-        Returns:
-            tuple : ase.Atoms object of merged structure, ids of the
-                    nanocluster, ids of the adsorbate
-        """
-        joint_atoms = cluster + adsorbate
-        cluster_ids = list(range(len(cluster)))
-        adsorbate_ids = list(range(len(cluster_ids), len(joint_atoms)))
-
-        return joint_atoms, cluster_ids, adsorbate_ids
 
 @explicit_serialize
 class NewLadderRootTask(FiretaskBase):

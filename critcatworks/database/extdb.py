@@ -278,3 +278,29 @@ def fetch_simulations(extdb_connect, simulation_ids):
     simulations  = dict(zip(simulation_ids, simulations_list))
     print(simulation_ids, len(simulation_ids))
     return simulations
+
+
+def gather_all_atom_types(calc_ids, simulations):
+    """
+    Helper function to determine all atom types in the dataset
+
+    Args:
+        calc_ids (list) : ids of the simulation collection
+        simulations (list) : simulation documents
+
+    Returns:
+        list :  a sorted unique list of atomic numbers in the
+                dataset
+    """
+    # going through nc atoms once to find atom types
+    atomic_numbers = []
+    for idx, calc_id in enumerate(calc_ids):
+        atoms_dict = simulations[str(calc_id)]["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
+        atomic_numbers.extend(atoms.get_atomic_numbers())
+
+    sorted_list_atomic_numbers = list(sorted(set(atomic_numbers)))
+
+    all_atomtypes = sorted_list_atomic_numbers
+    return all_atomtypes
+
