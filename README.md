@@ -1,4 +1,8 @@
 # critcatworks
+
+Documentation website under construction
+[https://singroup.github.io/critcatworks/](https://singroup.github.io/critcatworks/)
+
 Worklow manager for DFT simulations on nanocluster databases using Fireworks
 
 Beta version features 3 workflows:
