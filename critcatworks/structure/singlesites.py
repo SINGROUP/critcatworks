@@ -24,8 +24,7 @@ from critcatworks.database.extdb import fetch_simulations
 
 @explicit_serialize
 class AdsiteCreationTask(FiretaskBase):
-    """ 
-    Firetask to determine adsorption site structures. The adsorbate
+    """Firetask to determine adsorption site structures. The adsorbate
     can only be a single atom. For a molecular adsorbate (binding
     to only one site), please use the Firetask 
     MonodentateAdsiteCreationTask.
@@ -164,8 +163,7 @@ class AdsiteCreationTask(FiretaskBase):
 
 @explicit_serialize
 class MonodentateAdsiteCreationTask(FiretaskBase):
-    """ 
-    Firetask to determine adsorption site structures. The adsorbate
+    """Firetask to determine adsorption site structures. The adsorbate
     is specified as a molecule with an anchor X which binds to
     only one site. The position of the binding atom is exactly
     determined by the adsorption vector of the adsorption site
@@ -311,8 +309,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
 
 @explicit_serialize
 class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
-    """ 
-    Firetask to determine unique adsorption site structures. The 
+    """Firetask to determine unique adsorption site structures. The 
     adsorbate is specified as a molecule with an anchor X which 
     binds to only one site. The position of the binding atom is 
     exactly determined by the adsorption vector of the adsorption 
@@ -470,8 +467,7 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
 
 @explicit_serialize
 class AdsiteRankTask(FiretaskBase):
-    """ 
-    Firetask to determine ranking of adsorption site structures.
+    """Firetask to determine ranking of adsorption site structures.
     Based on a previously calculated descriptor matrix (in
     the fw_spec as a path to a file), the adsorbate structure 
     sites are ranked are ranked for their dissimilarity.
@@ -516,8 +512,7 @@ class AdsiteRankTask(FiretaskBase):
 def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top", "bridge", "hollow"], 
         descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
-    """ 
-    Firetask to determine adsorption site structures. The adsorbate
+    """Firetask to determine adsorption site structures. The adsorbate
     can only be a single atom. For a molecular adsorbate (binding
     to only one site), please use the Firetask 
     MonodentateAdsiteCreationTask.
@@ -539,7 +534,7 @@ def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top
                             descriptors, see the documentation of dscribe
                             Defaults to 'soap'
         descriptor_params (dict) : descriptor parameters
-                    
+
     Returns:
         FWAction : Firework action, updates fw_spec
     """
@@ -559,8 +554,7 @@ def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top
 def get_monodentate_adsites(reference_energy = 0.0, adsorbate = {}, adsite_types = ["top", "bridge", "hollow"], 
         descriptor = "soap", descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
-    """ 
-    Firetask to determine adsorption site structures. The adsorbate
+    """Firetask to determine adsorption site structures. The adsorbate
     is specified as a molecule with an anchor X which binds to
     only one site. The position of the binding atom is exactly
     determined by the adsorption vector of the adsorption site
@@ -606,8 +600,7 @@ def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsit
         threshold = 0.001, descriptor = "soap", 
         descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
             "crossover" : True, "sparse" : False}):
-    """ 
-    Firework to determine unique adsorption site structures. The 
+    """Firework to determine unique adsorption site structures. The 
     adsorbate is specified as a molecule with an anchor X which 
     binds to only one site. The position of the binding atom is 
     exactly determined by the adsorption vector of the adsorption 
@@ -659,8 +652,7 @@ def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsit
     return fw
 
 def rank_adsites():
-    """    
-    Firework to determine ranking of adsorption site structures.
+    """Firework to determine ranking of adsorption site structures.
     Based on a previously calculated descriptor matrix (in
     the fw_spec as a path to a file), the adsorbate structure 
     sites are ranked are ranked for their dissimilarity.

@@ -3,8 +3,7 @@ import pymongo
 from pprint import pprint as pp
 
 def get_external_database(extdb_connect):
-    """
-    A helper function to connect to a mongodb database.
+    """A helper function to connect to a mongodb database.
 
     Args:
         extdb_connect (dict):   dictionary containing the keys host,
@@ -12,7 +11,7 @@ def get_external_database(extdb_connect):
 
     Returns:
         pymongo object : address to database
-    """ 
+    """
     CLIENT = pymongo.MongoClient(extdb_connect["host"], 
         username = extdb_connect["username"],
         password = extdb_connect["password"],
@@ -22,8 +21,7 @@ def get_external_database(extdb_connect):
 
 
 def _reset_IDs_collection(db = None):
-    """
-    Helper function to reset the counting of the following ids:
+    """Helper function to reset the counting of the following ids:
     simulations
     workflows
     machine_learning
@@ -55,8 +53,7 @@ def _reset_IDs_collection(db = None):
 
 
 def _query_id_counter_and_increment(collection, db):
-    """
-    Helper function to query an ID and increase it by one.
+    """Helper function to query an ID and increase it by one.
 
     Args:
         collection (str) :  name of the collection id to fetch and increment.
@@ -72,8 +69,7 @@ def _query_id_counter_and_increment(collection, db):
     return id_counter
 
 def update_simulations_collection(extdb_connect, **kwargs):
-    """
-    A new document is added to the simulations collection of the mongodb database.
+    """A new document is added to the simulations collection of the mongodb database.
     It contains records of all manipulation steps of a structure, in particular the 
     initial structure, structure after DFT relaxation, 
     structure with added or removed asdorbates, etc.
@@ -148,8 +144,7 @@ def update_workflows_collection(username, password, creation_time,
     extdb_connect, parameters = {},
     name = "UNNAMED", workflow_type = "NO_TYPE",
     **kwargs):
-    """
-    A new document is added to the workflows collection of the mongodb database.
+    """A new document is added to the workflows collection of the mongodb database.
     (Usually at the beginning of the workflow run.)
     It contains records of all types of workflows. The documents should be in a specific format. 
     Any arguments can be specified, however, certain arguments below should be 
@@ -197,8 +192,7 @@ def update_machine_learning_collection(method, extdb_connect, workflow_id = -1,
     metrics_training = {}, metrics_validation = {}, metrics_test = {},
     output = {},
     **kwargs):
-    """
-    A new document is added to the machine_learning collection of the mongodb database.
+    """A new document is added to the machine_learning collection of the mongodb database.
     It contains records of all types of workflows. The documents should be in a specific format. 
     Any arguments can be specified, however, certain arguments below should be 
     consistently given to allow for comprehensive database querying.
@@ -260,16 +254,15 @@ def update_machine_learning_collection(method, extdb_connect, workflow_id = -1,
     return dct
 
 def fetch_simulations(extdb_connect, simulation_ids):
-    """
-    Fetches simulation records by simulation id
+    """Fetches simulation records by simulation id
 
     Args:
         extdb_connect (dict):   dictionary containing the keys host,
                                 username, password, authsource and db_name. 
         simulation_ids (1D ndarray) : unique identifiers of the simulation collection.
 
-    Returns :
-        list of dict : documents of the simulation collection
+    Returns:
+        list : documents of the simulation collection
     """
     db = get_external_database(extdb_connect)
     cursor =   db['simulations'].find({"_id" : {"$in" : simulation_ids }})
@@ -281,8 +274,7 @@ def fetch_simulations(extdb_connect, simulation_ids):
 
 
 def gather_all_atom_types(calc_ids, simulations):
-    """
-    Helper function to determine all atom types in the dataset
+    """Helper function to determine all atom types in the dataset
 
     Args:
         calc_ids (list) : ids of the simulation collection
@@ -303,4 +295,3 @@ def gather_all_atom_types(calc_ids, simulations):
 
     all_atomtypes = sorted_list_atomic_numbers
     return all_atomtypes
-
