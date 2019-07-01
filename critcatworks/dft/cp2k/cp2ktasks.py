@@ -7,6 +7,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 import pathlib, logging
 import pycp2k, cp2kparser
 import ase, ase.io
+from scipy.spatial.distance import cdist, pdist
 from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database.extdb import update_simulations_collection
 import copy
@@ -62,6 +63,17 @@ class CP2KSetupTask(FiretaskBase):
         cell_size = atoms.get_cell()
         
         # manipulate simulation cell
+        # check if cell_size is zero. Default to 2.5 times diameter.
+        all_zeros = not cell_size.any()
+            
+        if all_zeros:
+            pos = atoms.get_positions()
+            pdist(pos)
+            diameter = pdist(pos).max()
+            mpl = 2.5
+            atoms.set_cell([diameter * mpl, diameter * mpl, diameter * mpl])
+            cell_size = atoms.get_cell()
+
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.A = "[angstrom] " + str(cell_size[0][0]) + " " + str(cell_size[0][1]) + " " + str(cell_size[0][2]) 
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.B = "[angstrom] " + str(cell_size[1][0]) + " " + str(cell_size[1][1]) + " " + str(cell_size[1][2]) 
         calc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.CELL.C = "[angstrom] " + str(cell_size[2][0]) + " " + str(cell_size[2][1]) + " " + str(cell_size[2][2]) 
