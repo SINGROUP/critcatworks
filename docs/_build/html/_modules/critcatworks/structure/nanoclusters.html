@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.structure.nanoclusters &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.structure.nanoclusters</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">PyTask</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks.queue.queue_launcher</span> <span class="k">import</span> <span class="n">launch_rocket_to_queue</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.queue_adapters.common_adapter</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">update_simulations_collection</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.format</span> <span class="k">import</span> <span class="n">atoms_dict_to_ase</span><span class="p">,</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">fetch_simulations</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">get_external_database</span><span class="p">,</span> <span class="n">_query_id_counter_and_increment</span>
+<span class="kn">import</span> <span class="nn">cluskit</span>
+<span class="kn">import</span> <span class="nn">dscribe</span>
+<div class="viewcode-block" id="NCStabilityTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.NCStabilityTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">NCStabilityTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Task to compare the stability of clusters using cohesive or total energy.</span>
+<span class="sd">    Cohesive energy requires atomic total energies.</span>
+
+<span class="sd">    Writes a file called cohesive_energy.json where the energies are summarized</span>
+<span class="sd">    split by nanocluster composition.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        atomic_energies (list) :    atomic energies provided using the same </span>
+<span class="sd">                                    simulation parameters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;NCStabilityTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;atomic_energies&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="NCStabilityTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.NCStabilityTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">atomic_energies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;atomic_energies&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">analysis_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;analysis_ids&quot;</span><span class="p">]</span>
+        <span class="c1"># analysis_ids becomes calc_ids</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">analysis_ids</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids</span><span class="p">)</span>
+
+        <span class="n">cohesive_energy_dct</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cohesive_energy_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="n">calc_ids</span><span class="p">:</span>
+            <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">])</span>
+            <span class="c1"># get total energy</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">total_energy</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;total_energy&quot;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;simulation&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; did not seam to have total_energy in its output.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="n">atomic_numbers</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">][</span><span class="s2">&quot;numbers&quot;</span><span class="p">]</span>
+            <span class="n">cohesive_energy</span> <span class="o">=</span> <span class="n">total_energy</span>
+
+            <span class="k">if</span> <span class="n">cohesive_energy</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;simulation&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; has a total_energy of None.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>                
+
+            <span class="c1"># get chemical formula</span>
+            <span class="n">dct</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="n">_count_symbols</span><span class="p">(</span><span class="n">atomic_numbers</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">occurences</span> <span class="ow">in</span> <span class="n">dct</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">cohesive_energy</span> <span class="o">=</span> <span class="n">cohesive_energy</span> <span class="o">-</span> <span class="p">(</span> <span class="n">atomic_energies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">symbol</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">occurences</span> <span class="p">)</span>
+
+            <span class="n">formula_string</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="n">formula_metal</span><span class="p">(</span><span class="n">atomic_numbers</span><span class="p">,</span> <span class="n">empirical</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">formula_string</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cohesive_energy_dct</span><span class="p">:</span>
+                <span class="n">cohesive_energy_dct</span><span class="p">[</span><span class="n">formula_string</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">cohesive_energy_dct</span><span class="p">[</span><span class="n">formula_string</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">cohesive_energy</span>
+            <span class="n">cohesive_energy_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cohesive_energy</span><span class="p">)</span>
+
+
+        <span class="n">sort_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">cohesive_energy_lst</span><span class="p">)</span>
+        <span class="n">sorted_calc_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)[</span><span class="n">sort_ids</span><span class="p">]</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;cohesive_energy_dct&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;cohesive_energy_lst&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">cohesive_energy_dct</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">cohesive_energy_lst</span><span class="p">)</span>
+
+        <span class="c1"># cluster_stability</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;cohesive_energy.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cohesive_energy_dct</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+
+        <span class="c1"># fireworks</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;sorted_calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sorted_calc_ids</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;cohesive_energy_dct&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cohesive_energy_dct</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_ids</span>
+
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="NCGenerationTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.NCGenerationTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">NCGenerationTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Firetask to generate binary nanoclusters of defined size and shape.</span>
+<span class="sd">    For each binary element combination, for each composition, n_configurations</span>
+<span class="sd">    maximally dissimilar structures are created and uploaded to the</span>
+<span class="sd">    simulations collection of the mongodb database.</span>
+<span class="sd">    For further information on the generation algorithm, </span>
+<span class="sd">    consult the documentation of cluskit.</span>
+
+<span class="sd">    The new structures are added to the simulation collection of</span>
+<span class="sd">    the mongodb database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_initial_configurations (int) : number of initial configurations per </span>
+<span class="sd">                                         composition to choose from (higher number</span>
+<span class="sd">                                         will make the grid finer)</span>
+<span class="sd">        n_configurations (int) :    number of configurations per composition </span>
+<span class="sd">                                    (chosen based on maximally different </span>
+<span class="sd">                                    structural features)</span>
+<span class="sd">        shape (str) : determines shape of nanoclusters. &#39;ico&#39;, &#39;octa&#39; and &#39;wulff&#39; </span>
+<span class="sd">        nanocluster_size (int) : determines nanocluster size. Meaning depends on shape </span>
+<span class="sd">        compositions (list) : each element determines the amount of atoms of type 1. </span>
+<span class="sd">        elements (list) : elements (str) to iterate over</span>
+<span class="sd">        generate_pure_nanoclusters (bool) : if set to True, also pure </span>
+<span class="sd">                                            nanoclusters are generated</span>
+<span class="sd">        bondlength_dct (dict) :     bond lengths to use for specific elements. </span>
+<span class="sd">                                    Some default bond lenghts are provided for</span>
+<span class="sd">                                    common elements</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;NCGenerationTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;n_initial_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;n_configurations&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="s1">&#39;nanocluster_size&#39;</span><span class="p">,</span> <span class="s1">&#39;compositions&#39;</span><span class="p">,</span> <span class="s1">&#39;elements&#39;</span><span class="p">,]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;generate_pure_nanoclusters&#39;</span><span class="p">,</span> <span class="s1">&#39;bondlength_dct&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="NCGenerationTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.NCGenerationTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">n_initial_configurations</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;n_initial_configurations&quot;</span><span class="p">]</span> 
+        <span class="n">n_configurations</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;n_configurations&quot;</span><span class="p">]</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;shape&quot;</span><span class="p">]</span>
+        <span class="n">nanocluster_size</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;nanocluster_size&quot;</span><span class="p">]</span>
+        <span class="n">compositions</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;compositions&quot;</span><span class="p">]</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">]</span>
+        <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;generate_pure_nanoclusters&quot;</span><span class="p">],</span> 
+        <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;bondlength_dct&quot;</span><span class="p">]</span>
+
+        <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">])</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simulations&#39;</span><span class="p">]</span>
+
+        <span class="c1"># generate clusters</span>
+        <span class="n">nanoclusters</span><span class="p">,</span> <span class="n">calc_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">n_initial_configurations</span><span class="p">,</span> <span class="n">n_configurations</span><span class="p">,</span> 
+            <span class="n">shape</span><span class="p">,</span> <span class="n">nanocluster_size</span><span class="p">,</span> 
+            <span class="n">compositions</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> 
+            <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="n">generate_pure_nanoclusters</span><span class="p">,</span> <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="n">bondlength_dct</span><span class="p">,</span>
+            <span class="n">db</span> <span class="o">=</span> <span class="n">db</span><span class="p">,</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span><span class="p">)</span>
+
+        <span class="c1"># upload all simulations at once</span>
+        <span class="n">simulations</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">nanoclusters</span><span class="p">)</span>
+
+        <span class="c1"># fireworks</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_ids</span>
+
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NCGenerationTask.generate"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.NCGenerationTask.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_initial_configurations</span><span class="p">,</span> <span class="n">n_configurations</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> 
+        <span class="n">nanocluster_size</span><span class="p">,</span> <span class="n">compositions</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> 
+        <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">db</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates binary nanoclusters. For further information, </span>
+<span class="sd">        consult the documentation of cluskit</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_initial_configurations (int) : number of initial configurations per </span>
+<span class="sd">                                             composition to choose from (higher number</span>
+<span class="sd">                                             will make the grid finer)</span>
+<span class="sd">            n_configurations (int) :    number of configurations per composition </span>
+<span class="sd">                                        (chosen based on maximally different </span>
+<span class="sd">                                        structural features)</span>
+<span class="sd">            shape (str) : determines shape of nanoclusters. &#39;ico&#39;, &#39;octa&#39; and &#39;wulff&#39; </span>
+<span class="sd">            nanocluster_size (int) : determines nanocluster size. Meaning depends on shape </span>
+<span class="sd">            compositions (list) : each element determines the amount of atoms of type 1. </span>
+<span class="sd">            elements (list) : elements (str) to iterate over</span>
+<span class="sd">            generate_pure_nanoclusters (bool) : if set to True, also pure </span>
+<span class="sd">                                                nanoclusters are generated</span>
+<span class="sd">            bondlength_dct (dict) :     bond lengths to use for specific elements. </span>
+<span class="sd">                                        Some default bond lenghts are provided for</span>
+<span class="sd">                                        common elements</span>
+<span class="sd">            db (pymongo object) :       connection to the mongodb database</span>
+<span class="sd">            workflow_id (int) :     unique identifier of the current workflow</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple : list of nanocluster ase.Atoms objects,</span>
+<span class="sd">                    list of simulation ids</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">test_scaffold</span> <span class="o">=</span> <span class="n">cluskit</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">get_scaffold</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">nanocluster_size</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+        <span class="n">NATOMS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_scaffold</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nanoclusters_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simulations&#39;</span><span class="p">]</span>
+
+        <span class="c1"># lattice_constants fcc</span>
+        <span class="n">tm_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Sc&#39;</span><span class="p">:</span> <span class="mf">4.6796</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">:</span> <span class="mf">4.1731</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">:</span> <span class="mf">4.2851</span><span class="p">,</span> <span class="s1">&#39;Cr&#39;</span><span class="p">:</span> <span class="mf">4.1154</span><span class="p">,</span> <span class="s1">&#39;Mn&#39;</span><span class="p">:</span> <span class="mf">1.2604</span><span class="p">,</span> <span class="s1">&#39;Fe&#39;</span><span class="p">:</span> <span class="mf">4.0538</span><span class="p">,</span> 
+               <span class="s1">&#39;Co&#39;</span><span class="p">:</span> <span class="mf">3.5456</span><span class="p">,</span> <span class="s1">&#39;Zn&#39;</span><span class="p">:</span> <span class="mf">3.7687</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="mf">5.1582</span><span class="p">,</span> <span class="s1">&#39;Zr&#39;</span><span class="p">:</span> <span class="mf">4.5707</span><span class="p">,</span> <span class="s1">&#39;Nb&#39;</span><span class="p">:</span> <span class="mf">4.6675</span><span class="p">,</span> <span class="s1">&#39;Mo&#39;</span><span class="p">:</span> <span class="mf">4.4505</span><span class="p">,</span> 
+               <span class="s1">&#39;Tc&#39;</span><span class="p">:</span> <span class="mf">3.8679</span><span class="p">,</span> <span class="s1">&#39;Ru&#39;</span><span class="p">:</span> <span class="mf">3.8267</span><span class="p">,</span> <span class="s1">&#39;Cd&#39;</span><span class="p">:</span> <span class="mf">4.2135</span><span class="p">,</span> <span class="s1">&#39;Hf&#39;</span><span class="p">:</span> <span class="mf">4.5204</span><span class="p">,</span> <span class="s1">&#39;Ta&#39;</span><span class="p">:</span> <span class="mf">4.6687</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span> <span class="mf">4.4763</span><span class="p">,</span> 
+               <span class="s1">&#39;Re&#39;</span><span class="p">:</span> <span class="mf">3.9046</span><span class="p">,</span> <span class="s1">&#39;Os&#39;</span><span class="p">:</span> <span class="mf">3.8670</span><span class="p">,</span> <span class="s1">&#39;Hg&#39;</span><span class="p">:</span> <span class="mf">4.2497</span><span class="p">}</span>
+
+        <span class="c1"># manage compositions</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">el1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">el2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">el1</span><span class="p">,</span> <span class="n">el2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;skipping double-counted combinations&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">generate_pure_nanoclusters</span> <span class="o">==</span> <span class="kc">False</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;skipping pure nanoclusters&quot;</span><span class="p">)</span>        
+                    <span class="k">continue</span>
+            
+
+                <span class="k">for</span> <span class="n">composition</span> <span class="ow">in</span> <span class="n">compositions</span><span class="p">:</span>
+                    <span class="c1"># estimate bondlength</span>
+                    <span class="n">bondlength_el1</span> <span class="o">=</span> <span class="n">bondlength_dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">el1</span><span class="p">,</span> <span class="n">tm_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">el1</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.41</span><span class="p">)</span>
+                    <span class="n">bondlength_el2</span> <span class="o">=</span> <span class="n">bondlength_dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">el2</span><span class="p">,</span> <span class="n">tm_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">el2</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.41</span><span class="p">)</span>
+
+                    <span class="n">bondlength</span> <span class="o">=</span> <span class="n">composition</span> <span class="o">/</span> <span class="n">NATOMS</span> <span class="o">*</span> <span class="n">bondlength_el1</span> <span class="o">+</span> <span class="p">(</span><span class="n">NATOMS</span> <span class="o">-</span> <span class="n">composition</span><span class="p">)</span> <span class="o">/</span> <span class="n">NATOMS</span> <span class="o">*</span> <span class="n">bondlength_el2</span>
+
+                    <span class="c1"># create scaffold</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating scaffold&quot;</span><span class="p">)</span>
+                    <span class="n">scaffold</span> <span class="o">=</span> <span class="n">cluskit</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">get_scaffold</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">nanocluster_size</span><span class="p">,</span> <span class="n">bondlength</span> <span class="o">*</span> <span class="mf">1.41</span><span class="p">)</span>
+
+                    <span class="n">atnum1</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">atomic_numbers</span><span class="p">[</span><span class="n">el1</span><span class="p">]</span>
+                    <span class="n">atnum2</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">atomic_numbers</span><span class="p">[</span><span class="n">el2</span><span class="p">]</span>
+
+                    <span class="n">scaffold</span><span class="o">.</span><span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">dscribe</span><span class="o">.</span><span class="n">descriptors</span><span class="o">.</span><span class="n">SOAP</span><span class="p">(</span>
+                        <span class="n">atomic_numbers</span><span class="o">=</span><span class="p">[</span><span class="n">atnum1</span><span class="p">,</span> <span class="n">atnum2</span><span class="p">],</span>
+                        <span class="n">periodic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">rcut</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+                        <span class="n">nmax</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                        <span class="n">lmax</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                        <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">average</span><span class="o">=</span><span class="kc">True</span>
+                    <span class="p">)</span>
+                    <span class="c1"># run cluster generator</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cluster generator&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="n">cluster_lst</span> <span class="o">=</span> <span class="n">scaffold</span><span class="o">.</span><span class="n">get_unique_clusters_in_range</span><span class="p">(</span><span class="n">typeA</span> <span class="o">=</span> <span class="n">atnum1</span><span class="p">,</span> <span class="n">typeB</span> <span class="o">=</span> <span class="n">atnum2</span><span class="p">,</span> 
+                            <span class="n">ntypeB</span> <span class="o">=</span> <span class="n">NATOMS</span> <span class="o">-</span> <span class="n">composition</span><span class="p">,</span> <span class="n">n_clus</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">cluster_lst</span> <span class="o">=</span> <span class="n">scaffold</span><span class="o">.</span><span class="n">get_unique_clusters_in_range</span><span class="p">(</span><span class="n">typeA</span> <span class="o">=</span> <span class="n">atnum1</span><span class="p">,</span> <span class="n">typeB</span> <span class="o">=</span> <span class="n">atnum2</span><span class="p">,</span> 
+                            <span class="n">ntypeB</span> <span class="o">=</span> <span class="n">NATOMS</span> <span class="o">-</span> <span class="n">composition</span><span class="p">,</span> <span class="n">n_clus</span> <span class="o">=</span> <span class="n">n_initial_configurations</span><span class="p">)</span>
+                        <span class="n">cluster_lst</span> <span class="o">=</span> <span class="n">cluster_lst</span><span class="p">[:</span><span class="n">n_configurations</span><span class="p">]</span>
+
+                    <span class="n">count</span> <span class="o">+=</span> <span class="n">n_configurations</span>
+                    <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cluster_lst</span><span class="p">):</span>
+                        <span class="n">name</span> <span class="o">=</span> <span class="n">el1</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">composition</span><span class="p">)</span> <span class="o">+</span> <span class="n">el2</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">NATOMS</span> <span class="o">-</span> <span class="n">composition</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.xyz&quot;</span>
+                        <span class="c1"># simulation format</span>
+                        <span class="n">simulation_id</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;simulations&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+                        <span class="n">atoms</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">ase_object</span>
+                        <span class="n">nanocluster_atom_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)))</span>
+                        <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">ase_to_atoms_dict</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+                        <span class="n">nanocluster</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;atom_ids&quot;</span> <span class="p">:</span> <span class="n">nanocluster_atom_ids</span><span class="p">,</span> <span class="s2">&quot;reference_id&quot;</span> <span class="p">:</span> <span class="n">simulation_id</span><span class="p">}</span>
+
+                        <span class="n">dct</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="n">simulation_id</span><span class="p">,</span> <span class="s2">&quot;atoms&quot;</span> <span class="p">:</span> <span class="n">atoms_dict</span><span class="p">,</span> 
+                            <span class="s2">&quot;source_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;workflow_id&quot;</span> <span class="p">:</span> <span class="n">workflow_id</span><span class="p">,</span> 
+                            <span class="s2">&quot;nanoclusters&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="n">nanocluster</span><span class="p">],</span> <span class="s2">&quot;adsorbates&quot;</span> <span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;substrates&quot;</span> <span class="p">:</span> <span class="p">[],</span> 
+                            <span class="s2">&quot;operations&quot;</span> <span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;inp&quot;</span> <span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
+                            <span class="p">}</span>
+
+                        <span class="n">nanoclusters_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+                        <span class="n">calc_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">simulation_id</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">break</span>
+        <span class="k">return</span> <span class="n">nanoclusters_lst</span><span class="p">,</span> <span class="n">calc_ids</span></div></div>
+
+
+<div class="viewcode-block" id="compare_nanoclusters"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.compare_nanoclusters">[docs]</a><span class="k">def</span> <span class="nf">compare_nanoclusters</span><span class="p">(</span><span class="n">atomic_energies</span> <span class="o">=</span> <span class="p">{}):</span>    
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Firework to compare the stability of clusters using cohesive or total energy.</span>
+<span class="sd">    Cohesive energy requires atomic total energies.</span>
+
+<span class="sd">    Writes a file called cohesive_energy.json where the energies are summarized</span>
+<span class="sd">    split by nanocluster composition.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        atomic_energies (list) :    atomic energies provided using the same </span>
+<span class="sd">                                    simulation parameters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework NCStabilityWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">NCStabilityTask</span><span class="p">(</span><span class="n">atomic_energies</span> <span class="o">=</span> <span class="n">atomic_energies</span><span class="p">)</span>
+    <span class="n">dct</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;lightweight&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;NCStabilityTask&#39;</span><span class="p">}</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span><span class="o">=</span><span class="n">dct</span><span class="p">,</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;NCStabilityWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+
+<div class="viewcode-block" id="generate_nanoclusters"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.nanoclusters.generate_nanoclusters">[docs]</a><span class="k">def</span> <span class="nf">generate_nanoclusters</span><span class="p">(</span><span class="n">n_initial_configurations</span><span class="p">,</span> <span class="n">n_configurations</span><span class="p">,</span> 
+    <span class="n">shape</span><span class="p">,</span> <span class="n">nanocluster_size</span><span class="p">,</span> <span class="n">compositions</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> 
+    <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Firework to generate binary nanoclusters of defined size and shape.</span>
+<span class="sd">    For each binary element combination, for each composition, n_configurations</span>
+<span class="sd">    maximally dissimilar structures are created and uploaded to the</span>
+<span class="sd">    simulations collection of the mongodb database.</span>
+<span class="sd">    For further information on the generation algorithm, </span>
+<span class="sd">    consult the documentation of cluskit.</span>
+
+<span class="sd">    The new structures are added to the simulation collection of</span>
+<span class="sd">    the mongodb database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_initial_configurations (int) : number of initial configurations per </span>
+<span class="sd">                                         composition to choose from (higher number</span>
+<span class="sd">                                         will make the grid finer)</span>
+<span class="sd">        n_configurations (int) :    number of configurations per composition </span>
+<span class="sd">                                    (chosen based on maximally different </span>
+<span class="sd">                                    structural features)</span>
+<span class="sd">        shape (str) : determines shape of nanoclusters. &#39;ico&#39;, &#39;octa&#39; and &#39;wulff&#39; </span>
+<span class="sd">        nanocluster_size (int) : determines nanocluster size. Meaning depends on shape </span>
+<span class="sd">        compositions (list) : each element determines the amount of atoms of type 1. </span>
+<span class="sd">        elements (list) : elements (str) to iterate over</span>
+<span class="sd">        generate_pure_nanoclusters (bool) : if set to True, also pure </span>
+<span class="sd">                                            nanoclusters are generated</span>
+<span class="sd">        bondlength_dct (dict) :     bond lengths to use for specific elements. </span>
+<span class="sd">                                    Some default bond lenghts are provided for</span>
+<span class="sd">                                    common elements</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework NCGenerationWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">NCGenerationTask</span><span class="p">(</span><span class="n">n_initial_configurations</span> <span class="o">=</span> <span class="n">n_initial_configurations</span><span class="p">,</span> 
+        <span class="n">n_configurations</span> <span class="o">=</span> <span class="n">n_configurations</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">,</span> <span class="n">nanocluster_size</span> <span class="o">=</span> <span class="n">nanocluster_size</span><span class="p">,</span>
+        <span class="n">compositions</span> <span class="o">=</span> <span class="n">compositions</span><span class="p">,</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">elements</span><span class="p">,</span>
+        <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="n">dct</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;large&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;NCGenerationTask&#39;</span><span class="p">}</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span><span class="o">=</span><span class="n">dct</span><span class="p">,</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;NCGenerationWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

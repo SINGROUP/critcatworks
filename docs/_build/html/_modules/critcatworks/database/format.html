@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.database.format &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.database.format</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">PyTask</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks.queue.queue_launcher</span> <span class="k">import</span> <span class="n">launch_rocket_to_queue</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.queue_adapters.common_adapter</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="atoms_dict_to_ase"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.format.atoms_dict_to_ase">[docs]</a><span class="k">def</span> <span class="nf">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to convert a ATOMS dictionary into an </span>
+<span class="sd">    ase.Atoms object</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        atoms_dict (dict) : dictionary with information about the atoms.</span>
+<span class="sd">                            should be in the following format</span>
+
+<span class="sd">                            numbers (1D ndarray)   : list of atomic numbers as numpy array [N] of ints</span>
+<span class="sd">                            positions (2D ndarray) : positions as numpy matrix [Nx3] of doubles</span>
+<span class="sd">                            constraints (2D ndarray) : frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free</span>
+<span class="sd">                            pbc (bool)             : use periodic boundaries</span>
+<span class="sd">                            cell (2D ndarray)      : matrix 3x3 with cell vectors on the rows</span>
+<span class="sd">                            celldisp (1D ndarray)  : displacement of cell from origin</span>
+<span class="sd">                            info (dict)            : field for additional information related to structure</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ase.Atoms : Corresponding ase.Atoms object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="p">[</span><span class="s1">&#39;cell&#39;</span><span class="p">]</span>
+    <span class="n">celldisp</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="p">[</span><span class="s1">&#39;celldisp&#39;</span><span class="p">]</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="p">[</span><span class="s1">&#39;constraints&#39;</span><span class="p">]</span>
+    <span class="n">pbc</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="p">[</span><span class="s1">&#39;pbc&#39;</span><span class="p">]</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="p">[</span><span class="s1">&#39;numbers&#39;</span><span class="p">]</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="p">[</span><span class="s1">&#39;positions&#39;</span><span class="p">]</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">atoms_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+    <span class="n">atoms</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">(</span><span class="n">numbers</span><span class="o">=</span><span class="n">numbers</span><span class="p">,</span>
+        <span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">cell</span><span class="p">,</span>
+        <span class="n">celldisp</span> <span class="o">=</span> <span class="n">celldisp</span><span class="p">,</span>
+        <span class="n">constraint</span> <span class="o">=</span> <span class="n">constraints</span><span class="p">,</span>
+        <span class="n">pbc</span> <span class="o">=</span> <span class="n">pbc</span><span class="p">,</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">info</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">atoms</span></div>
+
+
+<div class="viewcode-block" id="ase_to_atoms_dict"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.format.ase_to_atoms_dict">[docs]</a><span class="k">def</span> <span class="nf">ase_to_atoms_dict</span><span class="p">(</span><span class="n">atoms</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to convert an </span>
+<span class="sd">    ase.Atoms object into its corresponding python dictionary</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        atoms (ase.Atoms) : ase.Atoms object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict : Corresponding python dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_positions</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_cell</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">pbc</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_pbc</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_atomic_numbers</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">constraints</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">constraints</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">constraints</span>
+    <span class="n">celldisp</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_celldisp</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">info</span>
+
+    <span class="n">atoms_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;positions&quot;</span> <span class="p">:</span> <span class="n">positions</span><span class="p">,</span>
+        <span class="s2">&quot;cell&quot;</span> <span class="p">:</span> <span class="n">cell</span><span class="p">,</span>
+        <span class="s2">&quot;pbc&quot;</span> <span class="p">:</span> <span class="n">pbc</span><span class="p">,</span>
+        <span class="s2">&quot;numbers&quot;</span> <span class="p">:</span> <span class="n">numbers</span><span class="p">,</span>
+        <span class="s2">&quot;constraints&quot;</span> <span class="p">:</span> <span class="n">constraints</span><span class="p">,</span>
+        <span class="s2">&quot;celldisp&quot;</span> <span class="p">:</span> <span class="n">celldisp</span><span class="p">,</span>
+        <span class="s2">&quot;info&quot;</span> <span class="p">:</span> <span class="n">info</span><span class="p">,</span>    
+        <span class="p">}</span>
+    <span class="k">return</span> <span class="n">atoms_dict</span></div>
+
+<div class="viewcode-block" id="write_descmatrix"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.format.write_descmatrix">[docs]</a><span class="k">def</span> <span class="nf">write_descmatrix</span><span class="p">(</span><span class="n">descmatrix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to write a descriptor matrix required for </span>
+<span class="sd">    machine learning. It is stored as a file, since large arrays</span>
+<span class="sd">    make fireworks slow.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        descmatrix (2D np.ndarray) : descriptor matrix with </span>
+<span class="sd">                                     M features x N datapoints</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str : absolute path to file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_str</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M&quot;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;descmatrix_&quot;</span> <span class="o">+</span> <span class="n">time_str</span> <span class="o">+</span>  <span class="s2">&quot;.npy&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">descmatrix</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="read_descmatrix"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.format.read_descmatrix">[docs]</a><span class="k">def</span> <span class="nf">read_descmatrix</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to read a descriptor matrix required for </span>
+<span class="sd">    machine learning. It is stored as a file, since large arrays</span>
+<span class="sd">    make fireworks slow.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fw_spec (dict) : Only the key &#39;descmatrix&#39; is read. It expects a string </span>
+<span class="sd">                         with the absolute path to file    </span>
+<span class="sd">                         </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        2D np.ndarray  :    descriptor matrix with </span>
+<span class="sd">                            M features x N datapoints</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;descmatrix&quot;</span><span class="p">]</span>
+    <span class="n">descmatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">descmatrix</span></div>
+
+
+<div class="viewcode-block" id="join_cluster_adsorbate"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.format.join_cluster_adsorbate">[docs]</a><span class="k">def</span> <span class="nf">join_cluster_adsorbate</span><span class="p">(</span><span class="n">cluster</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to merge the structures</span>
+<span class="sd">    cluster and adsorbate while retaining information</span>
+<span class="sd">    about the ids</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cluster (ase.Atoms) : nanocluster structure</span>
+<span class="sd">        adsorbate (ase.Atoms) : single adsorbate</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple : ase.Atoms object of merged structure, ids of the</span>
+<span class="sd">                nanocluster, ids of the adsorbate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">joint_atoms</span> <span class="o">=</span> <span class="n">cluster</span> <span class="o">+</span> <span class="n">adsorbate</span>
+    <span class="n">cluster_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cluster</span><span class="p">)))</span>
+    <span class="n">adsorbate_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cluster_ids</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">joint_atoms</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">joint_atoms</span><span class="p">,</span> <span class="n">cluster_ids</span><span class="p">,</span> <span class="n">adsorbate_ids</span></div>
+
+<div class="viewcode-block" id="adsorbate_pos_to_atoms_lst"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.format.adsorbate_pos_to_atoms_lst">[docs]</a><span class="k">def</span> <span class="nf">adsorbate_pos_to_atoms_lst</span><span class="p">(</span><span class="n">adspos</span><span class="p">,</span> <span class="n">adsorbate_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to turn positions for adsorbates into</span>
+<span class="sd">    ase atoms objects while the species is defined by</span>
+<span class="sd">    adsorbate_name</span>
+<span class="sd">    Attention! Works with only one adsorbate atom.</span>
+<span class="sd">    In the future, cluskit might generalize to return a </span>
+<span class="sd">    list of adsorbates already in ase format.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        adspos (2D ndarray) : positions of the adsorbate atoms</span>
+<span class="sd">        adsorbate_name (str) : chemical symbol of the adsorbate atoms</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list : ase.Atoms objects of single atoms at each position</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atoms_lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ads_structures_dict</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">adsorbate</span> <span class="ow">in</span> <span class="n">adspos</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">adsorbate_name</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">adsorbate</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">adsorbate</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="n">adsorbate_name</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">adsorbate</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+        <span class="n">atoms_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">atoms_lst</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

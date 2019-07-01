@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.ml.convergence &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.ml.convergence</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">PyTask</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks.queue.queue_launcher</span> <span class="k">import</span> <span class="n">launch_rocket_to_queue</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.queue_adapters.common_adapter</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">critcatworks.dft.cp2k</span> <span class="k">import</span> <span class="n">setup_cp2k</span>
+
+<div class="viewcode-block" id="CheckConvergenceTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.convergence.CheckConvergenceTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">CheckConvergenceTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Task to check the convergence of the database.</span>
+<span class="sd">    If not converged, the workflow continues.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        threshold (float) : If the convergence_criterion (default MAE of property) is below the given threshold, </span>
+<span class="sd">                            the workflow is defused early</span>
+<span class="sd">        convergence_criterion (str) :   Type of machine learning criterion, based on which to stop</span>
+<span class="sd">                                        the workflow. Defaults to mae (MAE)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec, possible defuses the workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;CheckConvergenceTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="s1">&#39;convergence_criterion&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="CheckConvergenceTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.convergence.CheckConvergenceTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+
+        <span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;threshold&quot;</span><span class="p">]</span>
+        <span class="n">convergence_criterion</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;convergence_criterion&quot;</span><span class="p">]</span>
+        
+        <span class="n">machine_learning_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_machine_learning_id&quot;</span><span class="p">,</span> <span class="s2">&quot;NONE&quot;</span><span class="p">)</span>
+        <span class="n">machine_learning</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;machine_learning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">machine_learning_id</span><span class="p">),</span> <span class="p">{})</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">machine_learning</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metrics_test&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">convergence_criterion</span><span class="p">,</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">threshold</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mae</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Database is converged&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;exiting workflow&quot;</span><span class="p">)</span>
+            <span class="n">defuse_workflow</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">defuse_workflow</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># start new chunk of calculations</span>
+            <span class="c1"># already defined as children in the workflow</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;calculating next chunk. continue workflow as planned&quot;</span><span class="p">)</span>
+
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">,</span> <span class="n">defuse_workflow</span><span class="o">=</span><span class="n">defuse_workflow</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="check_convergence"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.convergence.check_convergence">[docs]</a><span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">convergence_criterion</span> <span class="o">=</span> <span class="s2">&quot;mae&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks the convergence of the database.</span>
+<span class="sd">    If not converged, the workflow continues.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        threshold (float) : If the convergence_criterion (default MAE of property) is below the given threshold, </span>
+<span class="sd">                            the workflow is defused early</span>
+<span class="sd">        convergence_criterion (str) :   Type of machine learning criterion, based on which to stop</span>
+<span class="sd">                                        the workflow. Defaults to mae (MAE)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework CheckConvergenceWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">CheckConvergenceTask</span><span class="p">(</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">convergence_criterion</span> <span class="o">=</span> <span class="n">convergence_criterion</span><span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;lightweight&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;CheckConvergenceTask&#39;</span><span class="p">},</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;CheckConvergenceWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>
