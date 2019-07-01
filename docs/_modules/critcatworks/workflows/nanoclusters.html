@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.workflows.nanoclusters &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.workflows.nanoclusters</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span>
+
+<span class="c1"># internal modules</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">start_from_structures</span><span class="p">,</span> <span class="n">start_from_database</span><span class="p">,</span> <span class="n">read_structures</span>
+<span class="kn">from</span> <span class="nn">critcatworks.structure</span> <span class="k">import</span> <span class="n">compare_nanoclusters</span><span class="p">,</span> <span class="n">update_converged_data</span>
+<span class="kn">from</span> <span class="nn">critcatworks.dft</span> <span class="k">import</span> <span class="n">setup_folders</span><span class="p">,</span> <span class="n">chunk_calculations</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.format</span> <span class="k">import</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.update</span> <span class="k">import</span> <span class="n">initialize_workflow_data</span>
+
+<div class="viewcode-block" id="get_nanoclusters_workflow"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.nanoclusters.get_nanoclusters_workflow">[docs]</a><span class="k">def</span> <span class="nf">get_nanoclusters_workflow</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> 
+    <span class="n">worker_target_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">structures</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+    <span class="n">extdb_ids</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">source_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reference_energy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+    <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Workflow to relax the structure of a set of</span>
+<span class="sd">    nanoclusters using a simulation software (e.g. CP2K).</span>
+<span class="sd">    The cohesive energies are calculated and summarized.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        template_path (str) :   absolute path to input file for calculations. </span>
+<span class="sd">                                It works as a template which is later modified by the</span>
+<span class="sd">                                simulation-specific Firework.</span>
+<span class="sd">        username (str) :        user who executed the workflow</span>
+<span class="sd">        password (str) :        password for user to upload to the database</span>
+<span class="sd">        worker_target_path (str) :  absolute path on computing resource </span>
+<span class="sd">                                    directory needs to exist</span>
+<span class="sd">        structures (list) : list of ase.Atoms objects from where the workflow is started.</span>
+<span class="sd">        extdb_ids (list) :  unique identifiers of the simulations collection which</span>
+<span class="sd">                            are used to start the workflow</span>
+<span class="sd">        source_path (str) : absolute path on the computing resource to the directory </span>
+<span class="sd">                            where to read the structures from        </span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.</span>
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        fireworks.Workflow : nanocluster Fireworks Workflow object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1">#FireWork: Initialize workflow with workflow_id from external database</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;template&quot;</span> <span class="p">:</span> <span class="n">template</span><span class="p">,</span>
+        <span class="s2">&quot;template_path&quot;</span> <span class="p">:</span> <span class="n">template_path</span><span class="p">,</span>
+        <span class="s2">&quot;worker_target_path&quot;</span> <span class="p">:</span> <span class="n">worker_target_path</span><span class="p">,</span>
+        <span class="s2">&quot;extdb_ids&quot;</span> <span class="p">:</span> <span class="n">extdb_ids</span><span class="p">,</span>
+        <span class="s2">&quot;source_path&quot;</span> <span class="p">:</span> <span class="n">source_path</span><span class="p">,</span>
+        <span class="s2">&quot;reference_energy&quot;</span> <span class="p">:</span> <span class="n">reference_energy</span><span class="p">,</span>
+        <span class="s2">&quot;simulation_method&quot;</span> <span class="p">:</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;n_max_restarts&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;workflow_type&quot;</span> <span class="p">:</span> <span class="s2">&quot;relax_nanoclusters&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">fw_init</span> <span class="o">=</span> <span class="n">initialize_workflow_data</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> 
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;UNNAMED&quot;</span><span class="p">,</span> <span class="n">workflow_type</span> <span class="o">=</span> <span class="s2">&quot;relax_nanoclusters&quot;</span><span class="p">,</span>
+        <span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">extdb_connect</span><span class="p">)</span>
+
+    <span class="c1"># FireWork: Read nanocluster structures and initialise a database</span>
+    <span class="c1"># object containing set information</span>
+    <span class="k">if</span> <span class="n">structures</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jsonified_structures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">atoms</span> <span class="ow">in</span> <span class="n">structures</span><span class="p">:</span>
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">ase_to_atoms_dict</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+            <span class="n">jsonified_structures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span> 
+        <span class="n">fw_get_structures</span> <span class="o">=</span> <span class="n">start_from_structures</span><span class="p">(</span><span class="n">jsonified_structures</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">extdb_ids</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fw_get_structures</span> <span class="o">=</span> <span class="n">start_from_database</span><span class="p">(</span><span class="n">extdb_ids</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">source_path</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fw_get_structures</span> <span class="o">=</span> <span class="n">read_structures</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;structures, extdb_ids or source_path contain no entries!&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Firework: setup folders for DFT calculations</span>
+    <span class="n">fw_setup_folders</span> <span class="o">=</span> <span class="n">setup_folders</span><span class="p">(</span><span class="n">target_path</span> <span class="o">=</span> <span class="n">worker_target_path</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cp2k_nanoclusters_id&quot;</span><span class="p">)</span>
+
+    <span class="c1"># FireWork: setup, run and extract DFT calculation</span>
+    <span class="c1"># (involves checking for errors in DFT and rerunning)</span>
+    <span class="n">fw_chunk_calculations</span> <span class="o">=</span> <span class="n">chunk_calculations</span><span class="p">(</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">,</span> <span class="n">target_path</span> <span class="o">=</span> <span class="n">worker_target_path</span><span class="p">,</span> 
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span> <span class="n">simulation_method</span> <span class="o">=</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">,</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">)</span>
+
+    <span class="c1"># FireWork: compare stability of nanoclusters. </span>
+    <span class="c1">#Computes cohesive energies if atomic_energies of all involved elements are given</span>
+    <span class="n">fw_compare_nanoclusters</span> <span class="o">=</span>  <span class="n">compare_nanoclusters</span><span class="p">(</span><span class="n">atomic_energies</span> <span class="o">=</span> <span class="p">{})</span>
+
+    <span class="c1"># add above Fireworks with links</span>
+    <span class="n">workflow_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_init</span><span class="p">,</span>
+        <span class="n">fw_get_structures</span><span class="p">,</span> 
+        <span class="n">fw_setup_folders</span><span class="p">,</span>
+        <span class="n">fw_chunk_calculations</span><span class="p">,</span>
+        <span class="n">fw_compare_nanoclusters</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="n">links_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">fw_init</span><span class="p">:</span> <span class="p">[</span><span class="n">fw_get_structures</span><span class="p">],</span>
+            <span class="n">fw_get_structures</span><span class="p">:</span> <span class="p">[</span><span class="n">fw_setup_folders</span><span class="p">],</span>
+            <span class="n">fw_setup_folders</span> <span class="p">:</span> <span class="p">[</span><span class="n">fw_chunk_calculations</span><span class="p">],</span>
+            <span class="n">fw_chunk_calculations</span> <span class="p">:</span> <span class="p">[</span><span class="n">fw_compare_nanoclusters</span><span class="p">],</span>
+            <span class="p">}</span>
+
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">workflow_list</span><span class="p">,</span> <span class="n">links_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wf</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

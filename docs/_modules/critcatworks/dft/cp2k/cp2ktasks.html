@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.dft.cp2k.cp2ktasks &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.dft.cp2k.cp2ktasks</h1><div class="highlight"><pre>
+<span></span><span class="c1"># cp2k setup</span>
+<span class="c1"># cp2k run</span>
+<span class="c1"># cp2k parse/analysis</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pycp2k</span><span class="o">,</span> <span class="nn">cp2kparser</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">atoms_dict_to_ase</span><span class="p">,</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">update_simulations_collection</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<div class="viewcode-block" id="CP2KSetupTask"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.CP2KSetupTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">CP2KSetupTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Firetask to setup DFT calculations for CP2K. </span>
+<span class="sd">    It alters the cellsize. The template has to link to the structure file</span>
+<span class="sd">    with the name structure.xyz. It writes an input file with in the given folder.</span>
+<span class="sd">    Other template alterations are not supported yet.</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        template (str)    : input file for calculations represented as string. </span>
+<span class="sd">                            It works as a template which is later modified by the</span>
+<span class="sd">                            simulation-specific Firework.</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        calc_id (int) :     simulation id of the structure on which the calculation will </span>
+<span class="sd">                            be run</span>
+<span class="sd">        name (str) :        individual calculation folder name </span>
+<span class="sd">                            is prefixed with the given string</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action (no action taken)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;CP2KSetupTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;target_path&#39;</span><span class="p">,</span> <span class="s1">&#39;calc_id&#39;</span><span class="p">,</span> <span class="s2">&quot;n_max_restarts&quot;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="CP2KSetupTask.run_task"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.CP2KSetupTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;CP2KSetupTask not implemented yet&quot;</span><span class="p">)</span>
+        
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">]</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;target_path&quot;</span><span class="p">]</span>
+        <span class="n">calc_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;calc_id&quot;</span><span class="p">]</span>
+        <span class="n">template_path</span> <span class="o">=</span> <span class="s2">&quot;template.txt&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">the_file</span><span class="p">:</span>
+            <span class="n">the_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+        <span class="c1"># read template</span>
+        <span class="n">cp2kinput</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">template_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">calc</span> <span class="o">=</span> <span class="n">pycp2k</span><span class="o">.</span><span class="n">CP2K</span><span class="p">()</span>
+        <span class="n">calc</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">cp2kinput</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;target_path&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+
+        <span class="n">simulation</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;simulation&quot;</span><span class="p">]</span>
+        <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span>
+        <span class="n">cell_size</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_cell</span><span class="p">()</span>
+        
+        <span class="c1"># manipulate simulation cell</span>
+        <span class="n">calc</span><span class="o">.</span><span class="n">CP2K_INPUT</span><span class="o">.</span><span class="n">FORCE_EVAL_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">SUBSYS</span><span class="o">.</span><span class="n">CELL</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="s2">&quot;[angstrom] &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> 
+        <span class="n">calc</span><span class="o">.</span><span class="n">CP2K_INPUT</span><span class="o">.</span><span class="n">FORCE_EVAL_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">SUBSYS</span><span class="o">.</span><span class="n">CELL</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="s2">&quot;[angstrom] &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> 
+        <span class="n">calc</span><span class="o">.</span><span class="n">CP2K_INPUT</span><span class="o">.</span><span class="n">FORCE_EVAL_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">SUBSYS</span><span class="o">.</span><span class="n">CELL</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="s2">&quot;[angstrom] &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell_size</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> 
+        <span class="n">calc</span><span class="o">.</span><span class="n">CP2K_INPUT</span><span class="o">.</span><span class="n">FORCE_EVAL_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">SUBSYS</span><span class="o">.</span><span class="n">TOPOLOGY</span><span class="o">.</span><span class="n">Coord_file_name</span> <span class="o">=</span> <span class="s2">&quot;structure.xyz&quot;</span>
+        <span class="n">calc</span><span class="o">.</span><span class="n">working_directory</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;working_directory: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calc</span><span class="o">.</span><span class="n">working_directory</span><span class="p">))</span>
+        <span class="n">calc</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="s2">&quot;gopt&quot;</span>
+        <span class="n">calc</span><span class="o">.</span><span class="n">write_input_file</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;cp2k input file written TO&quot;</span> <span class="o">+</span> <span class="n">calc</span><span class="o">.</span><span class="n">project_name</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span><span class="p">)</span>
+
+
+        <span class="n">input_string</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">get_input_string</span><span class="p">()</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;simulation&quot;</span><span class="p">][</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;input_string&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_string</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;simulation&quot;</span><span class="p">][</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">()</span></div></div>
+
+<div class="viewcode-block" id="CP2KRunTask"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.CP2KRunTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">CP2KRunTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Firetask to run CP2K calculations.</span>
+<span class="sd">    It assumes that an srun command is used by the computing platform.</span>
+<span class="sd">    It checks for the existence of a restart file. If it exists,</span>
+<span class="sd">    the calculation will be restarted from there.</span>
+<span class="sd">    The inputfile has to link to the structure file with the </span>
+<span class="sd">    name structure.xyz. It descends to the folder given by target_path.</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        calc_id (int) :     simulation id of the structure on which the calculation will </span>
+<span class="sd">                            be run</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;CP2KRunTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;target_path&#39;</span><span class="p">,</span> <span class="s1">&#39;calc_id&#39;</span><span class="p">,</span> <span class="s2">&quot;n_max_restarts&quot;</span><span class="p">,</span> <span class="s1">&#39;skip_dft&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="CP2KRunTask.run_task"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.CP2KRunTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;target_path&quot;</span><span class="p">]</span>
+        <span class="n">calc_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;calc_id&quot;</span><span class="p">]</span>
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;n_max_restarts&quot;</span><span class="p">]</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;skip_dft&quot;</span><span class="p">]</span>
+        <span class="n">n_restarts</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_restarts&quot;</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Running CP2K&quot;</span><span class="p">)</span>
+        <span class="c1"># shell command construction</span>
+        <span class="n">input_file</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;*inp&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">input_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.inp&quot;</span><span class="p">,</span> <span class="s2">&quot;.out&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># check for restart file</span>
+        <span class="n">restart_file_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;*restart&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">restart_file_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">restart_file</span> <span class="o">=</span> <span class="n">restart_file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">input_file</span> <span class="o">=</span> <span class="n">restart_file</span> 
+            <span class="n">input_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">restart_file_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Found several .restart files. Taking first one.&quot;</span><span class="p">)</span>
+            <span class="n">restart_file</span> <span class="o">=</span> <span class="n">restart_file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">input_file</span> <span class="o">=</span> <span class="n">restart_file</span> 
+            <span class="n">input_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># otherwise use inp</span>
+            <span class="k">pass</span>
+        
+        <span class="n">cp2k_bin</span><span class="o">=</span><span class="s2">&quot;cp2k.popt&quot;</span>
+        <span class="n">run_command</span> <span class="o">=</span> <span class="s2">&quot;srun &quot;</span> <span class="o">+</span> <span class="n">cp2k_bin</span>  <span class="o">+</span> <span class="s2">&quot; -o &quot;</span> <span class="o">+</span> <span class="n">output_file</span> <span class="o">+</span> <span class="s2">&quot; -i &quot;</span> <span class="o">+</span> <span class="n">input_file</span>
+        <span class="n">command_list</span> <span class="o">=</span> <span class="n">run_command</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shell command:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">command_list</span><span class="p">)</span>
+        <span class="c1"># running CP2K with srun in shell</span>
+        <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="n">target_path</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;going into directory&quot;</span><span class="p">,</span> <span class="n">target_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">skip_dft</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;DFT calculation is skipped. Switch skip_dft to False!&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">command_list</span><span class="p">,</span> <span class="n">shell</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;run done&quot;</span><span class="p">)</span>
+
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="CP2KAnalysisTask"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.CP2KAnalysisTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">CP2KAnalysisTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Firetask to analyse CP2K calculations. Preparsing is needed for the main </span>
+<span class="sd">    parser to run without throwing an error. The main parser is python package</span>
+<span class="sd">    which reads most of the output fields. Only a fraction of them is actually </span>
+<span class="sd">    transferred to the document in the simulation collection (positions, labels, </span>
+<span class="sd">    is_converged, total_energy, number_of_frames_in_sequence, is_walltime_exceeded,</span>
+<span class="sd">    nwarnings, simulation_cell).</span>
+<span class="sd">    Upon failure (meaning incomplete or no output, or not converged) of the </span>
+<span class="sd">    simulation, a detour is added to restart it (n_max_restarts times).</span>
+<span class="sd">    If it fails for the last time, its children are defused (meaning the workflow</span>
+<span class="sd">    gets paused, manual inspection is recommended).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        calc_id (int) :     simulation id of the structure on which the calculation will </span>
+<span class="sd">                            be run</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">            </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction :  Firework action, updates fw_spec, possibly defuses Firework children,</span>
+<span class="sd">                    possibly adds Fireworks as detours to the workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;CP2KAnalysisTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;target_path&#39;</span><span class="p">,</span> <span class="s1">&#39;calc_id&#39;</span><span class="p">,</span> <span class="s1">&#39;n_max_restarts&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="CP2KAnalysisTask.run_task"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.CP2KAnalysisTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;target_path&quot;</span><span class="p">]</span>
+        <span class="n">calc_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;calc_id&quot;</span><span class="p">]</span>
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;n_max_restarts&quot;</span><span class="p">]</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;skip_dft&quot;</span><span class="p">]</span>
+        <span class="n">n_restarts</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_restarts&quot;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calc_id&quot;</span><span class="p">,</span> <span class="n">calc_id</span><span class="p">)</span>
+        <span class="c1"># read output</span>
+
+        <span class="c1"># preparse for correct termination, warnings and exceeded walltime</span>
+        <span class="c1"># preparsing needed for parser to run without throwing error</span>
+        <span class="n">output_state</span><span class="p">,</span> <span class="n">preparse_results</span> <span class="o">=</span> <span class="n">additional_parse_stdout</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">target_path</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;no_output&quot;</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;no output file available&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no output file available&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;incorrect_termination&quot;</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;incorrect termination&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;incorrect termination&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;parser confirmed that CP2K terminated correctly&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parser confirmed that CP2K terminated correctly&quot;</span><span class="p">)</span>
+        <span class="c1">####</span>
+        <span class="k">if</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;no_output&quot;</span><span class="p">:</span> <span class="c1"># or output_state == &quot;incorrect_termination&quot;:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nwarnings</span> <span class="o">=</span> <span class="n">preparse_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nwarnings&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">is_walltime_exceeded</span> <span class="o">=</span> <span class="n">preparse_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;exceeded_walltime&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="c1"># cp2k parser</span>
+            <span class="n">parser</span> <span class="o">=</span> <span class="n">cp2kparser</span><span class="o">.</span><span class="n">CP2KParser</span><span class="p">(</span><span class="n">default_units</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;hartree&quot;</span><span class="p">],</span> <span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cp2k parser setup successfully&quot;</span><span class="p">)</span>
+            <span class="n">cp2koutput</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;gopt.out&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cp2koutput</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cp2k parser ran successfully&quot;</span><span class="p">)</span>
+    
+            <span class="n">atom_positions</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;atom_positions&quot;</span><span class="p">]</span>
+            <span class="n">number_of_frames_in_sequence</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;number_of_frames_in_sequence&quot;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">is_converged</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;geometry_optimization_converged&quot;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">is_converged</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">atom_labels</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;atom_labels&quot;</span><span class="p">]</span>
+            <span class="n">frame_sequence_potential_energy</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;frame_sequence_potential_energy&quot;</span><span class="p">]</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;simulation_cell&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">input_filename</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;x_cp2k_input_filename&quot;</span><span class="p">]</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">input_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">input_string</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">is_converged</span><span class="p">:</span>
+                <span class="n">total_energy</span> <span class="o">=</span> <span class="n">frame_sequence_potential_energy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">output_state</span> <span class="o">=</span> <span class="s2">&quot;not_converged&quot;</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;CP2K not converged&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CP2K not converged&quot;</span><span class="p">)</span>
+                <span class="c1"># not converged energy is stored</span>
+                <span class="n">total_energy</span> <span class="o">=</span> <span class="n">frame_sequence_potential_energy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># restart</span>
+        <span class="k">if</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;no_output&quot;</span> <span class="ow">or</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;incorrect_termination&quot;</span> <span class="ow">or</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;not_converged&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_restarts&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n_max_restarts</span><span class="p">:</span>
+                <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_restarts&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">detours</span> <span class="o">=</span>  <span class="n">rerun_cp2k</span><span class="p">(</span><span class="n">target_path</span><span class="p">,</span> <span class="n">calc_id</span><span class="p">,</span> <span class="n">n_max_restarts</span><span class="p">,</span> <span class="n">n_restarts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_restarts</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> 
+                    <span class="n">simulation</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;simulation&quot;</span><span class="p">],</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">])</span>
+
+                <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+                <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">,</span> <span class="n">detours</span> <span class="o">=</span> <span class="n">detours</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">is_defused</span> <span class="o">=</span> <span class="kc">True</span>   
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_defused</span> <span class="o">=</span> <span class="kc">False</span> 
+
+        <span class="c1"># update data</span>
+        <span class="k">if</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;ok&quot;</span> <span class="ow">or</span> <span class="n">output_state</span> <span class="o">==</span> <span class="s2">&quot;not_converged&quot;</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;total_energy: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total_energy</span><span class="p">))</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;atom_labels&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atom_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atom_labels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;atom_positions&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atom_positions</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;frame_sequence_potential_energy&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">frame_sequence_potential_energy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;number_of_frames_in_sequence&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">number_of_frames_in_sequence</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;is_converged&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">is_converged</span><span class="p">)</span>
+    
+            <span class="c1"># conversion factor cp2kparser uses other units! WARNING, might change in the future! conversion always back to Angstrom.</span>
+            <span class="n">relaxed_structure</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">Atoms</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="n">atom_labels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">atom_positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">10e9</span><span class="p">,</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">cell</span> <span class="o">*</span> <span class="mf">10e9</span><span class="p">)</span>
+    
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">ase_to_atoms_dict</span><span class="p">(</span><span class="n">relaxed_structure</span><span class="p">)</span>
+    
+            <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;is_converged&quot;</span> <span class="p">:</span> <span class="n">is_converged</span><span class="p">,</span>
+                <span class="s2">&quot;number_of_frames_in_sequence&quot;</span> <span class="p">:</span> <span class="n">number_of_frames_in_sequence</span><span class="p">,</span>
+                <span class="s2">&quot;nwarnings&quot;</span> <span class="p">:</span> <span class="n">nwarnings</span><span class="p">,</span>
+                <span class="s2">&quot;is_walltime_exceeded&quot;</span> <span class="p">:</span> <span class="n">is_walltime_exceeded</span><span class="p">,</span>
+                <span class="s2">&quot;total_energy&quot;</span> <span class="p">:</span> <span class="n">total_energy</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># in case of no_output or incorrect_termination</span>
+            <span class="c1"># fill slots with empty placeholders</span>
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;simulation&quot;</span><span class="p">][</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+            <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;is_converged&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;output_state&quot;</span> <span class="p">:</span> <span class="n">output_state</span><span class="p">}</span>
+            <span class="n">input_string</span> <span class="o">=</span> <span class="s2">&quot;no output or incorrect termination of CP2K calculation&quot;</span>
+
+        <span class="c1"># get source simulation</span>
+        <span class="n">source_simulation</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;simulation&quot;</span><span class="p">]</span>
+
+        <span class="c1"># update external database</span>
+        <span class="n">dct</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">source_simulation</span><span class="p">)</span>
+        <span class="c1"># calculation originated from this:</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;source_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_id</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoms_dict</span> <span class="c1">### !!!</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cp2k&quot;</span><span class="p">]</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_dict</span> <span class="c1"># might still be missing some output</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+        <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;input_string&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">input_string</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;simulation after analysis&quot;</span><span class="p">)</span>
+
+        <span class="n">simulation</span> <span class="o">=</span> <span class="n">update_simulations_collection</span><span class="p">(</span><span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="o">**</span><span class="n">dct</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">simulation</span><span class="p">)</span>
+
+        <span class="c1"># update internal workflow data</span>
+        <span class="n">simulation_id</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+
+        <span class="c1"># update temp workflow data</span>
+        <span class="n">mod_spec</span> <span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;_set&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;temp-&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;calc_analysis_ids_dict-&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)</span> <span class="p">:</span> <span class="n">simulation_id</span> <span class="p">}},</span>
+            <span class="p">{</span><span class="s2">&quot;_push&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;temp-&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;analysis_ids&quot;</span> <span class="p">:</span> <span class="n">simulation_id</span> <span class="p">}},</span>
+            <span class="p">]</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;pushing new ids to analysis_ids&quot;</span><span class="p">)</span>
+
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="c1"># update spec no longer necessary</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">mod_spec</span><span class="o">=</span><span class="n">mod_spec</span><span class="p">,</span> <span class="n">defuse_children</span> <span class="o">=</span> <span class="n">is_defused</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="setup_cp2k"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.setup_cp2k">[docs]</a><span class="k">def</span> <span class="nf">setup_cp2k</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">calc_id</span><span class="p">,</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cp2k_run_id&quot;</span><span class="p">,</span> <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a mini-workflow consisting of:</span>
+<span class="sd">    Firework 1: two Firetasks CP2KSetupTask and CP2KRunTask.</span>
+<span class="sd">    Firework 2: CP2KAnalysisTask</span>
+
+<span class="sd">    This workflow can be added as a detour in any workflow requiring a CP2K simulation. For more information</span>
+<span class="sd">    about the individual steps, consult the documentation on CP2KSetupTask, CP2KRunTask and CP2KAnalysisTask.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template (str)    : input file for calculations represented as string. </span>
+<span class="sd">                            It works as a template which is later modified by the</span>
+<span class="sd">                            simulation-specific Firework.</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        calc_id (int) :     simulation id of the structure on which the calculation will </span>
+<span class="sd">                            be run</span>
+<span class="sd">        simulation (dict)   document of the simulation collection. Some fields are updated during the</span>
+<span class="sd">                            analysis step and stored in a new document</span>
+<span class="sd">        name (str) :        individual calculation folder name </span>
+<span class="sd">                            is prefixed with the given string</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.        </span>
+<span class="sd">        extdb_connect (dict) :  dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Workflow : fireworks Workflow object </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">setup_task</span> <span class="o">=</span> <span class="n">CP2KSetupTask</span><span class="p">(</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">,</span>
+                    <span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span>
+                    <span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span><span class="p">,</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+    <span class="n">run_task</span> <span class="o">=</span> <span class="n">CP2KRunTask</span><span class="p">(</span><span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span> 
+        <span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span><span class="p">,</span> 
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">)</span>
+    
+    <span class="c1"># add analysis as an additional Firework as a child. Ensures</span>
+    <span class="c1"># that Firework exists even if CP2K fails</span>
+    <span class="n">analysis_task</span> <span class="o">=</span> <span class="n">CP2KAnalysisTask</span><span class="p">(</span><span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span> 
+        <span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span><span class="p">,</span> 
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">)</span>
+
+    
+    <span class="n">fw1</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">setup_task</span><span class="p">,</span><span class="n">run_task</span><span class="p">],</span> 
+        <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;dft&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;CP2KWork&#39;</span><span class="p">,</span> 
+            <span class="s2">&quot;n_restarts&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;simulation&quot;</span> <span class="p">:</span> <span class="n">simulation</span><span class="p">,</span>
+            <span class="s2">&quot;extdb_connect&quot;</span> <span class="p">:</span> <span class="n">extdb_connect</span><span class="p">,</span>
+            <span class="s2">&quot;_priority&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;CP2KWork&#39;</span><span class="p">)</span>
+
+    <span class="n">fw2</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">analysis_task</span><span class="p">],</span> 
+        <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;lightweight&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;CP2KAnalysisTask&#39;</span><span class="p">,</span> 
+            <span class="s2">&quot;n_restarts&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;simulation&quot;</span> <span class="p">:</span> <span class="n">simulation</span><span class="p">,</span>
+            <span class="s2">&quot;extdb_connect&quot;</span> <span class="p">:</span> <span class="n">extdb_connect</span><span class="p">,</span>
+            <span class="s2">&quot;_allow_fizzled_parents&quot;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;_priority&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;CP2KAnalysisWork&#39;</span><span class="p">,</span>
+        <span class="n">parents</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw1</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="n">fw1</span><span class="p">,</span><span class="n">fw2</span><span class="p">],</span> <span class="p">{</span><span class="n">fw1</span> <span class="p">:</span> <span class="p">[</span><span class="n">fw2</span><span class="p">]}</span></div>
+
+
+<div class="viewcode-block" id="rerun_cp2k"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.rerun_cp2k">[docs]</a><span class="k">def</span> <span class="nf">rerun_cp2k</span><span class="p">(</span><span class="n">target_path</span><span class="p">,</span> <span class="n">calc_id</span><span class="p">,</span> <span class="n">n_max_restarts</span><span class="p">,</span> <span class="n">n_restarts</span><span class="p">,</span> 
+        <span class="n">simulation</span><span class="p">,</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{}):</span>    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a mini-workflow consisting of:</span>
+<span class="sd">    Firework 1: CP2KRunTask</span>
+<span class="sd">    Firework 2: CP2KAnalysisTask</span>
+
+<span class="sd">    It is assumed that the CP2K input file along with the structure are</span>
+<span class="sd">    already setup in the folder target_path. This workflow can be added as a detour in any </span>
+<span class="sd">    workflow requiring a CP2K simulation. For more information about the individual </span>
+<span class="sd">    steps, consult the documentation on CP2KRunTask and CP2KAnalysisTask.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        calc_id (int) :     simulation id of the structure on which the calculation will </span>
+<span class="sd">                            be run</span>
+<span class="sd">        n_restarts (int)  : number of times the calculation has already been restarted</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">        simulation (dict)   document of the simulation collection. Some fields are updated during the</span>
+<span class="sd">                            analysis step and stored in a new document</span>
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.        </span>
+<span class="sd">        extdb_connect (dict) :  dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Workflow : fireworks Workflow object </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fw1</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">CP2KRunTask</span><span class="p">(</span><span class="n">target_path</span><span class="o">=</span><span class="n">target_path</span><span class="p">,</span> <span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span><span class="p">,</span> 
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">)],</span> 
+        <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;dft&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;CP2KRerunWork&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;n_restarts&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_restarts</span><span class="p">),</span> <span class="s2">&quot;simulation&quot;</span> <span class="p">:</span> <span class="n">simulation</span><span class="p">,</span>
+            <span class="s2">&quot;_priority&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s2">&quot;extdb_connect&quot;</span> <span class="p">:</span> <span class="n">extdb_connect</span> <span class="p">},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;CP2KRerunWork&#39;</span><span class="p">)</span>
+
+    <span class="c1"># add analysis as an additional Firework as a child. Ensures</span>
+    <span class="c1"># that Firework exists even if CP2K fails</span>
+    <span class="n">analysis_task</span> <span class="o">=</span> <span class="n">CP2KAnalysisTask</span><span class="p">(</span><span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span> 
+        <span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span><span class="p">,</span> 
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">)</span>
+
+    <span class="n">fw2</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">analysis_task</span><span class="p">],</span> 
+        <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;lightweight&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;CP2KAnalysisTask&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;n_restarts&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_restarts</span><span class="p">),</span> <span class="s2">&quot;simulation&quot;</span> <span class="p">:</span> <span class="n">simulation</span><span class="p">,</span>
+            <span class="s2">&quot;extdb_connect&quot;</span> <span class="p">:</span> <span class="n">extdb_connect</span><span class="p">,</span>
+            <span class="s2">&quot;_priority&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;_allow_fizzled_parents&quot;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;CP2KAnalysisWork&#39;</span><span class="p">,</span>
+        <span class="n">parents</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw1</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="n">Workflow</span><span class="p">([</span><span class="n">fw1</span><span class="p">,</span><span class="n">fw2</span><span class="p">],)</span></div>
+
+<div class="viewcode-block" id="cd"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.cd">[docs]</a><span class="k">class</span> <span class="nc">cd</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Context manager for changing the current working directory&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newPath</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">newPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">newPath</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">savedPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">newPath</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">etype</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">savedPath</span><span class="p">)</span></div>
+                                   
+
+<div class="viewcode-block" id="additional_parse_stdout"><a class="viewcode-back" href="../../../../src/doc/critcatworks.dft.cp2k.html#critcatworks.dft.cp2k.cp2ktasks.additional_parse_stdout">[docs]</a><span class="k">def</span> <span class="nf">additional_parse_stdout</span><span class="p">(</span><span class="n">target_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to parse CP2K output first simply. This</span>
+<span class="sd">    prevents the main parser from failing most of the time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple :     string (no_output, incorrect_termination, ok), </span>
+<span class="sd">                    and dict of results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;gopt.out&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Cp2k output file not retrieved&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;no_output&quot;</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;WARNING, more than one output file available&quot;</span><span class="p">)</span>
+    <span class="n">cp2koutput</span> <span class="o">=</span> <span class="n">output_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">abs_fn</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">cp2koutput</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="n">abs_fn</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">abs_fn</span><span class="p">)</span>
+    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;exceeded_walltime&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_fn</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="c1">#if line.startswith(&#39; ENERGY| &#39;):</span>
+            <span class="c1">#    result_dict[&#39;energy&#39;] = float(line.split()[8])</span>
+            <span class="k">if</span> <span class="s1">&#39;The number of warnings for this run is&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s1">&#39;nwarnings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">&#39;exceeded requested execution time&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s1">&#39;exceeded_walltime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="s1">&#39;nwarnings&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result_dict</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;CP2K did not finish properly.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;incorrect_termination&quot;</span><span class="p">,</span> <span class="n">result_dict</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="n">result_dict</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

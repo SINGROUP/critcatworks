@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.workflows package &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="critcatworks.structure package" href="critcatworks.structure.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.structure.html" title="critcatworks.structure package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" accesskey="U">critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="critcatworks-workflows-package">
+<h1>critcatworks.workflows package<a class="headerlink" href="#critcatworks-workflows-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-critcatworks.workflows.clusgen">
+<span id="critcatworks-workflows-clusgen-module"></span><h2>critcatworks.workflows.clusgen module<a class="headerlink" href="#module-critcatworks.workflows.clusgen" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.clusgen.generate_nanoclusters_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.clusgen.</code><code class="sig-name descname">generate_nanoclusters_workflow</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">worker_target_path=None</em>, <em class="sig-param">extdb_connect={}</em>, <em class="sig-param">shape='ico'</em>, <em class="sig-param">nanocluster_size=3</em>, <em class="sig-param">compositions=''</em>, <em class="sig-param">elements=[]</em>, <em class="sig-param">generate_pure_nanoclusters=True</em>, <em class="sig-param">n_configurations=10</em>, <em class="sig-param">n_initial_configurations=100</em>, <em class="sig-param">bondlength_dct={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/clusgen.html#generate_nanoclusters_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.clusgen.generate_nanoclusters_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to generate binary nanoclusters of defined size and shape.
+For each binary element combination, for each composition, n_configurations
+maximally dissimilar structures are created and uploaded to the
+simulations collection of the mongodb database.</p>
+<p>For generating the structures, the cluster generator in the
+python package cluskit is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+<li><p><strong>shape</strong> (<em>str</em>) – determines shape of nanoclusters. ‘ico’, ‘octa’ and ‘wulff’</p></li>
+<li><p><strong>nanocluster_size</strong> (<em>int</em>) – determines nanocluster size. Meaning depends on shape</p></li>
+<li><p><strong>compositions</strong> (<em>list</em>) – each element determines the amount of atoms of type 1.</p></li>
+<li><p><strong>elements</strong> (<em>list</em>) – elements (str) to iterate over</p></li>
+<li><p><strong>generate_pure_nanoclusters</strong> (<em>bool</em>) – if set to True, also pure
+nanoclusters are generated</p></li>
+<li><p><strong>n_configurations</strong> (<em>int</em>) – number of configurations per composition
+(chosen based on maximally different
+structural features)</p></li>
+<li><p><strong>n_initial_configurations</strong> (<em>int</em>) – number of initial configurations per
+composition to choose from (higher number
+will make the grid finer)</p></li>
+<li><p><strong>bondlength_dct</strong> (<em>dict</em>) – bond lengths to use for specific elements.
+Some default bond lenghts are provided for
+common elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>generate_nanoclusters Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.coverage">
+<span id="critcatworks-workflows-coverage-module"></span><h2>critcatworks.workflows.coverage module<a class="headerlink" href="#module-critcatworks.workflows.coverage" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.coverage.get_coverage_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.coverage.</code><code class="sig-name descname">get_coverage_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path, username, password, worker_target_path=None, structures=None, extdb_ids=None, source_path=None, reference_energy=0.0, adsorbate_name='H', max_iterations=10000, adsite_types=['top', 'bridge', 'hollow'], n_max_restarts=1, skip_dft=False, bond_length=1.4, n_remaining='', extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/coverage.html#get_coverage_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.coverage.get_coverage_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step,
+adsorbates are put on top, bridge and hollow sites. Once the structure is relaxed by DFT,
+formed adsorbate molecules (pairs of atoms) are replaced by a single adsorbate.
+The procedure is repeated until no adsorbate molecules form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_path</strong> (<em>str</em>) – absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>structures</strong> (<em>list</em>) – list of ase.Atoms objects from where the workflow is started.</p></li>
+<li><p><strong>extdb_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>source_path</strong> (<em>str</em>) – absolute path on the computing resource to the directory
+where to read the structures from</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>max_iterations</strong> (<em>int</em>) – maximum number of iterations in the workflow</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>n_remaining</strong> (<em>int</em>) – number of adsorbates which should remain after the
+first pre-DFT pruning of the adsorbate coverage</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coverage Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.coverageladder">
+<span id="critcatworks-workflows-coverageladder-module"></span><h2>critcatworks.workflows.coverageladder module<a class="headerlink" href="#module-critcatworks.workflows.coverageladder" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.coverageladder.get_coverage_ladder_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.coverageladder.</code><code class="sig-name descname">get_coverage_ladder_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">worker_target_path=None</em>, <em class="sig-param">start_ids=None</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">free_energy_correction=0.0</em>, <em class="sig-param">adsorbate_name='H'</em>, <em class="sig-param">max_iterations=100</em>, <em class="sig-param">n_max_restarts=1</em>, <em class="sig-param">skip_dft=False</em>, <em class="sig-param">bond_length=1.5</em>, <em class="sig-param">d=4</em>, <em class="sig-param">l=2</em>, <em class="sig-param">k=7</em>, <em class="sig-param">initial_direction=1</em>, <em class="sig-param">ranking_metric='similarity'</em>, <em class="sig-param">extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/coverageladder.html#get_coverage_ladder_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.coverageladder.get_coverage_ladder_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. One adsorbate at
+a time is added or removed until certain break criteria are met. Currently only d and max_iterations
+are stopping criterions.
+d, l, k, initial_direction and ranking_metric are parameters specific
+to the coverage ladder workflow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_path</strong> (<em>str</em>) – absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>start_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>free_energy_correction</strong> (<em>float</em>) – free energy correction of the adsorption
+reaction at hand</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>max_iterations</strong> (<em>int</em>) – maximum number of iterations in the workflow</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – maximum depth of the coverage ladder (termination criterion)</p></li>
+<li><p><strong>l</strong> (<em>int</em>) – number of low-energy structures to carry over to the next step</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of empty candidate sites for adding /
+adsorbed atoms for removing to consider per step</p></li>
+<li><p><strong>initial_direction</strong> (<em>bool</em>) – True will force the initial step to add an adsorbate,
+False will force the initial step to remove an adsorbate</p></li>
+<li><p><strong>ranking_metric</strong> (<em>str</em>) – ‘similarity’ or ‘distance’. Metric based on which to choose
+k candidates (empty sites / adsorbates)</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coverageladder Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.molsinglesites">
+<span id="critcatworks-workflows-molsinglesites-module"></span><h2>critcatworks.workflows.molsinglesites module<a class="headerlink" href="#module-critcatworks.workflows.molsinglesites" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.molsinglesites.get_molsinglesites_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.molsinglesites.</code><code class="sig-name descname">get_molsinglesites_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path, username, password, worker_target_path=None, structures=None, extdb_ids=None, source_path=None, reference_energy=0.0, adsorbate={}, chunk_size=100, max_calculations=10000, adsite_types=['top', 'bridge', 'hollow'], threshold=0.1, n_max_restarts=1, skip_dft=False, extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/molsinglesites.html#get_molsinglesites_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.molsinglesites.get_molsinglesites_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to determine the adsorption sites and energies of a set of
+nanocluster structures. The adsorption sites are determined by the
+python package cluskit and then ranked by farthest point sampling
+based on their structural local dissimilarity.
+The adsorption energy is determined by a simulation code (e.g. CP2K)
+in chunks in a loop. The adsorption energies of the uncalculated
+structures are inferred by machine learning.
+Once, the generalization error is low enough, the workflow stops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_path</strong> (<em>str</em>) – absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>structures</strong> (<em>list</em>) – list of ase.Atoms objects from where the workflow is started.</p></li>
+<li><p><strong>extdb_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>source_path</strong> (<em>str</em>) – absolute path on the computing resource to the directory
+where to read the structures from</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate</strong> (<em>dict</em>) – adsorbed molecule as atoms dict. Contains an “X” dummy atom
+which indicates the anchor point to the nanocluster</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – number of calculations to be run simulataneously. Default -1
+means all calculations are run at once.</p></li>
+<li><p><strong>max_calculations</strong> (<em>int</em>) – maximum number of iterations in the workflow</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – ML accuracy of convergence criterion. When below, the workflow
+is defused.</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>molsinglesites Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.nanoclusters">
+<span id="critcatworks-workflows-nanoclusters-module"></span><h2>critcatworks.workflows.nanoclusters module<a class="headerlink" href="#module-critcatworks.workflows.nanoclusters" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.nanoclusters.get_nanoclusters_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.nanoclusters.</code><code class="sig-name descname">get_nanoclusters_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">worker_target_path=None</em>, <em class="sig-param">structures=None</em>, <em class="sig-param">extdb_ids=None</em>, <em class="sig-param">source_path=None</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">n_max_restarts=1</em>, <em class="sig-param">skip_dft=False</em>, <em class="sig-param">extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/nanoclusters.html#get_nanoclusters_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.nanoclusters.get_nanoclusters_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to relax the structure of a set of
+nanoclusters using a simulation software (e.g. CP2K).
+The cohesive energies are calculated and summarized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_path</strong> (<em>str</em>) – absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>structures</strong> (<em>list</em>) – list of ase.Atoms objects from where the workflow is started.</p></li>
+<li><p><strong>extdb_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>source_path</strong> (<em>str</em>) – absolute path on the computing resource to the directory
+where to read the structures from</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nanocluster Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.simpleflow">
+<span id="critcatworks-workflows-simpleflow-module"></span><h2>critcatworks.workflows.simpleflow module<a class="headerlink" href="#module-critcatworks.workflows.simpleflow" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.workflows.simpleflow.SimpleTestTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.workflows.simpleflow.</code><code class="sig-name descname">SimpleTestTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/simpleflow.html#SimpleTestTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.simpleflow.SimpleTestTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Simple FireTask to see what attributes FireTasks have.</p>
+<dl class="attribute">
+<dt id="critcatworks.workflows.simpleflow.SimpleTestTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.workflows.simpleflow.SimpleTestTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.workflows.simpleflow.SimpleTestTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.workflows.simpleflow.SimpleTestTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.workflows.simpleflow.SimpleTestTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/simpleflow.html#SimpleTestTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.simpleflow.SimpleTestTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.workflows.simpleflow.dummy_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.simpleflow.</code><code class="sig-name descname">dummy_workflow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/simpleflow.html#dummy_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.simpleflow.dummy_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>dummy fireworks Workflow</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.workflows.simpleflow.test_foreachtask_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.simpleflow.</code><code class="sig-name descname">test_foreachtask_workflow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/simpleflow.html#test_foreachtask_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.simpleflow.test_foreachtask_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to test fireworks ForeachTask with a dummy workflow</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.singlesites">
+<span id="critcatworks-workflows-singlesites-module"></span><h2>critcatworks.workflows.singlesites module<a class="headerlink" href="#module-critcatworks.workflows.singlesites" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.singlesites.get_singlesites_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.singlesites.</code><code class="sig-name descname">get_singlesites_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path, username, password, worker_target_path=None, structures=None, extdb_ids=None, source_path=None, reference_energy=0.0, adsorbate_name='H', chunk_size=100, max_calculations=10000, adsite_types=['top', 'bridge', 'hollow'], threshold=0.1, n_max_restarts=1, skip_dft=False, extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/singlesites.html#get_singlesites_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.singlesites.get_singlesites_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attention! This workflow is for atomic adsorbates only!
+Workflow to determine the adsorption sites and energies of a set of
+nanocluster structures. The adsorption sites are determined by the
+python package cluskit and then ranked by farthest point sampling
+based on their structural local dissimilarity.
+The adsorption energy is determined by a simulation code (e.g. CP2K)
+in chunks in a loop. The adsorption energies of the uncalculated
+structures are inferred by machine learning.
+Once, the generalization error is low enough, the workflow stops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_path</strong> (<em>str</em>) – absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>structures</strong> (<em>list</em>) – list of ase.Atoms objects from where the workflow is started.</p></li>
+<li><p><strong>extdb_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>source_path</strong> (<em>str</em>) – absolute path on the computing resource to the directory
+where to read the structures from</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbold of the adsorbed atom</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – number of calculations to be run simulataneously. Default -1
+means all calculations are run at once.</p></li>
+<li><p><strong>max_calculations</strong> (<em>int</em>) – maximum number of iterations in the workflow</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – ML accuracy of convergence criterion. When below, the workflow
+is defused.</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>molsinglesites Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows.uniquemolsites">
+<span id="critcatworks-workflows-uniquemolsites-module"></span><h2>critcatworks.workflows.uniquemolsites module<a class="headerlink" href="#module-critcatworks.workflows.uniquemolsites" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.workflows.uniquemolsites.get_uniquemolsites_workflow">
+<code class="sig-prename descclassname">critcatworks.workflows.uniquemolsites.</code><code class="sig-name descname">get_uniquemolsites_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path, username, password, worker_target_path=None, structures=None, extdb_ids=None, source_path=None, reference_energy=0.0, adsorbate={}, adsite_types=['top', 'bridge', 'hollow'], threshold=0.001, n_max_restarts=1, skip_dft=False, extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/uniquemolsites.html#get_uniquemolsites_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.uniquemolsites.get_uniquemolsites_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workflow to determine the adsorption sites and energies of a set of
+nanocluster structures. The adsorption sites are determined by the
+python package cluskit and then ranked by farthest point sampling
+based on their structural local dissimilarity.
+Only sites which are more dissimilar than the given threshold are
+computed.
+The adsorption energy is determined by a simulation code (e.g. CP2K).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_path</strong> (<em>str</em>) – absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for user to upload to the database</p></li>
+<li><p><strong>worker_target_path</strong> (<em>str</em>) – absolute path on computing resource
+directory needs to exist</p></li>
+<li><p><strong>structures</strong> (<em>list</em>) – list of ase.Atoms objects from where the workflow is started.</p></li>
+<li><p><strong>extdb_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>source_path</strong> (<em>str</em>) – absolute path on the computing resource to the directory
+where to read the structures from</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate</strong> (<em>dict</em>) – adsorbed molecule as atoms dict. Contains an “X” dummy atom
+which indicates the anchor point to the nanocluster</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – threshold of similarity metric between the local structures
+of the adsorption sites. Only sites which are more dissimilar
+than the given threshold are computed</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>molsinglesites Fireworks Workflow object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks.Workflow</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.workflows">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-critcatworks.workflows" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">critcatworks.workflows package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.clusgen">critcatworks.workflows.clusgen module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.coverage">critcatworks.workflows.coverage module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.coverageladder">critcatworks.workflows.coverageladder module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.molsinglesites">critcatworks.workflows.molsinglesites module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.nanoclusters">critcatworks.workflows.nanoclusters module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.simpleflow">critcatworks.workflows.simpleflow module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.singlesites">critcatworks.workflows.singlesites module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows.uniquemolsites">critcatworks.workflows.uniquemolsites module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.workflows">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="critcatworks.structure.html"
+                        title="previous chapter">critcatworks.structure package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/src/doc/critcatworks.workflows.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.structure.html" title="critcatworks.structure package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" >critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>
