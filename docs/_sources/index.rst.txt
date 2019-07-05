@@ -10,12 +10,72 @@ This site is UNDER CONSTRUCTION
 
 critcatworks is a workflow manager based on fireworks
 
+.. toctree::
+
+   quickstart
+
+
 Documentation
 =============
 
 .. toctree::
 
    src/doc/modules
+
+Tutorials
+=============
+
+.. toctree::
+   
+   installation
+   quickstart
+   checklist
+   tutorials/tutorials
+
+
+
+Contributing
+============
+
+Contribute by raising an issue on github if you encounter a problem, or develop your own
+nanocluster workflow. Follow the guidelines in the developer tutorial: :ref:`developer`
+
+About
+=====
+
+Authors
+-------
+This package is developed at Aalto University, Department of Applied Physics
+by the `Surfaces and Interfaces at the Nanoscale (SIN) 
+<https://www.aalto.fi/department-of-applied-physics/surfaces-and-interfaces-at-the-nanoscale-sin>`_ 
+group.
+
+Contact
+-------
+If you encounter issues with the software, or want to suggest improvements,
+please use the `issues feature <https://github.com/SINGROUP/critcatworks/issues>`_ of
+github. 
+
+.. raw:: html
+
+    <script type="text/javascript" src="_static/js/spamspan.js"></script>
+    <p>If you want to contact the authors on other matters, use the following email:
+        <span class="spamspan">
+        <span class="u">marc.jager</span>
+        [at]
+        <span class="d">aalto [dot] fi</span>
+        </span>
+    </p>
+
+License
+-------
+The software is licensed under the GNU General Public License Version 3.0
+
+Funding
+-------
+This project has received funding from the Finnish Foundation for 
+Technology Promotion and the European Union's Horizon 2020 
+research under grant agreement number no. 686053 CRITCAT.
 
 Indices and tables
 ==================

@@ -37,8 +37,8 @@ Tutorials
 Contributing
 ============
 
-Contribute by raising an issue on github if you encounter a problem, or become develop your own
-nanocluster workflow. Follow the guidelines in the developer tutorial
+Contribute by raising an issue on github if you encounter a problem, or develop your own
+nanocluster workflow. Follow the guidelines in the developer tutorial: :ref:`developer`
 
 About
 =====
