@@ -42,6 +42,33 @@
 <span id="developer"></span><h1>For Future Developers<a class="headerlink" href="#for-future-developers" title="Permalink to this headline">¶</a></h1>
 <p>Become a developer
 Developer tutorial coming soon</p>
+<div class="section" id="fireworks-specs-entries">
+<h2>Fireworks specs entries<a class="headerlink" href="#fireworks-specs-entries" title="Permalink to this headline">¶</a></h2>
+<p>update dict for recent relevant entries</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+fw_spec = {</p>
+<blockquote>
+<div><p>simulations (dict) : “simulation entries for this workflow”,
+workflow (dict) : “relevant information about this workflow”,
+machine_learning (dict) : “machine_learning instances of this workflow”,
+temp (dict) :</p>
+<blockquote>
+<div><p>{
+calc_paths (list of str) : “paths to the dft calculations, sorted by adsorbate ids”,
+calc_ids (list of int) : “ids of simulations in permanent database”,
+is_converged_list (list of int) : “1 - converged, 0 - not converged calculation, same order as calc_paths”,
+fps_ranking (list of int) : “adsorbate ids ordered by FPS ranking”,
+analysis_ids (list of int) : “calculation ids which have been analysed and where analysis can be processed”,
+descmatrix (str) : “path to numpy array. 2D-matrix descriptor, row representing datapoint”,
+property (list of str) : “property of interest to machine learning”,
+last_machine_learning_id (int) : “id of last machine learning step”,
+}</p>
+</div></blockquote>
+<p>n_calcs_started (int) : “number of calculations which have already been started”,</p>
+</div></blockquote>
+<p>}</p>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</div>
 </div>
 
 
@@ -50,6 +77,14 @@ Developer tutorial coming soon</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">For Future Developers</a><ul>
+<li><a class="reference internal" href="#fireworks-specs-entries">Fireworks specs entries</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="coverageladder_workflow.html"
                         title="previous chapter">Coverage Ladder Workflow</a></p>

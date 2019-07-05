@@ -40,7 +40,40 @@
   <div class="section" id="welcome-to-critcatworks-documentation">
 <h1>Welcome to critcatworks documentation!<a class="headerlink" href="#welcome-to-critcatworks-documentation" title="Permalink to this headline">¶</a></h1>
 <p>This site is UNDER CONSTRUCTION</p>
-<p>critcatworks is a workflow manager based on fireworks</p>
+<p>Workflow manager for DFT simulations on nanocluster databases using Fireworks</p>
+<p>The package features various workflows:
+1. singlesites workflow</p>
+<blockquote>
+<div><p>-automatically generate adsorbates on nanoclusters
+-rank the cluster-adsorbate structures based on similarity
+-run CP2K calculations
+-do machine learning on the fly</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>nanocluster workflow</p></li>
+</ol>
+<blockquote>
+<div><p>-relax nanocluster structures</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>coverage workflow</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>automatically cover nanoclusters with adsorbates</p></li>
+<li><p>reduce the coverage with a simple heuristic step by step with DFT</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>coverage ladder workflow</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>starting from a coverage with adsorbates</p></li>
+<li><p>sophisticated coverage ladder algorithm searches for the optimal adsorbate coverage</p></li>
+</ul>
+</div></blockquote>
+<p>Take a look at the <a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a> tutorial for the first steps.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
@@ -127,6 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="checklist.html">Checklist</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="checklist.html#obligatory">Obligatory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="checklist.html#recommended">Recommended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checklist.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a><ul>
@@ -134,7 +168,10 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/singlesites_workflow.html">Singlesites Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/coverage_workflow.html">Simple Coverage Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/coverageladder_workflow.html">Coverage Ladder Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/developer.html">For Future Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/developer.html">For Future Developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/developer.html#fireworks-specs-entries">Fireworks specs entries</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

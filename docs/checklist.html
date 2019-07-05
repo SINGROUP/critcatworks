@@ -47,6 +47,13 @@
 <h2>Obligatory<a class="headerlink" href="#obligatory" title="Permalink to this headline">¶</a></h2>
 <p>These points must be met:</p>
 <p>coming soon</p>
+<ul class="simple">
+<li><p>Did the test run with a LJ-potential terminate correctly?</p></li>
+<li><p>Did you change the database to “ncdb”? (Argument in worfklow: extdb_connect = {“db_name”: “ncdb”},)</p></li>
+<li><p>Is the information for the launchpad correct? (username, password) in both workflow submission and launching script?</p></li>
+<li><p>Are the walltimes in the launching script sensible?</p></li>
+<li><p>Does worker_target_path (absolute path) exist and is it void of previous runs? (older folders and files might interfere with the CP2K calculation)</p></li>
+</ul>
 </div>
 <div class="section" id="recommended">
 <h2>Recommended<a class="headerlink" href="#recommended" title="Permalink to this headline">¶</a></h2>
@@ -54,6 +61,20 @@
 yet it is recommended to check them
 for the best user experience:</p>
 <p>coming soon</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If your workflow stops ahead of time, it might have fizzled or been defused.</p>
+<p>If it fizzled, it means there is an unexpected failure. Investigate the error in the corresponding launch directory. Once you have fixed the issue (e.g. missing file, typo, walltime, bug in the code, …) you can rerun a workflow from a specific firework through</p>
+<p><code class="docutils literal notranslate"><span class="pre">`sh</span>
+<span class="pre">lpad</span> <span class="pre">-l</span> <span class="pre">&lt;LAUNCHPAD&gt;</span> <span class="pre">rerun_fws</span> <span class="pre">-i</span> <span class="pre">&lt;FIREWORKID&gt;</span>
+<span class="pre">`</span></code></p>
+<p>If the workflow has been defused, there is usually an expected reason for it. A set convergence criterion might have been met or a loop has become static (no more changes detected) …</p>
+<p>In most cases you can choose to keep on running it until the next stop point. Use the command</p>
+<p><code class="docutils literal notranslate"><span class="pre">`sh</span>
+<span class="pre">lpad</span> <span class="pre">-l</span> <span class="pre">reignite_wflows</span> <span class="pre">-i</span> <span class="pre">&lt;WORKFLOWID&gt;</span>
+<span class="pre">`</span></code></p>
+<p>If you have found a bug, please raise an issue. You can also make a pull request if you have found a solution to the problem.</p>
 </div>
 </div>
 
@@ -68,6 +89,7 @@ for the best user experience:</p>
 <li><a class="reference internal" href="#">Checklist</a><ul>
 <li><a class="reference internal" href="#obligatory">Obligatory</a></li>
 <li><a class="reference internal" href="#recommended">Recommended</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 </ul>
