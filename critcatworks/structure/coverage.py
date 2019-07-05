@@ -218,7 +218,7 @@ class PerTypeCoverageCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
-            descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
+            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 

@@ -29,7 +29,7 @@ for n_shells in [55,147,309]:
 
         # descriptor needs to be set correctly
         scaffold.descriptor_setup = dscribe.descriptors.SOAP(
-            atomic_numbers=[29,78],
+            species=[29,78],
             periodic=False,
             rcut=5.0,
             nmax=8,

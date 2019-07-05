@@ -14,7 +14,7 @@ if __name__ == "__main__":
             'scipy',
             'ase',
             'future',
-            'cluskit>=4.1.2',
+            'cluskit>=4.1.9',
             'pathlib',
             'pprint',
             'sklearn',

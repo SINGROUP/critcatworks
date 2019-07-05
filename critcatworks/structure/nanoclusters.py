@@ -242,7 +242,7 @@ class NCGenerationTask(FiretaskBase):
                     atnum2 = ase.data.atomic_numbers[el2]
 
                     scaffold.descriptor_setup = dscribe.descriptors.SOAP(
-                        atomic_numbers=[atnum1, atnum2],
+                        species=[atnum1, atnum2],
                         periodic=False,
                         rcut=5.0,
                         nmax=8,

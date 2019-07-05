@@ -91,7 +91,7 @@ class AdsiteCreationTask(FiretaskBase):
             cluster.get_surface_atoms()
             # TODO allow for other descriptors than default
             # TODO read descriptor_params
-            descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
+            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 
@@ -237,7 +237,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
             cluster.get_surface_atoms()
             # TODO allow for other descriptors than default
             # TODO read descriptor_params
-            descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
+            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 
@@ -390,7 +390,7 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
             cluster.get_surface_atoms()
             # TODO allow for other descriptors than default
             # TODO read descriptor_params
-            descriptor_setup = dscribe.descriptors.SOAP(atomic_numbers = all_atomtypes, 
+            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
                 nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 
