@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Installation" href="../../installation.html" />
     <link rel="prev" title="critcatworks.structure package" href="critcatworks.structure.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -25,6 +26,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="../../installation.html" title="Installation"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="critcatworks.structure.html" title="critcatworks.structure package"
              accesskey="P">previous</a> |</li>
@@ -260,7 +264,7 @@ username, password, authsource and db_name.</p></li>
 <span id="critcatworks-workflows-nanoclusters-module"></span><h2>critcatworks.workflows.nanoclusters module<a class="headerlink" href="#module-critcatworks.workflows.nanoclusters" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="critcatworks.workflows.nanoclusters.get_nanoclusters_workflow">
-<code class="sig-prename descclassname">critcatworks.workflows.nanoclusters.</code><code class="sig-name descname">get_nanoclusters_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">worker_target_path=None</em>, <em class="sig-param">structures=None</em>, <em class="sig-param">extdb_ids=None</em>, <em class="sig-param">source_path=None</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">n_max_restarts=1</em>, <em class="sig-param">skip_dft=False</em>, <em class="sig-param">extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/nanoclusters.html#get_nanoclusters_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.nanoclusters.get_nanoclusters_workflow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">critcatworks.workflows.nanoclusters.</code><code class="sig-name descname">get_nanoclusters_workflow</code><span class="sig-paren">(</span><em class="sig-param">template_path</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">worker_target_path=None</em>, <em class="sig-param">structures=None</em>, <em class="sig-param">extdb_ids=None</em>, <em class="sig-param">source_path=None</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">atomic_energies={}</em>, <em class="sig-param">n_max_restarts=1</em>, <em class="sig-param">skip_dft=False</em>, <em class="sig-param">extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/workflows/nanoclusters.html#get_nanoclusters_workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.workflows.nanoclusters.get_nanoclusters_workflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Workflow to relax the structure of a set of
 nanoclusters using a simulation software (e.g. CP2K).
 The cohesive energies are calculated and summarized.</p>
@@ -282,6 +286,7 @@ where to read the structures from</p></li>
 <li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
 total energy of the isolated adsorbate molecule
 or a different reference point</p></li>
+<li><p><strong>atomic_energies</strong> (<em>dict</em>) – used for computing cohesive energies, not required</p></li>
 <li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
 <li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
 following simulation runs. Instead the structure is returned unchanged.</p></li>
@@ -498,6 +503,9 @@ username, password, authsource and db_name.</p></li>
   <h4>Previous topic</h4>
   <p class="topless"><a href="critcatworks.structure.html"
                         title="previous chapter">critcatworks.structure package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../installation.html"
+                        title="next chapter">Installation</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -528,6 +536,9 @@ username, password, authsource and db_name.</p></li>
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="../../installation.html" title="Installation"
+             >next</a> |</li>
         <li class="right" >
           <a href="critcatworks.structure.html" title="critcatworks.structure package"
              >previous</a> |</li>

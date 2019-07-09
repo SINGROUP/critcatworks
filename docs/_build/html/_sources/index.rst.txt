@@ -11,6 +11,7 @@ This site is UNDER CONSTRUCTION
 Workflow manager for DFT simulations on nanocluster databases using Fireworks
 
 The package features various workflows:
+
 1. singlesites workflow
 -automatically generate adsorbates on nanoclusters
 -rank the cluster-adsorbate structures based on similarity
@@ -25,16 +26,12 @@ The package features various workflows:
 - automatically cover nanoclusters with adsorbates
 - reduce the coverage with a simple heuristic step by step with DFT
 
-5. coverage ladder workflow
+4. coverage ladder workflow
 - starting from a coverage with adsorbates
 - sophisticated coverage ladder algorithm searches for the optimal adsorbate coverage
 
 
 Take a look at the :doc:`quickstart` tutorial for the first steps. 
-
-.. toctree::
-
-   quickstart
 
 
 Documentation

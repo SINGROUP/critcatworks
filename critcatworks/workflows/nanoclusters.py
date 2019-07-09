@@ -12,6 +12,7 @@ from critcatworks.database.update import initialize_workflow_data
 def get_nanoclusters_workflow(template_path, username, password, 
     worker_target_path = None, structures = None, 
     extdb_ids = None, source_path = None, reference_energy=0.0, 
+    atomic_energies = {},
     n_max_restarts = 1, skip_dft = False, extdb_connect = {}):
     """
     Workflow to relax the structure of a set of
@@ -34,6 +35,7 @@ def get_nanoclusters_workflow(template_path, username, password,
         reference_energy (float) :  reference energy for the adsorbate. Can be the
                                     total energy of the isolated adsorbate molecule
                                     or a different reference point
+        atomic_energies (dict)  :   used for computing cohesive energies, not required
         n_max_restarts (int)  : number of times the calculation is restarted upon failure
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
@@ -57,6 +59,7 @@ def get_nanoclusters_workflow(template_path, username, password,
         "simulation_method" : "cp2k",
         "n_max_restarts" : 1,
         "workflow_type" : "relax_nanoclusters",
+        "atomic_energies" : atomic_energies,
         }
     fw_init = initialize_workflow_data(username, password, parameters, 
         name = "UNNAMED", workflow_type = "relax_nanoclusters",
@@ -87,7 +90,7 @@ def get_nanoclusters_workflow(template_path, username, password,
 
     # FireWork: compare stability of nanoclusters. 
     #Computes cohesive energies if atomic_energies of all involved elements are given
-    fw_compare_nanoclusters =  compare_nanoclusters(atomic_energies = {})
+    fw_compare_nanoclusters =  compare_nanoclusters(atomic_energies = atomic_energies)
 
     # add above Fireworks with links
     workflow_list = [fw_init,

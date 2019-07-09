@@ -44,8 +44,137 @@
             
   <div class="section" id="nanocluster-workflow">
 <h1>Nanocluster Workflow<a class="headerlink" href="#nanocluster-workflow" title="Permalink to this headline">¶</a></h1>
-<p>workflow overview
-and usage coming soon</p>
+<p>This workflow simply relaxes the structure of a set of nanoclusters</p>
+<p>If atomic energies are given, the cohesive energies of the relaxed nanoclusters
+are computed. Otherwise, the total energy is used to compare nanoclusters of
+the same composition.</p>
+<p>Currently, stable nanoclusters have to be picked manually once the workflow
+has finished, but this can be automated in the future.</p>
+<p>This is an example how to use the nanocluster workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">ase</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+
+<span class="c1"># internal modules</span>
+<span class="kn">from</span> <span class="nn">critcatworks.workflows</span> <span class="kn">import</span> <span class="n">get_nanoclusters_workflow</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="kn">import</span> <span class="n">mylaunchpad</span>
+
+<span class="k">def</span> <span class="nf">read_structures_locally</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;nanocluster path &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; stem &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stem</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">atoms</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+                <span class="c1"># set cell to 2.5 the diameter</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_positions</span><span class="p">()</span>
+                <span class="n">pdist</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                <span class="n">diameter</span> <span class="o">=</span> <span class="n">pdist</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">mpl</span> <span class="o">=</span> <span class="mf">2.5</span>
+                
+                <span class="n">atoms</span><span class="o">.</span><span class="n">set_cell</span><span class="p">([</span><span class="n">diameter</span> <span class="o">*</span> <span class="n">mpl</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">*</span> <span class="n">mpl</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">*</span> <span class="n">mpl</span><span class="p">])</span>
+                <span class="n">structures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;WARNING: file type not understood&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unexpected error:&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">structures</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">IS_QUEUE</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">USERNAME</span> <span class="o">=</span> <span class="s2">&quot;mjcritcat&quot;</span>
+    <span class="n">PASSWORD</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">IS_QUEUE</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(name)s</span><span class="s1">:</span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logdir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="n">logdir</span> <span class="o">+</span> <span class="s2">&quot;/nanocluster_workflow.log&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="c1"># set up the LaunchPad and reset it</span>
+    <span class="n">launchpad</span> <span class="o">=</span> <span class="n">mylaunchpad</span><span class="o">.</span><span class="n">create_launchpad</span><span class="p">(</span><span class="n">USERNAME</span><span class="p">,</span> <span class="n">PASSWORD</span><span class="p">,</span> <span class="n">lpadname</span> <span class="o">=</span> <span class="s2">&quot;mjfireworkstriton&quot;</span><span class="p">)</span>
+    <span class="c1">#launchpad.reset(&#39;&#39;, require_password=False)</span>
+
+    <span class="n">structures</span> <span class="o">=</span> <span class="n">read_structures_locally</span><span class="p">(</span><span class="s2">&quot;./ptx55&quot;</span><span class="p">)</span>
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">get_nanoclusters_workflow</span><span class="p">(</span><span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;mjcritcat&quot;</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">PASSWORD</span><span class="p">,</span>
+        <span class="n">source_path</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">template_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;templates/triton_gopt.inp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()),</span> 
+        <span class="c1">#worker_target_path = &quot;/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/production/ptcu_selected_clusters&quot;,</span>
+        <span class="n">worker_target_path</span> <span class="o">=</span> <span class="s2">&quot;/scratch/work/jagerm1/workflow_runs/nanoclusters/production/selected_ptni_clusters&quot;</span><span class="p">,</span>
+        <span class="n">structures</span> <span class="o">=</span> <span class="n">structures</span><span class="p">,</span>
+        <span class="n">extdb_ids</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;db_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ncdb&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="c1"># store workflow </span>
+    <span class="n">launchpad</span><span class="o">.</span><span class="n">add_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As in most workflows, the initial structures can be read in three ways:</p>
+<dl class="field-list simple">
+<dt class="field-odd">structures</dt>
+<dd class="field-odd"><p>list of ase.Atoms objects</p>
+</dd>
+<dt class="field-even">extdb_ids</dt>
+<dd class="field-even"><p>list of unique identifiers of the simulations collection. The
+simulations in the database need to have the correct form</p>
+</dd>
+<dt class="field-odd">source_path</dt>
+<dd class="field-odd"><p>absolute path on the computing resource to the directory
+where to read the structures from</p>
+</dd>
+</dl>
+<p>There are a few workflow-specific arguments</p>
+<blockquote>
+<div><p>atomic_energies (dict)  :   used for computing cohesive energies, not required</p>
+</div></blockquote>
+<p>The other arguments are common to all workflows, such as the username and password for the
+database or the path to the DFT template. They are listed here in more detail</p>
+<dl class="field-list">
+<dt class="field-odd">template_path (str)</dt>
+<dd class="field-odd"><p>absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p>
+</dd>
+<dt class="field-even">username (str)</dt>
+<dd class="field-even"><p>user who executed the workflow</p>
+</dd>
+<dt class="field-odd">password (str)</dt>
+<dd class="field-odd"><p>password for user to upload to the database</p>
+</dd>
+<dt class="field-even">worker_target_path (str)</dt>
+<dd class="field-even"><p>absolute path on computing resource. Directory needs to exist</p>
+</dd>
+<dt class="field-odd">reference_energy (float)</dt>
+<dd class="field-odd"><p>reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p>
+</dd>
+<dt class="field-even">n_max_restarts (int)</dt>
+<dd class="field-even"><p>number of times the DFT calculation is restarted upon failure</p>
+</dd>
+<dt class="field-odd">skip_dft (bool)</dt>
+<dd class="field-odd"><blockquote>
+<div><p>If set to true, the simulation step is skipped in all</p>
+</div></blockquote>
+<p>following simulation runs. Instead the structure is returned unchanged.</p>
+</dd>
+<dt class="field-even">extdb_connect (dict)</dt>
+<dd class="field-even"><p>dictionary containing the keys host,
+username, password, authsource and db_name
+of the database to connect to. Defaults to
+a test database for critcat.
+If db_name is set to ncdb, this will upload
+the data to the production database.</p>
+</dd>
+</dl>
 </div>
 
 

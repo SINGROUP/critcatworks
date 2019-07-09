@@ -49,6 +49,7 @@
 <div class="viewcode-block" id="get_nanoclusters_workflow"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.nanoclusters.get_nanoclusters_workflow">[docs]</a><span class="k">def</span> <span class="nf">get_nanoclusters_workflow</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> 
     <span class="n">worker_target_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">structures</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
     <span class="n">extdb_ids</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">source_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reference_energy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+    <span class="n">atomic_energies</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{}):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Workflow to relax the structure of a set of</span>
@@ -71,6 +72,7 @@
 <span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
 <span class="sd">                                    total energy of the isolated adsorbate molecule</span>
 <span class="sd">                                    or a different reference point</span>
+<span class="sd">        atomic_energies (dict)  :   used for computing cohesive energies, not required</span>
 <span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
 <span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
 <span class="sd">                            following simulation runs. Instead the structure is returned unchanged.</span>
@@ -94,6 +96,7 @@
         <span class="s2">&quot;simulation_method&quot;</span> <span class="p">:</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">,</span>
         <span class="s2">&quot;n_max_restarts&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s2">&quot;workflow_type&quot;</span> <span class="p">:</span> <span class="s2">&quot;relax_nanoclusters&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;atomic_energies&quot;</span> <span class="p">:</span> <span class="n">atomic_energies</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="n">fw_init</span> <span class="o">=</span> <span class="n">initialize_workflow_data</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> 
         <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;UNNAMED&quot;</span><span class="p">,</span> <span class="n">workflow_type</span> <span class="o">=</span> <span class="s2">&quot;relax_nanoclusters&quot;</span><span class="p">,</span>
@@ -124,7 +127,7 @@
 
     <span class="c1"># FireWork: compare stability of nanoclusters. </span>
     <span class="c1">#Computes cohesive energies if atomic_energies of all involved elements are given</span>
-    <span class="n">fw_compare_nanoclusters</span> <span class="o">=</span>  <span class="n">compare_nanoclusters</span><span class="p">(</span><span class="n">atomic_energies</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="n">fw_compare_nanoclusters</span> <span class="o">=</span>  <span class="n">compare_nanoclusters</span><span class="p">(</span><span class="n">atomic_energies</span> <span class="o">=</span> <span class="n">atomic_energies</span><span class="p">)</span>
 
     <span class="c1"># add above Fireworks with links</span>
     <span class="n">workflow_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_init</span><span class="p">,</span>
