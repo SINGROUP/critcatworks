@@ -28,6 +28,7 @@ consistently find a significantly lower-energy coverage.
 
 This figure provides an overview on how the implemented workflows depend on each other.
 
+
 .. image:: ../images/implemented_workflows_overview.svg
    :width: 800
 

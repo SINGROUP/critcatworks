@@ -48,7 +48,7 @@ Take a look at the :doc:`installation` and :doc:`quickstart` tutorials for the f
 
 
 Tutorials
-=============
+=========
 
 In order to use the workflow package confidently, it is advised to become familiar with
 Fireworks: `Documentation <https://materialsproject.github.io/fireworks/>`_.
@@ -69,8 +69,8 @@ Contributing
 Contribute by raising an issue on github if you encounter a problem, or develop your own
 nanocluster workflow. Follow the guidelines in the developer tutorial: :ref:`developer`
 
-Documentation
-=============
+Code Documentation
+==================
 
 .. toctree::
 
