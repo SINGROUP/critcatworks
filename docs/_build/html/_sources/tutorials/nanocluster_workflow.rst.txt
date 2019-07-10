@@ -11,6 +11,10 @@ Currently, stable nanoclusters have to be picked manually once the workflow
 has finished, but this can be automated in the future.
 
 
+.. image:: ../images/nanoclusters.svg
+   :width: 800
+
+
 This is an example how to use the nanocluster workflow:
 
 .. literalinclude:: ../../examples/nanoclusters.py
@@ -34,31 +38,6 @@ There are a few workflow-specific arguments
         atomic_energies (dict)  :   used for computing cohesive energies, not required
 
 The other arguments are common to all workflows, such as the username and password for the
-database or the path to the DFT template. They are listed here in more detail
-
-
-:template_path (str):   
-    absolute path to input file for calculations. 
-    It works as a template which is later modified by the
-    simulation-specific Firework.
-:username (str): user who executed the workflow
-:password (str): password for user to upload to the database
-:worker_target_path (str): absolute path on computing resource. Directory needs to exist
-:reference_energy (float):  
-    reference energy for the adsorbate. Can be the
-    total energy of the isolated adsorbate molecule
-    or a different reference point
-:n_max_restarts (int): number of times the DFT calculation is restarted upon failure
-:skip_dft (bool):   
-    If set to true, the simulation step is skipped in all
-    following simulation runs. Instead the structure is returned unchanged.
-:extdb_connect (dict):   
-     dictionary containing the keys host,
-     username, password, authsource and db_name 
-     of the database to connect to. Defaults to
-     a test database for critcat.
-     If db_name is set to ncdb, this will upload
-     the data to the production database.
-
+database or the path to the DFT template. 
 
 

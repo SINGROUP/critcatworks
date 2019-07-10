@@ -3,36 +3,71 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to critcatworks documentation!
-========================================
+Welcome to Critcatworks
+=======================
+
+Workflow manager for DFT simulations on nanocluster databases using Fireworks
 
 This site is UNDER CONSTRUCTION
 
-Workflow manager for DFT simulations on nanocluster databases using Fireworks
+The project aims to partially automate nanocatalyst discovery. During the course
+of this project, critcatworks emerged. It has made screening of catalyst search space
+and management and analysis of large datasets easier. The following sketch shows an
+overview of the envisioned and partly realized catalyst discovery platform.
+
+.. image:: ./images/critcat_2_flowchart.svg 
+   :width: 800
+
 
 The package features various workflows:
 
 1. singlesites workflow
--automatically generate adsorbates on nanoclusters
--rank the cluster-adsorbate structures based on similarity
--run CP2K calculations
--do machine learning on the fly
+
+   a) automatically generate adsorbates on nanoclusters
+   b) rank the cluster-adsorbate structures based on similarity
+   c) run CP2K calculations
+   d) do machine learning on the fly
 
 2. nanocluster workflow
--relax nanocluster structures
 
+   a) relax nanocluster structures
+   b) sort them with respect to stability 
 
 3. coverage workflow
-- automatically cover nanoclusters with adsorbates
-- reduce the coverage with a simple heuristic step by step with DFT
+
+   a) automatically cover nanoclusters with adsorbates
+   b) reduce the coverage with a simple heuristic step by step with DFT
 
 4. coverage ladder workflow
-- starting from a coverage with adsorbates
-- sophisticated coverage ladder algorithm searches for the optimal adsorbate coverage
+
+   a) starting from a coverage with adsorbates
+   b) sophisticated coverage ladder algorithm searches for the optimal adsorbate coverage
 
 
-Take a look at the :doc:`quickstart` tutorial for the first steps. 
+Take a look at the :doc:`installation` and :doc:`quickstart` tutorials for the first steps. 
 
+
+Tutorials
+=============
+
+In order to use the workflow package confidently, it is advised to become familiar with
+Fireworks: `Documentation <https://materialsproject.github.io/fireworks/>`_.
+
+.. toctree::
+   
+   installation
+   quickstart
+   checklist
+   tutorials/workflows
+   database
+   developer   
+
+
+Contributing
+============
+
+Contribute by raising an issue on github if you encounter a problem, or develop your own
+nanocluster workflow. Follow the guidelines in the developer tutorial: :ref:`developer`
 
 Documentation
 =============
@@ -41,23 +76,6 @@ Documentation
 
    src/doc/modules
 
-Tutorials
-=============
-
-.. toctree::
-   
-   installation
-   quickstart
-   checklist
-   tutorials/tutorials
-
-
-
-Contributing
-============
-
-Contribute by raising an issue on github if you encounter a problem, or develop your own
-nanocluster workflow. Follow the guidelines in the developer tutorial: :ref:`developer`
 
 About
 =====

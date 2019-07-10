@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Singlesites Workflow" href="singlesites_workflow.html" />
-    <link rel="prev" title="Tutorials" href="tutorials.html" /> 
+    <link rel="prev" title="Workflows" href="workflows.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,10 +30,10 @@
           <a href="singlesites_workflow.html" title="Singlesites Workflow"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="tutorials.html" title="Tutorials"
+          <a href="workflows.html" title="Workflows"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="tutorials.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="workflows.html" accesskey="U">Workflows</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -50,6 +50,7 @@ are computed. Otherwise, the total energy is used to compare nanoclusters of
 the same composition.</p>
 <p>Currently, stable nanoclusters have to be picked manually once the workflow
 has finished, but this can be automated in the future.</p>
+<a class="reference internal image-reference" href="../_images/nanoclusters.svg"><img alt="../_images/nanoclusters.svg" src="../_images/nanoclusters.svg" width="800" /></a>
 <p>This is an example how to use the nanocluster workflow:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
@@ -136,45 +137,7 @@ where to read the structures from</p>
 <div><p>atomic_energies (dict)  :   used for computing cohesive energies, not required</p>
 </div></blockquote>
 <p>The other arguments are common to all workflows, such as the username and password for the
-database or the path to the DFT template. They are listed here in more detail</p>
-<dl class="field-list">
-<dt class="field-odd">template_path (str)</dt>
-<dd class="field-odd"><p>absolute path to input file for calculations.
-It works as a template which is later modified by the
-simulation-specific Firework.</p>
-</dd>
-<dt class="field-even">username (str)</dt>
-<dd class="field-even"><p>user who executed the workflow</p>
-</dd>
-<dt class="field-odd">password (str)</dt>
-<dd class="field-odd"><p>password for user to upload to the database</p>
-</dd>
-<dt class="field-even">worker_target_path (str)</dt>
-<dd class="field-even"><p>absolute path on computing resource. Directory needs to exist</p>
-</dd>
-<dt class="field-odd">reference_energy (float)</dt>
-<dd class="field-odd"><p>reference energy for the adsorbate. Can be the
-total energy of the isolated adsorbate molecule
-or a different reference point</p>
-</dd>
-<dt class="field-even">n_max_restarts (int)</dt>
-<dd class="field-even"><p>number of times the DFT calculation is restarted upon failure</p>
-</dd>
-<dt class="field-odd">skip_dft (bool)</dt>
-<dd class="field-odd"><blockquote>
-<div><p>If set to true, the simulation step is skipped in all</p>
-</div></blockquote>
-<p>following simulation runs. Instead the structure is returned unchanged.</p>
-</dd>
-<dt class="field-even">extdb_connect (dict)</dt>
-<dd class="field-even"><p>dictionary containing the keys host,
-username, password, authsource and db_name
-of the database to connect to. Defaults to
-a test database for critcat.
-If db_name is set to ncdb, this will upload
-the data to the production database.</p>
-</dd>
-</dl>
+database or the path to the DFT template.</p>
 </div>
 
 
@@ -184,8 +147,8 @@ the data to the production database.</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="tutorials.html"
-                        title="previous chapter">Tutorials</a></p>
+  <p class="topless"><a href="workflows.html"
+                        title="previous chapter">Workflows</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="singlesites_workflow.html"
                         title="next chapter">Singlesites Workflow</a></p>
@@ -223,10 +186,10 @@ the data to the production database.</p>
           <a href="singlesites_workflow.html" title="Singlesites Workflow"
              >next</a> |</li>
         <li class="right" >
-          <a href="tutorials.html" title="Tutorials"
+          <a href="workflows.html" title="Workflows"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="tutorials.html" >Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="workflows.html" >Workflows</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -1,7 +1,9 @@
 # critcatworks
 
 CritCatWorks is a workflow manager for DFT simulations on nanocluster databases 
-built on Fireworks. The documentation along with tutorials is available at
+built on 
+[Fireworks](https://materialsproject.github.io/fireworks/).
+The documentation along with tutorials is available at
 [https://singroup.github.io/critcatworks/](https://singroup.github.io/critcatworks/)
 
 

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Welcome to critcatworks documentation! &#8212; critcatworks 01.07.2019 documentation</title>
+    <title>Welcome to Critcatworks &#8212; critcatworks 01.07.2019 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="critcatworks" href="src/doc/modules.html" /> 
+    <link rel="next" title="Installation" href="installation.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +26,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="src/doc/modules.html" title="critcatworks"
+          <a href="installation.html" title="Installation"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">critcatworks 01.07.2019 documentation</a> &#187;</li> 
       </ul>
@@ -37,28 +37,86 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-critcatworks-documentation">
-<h1>Welcome to critcatworks documentation!<a class="headerlink" href="#welcome-to-critcatworks-documentation" title="Permalink to this headline">¶</a></h1>
-<p>This site is UNDER CONSTRUCTION</p>
+  <div class="section" id="welcome-to-critcatworks">
+<h1>Welcome to Critcatworks<a class="headerlink" href="#welcome-to-critcatworks" title="Permalink to this headline">¶</a></h1>
 <p>Workflow manager for DFT simulations on nanocluster databases using Fireworks</p>
+<p>This site is UNDER CONSTRUCTION</p>
+<p>The project aims to partially automate nanocatalyst discovery. During the course
+of this project, critcatworks emerged. It has made screening of catalyst search space
+and management and analysis of large datasets easier. The following sketch shows an
+overview of the envisioned and partly realized catalyst discovery platform.</p>
+<a class="reference internal image-reference" href="_images/critcat_2_flowchart.svg"><img alt="_images/critcat_2_flowchart.svg" src="_images/critcat_2_flowchart.svg" width="800" /></a>
 <p>The package features various workflows:</p>
-<p>1. singlesites workflow
--automatically generate adsorbates on nanoclusters
--rank the cluster-adsorbate structures based on similarity
--run CP2K calculations
--do machine learning on the fly</p>
-<p>2. nanocluster workflow
--relax nanocluster structures</p>
-<p>3. coverage workflow
-- automatically cover nanoclusters with adsorbates
-- reduce the coverage with a simple heuristic step by step with DFT</p>
-<p>4. coverage ladder workflow
-- starting from a coverage with adsorbates
-- sophisticated coverage ladder algorithm searches for the optimal adsorbate coverage</p>
-<p>Take a look at the <a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a> tutorial for the first steps.</p>
+<ol class="arabic simple">
+<li><p>singlesites workflow</p>
+<ol class="loweralpha simple">
+<li><p>automatically generate adsorbates on nanoclusters</p></li>
+<li><p>rank the cluster-adsorbate structures based on similarity</p></li>
+<li><p>run CP2K calculations</p></li>
+<li><p>do machine learning on the fly</p></li>
+</ol>
+</li>
+<li><p>nanocluster workflow</p>
+<ol class="loweralpha simple">
+<li><p>relax nanocluster structures</p></li>
+<li><p>sort them with respect to stability</p></li>
+</ol>
+</li>
+<li><p>coverage workflow</p>
+<ol class="loweralpha simple">
+<li><p>automatically cover nanoclusters with adsorbates</p></li>
+<li><p>reduce the coverage with a simple heuristic step by step with DFT</p></li>
+</ol>
+</li>
+<li><p>coverage ladder workflow</p>
+<ol class="loweralpha simple">
+<li><p>starting from a coverage with adsorbates</p></li>
+<li><p>sophisticated coverage ladder algorithm searches for the optimal adsorbate coverage</p></li>
+</ol>
+</li>
+</ol>
+<p>Take a look at the <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> and <a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a> tutorials for the first steps.</p>
 </div>
-<div class="section" id="documentation">
-<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<p>In order to use the workflow package confidently, it is advised to become familiar with
+Fireworks: <a class="reference external" href="https://materialsproject.github.io/fireworks/">Documentation</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checklist.html">Checklist</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="checklist.html#obligatory">Obligatory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checklist.html#recommended">Recommended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checklist.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/workflows.html">Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/nanocluster_workflow.html">Nanocluster Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/singlesites_workflow.html">Singlesites Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/coverage_workflow.html">Simple Coverage Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/coverageladder_workflow.html">Coverage Ladder Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#database-format">Database format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#database-query-examples">Database query examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">For Future Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer.html#fireworks-specs-entries">Fireworks specs entries</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>Contribute by raising an issue on github if you encounter a problem, or develop your own
+nanocluster workflow. Follow the guidelines in the developer tutorial: <a class="reference internal" href="developer.html#developer"><span class="std std-ref">For Future Developers</span></a></p>
+</div>
+<div class="section" id="id1">
+<h1>Documentation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="src/doc/modules.html">critcatworks</a><ul>
@@ -128,37 +186,6 @@
 </ul>
 </div>
 </div>
-<div class="section" id="tutorials">
-<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="checklist.html">Checklist</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="checklist.html#obligatory">Obligatory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="checklist.html#recommended">Recommended</a></li>
-<li class="toctree-l2"><a class="reference internal" href="checklist.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/nanocluster_workflow.html">Nanocluster Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/singlesites_workflow.html">Singlesites Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/coverage_workflow.html">Simple Coverage Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/coverageladder_workflow.html">Coverage Ladder Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/developer.html">For Future Developers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorials/developer.html#fireworks-specs-entries">Fireworks specs entries</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="contributing">
-<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
-<p>Contribute by raising an issue on github if you encounter a problem, or develop your own
-nanocluster workflow. Follow the guidelines in the developer tutorial: <a class="reference internal" href="tutorials/developer.html#developer"><span class="std std-ref">For Future Developers</span></a></p>
-</div>
 <div class="section" id="about">
 <h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
@@ -208,10 +235,10 @@ research under grant agreement number no. 686053 CRITCAT.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to critcatworks documentation!</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#">Welcome to Critcatworks</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 <li><a class="reference internal" href="#contributing">Contributing</a></li>
+<li><a class="reference internal" href="#id1">Documentation</a></li>
 <li><a class="reference internal" href="#about">About</a><ul>
 <li><a class="reference internal" href="#authors">Authors</a></li>
 <li><a class="reference internal" href="#contact">Contact</a></li>
@@ -223,8 +250,8 @@ research under grant agreement number no. 686053 CRITCAT.</p>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="src/doc/modules.html"
-                        title="next chapter">critcatworks</a></p>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installation</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -256,7 +283,7 @@ research under grant agreement number no. 686053 CRITCAT.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="src/doc/modules.html" title="critcatworks"
+          <a href="installation.html" title="Installation"
              >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">critcatworks 01.07.2019 documentation</a> &#187;</li> 
       </ul>

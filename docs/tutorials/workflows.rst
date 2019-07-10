@@ -1,6 +1,6 @@
-.. _tutorials:
+.. _workflows:
 
-Tutorials
+Workflows
 =========
 
 The automated workflows facilitate generation and analysis of large datasets of
@@ -25,14 +25,42 @@ Given a starting coverage, the coverage ladder workflow adds and removes adsorba
 with a parallel DFT computation of addition/removal candidates, and branches out over time to
 consistently find a significantly lower-energy coverage.
 
+
+This figure provides an overview on how the implemented workflows depend on each other.
+
+.. image:: ../images/implemented_workflows_overview.svg
+   :width: 800
+
+
+
+Most workflows have the following arguments in common: 
+
+
+:template_path (str):   
+    absolute path to input file for calculations. 
+    It works as a template which is later modified by the
+    simulation-specific Firework.
+:username (str): user who executed the workflow
+:password (str): password for user to upload to the database
+:worker_target_path (str): absolute path on computing resource. Directory needs to exist
+:reference_energy (float):  
+    reference energy for the adsorbate. Can be the
+    total energy of the isolated adsorbate molecule
+    or a different reference point
+:n_max_restarts (int): number of times the DFT calculation is restarted upon failure
+:skip_dft (bool):   
+    If set to true, the simulation step is skipped in all
+    following simulation runs. Instead the structure is returned unchanged.
+:extdb_connect (dict):   
+     dictionary containing the keys host,
+     username, password, authsource and db_name 
+     of the database to connect to. Defaults to
+     a test database for critcat.
+     If db_name is set to ncdb, this will upload
+     the data to the production database.
+
+
 The following workflows are available (alongside a few others):
-
-ADD OVERVIEW FIGURE
-
-
-In order to use the workflow package confidently, it is advised to become familiar with
-Fireworks: `Documentation <https://materialsproject.github.io/fireworks/>`_.
-
 
 .. toctree::
    :maxdepth: 1
@@ -41,4 +69,3 @@ Fireworks: `Documentation <https://materialsproject.github.io/fireworks/>`_.
    singlesites_workflow
    coverage_workflow
    coverageladder_workflow
-   developer   

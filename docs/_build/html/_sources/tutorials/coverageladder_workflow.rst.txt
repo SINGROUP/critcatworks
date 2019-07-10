@@ -5,5 +5,5 @@ workflow overview
 and usage coming soon
 
 
-.. image:: ../images/coverageladder.eps
+.. image:: ../images/coverageladder.svg
    :width: 800

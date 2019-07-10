@@ -4,6 +4,9 @@ Quickstart
 quickstart instructions will be improved soon
 
 
+.. image:: ./images/workflow_platform_technical_overview.png 
+   :width: 800
+
 
 A few examples are given in the examples folder.
 Important to run a workflow:
