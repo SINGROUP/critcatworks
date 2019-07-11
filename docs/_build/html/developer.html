@@ -14,6 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="critcatworks" href="src/doc/modules.html" />
     <link rel="prev" title="Database" href="database.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -25,6 +26,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="src/doc/modules.html" title="critcatworks"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="database.html" title="Database"
              accesskey="P">previous</a> |</li>
@@ -44,23 +48,137 @@ Developer tutorial coming soon</p>
 <div class="section" id="fireworks-specs-entries">
 <h2>Fireworks specs entries<a class="headerlink" href="#fireworks-specs-entries" title="Permalink to this headline">¶</a></h2>
 <p>update dict for recent relevant entries</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fw_spec</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">simulations</span> <span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;simulation entries for this workflow&quot;</span><span class="p">,</span>
-    <span class="n">workflow</span> <span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;relevant information about this workflow&quot;</span><span class="p">,</span>
-    <span class="n">machine_learning</span> <span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;machine_learning instances of this workflow&quot;</span><span class="p">,</span>
-    <span class="n">temp</span> <span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="p">:</span>
-        <span class="p">{</span>
-        <span class="n">calc_paths</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="nb">str</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;paths to the dft calculations, sorted by adsorbate ids&quot;</span><span class="p">,</span>
-        <span class="n">calc_ids</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;ids of simulations in permanent database&quot;</span><span class="p">,</span>
-        <span class="n">is_converged_list</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;1 - converged, 0 - not converged calculation, same order as calc_paths&quot;</span><span class="p">,</span>
-        <span class="n">fps_ranking</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;adsorbate ids ordered by FPS ranking&quot;</span><span class="p">,</span>
-        <span class="n">analysis_ids</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;calculation ids which have been analysed and where analysis can be processed&quot;</span><span class="p">,</span>
-        <span class="n">descmatrix</span> <span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;path to numpy array. 2D-matrix descriptor, row representing datapoint&quot;</span><span class="p">,</span>
-        <span class="nb">property</span> <span class="p">(</span><span class="nb">list</span> <span class="n">of</span> <span class="nb">str</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;property of interest to machine learning&quot;</span><span class="p">,</span>
-        <span class="n">last_machine_learning_id</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;id of last machine learning step&quot;</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="n">n_calcs_started</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="s2">&quot;number of calculations which have already been started&quot;</span><span class="p">,</span>
-<span class="p">}</span>
+<dl class="field-list simple">
+<dt class="field-odd">simulations (dict)</dt>
+<dd class="field-odd"><p>simulation collection entries for this workflow.
+Usually, simulations are not stored here, since large amounts
+of documents would slow the workflow manager down</p>
+</dd>
+<dt class="field-even">workflow (dict)</dt>
+<dd class="field-even"><p>relevant information about this workflow,
+entry for workflow collection</p>
+</dd>
+<dt class="field-odd">machine_learning (dict)</dt>
+<dd class="field-odd"><p>machine_learning instances of this workflow
+entries for machine_learning collection</p>
+</dd>
+<dt class="field-even">n_calcs_started (int)</dt>
+<dd class="field-even"><p>number of calculations which have already been started</p>
+</dd>
+<dt class="field-odd">extdb_connect (dict)</dt>
+<dd class="field-odd"><p>Connection information to permanent mongodb database containing the keys host, username, password,
+authsource and db_name.</p>
+</dd>
+<dt class="field-even">temp (dict)</dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">calc_paths (list of str)</dt>
+<dd class="field-odd"><p>paths to the dft calculations, sorted by adsorbate ids</p>
+</dd>
+<dt class="field-even">calc_ids (list of int)</dt>
+<dd class="field-even"><p>ids of simulations in permanent database</p>
+</dd>
+<dt class="field-odd">is_converged_list (list of int)</dt>
+<dd class="field-odd"><p>1 - converged,
+0 - not converged calculation,
+same order as calc_paths</p>
+</dd>
+<dt class="field-even">fps_ranking (list of int)</dt>
+<dd class="field-even"><p>adsorbate ids ordered by FPS ranking</p>
+</dd>
+<dt class="field-odd">analysis_ids (list of int)</dt>
+<dd class="field-odd"><p>calculation ids which have been analysed and where analysis can be processed</p>
+</dd>
+<dt class="field-even">calc_analysis_ids_dict (dict)</dt>
+<dd class="field-even"><p>keys are calculation ids before DFT
+values are calculation ids which have been analysed</p>
+</dd>
+<dt class="field-odd">cohesive_energy_dct (dict)</dt>
+<dd class="field-odd"><p>for each chemical formula key, the value corresponds
+to a dict of simulation indices and cohesive energies
+(total energies if no atomic energies were given)</p>
+</dd>
+<dt class="field-even">descmatrix (str)</dt>
+<dd class="field-even"><p>path to numpy array. 2D-matrix descriptor, row representing datapoint</p>
+</dd>
+<dt class="field-odd">property (list of str)</dt>
+<dd class="field-odd"><p>property of interest to machine learning</p>
+</dd>
+<dt class="field-even">last_machine_learning_id (int)</dt>
+<dd class="field-even"><p>id of last machine learning step</p>
+</dd>
+<dt class="field-odd">reference_energy (float)</dt>
+<dd class="field-odd"><p>reference energy for the adsorbate. Can be the total energy of the isolated adsorbate molecule or a different reference point</p>
+</dd>
+<dt class="field-even">free_energy_correction (float)</dt>
+<dd class="field-even"><p>constant shift in free
+energy. This is relevant for the coverage ladder
+target energy range.</p>
+</dd>
+<dt class="field-odd">branch_dct (dict)</dt>
+<dd class="field-odd"><p>keys of parent simulations
+with values being lists of child simulations</p>
+</dd>
+<dt class="field-even">direction (bool)</dt>
+<dd class="field-even"><p>1 - adding adsorbate
+0 - removing adsorbate</p>
+</dd>
+<dt class="field-odd">ne_dct (dict)</dt>
+<dd class="field-odd"><p>stores total energies of all calculations with respect to the number of adsorbates and their ids</p>
+</dd>
+<dt class="field-even">n_adsorbates_root (int)</dt>
+<dd class="field-even"><p>number of adsorbates of the root structure</p>
+</dd>
+<dt class="field-odd">n_adsorbates (int)</dt>
+<dd class="field-odd"><p>number of adsorbates of the current step</p>
+</dd>
+<dt class="field-even">is_return (bool)</dt>
+<dd class="field-even"><p>current state of the coverage ladder workflow. If True,
+the ladder search is on the way back to the root level</p>
+</dd>
+<dt class="field-odd">is_new_root (bool)</dt>
+<dd class="field-odd"><p>If True, the last simulation has resulted in a new
+root simulation</p>
+</dd>
+<dt class="field-even">open_branches (list)</dt>
+<dd class="field-even"><p>each element is a tuple containing parent simulation ids and direction</p>
+</dd>
+<dt class="field-odd">root_history (list)</dt>
+<dd class="field-odd"><p>ordered ids of root simulations during the course of
+the workflow, starting with the start_id</p>
+</dd>
+<dt class="field-even">step_history (list)</dt>
+<dd class="field-even"><p>each entry is a tuple of
+a list of calculation ids
+and a direction indicator</p>
+</dd>
+<dt class="field-odd">calc_parents (dict)</dt>
+<dd class="field-odd"><p>keys of simulation ids
+with values being parent simulation ids</p>
+</dd>
+<dt class="field-even">start_id (int)</dt>
+<dd class="field-even"><p>unique identifier of the simulation which is used to start the workflow</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>TO DELETE</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span>{
+    simulations (dict) : &quot;simulation entries for this workflow&quot;,
+    workflow (dict) : &quot;relevant information about this workflow&quot;,
+    machine_learning (dict) : &quot;machine_learning instances of this workflow&quot;,
+    temp (dict) :
+        {
+        calc_paths (list of str) : &quot;paths to the dft calculations, sorted by adsorbate ids&quot;,
+        calc_ids (list of int) : &quot;ids of simulations in permanent database&quot;,
+        is_converged_list (list of int) : &quot;1 - converged, 0 - not converged calculation, same order as calc_paths&quot;,
+        fps_ranking (list of int) : &quot;adsorbate ids ordered by FPS ranking&quot;,
+        analysis_ids (list of int) : &quot;calculation ids which have been analysed and where analysis can be processed&quot;,
+        descmatrix (str) : &quot;path to numpy array. 2D-matrix descriptor, row representing datapoint&quot;,
+        property (list of str) : &quot;property of interest to machine learning&quot;,
+        last_machine_learning_id (int) : &quot;id of last machine learning step&quot;,
+        }
+    n_calcs_started (int) : &quot;number of calculations which have already been started&quot;,
+}
 </pre></div>
 </div>
 </div>
@@ -83,6 +201,9 @@ Developer tutorial coming soon</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="database.html"
                         title="previous chapter">Database</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src/doc/modules.html"
+                        title="next chapter">critcatworks</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -113,6 +234,9 @@ Developer tutorial coming soon</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="src/doc/modules.html" title="critcatworks"
+             >next</a> |</li>
         <li class="right" >
           <a href="database.html" title="Database"
              >previous</a> |</li>
