@@ -17,20 +17,21 @@ In the following, we list the entries that data records need to have in each col
 
 
 Collection: IDs
+^^^^^^^^^^^^^^^
 
 contains the ID values that will be assigned to the newest entries in other collections
 
 
-_id (int):
+:_id (int):
     automatic compulsory internal id for MongoDB
 
-simulations (int):
+:simulations (int):
     ID to be used by the next new entry of type simulation
 
-workflows (int):
+:workflows (int):
     ID to be used by the next new entry of type workflows 
 
-machine_learning (int):
+:machine_learning (int):
     ID to be used by the next new entry of type machine_learning 
 
 (notice how the field name matches the collection name)
@@ -38,38 +39,38 @@ machine_learning (int):
 
 
 Collection: simulations
+^^^^^^^^^^^^^^^^^^^^^^^
 
-
-_id (int): 
+:_id (int): 
     unique identifier
 
-source_id (int):
+:source_id (int):
     ID of the parent simulation that originated this, -1 if none
 
-workflow_id (int):
+:workflow_id (int):
     ID of workflow when instance was added, -1 if none
 
-wf_sim_id (int):
+:wf_sim_id (int):
     ID of simulation (unique within the workflow this belongs to)
 
-atoms (ATOMS):
+:atoms (ATOMS):
     dictionary with information about the atoms.
 
-nanoclusters (NANOCLUSTER):
+:nanoclusters (NANOCLUSTER):
     list of dictionaries with information about the nanocluster(s)
-adsorbates (ADSORBATE):
+:adsorbates (ADSORBATE):
     list of dictionaries with information about the adsorbate(s)
 
-substrates (SUBSTRATE):
+:substrates (SUBSTRATE):
     list of dictionaries with information about the substrate(s)
 
-operations (list):
+:operations (list):
     List of dictionaries, each describing one operation. Always with respect to the parent simulation if applicable 
 
-inp (dict):
+:inp (dict):
     property/value pairs describing the simulation input
 
-output (dict):
+:output (dict):
     property/value pairs output by the calculation
 
 
@@ -78,67 +79,67 @@ For custom types ATOMS, NANOCLUSTER, ADSORBATE and SUBSTRATE see below.
 
 
 Collection: workflows
+^^^^^^^^^^^^^^^^^^^^^
 
-
-_id (int): 
+:_id (int): 
     unique identifier
 
-username (str):
+:username (str):
     user who executed the workflow
-creation_time (str):
+:creation_time (str):
     time of creation of the workflow
-parameters (dict):
+:parameters (dict):
     workflow-specific parameters
-name (str):
+:name (str):
     custom name of workflow
-workflow_type (str):
+:workflow_type (str):
     custom type of workflow
 
 
 
 Collection: machine_learning
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-_id (int): 
+:_id (int): 
     unique identifier
 
-workflow_id (int):
+:workflow_id (int):
     ID of workflow which the machine learning run was part of
 
-method (str):
+:method (str):
     name of the ML method: krr, nn, ...
 
-method_params (dict):
+:method_params (dict):
     Parameters of the method
 
-descriptor (str):
+:descriptor (str):
     name of the descriptor: soap, mbtr, cm, ...
 
-descriptor_params (dict):
+:descriptor_params (dict):
     Parameters of the descriptor used
 
-training_set (int[]):
+:training_set (int[]):
     list of simulation IDs used for training
 
-validation_set (int[]):
+:validation_set (int[]):
     list of simulation IDs used in validation. If empty, cross-validation was used.
-test_set (int[]):
+:test_set (int[]):
     list of simulation IDs used in testing. If empty, only validation was used
-prediction_set (int[]):
+:prediction_set (int[]):
     list of simulation IDs used for prediction.
-metrics_training (dict):
+:metrics_training (dict):
     dictionary of (“metric name”: value) on training set
     key: string = name of the metric
     value: float = calculated value
-metrics_validation (dict):
+:metrics_validation (dict):
     dictionary of (“metric name”: value) on validation set
     key: string = name of the metric
     value: float = calculated value
-metrics_test (dict):
+:metrics_test (dict):
     dictionary of (“metric name”: value) on test set
     key: string = name of the metric
     value: float = calculated value
-output (dict):
+:output (dict):
     relevant training output info
 
 
@@ -147,24 +148,26 @@ The field output is a dictionary with all the useful output values from the calc
 
 
 Custom Type: ATOMS
+^^^^^^^^^^^^^^^^^^
+
 
 A dictionary for describing atoms in a system, conceptually 
 close to ase.Atoms object:
 
 
-numbers (int[]):
+:numbers (int[]):
     list of atomic numbers as numpy array [N] of ints
-positions (float[N,3]):
+:positions (float[N,3]):
     positions as numpy matrix [Nx3] of doubles
-constraints (int[N,3]):
+:constraints (int[N,3]):
     frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free
-pbc (bool):
+:pbc (bool):
     use periodic boundaries
-cell (float[3,3]):
+:cell (float[3,3]):
     matrix 3x3 with cell vectors on the rows
-celldisp (float[3,1]):
+:celldisp (float[3,1]):
     displacement of cell from origin
-info (dict):
+:info (dict):
     field for additional information related to structure
 
 
@@ -173,34 +176,38 @@ The order of atoms in this dictionary is the one found in the simulation input f
 
 
 Custom Type: ADSORBATE
+^^^^^^^^^^^^^^^^^^^^^^
 
 
-reference_id (int):
+:reference_id (int):
     ID of the simulation to use as reference
-atom_ids (int[]):
+:atom_ids (int[]):
     atom indices in the ATOMS dictionary of the simulation record
-site_class (str):
+:site_class (str):
     class of adsorption site: “top”, “bridge”, “hollow”, “4-fold hollow”
-site_ids (int[]):
+:site_ids (int[]):
     list of atom ids (in simulation record) that define the adsorption site
 
 
 Custom Type: NANOCLUSTER
+^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 In general, simulation.nanoclusters is a list of dictionaries with this structure. 
 
-reference_id (int):
+:reference_id (int):
     ID of the simulation where this cluster was made, -1 if original
-atom_ids (int[]):
+:atom_ids (int[]):
     atom indices in the ATOMS dictionary of the simulation record
 
 
 Custom Type: SUBSTRATE
+^^^^^^^^^^^^^^^^^^^^^^
 
 
-reference_id (int):
+:reference_id (int):
     ID of the parent support simulation, -1 if no parent
-atom_ids (int[]):
+:atom_ids (int[]):
     atom indices in the corresponding ATOMS dictionary. See below
 
 
