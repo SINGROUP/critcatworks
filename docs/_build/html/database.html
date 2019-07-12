@@ -51,10 +51,146 @@ which is very close to python documents. If you know python,
 MongoDB documents are easy to read and query.</p>
 <div class="section" id="database-format">
 <h2>Database format<a class="headerlink" href="#database-format" title="Permalink to this headline">¶</a></h2>
-<p>collections
--simulations
--workflows
--machine_learning</p>
+<p>In the following, we list the entries that data records need to have in each collection. A data record is assumed to be a python dictionary, and the tables give the keys that are expected to be found therein. The following collections are defined: IDs, simulations, workflows and machine_learning.</p>
+<p>Collection: IDs</p>
+<p>contains the ID values that will be assigned to the newest entries in other collections</p>
+<dl class="simple">
+<dt>_id (int):</dt><dd><p>automatic compulsory internal id for MongoDB</p>
+</dd>
+<dt>simulations (int):</dt><dd><p>ID to be used by the next new entry of type simulation</p>
+</dd>
+<dt>workflows (int):</dt><dd><p>ID to be used by the next new entry of type workflows</p>
+</dd>
+<dt>machine_learning (int):</dt><dd><p>ID to be used by the next new entry of type machine_learning</p>
+</dd>
+</dl>
+<p>(notice how the field name matches the collection name)</p>
+<p>Collection: simulations</p>
+<dl class="simple">
+<dt>_id (int):</dt><dd><p>unique identifier</p>
+</dd>
+<dt>source_id (int):</dt><dd><p>ID of the parent simulation that originated this, -1 if none</p>
+</dd>
+<dt>workflow_id (int):</dt><dd><p>ID of workflow when instance was added, -1 if none</p>
+</dd>
+<dt>wf_sim_id (int):</dt><dd><p>ID of simulation (unique within the workflow this belongs to)</p>
+</dd>
+<dt>atoms (ATOMS):</dt><dd><p>dictionary with information about the atoms.</p>
+</dd>
+<dt>nanoclusters (NANOCLUSTER):</dt><dd><p>list of dictionaries with information about the nanocluster(s)</p>
+</dd>
+<dt>adsorbates (ADSORBATE):</dt><dd><p>list of dictionaries with information about the adsorbate(s)</p>
+</dd>
+<dt>substrates (SUBSTRATE):</dt><dd><p>list of dictionaries with information about the substrate(s)</p>
+</dd>
+<dt>operations (list):</dt><dd><p>List of dictionaries, each describing one operation. Always with respect to the parent simulation if applicable</p>
+</dd>
+<dt>inp (dict):</dt><dd><p>property/value pairs describing the simulation input</p>
+</dd>
+<dt>output (dict):</dt><dd><p>property/value pairs output by the calculation</p>
+</dd>
+</dl>
+<p>For custom types ATOMS, NANOCLUSTER, ADSORBATE and SUBSTRATE see below.</p>
+<p>Collection: workflows</p>
+<dl class="simple">
+<dt>_id (int):</dt><dd><p>unique identifier</p>
+</dd>
+<dt>username (str):</dt><dd><p>user who executed the workflow</p>
+</dd>
+<dt>creation_time (str):</dt><dd><p>time of creation of the workflow</p>
+</dd>
+<dt>parameters (dict):</dt><dd><p>workflow-specific parameters</p>
+</dd>
+<dt>name (str):</dt><dd><p>custom name of workflow</p>
+</dd>
+<dt>workflow_type (str):</dt><dd><p>custom type of workflow</p>
+</dd>
+</dl>
+<p>Collection: machine_learning</p>
+<dl class="simple">
+<dt>_id (int):</dt><dd><p>unique identifier</p>
+</dd>
+<dt>workflow_id (int):</dt><dd><p>ID of workflow which the machine learning run was part of</p>
+</dd>
+<dt>method (str):</dt><dd><p>name of the ML method: krr, nn, …</p>
+</dd>
+<dt>method_params (dict):</dt><dd><p>Parameters of the method</p>
+</dd>
+<dt>descriptor (str):</dt><dd><p>name of the descriptor: soap, mbtr, cm, …</p>
+</dd>
+<dt>descriptor_params (dict):</dt><dd><p>Parameters of the descriptor used</p>
+</dd>
+<dt>training_set (int[]):</dt><dd><p>list of simulation IDs used for training</p>
+</dd>
+<dt>validation_set (int[]):</dt><dd><p>list of simulation IDs used in validation. If empty, cross-validation was used.</p>
+</dd>
+<dt>test_set (int[]):</dt><dd><p>list of simulation IDs used in testing. If empty, only validation was used</p>
+</dd>
+<dt>prediction_set (int[]):</dt><dd><p>list of simulation IDs used for prediction.</p>
+</dd>
+<dt>metrics_training (dict):</dt><dd><p>dictionary of (“metric name”: value) on training set
+key: string = name of the metric
+value: float = calculated value</p>
+</dd>
+<dt>metrics_validation (dict):</dt><dd><p>dictionary of (“metric name”: value) on validation set
+key: string = name of the metric
+value: float = calculated value</p>
+</dd>
+<dt>metrics_test (dict):</dt><dd><p>dictionary of (“metric name”: value) on test set
+key: string = name of the metric
+value: float = calculated value</p>
+</dd>
+<dt>output (dict):</dt><dd><p>relevant training output info</p>
+</dd>
+</dl>
+<p>Ideally, method name corresponds to a python class/function in the platform, that is initialised with the parameter dictionary given in method_params. Similarly, descriptor name also matches a python class, to be initialised with its own given set of parameters, descriptor_params.
+The field output is a dictionary with all the useful output values from the calculation.</p>
+<p>Custom Type: ATOMS</p>
+<p>A dictionary for describing atoms in a system, conceptually
+close to ase.Atoms object:</p>
+<dl class="simple">
+<dt>numbers (int[]):</dt><dd><p>list of atomic numbers as numpy array [N] of ints</p>
+</dd>
+<dt>positions (float[N,3]):</dt><dd><p>positions as numpy matrix [Nx3] of doubles</p>
+</dd>
+<dt>constraints (int[N,3]):</dt><dd><p>frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free</p>
+</dd>
+<dt>pbc (bool):</dt><dd><p>use periodic boundaries</p>
+</dd>
+<dt>cell (float[3,3]):</dt><dd><p>matrix 3x3 with cell vectors on the rows</p>
+</dd>
+<dt>celldisp (float[3,1]):</dt><dd><p>displacement of cell from origin</p>
+</dd>
+<dt>info (dict):</dt><dd><p>field for additional information related to structure</p>
+</dd>
+</dl>
+<p>The order of atoms in this dictionary is the one found in the simulation input file.</p>
+<p>Custom Type: ADSORBATE</p>
+<dl class="simple">
+<dt>reference_id (int):</dt><dd><p>ID of the simulation to use as reference</p>
+</dd>
+<dt>atom_ids (int[]):</dt><dd><p>atom indices in the ATOMS dictionary of the simulation record</p>
+</dd>
+<dt>site_class (str):</dt><dd><p>class of adsorption site: “top”, “bridge”, “hollow”, “4-fold hollow”</p>
+</dd>
+<dt>site_ids (int[]):</dt><dd><p>list of atom ids (in simulation record) that define the adsorption site</p>
+</dd>
+</dl>
+<p>Custom Type: NANOCLUSTER</p>
+<p>In general, simulation.nanoclusters is a list of dictionaries with this structure.</p>
+<dl class="simple">
+<dt>reference_id (int):</dt><dd><p>ID of the simulation where this cluster was made, -1 if original</p>
+</dd>
+<dt>atom_ids (int[]):</dt><dd><p>atom indices in the ATOMS dictionary of the simulation record</p>
+</dd>
+</dl>
+<p>Custom Type: SUBSTRATE</p>
+<dl class="simple">
+<dt>reference_id (int):</dt><dd><p>ID of the parent support simulation, -1 if no parent</p>
+</dd>
+<dt>atom_ids (int[]):</dt><dd><p>atom indices in the corresponding ATOMS dictionary. See below</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="database-query-examples">
 <h2>Database query examples<a class="headerlink" href="#database-query-examples" title="Permalink to this headline">¶</a></h2>

@@ -44,11 +44,33 @@
             
   <div class="section" id="simple-coverage-workflow">
 <h1>Simple Coverage Workflow<a class="headerlink" href="#simple-coverage-workflow" title="Permalink to this headline">¶</a></h1>
-<p>workflow overview
-and usage coming soon</p>
+<p>The simple coverage workflow obtains a stable, simple coverage estimate. It does so by iteratively relaxing the coverage structure by DFT and removing too close adsorbates. So far, only atomic adsorbates are supported.</p>
 <a class="reference internal image-reference" href="../_images/simplecoverage.svg"><img alt="../_images/simplecoverage.svg" src="../_images/simplecoverage.svg" width="800" /></a>
-<p>pre-reduction: either number of remaining adsorbates
-or a minimum distance</p>
+<p>Given a nanocluster structure, the adsorption sites are mapped out as described in the <a class="reference internal" href="singlesites_workflow.html"><span class="doc">Singlesites Workflow</span></a> tutorial. Similarly <strong>adsorbate_name</strong> defines which atomic adsorbate is placed onto sites classified as “top”, “bridge” and/or “hollow” in <strong>adsite_types</strong>.</p>
+<p>Since the cluster is would likely be overpopulated, the amount of adsorbates is pre-reduced: either the user defines the target number of remaining adsorbates (<strong>n_remaining</strong>) or a inter-adsorbate minimum distance (<strong>bond_length</strong>). If <strong>n_remaining</strong> is given, <strong>bond_length</strong> is ignored in this step.</p>
+<p>After each DFT relaxation, it is checked if any two adsorbate atoms have formed a molecule. Too close adsorbates (specified by <strong>bond_length</strong>) are consequently removed.</p>
+<p>If no adsorbates are too close, the search has converged and the workflow stops. Otherwise, it continues for <strong>max_iterations</strong>.</p>
+<p>At one glance, these are the simple-coverage-workflow-specific parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">adsorbate_name (str)</dt>
+<dd class="field-odd"><p>element symbol of the adsorbed atom</p>
+</dd>
+<dt class="field-even">max_iterations (int)</dt>
+<dd class="field-even"><p>maximum number of iterations in the workflow</p>
+</dd>
+<dt class="field-odd">adsite_types (list)</dt>
+<dd class="field-odd"><p>adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p>
+</dd>
+<dt class="field-even">bond_length (float)</dt>
+<dd class="field-even"><p>distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p>
+</dd>
+<dt class="field-odd">n_remaining (int)</dt>
+<dd class="field-odd"><p>number of adsorbates which should remain after the
+first pre-DFT pruning of the adsorbate coverage</p>
+</dd>
+</dl>
 </div>
 
 

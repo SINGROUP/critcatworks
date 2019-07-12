@@ -33,9 +33,9 @@ As in most workflows, the initial structures can be read in three ways:
     where to read the structures from
 
 
-There are a few workflow-specific arguments
+There are a few workflow-specific arguments:
 
-        atomic_energies (dict)  :   used for computing cohesive energies, not required
+:atomic_energies (dict):   used for computing cohesive energies, not required
 
 The other arguments are common to all workflows, such as the username and password for the
 database or the path to the DFT template. 

@@ -44,9 +44,60 @@
             
   <div class="section" id="coverage-ladder-workflow">
 <h1>Coverage Ladder Workflow<a class="headerlink" href="#coverage-ladder-workflow" title="Permalink to this headline">¶</a></h1>
-<p>workflow overview
-and usage coming soon</p>
+<p>The coverage ladder workflow usually uses a structure provided by simple coverage as input (simulation document taken from the mongodb database).
+If another input is desired, it requires care in generating the simulations document. It has to correctly categorize which atoms belong to the nanocluster and which ones are adsorbates. Furthermore, it needs to point to a document containing the nanocluster’s total energy.</p>
+<p>So far, only atomic adsorbates are supported.</p>
+<p>The coverage ladder is a more sophisticated heuristic/machine-learning workflow which consistently improves the coverage iteratively. The logic of the workflow is sketched below:</p>
 <a class="reference internal image-reference" href="../_images/coverageladder.svg"><img alt="../_images/coverageladder.svg" src="../_images/coverageladder.svg" width="800" /></a>
+<p>The target coverage is where the adsorption free energy is around zero. Since computing the free energy is costly, it is approximated by a constant shift. The parameter <strong>free_energy_correction</strong> needs to be estimated by the user (e.g. separate DFT calculations, literature).</p>
+<p>The workflow adds or removes adsorbates one by one trying different candidates or locations simultaneously. The type of adsorbate atom is defined by <strong>adsorbate_name</strong>.</p>
+<p>The decision to go up or down the coverage ladder depends on the following property (given an adsorbate A):</p>
+<blockquote>
+<div><p><img class="math" src="../_images/math/6450616b75212cb568e905db49efd0c3dd584648.png" alt="\Delta"/>G<sub>diff</sub>(n * A) = E(n * A) - E((n-1) * A)) - <strong>reference_energy</strong> + <strong>free_energy_correction</strong></p>
+</div></blockquote>
+<p>Since that property is unknown in the beginning, the user can set the initial direction (<strong>initial_direction</strong>). The candidate adsorbates to be added or removed are selected via a distance or similarity metric (<strong>ranking_metric</strong>). When an adsorbate should be added, either site located furthest from other adsorbates are prioritized, or the most dissimilar sites are preferred. With <strong>bond_length</strong>, the user can disqualify sites which are too close to other adsorbates (in order to eliminate the risk of bond formation). When an adsorbate should be removed, either atoms closest to other adsorbates are prioritized, or the most dissimilar adsorbate atoms are preferred.</p>
+<p>The root structure is the coverage configuration found so far with the lowest energy.</p>
+<p>In order to compare two configurations, they need to have the same number of adsorbates on the surface. For that purpose, the workflow climbs up or down the ladder but always returns to the level of the root structure. If no new root structure is found, it branches out as shown by the green arrows in the sketch above.</p>
+<p>The workflow has several parameters to constrain the search space to a manageable size. It would stop if more than <strong>d</strong> adsorbates have to be either added or removed in order to find a better configuration. Only the <strong>l</strong> lowest-energy structures are carried over to the next step. Only <strong>k</strong> adsorbate or location candidates are considered simultaneously per lowest_energy structure.</p>
+<p>At one glance, these are the coverageladder-workflow-specific parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">reference_energy (float)</dt>
+<dd class="field-odd"><p>reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p>
+</dd>
+<dt class="field-even">free_energy_correction (float)</dt>
+<dd class="field-even"><p>free energy correction of the adsorption
+reaction at hand</p>
+</dd>
+<dt class="field-odd">adsorbate_name (str)</dt>
+<dd class="field-odd"><p>element symbol of the adsorbed atom</p>
+</dd>
+<dt class="field-even">max_iterations (int)</dt>
+<dd class="field-even"><p>maximum number of iterations in the workflow</p>
+</dd>
+<dt class="field-odd">bond_length (float)</dt>
+<dd class="field-odd"><p>distance in angstrom under which two adsorbed atoms are considered bound, hence too close</p>
+</dd>
+<dt class="field-even">d (int)</dt>
+<dd class="field-even"><p>maximum depth of the coverage ladder (termination criterion)</p>
+</dd>
+<dt class="field-odd">l (int)</dt>
+<dd class="field-odd"><p>number of low-energy structures to carry over to the next step</p>
+</dd>
+<dt class="field-even">k (int)</dt>
+<dd class="field-even"><p>number of empty candidate sites for adding /
+adsorbed atoms for removing to consider per step</p>
+</dd>
+<dt class="field-odd">initial_direction (bool)</dt>
+<dd class="field-odd"><p>True will force the initial step to add an adsorbate,
+False will force the initial step to remove an adsorbate</p>
+</dd>
+<dt class="field-even">ranking_metric (str)</dt>
+<dd class="field-even"><p>‘similarity’ or ‘distance’. Metric based on which to choose
+k candidates (empty sites / adsorbates)</p>
+</dd>
+</dl>
 </div>
 
 
