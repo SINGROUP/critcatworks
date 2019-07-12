@@ -61,7 +61,7 @@ Most workflows have the following arguments in common:
      the data to the production database.
 
 
-The following workflows are available (alongside a few others):
+The following workflows come with a tutorial (there are a few more simple or similar workflows without a tutorial):
 
 .. toctree::
    :maxdepth: 1

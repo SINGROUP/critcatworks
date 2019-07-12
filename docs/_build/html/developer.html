@@ -43,11 +43,82 @@
             
   <div class="section" id="for-future-developers">
 <span id="developer"></span><h1>For Future Developers<a class="headerlink" href="#for-future-developers" title="Permalink to this headline">¶</a></h1>
-<p>Become a developer
-Developer tutorial coming soon</p>
-<div class="section" id="fireworks-specs-entries">
-<h2>Fireworks specs entries<a class="headerlink" href="#fireworks-specs-entries" title="Permalink to this headline">¶</a></h2>
-<p>update dict for recent relevant entries</p>
+<p>Become a developer if you want to add more functionality to critcatworks. Raising an issue on github would be the first step. Do not hesitate to contact us if you have any questions.</p>
+<p>The goal of critcatworks is to automate nanocluster-surface related research. In critcatworks belongs everything which joins already available building blocks into a complex workflow.</p>
+<p>If you want to improve the workflow manager side, Fireworks is the dependency to work on.</p>
+<p>If you want to instead create a nanocluster tool, it most likely belongs in cluskit (unless very simple). Since cluskit is also developed in this group, a concerted effort to make that tool available both in cluskit and in critcatworks can be tackled (contact us in that case). Make sure that the functionality is not already in cluskit!</p>
+<div class="section" id="how-to-write-custom-firetasks">
+<h2>How to Write Custom Firetasks<a class="headerlink" href="#how-to-write-custom-firetasks" title="Permalink to this headline">¶</a></h2>
+<p>Writing your custom Firetask is easy. You just need to wrap your function in a class with some decorations beforehand and afterwards. Before you start implementing your first Firetask, make sure to have a basic knowledge about Fireworks.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+
+<span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">MyCustomTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom Firetask template.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        required_parameter1 (any):  you can read any parameters</span>
+<span class="sd">                                    during creationg of this task</span>
+
+<span class="sd">        required_parameter2 (any):  lists, dictionaries, arrays, etc. are all fine,</span>
+<span class="sd">                                    but no pure python objects</span>
+
+<span class="sd">        optional_parameter1 (any):  Remember to add them to the list below</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;MyCustomTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;required_parameter1&#39;</span><span class="p">,</span> <span class="s1">&#39;required_parameter2&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;optional_parameter1&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="c1"># those values cannot be modified during runtime of the workflow</span>
+        <span class="n">optional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;optional_parameter1&quot;</span><span class="p">,</span> <span class="s2">&quot;default_value&quot;</span><span class="p">)</span>
+        <span class="n">important_parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;required_parameter1&quot;</span><span class="p">]</span>
+        <span class="n">another_parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;required_parameter2&quot;</span><span class="p">]</span>
+
+
+        <span class="c1"># you can also get information from the firework spec (this can be</span>
+        <span class="c1">#modified during runtime of the workflow)</span>
+        <span class="n">analysis_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;analysis_ids&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="c1"># analysis_ids becomes calc_ids and is stored later</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">analysis_ids</span>
+
+        <span class="c1"># run your custom code</span>
+        <span class="n">mycustom_dct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span> <span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+
+
+        <span class="c1"># check where this file gets written</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mycustomfile.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">mycustom_dct</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+
+        <span class="c1"># fireworks</span>
+        <span class="c1"># Store information for future jobs to fetch and/or to keep record</span>
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_ids</span>
+
+        <span class="c1"># important to remove those, otherwise they would</span>
+        <span class="c1"># overwrite the next Firework&#39;s _category and name</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+        <span class="c1"># always return a FWAction object.</span>
+        <span class="c1"># other arguments can deviate or defuse the workflow</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-from-and-writing-to-permanent-database">
+<h2>Reading from and Writing to Permanent database<a class="headerlink" href="#reading-from-and-writing-to-permanent-database" title="Permalink to this headline">¶</a></h2>
+<p>For interacting with an external database, consider using the functions in <code class="code docutils literal notranslate"><span class="pre">critcatworks.database.extdb</span></code>.</p>
+<p>The function <em>get_external_database</em> connects you to a database using <em>extdb_connect</em>.</p>
+<p>Then, for instance <em>fetch_simulations</em> can get multiple simulations by id.</p>
+<p>Lastly, <em>update_simulations_collection</em> uploads one simulation document to the database.</p>
+<p>For other functionalities in <code class="code docutils literal notranslate"><span class="pre">critcatworks.database.extdb</span></code> consult the code documentation.</p>
+</div>
+<div class="section" id="fireworks-spec-entries">
+<h2>Fireworks Spec Entries<a class="headerlink" href="#fireworks-spec-entries" title="Permalink to this headline">¶</a></h2>
+<p>The current workflows use the following <em>fw_spec</em> entries. It is recommended to adhere to the structure but is not prohibited in any way.</p>
 <dl class="field-list simple">
 <dt class="field-odd">simulations (dict)</dt>
 <dd class="field-odd"><p>simulation collection entries for this workflow.
@@ -70,117 +141,73 @@ entries for machine_learning collection</p>
 authsource and db_name.</p>
 </dd>
 <dt class="field-even">temp (dict)</dt>
-<dd class="field-even"><dl class="field-list simple">
-<dt class="field-odd">calc_paths (list of str)</dt>
-<dd class="field-odd"><p>paths to the dft calculations, sorted by adsorbate ids</p>
+<dd class="field-even"><dl class="simple">
+<dt>calc_paths (list of str)</dt><dd><p>paths to the dft calculations, sorted by adsorbate ids</p>
 </dd>
-<dt class="field-even">calc_ids (list of int)</dt>
-<dd class="field-even"><p>ids of simulations in permanent database</p>
+<dt>calc_ids (list of int)</dt><dd><p>ids of simulations in permanent database</p>
 </dd>
-<dt class="field-odd">is_converged_list (list of int)</dt>
-<dd class="field-odd"><p>1 - converged,
+<dt>is_converged_list (list of int)</dt><dd><p>1 - converged,
 0 - not converged calculation,
 same order as calc_paths</p>
 </dd>
-<dt class="field-even">fps_ranking (list of int)</dt>
-<dd class="field-even"><p>adsorbate ids ordered by FPS ranking</p>
+<dt>fps_ranking (list of int)</dt><dd><p>adsorbate ids ordered by FPS ranking</p>
 </dd>
-<dt class="field-odd">analysis_ids (list of int)</dt>
-<dd class="field-odd"><p>calculation ids which have been analysed and where analysis can be processed</p>
+<dt>analysis_ids (list of int)</dt><dd><p>calculation ids which have been analysed and where analysis can be processed</p>
 </dd>
-<dt class="field-even">calc_analysis_ids_dict (dict)</dt>
-<dd class="field-even"><p>keys are calculation ids before DFT
+<dt>calc_analysis_ids_dict (dict)</dt><dd><p>keys are calculation ids before DFT
 values are calculation ids which have been analysed</p>
 </dd>
-<dt class="field-odd">cohesive_energy_dct (dict)</dt>
-<dd class="field-odd"><p>for each chemical formula key, the value corresponds
+<dt>cohesive_energy_dct (dict)</dt><dd><p>for each chemical formula key, the value corresponds
 to a dict of simulation indices and cohesive energies
 (total energies if no atomic energies were given)</p>
 </dd>
-<dt class="field-even">descmatrix (str)</dt>
-<dd class="field-even"><p>path to numpy array. 2D-matrix descriptor, row representing datapoint</p>
+<dt>descmatrix (str)</dt><dd><p>path to numpy array. 2D-matrix descriptor, row representing datapoint</p>
 </dd>
-<dt class="field-odd">property (list of str)</dt>
-<dd class="field-odd"><p>property of interest to machine learning</p>
+<dt>property (list of str)</dt><dd><p>property of interest to machine learning</p>
 </dd>
-<dt class="field-even">last_machine_learning_id (int)</dt>
-<dd class="field-even"><p>id of last machine learning step</p>
+<dt>last_machine_learning_id (int)</dt><dd><p>id of last machine learning step</p>
 </dd>
-<dt class="field-odd">reference_energy (float)</dt>
-<dd class="field-odd"><p>reference energy for the adsorbate. Can be the total energy of the isolated adsorbate molecule or a different reference point</p>
+<dt>reference_energy (float)</dt><dd><p>reference energy for the adsorbate. Can be the total energy of the isolated adsorbate molecule or a different reference point</p>
 </dd>
-<dt class="field-even">free_energy_correction (float)</dt>
-<dd class="field-even"><p>constant shift in free
+<dt>free_energy_correction (float)</dt><dd><p>constant shift in free
 energy. This is relevant for the coverage ladder
 target energy range.</p>
 </dd>
-<dt class="field-odd">branch_dct (dict)</dt>
-<dd class="field-odd"><p>keys of parent simulations
+<dt>branch_dct (dict)</dt><dd><p>keys of parent simulations
 with values being lists of child simulations</p>
 </dd>
-<dt class="field-even">direction (bool)</dt>
-<dd class="field-even"><p>1 - adding adsorbate
+<dt>direction (bool)</dt><dd><p>1 - adding adsorbate
 0 - removing adsorbate</p>
 </dd>
-<dt class="field-odd">ne_dct (dict)</dt>
-<dd class="field-odd"><p>stores total energies of all calculations with respect to the number of adsorbates and their ids</p>
+<dt>ne_dct (dict)</dt><dd><p>stores total energies of all calculations with respect to the number of adsorbates and their ids</p>
 </dd>
-<dt class="field-even">n_adsorbates_root (int)</dt>
-<dd class="field-even"><p>number of adsorbates of the root structure</p>
+<dt>n_adsorbates_root (int)</dt><dd><p>number of adsorbates of the root structure</p>
 </dd>
-<dt class="field-odd">n_adsorbates (int)</dt>
-<dd class="field-odd"><p>number of adsorbates of the current step</p>
+<dt>n_adsorbates (int)</dt><dd><p>number of adsorbates of the current step</p>
 </dd>
-<dt class="field-even">is_return (bool)</dt>
-<dd class="field-even"><p>current state of the coverage ladder workflow. If True,
+<dt>is_return (bool)</dt><dd><p>current state of the coverage ladder workflow. If True,
 the ladder search is on the way back to the root level</p>
 </dd>
-<dt class="field-odd">is_new_root (bool)</dt>
-<dd class="field-odd"><p>If True, the last simulation has resulted in a new
+<dt>is_new_root (bool)</dt><dd><p>If True, the last simulation has resulted in a new
 root simulation</p>
 </dd>
-<dt class="field-even">open_branches (list)</dt>
-<dd class="field-even"><p>each element is a tuple containing parent simulation ids and direction</p>
+<dt>open_branches (list)</dt><dd><p>each element is a tuple containing parent simulation ids and direction</p>
 </dd>
-<dt class="field-odd">root_history (list)</dt>
-<dd class="field-odd"><p>ordered ids of root simulations during the course of
+<dt>root_history (list)</dt><dd><p>ordered ids of root simulations during the course of
 the workflow, starting with the start_id</p>
 </dd>
-<dt class="field-even">step_history (list)</dt>
-<dd class="field-even"><p>each entry is a tuple of
+<dt>step_history (list)</dt><dd><p>each entry is a tuple of
 a list of calculation ids
 and a direction indicator</p>
 </dd>
-<dt class="field-odd">calc_parents (dict)</dt>
-<dd class="field-odd"><p>keys of simulation ids
+<dt>calc_parents (dict)</dt><dd><p>keys of simulation ids
 with values being parent simulation ids</p>
 </dd>
-<dt class="field-even">start_id (int)</dt>
-<dd class="field-even"><p>unique identifier of the simulation which is used to start the workflow</p>
+<dt>start_id (int)</dt><dd><p>unique identifier of the simulation which is used to start the workflow</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p>TO DELETE</p>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span>{
-    simulations (dict) : &quot;simulation entries for this workflow&quot;,
-    workflow (dict) : &quot;relevant information about this workflow&quot;,
-    machine_learning (dict) : &quot;machine_learning instances of this workflow&quot;,
-    temp (dict) :
-        {
-        calc_paths (list of str) : &quot;paths to the dft calculations, sorted by adsorbate ids&quot;,
-        calc_ids (list of int) : &quot;ids of simulations in permanent database&quot;,
-        is_converged_list (list of int) : &quot;1 - converged, 0 - not converged calculation, same order as calc_paths&quot;,
-        fps_ranking (list of int) : &quot;adsorbate ids ordered by FPS ranking&quot;,
-        analysis_ids (list of int) : &quot;calculation ids which have been analysed and where analysis can be processed&quot;,
-        descmatrix (str) : &quot;path to numpy array. 2D-matrix descriptor, row representing datapoint&quot;,
-        property (list of str) : &quot;property of interest to machine learning&quot;,
-        last_machine_learning_id (int) : &quot;id of last machine learning step&quot;,
-        }
-    n_calcs_started (int) : &quot;number of calculations which have already been started&quot;,
-}
-</pre></div>
-</div>
 </div>
 </div>
 
@@ -193,7 +220,9 @@ with values being parent simulation ids</p>
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">For Future Developers</a><ul>
-<li><a class="reference internal" href="#fireworks-specs-entries">Fireworks specs entries</a></li>
+<li><a class="reference internal" href="#how-to-write-custom-firetasks">How to Write Custom Firetasks</a></li>
+<li><a class="reference internal" href="#reading-from-and-writing-to-permanent-database">Reading from and Writing to Permanent database</a></li>
+<li><a class="reference internal" href="#fireworks-spec-entries">Fireworks Spec Entries</a></li>
 </ul>
 </li>
 </ul>

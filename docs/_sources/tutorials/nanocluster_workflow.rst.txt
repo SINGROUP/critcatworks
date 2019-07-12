@@ -3,9 +3,9 @@ Nanocluster Workflow
 
 This workflow simply relaxes the structure of a set of nanoclusters
 
-If atomic energies are given, the cohesive energies of the relaxed nanoclusters
-are computed. Otherwise, the total energy is used to compare nanoclusters of
-the same composition. 
+If atomic energies (**atomic_energies**) are given, the cohesive energies of the relaxed nanoclusters
+are computed. Otherwise, the total energy is used to compare 
+nanoclusters of the same composition. 
 
 Currently, stable nanoclusters have to be picked manually once the workflow 
 has finished, but this can be automated in the future.
@@ -39,5 +39,4 @@ There are a few workflow-specific arguments
 
 The other arguments are common to all workflows, such as the username and password for the
 database or the path to the DFT template. 
-
 
