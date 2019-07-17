@@ -17,7 +17,7 @@ def get_coverage_workflow(template_path, username, password,
         source_path  = None, reference_energy=0.0,
         adsorbate_name='H',max_iterations = 10000,  
         adsite_types = ["top", "bridge", "hollow"], n_max_restarts = 1, 
-        skip_dft = False, bond_length = 1.4, n_remaining = "",
+        skip_dft = False, is_safeguard = True, bond_length = 1.4, n_remaining = "",
         extdb_connect = {}):
     """
     Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. As a first step, 
@@ -48,6 +48,8 @@ def get_coverage_workflow(template_path, username, password,
         n_max_restarts (int)  : number of times the calculation is restarted upon failure
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all simulation jobs
+                               converge properly after the maximum number of restarts.
         bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
                                 considered bound, hence too close
         n_remaining (int) : number of adsorbates which should remain after the
@@ -145,7 +147,7 @@ def get_coverage_workflow(template_path, username, password,
             chunk_size = -1, n_max_restarts = n_max_restarts, 
             simulation_method = "cp2k",
             name = "cp2k_coverage_iter_" + str(i), 
-            skip_dft = skip_dft)
+            skip_dft = skip_dft, is_safeguard = is_safeguard)
         workflow_list.append(fw_chunk_calculations)
 
         links_dict[fw_setup_folders] = [fw_chunk_calculations] 

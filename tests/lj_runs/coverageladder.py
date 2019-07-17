@@ -23,17 +23,15 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/coverage_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
-    launchpad.reset('', require_password=False)
+    #launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "serenity")
+    #launchpad.reset('', require_password=False)
     
     wf = get_coverage_ladder_workflow(username = "mjcritcat", 
         password = PASSWORD,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()),     
-        #worker_target_path = "/scratch/work/jagerm1/workflow_runs/coverage/production/selected_ptni_clusters_topbridgehollow_nremaining80",
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptni_structures3/",
-        #start_ids = [7600, 7510], 
         start_ids = [25627],
-        #reference_energy = -1.16195386047558 * 0.5,
         reference_energy = -0.50,
         free_energy_correction = 0.24 / 27.211,
         adsorbate_name = "H",

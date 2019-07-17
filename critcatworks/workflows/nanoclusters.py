@@ -13,7 +13,7 @@ def get_nanoclusters_workflow(template_path, username, password,
     worker_target_path = None, structures = None, 
     extdb_ids = None, source_path = None, reference_energy=0.0, 
     atomic_energies = {},
-    n_max_restarts = 1, skip_dft = False, extdb_connect = {}):
+    n_max_restarts = 1, skip_dft = False, is_safeguard = True, extdb_connect = {}):
     """
     Workflow to relax the structure of a set of
     nanoclusters using a simulation software (e.g. CP2K).
@@ -39,6 +39,8 @@ def get_nanoclusters_workflow(template_path, username, password,
         n_max_restarts (int)  : number of times the calculation is restarted upon failure
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all simulation jobs
+                               converge properly after the maximum number of restarts.
         extdb_connect (dict):   dictionary containing the keys host,
                                 username, password, authsource and db_name.
         
@@ -86,7 +88,8 @@ def get_nanoclusters_workflow(template_path, username, password,
     # FireWork: setup, run and extract DFT calculation
     # (involves checking for errors in DFT and rerunning)
     fw_chunk_calculations = chunk_calculations(template = template, target_path = worker_target_path, 
-        n_max_restarts = n_max_restarts, simulation_method = "cp2k", skip_dft = skip_dft)
+        n_max_restarts = n_max_restarts, simulation_method = "cp2k", skip_dft = skip_dft,
+        is_safeguard = is_safeguard)
 
     # FireWork: compare stability of nanoclusters. 
     #Computes cohesive energies if atomic_energies of all involved elements are given

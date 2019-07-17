@@ -16,7 +16,7 @@ from critcatworks.structure import get_per_type_coverage, eliminate_pairs, elimi
 def get_coverage_ladder_workflow(template_path, username, password,
         worker_target_path = None, start_ids = None, reference_energy=0.0, free_energy_correction = 0.0,
         adsorbate_name='H', max_iterations = 100, n_max_restarts = 1,
-        skip_dft = False, bond_length = 1.5,
+        skip_dft = False, is_safeguard = True, bond_length = 1.5,
         d = 4, l = 2, k = 7, initial_direction = 1, ranking_metric = "similarity",
         extdb_connect = {}):
     """
@@ -46,6 +46,8 @@ def get_coverage_ladder_workflow(template_path, username, password,
         n_max_restarts (int)  : number of times the calculation is restarted upon failure
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all simulation jobs
+                               converge properly after the maximum number of restarts.
         bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
                                 considered bound, hence too close
         d (int) : maximum depth of the coverage ladder (termination criterion)
@@ -128,7 +130,7 @@ def get_coverage_ladder_workflow(template_path, username, password,
             chunk_size = -1, n_max_restarts = n_max_restarts, 
             simulation_method = "cp2k",
             name = "cp2k_ladder_iter_" + str(i), 
-            skip_dft = skip_dft)
+            skip_dft = skip_dft, is_safeguard = is_safeguard)
         workflow_list.append(fw_chunk_calculations)
 
         links_dict[fw_setup_folders] = [fw_chunk_calculations] 

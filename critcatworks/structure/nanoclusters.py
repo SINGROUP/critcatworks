@@ -87,7 +87,7 @@ class NCStabilityTask(FiretaskBase):
 
         # cluster_stability
         with open('cohesive_energy.json', 'w') as outfile:
-            json.dump(cohesive_energy_dct, outfile)
+            json.dump(cohesive_energy_dct, outfile, indent = 4)
 
         # fireworks
         update_spec = fw_spec

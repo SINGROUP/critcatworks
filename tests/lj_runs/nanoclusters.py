@@ -46,11 +46,10 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/nanocluster_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
-    launchpad.reset('', require_password=False)
+    #launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "serenity")
+    #launchpad.reset('', require_password=False)
 
-    #structures = read_structures_locally("../selected_ptcu_structures")
-    structures = read_structures_locally("../selected_ptni_structures")
     wf = get_nanoclusters_workflow(username = "mjcritcat", password = PASSWORD,
         source_path = None,
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 

@@ -19,7 +19,7 @@ def get_singlesites_workflow(template_path, username, password,
         source_path  = None, reference_energy=0.0,
         adsorbate_name='H', chunk_size = 100, max_calculations = 10000,
         adsite_types = ["top", "bridge", "hollow"], threshold = 0.1, n_max_restarts = 1,
-        skip_dft = False, extdb_connect = {}):
+        skip_dft = False, is_safeguard = True, extdb_connect = {}):
     """
     Attention! This workflow is for atomic adsorbates only!
     Workflow to determine the adsorption sites and energies of a set of
@@ -58,6 +58,8 @@ def get_singlesites_workflow(template_path, username, password,
         n_max_restarts (int)  : number of times the calculation is restarted upon failure
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all simulation jobs
+                               converge properly after the maximum number of restarts.
         extdb_connect (dict):   dictionary containing the keys host,
                                 username, password, authsource and db_name.
         
@@ -115,7 +117,7 @@ def get_singlesites_workflow(template_path, username, password,
         adsite_types = adsite_types,
         descriptor = "soap",
         descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
-            "crossover" : True, "sparse" : False},
+            },
         )
     # FireWork: FPS ranking
     fw_rank_adsites = rank_adsites()
@@ -147,7 +149,7 @@ def get_singlesites_workflow(template_path, username, password,
 
         fw_chunk_calculations = chunk_calculations(template = template, target_path = worker_target_path, 
             chunk_size = chunk_size, n_max_restarts = n_max_restarts, simulation_method = "cp2k",
-            skip_dft = skip_dft)
+            skip_dft = skip_dft, is_safeguard = is_safeguard)
         workflow_list.append(fw_chunk_calculations)
         if i == 0:
             links_dict[fw_setup_folders] = [fw_chunk_calculations]

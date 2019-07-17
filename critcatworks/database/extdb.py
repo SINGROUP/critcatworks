@@ -1,6 +1,7 @@
 # functions to store data in an external MongoDB database
 import pymongo
 from pprint import pprint as pp
+from critcatworks.database.format import atoms_dict_to_ase
 
 def get_external_database(extdb_connect):
     """A helper function to connect to a mongodb database.

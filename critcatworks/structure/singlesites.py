@@ -21,6 +21,31 @@ from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import get_external_database, _query_id_counter_and_increment
 from critcatworks.database.extdb import fetch_simulations
 
+def _setup_descriptor(all_atomtypes, descriptor, **descriptor_params):
+    """Helper function to setup dscribe descriptor object
+    Args:
+        all_atomtypes (list) : atomic numbers or species to be used in the descriptor
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
+
+    Returns:
+        dscribe.descriptors : descriptor object of the dscribe package
+    """
+    if descriptor == "soap":
+        descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
+             crossover = True, sparse = False, **descriptor_params)
+    elif descriptor == "mbtr":
+        descriptor_setup = dscribe.descriptors.MBTR(species = all_atomtypes, 
+             sparse = False, **descriptor_params)
+    elif descriptor == "acsf":
+        descriptor_setup = dscribe.descriptors.ACSF(species = all_atomtypes, 
+             sparse = False, **descriptor_params)
+    elif descriptor == "cm":
+        descriptor_setup = dscribe.descriptors.CoulombMatrix( sparse = False, **descriptor_params)
+    return descriptor_setup
+
 
 @explicit_serialize
 class AdsiteCreationTask(FiretaskBase):
@@ -42,15 +67,21 @@ class AdsiteCreationTask(FiretaskBase):
         adsorbate_name (str) :  element symbold of the adsorbed atom
         adsite_types (list) :   adsorption site types, can contain any combination of
                                 "top", "bridge", "hollow"
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
                 
     Returns:
         FWAction : Firework action, updates fw_spec
     """
     _fw_name = 'AdsiteCreationTask'
-    required_params = ['reference_energy', 'adsorbate_name', 'adsite_types']
+    required_params = ['reference_energy', 'adsorbate_name', 'adsite_types', 'descriptor', 'descriptor_params']
     optional_params = []
 
     def run_task(self, fw_spec):
+        descriptor = self["descriptor"]
+        descriptor_params = self["descriptor_params"]
         adsorbate_name = self["adsorbate_name"]
         adsite_types = self["adsite_types"]
         reference_energy = self["reference_energy"]
@@ -89,10 +120,9 @@ class AdsiteCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
-            # TODO allow for other descriptors than default
-            # TODO read descriptor_params
-            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
-                nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
+            descriptor_setup = _setup_descriptor(all_atomtypes, descriptor, **descriptor_params)
+            #descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
+            #    nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 
             #looping over adsorption site type
@@ -132,11 +162,13 @@ class AdsiteCreationTask(FiretaskBase):
                     dct["workflow_id"] = workflow_id
                     dct["atoms"] = joint_atoms_dict
                     dct["operations"] = [dict({"add_adsorbate" : 1})]
-                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+
+
+                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id, "site_class" : adsite_type, "site_ids" : surface_atoms.tolist()}))
                     # empty previous input
                     dct["inp"] = {}
                     dct["inp"]["adsite_type"] = adsite_type
-                    dct["inp"]["adsorbate_name"] = adsorbate_name
+                    dct["inp"]["adsorbate"] = adsorbate_name
                     # empty previous output
                     dct["output"] = {}
                     dct["output"]["surface_atoms"] = surface_atoms.tolist()
@@ -184,15 +216,21 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
                             which indicates the anchor point to the nanocluster
         adsite_types (list) :   adsorption site types, can contain any combination of
                                 "top", "bridge", "hollow"
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
                 
     Returns:
         FWAction : Firework action, updates fw_spec
     """
     _fw_name = 'MonodentateAdsiteCreationTask'
-    required_params = ['reference_energy', 'adsorbate', 'adsite_types']
+    required_params = ['reference_energy', 'adsorbate', 'adsite_types', 'descriptor', 'descriptor_params']
     optional_params = []
 
     def run_task(self, fw_spec):
+        descriptor = self["descriptor"]
+        descriptor_params = self["descriptor_params"]
         adsorbate_dict = self["adsorbate"]
         adsite_types = self["adsite_types"]
         reference_energy = self["reference_energy"]
@@ -235,10 +273,9 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
-            # TODO allow for other descriptors than default
-            # TODO read descriptor_params
-            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
-                nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
+            descriptor_setup = _setup_descriptor(all_atomtypes, descriptor, **descriptor_params)
+            #descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
+            #    nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 
             #looping over adsorption site type
@@ -278,7 +315,7 @@ class MonodentateAdsiteCreationTask(FiretaskBase):
                     dct["workflow_id"] = workflow_id
                     dct["atoms"] = joint_atoms_dict
                     dct["operations"] = [dict({"add_adsorbate" : 1})]
-                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id, "site_class" : adsite_type, "site_ids" : surface_atoms.tolist()}))
                     # empty previous input
                     dct["inp"] = {}
                     dct["inp"]["adsite_type"] = adsite_type
@@ -338,15 +375,21 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
         threshold (float) :     threshold of similarity metric between the local structures
                                 of the adsorption sites. Only sites which are more dissimilar 
                                 than the given threshold are computed
+        descriptor (str) :  type of descriptor to be used. For a list of
+                            descriptors, see the documentation of dscribe
+                            Defaults to 'soap'
+        descriptor_params (dict) : descriptor parameters
 
     Returns:
         FWAction : Firework action, updates fw_spec
     """
     _fw_name = 'MonodentateUniqueAdsiteCreationTask'
-    required_params = ['reference_energy', 'adsorbate', 'adsite_types', 'threshold']
+    required_params = ['reference_energy', 'adsorbate', 'adsite_types', 'threshold', 'descriptor', 'descriptor_params']
     optional_params = []
 
     def run_task(self, fw_spec):
+        descriptor = self["descriptor"]
+        descriptor_params = self["descriptor_params"]
         adsorbate_dict = self["adsorbate"]
         adsite_types = self["adsite_types"]
         reference_energy = self["reference_energy"]
@@ -388,10 +431,9 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
             # running cluskit on cluster
             cluster = cluskit.Cluster(atoms)
             cluster.get_surface_atoms()
-            # TODO allow for other descriptors than default
-            # TODO read descriptor_params
-            descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
-                nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
+            descriptor_setup = _setup_descriptor(all_atomtypes, descriptor, **descriptor_params)
+            #descriptor_setup = dscribe.descriptors.SOAP(species = all_atomtypes, 
+            #    nmax = 9, lmax = 6, rcut=5.0, crossover = True, sparse = False)
             cluster.descriptor_setup = descriptor_setup
 
             #looping over adsorption site type
@@ -435,7 +477,7 @@ class MonodentateUniqueAdsiteCreationTask(FiretaskBase):
                     dct["workflow_id"] = workflow_id
                     dct["atoms"] = joint_atoms_dict
                     dct["operations"] = [dict({"add_adsorbate" : 1})]
-                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id, "site_class" : adsite_type, "site_ids" : surface_atoms.tolist()}))
                     # empty previous input
                     dct["inp"] = {}
                     dct["inp"]["adsite_type"] = adsite_type

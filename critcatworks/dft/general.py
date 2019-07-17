@@ -85,6 +85,8 @@ class ChunkCalculationsTask(FiretaskBase):
                                     Currently, only CP2K is implemented.
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
     Returns:
         FWAction :  Firework action, updates fw_spec, 
                     creates new Fireworks as detours from workflow
@@ -92,12 +94,13 @@ class ChunkCalculationsTask(FiretaskBase):
 
     _fw_name = 'ChunkCalculationsTask'
     required_params = ['template', 'target_path',  'name', 'n_max_restarts']
-    optional_params = ['chunk_size', 'simulation_method', 'skip_dft']
+    optional_params = ['chunk_size', 'simulation_method', 'skip_dft', 'is_safeguard']
 
     def run_task(self, fw_spec):
         template = self["template"]
         target_path = self["target_path"]
         chunk_size = self.get("chunk_size", -1)
+        is_safeguard = self.get("is_safeguard", True)
         simulation_method = self.get("simulation_method", "cp2k")
         name = self["name"]
         n_max_restarts = self["n_max_restarts"]
@@ -135,6 +138,7 @@ class ChunkCalculationsTask(FiretaskBase):
                     n_max_restarts = n_max_restarts,
                     simulation = simulation,
                     skip_dft = skip_dft,
+                    is_safeguard = is_safeguard,
                     extdb_connect = fw_spec["extdb_connect"]
                     )
                 wfs.extend(new_fw)
@@ -173,7 +177,8 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     return fw
 
 
-def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k", skip_dft = False):
+def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k", 
+    skip_dft = False, is_safeguard = True):
     """ 
     Create Fireworks with new calculations to setup and run.
 
@@ -192,6 +197,8 @@ def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_
                                     Currently, only CP2K is implemented.
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
 
     Returns:
                 Firework : StructureFolderWork Firework,
@@ -205,6 +212,7 @@ def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_
         n_max_restarts = n_max_restarts,
         simulation_method = simulation_method,
         skip_dft = skip_dft,
+        is_safeguard = is_safeguard,
         )
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'ChunkCalculationsTask'},
                      name = 'ChunkCalculationsWork')

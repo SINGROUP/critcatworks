@@ -157,9 +157,45 @@ def adsorbate_pos_to_atoms_lst(adspos, adsorbate_name):
     atoms_lst = []
     ads_structures_dict = []
     for adsorbate in adspos:
-        logging.debug(adsorbate_name)
-        logging.debug(adsorbate)
-        logging.debug(adsorbate.shape)
         atoms = ase.Atoms(symbols=adsorbate_name, positions=adsorbate.reshape((1,3)))
         atoms_lst.append(atoms)
-    return atoms_lst
+    return atoms_lst    
+
+def split_nanocluster_and_adsorbates(simulation):
+        """Helper function to split a given structure in a simulation
+        document into two ase atoms objects containing only
+        the nanocluster or the adsorbate atoms.
+
+        Args:
+            simulation (dict) :
+
+        Returns:
+            tuple : cluster atoms (ase.Atoms),
+                    adsorbate atoms (ase.Atoms),
+                    adsorption site ids (list), 
+                    adsorption site classes (list), 
+                    reference ids (list), 
+                    adsorbate ids (list)                    
+        """
+        adsorbate_ids = []
+        reference_ids = []
+        site_class_list = []
+        site_ids_list = []
+        atoms_dict = simulation["atoms"]
+        atoms = atoms_dict_to_ase(atoms_dict)
+
+        for adsorbate in simulation["adsorbates"]:
+            adsorbate_ids.extend(adsorbate["atom_ids"])
+            reference_ids.append(adsorbate["reference_id"])
+            site_class_list.append(adsorbate.get("site_class", ""))
+            site_ids_list.append(adsorbate.get("site_ids_list", []))
+        adsorbate_atoms = atoms[np.array(adsorbate_ids, dtype=int)]
+
+        cluster_ids = []
+        for nanocluster in simulation["nanoclusters"]:
+            cluster_ids.extend(nanocluster["atom_ids"])
+        cluster_atoms = atoms[np.array(cluster_ids, dtype=int)]
+
+        return cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids
+
+

@@ -184,7 +184,8 @@ class CP2KAnalysisTask(FiretaskBase):
         calc_id (int) :     simulation id of the structure on which the calculation will 
                             be run
         n_max_restarts (int)  : number of times the calculation is restarted upon failure
-            
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
     Returns:
         FWAction :  Firework action, updates fw_spec, possibly defuses Firework children,
                     possibly adds Fireworks as detours to the workflow
@@ -192,13 +193,14 @@ class CP2KAnalysisTask(FiretaskBase):
 
     _fw_name = 'CP2KAnalysisTask'
     required_params = ['target_path', 'calc_id', 'n_max_restarts']
-    optional_params = []
+    optional_params = ['is_safeguard']
 
     def run_task(self, fw_spec):
         target_path = self["target_path"]
         calc_id = self["calc_id"]
         n_max_restarts = self["n_max_restarts"]
         skip_dft = self["skip_dft"]
+        is_safeguard = self.get("is_safeguard", True)
         n_restarts = fw_spec["n_restarts"]
         print("calc_id", calc_id)
         # read output
@@ -217,7 +219,7 @@ class CP2KAnalysisTask(FiretaskBase):
             logging.info("parser confirmed that CP2K terminated correctly")
             print("parser confirmed that CP2K terminated correctly")
         ####
-        if output_state == "no_output": # or output_state == "incorrect_termination":
+        if (output_state == "no_output") or (output_state == "incorrect_termination"):
             pass
         else:
             nwarnings = preparse_results.get('nwarnings', 0)
@@ -258,13 +260,18 @@ class CP2KAnalysisTask(FiretaskBase):
             if fw_spec["n_restarts"] < n_max_restarts:
                 fw_spec["n_restarts"] += 1
                 detours =  rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts = int(n_restarts) + 1, 
-                    simulation = fw_spec["simulation"], skip_dft = skip_dft, extdb_connect = fw_spec["extdb_connect"])
+                    simulation = fw_spec["simulation"], skip_dft = skip_dft, is_safeguard = is_safeguard,
+                    extdb_connect = fw_spec["extdb_connect"])
 
                 fw_spec.pop("_category")
                 fw_spec.pop("name")
                 return FWAction(update_spec = fw_spec, detours = detours)
             else:
-                is_defused = True   
+                if is_safeguard == True:
+                    is_defused = True   
+                else:
+                    is_defused = False
+                    logging.warning("safeguard is off. Workflow continues despite CP2K run not having converged")
         else:
             is_defused = False 
 
@@ -340,7 +347,7 @@ class CP2KAnalysisTask(FiretaskBase):
 
 
 def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id", n_max_restarts = 4,
-        skip_dft = False, extdb_connect = {}):
+        skip_dft = False, is_safeguard = True, extdb_connect = {}):
     """
     Creates a mini-workflow consisting of:
     Firework 1: two Firetasks CP2KSetupTask and CP2KRunTask.
@@ -365,6 +372,8 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
 
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.        
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
         extdb_connect (dict) :  dictionary containing the keys host,
                                 username, password, authsource and db_name.
 
@@ -389,7 +398,8 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
     analysis_task = CP2KAnalysisTask(target_path = target_path, 
         calc_id = calc_id, 
         n_max_restarts = n_max_restarts,
-        skip_dft = skip_dft)
+        skip_dft = skip_dft,
+        is_safeguard = is_safeguard)
 
     
     fw1 = Firework([setup_task,run_task], 
@@ -412,7 +422,7 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
 
 
 def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts, 
-        simulation, skip_dft = False, extdb_connect = {}):    
+        simulation, skip_dft = False, is_safeguard = True, extdb_connect = {}):    
     """
     Creates a mini-workflow consisting of:
     Firework 1: CP2KRunTask
@@ -434,6 +444,8 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
                             analysis step and stored in a new document
         skip_dft (bool) :   If set to true, the simulation step is skipped in all
                             following simulation runs. Instead the structure is returned unchanged.        
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
         extdb_connect (dict) :  dictionary containing the keys host,
                                 username, password, authsource and db_name.
 
@@ -454,7 +466,8 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
     analysis_task = CP2KAnalysisTask(target_path = target_path, 
         calc_id = calc_id, 
         n_max_restarts = n_max_restarts,
-        skip_dft = skip_dft)
+        skip_dft = skip_dft,
+        is_safeguard = is_safeguard)
 
     fw2 = Firework([analysis_task], 
         spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
@@ -511,8 +524,11 @@ def additional_parse_stdout(target_path):
             if 'exceeded requested execution time' in line:
                 result_dict['exceeded_walltime'] = True
 
-    if 'nwarnings' not in result_dict:
+    if ('nwarnings' not in result_dict) or (result_dict['exceeded_walltime'] == True):
         logging.warning("CP2K did not finish properly.")
         return "incorrect_termination", result_dict
     else:
         return "ok", result_dict
+
+
+

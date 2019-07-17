@@ -1,7 +1,7 @@
 ############ General ############################
 
 &GLOBAL
-  WALLTIME 00:01:00
+  WALLTIME 23:50:00
   RUN_TYPE GEO_OPT           
   PREFERRED_FFT_LIBRARY FFTSG
   EXTENDED_FFT_LENGTHS
@@ -29,9 +29,9 @@
 #    CHARGE 0
 
     &MGRID
-      CUTOFF 200             # plane-wave cutoff for the charge density [Rydbergs]
+      CUTOFF 600             # plane-wave cutoff for the charge density [Rydbergs]
       NGRIDS 5
-      REL_CUTOFF 30
+      REL_CUTOFF 60
     &END MGRID  
     &POISSON
       PERIODIC XYZ
@@ -82,11 +82,11 @@
       SCF_GUESS RESTART
       EPS_LUMOS  0.000001    # for MO_CUBES
       MAX_ITER_LUMOS 10000   # for MO_CUBES
-      EPS_SCF 1.0E-4         # convergence threshold for total energy
+      EPS_SCF 1.0E-6         # convergence threshold for total energy
       CHOLESKY INVERSE_DBCSR
 
 ### STANDARD DIAGONALIZATION with SMEARING
-     MAX_SCF 100 
+     MAX_SCF 200 
      ADDED_MOS  200 
      &SMEAR  ON 
          METHOD FERMI_DIRAC 
@@ -105,7 +105,7 @@
      &OUTER_SCF
      # Start again if not converged
      # Must be smaller than the one in inner loop, default 1.0E-5
-          EPS_SCF 1.0E-4
+          EPS_SCF 1.0E-6
           MAX_SCF 2
      &END OUTER_SCF
 
@@ -149,7 +149,7 @@
     &END
     &CELL
       PERIODIC XYZ
-      ABC 20.0 20.0 20.0
+      #ABC 25.0 25.0 25.0
     &END CELL
     &TOPOLOGY
       COORD_FILE_FORMAT XYZ
@@ -214,6 +214,14 @@
       BASIS_SET DZVP-MOLOPT-SR-GTH
       POTENTIAL GTH-PBE-q12
     &END KIND
+    &KIND N
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND Ti
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE-q12
+    &END KIND
 
 
   &END SUBSYS
@@ -223,7 +231,7 @@
 &MOTION
   &GEO_OPT
     TYPE MINIMIZATION
-    MAX_ITER 3
+    MAX_ITER 240
     MAX_FORCE 4.5E-4  #9.75E-5
     RMS_FORCE 3.0E-4  #5.0E-5
     OPTIMIZER BFGS

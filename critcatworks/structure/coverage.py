@@ -19,6 +19,7 @@ from critcatworks.database import atoms_dict_to_ase, ase_to_atoms_dict
 from critcatworks.database import read_descmatrix, write_descmatrix
 from critcatworks.database import adsorbate_pos_to_atoms_lst
 from critcatworks.database import join_cluster_adsorbate
+from critcatworks.database import split_nanocluster_and_adsorbates
 from critcatworks.database.extdb import gather_all_atom_types
 from critcatworks.database.extdb import update_simulations_collection
 from critcatworks.database.extdb import fetch_simulations
@@ -103,7 +104,7 @@ class AdsorbateEliminationTask(FiretaskBase):
                 adsorbate_ids.extend(adsorbate["atom_ids"])
                 reference_ids.append(adsorbate["reference_id"])
                 site_class_list.append(adsorbate.get("site_class",""))
-                site_ids_list.append(adsorbate.get("site_ids_list", []))
+                site_ids_list.append(adsorbate.get("site_ids", []))
             adsorbate_atoms = atoms[np.array(adsorbate_ids, dtype = int)]
 
             cluster_ids = []
@@ -259,7 +260,8 @@ class PerTypeCoverageCreationTask(FiretaskBase):
                 for adsorbate, surface_atoms in zip(adsorbate_lst, sites_surface_atoms):
                     add_adsorbate += 1
                     atoms, _ , adsorbate_ids = join_cluster_adsorbate(atoms, adsorbate)
-                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id}))
+                    dct["adsorbates"].append(dict({"atom_ids" : adsorbate_ids, "reference_id" : reference_id, 
+                        "site_class" : adsite_type_int, "site_ids" : surface_atoms.tolist()}))
                     dct["output"]["surface_atoms"][str(adsorbate_ids)] = surface_atoms.tolist()
 
             joint_atoms_dict = ase_to_atoms_dict(atoms)
@@ -626,7 +628,7 @@ class GatherLadderTask(FiretaskBase):
         fw_spec["temp"]["property"] = energies 
         fw_spec["temp"]["calc_ids"] = calc_ids
         fw_spec["temp"]["ne_dct"] = ne_dct
-        fw_spec["temp"]["analysis_ids"] = [] # TODO check if push from Analysis requires array
+        fw_spec["temp"]["analysis_ids"] = [] 
         fw_spec["temp"]["calc_parents"] = calc_parents
         fw_spec.pop("_category")
         fw_spec.pop("name")
@@ -727,7 +729,7 @@ class AddRemoveLadderTask(FiretaskBase):
         print("adding 1 adsorbate")
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
-        cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(simulation)
+        cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = split_nanocluster_and_adsorbates(simulation)
 
         # get sites of nanocluster
         cluster = cluskit.Cluster(cluster_atoms)
@@ -735,11 +737,6 @@ class AddRemoveLadderTask(FiretaskBase):
 
         # find "empty" sites
         ids = self.get_empty_sites(adsorption_sites, adsorbate_atoms.get_positions(), bond_length= bond_length)
-        #print("get_empty_sites", ids, len(ids))
-
-        # based on bond distance (given)
-        # TODO similarity of environment
-        # optional: exclude similar sites based on similarity threshold
 
         # rank "empty" sites based on
         # a) soap similarity
@@ -782,8 +779,9 @@ class AddRemoveLadderTask(FiretaskBase):
             dct["adsorbates"].append(dict({"atom_ids": adsorbate_ids, "reference_id": reference_id}))
             # empty previous input
             dct["inp"] = {}
+            # TODO add info about site 
             #dct["inp"]["adsite_type"] = adsite_type
-            #dct["inp"]["adsorbate"] = adsorbate_name
+            dct["inp"]["adsorbate"] = adsorbate_name
             # empty previous output
             dct["output"] = {}
             #dct["output"]["surface_atoms"] = surface_atoms.tolist()
@@ -827,7 +825,7 @@ class AddRemoveLadderTask(FiretaskBase):
         """
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
-        cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = self.split_nanocluster_and_adsorbates(
+        cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids = split_nanocluster_and_adsorbates(
             simulation)
         print("removing 1 adsorbate")
 
@@ -836,8 +834,6 @@ class AddRemoveLadderTask(FiretaskBase):
         #cluster.get_sites(-1)
         desc = cluster.get_cluster_descriptor()[len(cluster_atoms) :]
         desc.shape
-
-        # optional: exclude similar adsorbates based on similarity threshold
 
         # rank adsorbates based on
         # a) soap similarity
@@ -888,6 +884,7 @@ class AddRemoveLadderTask(FiretaskBase):
             dct["operations"] = [dict({"add_adsorbate": -1})]
             # empty previous input
             dct["inp"] = {}
+            # TODO add info about site
             #dct["inp"]["adsite_type"] = adsite_type
             #dct["inp"]["adsorbate"] = adsorbate_name
             # empty previous output
@@ -906,43 +903,6 @@ class AddRemoveLadderTask(FiretaskBase):
 
         db["simulations"].insert_many(simulations_chunk_list)
         return new_calc_ids
-
-    def split_nanocluster_and_adsorbates(self, simulation):
-        """Helper function to split a given structure in a simulation
-        document into two ase atoms objects containing only
-        the nanocluster or the adsorbate atoms.
-
-        Args:
-            simulation (dict) :
-
-        Returns:
-            tuple : cluster atoms (ase.Atoms),
-                    adsorbate atoms (ase.Atoms),
-                    adsorption site ids (list), 
-                    adsorption site classes (list), 
-                    reference ids (list), 
-                    adsorbate ids (list)                    
-        """
-        adsorbate_ids = []
-        reference_ids = []
-        site_class_list = []
-        site_ids_list = []
-        atoms_dict = simulation["atoms"]
-        atoms = atoms_dict_to_ase(atoms_dict)
-
-        for adsorbate in simulation["adsorbates"]:
-            adsorbate_ids.extend(adsorbate["atom_ids"])
-            reference_ids.append(adsorbate["reference_id"])
-            site_class_list.append(adsorbate.get("site_class", ""))
-            site_ids_list.append(adsorbate.get("site_ids_list", []))
-        adsorbate_atoms = atoms[np.array(adsorbate_ids, dtype=int)]
-
-        cluster_ids = []
-        for nanocluster in simulation["nanoclusters"]:
-            cluster_ids.extend(nanocluster["atom_ids"])
-        cluster_atoms = atoms[np.array(cluster_ids, dtype=int)]
-
-        return cluster_atoms, adsorbate_atoms, site_ids_list, site_class_list, reference_ids, adsorbate_ids
 
     def get_empty_sites(self, site_positions, 
         adsorbate_positions, bond_length = 1.5):
