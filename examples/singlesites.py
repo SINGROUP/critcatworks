@@ -49,12 +49,10 @@ if __name__ == "__main__":
     launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, lpadname = "mjfireworkstriton")
     #launchpad.reset('', require_password=False)
 
-    #structures = read_structures_locally("ptcu_converged_str")
     wf = get_singlesites_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        template_path = str(pathlib.Path("./templates/triton_gopt.inp").resolve()), 
-        worker_target_path = "/scratch/work/jagerm1/workflow_runs/singlesites/production/selected_ptcu_structures",
-        #structures = structures,
+        template_path = str(pathlib.Path("./templates/triton_gopt_24h.inp").resolve()), 
+        worker_target_path = "/scratch/work/jagerm1/workflow_runs/singlesites/production/binarytm",
         extdb_ids = [311, 312, 314, 316, 318, 331, 336, 338],
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
