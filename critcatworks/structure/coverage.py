@@ -600,7 +600,13 @@ class GatherLadderTask(FiretaskBase):
         energies = []
         for idx in analysis_ids:
             simulation = simulations[str(idx)]
-            energies.append(simulation["output"]["total_energy"]) 
+            try:
+                total_energy = simulation["output"]["total_energy"]
+            except:
+                logging.warning("total_energy not found! Not contributing to reaction energy!")
+                total_energy = 0.0
+
+            energies.append(total_energy) 
 
         # find calc_id in calc_parents and replace with analysis_id
         for _, children in calc_parents.items():

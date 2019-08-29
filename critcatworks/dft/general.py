@@ -29,6 +29,7 @@ class StructureFolderTask(FiretaskBase):
 
     def run_task(self, fw_spec):
         target_path = self['target_path']
+        #target_path = str(pathlib.Path(target_path).resolve())
         prefix = self['name']
         time_str = time.strftime("%Y-%m-%d-%H-%M")
 
@@ -99,6 +100,7 @@ class ChunkCalculationsTask(FiretaskBase):
     def run_task(self, fw_spec):
         template = self["template"]
         target_path = self["target_path"]
+        #target_path = str(pathlib.Path(target_path).resolve())
         chunk_size = self.get("chunk_size", -1)
         is_safeguard = self.get("is_safeguard", True)
         simulation_method = self.get("simulation_method", "cp2k")

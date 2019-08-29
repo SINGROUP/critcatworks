@@ -41,6 +41,7 @@ class MLTask(FiretaskBase):
 
     def run_task(self, fw_spec):
         target_path = self['target_path']
+        #target_path = str(pathlib.Path(target_path).resolve())
 
         METHOD = "krr"
         IS_PREDICT_FAILED = True
