@@ -156,11 +156,11 @@ class AdsorbateEliminationTask(FiretaskBase):
         update_spec.pop("_category")
         update_spec.pop("name")
         if len(new_calc_ids) == 0:
-            defuse_workflow = True
+            defuse_children = True
         else:
-            defuse_workflow = False
+            defuse_children = False
 
-        return FWAction(update_spec=update_spec, defuse_workflow = defuse_workflow)
+        return FWAction(update_spec=update_spec, defuse_children = defuse_children)
 
 @explicit_serialize
 class PerTypeCoverageCreationTask(FiretaskBase):
@@ -397,10 +397,10 @@ class CoverageLadderTask(FiretaskBase):
         fw_spec.pop("_category")
         fw_spec.pop("name")
         if (abs(n_adsorbates - n_adsorbates_root) == d) and ((n_adsorbates - n_adsorbates_root > 0) == direction):
-            defuse_workflow = True
+            defuse_children = True
         else:
-            defuse_workflow = False
-        return FWAction(update_spec=fw_spec, defuse_workflow = defuse_workflow)
+            defuse_children = False
+        return FWAction(update_spec=fw_spec, defuse_children = defuse_children)
 
     def find_lowest_energy_structures(self, l, calc_ids, energies):
         """Finds the l lowest energy structures based on the 

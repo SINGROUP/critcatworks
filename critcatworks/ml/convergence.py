@@ -43,10 +43,10 @@ class CheckConvergenceTask(FiretaskBase):
         if mae < threshold:
             logging.info("Database is converged")
             logging.info("exiting workflow")
-            defuse_workflow = True
+            defuse_children = True
 
         else:
-            defuse_workflow = False
+            defuse_children = False
             # start new chunk of calculations
             # already defined as children in the workflow
             logging.info("calculating next chunk. continue workflow as planned")
@@ -55,7 +55,7 @@ class CheckConvergenceTask(FiretaskBase):
         update_spec.pop("_category")
         update_spec.pop("name")
 
-        return FWAction(update_spec=update_spec, defuse_workflow=defuse_workflow)
+        return FWAction(update_spec=update_spec, defuse_children=defuse_children)
 
 
 def check_convergence(threshold, convergence_criterion = "mae"):

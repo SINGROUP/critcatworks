@@ -201,6 +201,8 @@ class CP2KAnalysisTask(FiretaskBase):
         n_max_restarts = self["n_max_restarts"]
         skip_dft = self["skip_dft"]
         is_safeguard = self.get("is_safeguard", True)
+        # temporary fix, no safeguard
+        is_safeguard = False 
         n_restarts = fw_spec["n_restarts"]
         print("calc_id", calc_id)
         # read output
