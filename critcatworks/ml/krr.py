@@ -110,8 +110,8 @@ class MLTask(FiretaskBase):
         # update machine learning data
         # translate to simulation ids
         
-        ml_results["ids_train"] = simulation_ids_training[ml_results["ids_train"]]
-        ml_results["ids_test"] = simulation_ids_training[ml_results["ids_test"]]
+        ml_results["ids_train"] = np.array(calc_ids)[ml_results["ids_train"]]
+        ml_results["ids_test"] = np.array(calc_ids)[ml_results["ids_test"]]
         ml_results["ids_predicted"] = simulation_ids_predict
 
         # update external database
