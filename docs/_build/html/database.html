@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Database &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="For Future Developers" href="developer.html" />
+    <link rel="prev" title="Coverage Ladder Workflow" href="tutorials/coverageladder_workflow.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developer.html" title="For Future Developers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorials/coverageladder_workflow.html" title="Coverage Ladder Workflow"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="database">
+<span id="id1"></span><h1>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h1>
+<p>For storing information about the workflows, machine learning,
+DFT simlations and other structure manipulations, MongoDB
+is used as a permament, shared database.
+MongoDB is a NoSQL database, with bson dictionaries as documents,
+which is very close to python documents. If you know python,
+MongoDB documents are easy to read and query.</p>
+<div class="section" id="database-format">
+<h2>Database format<a class="headerlink" href="#database-format" title="Permalink to this headline">¶</a></h2>
+<p>In the following, we list the entries that data records need to have in each collection. A data record is assumed to be a python dictionary, and the tables give the keys that are expected to be found therein. The following collections are defined: IDs, simulations, workflows and machine_learning.</p>
+<div class="section" id="collection-ids">
+<h3>Collection: IDs<a class="headerlink" href="#collection-ids" title="Permalink to this headline">¶</a></h3>
+<p>contains the ID values that will be assigned to the newest entries in other collections</p>
+<dl class="field-list simple">
+<dt class="field-odd">_id (int)</dt>
+<dd class="field-odd"><p>automatic compulsory internal id for MongoDB</p>
+</dd>
+<dt class="field-even">simulations (int)</dt>
+<dd class="field-even"><p>ID to be used by the next new entry of type simulation</p>
+</dd>
+<dt class="field-odd">workflows (int)</dt>
+<dd class="field-odd"><p>ID to be used by the next new entry of type workflows</p>
+</dd>
+<dt class="field-even">machine_learning (int)</dt>
+<dd class="field-even"><p>ID to be used by the next new entry of type machine_learning</p>
+</dd>
+</dl>
+<p>(notice how the field name matches the collection name)</p>
+</div>
+<div class="section" id="collection-simulations">
+<h3>Collection: simulations<a class="headerlink" href="#collection-simulations" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">_id (int)</dt>
+<dd class="field-odd"><p>unique identifier</p>
+</dd>
+<dt class="field-even">source_id (int)</dt>
+<dd class="field-even"><p>ID of the parent simulation that originated this, -1 if none</p>
+</dd>
+<dt class="field-odd">workflow_id (int)</dt>
+<dd class="field-odd"><p>ID of workflow when instance was added, -1 if none</p>
+</dd>
+<dt class="field-even">wf_sim_id (int)</dt>
+<dd class="field-even"><p>ID of simulation (unique within the workflow this belongs to)</p>
+</dd>
+<dt class="field-odd">atoms (ATOMS)</dt>
+<dd class="field-odd"><p>dictionary with information about the atoms.</p>
+</dd>
+<dt class="field-even">nanoclusters (NANOCLUSTER)</dt>
+<dd class="field-even"><p>list of dictionaries with information about the nanocluster(s)</p>
+</dd>
+<dt class="field-odd">adsorbates (ADSORBATE)</dt>
+<dd class="field-odd"><p>list of dictionaries with information about the adsorbate(s)</p>
+</dd>
+<dt class="field-even">substrates (SUBSTRATE)</dt>
+<dd class="field-even"><p>list of dictionaries with information about the substrate(s)</p>
+</dd>
+<dt class="field-odd">operations (list)</dt>
+<dd class="field-odd"><p>List of dictionaries, each describing one operation. Always with respect to the parent simulation if applicable</p>
+</dd>
+<dt class="field-even">inp (dict)</dt>
+<dd class="field-even"><p>property/value pairs describing the simulation input</p>
+</dd>
+<dt class="field-odd">output (dict)</dt>
+<dd class="field-odd"><p>property/value pairs output by the calculation</p>
+</dd>
+</dl>
+<p>For custom types ATOMS, NANOCLUSTER, ADSORBATE and SUBSTRATE see below.</p>
+</div>
+<div class="section" id="collection-workflows">
+<h3>Collection: workflows<a class="headerlink" href="#collection-workflows" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">_id (int)</dt>
+<dd class="field-odd"><p>unique identifier</p>
+</dd>
+<dt class="field-even">username (str)</dt>
+<dd class="field-even"><p>user who executed the workflow</p>
+</dd>
+<dt class="field-odd">creation_time (str)</dt>
+<dd class="field-odd"><p>time of creation of the workflow</p>
+</dd>
+<dt class="field-even">parameters (dict)</dt>
+<dd class="field-even"><p>workflow-specific parameters</p>
+</dd>
+<dt class="field-odd">name (str)</dt>
+<dd class="field-odd"><p>custom name of workflow</p>
+</dd>
+<dt class="field-even">workflow_type (str)</dt>
+<dd class="field-even"><p>custom type of workflow</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="collection-machine-learning">
+<h3>Collection: machine_learning<a class="headerlink" href="#collection-machine-learning" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">_id (int)</dt>
+<dd class="field-odd"><p>unique identifier</p>
+</dd>
+<dt class="field-even">workflow_id (int)</dt>
+<dd class="field-even"><p>ID of workflow which the machine learning run was part of</p>
+</dd>
+<dt class="field-odd">method (str)</dt>
+<dd class="field-odd"><p>name of the ML method: krr, nn, …</p>
+</dd>
+<dt class="field-even">method_params (dict)</dt>
+<dd class="field-even"><p>Parameters of the method</p>
+</dd>
+<dt class="field-odd">descriptor (str)</dt>
+<dd class="field-odd"><p>name of the descriptor: soap, mbtr, cm, …</p>
+</dd>
+<dt class="field-even">descriptor_params (dict)</dt>
+<dd class="field-even"><p>Parameters of the descriptor used</p>
+</dd>
+<dt class="field-odd">training_set (int[])</dt>
+<dd class="field-odd"><p>list of simulation IDs used for training</p>
+</dd>
+<dt class="field-even">validation_set (int[])</dt>
+<dd class="field-even"><p>list of simulation IDs used in validation. If empty, cross-validation was used.</p>
+</dd>
+<dt class="field-odd">test_set (int[])</dt>
+<dd class="field-odd"><p>list of simulation IDs used in testing. If empty, only validation was used</p>
+</dd>
+<dt class="field-even">prediction_set (int[])</dt>
+<dd class="field-even"><p>list of simulation IDs used for prediction.</p>
+</dd>
+<dt class="field-odd">metrics_training (dict)</dt>
+<dd class="field-odd"><p>dictionary of (“metric name”: value) on training set
+key: string = name of the metric
+value: float = calculated value</p>
+</dd>
+<dt class="field-even">metrics_validation (dict)</dt>
+<dd class="field-even"><p>dictionary of (“metric name”: value) on validation set
+key: string = name of the metric
+value: float = calculated value</p>
+</dd>
+<dt class="field-odd">metrics_test (dict)</dt>
+<dd class="field-odd"><p>dictionary of (“metric name”: value) on test set
+key: string = name of the metric
+value: float = calculated value</p>
+</dd>
+<dt class="field-even">output (dict)</dt>
+<dd class="field-even"><p>relevant training output info</p>
+</dd>
+</dl>
+<p>Ideally, method name corresponds to a python class/function in the platform, that is initialised with the parameter dictionary given in method_params. Similarly, descriptor name also matches a python class, to be initialised with its own given set of parameters, descriptor_params.
+The field output is a dictionary with all the useful output values from the calculation.</p>
+</div>
+<div class="section" id="custom-type-atoms">
+<h3>Custom Type: ATOMS<a class="headerlink" href="#custom-type-atoms" title="Permalink to this headline">¶</a></h3>
+<p>A dictionary for describing atoms in a system, conceptually
+close to ase.Atoms object:</p>
+<dl class="field-list simple">
+<dt class="field-odd">numbers (int[])</dt>
+<dd class="field-odd"><p>list of atomic numbers as numpy array [N] of ints</p>
+</dd>
+<dt class="field-even">positions (float[N,3])</dt>
+<dd class="field-even"><p>positions as numpy matrix [Nx3] of doubles</p>
+</dd>
+<dt class="field-odd">constraints (int[N,3])</dt>
+<dd class="field-odd"><p>frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free</p>
+</dd>
+<dt class="field-even">pbc (bool)</dt>
+<dd class="field-even"><p>use periodic boundaries</p>
+</dd>
+<dt class="field-odd">cell (float[3,3])</dt>
+<dd class="field-odd"><p>matrix 3x3 with cell vectors on the rows</p>
+</dd>
+<dt class="field-even">celldisp (float[3,1])</dt>
+<dd class="field-even"><p>displacement of cell from origin</p>
+</dd>
+<dt class="field-odd">info (dict)</dt>
+<dd class="field-odd"><p>field for additional information related to structure</p>
+</dd>
+</dl>
+<p>The order of atoms in this dictionary is the one found in the simulation input file.</p>
+</div>
+<div class="section" id="custom-type-adsorbate">
+<h3>Custom Type: ADSORBATE<a class="headerlink" href="#custom-type-adsorbate" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">reference_id (int)</dt>
+<dd class="field-odd"><p>ID of the simulation to use as reference</p>
+</dd>
+<dt class="field-even">atom_ids (int[])</dt>
+<dd class="field-even"><p>atom indices in the ATOMS dictionary of the simulation record</p>
+</dd>
+<dt class="field-odd">site_class (str)</dt>
+<dd class="field-odd"><p>class of adsorption site: “top”, “bridge”, “hollow”, “4-fold hollow”</p>
+</dd>
+<dt class="field-even">site_ids (int[])</dt>
+<dd class="field-even"><p>list of atom ids (in simulation record) that define the adsorption site</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="custom-type-nanocluster">
+<h3>Custom Type: NANOCLUSTER<a class="headerlink" href="#custom-type-nanocluster" title="Permalink to this headline">¶</a></h3>
+<p>In general, simulation.nanoclusters is a list of dictionaries with this structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">reference_id (int)</dt>
+<dd class="field-odd"><p>ID of the simulation where this cluster was made, -1 if original</p>
+</dd>
+<dt class="field-even">atom_ids (int[])</dt>
+<dd class="field-even"><p>atom indices in the ATOMS dictionary of the simulation record</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="custom-type-substrate">
+<h3>Custom Type: SUBSTRATE<a class="headerlink" href="#custom-type-substrate" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">reference_id (int)</dt>
+<dd class="field-odd"><p>ID of the parent support simulation, -1 if no parent</p>
+</dd>
+<dt class="field-even">atom_ids (int[])</dt>
+<dd class="field-even"><p>atom indices in the corresponding ATOMS dictionary. See below</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="database-query-examples">
+<h2>Database query examples<a class="headerlink" href="#database-query-examples" title="Permalink to this headline">¶</a></h2>
+<p>A few examples how to query that database
+are given in the gui/ folder on the github
+repository.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Database</a><ul>
+<li><a class="reference internal" href="#database-format">Database format</a><ul>
+<li><a class="reference internal" href="#collection-ids">Collection: IDs</a></li>
+<li><a class="reference internal" href="#collection-simulations">Collection: simulations</a></li>
+<li><a class="reference internal" href="#collection-workflows">Collection: workflows</a></li>
+<li><a class="reference internal" href="#collection-machine-learning">Collection: machine_learning</a></li>
+<li><a class="reference internal" href="#custom-type-atoms">Custom Type: ATOMS</a></li>
+<li><a class="reference internal" href="#custom-type-adsorbate">Custom Type: ADSORBATE</a></li>
+<li><a class="reference internal" href="#custom-type-nanocluster">Custom Type: NANOCLUSTER</a></li>
+<li><a class="reference internal" href="#custom-type-substrate">Custom Type: SUBSTRATE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database-query-examples">Database query examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorials/coverageladder_workflow.html"
+                        title="previous chapter">Coverage Ladder Workflow</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="developer.html"
+                        title="next chapter">For Future Developers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/database.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developer.html" title="For Future Developers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorials/coverageladder_workflow.html" title="Coverage Ladder Workflow"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.database package &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="critcatworks.dft package" href="critcatworks.dft.html" />
+    <link rel="prev" title="critcatworks package" href="critcatworks.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.dft.html" title="critcatworks.dft package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.html" title="critcatworks package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" accesskey="U">critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="critcatworks-database-package">
+<h1>critcatworks.database package<a class="headerlink" href="#critcatworks-database-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-critcatworks.database.extdb">
+<span id="critcatworks-database-extdb-module"></span><h2>critcatworks.database.extdb module<a class="headerlink" href="#module-critcatworks.database.extdb" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.database.extdb.fetch_simulations">
+<code class="sig-prename descclassname">critcatworks.database.extdb.</code><code class="sig-name descname">fetch_simulations</code><span class="sig-paren">(</span><em class="sig-param">extdb_connect</em>, <em class="sig-param">simulation_ids</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/extdb.html#fetch_simulations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.extdb.fetch_simulations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches simulation records by simulation id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+<li><p><strong>simulation_ids</strong> (<em>1D ndarray</em>) – unique identifiers of the simulation collection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>documents of the simulation collection</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.extdb.gather_all_atom_types">
+<code class="sig-prename descclassname">critcatworks.database.extdb.</code><code class="sig-name descname">gather_all_atom_types</code><span class="sig-paren">(</span><em class="sig-param">calc_ids</em>, <em class="sig-param">simulations</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/extdb.html#gather_all_atom_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.extdb.gather_all_atom_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to determine all atom types in the dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calc_ids</strong> (<em>list</em>) – ids of the simulation collection</p></li>
+<li><p><strong>simulations</strong> (<em>list</em>) – simulation documents</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>a sorted unique list of atomic numbers in the</dt><dd><p>dataset</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.extdb.get_external_database">
+<code class="sig-prename descclassname">critcatworks.database.extdb.</code><code class="sig-name descname">get_external_database</code><span class="sig-paren">(</span><em class="sig-param">extdb_connect</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/extdb.html#get_external_database"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.extdb.get_external_database" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper function to connect to a mongodb database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>address to database</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pymongo object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.extdb.update_machine_learning_collection">
+<code class="sig-prename descclassname">critcatworks.database.extdb.</code><code class="sig-name descname">update_machine_learning_collection</code><span class="sig-paren">(</span><em class="sig-param">method</em>, <em class="sig-param">extdb_connect</em>, <em class="sig-param">workflow_id=-1</em>, <em class="sig-param">method_params={}</em>, <em class="sig-param">descriptor='soap'</em>, <em class="sig-param">descriptor_params={}</em>, <em class="sig-param">training_set=[]</em>, <em class="sig-param">validation_set=[]</em>, <em class="sig-param">test_set=[]</em>, <em class="sig-param">prediction_set=[]</em>, <em class="sig-param">metrics_training={}</em>, <em class="sig-param">metrics_validation={}</em>, <em class="sig-param">metrics_test={}</em>, <em class="sig-param">output={}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/extdb.html#update_machine_learning_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.extdb.update_machine_learning_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A new document is added to the machine_learning collection of the mongodb database.
+It contains records of all types of workflows. The documents should be in a specific format.
+Any arguments can be specified, however, certain arguments below should be
+consistently given to allow for comprehensive database querying.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>workflow_id</strong> (<em>int</em>) – ID of workflow which the machine learning run was part of</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – name of the ML method: krr, nn, …</p></li>
+<li><p><strong>method_params</strong> (<em>dict</em>) – Parameters of the method</p></li>
+<li><p><strong>descriptor</strong> (<em>str</em>) – name of the descriptor: soap, mbtr, lmbtr, cm, …</p></li>
+<li><p><strong>descriptor_params</strong> (<em>dict</em>) – Parameters of the descriptor used</p></li>
+<li><p><strong>training_set</strong> (<em>1D ndarray</em>) – list of simulation IDs used for training</p></li>
+<li><p><strong>validation_set</strong> (<em>1D ndarray</em>) – list of simulation IDs used in validation.
+If empty, cross-validation was used.</p></li>
+<li><p><strong>test_set</strong> (<em>1D ndarray</em>) – list of simulation IDs used in testing.
+If empty, only validation was used</p></li>
+<li><p><strong>prediction_set</strong> (<em>1D ndarray</em>) – list of simulation IDs used for prediction.</p></li>
+<li><p><strong>metrics_training</strong> (<em>dict</em>) – dictionary of (“metric name”: value) on training set
+key (str) : name of the metric
+value (float) : calculated value</p></li>
+<li><p><strong>metrics_validation</strong> (<em>dict</em>) – dictionary of (“metric name”: value) on validation set
+key (str) : name of the metric
+value (float) : calculated value</p></li>
+<li><p><strong>metrics_test</strong> (<em>dict</em>) – dictionary of (“metric name”: value) on test set
+key (str) : name of the metric
+value (float) : calculated value</p></li>
+<li><p><strong>output</strong> (<em>dict</em>) – relevant training output info</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A dictionary with the provided arguments plus</dt><dd><p>a unique id provided by the database.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.extdb.update_simulations_collection">
+<code class="sig-prename descclassname">critcatworks.database.extdb.</code><code class="sig-name descname">update_simulations_collection</code><span class="sig-paren">(</span><em class="sig-param">extdb_connect</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/extdb.html#update_simulations_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.extdb.update_simulations_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A new document is added to the simulations collection of the mongodb database.
+It contains records of all manipulation steps of a structure, in particular the
+initial structure, structure after DFT relaxation,
+structure with added or removed asdorbates, etc.
+The documents should be in a specific format. Any arguments can be
+specified, however, the optional arguments below should be
+consistently given to allow for comprehensive database querying.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+<li><p><strong>source_id</strong> (<em>int</em>) – ID of the parent simulation that originated this, -1 if none</p></li>
+<li><p><strong>workflow_id</strong> (<em>int</em>) – ID of workflow when instance was added, -1 if none</p></li>
+<li><p><strong>wf_sim_id</strong> (<em>int</em>) – ID of simulation (unique within the workflow this belongs to)</p></li>
+<li><p><strong>atoms</strong> (<em>dict</em>) – <p>dictionary with information about the atoms.
+should be in the following format</p>
+<p>numbers (1D ndarray)   : list of atomic numbers as numpy array [N] of ints
+positions (2D ndarray) : positions as numpy matrix [Nx3] of doubles
+constraints (2D ndarray) : frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free
+pbc (bool)             : use periodic boundaries
+cell (2D ndarray)      : matrix 3x3 with cell vectors on the rows
+celldisp (1D ndarray)  : displacement of cell from origin
+info (dict)            : field for additional information related to structure</p>
+</p></li>
+<li><p><strong>nanoclusters</strong> (<em>list of ATOMS dict</em>) – <p>list of dictionaries with information about the nanocluster(s)
+The dictionaries should have the following form:</p>
+<p>reference_id (int) : ID of the simulation where this cluster was made, -1 if original
+atom_ids (1D ndarray) : atom indices in the ATOMS dictionary of the simulation record.</p>
+</p></li>
+<li><p><strong>adsorbates</strong> (<em>list of dict</em>) – <p>list of dictionaries with information about the adsorbate(s)
+The dictionaries should have the following form:</p>
+<p>reference_id (int) : ID of the simulation to use as reference
+atom_ids (1D ndarray) : atom indices in the ATOMS dictionary of the simulation record.
+site_class (str) : class of adsorption site: “top”, “bridge”, “hollow”, “4-fold hollow”
+site_ids (1D ndarray) : list of atom ids (in simulation record) that define the adsorption site</p>
+</p></li>
+<li><p><strong>substrate</strong> (<em>list of dict</em>) – <p>list of dictionaries with information about the substrate(s)
+The dictionaries should have the following form:</p>
+<p>reference_id (int) : ID of the parent support simulation, -1 if no parent
+atom_ids (1D ndarray) : atom indices in the corresponding ATOMS dictionary</p>
+</p></li>
+<li><p><strong>operations</strong> (<em>list</em>) – List of dictionaries, each describing one operation. Always with respect to the parent simulation if applicable.
+The dictionaries can be of arbitrary form.</p></li>
+<li><p><strong>inp</strong> (<em>dict</em>) – property/value pairs describing the simulation input
+The dictionary can be of arbitrary form.</p></li>
+<li><p><strong>output</strong> (<em>dict</em>) – property/value pairs output by the calculation
+The dictionary can be of arbitrary form.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A dictionary with the provided arguments plus</dt><dd><p>a unique id provided by the database.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.extdb.update_workflows_collection">
+<code class="sig-prename descclassname">critcatworks.database.extdb.</code><code class="sig-name descname">update_workflows_collection</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">creation_time</em>, <em class="sig-param">extdb_connect</em>, <em class="sig-param">parameters={}</em>, <em class="sig-param">name='UNNAMED'</em>, <em class="sig-param">workflow_type='NO_TYPE'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/extdb.html#update_workflows_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.extdb.update_workflows_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A new document is added to the workflows collection of the mongodb database.
+(Usually at the beginning of the workflow run.)
+It contains records of all types of workflows. The documents should be in a specific format.
+Any arguments can be specified, however, certain arguments below should be
+consistently given to allow for comprehensive database querying.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary containing the keys host,
+username, password, authsource and db_name.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – user who executed the workflow</p></li>
+<li><p><strong>creation_time</strong> (<em>str</em>) – time of creation of the workflow</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em>) – workflow-specific parameters</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – custom name of workflow</p></li>
+<li><p><strong>workflow_type</strong> (<em>str</em>) – custom type of workflow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Contains the keys username, name, workflow_type, creation_time,</dt><dd><p>parameters and _id, the latter being a
+unique id provided by the database.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.database.format">
+<span id="critcatworks-database-format-module"></span><h2>critcatworks.database.format module<a class="headerlink" href="#module-critcatworks.database.format" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.database.format.adsorbate_pos_to_atoms_lst">
+<code class="sig-prename descclassname">critcatworks.database.format.</code><code class="sig-name descname">adsorbate_pos_to_atoms_lst</code><span class="sig-paren">(</span><em class="sig-param">adspos</em>, <em class="sig-param">adsorbate_name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/format.html#adsorbate_pos_to_atoms_lst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.format.adsorbate_pos_to_atoms_lst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to turn positions for adsorbates into
+ase atoms objects while the species is defined by
+adsorbate_name
+Attention! Works with only one adsorbate atom.
+In the future, cluskit might generalize to return a
+list of adsorbates already in ase format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adspos</strong> (<em>2D ndarray</em>) – positions of the adsorbate atoms</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – chemical symbol of the adsorbate atoms</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ase.Atoms objects of single atoms at each position</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.format.ase_to_atoms_dict">
+<code class="sig-prename descclassname">critcatworks.database.format.</code><code class="sig-name descname">ase_to_atoms_dict</code><span class="sig-paren">(</span><em class="sig-param">atoms</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/format.html#ase_to_atoms_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.format.ase_to_atoms_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert an
+ase.Atoms object into its corresponding python dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atoms</strong> (<em>ase.Atoms</em>) – ase.Atoms object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corresponding python dictionary</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.format.atoms_dict_to_ase">
+<code class="sig-prename descclassname">critcatworks.database.format.</code><code class="sig-name descname">atoms_dict_to_ase</code><span class="sig-paren">(</span><em class="sig-param">atoms_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/format.html#atoms_dict_to_ase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.format.atoms_dict_to_ase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert a ATOMS dictionary into an
+ase.Atoms object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atoms_dict</strong> (<em>dict</em>) – <p>dictionary with information about the atoms.
+should be in the following format</p>
+<p>numbers (1D ndarray)   : list of atomic numbers as numpy array [N] of ints
+positions (2D ndarray) : positions as numpy matrix [Nx3] of doubles
+constraints (2D ndarray) : frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free
+pbc (bool)             : use periodic boundaries
+cell (2D ndarray)      : matrix 3x3 with cell vectors on the rows
+celldisp (1D ndarray)  : displacement of cell from origin
+info (dict)            : field for additional information related to structure</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corresponding ase.Atoms object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ase.Atoms</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.format.join_cluster_adsorbate">
+<code class="sig-prename descclassname">critcatworks.database.format.</code><code class="sig-name descname">join_cluster_adsorbate</code><span class="sig-paren">(</span><em class="sig-param">cluster</em>, <em class="sig-param">adsorbate</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/format.html#join_cluster_adsorbate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.format.join_cluster_adsorbate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to merge the structures
+cluster and adsorbate while retaining information
+about the ids</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster</strong> (<em>ase.Atoms</em>) – nanocluster structure</p></li>
+<li><p><strong>adsorbate</strong> (<em>ase.Atoms</em>) – single adsorbate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ase.Atoms object of merged structure, ids of the</dt><dd><p>nanocluster, ids of the adsorbate</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.format.read_descmatrix">
+<code class="sig-prename descclassname">critcatworks.database.format.</code><code class="sig-name descname">read_descmatrix</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/format.html#read_descmatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.format.read_descmatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to read a descriptor matrix required for
+machine learning. It is stored as a file, since large arrays
+make fireworks slow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – Only the key ‘descmatrix’ is read. It expects a string
+with the absolute path to file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>descriptor matrix with</dt><dd><p>M features x N datapoints</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>2D np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.format.write_descmatrix">
+<code class="sig-prename descclassname">critcatworks.database.format.</code><code class="sig-name descname">write_descmatrix</code><span class="sig-paren">(</span><em class="sig-param">descmatrix</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/format.html#write_descmatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.format.write_descmatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to write a descriptor matrix required for
+machine learning. It is stored as a file, since large arrays
+make fireworks slow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>descmatrix</strong> (<em>2D np.ndarray</em>) – descriptor matrix with
+M features x N datapoints</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>absolute path to file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.database.mylaunchpad">
+<span id="critcatworks-database-mylaunchpad-module"></span><h2>critcatworks.database.mylaunchpad module<a class="headerlink" href="#module-critcatworks.database.mylaunchpad" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="critcatworks.database.mylaunchpad.create_launchpad">
+<code class="sig-prename descclassname">critcatworks.database.mylaunchpad.</code><code class="sig-name descname">create_launchpad</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">server='serenity'</em>, <em class="sig-param">lpadname=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/mylaunchpad.html#create_launchpad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.mylaunchpad.create_launchpad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the fireworks launchpad on specific preset servers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – username for the mongodb database</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for the mongodb database</p></li>
+<li><p><strong>server</strong> (<em>str</em>) – server name: “serinity” (default) or “atlas”</p></li>
+<li><p><strong>lpadname</strong> (<em>str</em>) – name of the fireworks internal database. If not given,
+the name is inferred.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Launchpad for internal fireworks use.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>fireworks object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.database.read">
+<span id="critcatworks-database-read-module"></span><h2>critcatworks.database.read module<a class="headerlink" href="#module-critcatworks.database.read" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.database.read.NCReadTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">NCReadTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#NCReadTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.NCReadTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to read nanocluster structures from xyz files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Path</strong> (<em>str</em>) – Absolute path to a directory containing
+structures readable by ASE</p></li>
+<li><p><strong>cell_factor</strong> (<em>float</em>) – enlarges cell size to x times the diameter
+diameter of the structure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, update fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.database.read.NCReadTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['cell_factor']</em><a class="headerlink" href="#critcatworks.database.read.NCReadTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.database.read.NCReadTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['path']</em><a class="headerlink" href="#critcatworks.database.read.NCReadTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.database.read.NCReadTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#NCReadTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.NCReadTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.database.read.NCStartFromDatabaseTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">NCStartFromDatabaseTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#NCStartFromDatabaseTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.NCStartFromDatabaseTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to setup starting structures from nanoclusters (ASE atoms objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_ids_lst</strong> (<em>str</em>) – list of simulation ids in external database</p></li>
+<li><p><strong>ext_db</strong> (<em>pymongo</em>) – external database pymongo object. Defaults to using
+extdb_connect (dictionary containing the keys host,
+username, password, authsource and db_name).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, update fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.database.read.NCStartFromDatabaseTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.database.read.NCStartFromDatabaseTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.database.read.NCStartFromDatabaseTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['db_ids_lst', 'ext_db']</em><a class="headerlink" href="#critcatworks.database.read.NCStartFromDatabaseTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.database.read.NCStartFromDatabaseTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#NCStartFromDatabaseTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.NCStartFromDatabaseTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.database.read.NCStartFromStructuresTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">NCStartFromStructuresTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#NCStartFromStructuresTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.NCStartFromStructuresTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to setup starting structures from nanoclusters (ASE atoms objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ase_atoms_lst</strong> (<em>str</em>) – list of ASE atoms objects in dictionary format</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, update fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.database.read.NCStartFromStructuresTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['ase_atoms_lst']</em><a class="headerlink" href="#critcatworks.database.read.NCStartFromStructuresTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.database.read.NCStartFromStructuresTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#NCStartFromStructuresTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.NCStartFromStructuresTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.read.read_structures">
+<code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">read_structures</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">spec={}</em>, <em class="sig-param">cell_factor=2.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#read_structures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.read_structures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up Firework to read nanocluster structures from
+structure files (e.g xyz)
+In the second line of the input file, it looks for the keywords:
+E, energy, total_energy, TotalEnergy, totalenergy
+It stores the first value found in the field output.total_energy</p>
+<p>The structures are stored in individual documents of the simulation
+collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – absolute path to the directory where the
+structure files (e.g. xyz format) can be found.</p></li>
+<li><p><strong>spec</strong> (<em>dict</em>) – optional additional entries for the fw_spec</p></li>
+<li><p><strong>cell_factor</strong> (<em>float</em>) – enlarges cell size to x times the diameter
+diameter of the structure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>NCReadWork Firework</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.read.read_structures_locally">
+<code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">read_structures_locally</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">cell_factor=2.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#read_structures_locally"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.read_structures_locally" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to read structures locally. Can be used within
+a firework or outside.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – absolute path to the directory where the
+structure files (e.g. xyz format) can be found.</p></li>
+<li><p><strong>cell_factor</strong> (<em>float</em>) – enlarges cell size to x times the diameter
+diameter of the structure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of ase.Atoms objects with a manipulated cellsize field.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.read.start_from_database">
+<code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">start_from_database</code><span class="sig-paren">(</span><em class="sig-param">db_ids_lst</em>, <em class="sig-param">ext_db=None</em>, <em class="sig-param">spec={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#start_from_database"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.start_from_database" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up Firework to retrieve nanocluster structures from the
+simulation collection of the mongodb database.
+In atoms.info it looks for the keywords:
+E, energy, total_energy, TotalEnergy, totalenergy
+It stores the first value found in the field output.total_energy</p>
+<p>The structures are stored in individual documents of the simulation
+collection.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.read.start_from_structures">
+<code class="sig-prename descclassname">critcatworks.database.read.</code><code class="sig-name descname">start_from_structures</code><span class="sig-paren">(</span><em class="sig-param">ase_atoms_lst</em>, <em class="sig-param">spec={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/read.html#start_from_structures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.read.start_from_structures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up Firework to read nanocluster structures from
+ASE atoms objects.
+The structures are copied to new individual documents of the simulation
+collection. References to the current workflow, the parent nanocluster
+and the source are updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ase_atoms_lst</strong> (<em>str</em>) – list of ASE atoms objects in dictionary format</p></li>
+<li><p><strong>spec</strong> (<em>dict</em>) – optional additional entries for the fw_spec</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, update fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.database.update">
+<span id="critcatworks-database-update-module"></span><h2>critcatworks.database.update module<a class="headerlink" href="#module-critcatworks.database.update" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.database.update.InitialTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.database.update.</code><code class="sig-name descname">InitialTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/update.html#InitialTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.update.InitialTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Custom Firetask to initialize a new workflow instance
+in the database.
+Additionally, initializes a few entries in the fw_spec.</p>
+<dl class="attribute">
+<dt id="critcatworks.database.update.InitialTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['extdb_connect']</em><a class="headerlink" href="#critcatworks.database.update.InitialTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.database.update.InitialTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['username', 'password', 'parameters', 'name', 'workflow_type']</em><a class="headerlink" href="#critcatworks.database.update.InitialTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.database.update.InitialTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/update.html#InitialTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.update.InitialTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.database.update.initialize_workflow_data">
+<code class="sig-prename descclassname">critcatworks.database.update.</code><code class="sig-name descname">initialize_workflow_data</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">parameters</em>, <em class="sig-param">name='UNNAMED'</em>, <em class="sig-param">workflow_type='UNNAMED'</em>, <em class="sig-param">extdb_connect={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/database/update.html#initialize_workflow_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.database.update.initialize_workflow_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a custom Firework object to initialize the workflow.
+It updates the workflow collection and makes a few entries in
+the fw_spec.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – username for the mongodb database</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password for the mongodb database</p></li>
+<li><p><strong>parameters</strong> (<em>dict</em>) – workflow-specific input parameters</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – custom name of the workflow</p></li>
+<li><p><strong>workflow_type</strong> (<em>str</em>) – custom workflow type</p></li>
+<li><p><strong>extdb_connect</strong> (<em>dict</em>) – dictionary optionally containing the keys host,
+authsource and db_name. All fields have a default
+value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>InitialWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.database">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-critcatworks.database" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">critcatworks.database package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-critcatworks.database.extdb">critcatworks.database.extdb module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.database.format">critcatworks.database.format module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.database.mylaunchpad">critcatworks.database.mylaunchpad module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.database.read">critcatworks.database.read module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.database.update">critcatworks.database.update module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.database">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="critcatworks.html"
+                        title="previous chapter">critcatworks package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="critcatworks.dft.html"
+                        title="next chapter">critcatworks.dft package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/src/doc/critcatworks.database.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.dft.html" title="critcatworks.dft package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.html" title="critcatworks package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" >critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

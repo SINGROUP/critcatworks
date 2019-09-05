@@ -1,6 +1,7 @@
 ############ General ############################
 
 &GLOBAL
+  WALLTIME 00:01:00
   RUN_TYPE GEO_OPT           
   PREFERRED_FFT_LIBRARY FFTSG
   EXTENDED_FFT_LENGTHS

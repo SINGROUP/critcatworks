@@ -15,15 +15,21 @@ class StructureFolderTask(FiretaskBase):
     Task to setup folders with xyz structures.
 
     Args:
-        None
-    """
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        name (str) :        individual calculation folder name 
+                            is prefixed with the given string
 
+    Returns:
+        FWAction : Firework action, updates fw_spec
+    """
     _fw_name = 'StructureFolderTask'
     required_params = ['target_path', 'name']
     optional_params = []
 
     def run_task(self, fw_spec):
         target_path = self['target_path']
+        #target_path = str(pathlib.Path(target_path).resolve())
         prefix = self['name']
         time_str = time.strftime("%Y-%m-%d-%H-%M")
 
@@ -66,17 +72,37 @@ class ChunkCalculationsTask(FiretaskBase):
     Create Fireworks with new calculations to setup and run
 
     Args:
-        None
+        template (str)    : input file for calculations represented as string. 
+                            It works as a template which is later modified by the
+                            simulation-specific Firework.
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        name (str) :        individual calculation folder name 
+                            is prefixed with the given string
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        chunk_size (int) :  number of calculations to be run simulataneously. Default -1
+                            means all calculations are run at once.
+        simulation_method (str) :   Specifies which simulation code to use.
+                                    Currently, only CP2K is implemented.
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
+    Returns:
+        FWAction :  Firework action, updates fw_spec, 
+                    creates new Fireworks as detours from workflow
     """
 
     _fw_name = 'ChunkCalculationsTask'
     required_params = ['template', 'target_path',  'name', 'n_max_restarts']
-    optional_params = ['chunk_size', 'simulation_method']
+    optional_params = ['chunk_size', 'simulation_method', 'skip_dft', 'is_safeguard']
 
     def run_task(self, fw_spec):
         template = self["template"]
         target_path = self["target_path"]
+        #target_path = str(pathlib.Path(target_path).resolve())
         chunk_size = self.get("chunk_size", -1)
+        is_safeguard = self.get("is_safeguard", True)
         simulation_method = self.get("simulation_method", "cp2k")
         name = self["name"]
         n_max_restarts = self["n_max_restarts"]
@@ -114,6 +140,7 @@ class ChunkCalculationsTask(FiretaskBase):
                     n_max_restarts = n_max_restarts,
                     simulation = simulation,
                     skip_dft = skip_dft,
+                    is_safeguard = is_safeguard,
                     extdb_connect = fw_spec["extdb_connect"]
                     )
                 wfs.extend(new_fw)
@@ -132,6 +159,18 @@ class ChunkCalculationsTask(FiretaskBase):
 
 
 def setup_folders(target_path, name = "cp2k_run_id",):
+    """ 
+    Creates folders with xyz structures.
+
+    Args:
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        name (str) :        individual calculation folder name 
+                            is prefixed with the given string
+
+    Returns:
+        Firework : StructureFolderWork Firework
+    """
     firetask1  = StructureFolderTask(
         target_path = target_path,
         name = name)
@@ -140,7 +179,33 @@ def setup_folders(target_path, name = "cp2k_run_id",):
     return fw
 
 
-def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k", skip_dft = False):
+def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_id", n_max_restarts = 4, simulation_method = "cp2k", 
+    skip_dft = False, is_safeguard = True):
+    """ 
+    Create Fireworks with new calculations to setup and run.
+
+    Args:
+        template (str)    : input file for calculations represented as string. 
+                            It works as a template which is later modified by the
+                            simulation-specific Firework.
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        name (str) :        individual calculation folder name 
+                            is prefixed with the given string
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        chunk_size (int) : det :    number of calculations to be run simulataneously. Default -1
+                                    means all calculations are run at once.
+        simulation_method (str) :   Specifies which simulation code to use.
+                                    Currently, only CP2K is implemented.
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
+
+    Returns:
+                Firework : StructureFolderWork Firework,
+                           creates new Fireworks as detours from workflow
+    """
     firetask1  = ChunkCalculationsTask(
         template = template,
         target_path = target_path,
@@ -149,6 +214,7 @@ def chunk_calculations(template, target_path, chunk_size = -1, name = "cp2k_run_
         n_max_restarts = n_max_restarts,
         simulation_method = simulation_method,
         skip_dft = skip_dft,
+        is_safeguard = is_safeguard,
         )
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'ChunkCalculationsTask'},
                      name = 'ChunkCalcWork')

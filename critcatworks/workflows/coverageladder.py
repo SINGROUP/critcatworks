@@ -16,13 +16,54 @@ from critcatworks.structure import get_per_type_coverage, eliminate_pairs, elimi
 def get_coverage_ladder_workflow(template_path, username, password,
         worker_target_path = None, start_ids = None, reference_energy=0.0, free_energy_correction = 0.0,
         adsorbate_name='H', max_iterations = 100, n_max_restarts = 1,
-        skip_dft = False, bond_length = 1.5,
+        skip_dft = False, is_safeguard = True, bond_length = 1.5,
         d = 4, l = 2, k = 7, initial_direction = 1, ranking_metric = "similarity",
         extdb_connect = {}):
     """
     Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. One adsorbate at 
-    a time is added or removed until certain break criteria are met.
-    d, l, k, initial_direction and ranking_metric are parameters specific to the coverage ladder workflow.
+    a time is added or removed until certain break criteria are met. Currently only d and max_iterations
+    are stopping criterions.
+    d, l, k, initial_direction and ranking_metric are parameters specific 
+    to the coverage ladder workflow.
+    
+    Args:
+        template_path (str) :   absolute path to input file for calculations. 
+                                It works as a template which is later modified by the
+                                simulation-specific Firework.
+        username (str) :        user who executed the workflow
+        password (str) :        password for user to upload to the database
+        worker_target_path (str) :  absolute path on computing resource 
+                                    directory needs to exist
+        start_ids (list) :  unique identifiers of the simulations collection which
+                            are used to start the workflow
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        free_energy_correction (float) :    free energy correction of the adsorption 
+                                            reaction at hand
+        adsorbate_name (str) : element symbol of the adsorbed atom
+        max_iterations (int) : maximum number of iterations in the workflow
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all simulation jobs
+                               converge properly after the maximum number of restarts.
+        bond_length (float) :   distance in angstrom under which two adsorbed atoms are 
+                                considered bound, hence too close
+        d (int) : maximum depth of the coverage ladder (termination criterion)
+        l (int) : number of low-energy structures to carry over to the next step
+        k (int) :   number of empty candidate sites for adding / 
+                    adsorbed atoms for removing to consider per step
+        initial_direction (bool) :  True will force the initial step to add an adsorbate,
+                                    False will force the initial step to remove an adsorbate
+        ranking_metric (str) : 'similarity' or 'distance'. Metric based on which to choose
+                                k candidates (empty sites / adsorbates)
+
+        extdb_connect (dict):   dictionary containing the keys host,
+                                username, password, authsource and db_name.
+        
+    Returns:
+        fireworks.Workflow : coverageladder Fireworks Workflow object
     """
     
     with open (template_path, "r") as f:
@@ -89,16 +130,10 @@ def get_coverage_ladder_workflow(template_path, username, password,
             chunk_size = -1, n_max_restarts = n_max_restarts, 
             simulation_method = "cp2k",
             name = "cp2k_ladder_iter_" + str(i), 
-            skip_dft = skip_dft)
+            skip_dft = skip_dft, is_safeguard = is_safeguard)
         workflow_list.append(fw_chunk_calculations)
 
         links_dict[fw_setup_folders] = [fw_chunk_calculations] 
-
-        # FireWork: update database, 
-        # (includes reading relaxed structure and energy)
-        #fw_update_converged_data = update_converged_data(chunk_size = -1)
-        #workflow_list.append(fw_update_converged_data)
-        #links_dict[fw_chunk_calculations] =[fw_update_converged_data]
 
         # FireWork: update ladder
         fw_gather_ladder = gather_ladder()

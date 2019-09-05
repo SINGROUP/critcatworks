@@ -1,0 +1,1738 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.structure package &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="critcatworks.workflows package" href="critcatworks.workflows.html" />
+    <link rel="prev" title="critcatworks.ml package" href="critcatworks.ml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.workflows.html" title="critcatworks.workflows package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.ml.html" title="critcatworks.ml package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" accesskey="U">critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="critcatworks-structure-package">
+<h1>critcatworks.structure package<a class="headerlink" href="#critcatworks-structure-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-critcatworks.structure.adsorbates">
+<span id="critcatworks-structure-adsorbates-module"></span><h2>critcatworks.structure.adsorbates module<a class="headerlink" href="#module-critcatworks.structure.adsorbates" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.structure.adsorbates.GatherPropertyTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.adsorbates.</code><code class="sig-name descname">GatherPropertyTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/adsorbates.html#GatherPropertyTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.adsorbates.GatherPropertyTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to update database from chunk of calculations.
+Computes properties of systems. Currently, only
+reaction energies (adsorption energies) are computed.
+The ids of the input structures in calc_ids are
+replaced by the ids of the post-simulation structures
+from analysis_ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chunk_size</strong> (<em>int</em>) – number of calculations that are run simulataneously.
+Default -1 means all calculations are run at once.</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.adsorbates.GatherPropertyTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['adsite_types']</em><a class="headerlink" href="#critcatworks.structure.adsorbates.GatherPropertyTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.adsorbates.GatherPropertyTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['chunk_size']</em><a class="headerlink" href="#critcatworks.structure.adsorbates.GatherPropertyTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.adsorbates.GatherPropertyTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/adsorbates.html#GatherPropertyTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.adsorbates.GatherPropertyTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.adsorbates.update_converged_data">
+<code class="sig-prename descclassname">critcatworks.structure.adsorbates.</code><code class="sig-name descname">update_converged_data</code><span class="sig-paren">(</span><em class="sig-param">chunk_size, adsite_types=['top', 'bridge', 'hollow']</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/adsorbates.html#update_converged_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.adsorbates.update_converged_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the internal fw_spec data from chunk of calculations.
+Computes properties of systems. Currently, only
+reaction energies (adsorption energies) are computed.
+The ids of the input structures in calc_ids are
+replaced by the ids of the post-simulation structures
+from analysis_ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chunk_size</strong> (<em>int</em>) – number of calculations that are run simulataneously.
+Default -1 means all calculations are run at once.</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework GatherPropertyWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.structure.coverage">
+<span id="critcatworks-structure-coverage-module"></span><h2>critcatworks.structure.coverage module<a class="headerlink" href="#module-critcatworks.structure.coverage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">AddRemoveLadderTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AddRemoveLadderTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask in the coverage ladder workflow to either add
+or remove an adsorbate (at k different positions)</p>
+<p>The decision where to add or remove adsorbates is
+quantified by the ranking_metric, either through
+a similarity or spatial distance metric.</p>
+<p>The bond_length parameters ensures that the positions
+are not too cramped, hence adsorbates never
+come too close to each other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of empty candidate sites for adding /
+adsorbed atoms for removing to consider per step</p></li>
+<li><p><strong>ranking_metric</strong> (<em>str</em>) – ‘similarity’ or ‘proximity’. Metric based on which to choose
+k candidates (empty sites / adsorbates)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.add_adsorbate">
+<code class="sig-name descname">add_adsorbate</code><span class="sig-paren">(</span><em class="sig-param">simulation</em>, <em class="sig-param">bond_length</em>, <em class="sig-param">db</em>, <em class="sig-param">ranking_metric='proximity'</em>, <em class="sig-param">k=7</em>, <em class="sig-param">adsorbate_name='H'</em>, <em class="sig-param">reference_id=-1</em>, <em class="sig-param">workflow_id=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AddRemoveLadderTask.add_adsorbate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.add_adsorbate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds one adsorbate to the structure at k different positions,
+predefined by adsorption sites.</p>
+<p>The new structures are added to the simulation collection.</p>
+<p>Only supports atomic adsorbates so far.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simulation</strong> (<em>dict</em>) – simulation document in custom format</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>db</strong> (<em>pymongo object</em>) – connection to the mongodb database</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of empty candidate sites for adding /
+adsorbed atoms for removing to consider per step</p></li>
+<li><p><strong>ranking_metric</strong> (<em>str</em>) – ‘similarity’ or ‘proximity’. Metric based on which to choose
+k candidates (empty sites / adsorbates)</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>reference_id</strong> (<em>int</em>) – simulation id of the adsorbate reference</p></li>
+<li><p><strong>workflow_id</strong> (<em>int</em>) – unique identifier of the current workflow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new simulation ids</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.get_empty_sites">
+<code class="sig-name descname">get_empty_sites</code><span class="sig-paren">(</span><em class="sig-param">site_positions</em>, <em class="sig-param">adsorbate_positions</em>, <em class="sig-param">bond_length=1.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AddRemoveLadderTask.get_empty_sites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.get_empty_sites" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a set of predefined adsorption sites, it is reduced
+to contain only sites which are not too close to existing
+adsorbate atoms (with respect to parameter bond_length).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_positions</strong> (<em>2D ndarray</em>) – adsorption site positions</p></li>
+<li><p><strong>adsorbate_positions</strong> (<em>2D ndarray</em>) – positions of all adsorbate atoms</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance criterion up to which a site
+is considered occupied by neighbouring atoms</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ids of the remaining site positions, ordered by</dt><dd><p>minimum distance to the adsorbates</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>1D ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.remove_adsorbate">
+<code class="sig-name descname">remove_adsorbate</code><span class="sig-paren">(</span><em class="sig-param">simulation</em>, <em class="sig-param">bond_length</em>, <em class="sig-param">db</em>, <em class="sig-param">ranking_metric='similarity'</em>, <em class="sig-param">k=7</em>, <em class="sig-param">adsorbate_name='H'</em>, <em class="sig-param">workflow_id=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AddRemoveLadderTask.remove_adsorbate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.remove_adsorbate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove one adsorbate from the structure at k different positions.</p>
+<p>The new structures are added to the simulation collection.</p>
+<p>Only supports atomic adsorbates so far.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simulation</strong> (<em>dict</em>) – simulation document in custom format</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>db</strong> (<em>pymongo object</em>) – connection to the mongodb database</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of empty candidate sites for adding /
+adsorbed atoms for removing to consider per step</p></li>
+<li><p><strong>ranking_metric</strong> (<em>str</em>) – ‘similarity’ or ‘proximity’. Metric based on which to choose
+k candidates (empty sites / adsorbates)</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>workflow_id</strong> (<em>int</em>) – unique identifier of the current workflow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new simulation ids</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['bond_length', 'k', 'ranking_metric']</em><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AddRemoveLadderTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.AddRemoveLadderTask.split_nanocluster_and_adsorbates">
+<code class="sig-name descname">split_nanocluster_and_adsorbates</code><span class="sig-paren">(</span><em class="sig-param">simulation</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AddRemoveLadderTask.split_nanocluster_and_adsorbates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AddRemoveLadderTask.split_nanocluster_and_adsorbates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to split a given structure in a simulation
+document into two ase atoms objects containing only
+the nanocluster or the adsorbate atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>simulation</strong> (<em>dict</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>cluster atoms (ase.Atoms),</dt><dd><p>adsorbate atoms (ase.Atoms),
+adsorption site ids (list),
+adsorption site classes (list),
+reference ids (list),
+adsorbate ids (list)</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.coverage.AdsorbateEliminationTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">AdsorbateEliminationTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AdsorbateEliminationTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AdsorbateEliminationTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask to eliminate too close adsorbate atoms on a covered
+nanocluster. The adsorbates
+can be eliminated either based on a minimum distance
+‘bond_length’ or the closest ones can be eliminated until
+only n_remaining adsorbates are left.</p>
+<p>The workflow is defused if no adsorbate atoms were removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>n_remaining</strong> (<em>int</em>) – number of adsorbates which should remain after the
+first pre-DFT pruning of the adsorbate coverage</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Firework action, updates fw_spec, possible defuses</dt><dd><p>workflow.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.AdsorbateEliminationTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['bond_length', 'n_remaining']</em><a class="headerlink" href="#critcatworks.structure.coverage.AdsorbateEliminationTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.AdsorbateEliminationTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['adsorbate_name']</em><a class="headerlink" href="#critcatworks.structure.coverage.AdsorbateEliminationTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.AdsorbateEliminationTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#AdsorbateEliminationTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.AdsorbateEliminationTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">CoverageLadderTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>This Task is at the heart of the coverage ladder workflow.
+It manages the following steps:
+- gets lowest energy structures from the previous step
+- checks if a new root structure has been found
+- manages branches
+- computes adsorption free energy
+- decides upon termination based on parameter d
+- decides direction of next step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – maximum depth of the coverage ladder (termination criterion)</p></li>
+<li><p><strong>l</strong> (<em>int</em>) – number of low-energy structures to carry over to the next step</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Firework action, updates fw_spec, possible defuses</dt><dd><p>workflow.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.check_new_root">
+<code class="sig-name descname">check_new_root</code><span class="sig-paren">(</span><em class="sig-param">is_new_root</em>, <em class="sig-param">branch_dct</em>, <em class="sig-param">lowest_idx</em>, <em class="sig-param">ne_dct</em>, <em class="sig-param">n_adsorbates_root</em>, <em class="sig-param">n_adsorbates</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">free_energy_correction=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask.check_new_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.check_new_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if current lowest-energy configuration is eligible
+for new root.
+A special check is done after the first step after root.
+It depends on the direction of the last step and checks the
+sign of the adsorption free energy.
+Otherwise, the method level_check_new_root is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>is_new_root</strong> (<em>bool</em>) – if True, the current step is the first step after
+root</p></li>
+<li><p><strong>branch_dct</strong> (<em>dict</em>) – parent simulation : list of child simulations</p></li>
+<li><p><strong>lowest_idx</strong> (<em>int</em>) – lowest-energy simulation id</p></li>
+<li><p><strong>ne_dct</strong> (<em>dict</em>) – stores total energies of all calculations with respect to
+the number of adsorbates and their ids</p></li>
+<li><p><strong>n_adsorbates_root</strong> (<em>int</em>) – number of adsorbates of the root structure</p></li>
+<li><p><strong>n_adsorbates</strong> (<em>int</em>) – number of adsorbates of the current step</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>free_energy_correction</strong> (<em>float</em>) – free energy correction of the adsorption
+reaction at hand</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>bool</strong> – new root</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.compute_dg_diff">
+<code class="sig-name descname">compute_dg_diff</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">branch_dct</em>, <em class="sig-param">ne_dct</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">free_energy_correction=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask.compute_dg_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.compute_dg_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to compute the adsorption free energy</p>
+<p>In the case of hydrogen the property is:
+dGdiff(nH) = G(nH) - G(nH-1)) - 0.5 G(H2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<em>int</em>) – simulation id</p></li>
+<li><p><strong>branch_dct</strong> (<em>dict</em>) – parent simulation : list of child simulations</p></li>
+<li><p><strong>ne_dct</strong> (<em>dict</em>) – stores total energies of all calculations with respect to
+the number of adsorbates and their ids</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>free_energy_correction</strong> (<em>float</em>) – free energy correction of the adsorption
+reaction at hand</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>tuple</strong> – adsorption free energy (float),
+assignment of property to ‘parent’ or ‘child’ simulation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.decide_next_branch">
+<code class="sig-name descname">decide_next_branch</code><span class="sig-paren">(</span><em class="sig-param">open_branches</em>, <em class="sig-param">ne_dct</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask.decide_next_branch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.decide_next_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>The next branch from the collected possible branches is
+picked. The first element is removed from the list
+which contains information about direction and
+parent simulation ids</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>open_branches</strong> (<em>list</em>) – each element is a tuple containing
+parent simulation ids and direction</p></li>
+<li><p><strong>ne_dct</strong> (<em>dict</em>) – stores total energies of all calculations with respect to
+the number of adsorbates and their ids</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>direction (bool),</dt><dd><p>simulation ids (list),
+updated number of adsorbates (int)</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.find_lowest_energy_structures">
+<code class="sig-name descname">find_lowest_energy_structures</code><span class="sig-paren">(</span><em class="sig-param">l</em>, <em class="sig-param">calc_ids</em>, <em class="sig-param">energies</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask.find_lowest_energy_structures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.find_lowest_energy_structures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the l lowest energy structures based on the
+given total energies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>int</em>) – number of lowest-energy structures</p></li>
+<li><p><strong>calc_ids</strong> (<em>list</em>) – simulation ids</p></li>
+<li><p><strong>energies</strong> (<em>list</em>) – total energies of the systems</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of l calc_ids, list of l total energies</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.level_check_new_root">
+<code class="sig-name descname">level_check_new_root</code><span class="sig-paren">(</span><em class="sig-param">idx</em>, <em class="sig-param">ne_dct</em>, <em class="sig-param">n_adsorbates_root</em>, <em class="sig-param">n_adsorbates</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask.level_check_new_root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.level_check_new_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has to compare with root, if it is
+on the same coverage level.
+The new structure becomes the new root if its total energy
+is lower.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['l', 'd']</em><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.CoverageLadderTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#CoverageLadderTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.CoverageLadderTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.coverage.GatherLadderTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">GatherLadderTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#GatherLadderTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.GatherLadderTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask for Gathering properties for coverage ladder.
+Update database from previous calculations.
+Computes properties of systems. Currently, only
+reaction energies (adsorption energies) are computed.
+The ids of the input structures in calc_ids are
+replaced by the ids of the post-simulation structures
+from analysis_ids.</p>
+<p>Args:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.GatherLadderTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.coverage.GatherLadderTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.GatherLadderTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.coverage.GatherLadderTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.GatherLadderTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#GatherLadderTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.GatherLadderTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.coverage.NewLadderRootTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">NewLadderRootTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#NewLadderRootTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.NewLadderRootTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to start CoverageLadder Workflow. It initiates a few
+fw_spec[“temp”] entries:
+-“step_history”
+-“root_history”
+-“is_return”
+-“start_id”
+-“is_new_root”
+-“n_adsorbates”
+-“n_adsorbates_root”
+-“branch_dct”
+-“open_branches”
+-“ne_dct”
+-“direction”
+-“calc_ids”
+-“reference_energy”
+-“free_energy_correction”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>free_energy_correction</strong> (<em>float</em>) – free energy correction of the adsorption
+reaction at hand</p></li>
+<li><p><strong>initial_direction</strong> (<em>bool</em>) – True will force the initial step to add an adsorbate,
+False will force the initial step to remove an adsorbate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.NewLadderRootTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['initial_direction']</em><a class="headerlink" href="#critcatworks.structure.coverage.NewLadderRootTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.NewLadderRootTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['start_ids', 'reference_energy', 'free_energy_correction']</em><a class="headerlink" href="#critcatworks.structure.coverage.NewLadderRootTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.NewLadderRootTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#NewLadderRootTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.NewLadderRootTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.coverage.PerTypeCoverageCreationTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">PerTypeCoverageCreationTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#PerTypeCoverageCreationTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.PerTypeCoverageCreationTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to cover cluster fully with adsorbates based on a type of site.</p>
+<p>Additionally, a reference simulation document is created and
+the descriptors of the sites are stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy of the adsorbate</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – Adsorbate atom name to be placed
+on all sites found.</p></li>
+<li><p><strong>adsite_types</strong> (<em>list of str</em>) – Can be “top”, “bridge” or “hollow”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.PerTypeCoverageCreationTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.coverage.PerTypeCoverageCreationTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.coverage.PerTypeCoverageCreationTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['reference_energy', 'adsorbate_name', 'adsite_types']</em><a class="headerlink" href="#critcatworks.structure.coverage.PerTypeCoverageCreationTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.coverage.PerTypeCoverageCreationTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#PerTypeCoverageCreationTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.PerTypeCoverageCreationTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.add_remove_adsorbate">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">add_remove_adsorbate</code><span class="sig-paren">(</span><em class="sig-param">bond_length</em>, <em class="sig-param">k=7</em>, <em class="sig-param">ranking_metric='similarity'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#add_remove_adsorbate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.add_remove_adsorbate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework in the coverage ladder workflow to either add
+or remove an adsorbate (at k different positions)</p>
+<p>The decision where to add or remove adsorbates is
+quantified by the ranking_metric, either through
+a similarity or spatial distance metric.</p>
+<p>The bond_length parameters ensures that the positions
+are not too cramped, hence adsorbates never
+come too close to each other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of empty candidate sites for adding /
+adsorbed atoms for removing to consider per step</p></li>
+<li><p><strong>ranking_metric</strong> (<em>str</em>) – ‘similarity’ or ‘proximity’. Metric based on which to choose
+k candidates (empty sites / adsorbates)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework AddRemoveLadderWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.eliminate_closest">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">eliminate_closest</code><span class="sig-paren">(</span><em class="sig-param">adsorbate_name</em>, <em class="sig-param">n_remaining</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#eliminate_closest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.eliminate_closest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to eliminate too close adsorbate atoms on a covered
+nanocluster. The adsorbates closest to each other are
+eliminated until only n_remaining adsorbates are left.</p>
+<p>The workflow is defused if no adsorbate atoms were removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>n_remaining</strong> (<em>int</em>) – number of adsorbates which should remain after the
+first pre-DFT pruning of the adsorbate coverage</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework AdsorbateEliminationWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.eliminate_pairs">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">eliminate_pairs</code><span class="sig-paren">(</span><em class="sig-param">adsorbate_name</em>, <em class="sig-param">bond_length</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#eliminate_pairs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.eliminate_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to eliminate too close adsorbate atoms on a covered
+nanocluster. The adsorbates closest to each other are
+eliminated based on a minimum distance ‘bond_length’.</p>
+<p>The workflow is defused if no adsorbate atoms were removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbol of the adsorbed atom</p></li>
+<li><p><strong>bond_length</strong> (<em>float</em>) – distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework AdsorbateEliminationWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.gather_ladder">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">gather_ladder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#gather_ladder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.gather_ladder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework for Gathering properties for coverage ladder.
+Update database from previous calculations.
+Computes properties of systems. Currently, only
+reaction energies (adsorption energies) are computed.
+The ids of the input structures in calc_ids are
+replaced by the ids of the post-simulation structures
+from analysis_ids.</p>
+<p>Args:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Firework GatherLadderWork</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.get_per_type_coverage">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">get_per_type_coverage</code><span class="sig-paren">(</span><em class="sig-param">reference_energy=0.0, adsorbate_name='H', adsite_types=['top', 'bridge', 'hollow'], descriptor='soap', descriptor_params={'crossover': True, 'lmax': 6, 'nmax': 9, 'rcut': 5.0, 'sparse': False}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#get_per_type_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.get_per_type_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to cover cluster fully with adsorbates based on a type of site.</p>
+<p>Additionally, a reference simulation document is created and
+the descriptors of the sites are stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy of the adsorbate</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – Adsorbate atom name to be placed
+on all sites found.</p></li>
+<li><p><strong>adsite_types</strong> (<em>list of str</em>) – Can be “top”, “bridge” or “hollow”.</p></li>
+<li><p><strong>descriptor</strong> (<em>str</em>) – type of descriptor to be used. For a list of
+descriptors, see the documentation of dscribe
+Defaults to ‘soap’</p></li>
+<li><p><strong>descriptor_params</strong> (<em>dict</em>) – descriptor parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework PerTypeCoverageCreationWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.start_coverage_ladder">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">start_coverage_ladder</code><span class="sig-paren">(</span><em class="sig-param">start_ids</em>, <em class="sig-param">initial_direction=1</em>, <em class="sig-param">reference_energy=0.0</em>, <em class="sig-param">free_energy_correction=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#start_coverage_ladder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.start_coverage_ladder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to start CoverageLadder Workflow. It initiates a few
+fw_spec[“temp”] entries:
+-“step_history”
+-“root_history”
+-“is_return”
+-“start_id”
+-“is_new_root”
+-“n_adsorbates”
+-“n_adsorbates_root”
+-“branch_dct”
+-“open_branches”
+-“ne_dct”
+-“direction”
+-“calc_ids”
+-“reference_energy”
+-“free_energy_correction”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_ids</strong> (<em>list</em>) – unique identifiers of the simulations collection which
+are used to start the workflow</p></li>
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>free_energy_correction</strong> (<em>float</em>) – free energy correction of the adsorption
+reaction at hand</p></li>
+<li><p><strong>initial_direction</strong> (<em>bool</em>) – True will force the initial step to add an adsorbate,
+False will force the initial step to remove an adsorbate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework NewLadderRootWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.step_coverage_ladder">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">step_coverage_ladder</code><span class="sig-paren">(</span><em class="sig-param">l=2</em>, <em class="sig-param">d=4</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#step_coverage_ladder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.step_coverage_ladder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This Firework is at the heart of the coverage ladder workflow.
+It manages the following steps:
+- gets lowest energy structures from the previous step
+- checks if a new root structure has been found
+- manages branches
+- computes adsorption free energy
+- decides upon termination based on parameter d
+- decides direction of next step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – maximum depth of the coverage ladder (termination criterion)</p></li>
+<li><p><strong>l</strong> (<em>int</em>) – number of low-energy structures to carry over to the next step</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework CoverageLadderWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.coverage.x2_to_x">
+<code class="sig-prename descclassname">critcatworks.structure.coverage.</code><code class="sig-name descname">x2_to_x</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">bondlength=1.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/coverage.html#x2_to_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.coverage.x2_to_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to determine the points closest to all other
+points. It ranks them removing one by one until no points
+are closer than the specified parameter bondlength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>2D ndarray</em>) – Points in n-dimensional space</p></li>
+<li><p><strong>bondlength</strong> (<em>float</em>) – criterion up to which points should
+be removed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ids of the remaining points, ordered by minimum</dt><dd><p>distance</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>1D ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.structure.nanoclusters">
+<span id="critcatworks-structure-nanoclusters-module"></span><h2>critcatworks.structure.nanoclusters module<a class="headerlink" href="#module-critcatworks.structure.nanoclusters" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.structure.nanoclusters.NCGenerationTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.nanoclusters.</code><code class="sig-name descname">NCGenerationTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#NCGenerationTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCGenerationTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask to generate binary nanoclusters of defined size and shape.
+For each binary element combination, for each composition, n_configurations
+maximally dissimilar structures are created and uploaded to the
+simulations collection of the mongodb database.
+For further information on the generation algorithm,
+consult the documentation of cluskit.</p>
+<p>The new structures are added to the simulation collection of
+the mongodb database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_initial_configurations</strong> (<em>int</em>) – number of initial configurations per
+composition to choose from (higher number
+will make the grid finer)</p></li>
+<li><p><strong>n_configurations</strong> (<em>int</em>) – number of configurations per composition
+(chosen based on maximally different
+structural features)</p></li>
+<li><p><strong>shape</strong> (<em>str</em>) – determines shape of nanoclusters. ‘ico’, ‘octa’ and ‘wulff’</p></li>
+<li><p><strong>nanocluster_size</strong> (<em>int</em>) – determines nanocluster size. Meaning depends on shape</p></li>
+<li><p><strong>compositions</strong> (<em>list</em>) – each element determines the amount of atoms of type 1.</p></li>
+<li><p><strong>elements</strong> (<em>list</em>) – elements (str) to iterate over</p></li>
+<li><p><strong>generate_pure_nanoclusters</strong> (<em>bool</em>) – if set to True, also pure
+nanoclusters are generated</p></li>
+<li><p><strong>bondlength_dct</strong> (<em>dict</em>) – bond lengths to use for specific elements.
+Some default bond lenghts are provided for
+common elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="critcatworks.structure.nanoclusters.NCGenerationTask.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param">n_initial_configurations</em>, <em class="sig-param">n_configurations</em>, <em class="sig-param">shape</em>, <em class="sig-param">nanocluster_size</em>, <em class="sig-param">compositions</em>, <em class="sig-param">elements</em>, <em class="sig-param">generate_pure_nanoclusters=True</em>, <em class="sig-param">bondlength_dct={}</em>, <em class="sig-param">db=None</em>, <em class="sig-param">workflow_id=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#NCGenerationTask.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCGenerationTask.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates binary nanoclusters. For further information,
+consult the documentation of cluskit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_initial_configurations</strong> (<em>int</em>) – number of initial configurations per
+composition to choose from (higher number
+will make the grid finer)</p></li>
+<li><p><strong>n_configurations</strong> (<em>int</em>) – number of configurations per composition
+(chosen based on maximally different
+structural features)</p></li>
+<li><p><strong>shape</strong> (<em>str</em>) – determines shape of nanoclusters. ‘ico’, ‘octa’ and ‘wulff’</p></li>
+<li><p><strong>nanocluster_size</strong> (<em>int</em>) – determines nanocluster size. Meaning depends on shape</p></li>
+<li><p><strong>compositions</strong> (<em>list</em>) – each element determines the amount of atoms of type 1.</p></li>
+<li><p><strong>elements</strong> (<em>list</em>) – elements (str) to iterate over</p></li>
+<li><p><strong>generate_pure_nanoclusters</strong> (<em>bool</em>) – if set to True, also pure
+nanoclusters are generated</p></li>
+<li><p><strong>bondlength_dct</strong> (<em>dict</em>) – bond lengths to use for specific elements.
+Some default bond lenghts are provided for
+common elements</p></li>
+<li><p><strong>db</strong> (<em>pymongo object</em>) – connection to the mongodb database</p></li>
+<li><p><strong>workflow_id</strong> (<em>int</em>) – unique identifier of the current workflow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>list of nanocluster ase.Atoms objects,</dt><dd><p>list of simulation ids</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.nanoclusters.NCGenerationTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['generate_pure_nanoclusters', 'bondlength_dct']</em><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCGenerationTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.nanoclusters.NCGenerationTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['n_initial_configurations', 'n_configurations', 'shape', 'nanocluster_size', 'compositions', 'elements']</em><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCGenerationTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.nanoclusters.NCGenerationTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#NCGenerationTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCGenerationTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.nanoclusters.NCStabilityTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.nanoclusters.</code><code class="sig-name descname">NCStabilityTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#NCStabilityTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCStabilityTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to compare the stability of clusters using cohesive or total energy.
+Cohesive energy requires atomic total energies.</p>
+<p>Writes a file called cohesive_energy.json where the energies are summarized
+split by nanocluster composition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atomic_energies</strong> (<em>list</em>) – atomic energies provided using the same
+simulation parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.nanoclusters.NCStabilityTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['atomic_energies']</em><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCStabilityTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.nanoclusters.NCStabilityTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCStabilityTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.nanoclusters.NCStabilityTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#NCStabilityTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.NCStabilityTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.nanoclusters.compare_nanoclusters">
+<code class="sig-prename descclassname">critcatworks.structure.nanoclusters.</code><code class="sig-name descname">compare_nanoclusters</code><span class="sig-paren">(</span><em class="sig-param">atomic_energies={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#compare_nanoclusters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.compare_nanoclusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to compare the stability of clusters using cohesive or total energy.
+Cohesive energy requires atomic total energies.</p>
+<p>Writes a file called cohesive_energy.json where the energies are summarized
+split by nanocluster composition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atomic_energies</strong> (<em>list</em>) – atomic energies provided using the same
+simulation parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework NCStabilityWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.nanoclusters.generate_nanoclusters">
+<code class="sig-prename descclassname">critcatworks.structure.nanoclusters.</code><code class="sig-name descname">generate_nanoclusters</code><span class="sig-paren">(</span><em class="sig-param">n_initial_configurations</em>, <em class="sig-param">n_configurations</em>, <em class="sig-param">shape</em>, <em class="sig-param">nanocluster_size</em>, <em class="sig-param">compositions</em>, <em class="sig-param">elements</em>, <em class="sig-param">generate_pure_nanoclusters=True</em>, <em class="sig-param">bondlength_dct={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/nanoclusters.html#generate_nanoclusters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.nanoclusters.generate_nanoclusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to generate binary nanoclusters of defined size and shape.
+For each binary element combination, for each composition, n_configurations
+maximally dissimilar structures are created and uploaded to the
+simulations collection of the mongodb database.
+For further information on the generation algorithm,
+consult the documentation of cluskit.</p>
+<p>The new structures are added to the simulation collection of
+the mongodb database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_initial_configurations</strong> (<em>int</em>) – number of initial configurations per
+composition to choose from (higher number
+will make the grid finer)</p></li>
+<li><p><strong>n_configurations</strong> (<em>int</em>) – number of configurations per composition
+(chosen based on maximally different
+structural features)</p></li>
+<li><p><strong>shape</strong> (<em>str</em>) – determines shape of nanoclusters. ‘ico’, ‘octa’ and ‘wulff’</p></li>
+<li><p><strong>nanocluster_size</strong> (<em>int</em>) – determines nanocluster size. Meaning depends on shape</p></li>
+<li><p><strong>compositions</strong> (<em>list</em>) – each element determines the amount of atoms of type 1.</p></li>
+<li><p><strong>elements</strong> (<em>list</em>) – elements (str) to iterate over</p></li>
+<li><p><strong>generate_pure_nanoclusters</strong> (<em>bool</em>) – if set to True, also pure
+nanoclusters are generated</p></li>
+<li><p><strong>bondlength_dct</strong> (<em>dict</em>) – bond lengths to use for specific elements.
+Some default bond lenghts are provided for
+common elements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework NCGenerationWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.structure.singlesites">
+<span id="critcatworks-structure-singlesites-module"></span><h2>critcatworks.structure.singlesites module<a class="headerlink" href="#module-critcatworks.structure.singlesites" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.structure.singlesites.AdsiteCreationTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">AdsiteCreationTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#AdsiteCreationTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteCreationTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask to determine adsorption site structures. The adsorbate
+can only be a single atom. For a molecular adsorbate (binding
+to only one site), please use the Firetask
+MonodentateAdsiteCreationTask.
+On a set of nanoclusters, a combination of top/bridge/hollow sites
+is classified and populated. Hence, the simulation collection
+of the mongodb database is updated with structures which each
+contain a single adsorbate on a nanocluster.</p>
+<p>Besides, a descriptor matrix is written to a file for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbold of the adsorbed atom</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.AdsiteCreationTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteCreationTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.AdsiteCreationTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['reference_energy', 'adsorbate_name', 'adsite_types']</em><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteCreationTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.singlesites.AdsiteCreationTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#AdsiteCreationTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteCreationTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.singlesites.AdsiteRankTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">AdsiteRankTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#AdsiteRankTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteRankTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask to determine ranking of adsorption site structures.
+Based on a previously calculated descriptor matrix (in
+the fw_spec as a path to a file), the adsorbate structure
+sites are ranked are ranked for their dissimilarity.</p>
+<p>Hence, the calc_ids, the structures to be simulated are
+reordered.</p>
+<p>Besides, the descriptor matrix is reordered and written
+to a file for later use.</p>
+<p>Args:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.AdsiteRankTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteRankTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.AdsiteRankTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteRankTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.singlesites.AdsiteRankTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#AdsiteRankTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.AdsiteRankTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.singlesites.MonodentateAdsiteCreationTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">MonodentateAdsiteCreationTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#MonodentateAdsiteCreationTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateAdsiteCreationTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask to determine adsorption site structures. The adsorbate
+is specified as a molecule with an anchor X which binds to
+only one site. The position of the binding atom is exactly
+determined by the adsorption vector of the adsorption site
+and the bond length between X and the closest, later binding,
+atom. On a set of nanoclusters, a combination of
+top/bridge/hollow sites is classified and populated.
+Hence, the simulation collection of the mongodb database
+is updated with structures which each
+contain a single adsorbate on a nanocluster.</p>
+<p>Besides, a descriptor matrix is written to a file for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate</strong> (<em>dict</em>) – adsorbed molecule as atoms dict. Contains an “X” dummy atom
+which indicates the anchor point to the nanocluster</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['reference_energy', 'adsorbate', 'adsite_types']</em><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#MonodentateAdsiteCreationTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">MonodentateUniqueAdsiteCreationTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#MonodentateUniqueAdsiteCreationTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Firetask to determine unique adsorption site structures. The
+adsorbate is specified as a molecule with an anchor X which
+binds to only one site. The position of the binding atom is
+exactly determined by the adsorption vector of the adsorption
+site and the bond length between X and the closest, later
+binding, atom. On a set of nanoclusters, a combination of
+top/bridge/hollow sites is classified.
+The sites are ranked for their dissimilarity based on a
+local descriptor (default soap), then uniqueness is defined
+by a threshold parameter. Only the unique sites are kept and
+populated with the adsorbate.</p>
+<p>Hence, the simulation collection of the mongodb database
+is updated with structures which each contain a single adsorbate
+on a nanocluster.</p>
+<p>Besides, a descriptor matrix is written to a file for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate</strong> (<em>dict</em>) – adsorbed molecule as atoms dict. Contains an “X” dummy atom
+which indicates the anchor point to the nanocluster</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – threshold of similarity metric between the local structures
+of the adsorption sites. Only sites which are more dissimilar
+than the given threshold are computed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['reference_energy', 'adsorbate', 'adsite_types', 'threshold']</em><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#MonodentateUniqueAdsiteCreationTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.singlesites.get_adsites">
+<code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">get_adsites</code><span class="sig-paren">(</span><em class="sig-param">reference_energy=0.0, adsorbate_name='H', adsite_types=['top', 'bridge', 'hollow'], descriptor='soap', descriptor_params={'crossover': True, 'lmax': 6, 'nmax': 9, 'rcut': 5.0, 'sparse': False}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#get_adsites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.get_adsites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firetask to determine adsorption site structures. The adsorbate
+can only be a single atom. For a molecular adsorbate (binding
+to only one site), please use the Firetask
+MonodentateAdsiteCreationTask.
+On a set of nanoclusters, a combination of top/bridge/hollow sites
+is classified and populated. Hence, the simulation collection
+of the mongodb database is updated with structures which each
+contain a single adsorbate on a nanocluster.</p>
+<p>Besides, a descriptor matrix is written to a file for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate_name</strong> (<em>str</em>) – element symbold of the adsorbed atom</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>descriptor</strong> (<em>str</em>) – type of descriptor to be used. For a list of
+descriptors, see the documentation of dscribe
+Defaults to ‘soap’</p></li>
+<li><p><strong>descriptor_params</strong> (<em>dict</em>) – descriptor parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.singlesites.get_monodentate_adsites">
+<code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">get_monodentate_adsites</code><span class="sig-paren">(</span><em class="sig-param">reference_energy=0.0, adsorbate={}, adsite_types=['top', 'bridge', 'hollow'], descriptor='soap', descriptor_params={'crossover': True, 'lmax': 6, 'nmax': 9, 'rcut': 5.0, 'sparse': False}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#get_monodentate_adsites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.get_monodentate_adsites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firetask to determine adsorption site structures. The adsorbate
+is specified as a molecule with an anchor X which binds to
+only one site. The position of the binding atom is exactly
+determined by the adsorption vector of the adsorption site
+and the bond length between X and the closest, later binding,
+atom. On a set of nanoclusters, a combination of
+top/bridge/hollow sites is classified and populated.
+Hence, the simulation collection of the mongodb database
+is updated with structures which each
+contain a single adsorbate on a nanocluster.</p>
+<p>Besides, a descriptor matrix is written to a file for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate</strong> (<em>dict</em>) – adsorbed molecule as atoms dict. Contains an “X” dummy atom
+which indicates the anchor point to the nanocluster</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>descriptor</strong> (<em>str</em>) – type of descriptor to be used. For a list of
+descriptors, see the documentation of dscribe
+Defaults to ‘soap’</p></li>
+<li><p><strong>descriptor_params</strong> (<em>dict</em>) – descriptor parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework MonodentateAdsiteCreationWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.singlesites.get_monodentate_unique_adsites">
+<code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">get_monodentate_unique_adsites</code><span class="sig-paren">(</span><em class="sig-param">reference_energy=0.0, adsorbate={}, adsite_types=['top', 'bridge', 'hollow'], threshold=0.001, descriptor='soap', descriptor_params={'crossover': True, 'lmax': 6, 'nmax': 9, 'rcut': 5.0, 'sparse': False}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#get_monodentate_unique_adsites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.get_monodentate_unique_adsites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to determine unique adsorption site structures. The
+adsorbate is specified as a molecule with an anchor X which
+binds to only one site. The position of the binding atom is
+exactly determined by the adsorption vector of the adsorption
+site and the bond length between X and the closest, later
+binding, atom. On a set of nanoclusters, a combination of
+top/bridge/hollow sites is classified.
+The sites are ranked for their dissimilarity based on a
+local descriptor (default soap), then uniqueness is defined
+by a threshold parameter. Only the unique sites are kept and
+populated with the adsorbate.</p>
+<p>Hence, the simulation collection of the mongodb database
+is updated with structures which each contain a single adsorbate
+on a nanocluster.</p>
+<p>Besides, a descriptor matrix is written to a file for later use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_energy</strong> (<em>float</em>) – reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p></li>
+<li><p><strong>adsorbate</strong> (<em>dict</em>) – adsorbed molecule as atoms dict. Contains an “X” dummy atom
+which indicates the anchor point to the nanocluster</p></li>
+<li><p><strong>adsite_types</strong> (<em>list</em>) – adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – threshold of similarity metric between the local structures
+of the adsorption sites. Only sites which are more dissimilar
+than the given threshold are computed</p></li>
+<li><p><strong>descriptor</strong> (<em>str</em>) – type of descriptor to be used. For a list of
+descriptors, see the documentation of dscribe
+Defaults to ‘soap’</p></li>
+<li><p><strong>descriptor_params</strong> (<em>dict</em>) – descriptor parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework MonodentateUniqueAdsiteCreationWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.structure.singlesites.rank_adsites">
+<code class="sig-prename descclassname">critcatworks.structure.singlesites.</code><code class="sig-name descname">rank_adsites</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/structure/singlesites.html#rank_adsites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.structure.singlesites.rank_adsites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firework to determine ranking of adsorption site structures.
+Based on a previously calculated descriptor matrix (in
+the fw_spec as a path to a file), the adsorbate structure
+sites are ranked are ranked for their dissimilarity.</p>
+<p>Hence, the calc_ids, the structures to be simulated are
+reordered.</p>
+<p>Besides, the descriptor matrix is reordered and written
+to a file for later use.</p>
+<p>Args:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Firework AdsiteRankWork</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.structure">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-critcatworks.structure" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">critcatworks.structure package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-critcatworks.structure.adsorbates">critcatworks.structure.adsorbates module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.structure.coverage">critcatworks.structure.coverage module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.structure.nanoclusters">critcatworks.structure.nanoclusters module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.structure.singlesites">critcatworks.structure.singlesites module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.structure">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="critcatworks.ml.html"
+                        title="previous chapter">critcatworks.ml package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="critcatworks.workflows.html"
+                        title="next chapter">critcatworks.workflows package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/src/doc/critcatworks.structure.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.workflows.html" title="critcatworks.workflows package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.ml.html" title="critcatworks.ml package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" >critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

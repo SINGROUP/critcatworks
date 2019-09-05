@@ -1,3 +1,4 @@
+# this workflow is for testing if fireworks runs
 from fireworks import Firework, FWorker, LaunchPad, ScriptTask, TemplateWriterTask, FileTransferTask, Workflow
 from fireworks.core.rocket_launcher import launch_rocket, rapidfire
 from fireworks import explicit_serialize, FiretaskBase, FWAction
@@ -6,16 +7,12 @@ from fireworks.user_objects.firetasks.dataflow_tasks import ForeachTask
 import os,time
 from pprint import pprint as pp
 import pathlib
-
-import mylaunchpad
+from critcatworks.database import mylaunchpad
 
 @explicit_serialize
 class SimpleTestTask(FiretaskBase):
    """ 
    Simple FireTask to see what attributes FireTasks have.
-
-   Args:
-       base_name (str): A random base name.
    """
 
    _fw_name = 'SimpleTestTask'
@@ -38,6 +35,9 @@ class SimpleTestTask(FiretaskBase):
 
 
 def test_foreachtask_workflow():
+    """
+    Workflow to test fireworks ForeachTask with a dummy workflow
+    """
     simple_task = SimpleTestTask(spec={'dft_params':[]}, inputs=['dft_params'])
     simple_dict = simple_task.to_dict()
     #resimple_task = SimpleTestTask.from_dict(simple_dict)
@@ -45,17 +45,20 @@ def test_foreachtask_workflow():
     print(simple_dict)
     #print(resimple_task)
     firetask1 = ForeachTask(task=simple_dict, split='dft_params', spec={'dft_params':[1,2,3]})
-    
-    fw1 = Firework([simple_task], spec={'dft_params':[-1,-2,-3], 'dft_outputs':{}   }, fw_id=1) 
+
+    fw1 = Firework([simple_task], spec={'dft_params':[-1,-2,-3], 'dft_outputs':{}   }, fw_id=1)
     fw2 = Firework([firetask1],   fw_id=2)
     fw3 = Firework([firetask1],   fw_id=3)
-    fw4 = Firework([simple_task], fw_id=4) 
+    fw4 = Firework([simple_task], fw_id=4)
 
     #wf = Firework([simple_task, firetask1, simple_task], spec={'dft_params':[1,2,3], 'ranking': [-3,-1] })
     workflow = Workflow([fw1, fw2, fw4], {1: [2], 2: [4],})
     return workflow
 
 def dummy_workflow():
+    """
+    dummy fireworks Workflow
+    """
     # create the Firework consisting of multiple tasks
     firetask1 = TemplateWriterTask({'context': {'opt1': 5.0, 'opt2': 'fast method'}, 'template_file': 'simple_template.txt', 'output_file': 'inputs.txt'})
     firetask2 = ScriptTask.from_str('wc -w < inputs.txt > words.txt')

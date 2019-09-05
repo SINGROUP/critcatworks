@@ -15,10 +15,25 @@ import copy
 @explicit_serialize
 class CP2KSetupTask(FiretaskBase):
     """ 
-    Task to setup DFT calculations.
+    Firetask to setup DFT calculations for CP2K. 
+    It alters the cellsize. The template has to link to the structure file
+    with the name structure.xyz. It writes an input file with in the given folder.
+    Other template alterations are not supported yet.
 
     Args:
-        None
+
+        template (str)    : input file for calculations represented as string. 
+                            It works as a template which is later modified by the
+                            simulation-specific Firework.
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        calc_id (int) :     simulation id of the structure on which the calculation will 
+                            be run
+        name (str) :        individual calculation folder name 
+                            is prefixed with the given string
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+    Returns:
+        FWAction : Firework action (no action taken)
     """
 
     _fw_name = 'CP2KSetupTask'
@@ -26,37 +41,28 @@ class CP2KSetupTask(FiretaskBase):
     optional_params = ['name']
 
     def run_task(self, fw_spec):
-        
         logging.info("CP2KSetupTask not implemented yet")
         
-        #prefix = self.get("name", "cp2k_run_id")      
         template = self["template"]
         target_path = self["target_path"]
         calc_id = self["calc_id"]
-        #n_max_restarts = self["n_max_restarts"]
         template_path = "template.txt"
         with open(template_path, "w") as the_file:
             the_file.write(template)
         # read template
         cp2kinput = glob.glob(template_path)[0]
-        #calc = pycp2k.cp2k.CP2K()
         calc = pycp2k.CP2K()
-        #inpparser = pycp2k.CP2KInputParser()
-        #calc = inpparser.parse(calc, cp2kinput)
         calc.parse(cp2kinput)
 
-        #logging.info("info about input parser")
-        #logging.info(inpparser)
-        #logging.info("cp2k info storage \n")
-        #logging.info(inpparser.storage_obj)
         logging.debug("target_path")
         logging.debug(target_path)
-
 
         simulation = fw_spec["simulation"]
         atoms_dict = simulation["atoms"]
         atoms = atoms_dict_to_ase(atoms_dict)
         cell_size = atoms.get_cell()
+        
+        # manipulate simulation cell
         # check if cell_size is zero. Default to 2.5 times diameter.
         all_zeros = not cell_size.any()
             
@@ -83,24 +89,29 @@ class CP2KSetupTask(FiretaskBase):
         update_spec = fw_spec
         update_spec["simulation"]["inp"]["input_string"] = input_string
         update_spec["simulation"]["inp"]["path"] = str(target_path)
-        #pass_spec = fw_spec
-        #print("dummy outputs generated")
-        #fw_spec.pop("_category")
-        #fw_spec.pop("name")
-        #detours = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts)], 
-        #    spec = {'_category' : "dft", 'name' : 'CP2KRunTask', "n_restarts" : 0},
-        #    name = 'CP2KRunWork')
-        #return FWAction(update_spec = fw_spec, detours = detours)
-        #return FWAction(update_spec = fw_spec)
         return FWAction()
 
 @explicit_serialize
 class CP2KRunTask(FiretaskBase):
     """ 
-    Task to run CP2K calculations.
+    Firetask to run CP2K calculations.
+    It assumes that an srun command is used by the computing platform.
+    It checks for the existence of a restart file. If it exists,
+    the calculation will be restarted from there.
+    The inputfile has to link to the structure file with the 
+    name structure.xyz. It descends to the folder given by target_path.
 
     Args:
-        None
+
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        calc_id (int) :     simulation id of the structure on which the calculation will 
+                            be run
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+    Returns:
+        FWAction : Firework action, updates fw_spec
     """
 
     _fw_name = 'CP2KRunTask'
@@ -151,33 +162,48 @@ class CP2KRunTask(FiretaskBase):
 
         fw_spec.pop("_category")
         fw_spec.pop("name")
-        # remove detour 
-        #detours = Firework([CP2KAnalysisTask(target_path=target_path, calc_id = calc_id, n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
-        #    spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
-        #        "n_restarts" : n_restarts, "simulation" : fw_spec["simulation"],
-        #        "extdb_connect" : fw_spec["extdb_connect"]},
-        #    name = 'CP2KAnalysisWork')
-        return FWAction(update_spec = fw_spec) #, detours = detours)
+        return FWAction(update_spec = fw_spec)
 
 
 @explicit_serialize
 class CP2KAnalysisTask(FiretaskBase):
     """ 
-    Task to analyse CP2K calculations.
+    Firetask to analyse CP2K calculations. Preparsing is needed for the main 
+    parser to run without throwing an error. The main parser is python package
+    which reads most of the output fields. Only a fraction of them is actually 
+    transferred to the document in the simulation collection (positions, labels, 
+    is_converged, total_energy, number_of_frames_in_sequence, is_walltime_exceeded,
+    nwarnings, simulation_cell).
+    Upon failure (meaning incomplete or no output, or not converged) of the 
+    simulation, a detour is added to restart it (n_max_restarts times).
+    If it fails for the last time, its children are defused (meaning the workflow
+    gets paused, manual inspection is recommended).
 
     Args:
-        None
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        calc_id (int) :     simulation id of the structure on which the calculation will 
+                            be run
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
+    Returns:
+        FWAction :  Firework action, updates fw_spec, possibly defuses Firework children,
+                    possibly adds Fireworks as detours to the workflow
     """
 
     _fw_name = 'CP2KAnalysisTask'
     required_params = ['target_path', 'calc_id', 'n_max_restarts']
-    optional_params = []
+    optional_params = ['is_safeguard']
 
     def run_task(self, fw_spec):
         target_path = self["target_path"]
         calc_id = self["calc_id"]
         n_max_restarts = self["n_max_restarts"]
         skip_dft = self["skip_dft"]
+        is_safeguard = self.get("is_safeguard", True)
+        # temporary fix, no safeguard
+        is_safeguard = False 
         n_restarts = fw_spec["n_restarts"]
         print("calc_id", calc_id)
         # read output
@@ -196,7 +222,7 @@ class CP2KAnalysisTask(FiretaskBase):
             logging.info("parser confirmed that CP2K terminated correctly")
             print("parser confirmed that CP2K terminated correctly")
         ####
-        if output_state == "no_output": # or output_state == "incorrect_termination":
+        if (output_state == "no_output") or (output_state == "incorrect_termination"):
             pass
         else:
             nwarnings = preparse_results.get('nwarnings', 0)
@@ -237,13 +263,18 @@ class CP2KAnalysisTask(FiretaskBase):
             if fw_spec["n_restarts"] < n_max_restarts:
                 fw_spec["n_restarts"] += 1
                 detours =  rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts = int(n_restarts) + 1, 
-                    simulation = fw_spec["simulation"], skip_dft = skip_dft, extdb_connect = fw_spec["extdb_connect"])
+                    simulation = fw_spec["simulation"], skip_dft = skip_dft, is_safeguard = is_safeguard,
+                    extdb_connect = fw_spec["extdb_connect"])
 
                 fw_spec.pop("_category")
                 fw_spec.pop("name")
                 return FWAction(update_spec = fw_spec, detours = detours)
             else:
-                is_defused = True   
+                if is_safeguard == True:
+                    is_defused = True   
+                else:
+                    is_defused = False
+                    logging.warning("safeguard is off. Workflow continues despite CP2K run not having converged")
         else:
             is_defused = False 
 
@@ -283,7 +314,6 @@ class CP2KAnalysisTask(FiretaskBase):
             result_dict = {"is_converged" : 0, "output_state" : output_state}
             input_string = "no output or incorrect termination of CP2K calculation"
 
-        ##
         # get source simulation
         source_simulation = fw_spec["simulation"]
 
@@ -316,12 +346,44 @@ class CP2KAnalysisTask(FiretaskBase):
         fw_spec.pop("_category")
         fw_spec.pop("name")
         # update spec no longer necessary
-        #return FWAction(update_spec = fw_spec, mod_spec=mod_spec)
         return FWAction(mod_spec=mod_spec, defuse_children = is_defused)
 
 
 def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id", n_max_restarts = 4,
-        skip_dft = False, extdb_connect = {}):
+        skip_dft = False, is_safeguard = True, extdb_connect = {}):
+    """
+    Creates a mini-workflow consisting of:
+    Firework 1: two Firetasks CP2KSetupTask and CP2KRunTask.
+    Firework 2: CP2KAnalysisTask
+
+    This workflow can be added as a detour in any workflow requiring a CP2K simulation. For more information
+    about the individual steps, consult the documentation on CP2KSetupTask, CP2KRunTask and CP2KAnalysisTask.
+
+    Args:
+        template (str)    : input file for calculations represented as string. 
+                            It works as a template which is later modified by the
+                            simulation-specific Firework.
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        calc_id (int) :     simulation id of the structure on which the calculation will 
+                            be run
+        simulation (dict)   document of the simulation collection. Some fields are updated during the
+                            analysis step and stored in a new document
+        name (str) :        individual calculation folder name 
+                            is prefixed with the given string
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.        
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
+        extdb_connect (dict) :  dictionary containing the keys host,
+                                username, password, authsource and db_name.
+
+    Returns:
+        Workflow : fireworks Workflow object 
+
+    """
     setup_task = CP2KSetupTask(template = template,
                     target_path = target_path,
                     calc_id = calc_id,
@@ -339,7 +401,8 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
     analysis_task = CP2KAnalysisTask(target_path = target_path, 
         calc_id = calc_id, 
         n_max_restarts = n_max_restarts,
-        skip_dft = skip_dft)
+        skip_dft = skip_dft,
+        is_safeguard = is_safeguard)
 
     
     fw1 = Firework([setup_task,run_task], 
@@ -358,15 +421,40 @@ def setup_cp2k(template, target_path, calc_id, simulation, name = "cp2k_run_id",
             "_priority": 8,},
         name = 'CP2KAnaWork',
         parents = [fw1]) 
-    #return Workflow([fw1,fw2], {fw1 : [fw2]})
-    #return [fw1,fw2], {fw1 : [fw2]}
     return [fw1,fw2], {fw1 : [fw2]}
 
 
 def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts, 
-        simulation, skip_dft = False, extdb_connect = {}):    
+        simulation, skip_dft = False, is_safeguard = True, extdb_connect = {}):    
     """
-    Run and analyse
+    Creates a mini-workflow consisting of:
+    Firework 1: CP2KRunTask
+    Firework 2: CP2KAnalysisTask
+
+    It is assumed that the CP2K input file along with the structure are
+    already setup in the folder target_path. This workflow can be added as a detour in any 
+    workflow requiring a CP2K simulation. For more information about the individual 
+    steps, consult the documentation on CP2KRunTask and CP2KAnalysisTask.
+
+    Args:
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+        calc_id (int) :     simulation id of the structure on which the calculation will 
+                            be run
+        n_restarts (int)  : number of times the calculation has already been restarted
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        simulation (dict)   document of the simulation collection. Some fields are updated during the
+                            analysis step and stored in a new document
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.        
+        is_safeguard (bool) : if False, the workflow is not paused when not all CP2K jobs
+                               converge properly after the maximum number of restarts.
+        extdb_connect (dict) :  dictionary containing the keys host,
+                                username, password, authsource and db_name.
+
+    Returns:
+        Workflow : fireworks Workflow object 
+
     """
     fw1 = Firework([CP2KRunTask(target_path=target_path, calc_id = calc_id, 
         n_max_restarts = n_max_restarts, skip_dft = skip_dft)], 
@@ -381,7 +469,8 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
     analysis_task = CP2KAnalysisTask(target_path = target_path, 
         calc_id = calc_id, 
         n_max_restarts = n_max_restarts,
-        skip_dft = skip_dft)
+        skip_dft = skip_dft,
+        is_safeguard = is_safeguard)
 
     fw2 = Firework([analysis_task], 
         spec = {'_category' : "lightweight", 'name' : 'CP2KAnalysisTask', 
@@ -392,8 +481,6 @@ def rerun_cp2k(target_path, calc_id, n_max_restarts, n_restarts,
         name = 'CP2KAnaWork',
         parents = [fw1]) 
     return Workflow([fw1,fw2],)
-    #return Workflow([fw1,fw2], {fw1 : [fw2]})
-    #return [fw1,fw2], {fw1 : [fw2]}
 
 class cd:
     """Context manager for changing the current working directory"""
@@ -409,6 +496,18 @@ class cd:
                                    
 
 def additional_parse_stdout(target_path):
+    """
+    Helper function to parse CP2K output first simply. This
+    prevents the main parser from failing most of the time.
+
+    Args:
+        target_path (str) : absolute path to the target directory 
+                            (needs to exist) on the computing resource.
+    
+    Returns:
+        tuple :     string (no_output, incorrect_termination, ok), 
+                    and dict of results.
+    """
     output_files = glob.glob(target_path + "/" + "gopt.out")
     if len(output_files) == 0:
         logging.warning("Cp2k output file not retrieved")
@@ -428,8 +527,11 @@ def additional_parse_stdout(target_path):
             if 'exceeded requested execution time' in line:
                 result_dict['exceeded_walltime'] = True
 
-    if 'nwarnings' not in result_dict:
+    if ('nwarnings' not in result_dict) or (result_dict['exceeded_walltime'] == True):
         logging.warning("CP2K did not finish properly.")
         return "incorrect_termination", result_dict
     else:
         return "ok", result_dict
+
+
+

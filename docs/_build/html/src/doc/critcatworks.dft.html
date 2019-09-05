@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.dft package &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="critcatworks.dft.cp2k package" href="critcatworks.dft.cp2k.html" />
+    <link rel="prev" title="critcatworks.database package" href="critcatworks.database.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.dft.cp2k.html" title="critcatworks.dft.cp2k package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.database.html" title="critcatworks.database package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" accesskey="U">critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="critcatworks-dft-package">
+<h1>critcatworks.dft package<a class="headerlink" href="#critcatworks-dft-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="critcatworks.dft.cp2k.html">critcatworks.dft.cp2k package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="critcatworks.dft.cp2k.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="critcatworks.dft.cp2k.html#module-critcatworks.dft.cp2k.cp2ktasks">critcatworks.dft.cp2k.cp2ktasks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="critcatworks.dft.cp2k.html#module-critcatworks.dft.cp2k">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-critcatworks.dft.general">
+<span id="critcatworks-dft-general-module"></span><h2>critcatworks.dft.general module<a class="headerlink" href="#module-critcatworks.dft.general" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.dft.general.ChunkCalculationsTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.dft.general.</code><code class="sig-name descname">ChunkCalculationsTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/dft/general.html#ChunkCalculationsTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.dft.general.ChunkCalculationsTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Create Fireworks with new calculations to setup and run</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template</strong> (<em>str</em>) – input file for calculations represented as string.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>target_path</strong> (<em>str</em>) – absolute path to the target directory
+(needs to exist) on the computing resource.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – individual calculation folder name
+is prefixed with the given string</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – number of calculations to be run simulataneously. Default -1
+means all calculations are run at once.</p></li>
+<li><p><strong>simulation_method</strong> (<em>str</em>) – Specifies which simulation code to use.
+Currently, only CP2K is implemented.</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Firework action, updates fw_spec,</dt><dd><p>creates new Fireworks as detours from workflow</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.dft.general.ChunkCalculationsTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = ['chunk_size', 'simulation_method', 'skip_dft']</em><a class="headerlink" href="#critcatworks.dft.general.ChunkCalculationsTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.dft.general.ChunkCalculationsTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['template', 'target_path', 'name', 'n_max_restarts']</em><a class="headerlink" href="#critcatworks.dft.general.ChunkCalculationsTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.dft.general.ChunkCalculationsTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/dft/general.html#ChunkCalculationsTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.dft.general.ChunkCalculationsTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="critcatworks.dft.general.StructureFolderTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.dft.general.</code><code class="sig-name descname">StructureFolderTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/dft/general.html#StructureFolderTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.dft.general.StructureFolderTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to setup folders with xyz structures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_path</strong> (<em>str</em>) – absolute path to the target directory
+(needs to exist) on the computing resource.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – individual calculation folder name
+is prefixed with the given string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.dft.general.StructureFolderTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.dft.general.StructureFolderTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.dft.general.StructureFolderTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['target_path', 'name']</em><a class="headerlink" href="#critcatworks.dft.general.StructureFolderTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.dft.general.StructureFolderTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/dft/general.html#StructureFolderTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.dft.general.StructureFolderTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.dft.general.chunk_calculations">
+<code class="sig-prename descclassname">critcatworks.dft.general.</code><code class="sig-name descname">chunk_calculations</code><span class="sig-paren">(</span><em class="sig-param">template</em>, <em class="sig-param">target_path</em>, <em class="sig-param">chunk_size=-1</em>, <em class="sig-param">name='cp2k_run_id'</em>, <em class="sig-param">n_max_restarts=4</em>, <em class="sig-param">simulation_method='cp2k'</em>, <em class="sig-param">skip_dft=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/dft/general.html#chunk_calculations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.dft.general.chunk_calculations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Fireworks with new calculations to setup and run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template</strong> (<em>str</em>) – input file for calculations represented as string.
+It works as a template which is later modified by the
+simulation-specific Firework.</p></li>
+<li><p><strong>target_path</strong> (<em>str</em>) – absolute path to the target directory
+(needs to exist) on the computing resource.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – individual calculation folder name
+is prefixed with the given string</p></li>
+<li><p><strong>n_max_restarts</strong> (<em>int</em>) – number of times the calculation is restarted upon failure</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – det :    number of calculations to be run simulataneously. Default -1
+means all calculations are run at once.</p></li>
+<li><p><strong>simulation_method</strong> (<em>str</em>) – Specifies which simulation code to use.
+Currently, only CP2K is implemented.</p></li>
+<li><p><strong>skip_dft</strong> (<em>bool</em>) – If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>StructureFolderWork Firework,</dt><dd><p>creates new Fireworks as detours from workflow</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.dft.general.setup_folders">
+<code class="sig-prename descclassname">critcatworks.dft.general.</code><code class="sig-name descname">setup_folders</code><span class="sig-paren">(</span><em class="sig-param">target_path</em>, <em class="sig-param">name='cp2k_run_id'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/dft/general.html#setup_folders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.dft.general.setup_folders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates folders with xyz structures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_path</strong> (<em>str</em>) – absolute path to the target directory
+(needs to exist) on the computing resource.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – individual calculation folder name
+is prefixed with the given string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>StructureFolderWork Firework</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.dft">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-critcatworks.dft" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">critcatworks.dft package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-critcatworks.dft.general">critcatworks.dft.general module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.dft">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="critcatworks.database.html"
+                        title="previous chapter">critcatworks.database package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="critcatworks.dft.cp2k.html"
+                        title="next chapter">critcatworks.dft.cp2k package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/src/doc/critcatworks.dft.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.dft.cp2k.html" title="critcatworks.dft.cp2k package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.database.html" title="critcatworks.database package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" >critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

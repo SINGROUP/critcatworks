@@ -47,27 +47,19 @@ if __name__ == "__main__":
         logging.basicConfig(filename = logdir + "/coverage_workflow.log", level=logging.INFO)
 
     # set up the LaunchPad and reset it
-    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
-    print(launchpad.__dict__)
-    launchpad.reset('', require_password=False)
+    #launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "atlas")
+    launchpad = mylaunchpad.create_launchpad(USERNAME, PASSWORD, server = "serenity")
+    #launchpad.reset('', require_password=False)
     
-    #structures = read_structures_locally("../nc_structures")
-    #structures = read_structures_locally("../selected_ptcu_structures")
     structures = read_structures_locally("../selected_ptni_structures")
     wf = get_coverage_workflow(username = "mjcritcat", 
         password = PASSWORD,
-        #source_path = str(pathlib.Path("../nc_structures/").resolve()),
-        #source_path = str(pathlib.Path("../selected_ptcu_structures/").resolve()),
-        #source_path = str(pathlib.Path("../selected_ptni_structures/").resolve()),
         template_path = str(pathlib.Path("../templates/cp2k_mm_energy.inp").resolve()), 
-        #worker_target_path = "../dummy_db/output/",
-        #worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptcu_structures/",
         worker_target_path = "/wrk/jagermar/DONOTREMOVE/workflow_runs/coverage/testruns/selected_ptni_structures3/",
         structures = structures,
         reference_energy = -1.16195386047558 * 0.5,
         adsorbate_name = "H",
         max_iterations = 5,
-        #adsite_types = ["top", "bridge", "hollow"],
         adsite_types = ["top", "hollow"],
         n_max_restarts = 1,
         skip_dft = False,

@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.ml package &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="critcatworks.structure package" href="critcatworks.structure.html" />
+    <link rel="prev" title="critcatworks.dft.cp2k package" href="critcatworks.dft.cp2k.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.structure.html" title="critcatworks.structure package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.dft.cp2k.html" title="critcatworks.dft.cp2k package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" accesskey="U">critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="critcatworks-ml-package">
+<h1>critcatworks.ml package<a class="headerlink" href="#critcatworks-ml-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-critcatworks.ml.convergence">
+<span id="critcatworks-ml-convergence-module"></span><h2>critcatworks.ml.convergence module<a class="headerlink" href="#module-critcatworks.ml.convergence" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.ml.convergence.CheckConvergenceTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.ml.convergence.</code><code class="sig-name descname">CheckConvergenceTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/convergence.html#CheckConvergenceTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.convergence.CheckConvergenceTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Task to check the convergence of the database.
+If not converged, the workflow continues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) – If the convergence_criterion (default MAE of property) is below the given threshold,
+the workflow is defused early</p></li>
+<li><p><strong>convergence_criterion</strong> (<em>str</em>) – Type of machine learning criterion, based on which to stop
+the workflow. Defaults to mae (MAE)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework action, updates fw_spec, possible defuses the workflow</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.ml.convergence.CheckConvergenceTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.ml.convergence.CheckConvergenceTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.ml.convergence.CheckConvergenceTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['threshold', 'convergence_criterion']</em><a class="headerlink" href="#critcatworks.ml.convergence.CheckConvergenceTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.ml.convergence.CheckConvergenceTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/convergence.html#CheckConvergenceTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.convergence.CheckConvergenceTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.convergence.check_convergence">
+<code class="sig-prename descclassname">critcatworks.ml.convergence.</code><code class="sig-name descname">check_convergence</code><span class="sig-paren">(</span><em class="sig-param">threshold</em>, <em class="sig-param">convergence_criterion='mae'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/convergence.html#check_convergence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.convergence.check_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the convergence of the database.
+If not converged, the workflow continues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) – If the convergence_criterion (default MAE of property) is below the given threshold,
+the workflow is defused early</p></li>
+<li><p><strong>convergence_criterion</strong> (<em>str</em>) – Type of machine learning criterion, based on which to stop
+the workflow. Defaults to mae (MAE)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Firework CheckConvergenceWork</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Firework</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.ml.krr">
+<span id="critcatworks-ml-krr-module"></span><h2>critcatworks.ml.krr module<a class="headerlink" href="#module-critcatworks.ml.krr" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="critcatworks.ml.krr.MLTask">
+<em class="property">class </em><code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">MLTask</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#MLTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.MLTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">fireworks.core.firework.FiretaskBase</span></code></p>
+<p>Machine Learning Task. It predicts the property of all uncomputed structures
+in the workflow. It is trained on all converged structures. Crossvalidation
+is used to infer the optimal machine learning hyperparameters.
+Currently, only KRR (kernel ridge regression) is implemented.</p>
+<p>A new document is added to the machine_learning collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>target_path</strong> (<em>str</em>) – absolute path to the target directory
+(needs to exist) on the computing resource.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Firework action, updates fw_spec, possibly defuses</dt><dd><p>workflow upon failure.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="critcatworks.ml.krr.MLTask.optional_params">
+<code class="sig-name descname">optional_params</code><em class="property"> = []</em><a class="headerlink" href="#critcatworks.ml.krr.MLTask.optional_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="critcatworks.ml.krr.MLTask.required_params">
+<code class="sig-name descname">required_params</code><em class="property"> = ['target_path']</em><a class="headerlink" href="#critcatworks.ml.krr.MLTask.required_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="critcatworks.ml.krr.MLTask.run_task">
+<code class="sig-name descname">run_task</code><span class="sig-paren">(</span><em class="sig-param">fw_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#MLTask.run_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.MLTask.run_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gets called when the Firetask is run. It can take in a
+Firework spec, perform some task using that data, and then return an
+output in the form of a FWAction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fw_spec</strong> (<em>dict</em>) – A Firework spec. This comes from the master spec.
+In addition, this spec contains a special “_fw_env” key that
+contains the env settings of the FWorker calling this method.
+This provides for abstracting out certain commands or
+settings. For example, “foo” may be named “foo1” in resource
+1 and “foo2” in resource 2. The FWorker env can specify {
+“foo”: “foo1”}, which maps an abstract variable “foo” to the
+relevant “foo1” or “foo2”. You can then write a task that
+uses fw_spec[“_fw_env”][“foo”] that will work across all
+these multiple resources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(FWAction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.krr.get_mae">
+<code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">get_mae</code><span class="sig-paren">(</span><em class="sig-param">target_path</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#get_mae"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.get_mae" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates Firework from MLTask. It predicts the property of all uncomputed structures
+in the workflow. It is trained on all converged structures. Crossvalidation
+is used to infer the optimal machine learning hyperparameters.
+Currently, only KRR (kernel ridge regression) is implemented.</p>
+<p>A new document is added to the machine_learning collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>target_path</strong> (<em>str</em>) – absolute path to the target directory
+(needs to exist) on the computing resource.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Firework action, updates fw_spec, possibly defuses</dt><dd><p>workflow upon failure.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FWAction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.krr.ml_krr">
+<code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">ml_krr</code><span class="sig-paren">(</span><em class="sig-param">features, labels, train_test_ids, to_predict_features, to_predict_ids, alpha_list=array([1.e-01, 1.e-02, 1.e-03, 1.e-04, 1.e-05, 1.e-06, 1.e-07, 1.e-08,        1.e-09]), gamma_list=array([1.e-01, 1.e-02, 1.e-03, 1.e-04, 1.e-05, 1.e-06, 1.e-07, 1.e-08,        1.e-09]), kernel_list=['rbf'], sample_size=0.8, is_scaled=False, n_cv=5, path='.'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#ml_krr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.ml_krr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to estimate the generalization error (MAE, MSE). The hyperparameters alpha and gamma are
+by default scanned on a logarithmic scale. The data set is split randomly into training and test set.
+The ratio of the split is defined by sample_size.
+The training set is used for cross validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<em>2D ndarray</em>) – descriptor input for the machine learning algorithm for training/testing</p></li>
+<li><p><strong>labels</strong> (<em>1D ndarray</em>) – property labels for the machine learning algorithm for training/testing</p></li>
+<li><p><strong>train_test_ids</strong> (<em>1D ndarray</em>) – pythonic ids (of features and labels) for training and
+testing.</p></li>
+<li><p><strong>to_predict_features</strong> (<em>1D ndarray</em>) – descriptor input for the machine learning algorithm
+for prediction</p></li>
+<li><p><strong>to_predict_ids</strong> (<em>1D ndarray</em>) – pythonic ids (of features and labels) ommited from training and
+testing.</p></li>
+<li><p><strong>alpha_list</strong> (<em>lsit</em>) – Regularization parameter. Defaults to np.logspace(-1, -9, 9)</p></li>
+<li><p><strong>gamma_list</strong> (<em>list</em>) – Kernel function scaling parameter. Defaults to np.logspace(-1, -9, 9)</p></li>
+<li><p><strong>kernel_list</strong> (<em>list</em>) – List of kernel functions (see sklearn documentation for options).
+Defaults to [‘rbf’]</p></li>
+<li><p><strong>sample_size</strong> (<em>float</em>) – The ratio of the training-test split is defined by this. Defaults to 0.8</p></li>
+<li><p><strong>is_scaled</strong> (<em>bool</em>) – If set to True, the features are scaled. Defaults to False</p></li>
+<li><p><strong>n_cv</strong> (<em>int</em>) – Number of cross-validation splits. Defaults to 5</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path whereto to write the machine learning output. Defaults to the
+current working directory</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>machine learning results with the following keys:</dt><dd><p>ids_train, ids_test, ids_predicted, method_params,
+output (.label_predicted, .label_train, .label_test),
+metrics_test, metrics_validation, metrics_training</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.krr.predict_and_error">
+<code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">predict_and_error</code><span class="sig-paren">(</span><em class="sig-param">learner</em>, <em class="sig-param">x_test</em>, <em class="sig-param">x_train</em>, <em class="sig-param">y_test</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#predict_and_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.predict_and_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to predict the property on a training and a test set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>learner</strong> (<em>sklearn.learner</em>) – learner object with which the training set was fitted</p></li>
+<li><p><strong>x_test</strong> (<em>2D ndarray</em>) – test data scaled accordingly</p></li>
+<li><p><strong>x_train</strong> (<em>2D ndarray</em>) – training data which is scaled</p></li>
+<li><p><strong>y_test</strong> (<em>1D ndarray</em>) – labels of the test data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>mae, mse, y_pred, train_y_pred, learner</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.krr.scale_data">
+<code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">scale_data</code><span class="sig-paren">(</span><em class="sig-param">x_train</em>, <em class="sig-param">x_test</em>, <em class="sig-param">is_mean=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#scale_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.scale_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to the scale the data with respect
+to the mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_train</strong> (<em>2D ndarray</em>) – training data which is scaled</p></li>
+<li><p><strong>x_test</strong> (<em>2D ndarray</em>) – test data scaled accordingly</p></li>
+<li><p><strong>is_mean</strong> (<em>bool</em>) – if set to False, scaled between 0 and 1.
+Otherwise, scaled centered around the mean of x_train.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the scaled arrays x_train, x_test</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.krr.split_scale_data">
+<code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">split_scale_data</code><span class="sig-paren">(</span><em class="sig-param">x_data</em>, <em class="sig-param">y_data</em>, <em class="sig-param">ids_data</em>, <em class="sig-param">sample_size</em>, <em class="sig-param">is_scaled</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#split_scale_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.split_scale_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to split and scale the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_data</strong> (<em>2D ndarray</em>) – features of the training and test data</p></li>
+<li><p><strong>y_data</strong> (<em>1D ndarray</em>) – labels of the training and test data</p></li>
+<li><p><strong>ids_data</strong> (<em>1D ndarray</em>) – complete list of ids of datapoints used for training and testing</p></li>
+<li><p><strong>sample_size</strong> (<em>float</em>) – The ratio of the training-test split is defined by this</p></li>
+<li><p><strong>is_scaled</strong> (<em>bool</em>) – True scales the features centered around the mean</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>ndarrays    x_train, x_test (split from x_data)</dt><dd><p>y_train, y_test (split from y_data)
+ids_train, ids_test (split from ids_data)</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="critcatworks.ml.krr.write_output">
+<code class="sig-prename descclassname">critcatworks.ml.krr.</code><code class="sig-name descname">write_output</code><span class="sig-paren">(</span><em class="sig-param">learner</em>, <em class="sig-param">sample_size</em>, <em class="sig-param">ml_method</em>, <em class="sig-param">mae</em>, <em class="sig-param">mse</em>, <em class="sig-param">runtype</em>, <em class="sig-param">ids_test</em>, <em class="sig-param">y_test</em>, <em class="sig-param">y_pred</em>, <em class="sig-param">ids_train</em>, <em class="sig-param">y_train</em>, <em class="sig-param">train_y_pred</em>, <em class="sig-param">to_predict_ids</em>, <em class="sig-param">y_to_predict</em>, <em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/critcatworks/ml/krr.html#write_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#critcatworks.ml.krr.write_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to write the machine learning output.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-critcatworks.ml">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-critcatworks.ml" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">critcatworks.ml package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-critcatworks.ml.convergence">critcatworks.ml.convergence module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.ml.krr">critcatworks.ml.krr module</a></li>
+<li><a class="reference internal" href="#module-critcatworks.ml">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="critcatworks.dft.cp2k.html"
+                        title="previous chapter">critcatworks.dft.cp2k package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="critcatworks.structure.html"
+                        title="next chapter">critcatworks.structure package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/src/doc/critcatworks.ml.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.structure.html" title="critcatworks.structure package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="critcatworks.dft.cp2k.html" title="critcatworks.dft.cp2k package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >critcatworks</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="critcatworks.html" >critcatworks package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

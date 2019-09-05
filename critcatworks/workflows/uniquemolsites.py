@@ -18,11 +18,49 @@ def get_uniquemolsites_workflow(template_path, username, password,
         worker_target_path = None, structures = None, extdb_ids = None,
         source_path  = None, reference_energy=0.0, adsorbate = {}, 
         adsite_types = ["top", "bridge", "hollow"], threshold = 0.001, n_max_restarts = 1,
-        skip_dft = False, extdb_connect = {}):
-    """
-
+        skip_dft = False, is_safeguard = True, extdb_connect = {}):
+    """ 
     Workflow to determine the adsorption sites and energies of a set of
-    nanocluster structures using CP2K and ClusKit
+    nanocluster structures. The adsorption sites are determined by the 
+    python package cluskit and then ranked by farthest point sampling
+    based on their structural local dissimilarity.
+    Only sites which are more dissimilar than the given threshold are 
+    computed.
+    The adsorption energy is determined by a simulation code (e.g. CP2K).
+
+    Args:
+        template_path (str) :   absolute path to input file for calculations. 
+                                It works as a template which is later modified by the
+                                simulation-specific Firework.
+        username (str) :        user who executed the workflow
+        password (str) :        password for user to upload to the database
+        worker_target_path (str) :  absolute path on computing resource 
+                                    directory needs to exist
+        structures (list) : list of ase.Atoms objects from where the workflow is started.
+        extdb_ids (list) :  unique identifiers of the simulations collection which
+                            are used to start the workflow
+        source_path (str) : absolute path on the computing resource to the directory 
+                            where to read the structures from        
+        reference_energy (float) :  reference energy for the adsorbate. Can be the
+                                    total energy of the isolated adsorbate molecule
+                                    or a different reference point
+        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an "X" dummy atom
+                            which indicates the anchor point to the nanocluster
+        adsite_types (list) :   adsorption site types, can contain any combination of
+                                "top", "bridge", "hollow"
+        threshold (float) :     threshold of similarity metric between the local structures
+                                of the adsorption sites. Only sites which are more dissimilar 
+                                than the given threshold are computed
+        n_max_restarts (int)  : number of times the calculation is restarted upon failure
+        skip_dft (bool) :   If set to true, the simulation step is skipped in all
+                            following simulation runs. Instead the structure is returned unchanged.
+        is_safeguard (bool) : if False, the workflow is not paused when not all simulation jobs
+                               converge properly after the maximum number of restarts.
+        extdb_connect (dict):   dictionary containing the keys host,
+                                username, password, authsource and db_name.
+        
+    Returns:
+        fireworks.Workflow : molsinglesites Fireworks Workflow object
     """
 
     with open (template_path, "r") as f:
@@ -75,14 +113,12 @@ def get_uniquemolsites_workflow(template_path, username, password,
         adsorbate = adsorbate_dict, 
         adsite_types = adsite_types,
         descriptor = "soap",
-        descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0, 
-            "crossover" : True, "sparse" : False},
+        descriptor_params = {"nmax" : 9, "lmax" :6, "rcut" : 5.0},
         threshold = threshold,
         )
 
     # Firework: setup folders for DFT calculations
     fw_setup_folders = setup_folders(target_path = worker_target_path, name = "cp2k_uniquemolsites_id")
-
 
     # add above Fireworks with links
     workflow_list = [fw_init,
@@ -99,10 +135,9 @@ def get_uniquemolsites_workflow(template_path, username, password,
 
     # FireWork: setup, run and extract DFT calculation
     # (involves checking for errors in DFT and rerunning)
-
     fw_chunk_calculations = chunk_calculations(template = template, target_path = worker_target_path, 
         n_max_restarts = n_max_restarts, simulation_method = "cp2k",
-        skip_dft = skip_dft)
+        skip_dft = skip_dft, is_safeguard = is_safeguard)
     workflow_list.append(fw_chunk_calculations)
     links_dict[fw_setup_folders] = [fw_chunk_calculations]
 
@@ -114,4 +149,3 @@ def get_uniquemolsites_workflow(template_path, username, password,
 
     wf = Workflow(workflow_list, links_dict, name = "uniquemolsites")
     return wf
-
