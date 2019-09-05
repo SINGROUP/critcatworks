@@ -128,5 +128,5 @@ class GatherPropertyTask(FiretaskBase):
 def update_converged_data(chunk_size, adsite_types = ["top", "bridge", "hollow"]):
     firetask1  = GatherPropertyTask(chunk_size = chunk_size, adsite_types = adsite_types)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'GatherPropertyTask'},
-             name = 'GatherPropertyWork')
+             name = 'GatherPropWork')
     return fw

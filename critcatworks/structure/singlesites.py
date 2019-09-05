@@ -504,7 +504,7 @@ def get_adsites(reference_energy = 0.0, adsorbate_name='H', adsite_types = ["top
         )
     fw = Firework([firetask1], 
         spec={'_category' : "medium", 'name' : 'AdsiteCreationTask'},
-        name = 'AdsiteCreationWork'
+        name = 'AdsiteCrWork'
         )
     return fw
 
@@ -520,7 +520,7 @@ def get_monodentate_adsites(reference_energy = 0.0, adsorbate = {}, adsite_types
         )
     fw = Firework([firetask1], 
         spec={'_category' : "medium", 'name' : 'MonodentateAdsiteCreationTask'},
-        name = 'MonodentateAdsiteCreationWork'
+        name = 'MonoAdCrWork'
         )
     return fw
 
@@ -538,7 +538,7 @@ def get_monodentate_unique_adsites(reference_energy = 0.0, adsorbate = {}, adsit
         )
     fw = Firework([firetask1], 
         spec={'_category' : "medium", 'name' : 'MonodentateUniqueAdsiteCreationTask'},
-        name = 'MonodentateUniqueAdsiteCreationWork'
+        name = 'MonoUniqAdCrWork'
         )
     return fw
 

@@ -52,6 +52,6 @@ class CheckConvergenceTask(FiretaskBase):
 def check_convergence(threshold, convergence_criterion = "mae"):
     firetask1  = CheckConvergenceTask(threshold = threshold, convergence_criterion = convergence_criterion)
     fw = Firework([firetask1], spec = {'_category' : "lightweight", 'name' : 'CheckConvergenceTask'},
-             name = 'CheckConvergenceWork')
+             name = 'CheckConvWork')
     return fw
 
