@@ -1,0 +1,24 @@
+{
+  "meta_name":"parse_status",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Status returned by the first parser that thranslated the ",
+    "main_file_uri"],
+  "meta_parent_section":"section_calculation_info",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"ParseFailure",
+    "meta_enum_description":"The parser failed to parse this main file"
+  },{
+    "meta_enum_value":"ParseSkipped",
+    "meta_enum_description":"The parser skipped this main file"
+  },{
+    "meta_enum_value":"ParseSuccess",
+    "meta_enum_description":[
+      "Parsing was successfull (does not mean that the file is valid or meaningful, ",
+      "simply that the parser could process it)"]
+  },{
+    "meta_enum_value":"ParseWithWarnings",
+    "meta_enum_description":"The Parser had serious warnings"
+  }]
+}

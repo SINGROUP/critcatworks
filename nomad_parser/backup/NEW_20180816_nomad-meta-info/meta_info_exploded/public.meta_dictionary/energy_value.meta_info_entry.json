@@ -1,0 +1,5 @@
+{
+  "meta_name":"energy_value",
+  "meta_type":"type-abstract",
+  "meta_description":"This metadata stores an energy value."
+}

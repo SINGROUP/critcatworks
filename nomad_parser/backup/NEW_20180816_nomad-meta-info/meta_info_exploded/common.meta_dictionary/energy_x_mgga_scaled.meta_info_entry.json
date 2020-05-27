@@ -1,0 +1,13 @@
+{
+  "meta_name":"energy_x_mgga_scaled",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Component of the exchange (X) energy at the GGA (or MetaGGA) level, using the ",
+    "self consistent density of the target functional, scaled accordingly to the ",
+    "mixing parameter."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

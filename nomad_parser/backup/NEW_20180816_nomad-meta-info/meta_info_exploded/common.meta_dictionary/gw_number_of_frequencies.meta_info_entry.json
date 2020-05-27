@@ -1,0 +1,9 @@
+{
+  "meta_name":"gw_number_of_frequencies",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Number of frequency points used in the calculation of the self ",
+    "energy."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"int"
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"springer_space_group_number",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Information about the space group number of current material according to ",
+    "Springer Materials"],
+  "meta_parent_section":"section_springer_material",
+  "meta_data_type":"int"
+}

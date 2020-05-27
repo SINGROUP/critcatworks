@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_topology_atoms",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Number of atoms in the system described by this ",
+    "topology."],
+  "meta_parent_section":"section_topology"
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_moller_plesset_perturbation_theory",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters for Møller\u2013Plesset perturbation ",
+    "theory."],
+  "meta_abstract_types":[
+    "settings_post_hartree_fock"]
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_integrator",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters that control the molecular dynamics (MD) ",
+    "integrator."],
+  "meta_abstract_types":[
+    "settings_molecular_dynamics"]
+}

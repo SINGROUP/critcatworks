@@ -1,0 +1,13 @@
+{
+  "meta_name":"restricted_uri",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The list of nomad uri(s) identifying the restricted info/file corresponding to ",
+    "this calculation"],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"string",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_restricted_uri"
+  }],
+  "meta_repeats":true
+}

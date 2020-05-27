@@ -1,0 +1,14 @@
+{
+  "meta_name":"gw_qp_linearization_prefactor",
+  "meta_type":"type-value",
+  "meta_description":"Linearization prefactor",
+  "meta_parent_section":"section_eigenvalues",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+  },{
+    "meta_dimension_symbolic":"number_of_eigenvalues"
+  }]
+}

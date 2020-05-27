@@ -1,0 +1,27 @@
+{
+  "meta_name":"section_volumetric_data",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section defining a set of volumetric data on a uniform real-space\n",
+    "grid.\n",
+    "\n",
+    "To store an array (e.g. a density or a potential), define:\n",
+    " * three grid point displacement vectors (\"displacements\")\n",
+    " * number of grid points along each axis (\"nx\", \"ny\" and \"nz\")\n",
+    " * the origin of the coordinate system, i.e. coordinates of the first grid\n",
+    "   point (\"origin\")\n",
+    " * how many spatial functions are represented, e.g., two for a\n",
+    "   normal spin-polarized density (\"multiplicity\")\n",
+    " * the values for each grid point (\"values\")\n",
+    " * the unit that applies to each value (\"units\")\n",
+    " * the kind of array represented by the volumetric data (\"kind\").\n",
+    "\n",
+    "Allowed kinds are (please add new kinds as necessary): \"density\",\n",
+    "\"potential_hartree\" and \"potential_effective\".  Densities and\n",
+    "potentials that are spin-polarized should have multiplicity two.\n",
+    "Rules for more complex spins are to be decided when ",
+    "necessary."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

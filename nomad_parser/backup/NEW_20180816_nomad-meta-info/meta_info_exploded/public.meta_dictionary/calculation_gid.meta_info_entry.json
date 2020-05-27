@@ -1,0 +1,7 @@
+{
+  "meta_name":"calculation_gid",
+  "meta_type":"type-value",
+  "meta_description":"unique identifier of a calculation.",
+  "meta_parent_section":"calculation_context",
+  "meta_data_type":"string"
+}

@@ -1,0 +1,11 @@
+{
+  "meta_name":"topology_force_field_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) A unique string idenfiying the force field defined in this ",
+    "section. Strategies to define it are discussed in the ",
+    "[topology\\_force\\_field\\_name](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-",
+    "info/wikis/metainfo/topology-force-field-name)."],
+  "meta_parent_section":"section_topology",
+  "meta_data_type":"string"
+}

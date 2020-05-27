@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_ngridq",
+  "meta_type":"type-value",
+  "meta_description":"k/q-point grid size used in the GW calculation.",
+  "meta_parent_section":"section_method",
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  }]
+}

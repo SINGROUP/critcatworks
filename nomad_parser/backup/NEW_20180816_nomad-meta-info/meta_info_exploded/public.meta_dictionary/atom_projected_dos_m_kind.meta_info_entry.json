@@ -1,0 +1,11 @@
+{
+  "meta_name":"atom_projected_dos_m_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String describing what the integer numbers of $m$ in atom_projected_dos_lm ",
+    "mean. The allowed values are listed in the [m_kind wiki ",
+    "page](https://gitlab.rzg.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/m-kind)",
+    "."],
+  "meta_parent_section":"section_atom_projected_dos",
+  "meta_data_type":"string"
+}

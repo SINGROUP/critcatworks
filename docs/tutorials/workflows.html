@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Workflows &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nanocluster Workflow" href="nanocluster_workflow.html" />
+    <link rel="prev" title="Checklist" href="../checklist.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nanocluster_workflow.html" title="Nanocluster Workflow"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../checklist.html" title="Checklist"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="workflows">
+<span id="id1"></span><h1>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h1>
+<p>The automated workflows facilitate generation and analysis of large datasets of
+adsorption on nanoclusters.</p>
+<p>At first, a set of nanoclusters can be relaxed by DFT. Clusters with the same composition will
+be ranked based on their stability. Human selection of clusters for the next step is currently
+required.</p>
+<p>After settling on a reduced set of nanoclusters, their adsorption sites are detected and
+populated. Two options are possible. Either studying a single adsorbate or a coverage of
+adsorbates on the nanoclusters.</p>
+<p>For the former, the single adsorbates are computed by DFT in chunks, smartly pre-selected, until
+enough points are acquired in order to infer the rest with machine-learning. The remaining points
+are predicted with a specified accuracy.</p>
+<p>For the latter, a nanocluster is covered by adsorbates using simple heuristics and an iterative
+DFT relaxation followed by a removal of a single adsorbate, one by one. This usually leads to
+too low coverages but is a good starting point for the next workflow.
+Given a starting coverage, the coverage ladder workflow adds and removes adsorbates one by one,
+with a parallel DFT computation of addition/removal candidates, and branches out over time to
+consistently find a significantly lower-energy coverage.</p>
+<p>This figure provides an overview on how the implemented workflows depend on each other.</p>
+<a class="reference internal image-reference" href="../_images/implemented_workflows_overview.svg"><img alt="../_images/implemented_workflows_overview.svg" src="../_images/implemented_workflows_overview.svg" width="800" /></a>
+<p>Most workflows have the following arguments in common:</p>
+<dl class="field-list simple">
+<dt class="field-odd">template_path (str)</dt>
+<dd class="field-odd"><p>absolute path to input file for calculations.
+It works as a template which is later modified by the
+simulation-specific Firework.</p>
+</dd>
+<dt class="field-even">username (str)</dt>
+<dd class="field-even"><p>user who executed the workflow</p>
+</dd>
+<dt class="field-odd">password (str)</dt>
+<dd class="field-odd"><p>password for user to upload to the database</p>
+</dd>
+<dt class="field-even">worker_target_path (str)</dt>
+<dd class="field-even"><p>absolute path on computing resource. Directory needs to exist</p>
+</dd>
+<dt class="field-odd">reference_energy (float)</dt>
+<dd class="field-odd"><p>reference energy for the adsorbate. Can be the
+total energy of the isolated adsorbate molecule
+or a different reference point</p>
+</dd>
+<dt class="field-even">n_max_restarts (int)</dt>
+<dd class="field-even"><p>number of times the DFT calculation is restarted upon failure</p>
+</dd>
+<dt class="field-odd">skip_dft (bool)</dt>
+<dd class="field-odd"><p>If set to true, the simulation step is skipped in all
+following simulation runs. Instead the structure is returned unchanged.</p>
+</dd>
+<dt class="field-even">extdb_connect (dict)</dt>
+<dd class="field-even"><p>dictionary containing the keys host,
+username, password, authsource and db_name
+of the database to connect to. Defaults to
+a test database for critcat.
+If db_name is set to ncdb, this will upload
+the data to the production database.</p>
+</dd>
+</dl>
+<p>The following workflows come with a tutorial (there are a few more simple or similar workflows without a tutorial):</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nanocluster_workflow.html">Nanocluster Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singlesites_workflow.html">Singlesites Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coverage_workflow.html">Simple Coverage Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coverageladder_workflow.html">Coverage Ladder Workflow</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../checklist.html"
+                        title="previous chapter">Checklist</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nanocluster_workflow.html"
+                        title="next chapter">Nanocluster Workflow</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/workflows.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nanocluster_workflow.html" title="Nanocluster Workflow"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../checklist.html" title="Checklist"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "meta_name":"method_atom_kind_label",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String used to identify the atoms of this kind. This should correspond to the ",
+    "atom_labels of the configuration. It is possible for one atom kind to have ",
+    "multiple labels (in order to allow two atoms of the same kind to have two ",
+    "differently defined sets of atom-centered basis functions or two different ",
+    "pseudo-potentials). Atom kind is typically the symbol of the atomic species but ",
+    "it can be also a ghost or pseudo-atom."],
+  "meta_parent_section":"section_method_atom_kind",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

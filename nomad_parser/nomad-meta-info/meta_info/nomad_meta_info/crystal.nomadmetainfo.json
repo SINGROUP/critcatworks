@@ -1,0 +1,5591 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the Crystal parser, all names are expected to start with x_crystal_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Atoms in asymmetric unit.",
+      "dtypeStr": "i",
+      "name": "x_crystal_atoms_in_asymmetric_unit",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atoms in unit cell.",
+      "dtypeStr": "i",
+      "name": "x_crystal_atoms_in_unit_cell",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "ENERGY RANGE (A.U.) -104.75831 -   0.62475 EFERMI  -0.39686",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_energy_fermi",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "ENERGY RANGE (A.U.) -104.75831 -   0.62475 EFERMI  -0.39686",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_energy_max",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "ENERGY RANGE (A.U.) -104.75831 -   0.62475 EFERMI  -0.39686",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_energy_min",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_is1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_is2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_is3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_k_pts_monk_net",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CARTESIAN COORD. ( 0.000 0.000 0.000):( 0.000 0.590 0.000) STEP  0.0310",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_coordinates_cartesian_begin",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "CARTESIAN COORD. ( 0.000 0.000 0.000):( 0.000 0.590 0.000) STEP  0.0310",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_coordinates_cartesian_end",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "LINE  1 ( 0.00 0.00 0.00: 0.50 0.00 0.50) IN TERMS OF PRIMITIVE LATTICE VECTORS",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_coordinates_primitive_begin",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "LINE  1 ( 0.00 0.00 0.00: 0.50 0.00 0.50) IN TERMS OF PRIMITIVE LATTICE VECTORS",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_coordinates_primitive_end",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "20 POINTS - SHRINKING_FACTOR 456",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_number_of_points",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "LINE  1 ( 0.00 0.00 0.00: 0.50 0.00 0.50) IN TERMS OF PRIMITIVE LATTICE VECTORS",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "fractional coordinates of the point: 1(  0/456  0/456  0/456)",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_point_coordinates",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "Energy of each band",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_point_energies",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_integer1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_integer2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_integer3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_integer4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_integer5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_integer6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "number of the point: 1(  0/456  0/456  0/456)",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_point_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line_point"
+      ]
+    }, {
+      "description": "20 POINTS - SHRINKING_FACTOR 456",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_line_shrink",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "CARTESIAN COORD. ( 0.000 0.000 0.000):( 0.000 0.590 0.000) STEP  0.0310",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_step",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_value11",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_value12",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_value13",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_value21",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_value22",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_line_value23",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "FROM BAND   1 TO BAND  18",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_max",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "FROM BAND   1 TO BAND  18",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_min",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "TOTAL OF  60 K-POINTS ALONG THE PATH",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_number_of_points",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_symmops_g",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_bands_symmops_k",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "BAND        TELAPSE        0.11 TCPU        0.11",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "BAND        TELAPSE        0.11 TCPU        0.11",
+      "dtypeStr": "f",
+      "name": "x_crystal_bands_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "Title string for the file",
+      "dtypeStr": "C",
+      "name": "x_crystal_bands_title",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "Atom element coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_coordinates",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Atom element label.",
+      "dtypeStr": "C",
+      "name": "x_crystal_basis_set_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Atom id.",
+      "dtypeStr": "i",
+      "name": "x_crystal_basis_set_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Orbital number: last orbital.",
+      "dtypeStr": "i",
+      "name": "x_crystal_basis_set_atom_shell_omax",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell"
+      ]
+    }, {
+      "description": "Orbital number: first orbital.",
+      "dtypeStr": "i",
+      "name": "x_crystal_basis_set_atom_shell_omin",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell"
+      ]
+    }, {
+      "description": "Gaussian primitive: coefficient for d, f or g orbitals.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_shell_primitive_coeff_dfg",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell_primitive"
+      ]
+    }, {
+      "description": "Gaussian primitive: coefficient for p orbitals.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_shell_primitive_coeff_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell_primitive"
+      ]
+    }, {
+      "description": "Gaussian primitive: coefficient for s orbitals.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_shell_primitive_coeff_s",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell_primitive"
+      ]
+    }, {
+      "description": "Gaussian primitive: exponent.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_shell_primitive_exp",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell_primitive"
+      ]
+    }, {
+      "description": "Shell type: S / P / SP / D / F / G.",
+      "dtypeStr": "C",
+      "name": "x_crystal_basis_set_atom_shell_type",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_basis_set_atom_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Conversion factor Bohr as Angstroms, used by Crystal.",
+      "dtypeStr": "f",
+      "name": "x_crystal_bohr_angstrom",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atom coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_atom_coordinates",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell",
+      "dtypeStr": "C",
+      "name": "x_crystal_cell_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom belongs to the asymmetric unit.",
+      "dtypeStr": "b",
+      "name": "x_crystal_cell_atom_in_asymmetric",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell",
+      "dtypeStr": "i",
+      "name": "x_crystal_cell_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell",
+      "dtypeStr": "C",
+      "name": "x_crystal_cell_atom_tag",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell: temporary value",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_atom_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell: temporary value",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_atom_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell: temporary value",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_atom_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell",
+      "dtypeStr": "i",
+      "name": "x_crystal_cell_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_atom"
+      ]
+    }, {
+      "description": "Number of symmetry operators",
+      "dtypeStr": "i",
+      "name": "x_crystal_cell_number_of_symmops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell"
+      ]
+    }, {
+      "description": "Crystallographic cell: vector lengths and angles.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_parameters",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_cell"
+      ]
+    }, {
+      "description": "Symmop id.",
+      "dtypeStr": "i",
+      "name": "x_crystal_cell_symmop_id",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Id of inversion symmop",
+      "dtypeStr": "i",
+      "name": "x_crystal_cell_symmop_inv",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Rotation matrix related to the symmop.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_rotation",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Translation related to the symmop.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_translation",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value10",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value11",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value12",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value7",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value8",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Symmop: temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_symmop_value9",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell_symmop"
+      ]
+    }, {
+      "description": "Crystallographic cell transformation matrix from primitive cell.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_transformation_matrix",
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "x_crystal_section_cell"
+      ]
+    }, {
+      "description": "Crystallographic cell volume.",
+      "dtypeStr": "f",
+      "name": "x_crystal_cell_volume",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell"
+      ]
+    }, {
+      "description": "Centring code denumerator.",
+      "dtypeStr": "i",
+      "name": "x_crystal_centring_code_d",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Centring code nominator.",
+      "dtypeStr": "i",
+      "name": "x_crystal_centring_code_n",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Reference for crystal classes.",
+      "dtypeStr": "C",
+      "name": "x_crystal_class_ref",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Crystal class.",
+      "dtypeStr": "C",
+      "name": "x_crystal_class",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Angles between conventional lattice vectors.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_angles",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Atom coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_atom_coordinates",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "x_crystal_section_conventional_cell_atom"
+      ]
+    }, {
+      "description": "Atom label",
+      "dtypeStr": "i",
+      "name": "x_crystal_conventional_cell_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell_atom"
+      ]
+    }, {
+      "description": "Proton number.",
+      "dtypeStr": "i",
+      "name": "x_crystal_conventional_cell_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell_atom"
+      ]
+    }, {
+      "description": "Lengths of conventional lattice vectors.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_lengths",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Number of non-equivalent atoms in the conventional cell.",
+      "dtypeStr": "i",
+      "name": "x_crystal_conventional_cell_number_of_atoms",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Units used for length and angle.",
+      "dtypeStr": "C",
+      "name": "x_crystal_conventional_cell_units",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_conventional_cell_value6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Crystal density in g/cm3.",
+      "dtypeStr": "f",
+      "name": "x_crystal_density",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Dielectric tensor for frequency calculations.",
+      "dtypeStr": "f",
+      "name": "x_crystal_dielectric_tensor",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "System dimensionality.",
+      "dtypeStr": "i",
+      "name": "x_crystal_dimensionality",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "runcry14 termination stats (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE      166.54 TCPU      166.18)",
+      "dtypeStr": "f",
+      "name": "x_crystal_endinformation_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_endinformation"
+      ]
+    }, {
+      "description": "runcry14 termination stats (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE      166.54 TCPU      166.18)",
+      "dtypeStr": "f",
+      "name": "x_crystal_endinformation_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_endinformation"
+      ]
+    }, {
+      "description": "Crystal family.",
+      "dtypeStr": "C",
+      "name": "x_crystal_family",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atomic forces on a single atom",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_atom_force",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_forces_atom"
+      ]
+    }, {
+      "description": "Atom label (number), e.g. in 1  11            -2.045495870088E-15 -2.044980874056E-15 -2.242718650102E-15",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_atom"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_atom_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_atom"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_atom_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_atom"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_atom_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_atom"
+      ]
+    }, {
+      "description": "Atom proton number, e.g. in 1  11            -2.045495870088E-15 -2.044980874056E-15 -2.242718650102E-15",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_atom"
+      ]
+    }, {
+      "description": "Atom dynamic charge (e.g. in ATOM   1 NA DYNAMIC CHARGE     0.986361)",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_born_atom_charge",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_born_atom"
+      ]
+    }, {
+      "description": "Atom element symbol (e.g. in ATOM   1 NA DYNAMIC CHARGE     0.986361)",
+      "dtypeStr": "C",
+      "name": "x_crystal_forces_born_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_born_atom"
+      ]
+    }, {
+      "description": "Atom label number (e.g. in ATOM   1 NA DYNAMIC CHARGE     0.986361)",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_born_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_born_atom"
+      ]
+    }, {
+      "description": "ATOMIC BORN CHARGE TENSOR",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_born_atom_tensor",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_forces_born_atom"
+      ]
+    }, {
+      "description": "  ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM.    CENTRAL POINT             -6.214954000417E+02    22     0.0000E+00    48",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_central_point_cycles",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "  ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM.    CENTRAL POINT             -6.214954000417E+02    22     0.0000E+00    48",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_central_point_de",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Force matrix: central point energy",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_central_point_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "  ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM.    CENTRAL POINT             -6.214954000417E+02    22     0.0000E+00    48",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_central_point_sym",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "number of cycles (N.CYC) in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_matrix_atom_cycles",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "delta energy (DE) in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_matrix_atom_de",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "Direction in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DX   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "C",
+      "name": "x_crystal_forces_matrix_atom_dir",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "Element symbol in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DX   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "C",
+      "name": "x_crystal_forces_matrix_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "TOTAL ENERGY (AU) in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_matrix_atom_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "Direction in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DY                   GENERATED FROM A PREVIOUS LINE)",
+      "dtypeStr": "C",
+      "name": "x_crystal_forces_matrix_atom_gen_dir",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom_gen"
+      ]
+    }, {
+      "description": "Element symbol in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DY                   GENERATED FROM A PREVIOUS LINE)",
+      "dtypeStr": "C",
+      "name": "x_crystal_forces_matrix_atom_gen_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom_gen"
+      ]
+    }, {
+      "description": "Atom label in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DY                   GENERATED FROM A PREVIOUS LINE)",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_matrix_atom_gen_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom_gen"
+      ]
+    }, {
+      "description": "MAX ABS(DGRAD) in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_matrix_atom_grad",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "Atom label in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DX   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_matrix_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "number of symmetries (SYM) in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05      -6.214953997616E+02     4     2.8014E-07     8)",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_matrix_atom_sym",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "Atomic forces: resultant of all",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_resultant",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Symmetry allowed directions.",
+      "dtypeStr": "i",
+      "name": "x_crystal_forces_symmetry_allowed_directions",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_forces_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Atom label.",
+      "dtypeStr": "C",
+      "name": "x_crystal_frequency_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_atom"
+      ]
+    }, {
+      "description": "Atom label.",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_atom"
+      ]
+    }, {
+      "description": "Mass in AMU.",
+      "dtypeStr": "f",
+      "name": "x_crystal_frequency_atom_mass",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_atom"
+      ]
+    }, {
+      "description": "IRREDUCIBLE ATOM",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_atom"
+      ]
+    }, {
+      "description": "NUMBER OF SYMMETRY OPERATORS THAT DOESN'T MOVE THE IRREDUCIBLE ATOM",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_atom_number_of_symmops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_atom"
+      ]
+    }, {
+      "description": "MAXIMUM ORDER AMONG THE OPERATORS OF THE IRREDUCIBLE ATOM",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_atom_order",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_atom"
+      ]
+    }, {
+      "description": "Length (angstrom) of single displacement in gradient calculations.",
+      "dtypeStr": "f",
+      "name": "x_crystal_frequency_gradients_dx",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients"
+      ]
+    }, {
+      "description": "Number of symmops used in equilibrium geometry.",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_equilibrium_symmops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients"
+      ]
+    }, {
+      "description": "Number of irreducible atoms.",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_number_of_atoms",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients"
+      ]
+    }, {
+      "description": "Number of scf+gradient calculations needed.",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_number_of_ops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients"
+      ]
+    }, {
+      "description": "Particular gradient: displacement component",
+      "dtypeStr": "C",
+      "name": "x_crystal_frequency_gradients_op_displacement",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "Particular gradient: element symbol",
+      "dtypeStr": "C",
+      "name": "x_crystal_frequency_gradients_op_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "GENERATED FROM LINE ? WITH OP ?",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_op_generated_by_symmop",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "GENERATED FROM LINE ? WITH OP ?",
+      "dtypeStr": "C",
+      "name": "x_crystal_frequency_gradients_op_generated_from_line",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "Particular gradient: atom label",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_op_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "Particular gradient: number",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_op_num",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "Number of symmops",
+      "dtypeStr": "i",
+      "name": "x_crystal_frequency_gradients_op_symmops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "C",
+      "name": "x_crystal_frequency_gradients_op_text",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "GENERATED BY TRANSLATIONAL INVARIANCE",
+      "dtypeStr": "b",
+      "name": "x_crystal_frequency_gradients_op_translational_invariance",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients_op"
+      ]
+    }, {
+      "description": "Geometry is consistent with the group.",
+      "dtypeStr": "b",
+      "name": "x_crystal_geometry_consistent",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Date of the Crystal version.",
+      "dtypeStr": "C",
+      "name": "x_crystal_header_date",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_header"
+      ]
+    }, {
+      "description": "Distribution describer.",
+      "dtypeStr": "C",
+      "name": "x_crystal_header_distribution",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_header"
+      ]
+    }, {
+      "description": "Minor version number of Crystal.",
+      "dtypeStr": "C",
+      "name": "x_crystal_header_minor",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_header"
+      ]
+    }, {
+      "description": "URL given in the header.",
+      "dtypeStr": "C",
+      "name": "x_crystal_header_url",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_header"
+      ]
+    }, {
+      "description": "Convergence seettings, on power of 10 (e.g. CONVERGENCE ON DELTAP        10**-16)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_convergence_on_deltap",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "Convergence seettings, on power of 10 (e.g. CONVERGENCE ON ENERGY        10**-10)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_convergence_on_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "COULOMB BIPOLAR BUFFER SET TO x Mb",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_coulomb_bipolar_buffer",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "DISK SPACE FOR EIGENVECTORS (FTN 10)      351575 REALS",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_eigenvectors_disk_space_ftn",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "DISK SPACE FOR EIGENVECTORS (FTN 10)      351575 REALS",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_eigenvectors_disk_space_reals",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "EXCHANGE BIPOLAR BUFFER SET TO x Mb",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_exchange_bipolar_buffer",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "FOCK/KS MATRIX MIXING SET TO x %",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_fock_ks_matrix_mixing",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT INPUT       TELAPSE        0.01 TCPU        0.01",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_input_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT INPUT       TELAPSE        0.01 TCPU        0.01",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_input_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_irr_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_irr_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48. (mentioned after the basis set)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_is1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48. (mentioned after the basis set)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_is2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48. (mentioned after the basis set)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_is3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "Header of unspecified info line.",
+      "dtypeStr": "C",
+      "name": "x_crystal_info_item_key",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info_item"
+      ]
+    }, {
+      "description": "Contents of unspecified info line.",
+      "dtypeStr": "C",
+      "name": "x_crystal_info_item_value",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info_item"
+      ]
+    }, {
+      "description": "NUMBER OF K POINTS(GILAT NET)    145",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_k_points_gilat",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "NUMBER OF K POINTS IN THE IBZ    145",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_k_points_ibz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48. (mentioned after the basis set)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_k_pts_monk_net",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_matrix_size_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_matrix_size_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "MAX G-VECTOR INDEX FOR 1- AND 2-ELECTRON INTEGRALS 247",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_max_g_vector_index",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "MAX NUMBER OF SCF CYCLES",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_max_scf_cycles",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "N. OF ATOMS PER CELL",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_number_of_atoms",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CORE ELECTRONS PER CELL",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_number_of_core_electrons",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "N. OF ELECTRONS PER CELL",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_number_of_electrons",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "NUMBER OF AO (Atomic orbitals)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_number_of_orbitals",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "NUMBER OF SHELLS",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_number_of_shells",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "N. OF SYMMETRY OPERATORS",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_number_of_symmops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "POLE ORDER IN MONO ZONE",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_pole_order",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "SHRINKING FACTOR(GILAT NET)   16",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_shrink_gilat",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_shrink_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_shrink_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_shrink_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "SHRINK. FACT.(MONKH.)   16 16 16",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_shrink",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "SYMMETRY ADAPTION OF THE BLOCH FUNCTIONS ENABLED",
+      "dtypeStr": "b",
+      "name": "x_crystal_info_symmetry_adaption",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48. (mentioned after the basis set)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_symmops_g",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48. (mentioned after the basis set)",
+      "dtypeStr": "i",
+      "name": "x_crystal_info_symmops_k",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "COULOMB OVERLAP TOL         (T1) 10**   -6. (Tolerance T1, power of 10)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_tol_coulomb_overlap",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "COULOMB PENETRATION TOL     (T2) 10**   -6. (Tolerance T2, power of 10)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_tol_coulomb_penetration",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "EXCHANGE OVERLAP TOL        (T3) 10**   -6. (Tolerance T3, power of 10)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_tol_exchange_overlap",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "EXCHANGE PSEUDO OVP (F(G))  (T4) 10**   -6. (Tolerance T4, power of 10)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_tol_pseudo_overlap_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "EXCHANGE PSEUDO OVP (P(G))  (T5) 10**  -12. (Tolerance T5, power of 10)",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_tol_pseudo_overlap_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "The type of the calculation that was performed.",
+      "dtypeStr": "C",
+      "name": "x_crystal_info_type_of_calculation",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "WEIGHT OF F(I) IN F(I+1)      30%",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_weight_previous",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. TOTAL ATOMIC CHARGES:. 10.0000000  10.0000000)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_atomic_charges",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. CHARGE NORMALIZATION FACTOR   1.00000000)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_charge_normalization",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      TELAPSE        0.62 TCPU        0.62)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_monmo3_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "subsequent scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      TELAPSE        0.62 TCPU        0.62)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_monmo3_telapse",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      TELAPSE        0.07 TCPU        0.07)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_moqgad_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      TELAPSE        0.07 TCPU        0.07)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_moqgad_telapse",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     TELAPSE        0.61 TCPU        0.61)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_shellx2_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     TELAPSE        0.61 TCPU        0.61)",
+      "dtypeStr": "f",
+      "name": "x_crystal_initial_shellx2_telapse",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Atom coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_atom_position",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "x_crystal_section_input_atom"
+      ]
+    }, {
+      "description": "Atom proton number.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_atom"
+      ]
+    }, {
+      "description": "Atom number of shells.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_basis_number_of_shells",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis"
+      ]
+    }, {
+      "description": "Atom shell total charge.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_basis_shell_charge",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell"
+      ]
+    }, {
+      "description": "Atom shell l-value.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_basis_shell_l",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell"
+      ]
+    }, {
+      "description": "Atom shell number of primitives.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_basis_shell_number_of_primitives",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell"
+      ]
+    }, {
+      "description": "Gaussian primitive: coefficient for p (in sp shell).",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_basis_shell_primitive_coefficient_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell_primitive"
+      ]
+    }, {
+      "description": "Gaussian primitive: coefficient for s (in sp shell).",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_basis_shell_primitive_coefficient_s",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell_primitive"
+      ]
+    }, {
+      "description": "Gaussian primitive: coefficient.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_basis_shell_primitive_coefficient",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell_primitive"
+      ]
+    }, {
+      "description": "Gaussian primitive: exponent.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_basis_shell_primitive_exp",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell_primitive"
+      ]
+    }, {
+      "description": "Atom shell scale factor.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_basis_shell_scale",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell"
+      ]
+    }, {
+      "description": "Atom shell type.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_basis_shell_type",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell"
+      ]
+    }, {
+      "description": "Atom proton number.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_basis_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis"
+      ]
+    }, {
+      "description": "Freqcalc dielectric tensor.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_dielectric_tensor",
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Geometry key: CRYSTAL / SLAB / POLYMER / HELIX / MOLECULE / EXTERNAL / DLVINPUT.",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_geometry",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Lattice parameters given in: 0: hexagonal, 1:rhombohedral.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_ifhr",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Spacegroup input format: 0:sequential number, 1:Hermann-Manguin.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_iflag",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Setting of origin: 0: spacegroup, 1: standard, 2: specified in input.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_ifso",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Freqcalc intens.",
+      "dtypeStr": "b",
+      "name": "x_crystal_input_intens",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Temporary storage for parsing a keyword.",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_keyword",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Lattice parameters.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_lattice_parameters",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Number of non-equivalent atoms.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_number_of_atoms",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Point group for molecules.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_pointgroup",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Flag for Mulliken population analysis.",
+      "dtypeStr": "b",
+      "name": "x_crystal_input_ppan",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Rod group for polymers.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_rodgroup",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "A non-standard shift of origin in fractional coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_shift_of_origin",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Shrink factors.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_shrink",
+      "shape": [
+        2
+      ],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Slab group for slabs.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_slabgroup",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Spacegroup given in Hermann-Manguin notation.",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_spacegroup_hm",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Spacegroup for crystals.",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_spacegroup",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Input file title.",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_title",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Temporary storage for parsing a line of numbers.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Temporary storage for parsing a line of numbers.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Temporary storage for parsing a line of numbers.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Temporary storage for parsing a line of numbers.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Temporary storage for parsing a line of numbers.",
+      "dtypeStr": "f",
+      "name": "x_crystal_input_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "EIGENVALUES (EIGV)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_mode_eigv",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "FREQUENCIES (CM**-1)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_mode_frequency_cmp",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "FREQUENCIES (THZ)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_mode_frequency_thz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "IR INTENS",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_mode_intens",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "IRREP",
+      "dtypeStr": "C",
+      "name": "x_crystal_irlo_mode_irrep",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "MODES",
+      "dtypeStr": "i",
+      "name": "x_crystal_irlo_mode_max",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "MODES",
+      "dtypeStr": "i",
+      "name": "x_crystal_irlo_mode_min",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "SHIFTS (CM**-1)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_mode_shift_cmp",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "SHIFTS (THZ)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_mode_shift_thz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_mode"
+      ]
+    }, {
+      "description": "Labels used for Cartesian axes.",
+      "dtypeStr": "C",
+      "name": "x_crystal_irlo_modes_atom_axislabels",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes_atom"
+      ]
+    }, {
+      "description": "Atom element symbol",
+      "dtypeStr": "C",
+      "name": "x_crystal_irlo_modes_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes_atom"
+      ]
+    }, {
+      "description": "Atom label",
+      "dtypeStr": "i",
+      "name": "x_crystal_irlo_modes_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes_atom"
+      ]
+    }, {
+      "description": "Frequencies",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_atom_mode_frequencies",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irlo_modes_atom_mode"
+      ]
+    }, {
+      "description": "Mode tensor",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_atom_mode_tensor",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irlo_modes_atom_mode"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_modes_value6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "IRREP Fu LO (ENTRIES ARE FRQS IN CM**-1)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_overlap_lo",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irlo"
+      ]
+    }, {
+      "description": "IRREP Fu OVERLAP matrix",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_overlap_matrix",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irlo"
+      ]
+    }, {
+      "description": "IRREP Fu TO (ENTRIES ARE FRQS IN CM**-1)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irlo_overlap_to",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irlo_overlap"
+      ]
+    }, {
+      "description": "CONVERSION FACTORS FOR FREQUENCIES: 1 CM**(-1) = ? HARTREE",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_conversion_hartree",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto"
+      ]
+    }, {
+      "description": "CONVERSION FACTORS FOR FREQUENCIES: 1 THZ = ? CM**(-1)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_conversion_thz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto"
+      ]
+    }, {
+      "description": "Transverse optical mode eigv value (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_mode_eigv",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode frequency CM**-1 (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_mode_frequency_cmp",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode frequency THZ (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_mode_frequency_thz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode INTENSity KM/MOL (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_mode_intens",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode IRREP tag (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "C",
+      "name": "x_crystal_irto_mode_irrep",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode IR tag (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "C",
+      "name": "x_crystal_irto_mode_ir",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode number, max (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "i",
+      "name": "x_crystal_irto_mode_max",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode number, min (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "i",
+      "name": "x_crystal_irto_mode_min",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Transverse optical mode RAMAN tag (e.g. in 1-   3    0.0000E+00      0.0000    0.0000  (Fu )   A (     0.00)   I)",
+      "dtypeStr": "C",
+      "name": "x_crystal_irto_mode_raman",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_mode"
+      ]
+    }, {
+      "description": "Labels used for Cartesian axes.",
+      "dtypeStr": "C",
+      "name": "x_crystal_irto_modes_atom_axislabels",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes_atom"
+      ]
+    }, {
+      "description": "Atom element symbol",
+      "dtypeStr": "C",
+      "name": "x_crystal_irto_modes_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes_atom"
+      ]
+    }, {
+      "description": "Atom label",
+      "dtypeStr": "i",
+      "name": "x_crystal_irto_modes_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes_atom"
+      ]
+    }, {
+      "description": "Frequencies",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_atom_mode_frequencies",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irto_modes_atom_mode"
+      ]
+    }, {
+      "description": "Mode tensor",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_atom_mode_tensor",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_irto_modes_atom_mode"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_irto_modes_value6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "K point integer coordinates. (as in 21-C( 12  1  0))",
+      "dtypeStr": "i",
+      "name": "x_crystal_kpoint_coordinates",
+      "shape": ["n"],
+      "superNames": [
+        "x_crystal_section_kpoint"
+      ]
+    }, {
+      "description": "K point number (as in 21-C( 12  1  0))",
+      "dtypeStr": "i",
+      "name": "x_crystal_kpoint_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_kpoint"
+      ]
+    }, {
+      "description": "K point symbol (as in 21-C( 12  1  0))",
+      "dtypeStr": "C",
+      "name": "x_crystal_kpoint_symbol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_kpoint"
+      ]
+    }, {
+      "description": "K points units (as in e.g. *** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF IS = 16))",
+      "dtypeStr": "i",
+      "name": "x_crystal_kpoints_is_units",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_kpoints"
+      ]
+    }, {
+      "description": "Lattice parameters in angstroms and angles.",
+      "dtypeStr": "f",
+      "name": "x_crystal_lattice_parameters",
+      "shape": [
+        6
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Real space primary lattice vectors.",
+      "dtypeStr": "f",
+      "name": "x_crystal_lattice_real",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_lattice"
+      ]
+    }, {
+      "description": "Reciprocal lattice vectors.",
+      "dtypeStr": "f",
+      "name": "x_crystal_lattice_reciprocal",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_lattice"
+      ]
+    }, {
+      "description": "Distance in angstroms.",
+      "dtypeStr": "f",
+      "name": "x_crystal_neighbors_atom_distance_ang",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance"
+      ]
+    }, {
+      "description": "Distance in atomic units.",
+      "dtypeStr": "f",
+      "name": "x_crystal_neighbors_atom_distance_au",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance"
+      ]
+    }, {
+      "description": "Neighbor atom cell.",
+      "dtypeStr": "i",
+      "name": "x_crystal_neighbors_atom_distance_neighbor_cell",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance_neighbor"
+      ]
+    }, {
+      "description": "Neighbor atom element.",
+      "dtypeStr": "C",
+      "name": "x_crystal_neighbors_atom_distance_neighbor_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance_neighbor"
+      ]
+    }, {
+      "description": "Neighbor atom label.",
+      "dtypeStr": "i",
+      "name": "x_crystal_neighbors_atom_distance_neighbor_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance_neighbor"
+      ]
+    }, {
+      "description": "Number of neighbors at at given distance",
+      "dtypeStr": "i",
+      "name": "x_crystal_neighbors_atom_distance_number_of_neighbors",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance"
+      ]
+    }, {
+      "description": "Atom element",
+      "dtypeStr": "C",
+      "name": "x_crystal_neighbors_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom"
+      ]
+    }, {
+      "description": "Atom label",
+      "dtypeStr": "i",
+      "name": "x_crystal_neighbors_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom"
+      ]
+    }, {
+      "description": "Number of symmetry operators.",
+      "dtypeStr": "i",
+      "name": "x_crystal_number_of_symmops",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atom coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_prim_atom_coordinates",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing.",
+      "dtypeStr": "C",
+      "name": "x_crystal_prim_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom belongs to the asymmetric unit.",
+      "dtypeStr": "b",
+      "name": "x_crystal_prim_atom_in_asymmetric",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing.",
+      "dtypeStr": "i",
+      "name": "x_crystal_prim_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing.",
+      "dtypeStr": "C",
+      "name": "x_crystal_prim_atom_tag",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing: temporary value",
+      "dtypeStr": "f",
+      "name": "x_crystal_prim_atom_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing: temporary value",
+      "dtypeStr": "f",
+      "name": "x_crystal_prim_atom_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing: temporary value",
+      "dtypeStr": "f",
+      "name": "x_crystal_prim_atom_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listing.",
+      "dtypeStr": "i",
+      "name": "x_crystal_prim_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim_atom"
+      ]
+    }, {
+      "description": "Angles between primitive lattice vectors.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_angles",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Atom coordinates.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_atom_coordinates",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Element symbol.",
+      "dtypeStr": "C",
+      "name": "x_crystal_primitive_cell_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Atom label",
+      "dtypeStr": "i",
+      "name": "x_crystal_primitive_cell_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Number of equivalent atoms.",
+      "dtypeStr": "i",
+      "name": "x_crystal_primitive_cell_atom_number_of_equivalents",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Atom number",
+      "dtypeStr": "i",
+      "name": "x_crystal_primitive_cell_atom_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_atom_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_atom_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_atom_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Proton number.",
+      "dtypeStr": "i",
+      "name": "x_crystal_primitive_cell_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell_atom"
+      ]
+    }, {
+      "description": "Lengths of primitive lattice vectors.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_lengths",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Units used for atom coordinates.",
+      "dtypeStr": "C",
+      "name": "x_crystal_primitive_cell_units_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Units used for length and angle.",
+      "dtypeStr": "C",
+      "name": "x_crystal_primitive_cell_units",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_value7",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Primitive cell volume.",
+      "dtypeStr": "f",
+      "name": "x_crystal_primitive_cell_volume",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Temporary type for storing date and time, in locale-dependent format.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_datetime",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "Crystal executable file name.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_exe",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "Hostname where Crystal was run",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_hn",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "Input file name.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_input",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "String describing the operating system where Crystal was run.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_os",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "Output file name.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_output",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "Temporary directory.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_tmpdir",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "Username: who ran Crystal.",
+      "dtypeStr": "C",
+      "name": "x_crystal_process_user",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_process"
+      ]
+    }, {
+      "description": "X(A)      Y(A)      Z(A)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_coordinates",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "AT.",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_atom_element",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "EXAD",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_exad",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "ATOM",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_atom_label",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "N.ELECT.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_number_of_electrons",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "SHELL",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_atom_shell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "N.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_atom_z",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_atom"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_cappa_is1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_cappa_is2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_cappa_is3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CELL VOLUME (A.U.)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_cell_volume",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CONVERGENCE ON ENER",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_convergence",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "DE(K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_dek",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "ENERGY LEVEL SHIFTING",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_energy_level_shifting",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "FERMI ENERGY",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_fermi_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "GCALCO - MAX INDICES DIRECT LATTICE VECTOR",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_gcalco_max_indices",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "properties input file",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_input_file",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_integer1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_integer2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_integer3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_irr_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_irr_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_k_pts_monk_net",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "KIN. ENERGY",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_kinetic_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Angles between primitive lattice vectors in degrees (e.g. LATTICE PARAMETERS  (ANGSTROM AND DEGREES) - PRIMITIVE CELL. A          B          C         ALPHA      BETA     GAMMA        VOLUME. 3.98822    3.98822    3.98822     60.0000   60.0000   60.0000      44.85631)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_angles",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Lengths of primitive lattice vectors in angstroms (e.g. LATTICE PARAMETERS  (ANGSTROM AND DEGREES) - PRIMITIVE CELL. A          B          C         ALPHA      BETA     GAMMA        VOLUME. 3.98822    3.98822    3.98822     60.0000   60.0000   60.0000      44.85631)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_lengths",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value4",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value5",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value6",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_value7",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "DIRECT LATTICE VECTOR COMPONENTS (ANGSTROM)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_vectors",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "Primitive cell volume in cubic angstroms. (e.g. LATTICE PARAMETERS  (ANGSTROM AND DEGREES) - PRIMITIVE CELL. A          B          C         ALPHA      BETA     GAMMA        VOLUME. 3.98822    3.98822    3.98822     60.0000   60.0000   60.0000      44.85631)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_lattice_volume",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_lattice"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_matrix_size_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     964",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_matrix_size_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "MAX G-VECTOR INDEX FOR 1- AND 2-ELECTRON INTEGRALS 247",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_max_gvector_index",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, N. OF ATOMS PER CELL.",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_atoms",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, CORE ELECTRONS PER CELL.",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_core_electrons",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, N. OF ELECTRONS PER CELL.",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_electrons",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "NUMBER OF K POINTS IN THE IBZ",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_k_points_ibz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, NUMBER OF AO.",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_orbitals",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "N. OF SCF CYCLES",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_scf_cycles",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, NUMBER OF SHELLS.",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_shells",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, N. OF SYMMETRY OPERATORS.",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_symmops",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "NO.OF VECTORS CREATED 6999 STARS  105 RMAX    79.76041 BOHR",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_number_of_vectors",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, POLE ORDER IN MONO ZONE",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_pole_order",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "NO.OF VECTORS CREATED 6999 STARS  105 RMAX    79.76041 BOHR",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_rmax_bohr",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "SHRINKING FACTOR(GILAT NET)",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_shrink_gilat",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "SHRINK. FACT.(MONKH.)",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_shrink_monkh",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "NO.OF VECTORS CREATED 6999 STARS  105 RMAX    79.76041 BOHR",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_stars",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Start date of program Properties (Properties performs e.g. band structure analysis) EEEEEEEEEE STARTING  DATE 26 05 2016 TIME 13:13:06.5.",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_start_date",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Start time of program Properties (Properties performs e.g. band structure analysis). EEEEEEEEEE STARTING  DATE 26 05 2016 TIME 13:13:06.5",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_start_time",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_symmops_g",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  48",
+      "dtypeStr": "i",
+      "name": "x_crystal_properties_symmops_k",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Title following Properties starting date and time.",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_title",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, tolerance T1 as power of 10 (e.g. COULOMB OVERLAP TOL          (T1) 10**   -6)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_tol_coulomb_overlap",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, tolerance T2 as power in 10 (e.g. COULOMB PENETRATION TOL      (T2) 10**   -6)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_tol_coulomb_penetration",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, tolerance T3 as power in 10 (e.g. EXCHANGE OVERLAP TOL         (T3) 10**   -6)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_tol_exchange_overlap",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, tolerance T4 as power in 10 (e.g. EXCHANGE PSEUDO OVP (F(G))   (T4) 10**   -6)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_tol_pseudo_overlap_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Info section related to program Properties, tolerance T5 as power in 10 (e.g. EXCHANGE PSEUDO OVP (P(G))   (T5) 10**  -12)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_tol_pseudo_overlap_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "TOTAL ENERGY",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_total_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Following line, 2nd type of properties calculation (e.g. HARTREE-FOCK HAMILTONIAN),",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_type2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Type of properties calculation (e.g. CRYSTAL - PROPERTIES - TYPE OF CALCULATION :  RESTRICTED CLOSED SHELL)",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_type",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "VIR. COEFF.",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_virial_coefficient",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "WARNING **** F90MAIN3 **** BF SYMMETRY ADAPTED-INFO MODIFIED BY BAND-CALL NEWK",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_warning_key",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_warning"
+      ]
+    }, {
+      "description": "WARNING **** F90MAIN3 **** BF SYMMETRY ADAPTED-INFO MODIFIED BY BAND-CALL NEWK",
+      "dtypeStr": "C",
+      "name": "x_crystal_properties_warning_text",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties_warning"
+      ]
+    }, {
+      "description": "WEIGHT OF F(I) IN F(I+1)",
+      "dtypeStr": "f",
+      "name": "x_crystal_properties_weight_f",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "BAND     INTEGRATED DOSS PER PROJECTION AND TOTAL. T.",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_band_doss_per",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_band"
+      ]
+    }, {
+      "description": "BAND     INTEGRATED DOSS PER PROJECTION AND TOTAL. T.",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_band_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_band"
+      ]
+    }, {
+      "description": "BOTTOM OF VIRTUAL BANDS - BAND     15; K    1; EIG  1.2859066E-01 AU",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_bottom_of_virtual_b",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "BOTTOM OF VIRTUAL BANDS - BAND     15; K    1; EIG  1.2859066E-01 AU",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_bottom_of_virtual_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "BOTTOM OF VIRTUAL BANDS - BAND     15; K    1; EIG  1.2859066E-01 AU",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_bottom_of_virtual_k",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "FERMI ENERGY AND DENSITY MATRIX CALCULATION ON COMPUTED EIGENVECTORS. DENSITY MATRIX AT SCF CYCLE ( 22+1)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_density_matrix_cycleplus",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "FERMI ENERGY AND DENSITY MATRIX CALCULATION ON COMPUTED EIGENVECTORS. DENSITY MATRIX AT SCF CYCLE ( 22+1)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_density_matrix_cycle",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 AU",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_dos_energy_dos",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos_energy"
+      ]
+    }, {
+      "description": "ENERGY",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_dos_energy_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos_energy"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "C",
+      "name": "x_crystal_restart_dos_energy_text",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos_energy"
+      ]
+    }, {
+      "description": "*** ENERGY      TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 AU",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_dos_scale_full",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos"
+      ]
+    }, {
+      "description": "*** INTEGRATED DENSITIES IN THE ENERGY INTERVAL PER PROJECTION AND TOTAL. T.",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_dos_scale_t",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos"
+      ]
+    }, {
+      "description": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT DOSS        TELAPSE        0.35 TCPU        0.35",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_dos_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos"
+      ]
+    }, {
+      "description": "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT DOSS        TELAPSE        0.35 TCPU        0.35",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_dos_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_dos"
+      ]
+    }, {
+      "description": "EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME 13:13:06.9",
+      "dtypeStr": "C",
+      "name": "x_crystal_restart_end_date",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "ENDPROP. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE        0.35 TCPU        0.35",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_end_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "ENDPROP. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE        0.35 TCPU        0.35",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_end_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME 13:13:06.9",
+      "dtypeStr": "C",
+      "name": "x_crystal_restart_end_time",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_fl_band_max",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_fl_band_min",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_fl_energy_max",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_fl_energy_min",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "INSULATING STATE",
+      "dtypeStr": "b",
+      "name": "x_crystal_restart_insulating_state",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_integer1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_integer2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_integer3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "14-C(  7  1  0)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_kpoint_coordinates",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_restart_kpoint"
+      ]
+    }, {
+      "description": "14-C(  7  1  0)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_kpoint_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_kpoint"
+      ]
+    }, {
+      "description": "14-C(  7  1  0)",
+      "dtypeStr": "C",
+      "name": "x_crystal_restart_kpoint_symbol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_kpoint"
+      ]
+    }, {
+      "description": "*** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF IS = 12)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_kpoints_is_units",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart_kpoints"
+      ]
+    }, {
+      "description": "NUMBER OF ENERGY POINTS",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_number_of_epoints",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "NUMBER OF K POINTS OF SECONDARY NET",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_number_of_kpsn",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "NUMBER OF LEGENDRE POLYNOMIALS",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_number_of_lpols",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "NUMBER OF PROJECTIONS",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_number_of_projections",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "NUMBER OF SYMMETRIZED PWS FOR EXPANSION",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_number_of_sympws",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "POINTS(GILAT NET)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_points_gilat",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "POINTS IN THE IBZ",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_points_ibz",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "SHRINK FACTOR(GILAT)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_shrink_gilat",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "SHRINK FACTORS(MONK.)",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_shrink_monkh",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "CORE DENSITY MATRIX CALCULATION. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT NEWK        TELAPSE        0.34 TCPU        0.34",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "CORE DENSITY MATRIX CALCULATION. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT NEWK        TELAPSE        0.34 TCPU        0.34",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOP OF VALENCE BANDS -    BAND     14; K    1; EIG -3.9685829E-01 AU",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_top_of_valence_b",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOP OF VALENCE BANDS -    BAND     14; K    1; EIG -3.9685829E-01 AU",
+      "dtypeStr": "f",
+      "name": "x_crystal_restart_top_of_valence_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "TOP OF VALENCE BANDS -    BAND     14; K    1; EIG -3.9685829E-01 AU",
+      "dtypeStr": "i",
+      "name": "x_crystal_restart_top_of_valence_k",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "runcry14 termination stats (e.g. EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME 13:13:06.4)",
+      "dtypeStr": "C",
+      "name": "x_crystal_run_end_date",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_endinformation"
+      ]
+    }, {
+      "description": "runcry14 termination stats (e.g. EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME 13:13:06.4)",
+      "dtypeStr": "C",
+      "name": "x_crystal_run_end_time",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_endinformation"
+      ]
+    }, {
+      "description": "The date when this run was started.",
+      "dtypeStr": "C",
+      "name": "x_crystal_run_start_date",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_startinformation"
+      ]
+    }, {
+      "description": "The time when this run was started.",
+      "dtypeStr": "C",
+      "name": "x_crystal_run_start_time",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_startinformation"
+      ]
+    }, {
+      "description": "Title of the runcry(14) task.",
+      "dtypeStr": "C",
+      "name": "x_crystal_run_title",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_startinformation"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g.  TOTAL ATOMIC CHARGES:. 10.0158876   9.9841124)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_atomic_charges",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: BIELET ZONE E-E                               5.7175063847322E+02",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_bielet_zone_ee",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. CHARGE NORMALIZATION FACTOR   1.00000000)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_charge_normalization",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Cycles when converged.",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_cycles",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "subsequent scf cycles, number of a particular scf iteration cycle (e.g.  CYC   0 ETOT(AU) -2.750919138897E+02 DETOT -2.75E+02 tst  0.00E+00 PX  1.00E+00)",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_cycle",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: EXT EL-POLE                                  -5.2914791274154E+02",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_ext_elpole",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: EXT EL-SPHEROPOLE                             3.9924168445258E+00",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_ext_spheropole",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT FDIK        TELAPSE        0.63 TCPU        0.63)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_fdik_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT FDIK        TELAPSE        0.63 TCPU        0.63)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_fdik_telapse",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Final scf step, cycle number (e.g. in TOTAL ENERGY(HF)(AU)(  22) -6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX 1.2E-08)",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_final_cycle",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Final scf step, delta energy (e.g. in TOTAL ENERGY(HF)(AU)(  22) -6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX 1.2E-08)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_final_delta_energy",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Final scf step, px value (e.g. in TOTAL ENERGY(HF)(AU)(  22) -6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX 1.2E-08)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_final_px",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Final scf step, total energy (e.g. in TOTAL ENERGY(HF)(AU)(  22) -6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX 1.2E-08)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_final_total_energy",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Final scf step, tst value (e.g. in TOTAL ENERGY(HF)(AU)(  22) -6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX 1.2E-08)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_final_tst",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "subsequent scf cycles (contains text INSULATING STATE)",
+      "dtypeStr": "b",
+      "name": "x_crystal_scf_insulating_state",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: KINETIC ENERGY                                2.7465596172356E+02",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_kinetic_energy",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "SCF mode (e.g. HF).",
+      "dtypeStr": "C",
+      "name": "x_crystal_scf_mode",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      TELAPSE        1.20 TCPU        1.20)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_monmo3_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      TELAPSE        1.20 TCPU        1.20)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_monmo3_telapse",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      TELAPSE        0.63 TCPU        0.63)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_moqgad_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      TELAPSE        0.63 TCPU        0.63)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_moqgad_telapse",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT PDIG        TELAPSE        0.63 TCPU        0.63)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_pdig_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT PDIG        TELAPSE        0.63 TCPU        0.63)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_pdig_telapse",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. CYC   0 ETOT(AU) -2.750919138897E+02 DETOT -2.75E+02 tst  0.00E+00 PX  1.00E+00)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_px",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     TELAPSE        1.19 TCPU        1.19)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_shellx2_tcpu",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     TELAPSE        1.19 TCPU        1.19)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_shellx2_telapse",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: TOTAL E-E                                     4.6595142576204E+01",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_total_ee",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: TOTAL E-N + N-E                              -5.2283101954878E+02",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_total_en_ne",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: TOTAL   ENERGY                               -2.7466419192577E+02",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_total_energy",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: TOTAL N-N                                    -7.3084276676762E+01 ",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_total_nn",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. CYC   0 ETOT(AU) -2.750919138897E+02 DETOT -2.75E+02 tst  0.00E+00 PX  1.00E+00)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_tst",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TOP OF VALENCE BANDS -    BAND     10; K    1; EIG -3.4527266E-01 AU)",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_valence_band",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TOP OF VALENCE BANDS -    BAND     10; K    1; EIG -3.4527266E-01 AU)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_valence_eig",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. TOP OF VALENCE BANDS -    BAND     10; K    1; EIG -3.4527266E-01 AU)",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_valence_k",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "+++ ENERGIES IN A.U. +++. ::: VIRIAL COEFFICIENT                            9.9998501747632E-01",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_virial_coefficient",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. BOTTOM OF VIRTUAL BANDS - BAND     11; K    1; EIG  3.7948795E-01 AU)",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_virtual_band",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. BOTTOM OF VIRTUAL BANDS - BAND     11; K    1; EIG  3.7948795E-01 AU)",
+      "dtypeStr": "f",
+      "name": "x_crystal_scf_virtual_eig",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "subsequent scf cycles (e.g. BOTTOM OF VIRTUAL BANDS - BAND     11; K    1; EIG  3.7948795E-01 AU)",
+      "dtypeStr": "i",
+      "name": "x_crystal_scf_virtual_k",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "A particular point in a line: 1(  0/456  0/456  0/456)",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_bands_line_point",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands_line"
+      ]
+    }, {
+      "description": "A particular line in band structure calculation",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_bands_line",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_bands"
+      ]
+    }, {
+      "description": "BAND STRUCTURE",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_bands",
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "A GTF shell / orbital has a number of gaussian primitives.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_basis_set_atom_shell_primitive",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom_shell"
+      ]
+    }, {
+      "description": "Shell contains a number of orbitals.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_basis_set_atom_shell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set_atom"
+      ]
+    }, {
+      "description": "Basis set atom",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_basis_set_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_basis_set"
+      ]
+    }, {
+      "description": "Basis set with low precision.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_basis_set",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atom in crystallographic cell.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_cell_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell"
+      ]
+    }, {
+      "description": "Symmetry operator.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_cell_symmop",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_cell"
+      ]
+    }, {
+      "description": "Crystallographic lattice",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_cell",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atom information.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_conventional_cell_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_conventional_cell"
+      ]
+    }, {
+      "description": "Section for conventional cell parameters",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_conventional_cell",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "runcry14 termination stats (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE      166.54 TCPU      166.18)",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_endinformation",
+      "superNames": [
+        "program_info"
+      ]
+    }, {
+      "description": "Atomic forces on a single atom",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_forces_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "ATOMIC BORN CHARGE TENSOR (UNITS OF e, ELECTRON CHARGE).",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_forces_born_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Atom in force matrix: directions that are GENERATED FROM A PREVIOUS LINE",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_forces_matrix_atom_gen",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces_matrix_atom"
+      ]
+    }, {
+      "description": "Atom in force matrix",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_forces_matrix_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Atomic forces",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_forces",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Frequency calculation setup: atom masses.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_frequency_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency"
+      ]
+    }, {
+      "description": "Atom listed in the gradients section.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_frequency_gradients_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients"
+      ]
+    }, {
+      "description": "Frequency calculation: scf+gradient calculations required for calculating frequencies: a particular gradient.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_frequency_gradients_op",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency_gradients"
+      ]
+    }, {
+      "description": "Frequency calculation: scf+gradient calculations required for calculating frequencies.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_frequency_gradients",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_frequency"
+      ]
+    }, {
+      "description": "Frequency calculations setup.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_frequency",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Contains crystal version information and other information obtained from the first asterix header in the Crystal output file.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_header",
+      "shape": [],
+      "superNames": []
+    }, {
+      "description": "Information line.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_info_item",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "Section containing miscellaneous information.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_info",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Non-equivalent atom.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_input_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Atom shell gaussian primitive.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_input_basis_shell_primitive",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis_shell"
+      ]
+    }, {
+      "description": "Atom shell in basis set.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_input_basis_shell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_basis"
+      ]
+    }, {
+      "description": "Basis set for an atom.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_input_basis",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Contains the input data for Crystal.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_input",
+      "shape": [],
+      "superNames": ["section_run"]
+    }, {
+      "description": "DFT input.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_input_dft",
+      "shape": [],
+      "superNames": ["x_crystal_section_input"]
+    }, {
+      "description": "DFT exchange-correlation functional shortcut name",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_dft_xc_shortcut",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_dft"
+      ]
+    }, {
+      "description": "DFT exchange functional name",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_dft_exchange",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_dft"
+      ]
+    }, {
+      "description": "DFT correlation functional name",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_dft_correlation",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input_dft"
+      ]
+    }, {
+      "description": "Crystal system type name.",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_system_type",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Crystal calculation type name.",
+      "dtypeStr": "C",
+      "name": "x_crystal_input_calculation_type",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "Mode",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irlo_modes_atom_mode",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes_atom"
+      ]
+    }, {
+      "description": "Atom",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irlo_modes_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo_modes"
+      ]
+    }, {
+      "description": "LO MODES FOR IRREP Fu",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irlo_modes",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo"
+      ]
+    }, {
+      "description": "MODES         EIGV          FREQUENCIES    IRREP IR INTENS       SHIFTS",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irlo_mode",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo"
+      ]
+    }, {
+      "description": "OVERLAP BETWEEN THE EIGENVECTORS OF LO AND TO MODES.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irlo_overlap",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irlo"
+      ]
+    }, {
+      "description": "LONGITUDINAL OPTICAL (LO) PHONON CALCULATION REQUESTED.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irlo",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Mode",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irto_modes_atom_mode",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes_atom"
+      ]
+    }, {
+      "description": "Atom",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irto_modes_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto_modes"
+      ]
+    }, {
+      "description": "NORMAL MODES NORMALIZED TO CLASSICAL AMPLITUDES.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irto_modes",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto"
+      ]
+    }, {
+      "description": "MODES         EIGV          FREQUENCIES     IRREP  IR   INTENS    RAMAN",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irto_mode",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_irto"
+      ]
+    }, {
+      "description": "EIGENVALUES (EIGV) OF THE MASS WEIGHTED HESSIAN MATRIX AND HARMONIC TRANSVERSE OPTICAL (TO) FREQUENCIES.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_irto",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "K points",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_kpoints",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "K point (as in e.g. *** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF IS = 16))",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_kpoint",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_kpoints"
+      ]
+    }, {
+      "description": "Vectors of the real and reciprical lattice.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_lattice",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Particular neighbor at a given distance.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_neighbors_atom_distance_neighbor",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom_distance"
+      ]
+    }, {
+      "description": "Nearest neighbors at a given distance.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_neighbors_atom_distance",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors_atom"
+      ]
+    }, {
+      "description": "Nearest neighbors of a particular (equivalent) atom",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_neighbors_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_neighbors"
+      ]
+    }, {
+      "description": "Nearest neighbors.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_neighbors",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atom mentioned in asymmetric unit listings.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_prim_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_prim"
+      ]
+    }, {
+      "description": "Atom information.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_primitive_cell_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_primitive_cell"
+      ]
+    }, {
+      "description": "Section for primitive cell parameters",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_primitive_cell",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Atoms mentioned in asymmetric unit listings.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_prim",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Stores operating system related information related to the Crystal process.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_process",
+      "shape": [],
+      "superNames": []
+    }, {
+      "description": "ATOM N.AT.  SHELL    X(A)      Y(A)      Z(A)      EXAD       N.ELECT.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_properties_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Section containing lattice parameters used by Properties program.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_properties_lattice",
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "WARNING **** F90MAIN3 **** BF SYMMETRY ADAPTED-INFO MODIFIED BY BAND-CALL NEWK",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_properties_warning",
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "program called properties, output file begins.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_properties",
+      "superNames": []
+    }, {
+      "description": "BAND     INTEGRATED DOSS PER PROJECTION AND TOTAL. T.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_restart_band",
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "*** ENERGY      TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 AU",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_restart_dos_energy",
+      "superNames": [
+        "x_crystal_section_restart_dos"
+      ]
+    }, {
+      "description": "*** ENERGY      TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 AU",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_restart_dos",
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "*** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF IS = 12)",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_restart_kpoints",
+      "superNames": [
+        "x_crystal_section_restart"
+      ]
+    }, {
+      "description": "14-C(  7  1  0)",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_restart_kpoint",
+      "superNames": [
+        "x_crystal_section_restart_kpoints"
+      ]
+    }, {
+      "description": "RESTART WITH NEW K POINTS NET",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_restart",
+      "superNames": [
+        "x_crystal_section_properties"
+      ]
+    }, {
+      "description": "Contains information about the starting conditions for this run.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_startinformation",
+      "superNames": [
+        "program_info"
+      ]
+    }, {
+      "description": "Symmetry allowed directions.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_symmetry",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "HARMONIC VIBRATIONAL CONTRIBUTIONS TO THERMODYNAMIC FUNCTIONS AT GIVEN TEMPERATURE AND PRESSURE. THERMODYNAMIC FUNCTIONS WITH VIBRATIONAL CONTRIBUTIONS.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_thermodynamic_contrib",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "Thermodynamic quantities",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_thermodynamic",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "VIBRATIONAL TEMPERATURES, LO MODES",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational_modes_lo",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes"
+      ]
+    }, {
+      "description": "VIBRATIONAL TEMPERATURES, TO MODES",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational_modes_to",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes"
+      ]
+    }, {
+      "description": "VIBRATIONAL TEMPERATURES (K) [MODE NUMBER;IRREP]",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational_modes",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "BORN CHARGE VECTOR IN THE BASIS OF NORMAL MODES",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational_mode",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "IRREP/CLA MULTIP Fu for GROUP OPERATORS",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational_multip",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "SYMMETRY ADAPTION OF VIBRATIONAL MODES: K-LITTLE GROUP: CLASS TABLE, CHARACTER TABLE.",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational_symmetry",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "SYMMETRY ADAPTION OF VIBRATIONAL MODES",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_vibrational",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_forces"
+      ]
+    }, {
+      "description": "Wavefunctions of an atom: initial conditions",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_wavefunctions_atom",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions"
+      ]
+    }, {
+      "description": "Wavefunctions",
+      "kindStr": "type_section",
+      "name": "x_crystal_section_wavefunctions",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Crystal spacegroup class",
+      "dtypeStr": "C",
+      "name": "x_crystal_spacegroup_class",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Crystal spacegroup string resembling Hermann–Mauguin notation.",
+      "dtypeStr": "C",
+      "name": "x_crystal_spacegroup",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Symmetry allowed directions.",
+      "dtypeStr": "i",
+      "name": "x_crystal_symmetry_allowed_directions",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_symmetry"
+      ]
+    }, {
+      "description": "CPU time used for calculating symmetry.",
+      "dtypeStr": "f",
+      "name": "x_crystal_symmetry_intscreen_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_symmetry"
+      ]
+    }, {
+      "description": "Elapsed time used for calculating symmetry.",
+      "dtypeStr": "f",
+      "name": "x_crystal_symmetry_intscreen_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_symmetry"
+      ]
+    }, {
+      "description": "Time used for calculating symmetry.",
+      "dtypeStr": "f",
+      "name": "x_crystal_symmetry_tcpu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_symmetry"
+      ]
+    }, {
+      "description": "Time used for calculating symmetry.",
+      "dtypeStr": "f",
+      "name": "x_crystal_symmetry_telapse",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_symmetry"
+      ]
+    }, {
+      "description": "ET+PV-TS: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_c1_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ET+PV-TS: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_c1_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ET+PV-TS : KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_c1_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "EL+E0+ET+PV-TS: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_c2_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "EL+E0+ET+PV-TS: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_c2_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "EL+E0+ET+PV-TS: KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_c2_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ZERO-POINT ENERGY: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_e0_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ZERO-POINT ENERGY: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_e0_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ZERO-POINT ENERGY: KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_e0_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ELECTRONIC ENERGY: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_el_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ELECTRONIC ENERGY: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_el_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "ELECTRONIC ENERGY: KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_el_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "THERMAL CONTRIBUTION TO THE VIBRATIONAL ENERGY: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_et_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "THERMAL CONTRIBUTION TO THE VIBRATIONAL ENERGY: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_et_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "THERMAL CONTRIBUTION TO THE VIBRATIONAL ENERGY: KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_et_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "AT GIVEN TEMPERATURE AND PRESSURE: (T =  ? K, P =   ? MPA)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_pressure",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "PRESSURE * VOLUME: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_pv_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "PRESSURE * VOLUME: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_pv_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "PRESSURE * VOLUME: KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_pv_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "AT GIVEN TEMPERATURE AND PRESSURE: (T =  ? K, P =   ? MPA)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_temperature",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "TEMPERATURE * ENTROPY: AU/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_ts_aucell",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "TEMPERATURE * ENTROPY: EV/CELL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_ts_ev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "TEMPERATURE * ENTROPY: KJ/MOL",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_contrib_ts_kjmol",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic_contrib"
+      ]
+    }, {
+      "description": "OTHER THERMODYNAMIC FUNCTIONS: ENTROPY: J/(MOL*K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_entropy_jmolk",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "OTHER THERMODYNAMIC FUNCTIONS: ENTROPY: mEV/(CELL*K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_entropy_mev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "OTHER THERMODYNAMIC FUNCTIONS: ENTROPY: mHARTREE/(CELL*K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_entropy_mhartree",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "OTHER THERMODYNAMIC FUNCTIONS: HEAT CAPACITY: J/(MOL*K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_heatcapacity_jmolk",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "OTHER THERMODYNAMIC FUNCTIONS: HEAT CAPACITY: mEV/(CELL*K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_heatcapacity_mev",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "OTHER THERMODYNAMIC FUNCTIONS: HEAT CAPACITY: mHARTREE/(CELL*K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_thermodynamic_heatcapacity_mhartree",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_thermodynamic"
+      ]
+    }, {
+      "description": "SUM TENSOR OF THE VIBRATIONAL CONTRIBUTIONS TO THE STATIC DIELECTRIC TENSOR",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_dielectric_tensor_contrib",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "HIGH FREQUENCY DIELECTRIC TENSOR (FROM INPUT)",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_dielectric_tensor_hf",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "STATIC DIELECTRIC TENSOR",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_dielectric_tensor_static",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Fu vector",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_fu",
+      "shape": [
+        2
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_integer1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_integer2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_minus",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "BORN CHARGE VECTOR IN THE BASIS OF NORMAL MODES (UNITS OF e*M_E**(-1/2) ).",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_mode_born_charge_vector",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational_mode"
+      ]
+    }, {
+      "description": "BORN CHARGE VECTOR IN THE BASIS OF NORMAL MODES (UNITS OF e*M_E**(-1/2) ).",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_mode_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_mode"
+      ]
+    }, {
+      "description": "CARTESIAN AXES SYSTEM",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_mode_tensor",
+      "shape": [
+        "n",
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational_mode"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_mode_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_mode"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_mode_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_mode"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_mode_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_mode"
+      ]
+    }, {
+      "description": "IRREP",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_modes_lo_irrep",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes_lo"
+      ]
+    }, {
+      "description": "Mode number",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_modes_lo_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes_lo"
+      ]
+    }, {
+      "description": "VIBRATIONAL TEMPERATURES (K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_modes_lo_temperature",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes_lo"
+      ]
+    }, {
+      "description": "Mode number",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_modes_to_irrep",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes_to"
+      ]
+    }, {
+      "description": "Mode number",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_modes_to_number",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes_to"
+      ]
+    }, {
+      "description": "VIBRATIONAL TEMPERATURES (K)",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_modes_to_temperature",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_modes_to"
+      ]
+    }, {
+      "description": "Fu",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_multip_fu",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_multip"
+      ]
+    }, {
+      "description": "IRREP/CLA",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_multip_irrep_cla",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_multip"
+      ]
+    }, {
+      "description": "MULTIP",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_multip_multip",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_multip"
+      ]
+    }, {
+      "description": "SYMMETRY ADAPTED DIRECTIONS FOR LONGITUDINAL OPTICAL MODES",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_optical_longitudal_mode_direction",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "CLASS",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_symmetry_class",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_symmetry"
+      ]
+    }, {
+      "description": "GROUP OPERATORS (SEE SYMMOPS KEYWORD)",
+      "dtypeStr": "i",
+      "name": "x_crystal_vibrational_symmetry_group_operators",
+      "shape": [
+        "n"
+      ],
+      "superNames": [
+        "x_crystal_section_vibrational_symmetry"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_symmetry_text",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational_symmetry"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_text1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_text2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage.",
+      "dtypeStr": "C",
+      "name": "x_crystal_vibrational_text3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_value1",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_value2",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Temporary storage",
+      "dtypeStr": "f",
+      "name": "x_crystal_vibrational_value3",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_vibrational"
+      ]
+    }, {
+      "description": "Simulation cell volume, in cubic angstroms.",
+      "dtypeStr": "f",
+      "name": "x_crystal_volume",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  2.6E-06",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_accuracy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  2.6E-06",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_kinetic_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUCLEAR CHARGE 11.0  SYMMETRY SPECIES            S    P",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_nuclear_charge",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CLOSED SHELLS     S:2    P:1",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_number_of_closed_shells_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CLOSED SHELLS     S:2    P:1",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_number_of_closed_shells_s",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CONTRACTED GTOS   S:4    P:3",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_number_of_contracted_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CONTRACTED GTOS   S:4    P:3",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_number_of_contracted_s",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): N. ELECTRONS   11.0  NUMBER OF PRIMITIVE GTOS   S:15    P:7",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_number_of_electrons",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUMBER OF PRIMITIVE GTOS   S:15    P:7",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_number_of_primitive_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): NUMBER OF PRIMITIVE GTOS   S:15    P:7",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_number_of_primitive_s",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): OPEN SHELL OCCUPATION       S:1    P:0",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_open_shell_occupation_p",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "as in ATOMIC WAVEFUNCTION(S): OPEN SHELL OCCUPATION       S:1    P:0",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_open_shell_occupation_s",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  2.6E-06",
+      "dtypeStr": "i",
+      "name": "x_crystal_wavefunctions_atom_scfit",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  2.6E-06",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_total_hf_energy",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  2.6E-06",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_virial_theorem",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }, {
+      "description": "Pointgroup number name.",
+      "dtypeStr": "C",
+      "name": "x_crystal_pointgroup",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Pointgroup number.",
+      "dtypeStr": "i",
+      "name": "x_crystal_pointgroup_number",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Pointgroup number 2.",
+      "dtypeStr": "i",
+      "name": "x_crystal_pointgroup_number2",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Spacegroup corresponding to the pointgroup.",
+      "dtypeStr": "C",
+      "name": "x_crystal_pointgroup_corresponding_spacegroup",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Input TOLDEE",
+      "dtypeStr": "i",
+      "name": "x_crystal_input_toldee",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_input"
+      ]
+    }, {
+      "description": "TOLDEE info",
+      "dtypeStr": "f",
+      "name": "x_crystal_info_toldee",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_info"
+      ]
+    }, {
+      "description": "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  2.6E-06",
+      "dtypeStr": "f",
+      "name": "x_crystal_wavefunctions_atom_znuc",
+      "shape": [],
+      "superNames": [
+        "x_crystal_section_wavefunctions_atom"
+      ]
+    }]
+}

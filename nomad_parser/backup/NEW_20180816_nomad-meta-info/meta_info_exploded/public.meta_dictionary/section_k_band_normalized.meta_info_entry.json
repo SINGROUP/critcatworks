@@ -1,0 +1,15 @@
+{
+  "meta_name":"section_k_band_normalized",
+  "meta_type":"type-section",
+  "meta_description":[
+    "This section stores information on a normalized $k$-band (electronic band ",
+    "structure) evaluation along one-dimensional pathways in the $k$ (reciprocal) ",
+    "space given in section_k_band_segment. Eigenvalues calculated at the actual ",
+    "$k$-mesh used for energy_total evaluations, can be found in the ",
+    "section_eigenvalues section."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

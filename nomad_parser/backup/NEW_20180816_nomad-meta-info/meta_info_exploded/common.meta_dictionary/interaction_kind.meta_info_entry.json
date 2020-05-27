@@ -1,0 +1,12 @@
+{
+  "meta_name":"interaction_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Short and unique name for this interaction type. Valid names are described in ",
+    "the [interaction\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-me",
+    "ta-info/wikis/metainfo/interaction-kind)."],
+  "meta_parent_section":"section_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_data_type":"string"
+}

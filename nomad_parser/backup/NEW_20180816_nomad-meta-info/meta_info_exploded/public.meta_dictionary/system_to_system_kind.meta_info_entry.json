@@ -1,0 +1,14 @@
+{
+  "meta_name":"system_to_system_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String defining the relationship between the referenced section_system and the ",
+    "present section_system. Often systems are connected for example if a phonon ",
+    "calculation using finite differences is performed the force ealuation is done ",
+    "in a larger supercell but properties such as the phonon band structure are ",
+    "still calculated for the primitive cell. Hence, the need of keeping track of ",
+    "these connected systems. The referenced system is identified via ",
+    "system_to_system_ref."],
+  "meta_parent_section":"section_system_to_system_refs",
+  "meta_data_type":"string"
+}

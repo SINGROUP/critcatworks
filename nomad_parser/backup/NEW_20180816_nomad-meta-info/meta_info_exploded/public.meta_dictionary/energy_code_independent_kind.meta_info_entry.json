@@ -1,0 +1,12 @@
+{
+  "meta_name":"energy_code_independent_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Type of the code-independent total energy (obtained by subtracting a reference ",
+    "energy calculated with the same code), created to be comparable among different ",
+    "codes and numerical settings. Details can be found on the ",
+    "[energy_code_independent wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-",
+    "meta-info/wikis/metainfo/energy-code-independent)."],
+  "meta_parent_section":"section_energy_code_independent",
+  "meta_data_type":"string"
+}

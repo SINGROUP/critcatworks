@@ -1,0 +1,8 @@
+{
+  "meta_name":"gw_fermi_energy",
+  "meta_type":"type-value",
+  "meta_description":"GW Fermi energy",
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

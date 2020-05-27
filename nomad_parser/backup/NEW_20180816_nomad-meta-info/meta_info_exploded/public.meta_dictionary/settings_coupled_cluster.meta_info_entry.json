@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_coupled_cluster",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters for the coupled-cluster method (CC) in the post ",
+    "Hartree-Fock step."],
+  "meta_abstract_types":[
+    "settings_post_hartree_fock"]
+}

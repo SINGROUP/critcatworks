@@ -1,0 +1,104 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "metainfo for the dftb plus parser. All names are expected to start with dftbp",
+  "dependencies": [ {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }, {
+      "relativePath": "common.nomadmetainfo.json"
+    }],
+  "metaInfos": [{
+    "description": "-",
+    "name": "atom",
+    "superNames": ["settings_atom_in_molecule"],
+    "repeats": true,
+    "dtypeStr": "i",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_atom_positions_X",
+    "superNames": ["section_system"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_charge",
+    "superNames": ["section_molecule_type"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_eigenvalues_values",
+    "superNames": ["section_eigenvalues"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_eigenvalues_occupation",
+    "superNames": ["section_eigenvalues"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_atom_positions_Y",
+    "superNames": ["section_system"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_atom_positions_Z",
+    "superNames": ["section_system"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_atom_forces_X",
+    "superNames": ["section_single_configuration_calculation"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "repeats": true,
+    "name": "x_dftbp_atom_forces_Y",
+    "superNames": ["section_single_configuration_calculation"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "name": "x_dftbp_atom_forces_Z",
+    "repeats": true,
+    "superNames": ["section_single_configuration_calculation"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "name": "x_dftbp_force_max",
+    "superNames": ["section_single_configuration_calculation"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "name": "x_dftbp_force_max_mov",
+    "superNames": ["section_single_configuration_calculation"],
+    "dtypeStr": "f",
+    "shape": []
+   },{
+    "description": "-",
+    "name": "energy_total",
+    "superNames": ["section_single_configuration_calculation", "energy_total_potential"],
+    "dtypeStr": "f",
+    "shape": []
+   }, {
+    "description": "-",
+    "name": "energy_free",
+    "superNames": ["section_single_configuration_calculation", "energy_total_potential"],
+    "dtypeStr": "f",
+    "shape": []
+   }]
+}

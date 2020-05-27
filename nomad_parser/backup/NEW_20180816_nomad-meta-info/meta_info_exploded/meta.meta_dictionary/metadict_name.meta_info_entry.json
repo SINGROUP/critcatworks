@@ -1,0 +1,7 @@
+{
+  "meta_name":"metadict_name",
+  "meta_type":"type-value",
+  "meta_description":"The name of the dictionary.",
+  "meta_parent_section":"meta_dictionary",
+  "meta_data_type":"string"
+}

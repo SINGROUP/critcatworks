@@ -1,0 +1,12 @@
+{
+  "meta_name":"interaction_to_topology_group_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to the topological group of atoms which is used to define contraint ",
+    "on it."],
+  "meta_parent_section":"section_interaction",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_topology"
+}

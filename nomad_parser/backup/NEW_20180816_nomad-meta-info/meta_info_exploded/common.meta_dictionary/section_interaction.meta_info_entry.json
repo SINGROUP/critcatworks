@@ -1,0 +1,12 @@
+{
+  "meta_name":"section_interaction",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing the description of a bonded interaction between arbitrary ",
+    "atoms."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

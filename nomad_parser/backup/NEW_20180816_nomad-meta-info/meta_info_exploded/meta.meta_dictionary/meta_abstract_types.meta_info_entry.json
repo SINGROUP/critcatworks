@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_abstract_types",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A list of all Meta Info of type *type-abstract* of this ",
+    "value"],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

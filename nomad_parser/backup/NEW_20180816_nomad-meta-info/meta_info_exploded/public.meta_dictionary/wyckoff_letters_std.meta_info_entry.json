@@ -1,0 +1,14 @@
+{
+  "meta_name":"wyckoff_letters_std",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Wyckoff letters for atoms in the standardized ",
+    "cell."],
+  "meta_parent_section":"section_std_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms_std"
+  }]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_response_message",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Messages outputted by the program formatting the data in the current ",
+    "response"],
+  "meta_parent_section":"response_context",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

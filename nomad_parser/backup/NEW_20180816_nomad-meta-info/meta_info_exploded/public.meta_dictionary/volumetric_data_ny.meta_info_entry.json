@@ -1,0 +1,6 @@
+{
+  "meta_name":"volumetric_data_ny",
+  "meta_type":"type-dimension",
+  "meta_description":"number of points along y axis",
+  "meta_parent_section":"section_volumetric_data"
+}

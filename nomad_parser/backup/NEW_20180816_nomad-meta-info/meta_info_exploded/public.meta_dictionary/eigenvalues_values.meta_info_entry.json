@@ -1,0 +1,19 @@
+{
+  "meta_name":"eigenvalues_values",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Values of the (electronic-energy) eigenvalues. The coordinates of the ",
+    "corresponding eigenstates in the reciprocal space are defined in ",
+    "eigenvalues_kpoints and their occupations are given in ",
+    "eigenvalues_occupation."],
+  "meta_parent_section":"section_eigenvalues",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+  },{
+    "meta_dimension_symbolic":"number_of_eigenvalues"
+  }],
+  "meta_units":"J"
+}

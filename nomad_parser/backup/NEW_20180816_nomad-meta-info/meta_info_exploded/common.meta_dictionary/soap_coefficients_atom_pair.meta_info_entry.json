@@ -1,0 +1,7 @@
+{
+  "meta_name":"soap_coefficients_atom_pair",
+  "meta_type":"type-value",
+  "meta_description":"Pair of atoms described in the current section",
+  "meta_parent_section":"section_soap_coefficients",
+  "meta_data_type":"string"
+}

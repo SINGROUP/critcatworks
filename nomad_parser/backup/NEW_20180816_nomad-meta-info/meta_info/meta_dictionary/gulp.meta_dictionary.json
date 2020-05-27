@@ -1,0 +1,485 @@
+{
+  "metadict_name":"gulp",
+  "metadict_description":[
+    "meta info used by the gulp parser.  All names are expected to start with ",
+    "x_gulp_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_gulp_cell_a",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_cell_alpha",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_cell_b",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_cell_beta",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_cell_c",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_cell_gamma",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_attachment_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for attachment_energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_attachment_energy_unit",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for attachment_energy_unit",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_bond_order_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for bond_order_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_brenner_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for brenner_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_bulk_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for bulk_energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_dispersion_real_recip",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for dispersion_real_recip",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_electric_field_times_distance",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for electric_field_times_distance",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_energy_shift",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for energy_shift",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_four_body_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for four_body_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_improper_torsions",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for improper_torsions",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_interatomic_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for interatomic_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_many_body_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for many_body_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_monopole_monopole_real",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for monopole_monopole_real",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_monopole_monopole_recip",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for monopole_monopole_recip",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_monopole_monopole_total",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for monopole_monopole_total",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_neutralising_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for neutralising_energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_non_primitive_unit_cell",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for non_primitive_unit_cell",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_out_of_plane_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for out_of_plane_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_primitive_unit_cell",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for primitive_unit_cell",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_reaxff_force_field",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for reaxff_force_field",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_region_1_2_interaction",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for region_1_2_interaction",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_region_2_2_interaction",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for region_2_2_interaction",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_self_energy_eem_qeq_sm",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for self_energy_eem_qeq_sm",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_sm_coulomb_correction",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for sm_coulomb_correction",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_solvation_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for solvation_energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_three_body_potentials",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for three_body_potentials",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_energy_total_lattice_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP energy term for total_lattice_energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_cutoff_max",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field cutoff max",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_cutoff_min",
+    "meta_type":"type-value",
+    "meta_description":[
+      "GULP force field cutoff min (can also be a string like 3Bond for some ",
+      "reason)"],
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_fourbody_force_constant",
+    "meta_type":"type-value",
+    "meta_description":"GULP 4-body force field parameter force constant",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_fourbody_phase",
+    "meta_type":"type-value",
+    "meta_description":"GULP 4-body force field parameter phase",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_fourbody_phi0",
+    "meta_type":"type-value",
+    "meta_description":"GULP 4-body force field parameter phi0",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_fourbody_sign",
+    "meta_type":"type-value",
+    "meta_description":"GULP 4-body force field parameter sign",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_parameter_a",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field parameter A",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_parameter_b",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field parameter B",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_parameter_c",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field parameter C",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_parameter_d",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field parameter D",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_potential_name",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field potential name",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_species_1",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field species 1",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_species_2",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field species 2",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_species_3",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field species 3",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_species_4",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field species 4",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_speciestype_1",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field speciestype 1",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_speciestype_2",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field speciestype 2",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_speciestype_3",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field speciestype 3",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_speciestype_4",
+    "meta_type":"type-value",
+    "meta_description":"GULP force field speciestype 4",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_threebody_1",
+    "meta_type":"type-value",
+    "meta_description":"GULP 3-body force field parameter 1",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_forcefield_threebody_2",
+    "meta_type":"type-value",
+    "meta_description":"GULP 3-body force field parameter 2",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_threebody_3",
+    "meta_type":"type-value",
+    "meta_description":"GULP 3-body force field parameter 3",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_forcefield_threebody_theta",
+    "meta_type":"type-value",
+    "meta_description":"GULP 3-body force field parameter theta",
+    "meta_parent_section":"x_gulp_section_forcefield",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_formula",
+    "meta_type":"type-value",
+    "meta_description":"GULP chemical formula",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_main_keyword",
+    "meta_type":"type-value",
+    "meta_description":"GULP calculation mode input variable",
+    "meta_parent_section":"x_gulp_section_main_keyword",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_md_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP molecular dynamics kinetic energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_md_potential_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP molecular dynamics potential energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_md_pressure",
+    "meta_type":"type-value",
+    "meta_description":"GULP molecular dynamics pressure",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_md_temperature",
+    "meta_type":"type-value",
+    "meta_description":"GULP molecular dynamics temperature",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_md_time",
+    "meta_type":"type-value",
+    "meta_description":"GULP molecular dynamics time",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_md_total_energy",
+    "meta_type":"type-value",
+    "meta_description":"GULP molecular dynamics total energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_number_of_species",
+    "meta_type":"type-dimension",
+    "meta_description":"Number of species in GULP",
+    "meta_parent_section":"section_method"
+  },{
+    "meta_name":"x_gulp_patterson_group",
+    "meta_type":"type-value",
+    "meta_description":"Patterson group",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_pbc",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gulp_prim_cell_a",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_prim_cell_alpha",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_prim_cell_b",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_prim_cell_beta",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_prim_cell_c",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_prim_cell_gamma",
+    "meta_type":"type-value",
+    "meta_description":"grrr",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gulp_section_forcefield",
+    "meta_type":"type-section",
+    "meta_description":"Section for GULP force field specification",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gulp_section_main_keyword",
+    "meta_type":"type-section",
+    "meta_description":"Section for GULP calculation mode input variable",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gulp_space_group",
+    "meta_type":"type-value",
+    "meta_description":"Space group",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gulp_species_charge",
+    "meta_type":"type-value",
+    "meta_description":"Number of species in GULP",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gulp_number_of_species"
+    }]
+  },{
+    "meta_name":"x_gulp_title",
+    "meta_type":"type-value",
+    "meta_description":"Title of GULP calculation",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  }]
+}

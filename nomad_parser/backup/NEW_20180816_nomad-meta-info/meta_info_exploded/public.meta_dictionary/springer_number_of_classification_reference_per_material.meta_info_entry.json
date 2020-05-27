@@ -1,0 +1,9 @@
+{
+  "meta_name":"springer_number_of_classification_reference_per_material",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Number of publications/references using this classification for the current ",
+    "material in the Springer Materials database"],
+  "meta_parent_section":"section_springer_classification",
+  "meta_data_type":"int"
+}

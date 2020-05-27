@@ -1,0 +1,23 @@
+{
+  "metadict_name":"summary",
+  "metadict_description":[
+    "meta info describing summary information on one or more ",
+    "calculations"],
+  "metadict_version":"0.1",
+  "metadict_require":[],
+  "meta_info_entry":[{
+    "meta_name":"section_summary",
+    "meta_type":"type-section",
+    "meta_description":"Main section for the summary information",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"summary_source_uri",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Uri of the object on which the summary information was collected (if ",
+      "defined)"],
+    "meta_parent_section":"section_summary",
+    "meta_data_type":"float"
+  }]
+}

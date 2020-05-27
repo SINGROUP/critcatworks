@@ -1,0 +1,8 @@
+{
+  "meta_name":"settings_physical_parameter",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "A parameter that defines the physical model used. Use ",
+    "settings_numerical_parameter for parameters that that influence only the ",
+    "convergence/accuracy."]
+}

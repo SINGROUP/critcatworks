@@ -1,0 +1,7 @@
+{
+  "meta_name":"settings_stress_tensor",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Settings to calculate the stress tensor (stress_tensor) consistent with the ",
+    "total energy of the system given in energy_total."]
+}

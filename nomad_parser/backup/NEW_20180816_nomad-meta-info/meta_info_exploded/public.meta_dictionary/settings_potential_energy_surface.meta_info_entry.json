@@ -1,0 +1,7 @@
+{
+  "meta_name":"settings_potential_energy_surface",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters that control the potential energy ",
+    "surface."]
+}

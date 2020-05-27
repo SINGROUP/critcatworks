@@ -1,0 +1,7 @@
+{
+  "meta_name":"section_processor_log",
+  "meta_type":"type-section",
+  "meta_description":"log of a processor",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

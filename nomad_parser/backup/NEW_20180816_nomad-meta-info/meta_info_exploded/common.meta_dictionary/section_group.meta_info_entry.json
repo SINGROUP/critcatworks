@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_group",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section describing a group (pairs, angles, molecules, etc.) between arbitrary ",
+    "atoms."],
+  "meta_parent_section":"section_topology",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

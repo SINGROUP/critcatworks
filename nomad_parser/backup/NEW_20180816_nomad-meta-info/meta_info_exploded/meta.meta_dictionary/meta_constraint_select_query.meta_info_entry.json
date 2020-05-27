@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_constraint_select_query",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Query that must be true for the values that have to satisfy this constraint. ",
+    "Typically this is for example a field having a given ",
+    "value."],
+  "meta_parent_section":"meta_constraint",
+  "meta_data_type":"string"
+}

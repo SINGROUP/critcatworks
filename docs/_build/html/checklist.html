@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Checklist &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Workflows" href="tutorials/workflows.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorials/workflows.html" title="Workflows"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="checklist">
+<h1>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h1>
+<p>Before a production run of a workflow, it is recommended to go once through this checklist.</p>
+<div class="section" id="obligatory">
+<h2>Obligatory<a class="headerlink" href="#obligatory" title="Permalink to this headline">¶</a></h2>
+<p>These points must be met:</p>
+<ul class="simple">
+<li><p>Is the information for the launchpad correct? (username, password) in both workflow submission and launching script?</p></li>
+<li><p>Are the arguments <em>username</em> and <em>password</em> correct in the workflow function?</p></li>
+<li><p>Does <em>worker_target_path</em> on the computing ressource exist?</p></li>
+<li><p>Did the test run with a LJ-potential terminate correctly?</p></li>
+<li><p>Did you switch to the correct DFT template (<em>template_path</em>)?</p></li>
+<li><p>Did you change the database to the production run database? (Argument in worfklow: e.g. <code class="code docutils literal notranslate"><span class="pre">extdb_connect</span> <span class="pre">=</span> <span class="pre">{&quot;db_name&quot;:</span> <span class="pre">&quot;ncdb&quot;}</span></code>)</p></li>
+<li><p>Are the walltimes and number of cores in the QueueAdapters of the launching script sensible?</p></li>
+</ul>
+</div>
+<div class="section" id="recommended">
+<h2>Recommended<a class="headerlink" href="#recommended" title="Permalink to this headline">¶</a></h2>
+<p>These points are not critical,
+yet it is recommended to check them
+for the best user experience:</p>
+<ul class="simple">
+<li><p>Did you set a walltime in the CP2K template? If no walltime is set or the walltime is not a little bit lower than the walltime specified during submission, Fireworks might not mark jobs FIZZLED but categorize them as RUNNING which were cancelled due to runtime. This halts the workflow and requires manual input (see Troubleshooting below).</p></li>
+<li><p>Did you provide a consistent (same DFT-level) <em>reference_energy</em> or <em>atomic_energies</em>? This may reduce your post-processing work.</p></li>
+<li><p>Is the location of your logpath ok? Some larger data files and output files are dumped there.</p></li>
+</ul>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If your workflow stops ahead of time, it might have fizzled or been defused.</p>
+<p>If it fizzled, it means there is an unexpected failure. Investigate the error in the corresponding launch directory. Once you have fixed the issue (e.g. missing file, typo, walltime, bug in the code, …) you can rerun a workflow from a specific firework through</p>
+<p><code class="code docutils literal notranslate"><span class="pre">lpad</span> <span class="pre">-l</span> <span class="pre">&lt;LAUNCHPAD&gt;</span> <span class="pre">rerun_fws</span> <span class="pre">-i</span> <span class="pre">&lt;FIREWORKID&gt;</span></code></p>
+<p>If the workflow has been defused, there is usually an expected reason for it. A set convergence criterion might have been met or a loop has become static (no more changes detected) …</p>
+<p>In most cases you can choose to keep on running it until the next stop point. Use the command</p>
+<p><code class="code docutils literal notranslate"><span class="pre">lpad</span> <span class="pre">-l</span> <span class="pre">&lt;LAUNCHPAD&gt;</span> <span class="pre">reignite_wflows</span> <span class="pre">-i</span> <span class="pre">&lt;WORKFLOWID&gt;</span></code></p>
+<p>If jobs are marked as RUNNING but have clearly finished, they might be lost. Use <code class="code docutils literal notranslate"><span class="pre">lpad</span> <span class="pre">-l</span> <span class="pre">&lt;LAUNCHPAD&gt;</span> <span class="pre">detect_lostruns</span></code>
+to look for them. Either add the argument <code class="code docutils literal notranslate"><span class="pre">--fizzle</span></code> or
+<code class="code docutils literal notranslate"><span class="pre">--rerun</span></code>. For more options use the <code class="code docutils literal notranslate"><span class="pre">--help</span></code> argument.</p>
+<p>If you have found a bug, please raise an issue on github. You can also make a pull request if you have found a solution to the problem.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Checklist</a><ul>
+<li><a class="reference internal" href="#obligatory">Obligatory</a></li>
+<li><a class="reference internal" href="#recommended">Recommended</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="previous chapter">Quickstart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorials/workflows.html"
+                        title="next chapter">Workflows</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/checklist.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorials/workflows.html" title="Workflows"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

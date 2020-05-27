@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.database.extdb &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.database.extdb</h1><div class="highlight"><pre>
+<span></span><span class="c1"># functions to store data in an external MongoDB database</span>
+<span class="kn">import</span> <span class="nn">pymongo</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+
+<div class="viewcode-block" id="get_external_database"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.extdb.get_external_database">[docs]</a><span class="k">def</span> <span class="nf">get_external_database</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A helper function to connect to a mongodb database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pymongo object : address to database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">CLIENT</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">],</span> 
+        <span class="n">username</span> <span class="o">=</span> <span class="n">extdb_connect</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">],</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">extdb_connect</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">],</span>
+        <span class="n">authSource</span> <span class="o">=</span> <span class="n">extdb_connect</span><span class="p">[</span><span class="s2">&quot;authsource&quot;</span><span class="p">])</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">CLIENT</span><span class="p">[</span><span class="n">extdb_connect</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">db</span></div>
+
+
+<span class="k">def</span> <span class="nf">_reset_IDs_collection</span><span class="p">(</span><span class="n">db</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function to reset the counting of the following ids:</span>
+<span class="sd">    simulations</span>
+<span class="sd">    workflows</span>
+<span class="sd">    machine_learning</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        db (pymongo object) : address to database</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int : number of documents in the IDs collection (expectedly 1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># counting collection</span>
+    <span class="n">ids_collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;IDs&#39;</span><span class="p">]</span>
+    <span class="c1">#print(id_collection)</span>
+    <span class="n">starting_ids</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;simulations&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;workflows&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;machine_learning&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">}</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="n">ids_collection</span><span class="o">.</span><span class="n">count</span><span class="p">({})</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ids_collection</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">starting_ids</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no entry yet&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ids_collection</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="n">starting_ids</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;IDs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">def</span> <span class="nf">_query_id_counter_and_increment</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function to query an ID and increase it by one.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        collection (str) :  name of the collection id to fetch and increment.</span>
+<span class="sd">                            Valid strings are &#39;simulations&#39;, &#39;workflows&#39; and</span>
+<span class="sd">                            &#39;machine_learning&#39;</span>
+<span class="sd">        db (pymongo object) : address to database</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int : id counter of the specified collection.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ids_collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;IDs&#39;</span><span class="p">]</span>
+    <span class="n">id_counter</span> <span class="o">=</span> <span class="n">ids_collection</span><span class="o">.</span><span class="n">find_one_and_update</span><span class="p">({},</span> <span class="p">{</span><span class="s1">&#39;$inc&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">collection</span><span class="p">:</span> <span class="mi">1</span><span class="p">}})[</span><span class="n">collection</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">id_counter</span>
+
+<div class="viewcode-block" id="update_simulations_collection"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.extdb.update_simulations_collection">[docs]</a><span class="k">def</span> <span class="nf">update_simulations_collection</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A new document is added to the simulations collection of the mongodb database.</span>
+<span class="sd">    It contains records of all manipulation steps of a structure, in particular the </span>
+<span class="sd">    initial structure, structure after DFT relaxation, </span>
+<span class="sd">    structure with added or removed asdorbates, etc.</span>
+<span class="sd">    The documents should be in a specific format. Any arguments can be</span>
+<span class="sd">    specified, however, the optional arguments below should be </span>
+<span class="sd">    consistently given to allow for comprehensive database querying.</span>
+<span class="sd">                            </span>
+<span class="sd">    Args:</span>
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name. </span>
+
+<span class="sd">        source_id (int)     : ID of the parent simulation that originated this, -1 if none</span>
+<span class="sd">        workflow_id (int)   : ID of workflow when instance was added, -1 if none</span>
+<span class="sd">        wf_sim_id (int)     : ID of simulation (unique within the workflow this belongs to)</span>
+<span class="sd">        atoms (dict)        :   dictionary with information about the atoms.</span>
+<span class="sd">                                should be in the following format</span>
+
+<span class="sd">                                numbers (1D ndarray)   : list of atomic numbers as numpy array [N] of ints</span>
+<span class="sd">                                positions (2D ndarray) : positions as numpy matrix [Nx3] of doubles</span>
+<span class="sd">                                constraints (2D ndarray) : frozen flags a matrix [Nx3] of int [optional] 1 = frozen, 0 = free</span>
+<span class="sd">                                pbc (bool)             : use periodic boundaries</span>
+<span class="sd">                                cell (2D ndarray)      : matrix 3x3 with cell vectors on the rows</span>
+<span class="sd">                                celldisp (1D ndarray)  : displacement of cell from origin</span>
+<span class="sd">                                info (dict)            : field for additional information related to structure</span>
+<span class="sd">        nanoclusters (list of ATOMS dict) :   list of dictionaries with information about the nanocluster(s)</span>
+<span class="sd">                                        The dictionaries should have the following form:</span>
+
+<span class="sd">                                        reference_id (int) : ID of the simulation where this cluster was made, -1 if original</span>
+<span class="sd">                                        atom_ids (1D ndarray) : atom indices in the ATOMS dictionary of the simulation record.</span>
+
+<span class="sd">        adsorbates (list of dict) :     list of dictionaries with information about the adsorbate(s)</span>
+<span class="sd">                                        The dictionaries should have the following form:</span>
+
+<span class="sd">                                        reference_id (int) : ID of the simulation to use as reference</span>
+<span class="sd">                                        atom_ids (1D ndarray) : atom indices in the ATOMS dictionary of the simulation record.</span>
+<span class="sd">                                        site_class (str) : class of adsorption site: “top”, “bridge”, “hollow”, “4-fold hollow”</span>
+<span class="sd">                                        site_ids (1D ndarray) : list of atom ids (in simulation record) that define the adsorption site</span>
+
+<span class="sd">        substrate (list of dict) :      list of dictionaries with information about the substrate(s)</span>
+<span class="sd">                                        The dictionaries should have the following form:</span>
+
+<span class="sd">                                        reference_id (int) : ID of the parent support simulation, -1 if no parent</span>
+<span class="sd">                                        atom_ids (1D ndarray) : atom indices in the corresponding ATOMS dictionary</span>
+
+<span class="sd">        operations (list) : List of dictionaries, each describing one operation. Always with respect to the parent simulation if applicable.</span>
+<span class="sd">                            The dictionaries can be of arbitrary form.</span>
+<span class="sd">        inp (dict)        : property/value pairs describing the simulation input</span>
+<span class="sd">                            The dictionary can be of arbitrary form.</span>
+<span class="sd">        output (dict)     : property/value pairs output by the calculation</span>
+<span class="sd">                            The dictionary can be of arbitrary form.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict :  A dictionary with the provided arguments plus</span>
+<span class="sd">                a unique id provided by the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dct</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">)</span>
+    <span class="n">simulations</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simulations&#39;</span><span class="p">]</span>
+    <span class="c1"># request id counter</span>
+    <span class="n">simulation_id</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;simulations&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+
+    <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">simulation_id</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new simulation id: &quot;</span> <span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulation_id</span><span class="p">))</span>
+
+    <span class="n">simulations</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dct</span></div>
+
+<span class="c1"># workflows</span>
+
+<div class="viewcode-block" id="update_workflows_collection"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.extdb.update_workflows_collection">[docs]</a><span class="k">def</span> <span class="nf">update_workflows_collection</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">creation_time</span><span class="p">,</span> 
+    <span class="n">extdb_connect</span><span class="p">,</span> <span class="n">parameters</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;UNNAMED&quot;</span><span class="p">,</span> <span class="n">workflow_type</span> <span class="o">=</span> <span class="s2">&quot;NO_TYPE&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A new document is added to the workflows collection of the mongodb database.</span>
+<span class="sd">    (Usually at the beginning of the workflow run.)</span>
+<span class="sd">    It contains records of all types of workflows. The documents should be in a specific format. </span>
+<span class="sd">    Any arguments can be specified, however, certain arguments below should be </span>
+<span class="sd">    consistently given to allow for comprehensive database querying.</span>
+<span class="sd">                            </span>
+<span class="sd">    Args:</span>
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name. </span>
+<span class="sd">        username (str) :        user who executed the workflow</span>
+<span class="sd">        creation_time (str) :   time of creation of the workflow</span>
+<span class="sd">        parameters (dict) :     workflow-specific parameters</span>
+<span class="sd">        name (str) :            custom name of workflow</span>
+<span class="sd">        workflow_type (str) :   custom type of workflow</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict :  Contains the keys username, name, workflow_type, creation_time,</span>
+<span class="sd">                parameters and _id, the latter being a </span>
+<span class="sd">                unique id provided by the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">)</span>
+    <span class="n">workflows</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;workflows&#39;</span><span class="p">]</span>
+
+    <span class="c1"># request id counter</span>
+    <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;workflows&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+
+    <span class="c1"># construct dictionary</span>
+    <span class="n">dct</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_id&#39;</span> <span class="p">:</span> <span class="n">workflow_id</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span> <span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;workflow_type&quot;</span> <span class="p">:</span> <span class="n">workflow_type</span><span class="p">,</span>
+        <span class="s2">&quot;creation_time&quot;</span> <span class="p">:</span> <span class="n">creation_time</span><span class="p">,</span>
+        <span class="s2">&quot;parameters&quot;</span> <span class="p">:</span> <span class="n">parameters</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">dct</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">workflows</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dct</span></div>
+
+<span class="c1"># machine_learning</span>
+
+<div class="viewcode-block" id="update_machine_learning_collection"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.extdb.update_machine_learning_collection">[docs]</a><span class="k">def</span> <span class="nf">update_machine_learning_collection</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">extdb_connect</span><span class="p">,</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="n">method_params</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">descriptor</span> <span class="o">=</span> <span class="s2">&quot;soap&quot;</span><span class="p">,</span>
+    <span class="n">descriptor_params</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">training_set</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">validation_set</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">test_set</span> <span class="o">=</span> <span class="p">[],</span><span class="n">prediction_set</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="n">metrics_training</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">metrics_validation</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">metrics_test</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A new document is added to the machine_learning collection of the mongodb database.</span>
+<span class="sd">    It contains records of all types of workflows. The documents should be in a specific format. </span>
+<span class="sd">    Any arguments can be specified, however, certain arguments below should be </span>
+<span class="sd">    consistently given to allow for comprehensive database querying.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        workflow_id (int) : ID of workflow which the machine learning run was part of</span>
+<span class="sd">        method (str) : name of the ML method: krr, nn, ...</span>
+<span class="sd">        method_params (dict) : Parameters of the method</span>
+<span class="sd">        descriptor (str) : name of the descriptor: soap, mbtr, lmbtr, cm, ...</span>
+<span class="sd">        descriptor_params (dict) : Parameters of the descriptor used</span>
+<span class="sd">        training_set (1D ndarray) : list of simulation IDs used for training</span>
+<span class="sd">        validation_set (1D ndarray) :   list of simulation IDs used in validation. </span>
+<span class="sd">                                        If empty, cross-validation was used.</span>
+<span class="sd">        test_set (1D ndarray) : list of simulation IDs used in testing. </span>
+<span class="sd">                                If empty, only validation was used</span>
+<span class="sd">        prediction_set (1D ndarray) : list of simulation IDs used for prediction.</span>
+<span class="sd">        metrics_training (dict) : dictionary of (“metric name”: value) on training set</span>
+<span class="sd">                                key (str) : name of the metric</span>
+<span class="sd">                                value (float) : calculated value</span>
+<span class="sd">        metrics_validation (dict) : dictionary of (“metric name”: value) on validation set</span>
+<span class="sd">                                    key (str) : name of the metric</span>
+<span class="sd">                                    value (float) : calculated value</span>
+
+<span class="sd">        metrics_test (dict) :   dictionary of (“metric name”: value) on test set</span>
+<span class="sd">                                key (str) : name of the metric</span>
+<span class="sd">                                value (float) : calculated value</span>
+<span class="sd">        output (dict)       :   relevant training output info</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict :  A dictionary with the provided arguments plus</span>
+<span class="sd">                a unique id provided by the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">)</span>
+    <span class="n">machine_learning</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;machine_learning&#39;</span><span class="p">]</span>
+
+    <span class="c1"># request id counter</span>
+    <span class="n">machine_learning_id</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;machine_learning&#39;</span><span class="p">,</span> 
+        <span class="n">db</span><span class="p">)</span>
+
+    <span class="c1"># construct dictionary</span>
+    <span class="n">dct</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_id&#39;</span> <span class="p">:</span> <span class="n">machine_learning_id</span><span class="p">,</span>
+        <span class="s2">&quot;method&quot;</span> <span class="p">:</span> <span class="n">method</span><span class="p">,</span>
+        <span class="s2">&quot;workflow_id&quot;</span> <span class="p">:</span> <span class="n">workflow_id</span><span class="p">,</span>
+        <span class="s2">&quot;method_params&quot;</span> <span class="p">:</span> <span class="n">method_params</span><span class="p">,</span>
+        <span class="s2">&quot;descriptor&quot;</span> <span class="p">:</span> <span class="n">descriptor</span><span class="p">,</span>
+        <span class="s2">&quot;descriptor_params&quot;</span> <span class="p">:</span> <span class="n">descriptor_params</span><span class="p">,</span>
+        <span class="s2">&quot;training_set&quot;</span> <span class="p">:</span> <span class="n">training_set</span><span class="p">,</span>
+        <span class="s2">&quot;validation_set&quot;</span> <span class="p">:</span> <span class="n">validation_set</span><span class="p">,</span>
+        <span class="s2">&quot;test_set&quot;</span> <span class="p">:</span> <span class="n">test_set</span><span class="p">,</span>
+        <span class="s2">&quot;prediction_set&quot;</span> <span class="p">:</span> <span class="n">prediction_set</span><span class="p">,</span>
+        <span class="s2">&quot;metrics_training&quot;</span> <span class="p">:</span> <span class="n">metrics_training</span><span class="p">,</span>
+        <span class="s2">&quot;metrics_validation&quot;</span> <span class="p">:</span> <span class="n">metrics_validation</span><span class="p">,</span>
+        <span class="s2">&quot;metrics_test&quot;</span> <span class="p">:</span> <span class="n">metrics_test</span><span class="p">,</span>
+        <span class="s2">&quot;output&quot;</span> <span class="p">:</span> <span class="n">output</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">dct</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">machine_learning</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dct</span></div>
+
+<div class="viewcode-block" id="fetch_simulations"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.extdb.fetch_simulations">[docs]</a><span class="k">def</span> <span class="nf">fetch_simulations</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">,</span> <span class="n">simulation_ids</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fetches simulation records by simulation id</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name. </span>
+<span class="sd">        simulation_ids (1D ndarray) : unique identifiers of the simulation collection.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list : documents of the simulation collection</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">extdb_connect</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span>   <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simulations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$in&quot;</span> <span class="p">:</span> <span class="n">simulation_ids</span> <span class="p">}})</span>
+    <span class="n">simulations_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">document</span> <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">]</span>
+    <span class="n">simulation_ids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">document</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">simulations_list</span><span class="p">]</span>
+    <span class="n">simulations</span>  <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">simulation_ids</span><span class="p">,</span> <span class="n">simulations_list</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">simulation_ids</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">simulation_ids</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">simulations</span></div>
+
+
+<div class="viewcode-block" id="gather_all_atom_types"><a class="viewcode-back" href="../../../src/doc/critcatworks.database.html#critcatworks.database.extdb.gather_all_atom_types">[docs]</a><span class="k">def</span> <span class="nf">gather_all_atom_types</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">,</span> <span class="n">simulations</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function to determine all atom types in the dataset</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        calc_ids (list) : ids of the simulation collection</span>
+<span class="sd">        simulations (list) : simulation documents</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list :  a sorted unique list of atomic numbers in the</span>
+<span class="sd">                dataset</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># going through nc atoms once to find atom types</span>
+    <span class="n">atomic_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">):</span>
+        <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)][</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span>
+        <span class="n">atomic_numbers</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_atomic_numbers</span><span class="p">())</span>
+
+    <span class="n">sorted_list_atomic_numbers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">atomic_numbers</span><span class="p">)))</span>
+
+    <span class="n">all_atomtypes</span> <span class="o">=</span> <span class="n">sorted_list_atomic_numbers</span>
+    <span class="k">return</span> <span class="n">all_atomtypes</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

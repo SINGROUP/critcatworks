@@ -1,0 +1,555 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "Metadata information for atomic data collections and properties.",
+  "dependencies": [
+    {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }
+  ],
+  "metaInfos": [
+    {
+      "description": "Basis set used for atomic calculation.",
+      "dtypeStr": "C",
+      "name": "atomic_basis_set",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property_method"
+      ],
+      "units": ""
+    },
+    {
+      "description": "Charge of the free atom for corresponding atomic property.",
+      "dtypeStr": "f",
+      "name": "atomic_charge",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "C"
+    },
+    {
+      "description": "Comprehensive details about an atomic data collection.",
+      "dtypeStr": "C",
+      "name": "atomic_collection_description",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "section_atomic_data_collection"
+      ]
+    },
+    {
+      "description": "The name of the atomic data collection.",
+      "dtypeStr": "C",
+      "name": "atomic_collection_name",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "section_atomic_data_collection"
+      ]
+    },
+    {
+      "description": "Electron affinity for free atom. The electron affinity of an atom is the amount of energy released or spent when an electron is added to a neutral atom in the gaseous state to form a negative ion.",
+      "dtypeStr": "f",
+      "name": "atomic_electron_affinity",
+      "shape": [],
+      "shortname": "EA",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Binding energy of the dimer.",
+      "dtypeStr": "f",
+      "name": "atomic_electronic_binding_energy_dimer",
+      "shape": [],
+      "shortname": "E_b",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "The element symbol in the periodic table.",
+      "dtypeStr": "C",
+      "name": "atomic_element_symbol",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": ""
+    },
+    {
+      "description": "In electronic structure theory, calculations may be performed for a spectrum with many excited energy levels. Molecular orbitals (MOs) are made of fractions of atomic orbitals. All atoms in the molecule provide their atomic orbitals for construction of MOs, but not all atomic orbitals must participate in all MOs. For example, the Hartree-Fock method for atoms or molecules assumes that the wave function is a single configuration state function with well-defined quantum numbers and that the energy level is not necessarily the ground state. The highest occupied molecular orbital state for a system is called as HOMO.",
+      "dtypeStr": "f",
+      "name": "atomic_homo",
+      "shape": [],
+      "shortname": "E_HOMO",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Difference between highest occupied and lowest unoccupied single-particle state energy for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_homo_lumo_diff",
+      "shape": [],
+      "shortname": "deltaE_HL",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Ionization potential for free atom. The ionization potential is qualitatively defined as the amount of energy required to remove the most loosely bound electron or the valence electron, of an isolated gaseous atom to form a cation.",
+      "dtypeStr": "f",
+      "name": "atomic_ionization_potential",
+      "shape": [],
+      "shortname": "IP",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Polarizability is the ability to form instantaneous multipoles. It is a property of matter. Polarizabilities determine the dynamical response of a bound system to external fields, and provide insight into a materials internal structure. Electric polarizability is the relative tendency of a charge distribution, like the electron cloud of an atom or molecule, and consequently of any material body, to have its charges displaced by any external electric field, which in the uniform case is applied typically by a charged parallel-plate capacitor. The polarizability in isotropic media is defined as the ratio of the induced dipole moment of an atom to the electric field that produces this dipole moment. We are often interested only in the spherical average (or isotropic component) of the polarizability tensor. The isotropic polarizability is defined as average of principal components of the polarizability tensor.",
+      "dtypeStr": "f",
+      "name": "atomic_isotropic_polarizability",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m**3"
+    },
+    {
+      "description": "The long-range van der Waals energy between two non overlapping fragments $A$ and $B$ of the physical system under study can be expressed as a multipolar expansion and $C_{n}^{AB}$ are the multipolar vdW coefficients. A widespread approach to include long-range vdW interactions in atomistic calculation is to truncate multipolar expansion to the dipole-dipole order and keep only the leading $C_{6}^{AB} /R^{6}$ term. The vdW $C_{6}$ coefficient can be obtained using Casimir-Polder integral over frequency dependent polarizability as function of imaginary frequency argument.",
+      "dtypeStr": "f",
+      "name": "atomic_isotropic_vdw_coefficient",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J.m**6"
+    },
+    {
+      "description": "In electronic structure theory, calculations may be performed for a spectrum with many excited energy levels. Molecular orbitals (MOs) are made of fractions of atomic orbitals.  All atoms in the molecule provide their atomic orbitals for construction of MOs, but not all atomic orbitals must participate in all  MOs.  For example, the Hartree-Fock method for atoms or molecules assumes that the wave function is a single configuration state function with well-defined quantum numbers and that the energy level is not necessarily the ground state. The lowest unoccupied molecular orbital state for a system is called as LUMO.",
+      "dtypeStr": "f",
+      "name": "atomic_lumo",
+      "shape": [],
+      "shortname": "E_LUMO",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "The melting temperature is the temperature at which a substance changes from solid to liquid state.",
+      "dtypeStr": "f",
+      "name": "atomic_melting_temperature",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "K"
+    },
+    {
+      "description": "The method used for atomic calculations.",
+      "dtypeStr": "C",
+      "name": "atomic_method",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "section_atomic_property_method"
+      ]
+    },
+    {
+      "description": "The Mulliken electronegativity quantitatively defined as the average of the values of its first ionization energy and the absolute value of its electron affinity.",
+      "dtypeStr": "f",
+      "name": "atomic_mulliken_electronegativity",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Atomic number $Z$ for atomic species.",
+      "dtypeStr": "i",
+      "name": "atomic_number",
+      "shape": [],
+      "shortname": "Z",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": ""
+    },
+    {
+      "description": "Number of electrons located in the outermost shell (valence shell) of the atom.",
+      "dtypeStr": "i",
+      "name": "atomic_number_valence_electrons",
+      "shape": [],
+      "shortname": "Z_val",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": ""
+    },
+    {
+      "description": "The Pauling electronegativity is defined as the difference between the measured X-Y bond energy with the theoretical X-Y bond energy (computed as the average of the X-X bond energy and the Y-Y bond energy).",
+      "dtypeStr": "f",
+      "name": "atomic_pauling_electronegativity",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": ""
+    },
+    {
+      "description": "Source of atomic property Experiment/ Theory.",
+      "dtypeStr": "C",
+      "name": "atomic_property_source",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property_method"
+      ],
+      "units": ""
+    },
+    {
+      "description": "Reference to the method that is used to calculate associated atomic property.",
+      "dtypeStr": "r",
+      "name": "atomic_property_to_method_ref",
+      "referencedSections": [
+        "section_atomic_property_method"
+      ],
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ]
+    },
+    {
+      "description": "Half of the distance between equilibrium homonuclear-dimer.",
+      "dtypeStr": "f",
+      "name": "atomic_r_by_2_dimer",
+      "shape": [],
+      "shortname": "d",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "The covalent radius is a measure of the size of an atom that forms part of one covalent bond.",
+      "dtypeStr": "f",
+      "name": "atomic_r_covalent",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Expectation value of the radius $<r>$ of the highest occupied atomic orbital for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_r_homo",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Expectation value of the radius $<r>$ of the highest occupied atomic orbital for anionic atom.",
+      "dtypeStr": "f",
+      "name": "atomic_r_homo_anion",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Expectation value of the radius $<r>$ of the highest occupied atomic orbital for cationic atom.",
+      "dtypeStr": "f",
+      "name": "atomic_r_homo_cation",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "The atomic radius of a chemical element is a measure of the size of its atoms, usually the mean or typical distance from the center of the nucleus to the boundary of the surrounding cloud of electrons. Since the boundary is not a well-defined physical entity, there are various non-equivalent definitions of atomic radius. Three widely used definitions of atomic radius are: Van der Waals radius, ionic radius, and covalent radius.",
+      "dtypeStr": "f",
+      "name": "atomic_radius",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Expectation value of $<d>$ radial function for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_rd_expectation",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Radius at which $d_{max}$ radial function is maximum for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_rd_max",
+      "shape": [],
+      "shortname": "r_d",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Reference for associated atomic property calculations.",
+      "dtypeStr": "C",
+      "name": "atomic_reference_DOI",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property_method"
+      ],
+      "units": ""
+    },
+    {
+      "description": "Expectation value of $<p>$ radial function for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_rp_expectation",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Radius at which $p_{max}$ radial function is maximum for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_rp_max",
+      "shape": [],
+      "shortname": "r_p",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Expectation value of $<s>$ radial function for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_rs_expectation",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Radius at which $s_{max}$ radial function is maximum for free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_rs_max",
+      "shape": [],
+      "shortname": "r_s",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Atomic spin multiplicity. The multiplicity of an energy level is defined as $2S+1$, where S is the total spin angular momentum. States with multiplicity 1, 2, 3, 4, 5 are respectively called singlets, doublets, triplets, quartets and quintets.",
+      "dtypeStr": "i",
+      "name": "atomic_spin_multiplicity",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": ""
+    },
+    {
+      "description": "The term symbol ($^{2S+1}L_{J}$) is an abbreviated description of the (total) angular momentum quantum numbers in a multi-electron atom (even a single electron can also be described by a term symbol). Each energy level of an atom with a given electron configuration is described by not only the electron configuration but also its own term symbol, as the energy level also depends on the total angular momentum including spin. The usual atomic term symbols assume LS coupling (also known as Russell-Saunders coupling or Spin-Orbit coupling). The ground state term symbol is predicted by Hund's rules.",
+      "dtypeStr": "C",
+      "name": "atomic_term_symbol",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property_method"
+      ],
+      "units": ""
+    },
+    {
+      "description": "Total energy per atom.",
+      "dtypeStr": "f",
+      "name": "atomic_total_energy",
+      "shape": [],
+      "shortname": "E_Tot",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Energy of the valence p orbital for a free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_valence_p_orbital",
+      "shape": [],
+      "shortname": "E_p",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "Energy of the valence s orbital for a free atom.",
+      "dtypeStr": "f",
+      "name": "atomic_valence_s_orbital",
+      "shape": [],
+      "shortname": "E_s",
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "J"
+    },
+    {
+      "description": "The van der Waals radius, of an atom or molecule is the radius of an imaginary sphere representing the distance of closest approach for another atom(s). The vdW radius corresponds to half of the distance between two atoms where the Pauli repulsion balances the London dispersion attraction.",
+      "dtypeStr": "f",
+      "name": "atomic_vdw_radius",
+      "shape": [],
+      "superNames": [
+        "section_atomic_property"
+      ],
+      "units": "m"
+    },
+    {
+      "description": "Section that holds all atomic properties (section_atomic_property) and methods (section_atomic_property_method) of an atomic data collection.",
+      "kindStr": "type_section",
+      "name": "section_atomic_data_collection",
+      "superNames": []
+    },
+    {
+      "description": "Section that contains all atomic properties of an atomic data collection.",
+      "kindStr": "type_section",
+      "name": "section_atomic_property",
+      "superNames": [
+        "section_atomic_data_collection"
+      ]
+    },
+    {
+      "description": "Section of atomic properties for a given method.",
+      "kindStr": "type_section",
+      "name": "section_atomic_property_method",
+      "superNames": [
+        "section_atomic_data_collection"
+      ]
+    },
+    {
+      "name"       : "atomic_ea_by_energy_difference",
+        "description": "Electron affinity for free atom. This EA is defined as the energy difference between the neutral atom and -1 charged atom.",
+        "dtypeStr"   : "f",
+        "units"      : "",
+        "shape"      : [],
+        "shortname"  : "EA_delta",
+        "superNames" : [
+            "section_atomic_property"
+        ],
+        "units": "J"
+    },
+    {
+        "name"       : "atomic_ip_by_energy_difference",
+        "description": "Ionization potential for free atom. This IP is defined as the energy difference between the neutral atom and the +1 charged atom.",
+        "dtypeStr"   : "f",
+        "units"      : "",
+        "shape"      : [],
+        "shortname"  : "IP_delta",
+        "superNames" : [
+            "section_atomic_property"
+        ],
+        "units": "J"
+    },
+    {
+        "name"       : "atomic_ea_by_half_charged_homo",
+        "description": "Electron affinity for free atom. This EA is defined as the HOMO energy of +0.5 charged atom.",
+        "dtypeStr"   : "f",
+        "units"      : "",
+        "shape"      : [],
+        "shortname"  : "EA_half",
+        "superNames" : [
+            "section_atomic_property"
+        ],
+        "units": "J"
+    },
+    {
+        "name"       : "atomic_ip_by_half_charged_homo",
+        "description": "Ionization potential for free atom. This IP is defined as the HOMO energy of -0.5 charged atom.",
+        "dtypeStr"   : "f",
+        "units"      : "",
+        "shape"      : [],
+        "shortname"  : "IP_half",
+        "superNames" : [
+            "section_atomic_property"
+        ],
+        "units": "J"
+    },
+    {
+        "description": "Radius at which $f_{max}$ radial function is maximum for free atom.",
+        "dtypeStr": "f",
+        "name": "atomic_rf_max",
+        "shape": [],
+        "shortname": "r_f",
+        "superNames": [
+          "section_atomic_property"
+        ],
+        "units": "m"
+    },
+    {
+        "description": "The index number of s orbital. This index is used to indicate the index number of s orbital which is used in other properties",
+        "dtypeStr": "i",
+        "name": "atomic_rs_max_orbital_index",
+        "shape": [],
+        "shortname": "index_s",
+        "superNames": [
+          "section_atomic_property"
+        ],
+        "units": ""
+    },
+    {
+        "description": "The index number of p orbital. This index is used to indicate the index number of p orbital which is used in other properties",
+        "dtypeStr": "i",
+        "name": "atomic_rp_max_orbital_index",
+        "shape": [],
+        "shortname": "index_p",
+        "superNames": [
+          "section_atomic_property"
+        ],
+        "units": ""
+    },
+    {
+        "description": "The index number of d orbital. This index is used to indicate the index number of d orbital which is used in other properties",
+        "dtypeStr": "i",
+        "name": "atomic_rd_max_orbital_index",
+        "shape": [],
+        "shortname": "index_d",
+        "superNames": [
+          "section_atomic_property"
+        ],
+        "units": ""
+    },
+    {
+        "description": "The index number of f orbital. This index is used to indicate the index number of f orbital which is used in other properties",
+        "dtypeStr": "i",
+        "name": "atomic_rf_max_orbital_index",
+        "shape": [],
+        "shortname": "index_f",
+        "superNames": [
+          "section_atomic_property"
+        ],
+        "units": ""
+    }
+
+  ]
+}

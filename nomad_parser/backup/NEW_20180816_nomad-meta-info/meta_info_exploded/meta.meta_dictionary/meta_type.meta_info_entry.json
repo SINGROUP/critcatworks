@@ -1,0 +1,45 @@
+{
+  "meta_name":"meta_type",
+  "meta_type":"type-value",
+  "meta_description":"Defines the type of meta_info_entry",
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"type-value",
+    "meta_enum_description":[
+      "A concrete data value. For example the meta info program_name has this ",
+      "meta_type. Conceptually meta info of this type corresponds to a column in a ",
+      "relational database.\n",
+      "This is the default type if not specified."]
+  },{
+    "meta_enum_value":"type-section",
+    "meta_enum_description":[
+      "A section, this is a bit like a class in object oriented programming, or table ",
+      "in a relational database.\n",
+      "There might be many objects (rows) corresponding to this.\n",
+      "Sections structure the data by grouping together the values contained in them, ",
+      "and their subsections."]
+  },{
+    "meta_enum_value":"type-dimension",
+    "meta_enum_description":[
+      "Represents a ``symbolic'' dimension, its name should begin with number\\_of\\_.\n",
+      "The dimension does not need to be explicitly stored anywhere, but can be ",
+      "extracted form the shape of a value that uses ",
+      "it."]
+  },{
+    "meta_enum_value":"type-abstract",
+    "meta_enum_description":[
+      "An abstract type is used only to classify meta_info_entry.\n",
+      "Abstract types have no influence on how the data is stored, that is defined ",
+      "exclusively by sections and values, but have two important functions: Help ",
+      "describing values or sections (augmenting the textual description), and enable ",
+      "simpler or automatic handling of conceptually related quantities.\n",
+      "For instance all energies can have the abstract type energy_type, and all ",
+      "parameters that influence the computation of the xc functional have the ",
+      "abstract type settings_xc. This way one can treat all energies in the same way, ",
+      "or compute a checksum or compare all settings that influence the xc ",
+      "calculation, even code specific ones that are not part of the public Meta Info, ",
+      "as long as they correctly set their abstract ",
+      "types."]
+  }]
+}

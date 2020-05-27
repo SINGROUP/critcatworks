@@ -1,0 +1,8 @@
+{
+  "meta_name":"atom_type_mass",
+  "meta_type":"type-value",
+  "meta_description":"(deprecated) Mass of the atom type.",
+  "meta_parent_section":"section_atom_type",
+  "meta_data_type":"float",
+  "meta_units":"kg"
+}

@@ -1,0 +1,25 @@
+{
+  "meta_name":"xc_functional_parameters",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains an associative list of non-default values of the parameters for the ",
+    "functional declared in xc_functional_name of the section_xc_functionals section.",
+    "\n",
+    "\n",
+    "For example, if a calculations using a hybrid XC functional (e.g., HSE06) ",
+    "specifies a user-given value of the mixing parameter between exact and GGA ",
+    "exchange, then this non-default value is stored in this metadata.\n",
+    "\n",
+    "The labels and units of these values are defined in the paragraph dedicated to ",
+    "the specified functional declared in xc_functional_name of the [xc_functional ",
+    "wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/",
+    "XC-functional).\n",
+    "\n",
+    "If this metadata is not given, the default parameter values for the ",
+    "xc_functional_name are assumed."],
+  "meta_parent_section":"section_xc_functionals",
+  "meta_abstract_types":[
+    "settings_physical_parameter",
+    "settings_xc_functional"],
+  "meta_data_type":"json"
+}

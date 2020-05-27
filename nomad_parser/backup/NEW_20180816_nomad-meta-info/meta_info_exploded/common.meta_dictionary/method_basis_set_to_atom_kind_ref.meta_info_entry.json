@@ -1,0 +1,14 @@
+{
+  "meta_name":"method_basis_set_to_atom_kind_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to an atom-centered basis set defined in ",
+    "section_basis_set_atom_centered and to the atom kind as defined in ",
+    "section_method_atom_kind."],
+  "meta_parent_section":"section_method_basis_set",
+  "meta_data_type":"reference",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_basis_sets_atom_centered"
+  }],
+  "meta_referenced_section":"section_method_atom_kind"
+}

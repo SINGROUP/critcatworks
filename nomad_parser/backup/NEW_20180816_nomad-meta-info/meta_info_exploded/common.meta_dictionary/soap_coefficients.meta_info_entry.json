@@ -1,0 +1,12 @@
+{
+  "meta_name":"soap_coefficients",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Compressed coefficient of the soap descriptor for the atom pair ",
+    "soap_coefficients_atom_pair"],
+  "meta_parent_section":"section_soap_coefficients",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_soap_coefficients"
+  }]
+}

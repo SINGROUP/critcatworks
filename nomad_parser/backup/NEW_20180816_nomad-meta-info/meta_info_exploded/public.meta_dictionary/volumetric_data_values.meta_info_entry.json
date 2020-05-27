@@ -1,0 +1,19 @@
+{
+  "meta_name":"volumetric_data_values",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Array of shape (multiplicity, nx, ny, nz) containing the values.  The units of ",
+    "these values depend on which kind of data the values represent; see ",
+    "\"volumetric_data_kind\"."],
+  "meta_parent_section":"section_volumetric_data",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"volumetric_data_multiplicity"
+  },{
+    "meta_dimension_symbolic":"volumetric_data_nx"
+  },{
+    "meta_dimension_symbolic":"volumetric_data_ny"
+  },{
+    "meta_dimension_symbolic":"volumetric_data_nz"
+  }]
+}

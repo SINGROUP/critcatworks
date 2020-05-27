@@ -1,0 +1,16 @@
+{
+  "meta_name":"stress_tensor_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the method used to calculate stress_tensor for, e.g., molecular ",
+    "dynamics and geometry optimization.\n",
+    "\n",
+    "The allowed values are:\n",
+    "\n",
+    "  * numeric\n",
+    "  * analytic"],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_stress_tensor"],
+  "meta_data_type":"string"
+}

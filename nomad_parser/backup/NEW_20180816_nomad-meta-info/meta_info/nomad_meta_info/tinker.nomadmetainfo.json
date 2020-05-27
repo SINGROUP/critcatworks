@@ -1,0 +1,1113 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"tinker",
+  "description":"meta info used by the tinker parser, all names are expected to start with x_tinker_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"number_of_atoms_per_type",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms involved in this type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_atom_element",
+    "description":"Atom type of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_atom_name",
+    "description":"Atom name of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_atom_positions_image_index",
+    "description":"PBC image flag index.",
+    "superNames":["section_system"],
+    "units":" ",
+    "dtypeStr":"i",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_tinker_atom_positions_scaled",
+    "description":"Position of the atoms in a scaled format [0, 1].",
+    "superNames":["section_system"],
+    "units":" ",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_tinker_atom_positions_wrapped",
+    "description":"Position of the atoms wrapped back to the periodic box.",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_tinker_atom_to_atom_type_ref",
+    "description":"Reference to the atoms of each atom type.",
+    "superNames":["x_tinker_section_atom_to_atom_type_ref"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_type"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_tinker_atom_type",
+    "description":"Atom type of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_atom_type_element",
+    "description":"Element symbol of an atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_atom_type_radius",
+    "description":"van der Waals radius of an atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_barostat_target_pressure",
+    "description":"MD barostat target pressure.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "units":"Pa",
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_barostat_tau",
+    "description":"MD barostat relaxation time.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_barostat_type",
+    "description":"MD barostat type, valid values are defined in the barostat_type wiki page.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_build_osarch",
+    "description":"Program Build OS/ARCH",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_angle_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_data_angle_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_angles_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_atom_types_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_data_bond_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_data_bond_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_bond_types_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_data_dihedral_coeff_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_dihedral_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_data_dihedral_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_file_store",
+    "description":"Filename of data file",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_data_topo_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_dummy",
+    "description":"dummy",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_frame_sequence_angle_energy",
+    "description":"Array containing the values of the angle_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_angle_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_angle_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_angle_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_angle_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_angle_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_bond_energy",
+    "description":"Array containing the values of the bond_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_bond_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_bond_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_bond_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_bond_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_bond_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_boundary",
+    "description":"Array containing the values of the boundary along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_boundary_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_boundary_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_boundary_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_boundary values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_boundary_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_cross_dihedral_energy",
+    "description":"Array containing the values of the cross_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_cross_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_cross_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_cross_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_cross_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_cross_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_density",
+    "description":"Array containing the values of the density along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_density_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_density_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_density_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_density values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_density_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_electrostatic_energy",
+    "description":"Array containing the values of the electrostatic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_electrostatic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_electrostatic_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_electrostatic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_electrostatic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_electrostatic_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_improper_dihedral_energy",
+    "description":"Array containing the values of the improper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_improper_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_improper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_improper_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_improper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_improper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_misc_energy",
+    "description":"Array containing the values of the misc_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_misc_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_misc_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_misc_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_misc_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_misc_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_proper_dihedral_energy",
+    "description":"Array containing the values of the proper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_proper_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_proper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_proper_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_proper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_proper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_total_energy",
+    "description":"Array containing the values of the total_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_total_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_total_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_total_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_total_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_total_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_total_kinetic_energy",
+    "description":"Array containing the values of the total_kinetic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_total_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_total_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_total_kinetic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_total_kinetic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_total_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_vdw_energy",
+    "description":"Array containing the values of the vdw_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_vdw_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_vdw_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_vdw_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_vdw_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_vdw_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_virial_energy",
+    "description":"Array containing the values of the virial_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_virial_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_virial_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_virial_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_virial_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_virial_energies_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_volume",
+    "description":"Array containing the values of the volume along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_volume_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_volumes_in_sequence"]
+  },{
+    "name":"x_tinker_frame_sequence_volume_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_tinker_frame_sequence_volume values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_tinker_number_of_volumes_in_sequence"]
+  },{
+    "name":"x_tinker_inout_control_a_axis",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_alpha",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_aniso_pressure",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_archive",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_archive_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_b_axis",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_barostat",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_basin",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_beta",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_c_axis",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_configuration_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_coordinate_file_list",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_debug",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_dielectric",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_digits",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_enforce_chirality",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_epsilonrule",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_ewald",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_ewald_cutoff",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_final_configuration_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_force_field_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_gamma",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_group",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_group_inter",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_initial_configuration_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_initial_temperature",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_initial_trajectory_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_input_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_integrator",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_key_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_lambda",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_lights",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_minimization",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_mutate",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_neighbor_list",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_nstep",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_inout_control_number_of_parameter_files",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_inout_control_number_of_steps",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_parameter_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_parameter_files",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C",
+    "shape":["x_tinker_inout_control_number_of_parameter_files"]
+  },{
+    "name":"x_tinker_inout_control_parameters",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_pme_grid",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_pme_order",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_polar_eps",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_printout",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_radiusrule",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_radiussize",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_radiustype",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_random_number_generator_seed",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_randomseed",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_rattle",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_restart_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_saddlepoint",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_spacegroup",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_step_dt",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_step_t",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_structure_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_tau_pressure",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_tau_temperature",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_title",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_topology_file",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_vdw_correction",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_vdw_cutoff",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_vdwtype",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_control_verbose",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_tinker_inout_control_vib_roots",
+    "description":"tinker running environment and control parameters.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_input_coord",
+    "description":"tinker input coordinates file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_input_vel",
+    "description":"tinker input velocities file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_output_coord",
+    "description":"tinker output coordinates file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_output_force",
+    "description":"tinker output forces file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_output_log",
+    "description":"tinker MD output log file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_output_vel",
+    "description":"tinker output velocities file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_restart_coord",
+    "description":"tinker restart coordinates file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_restart_vel",
+    "description":"tinker restart velocities file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_structure",
+    "description":"tinker input topology file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_traj_coord",
+    "description":"tinker output trajectory file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_traj_force",
+    "description":"tinker output file for forces in the trajectory.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_traj_vel",
+    "description":"tinker output file for velocities in the trajectory.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_inout_file_trajectory",
+    "description":"tinker output trajectory file.",
+    "superNames":["x_tinker_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_input_units_store",
+    "description":"It determines the units of all quantities specified in the input script and data file, as well as quantities output to the screen, log file, and dump files.",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_integrator_dt",
+    "description":"MD integration time step.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_integrator_type",
+    "description":"MD integrator type, valid values are defined in the integrator_type wiki page.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_interaction_atom_to_atom_type_ref",
+    "description":"Reference to the atom type of each interaction atoms.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_tinker_langevin_gamma",
+    "description":"Langevin thermostat damping factor.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_lattice_angles",
+    "description":"Angles of lattice vectors. Vector includes [alpha, beta, gamma] in degrees.",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_tinker_lattice_lengths",
+    "description":"Lattice dimensions in a vector. Vector includes [a, b, c] lengths.",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_tinker_masses_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_mdin_control_parameters",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to x_tinker_section_control_parameters.",
+    "superNames":[]
+  },{
+    "name":"x_tinker_mdin_finline",
+    "description":"finline in mdin",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_mdin_header",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_mdin_input_output_files",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to x_tinker_section_control_parameters.",
+    "superNames":[]
+  },{
+    "name":"x_tinker_mdin_method",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to section method.",
+    "superNames":[]
+  },{
+    "name":"x_tinker_mdin_run",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to settings run.",
+    "superNames":["settings_run"]
+  },{
+    "name":"x_tinker_mdin_wt",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_mdout_method",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to section method.",
+    "superNames":[]
+  },{
+    "name":"x_tinker_mdout_run",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to settings run.",
+    "superNames":["settings_run"]
+  },{
+    "name":"x_tinker_mdout_single_configuration_calculation",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdout belonging to section_single_configuration_calculation.",
+    "superNames":[]
+  },{
+    "name":"x_tinker_molecule_interaction_atom_to_atom_type_ref",
+    "description":"Reference to the atom type of each molecule interaction atoms.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_tinker_most_severe_warning_level",
+    "description":"Highest tinker warning level in the run.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_number_of_angle_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of angle_energies in this sequence of frames, see x_tinker_frame_sequence_angle_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_bond_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_tinker_frame_sequence_bond_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_boundary_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of boundary_energies in this sequence of frames, see x_tinker_frame_sequence_boundary_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_cross_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of cross_dihedral_energies in this sequence of frames, see x_tinker_frame_sequence_cross_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_defined_molecule_pair_interactions",
+    "description":"Number of defined pair interactions within a molecule (L-J pairs).",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_defined_pair_interactions",
+    "description":"Number of defined pair interactions (L-J pairs).",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_density_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of densities in this sequence of frames, see x_tinker_frame_sequence_density.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_electrostatic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of electrostatic_energies in this sequence of frames, see x_tinker_frame_sequence_electrostatic_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_improper_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of improper_dihedral_energies in this sequence of frames, see x_tinker_frame_sequence_improper_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_misc_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of misc_energies in this sequence of frames, see x_tinker_frame_sequence_misc_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_proper_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of proper_dihedral_energies in this sequence of frames, see x_tinker_frame_sequence_proper_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_steps_requested",
+    "description":"Number of requested MD integration time steps.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_number_of_tasks",
+    "description":"Number of tasks in parallel program (MPI).",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_number_of_total_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of total_energies in this sequence of frames, see x_tinker_frame_sequence_total_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_total_kinetic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of total_kinetic_energies in this sequence of frames, see x_tinker_frame_sequence_total_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_vdw_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of vdw_energies in this sequence of frames, see x_tinker_frame_sequence_vdw_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_virial_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_tinker_frame_sequence_virial_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_number_of_volumes_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of volumes in this sequence of frames, see x_tinker_frame_sequence_volume.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_tinker_output_created_by_user",
+    "description":"Output file creator",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_pair_interaction_atom_type_ref",
+    "description":"Reference to the atom type for pair interactions.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["x_tinker_number_of_defined_pair_interactions","number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_tinker_pair_interaction_parameters",
+    "description":"Pair interactions parameters.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"f",
+    "shape":["x_tinker_number_of_defined_pair_interactions",2]
+  },{
+    "name":"x_tinker_pair_molecule_interaction_parameters",
+    "description":"Molecule pair interactions parameters.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"f",
+    "shape":["number_of_defined_molecule_pair_interactions",2]
+  },{
+    "name":"x_tinker_pair_molecule_interaction_to_atom_type_ref",
+    "description":"Reference to the atom type for pair interactions within a molecule.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["x_tinker_number_of_defined_pair_interactions","number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_tinker_parallel_task_nr",
+    "description":"Program task no.",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_periodicity_type",
+    "description":"Periodic boundary condition type in the sampling (non-PBC or PBC).",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_build_date",
+    "description":"Program Build date",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_citation",
+    "description":"Program citations",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_copyright",
+    "description":"Program copyright",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_execution_date",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_execution_host",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_execution_path",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_execution_time",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_license",
+    "description":"tinker program license.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_module",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_module_version",
+    "description":"tinker program module version.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_version_date",
+    "description":"Program version date.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_program_working_path",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_section_atom_to_atom_type_ref",
+    "kindStr":"type_section",
+    "description":"Section to store atom label to atom type definition list",
+    "superNames":["section_topology"]
+  },{
+    "name":"x_tinker_section_control_parameters",
+    "kindStr":"type_section",
+    "description":"Section to store the input and output control parameters",
+    "superNames":["section_run"]
+  },{
+    "name":"x_tinker_section_input_output_files",
+    "kindStr":"type_section",
+    "description":"Section to store input and output file names",
+    "superNames":["x_tinker_section_control_parameters"]
+  },{
+    "name":"x_tinker_section_single_configuration_calculation",
+    "kindStr":"type_section",
+    "description":"section for gathering values for MD steps",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_tinker_thermostat_level",
+    "description":"MD thermostat level (see wiki: single, multiple, regional).",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_thermostat_target_temperature",
+    "description":"MD thermostat target temperature.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"K",
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_thermostat_tau",
+    "description":"MD thermostat relaxation time.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_tinker_thermostat_type",
+    "description":"MD thermostat type, valid values are defined in the thermostat_type wiki page.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_traj_atoms_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_traj_box_bound_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_traj_box_bounds_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_traj_number_of_atoms_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_traj_timestep_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_traj_variables_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_tinker_xlo_xhi",
+    "description":"test",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  }]
+}

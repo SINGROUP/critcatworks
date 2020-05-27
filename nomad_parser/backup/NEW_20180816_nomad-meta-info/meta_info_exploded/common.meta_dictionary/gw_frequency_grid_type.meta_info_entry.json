@@ -1,0 +1,12 @@
+{
+  "meta_name":"gw_frequency_grid_type",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Frequency integration grid type for the correlational self energy: 'eqdis' - ",
+    "equidistant frequencies from 0 to freqmax; 'gaulag' - Gauss-Laguerre quadrature ",
+    "from 0 to infinity; 'gauleg' - Gauss-Legendre quadrature from 0 to freqmax; ",
+    "'gaule2' (default) - double Gauss-Legendre quadrature from 0 to freqmax and ",
+    "from freqmax to infinity."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

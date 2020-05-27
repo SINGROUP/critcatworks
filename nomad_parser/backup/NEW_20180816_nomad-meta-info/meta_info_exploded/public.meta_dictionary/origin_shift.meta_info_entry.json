@@ -1,0 +1,18 @@
+{
+  "meta_name":"origin_shift",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Vector $\\mathbf{p}$ from the origin of the standardized system to the origin of ",
+    "the original system. Together with the matrix $\\mathbf{P}$, found in ",
+    "space_group_3D_transformation_matrix, the transformation between the ",
+    "standardized coordinates $\\mathbf{x}_s$ and original coordinates $\\mathbf{x}$ ",
+    "is then given by $\\mathbf{x}_s = \\mathbf{P} \\mathbf{x} + ",
+    "\\mathbf{p}$."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  }]
+}

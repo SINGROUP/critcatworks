@@ -1,0 +1,15 @@
+{
+  "meta_name":"frame_sequence_kinetic_energy_stats",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Average kinetic energy and its standard deviation over this sequence of frames ",
+    "(i.e., a trajectory, a frame is one section_single_configuration_calculation)."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":2
+  }],
+  "meta_units":"J"
+}

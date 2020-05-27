@@ -1,0 +1,12 @@
+{
+  "meta_name":"energy_total_potential_per_atom",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "A value of the total potential energy per atom. Note that a direct comparison ",
+    "may not be possible because of a difference in the methods for computing total ",
+    "energies and numerical implementations of various codes might leads to ",
+    "different energy zeros (see section_energy_code_independent for a ",
+    "code-independent definition of the energy)."],
+  "meta_abstract_types":[
+    "energy_component"]
+}

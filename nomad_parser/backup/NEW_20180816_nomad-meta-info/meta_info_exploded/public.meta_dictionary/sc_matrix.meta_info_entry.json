@@ -1,0 +1,14 @@
+{
+  "meta_name":"sc_matrix",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the matrix that transforms the unit-cell into the super-cell in which ",
+    "the actual calculation is performed."],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

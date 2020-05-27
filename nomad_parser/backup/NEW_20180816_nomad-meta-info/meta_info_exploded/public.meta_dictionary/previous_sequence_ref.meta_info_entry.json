@@ -1,0 +1,12 @@
+{
+  "meta_name":"previous_sequence_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains a reference to the previous sequence. A sequence is a trajectory, ",
+    "which can have number_of_frames_in_sequence each representing one ",
+    "section_single_configuration_calculation section. If not given, a start from an ",
+    "initial configuration is assumed."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_frame_sequence"
+}

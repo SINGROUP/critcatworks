@@ -1,0 +1,12 @@
+{
+  "meta_name":"parsing_message_info_run",
+  "meta_type":"type-value",
+  "meta_description":[
+    "This field is used for info messages of the parsing program associated with a ",
+    "run, see section_run."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "parsing_message_info"],
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

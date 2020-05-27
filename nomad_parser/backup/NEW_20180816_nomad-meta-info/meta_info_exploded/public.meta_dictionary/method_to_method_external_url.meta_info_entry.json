@@ -1,0 +1,10 @@
+{
+  "meta_name":"method_to_method_external_url",
+  "meta_type":"type-value",
+  "meta_description":[
+    "URL used to reference an externally stored section_method. The kind of ",
+    "relationship between the present and the referenced section_method is specified ",
+    "by method_to_method_kind."],
+  "meta_parent_section":"section_method_to_method_refs",
+  "meta_data_type":"string"
+}

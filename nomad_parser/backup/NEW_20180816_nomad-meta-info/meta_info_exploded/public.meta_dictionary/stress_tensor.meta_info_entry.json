@@ -1,0 +1,21 @@
+{
+  "meta_name":"stress_tensor",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the final value of the default stress tensor consistent with energy_total ",
+    "and calculated with the method specified in stress_tensor_method.\n",
+    "\n",
+    "This value is used (if needed) for, e.g., molecular dynamics and geometry ",
+    "optimization. Alternative definitions of the stress tensor can be assigned with ",
+    "stress_tensor_kind"],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "stress_tensor_type"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }],
+  "meta_units":"Pa"
+}

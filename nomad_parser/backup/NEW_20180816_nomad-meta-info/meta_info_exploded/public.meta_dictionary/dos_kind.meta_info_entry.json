@@ -1,0 +1,9 @@
+{
+  "meta_name":"dos_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String to specify the kind of density of states (either electronic or ",
+    "vibrational)."],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"string"
+}

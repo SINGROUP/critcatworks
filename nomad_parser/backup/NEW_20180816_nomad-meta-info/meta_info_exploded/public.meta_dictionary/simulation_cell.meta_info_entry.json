@@ -1,0 +1,19 @@
+{
+  "meta_name":"simulation_cell",
+  "meta_type":"type-value",
+  "meta_description":[
+    "DEPRECATED, use lattice_vectors instead. Holds the lattice vectors (in ",
+    "Cartesian coordinates) of the simulation cell. The last (fastest) index runs ",
+    "over the $x,y,z$ Cartesian coordinates, and the first index runs over the 3 ",
+    "lattice vectors."],
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "configuration_core"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }],
+  "meta_units":"m"
+}

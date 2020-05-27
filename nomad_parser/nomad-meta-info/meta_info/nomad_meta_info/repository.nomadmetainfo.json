@@ -1,0 +1,460 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "Meta Info that is used in the Nomad Repository",
+  "dependencies": [ {
+      "relativePath": "public.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "First name of a author of NOMAD repository data (includes middle names)",
+      "dtypeStr": "C",
+      "name": "author_first_name",
+      "superNames": [
+        "section_author_info"
+      ]
+    }, {
+      "description": "Last name of a author to NOMAD repository data",
+      "dtypeStr": "C",
+      "name": "author_last_name",
+      "superNames": [
+        "section_author_info"
+      ]
+    }, {
+      "description": "Name (fista and last name) of an author of NOMAD repository data",
+      "dtypeStr": "C",
+      "name": "author_name",
+      "superNames": [
+        "section_author_info"
+      ]
+    }, {
+      "description": "Identifier of the author used in the repository",
+      "dtypeStr": "i",
+      "name": "author_repo_id",
+      "superNames": [
+        "section_author_info"
+      ]
+    }, {
+      "description": "internal ID of the citation (primary key in Postgres DB)",
+      "dtypeStr": "C",
+      "name": "citation_repo_id",
+      "superNames": [
+        "section_citation"
+      ]
+    }, {
+      "description": "String defining the citation",
+      "dtypeStr": "C",
+      "name": "citation_value",
+      "superNames": [
+        "section_citation"
+      ]
+    }, {
+      "description": "internal ID of the data set (primary key in Postgres DB calculations table)",
+      "dtypeStr": "i",
+      "name": "dataset_calc_id",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "the NOMAD DOIs assigned to the dataset",
+      "kindStr": "type_section",
+      "name": "section_dataset_doi",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "the internal ID assigned to a NOMAD DOI (primary key in Postgres DB)",
+      "dtypeStr": "i",
+      "name": "dataset_doi_id",
+      "superNames": [
+        "section_dataset_doi"
+      ]
+    }, {
+      "description": "the name of the DOI",
+      "dtypeStr": "i",
+      "name": "dataset_doi_name",
+      "superNames": [
+        "section_dataset_doi"
+      ]
+    }, {
+      "description": "Checksum idendifying the dataset in the repository",
+      "dtypeStr": "C",
+      "name": "dataset_checksum",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "Name of NOMAD repository dataset",
+      "dtypeStr": "C",
+      "name": "dataset_name",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "internal ID of the (optional) parent data set (primary key in Postgres DB calculations table)",
+      "dtypeStr": "i",
+      "name": "dataset_parent_calc_id",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "Unique identifier of the parent NOMAD repository dataset",
+      "dtypeStr": "C",
+      "name": "dataset_parent_pid",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "Unique identifier of a NOMAD repository dataset",
+      "dtypeStr": "C",
+      "name": "dataset_pid",
+      "superNames": [
+        "section_repository_dataset"
+      ]
+    }, {
+      "description": "kind of access this data has currently",
+      "dtypeStr": "C",
+      "name": "repository_access_now",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "Gid of a raw data archives that contains this calculation",
+      "dtypeStr": "C",
+      "name": "repository_archive_gid",
+      "repeats": true,
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "Atomic elements used in this calculation",
+      "dtypeStr": "C",
+      "name": "repository_atomic_elements",
+      "repeats": true,
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "String identifying the type of basis set used in this calculation",
+      "dtypeStr": "C",
+      "name": "repository_basis_set_type",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "calc_id, an internal identifier in the database of a file/calculation in NOMAD repository",
+      "dtypeStr": "i64",
+      "name": "repository_calc_id",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "checksum of the calculation",
+      "dtypeStr": "C",
+      "name": "repository_checksum",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "Chemical formula (composition) calculation",
+      "dtypeStr": "C",
+      "name": "repository_chemical_formula",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "version of the code that was used to generate the calculation",
+      "dtypeStr": "C",
+      "name": "repository_code_version",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "Comment on data uploaded to NOMAD repository",
+      "dtypeStr": "C",
+      "name": "repository_comment",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "String identifying the crystal system of this calculation",
+      "dtypeStr": "C",
+      "name": "repository_crystal_system",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "paths to the files associated with this calculation on the file system",
+      "dtypeStr": "C",
+      "name": "repository_filepaths",
+      "repeats": true,
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "Checksum of the fields used in the NOMAD repository search result table: repository_chemical_formula, repository_spacegroup_nr, repository_basis_set_type, repository_xc_treatment, repository_code_version, repository_access_now, citation_repo_id, repository_comment, author_repository_id. Checksum is Base64 (url safe) encoding of the first 168 bit of SHA-512 prefixed with 'g'",
+      "dtypeStr": "C",
+      "name": "repository_grouping_checksum",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "Db identifier for a file/calculation in NOMAD repository",
+      "dtypeStr": "i64",
+      "name": "repository_id",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "path to the primary file of this calculation on the file system",
+      "dtypeStr": "C",
+      "name": "repository_location",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "A nomad uri to normalized calculation corresponding to this calculation",
+      "dtypeStr": "C",
+      "name": "repository_nomad_uri",
+      "repeats": true,
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "Date this calculation did become, or will become open access",
+      "dtypeStr": "C",
+      "name": "repository_open_date",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "String identifying the parser used to parse the information for the repository",
+      "dtypeStr": "C",
+      "name": "repository_parser_id",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "Permanent identifier of a file/calculation in NOMAD repository",
+      "dtypeStr": "C",
+      "name": "repository_calc_pid",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "String identifying the program used to generate this calculation",
+      "dtypeStr": "C",
+      "name": "repository_program_name",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "space group of the geometry of this calculation",
+      "dtypeStr": "i",
+      "name": "repository_spacegroup_nr",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "String identifying the type of system of this calculation",
+      "dtypeStr": "C",
+      "name": "repository_system_type",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "URI referring to the parsed file in the original upload to repository (equivalent of mainFileUri before repackaging)",
+      "dtypeStr": "C",
+      "name": "repository_uri",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "String identifying the xc treatment used in this calculation",
+      "dtypeStr": "C",
+      "name": "repository_xc_treatment",
+      "superNames": [
+        "section_repository_parserdata"
+      ]
+    }, {
+      "description": "Information about the authors of data uploaded to NOMAD repository",
+      "kindStr": "type_section",
+      "name": "section_author_info",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "Section describing a citation",
+      "kindStr": "type_section",
+      "name": "section_citation",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "Information on a raw data archive that contain open access data of this upload",
+      "kindStr": "type_section",
+      "name": "section_raw_data",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "Base path of the raw data in the upload, these directories are *not* created in the archive",
+      "dtypeStr": "C",
+      "name": "raw_data_base_path",
+      "superNames": [
+        "section_raw_data"
+      ]
+    }, {
+      "description": "paths stored in the archive, all subfiles are stored along with these",
+      "dtypeStr": "C",
+      "name": "raw_data_content_roots",
+      "repeats": true,
+      "superNames": [
+        "section_raw_data"
+      ]
+    }, {
+      "description": "When the raw data archive was created",
+      "dtypeStr": "C",
+      "name": "raw_data_creation_date",
+      "repeats": true,
+      "superNames": [
+        "section_raw_data"
+      ]
+    }, {
+      "description": "Unique identifier of the raw data archive",
+      "dtypeStr": "C",
+      "name": "raw_data_gid",
+      "superNames": [
+        "section_raw_data"
+      ]
+    }, {
+      "description": "NOMAD repository dataset tagging info",
+      "kindStr": "type_section",
+      "name": "section_repository_dataset",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "Section containing information about the original upload to NOMAD repository",
+      "kindStr": "type_section",
+      "name": "section_repository_info",
+      "superNames": []
+    }, {
+      "description": "Information about the person with whom this calculation is shared with",
+      "kindStr": "type_section",
+      "name": "section_shared_with",
+      "superNames": [
+        "section_repository_userdata"
+      ]
+    }, {
+      "description": "Information about the person who uploaded the data to NOMAD repository",
+      "kindStr": "type_section",
+      "name": "section_uploader_info",
+      "superNames": [
+        "section_repository_info"
+      ]
+  }, {
+    "description": "data about the calculation which can be modified by the owner",
+    "kindStr": "type_section",
+    "name": "section_repository_userdata",
+    "superNames": [
+      "section_repository_info"
+    ]
+  }, {
+    "description": "data about the calculation which can be modified by parsers",
+    "kindStr": "type_section",
+    "name": "section_repository_parserdata",
+    "superNames": [
+      "section_repository_info"
+    ]
+    }, {
+      "description": "First name of someone this calculation is shared with",
+      "dtypeStr": "C",
+      "name": "shared_with_first_name",
+      "superNames": [
+        "section_shared_with"
+      ]
+    }, {
+      "description": "Last name of the uploader to NOMAD repository",
+      "dtypeStr": "C",
+      "name": "shared_with_last_name",
+      "superNames": [
+        "section_shared_with"
+      ]
+    }, {
+      "description": "full name of the user the calculation has been shared with",
+      "dtypeStr": "i",
+      "name": "shared_with_name",
+      "superNames": [
+        "section_shared_with"
+      ]
+    }, {
+      "description": "repository-internal ID of the user the calculation has been shared with",
+      "dtypeStr": "i",
+      "name": "shared_with_repo_id",
+      "superNames": [
+        "section_shared_with"
+      ]
+    }, {
+      "description": "username of a person this calculation is shared with",
+      "dtypeStr": "C",
+      "name": "shared_with_username",
+      "superNames": [
+        "section_shared_with"
+      ]
+    }, {
+      "description": "Date/time when the data was uploaded to NOMAD repository (offset from *Unix epoch* (00:00:00 UTC on 1 January 1970) in seconds)",
+      "dtypeStr": "f",
+      "name": "upload_date",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "Unique ID of the upload 'block' (upload could have been split into many archives)",
+      "dtypeStr": "i",
+      "name": "upload_id",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "identifier for an upload",
+      "dtypeStr": "C",
+      "name": "upload_repository_pid",
+      "superNames": [
+        "section_repository_info"
+      ]
+    }, {
+      "description": "First name of the uploader to NOMAD repository (includes middle names)",
+      "dtypeStr": "C",
+      "name": "uploader_first_name",
+      "superNames": [
+        "section_uploader_info"
+      ]
+    }, {
+      "description": "Last name of the uploader to NOMAD repository",
+      "dtypeStr": "C",
+      "name": "uploader_last_name",
+      "superNames": [
+        "section_uploader_info"
+      ]
+    }, {
+      "description": "full name of the user who uploaded the calculation",
+      "dtypeStr": "i",
+      "name": "uploader_name",
+      "superNames": [
+        "section_uploader_info"
+      ]
+    }, {
+      "description": "First name of the uploader to NOMAD repository (includes middle names)",
+      "dtypeStr": "i",
+      "name": "uploader_repo_id",
+      "superNames": [
+        "section_uploader_info"
+      ]
+    }, {
+      "description": "username of the uploader",
+      "dtypeStr": "C",
+      "name": "uploader_username",
+      "superNames": [
+        "section_uploader_info"
+      ]
+    }]
+}

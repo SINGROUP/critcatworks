@@ -1,0 +1,19 @@
+{
+  "meta_name":"section_system_to_system_refs",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section that describes the relationship between different section_system ",
+    "sections.\n",
+    "\n",
+    "For instance, if a phonon calculation using a finite difference approach is ",
+    "performed the force evaluation is typically done in a larger supercell but the ",
+    "properties such as the phonon band structure are still calculated for the ",
+    "primitive cell.\n",
+    "\n",
+    "The kind of relationship between the system defined in this section and the ",
+    "referenced one is described by system_to_system_kind. The referenced ",
+    "section_system is identified via system_to_system_ref."],
+  "meta_parent_section":"section_system",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

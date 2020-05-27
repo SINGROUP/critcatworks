@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.structure.singlesites &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.structure.singlesites</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">PyTask</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks.queue.queue_launcher</span> <span class="k">import</span> <span class="n">launch_rocket_to_queue</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.queue_adapters.common_adapter</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">cluskit</span>
+<span class="kn">import</span> <span class="nn">dscribe</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">atoms_dict_to_ase</span><span class="p">,</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">read_descmatrix</span><span class="p">,</span> <span class="n">write_descmatrix</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">adsorbate_pos_to_atoms_lst</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">join_cluster_adsorbate</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">gather_all_atom_types</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">update_simulations_collection</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">get_external_database</span><span class="p">,</span> <span class="n">_query_id_counter_and_increment</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">fetch_simulations</span>
+
+
+<div class="viewcode-block" id="AdsiteCreationTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.AdsiteCreationTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">AdsiteCreationTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Firetask to determine adsorption site structures. The adsorbate</span>
+<span class="sd">    can only be a single atom. For a molecular adsorbate (binding</span>
+<span class="sd">    to only one site), please use the Firetask </span>
+<span class="sd">    MonodentateAdsiteCreationTask.</span>
+<span class="sd">    On a set of nanoclusters, a combination of top/bridge/hollow sites</span>
+<span class="sd">    is classified and populated. Hence, the simulation collection</span>
+<span class="sd">    of the mongodb database is updated with structures which each</span>
+<span class="sd">    contain a single adsorbate on a nanocluster.</span>
+
+<span class="sd">    Besides, a descriptor matrix is written to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        adsorbate_name (str) :  element symbold of the adsorbed atom</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;</span>
+<span class="sd">                </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;AdsiteCreationTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reference_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;adsorbate_name&#39;</span><span class="p">,</span> <span class="s1">&#39;adsite_types&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="AdsiteCreationTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.AdsiteCreationTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">adsorbate_name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsorbate_name&quot;</span><span class="p">]</span>
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsite_types&quot;</span><span class="p">]</span>
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;reference_energy&quot;</span><span class="p">]</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids</span><span class="p">)</span>
+        <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">desc_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">new_calc_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">])</span>
+
+        <span class="c1"># create reference of adsorbate in order to store its total energy</span>
+        <span class="c1"># for later constructing adsorption energies</span>
+        <span class="n">reference_simulation</span> <span class="o">=</span> <span class="n">update_simulations_collection</span><span class="p">(</span><span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">atoms</span> <span class="o">=</span> <span class="p">{},</span> 
+            <span class="n">source_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span><span class="p">,</span> 
+            <span class="n">nanoclusters</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">adsorbates</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">substrates</span> <span class="o">=</span> <span class="p">[],</span> 
+            <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">],</span> <span class="n">inp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;adsorbate_name&quot;</span> <span class="p">:</span> <span class="n">adsorbate_name</span><span class="p">},</span> 
+            <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;total_energy&quot;</span> <span class="p">:</span> <span class="n">reference_energy</span><span class="p">},)</span>
+        <span class="n">reference_id</span> <span class="o">=</span> <span class="n">reference_simulation</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+
+
+        <span class="n">all_atomtypes</span> <span class="o">=</span> <span class="n">gather_all_atom_types</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">,</span> <span class="n">simulations</span><span class="p">)</span>
+
+        <span class="c1"># looping over nc atoms </span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">):</span>
+            <span class="n">simulations_chunk_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1">##</span>
+            <span class="c1"># get source simulation</span>
+            <span class="n">source_simulation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)])</span>
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">source_simulation</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+            <span class="c1"># running cluskit on cluster</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="n">cluskit</span><span class="o">.</span><span class="n">Cluster</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">get_surface_atoms</span><span class="p">()</span>
+            <span class="c1"># TODO allow for other descriptors than default</span>
+            <span class="c1"># TODO read descriptor_params</span>
+            <span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">dscribe</span><span class="o">.</span><span class="n">descriptors</span><span class="o">.</span><span class="n">SOAP</span><span class="p">(</span><span class="n">species</span> <span class="o">=</span> <span class="n">all_atomtypes</span><span class="p">,</span> 
+                <span class="n">nmax</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">lmax</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">rcut</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">crossover</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sparse</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">descriptor_setup</span>
+
+            <span class="c1">#looping over adsorption site type</span>
+            <span class="k">for</span> <span class="n">adsite_type</span> <span class="ow">in</span> <span class="n">adsite_types</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;top&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;bridge&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">2</span>
+
+                <span class="k">elif</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;hollow&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;adsorption site type unknown, known types are: top, bridge, hollow&quot;</span><span class="p">)</span>
+                    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># get adsorption sites for a nanocluster</span>
+                <span class="n">adspos</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_sites</span><span class="p">(</span><span class="n">adsite_type_int</span><span class="p">)</span>
+                <span class="n">sites_surface_atoms</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">site_surface_atom_ids</span><span class="p">[</span><span class="n">adsite_type_int</span><span class="p">]</span>
+
+                <span class="c1"># get descriptor</span>
+                <span class="n">desc</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_sites_descriptor</span><span class="p">(</span><span class="n">adsite_type_int</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">desc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">desc_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+
+                <span class="n">adsorbate_lst</span> <span class="o">=</span> <span class="n">adsorbate_pos_to_atoms_lst</span><span class="p">(</span><span class="n">adspos</span><span class="p">,</span> <span class="n">adsorbate_name</span><span class="p">)</span>
+                <span class="c1">#loop over each adsorbate</span>
+                <span class="k">for</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="n">surface_atoms</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">adsorbate_lst</span><span class="p">,</span> <span class="n">sites_surface_atoms</span><span class="p">):</span>
+
+                    <span class="c1">#adsites_dict </span>
+                    <span class="n">joint_atoms</span><span class="p">,</span> <span class="n">cluster_ids</span><span class="p">,</span> <span class="n">adsorbate_ids</span> <span class="o">=</span> <span class="n">join_cluster_adsorbate</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">)</span>
+                    <span class="n">joint_atoms_dict</span> <span class="o">=</span> <span class="n">ase_to_atoms_dict</span><span class="p">(</span><span class="n">joint_atoms</span><span class="p">)</span>
+
+                    <span class="c1"># update external database</span>
+                    <span class="n">dct</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">source_simulation</span><span class="p">)</span>
+                    <span class="c1"># calculation originated from this:</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;source_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_id</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;workflow_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">workflow_id</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">joint_atoms_dict</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;add_adsorbate&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">})]</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;adsorbates&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;atom_ids&quot;</span> <span class="p">:</span> <span class="n">adsorbate_ids</span><span class="p">,</span> <span class="s2">&quot;reference_id&quot;</span> <span class="p">:</span> <span class="n">reference_id</span><span class="p">}))</span>
+                    <span class="c1"># empty previous input</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;adsite_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adsite_type</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;adsorbate_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adsorbate_name</span>
+                    <span class="c1"># empty previous output</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;surface_atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">surface_atoms</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+                    <span class="c1"># getting only id for uploading simulations in chunks</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;simulations&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+                    <span class="n">simulations_chunk_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+
+                    <span class="c1"># update internal workflow data</span>
+                    <span class="n">simulation_id</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+                    <span class="n">new_calc_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">simulation_id</span><span class="p">)</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;simulations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">simulations_chunk_list</span><span class="p">)</span>
+        
+        <span class="n">descmatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">desc_lst</span><span class="p">)</span>
+
+        <span class="c1"># saves descmatrix as a path to a numpy array</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;descmatrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">write_descmatrix</span><span class="p">(</span><span class="n">descmatrix</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_calc_ids</span>
+
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="MonodentateAdsiteCreationTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.MonodentateAdsiteCreationTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">MonodentateAdsiteCreationTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Firetask to determine adsorption site structures. The adsorbate</span>
+<span class="sd">    is specified as a molecule with an anchor X which binds to</span>
+<span class="sd">    only one site. The position of the binding atom is exactly</span>
+<span class="sd">    determined by the adsorption vector of the adsorption site</span>
+<span class="sd">    and the bond length between X and the closest, later binding,</span>
+<span class="sd">    atom. On a set of nanoclusters, a combination of </span>
+<span class="sd">    top/bridge/hollow sites is classified and populated. </span>
+<span class="sd">    Hence, the simulation collection of the mongodb database </span>
+<span class="sd">    is updated with structures which each</span>
+<span class="sd">    contain a single adsorbate on a nanocluster.</span>
+
+<span class="sd">    Besides, a descriptor matrix is written to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an &quot;X&quot; dummy atom</span>
+<span class="sd">                            which indicates the anchor point to the nanocluster</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;</span>
+<span class="sd">                </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;MonodentateAdsiteCreationTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reference_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;adsorbate&#39;</span><span class="p">,</span> <span class="s1">&#39;adsite_types&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="MonodentateAdsiteCreationTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.MonodentateAdsiteCreationTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">adsorbate_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsorbate&quot;</span><span class="p">]</span>
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsite_types&quot;</span><span class="p">]</span>
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;reference_energy&quot;</span><span class="p">]</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids</span><span class="p">)</span>
+        <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">desc_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">new_calc_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">])</span>
+
+        <span class="c1"># adsorbate atom with anchor x</span>
+        <span class="n">adsorbate_x</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">adsorbate_dict</span><span class="p">)</span>
+
+
+        <span class="c1"># create reference of adsorbate in order to store its total energy</span>
+        <span class="c1"># for later constructing adsorption energies</span>
+        <span class="n">reference_simulation</span> <span class="o">=</span> <span class="n">update_simulations_collection</span><span class="p">(</span><span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">atoms</span> <span class="o">=</span> <span class="n">adsorbate_dict</span><span class="p">,</span> 
+            <span class="n">source_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span><span class="p">,</span> 
+            <span class="n">nanoclusters</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">adsorbates</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">substrates</span> <span class="o">=</span> <span class="p">[],</span> 
+            <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">],</span> <span class="n">inp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;adsorbate&quot;</span> <span class="p">:</span> <span class="s2">&quot;monodentate_molecule&quot;</span><span class="p">},</span> 
+            <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;total_energy&quot;</span> <span class="p">:</span> <span class="n">reference_energy</span><span class="p">},)</span>
+        <span class="n">reference_id</span> <span class="o">=</span> <span class="n">reference_simulation</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+
+
+        <span class="n">all_atomtypes</span> <span class="o">=</span> <span class="n">gather_all_atom_types</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">,</span> <span class="n">simulations</span><span class="p">)</span>
+
+        <span class="c1"># looping over nc atoms </span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">):</span>
+            <span class="n">simulations_chunk_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1">##</span>
+            <span class="c1"># get source simulation</span>
+            <span class="n">source_simulation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)])</span>
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">source_simulation</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+            <span class="c1"># running cluskit on cluster</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="n">cluskit</span><span class="o">.</span><span class="n">Cluster</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">get_surface_atoms</span><span class="p">()</span>
+            <span class="c1"># TODO allow for other descriptors than default</span>
+            <span class="c1"># TODO read descriptor_params</span>
+            <span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">dscribe</span><span class="o">.</span><span class="n">descriptors</span><span class="o">.</span><span class="n">SOAP</span><span class="p">(</span><span class="n">species</span> <span class="o">=</span> <span class="n">all_atomtypes</span><span class="p">,</span> 
+                <span class="n">nmax</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">lmax</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">rcut</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">crossover</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sparse</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">descriptor_setup</span>
+
+            <span class="c1">#looping over adsorption site type</span>
+            <span class="k">for</span> <span class="n">adsite_type</span> <span class="ow">in</span> <span class="n">adsite_types</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;top&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;bridge&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">2</span>
+
+                <span class="k">elif</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;hollow&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;adsorption site type unknown, known types are: top, bridge, hollow&quot;</span><span class="p">)</span>
+                    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># get adsorption sites for a nanocluster</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_sites</span><span class="p">(</span><span class="n">adsite_type_int</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">sites_surface_atoms</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">site_surface_atom_ids</span><span class="p">[</span><span class="n">adsite_type_int</span><span class="p">]</span>
+
+                <span class="c1"># get descriptor</span>
+                <span class="n">desc</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_sites_descriptor</span><span class="p">(</span><span class="n">adsite_type_int</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">desc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">desc_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="n">adsorbate_lst</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">place_adsorbates</span><span class="p">(</span><span class="n">adsorbate_x</span><span class="p">,</span> <span class="n">sitetype</span> <span class="o">=</span> <span class="n">adsite_type_int</span><span class="p">)</span>
+
+                <span class="c1">#loop over each adsorbate</span>
+                <span class="k">for</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="n">surface_atoms</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">adsorbate_lst</span><span class="p">,</span> <span class="n">sites_surface_atoms</span><span class="p">):</span>
+
+                    <span class="c1">#adsites_dict </span>
+                    <span class="n">joint_atoms</span><span class="p">,</span> <span class="n">cluster_ids</span><span class="p">,</span> <span class="n">adsorbate_ids</span> <span class="o">=</span> <span class="n">join_cluster_adsorbate</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">)</span>
+                    <span class="n">joint_atoms_dict</span> <span class="o">=</span> <span class="n">ase_to_atoms_dict</span><span class="p">(</span><span class="n">joint_atoms</span><span class="p">)</span>
+
+                    <span class="c1"># update external database</span>
+                    <span class="n">dct</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">source_simulation</span><span class="p">)</span>
+                    <span class="c1"># calculation originated from this:</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;source_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_id</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;workflow_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">workflow_id</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">joint_atoms_dict</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;add_adsorbate&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">})]</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;adsorbates&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;atom_ids&quot;</span> <span class="p">:</span> <span class="n">adsorbate_ids</span><span class="p">,</span> <span class="s2">&quot;reference_id&quot;</span> <span class="p">:</span> <span class="n">reference_id</span><span class="p">}))</span>
+                    <span class="c1"># empty previous input</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;adsite_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adsite_type</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;adsorbate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adsorbate_dict</span>
+                    <span class="c1"># empty previous output</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;surface_atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">surface_atoms</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+                    <span class="c1"># getting only id for uploading simulations in chunks</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;simulations&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+                    <span class="n">simulations_chunk_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+
+                    <span class="c1"># update internal workflow data</span>
+                    <span class="n">simulation_id</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+                    <span class="n">new_calc_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">simulation_id</span><span class="p">)</span>
+        
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;simulations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">simulations_chunk_list</span><span class="p">)</span>
+        <span class="n">descmatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">desc_lst</span><span class="p">)</span>
+
+        <span class="c1"># saves descmatrix as a path to a numpy array</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;descmatrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">write_descmatrix</span><span class="p">(</span><span class="n">descmatrix</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_calc_ids</span>
+
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="MonodentateUniqueAdsiteCreationTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">MonodentateUniqueAdsiteCreationTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Firetask to determine unique adsorption site structures. The </span>
+<span class="sd">    adsorbate is specified as a molecule with an anchor X which </span>
+<span class="sd">    binds to only one site. The position of the binding atom is </span>
+<span class="sd">    exactly determined by the adsorption vector of the adsorption </span>
+<span class="sd">    site and the bond length between X and the closest, later </span>
+<span class="sd">    binding, atom. On a set of nanoclusters, a combination of </span>
+<span class="sd">    top/bridge/hollow sites is classified.</span>
+<span class="sd">    The sites are ranked for their dissimilarity based on a </span>
+<span class="sd">    local descriptor (default soap), then uniqueness is defined</span>
+<span class="sd">    by a threshold parameter. Only the unique sites are kept and</span>
+<span class="sd">    populated with the adsorbate. </span>
+
+<span class="sd">    Hence, the simulation collection of the mongodb database </span>
+<span class="sd">    is updated with structures which each contain a single adsorbate </span>
+<span class="sd">    on a nanocluster.</span>
+
+<span class="sd">    Besides, a descriptor matrix is written to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an &quot;X&quot; dummy atom</span>
+<span class="sd">                            which indicates the anchor point to the nanocluster</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;</span>
+<span class="sd">        threshold (float) :     threshold of similarity metric between the local structures</span>
+<span class="sd">                                of the adsorption sites. Only sites which are more dissimilar </span>
+<span class="sd">                                than the given threshold are computed</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;MonodentateUniqueAdsiteCreationTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reference_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;adsorbate&#39;</span><span class="p">,</span> <span class="s1">&#39;adsite_types&#39;</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="MonodentateUniqueAdsiteCreationTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.MonodentateUniqueAdsiteCreationTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">adsorbate_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsorbate&quot;</span><span class="p">]</span>
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsite_types&quot;</span><span class="p">]</span>
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;reference_energy&quot;</span><span class="p">]</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids</span><span class="p">)</span>
+        <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_id&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">desc_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">new_calc_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">get_external_database</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">])</span>
+
+        <span class="c1"># adsorbate atom with anchor x</span>
+        <span class="n">adsorbate_x</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">adsorbate_dict</span><span class="p">)</span>
+
+        <span class="c1"># create reference of adsorbate in order to store its total energy</span>
+        <span class="c1"># for later constructing adsorption energies</span>
+        <span class="n">reference_simulation</span> <span class="o">=</span> <span class="n">update_simulations_collection</span><span class="p">(</span><span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">atoms</span> <span class="o">=</span> <span class="n">adsorbate_dict</span><span class="p">,</span> 
+            <span class="n">source_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span><span class="p">,</span> 
+            <span class="n">nanoclusters</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">adsorbates</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">substrates</span> <span class="o">=</span> <span class="p">[],</span> 
+            <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">],</span> <span class="n">inp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;adsorbate&quot;</span> <span class="p">:</span> <span class="s2">&quot;monodentate_molecule&quot;</span><span class="p">},</span> 
+            <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;total_energy&quot;</span> <span class="p">:</span> <span class="n">reference_energy</span><span class="p">},)</span>
+        <span class="n">reference_id</span> <span class="o">=</span> <span class="n">reference_simulation</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+
+
+        <span class="n">all_atomtypes</span> <span class="o">=</span> <span class="n">gather_all_atom_types</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">,</span> <span class="n">simulations</span><span class="p">)</span>
+
+        <span class="c1"># looping over nc atoms </span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">):</span>
+            <span class="n">simulations_chunk_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1">##</span>
+            <span class="c1"># get source simulation</span>
+            <span class="n">source_simulation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)])</span>
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">source_simulation</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+            <span class="c1"># running cluskit on cluster</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="n">cluskit</span><span class="o">.</span><span class="n">Cluster</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">get_surface_atoms</span><span class="p">()</span>
+            <span class="c1"># TODO allow for other descriptors than default</span>
+            <span class="c1"># TODO read descriptor_params</span>
+            <span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">dscribe</span><span class="o">.</span><span class="n">descriptors</span><span class="o">.</span><span class="n">SOAP</span><span class="p">(</span><span class="n">species</span> <span class="o">=</span> <span class="n">all_atomtypes</span><span class="p">,</span> 
+                <span class="n">nmax</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">lmax</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">rcut</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">crossover</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sparse</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">descriptor_setup</span> <span class="o">=</span> <span class="n">descriptor_setup</span>
+
+            <span class="c1">#looping over adsorption site type</span>
+            <span class="k">for</span> <span class="n">adsite_type</span> <span class="ow">in</span> <span class="n">adsite_types</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;top&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;bridge&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">2</span>
+
+                <span class="k">elif</span> <span class="n">adsite_type</span> <span class="o">==</span> <span class="s2">&quot;hollow&quot;</span><span class="p">:</span>
+                    <span class="n">adsite_type_int</span> <span class="o">=</span> <span class="mi">3</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;adsorption site type unknown, known types are: top, bridge, hollow&quot;</span><span class="p">)</span>
+                    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># get adsorption sites for a nanocluster</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_sites</span><span class="p">(</span><span class="n">adsite_type_int</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">sites_surface_atoms</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">site_surface_atom_ids</span><span class="p">[</span><span class="n">adsite_type_int</span><span class="p">]</span>
+
+                <span class="c1"># get descriptor</span>
+                <span class="n">desc</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_sites_descriptor</span><span class="p">(</span><span class="n">adsite_type_int</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">desc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">desc_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="n">adsorbate_lst</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">place_adsorbates</span><span class="p">(</span><span class="n">adsorbate_x</span><span class="p">,</span> <span class="n">sitetype</span> <span class="o">=</span> <span class="n">adsite_type_int</span><span class="p">)</span>
+
+                <span class="c1"># reduce to unique sites per site type</span>
+                <span class="n">unique_ids</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_unique_sites</span><span class="p">(</span><span class="n">sitetype</span> <span class="o">=</span> <span class="n">adsite_type_int</span><span class="p">)</span>
+                <span class="n">adsorbate_lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">adsorbate_lst</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">unique_ids</span><span class="p">]</span>
+
+                <span class="c1">#loop over each adsorbate</span>
+                <span class="k">for</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="n">surface_atoms</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">adsorbate_lst</span><span class="p">,</span> <span class="n">sites_surface_atoms</span><span class="p">):</span>
+
+                    <span class="c1">#adsites_dict </span>
+                    <span class="n">joint_atoms</span><span class="p">,</span> <span class="n">cluster_ids</span><span class="p">,</span> <span class="n">adsorbate_ids</span> <span class="o">=</span> <span class="n">join_cluster_adsorbate</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">)</span>
+                    <span class="n">joint_atoms_dict</span> <span class="o">=</span> <span class="n">ase_to_atoms_dict</span><span class="p">(</span><span class="n">joint_atoms</span><span class="p">)</span>
+
+                    <span class="c1"># update external database</span>
+                    <span class="n">dct</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">source_simulation</span><span class="p">)</span>
+                    <span class="c1"># calculation originated from this:</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;source_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_id</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;workflow_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">workflow_id</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">joint_atoms_dict</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;operations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;add_adsorbate&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">})]</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;adsorbates&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">({</span><span class="s2">&quot;atom_ids&quot;</span> <span class="p">:</span> <span class="n">adsorbate_ids</span><span class="p">,</span> <span class="s2">&quot;reference_id&quot;</span> <span class="p">:</span> <span class="n">reference_id</span><span class="p">}))</span>
+                    <span class="c1"># empty previous input</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;adsite_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adsite_type</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;inp&quot;</span><span class="p">][</span><span class="s2">&quot;adsorbate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adsorbate_dict</span>
+                    <span class="c1"># empty previous output</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;surface_atoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">surface_atoms</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+                    <span class="c1"># getting only id for uploading simulations in chunks</span>
+                    <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_query_id_counter_and_increment</span><span class="p">(</span><span class="s1">&#39;simulations&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+                    <span class="n">simulations_chunk_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+
+                    <span class="c1"># update internal workflow data</span>
+                    <span class="n">simulation_id</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+                    <span class="n">new_calc_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">simulation_id</span><span class="p">)</span>
+        
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;simulations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">simulations_chunk_list</span><span class="p">)</span>
+        <span class="n">descmatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">desc_lst</span><span class="p">)</span>
+
+        <span class="c1"># saves descmatrix as a path to a numpy array</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;descmatrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">write_descmatrix</span><span class="p">(</span><span class="n">descmatrix</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_calc_ids</span>
+
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div></div>
+
+
+
+<div class="viewcode-block" id="AdsiteRankTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.AdsiteRankTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">AdsiteRankTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Firetask to determine ranking of adsorption site structures.</span>
+<span class="sd">    Based on a previously calculated descriptor matrix (in</span>
+<span class="sd">    the fw_spec as a path to a file), the adsorbate structure </span>
+<span class="sd">    sites are ranked are ranked for their dissimilarity.</span>
+
+<span class="sd">    Hence, the calc_ids, the structures to be simulated are</span>
+<span class="sd">    reordered. </span>
+
+<span class="sd">    Besides, the descriptor matrix is reordered and written </span>
+<span class="sd">    to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;AdsiteRankTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="AdsiteRankTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.AdsiteRankTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">descmatrix</span> <span class="o">=</span> <span class="n">read_descmatrix</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;DESCRIPTOR matrix attributes&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">descmatrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">descmatrix</span><span class="p">))</span>
+        <span class="n">fps_ranking</span> <span class="o">=</span> <span class="n">cluskit</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">_rank_fps</span><span class="p">(</span><span class="n">descmatrix</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">greedy</span> <span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">reordered_calc_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)[</span><span class="n">fps_ranking</span><span class="p">]</span>
+        <span class="n">reordered_descmatrix</span> <span class="o">=</span> <span class="n">descmatrix</span><span class="p">[</span><span class="n">fps_ranking</span><span class="p">]</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;fps_ranking&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fps_ranking</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reordered_calc_ids</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;descmatrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">write_descmatrix</span><span class="p">(</span><span class="n">reordered_descmatrix</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_adsites"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.get_adsites">[docs]</a><span class="k">def</span> <span class="nf">get_adsites</span><span class="p">(</span><span class="n">reference_energy</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">adsorbate_name</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">adsite_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bridge&quot;</span><span class="p">,</span> <span class="s2">&quot;hollow&quot;</span><span class="p">],</span> 
+        <span class="n">descriptor</span> <span class="o">=</span> <span class="s2">&quot;soap&quot;</span><span class="p">,</span> <span class="n">descriptor_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nmax&quot;</span> <span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;lmax&quot;</span> <span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;rcut&quot;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> 
+            <span class="s2">&quot;crossover&quot;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;sparse&quot;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">}):</span>
+    <span class="sd">&quot;&quot;&quot;Firetask to determine adsorption site structures. The adsorbate</span>
+<span class="sd">    can only be a single atom. For a molecular adsorbate (binding</span>
+<span class="sd">    to only one site), please use the Firetask </span>
+<span class="sd">    MonodentateAdsiteCreationTask.</span>
+<span class="sd">    On a set of nanoclusters, a combination of top/bridge/hollow sites</span>
+<span class="sd">    is classified and populated. Hence, the simulation collection</span>
+<span class="sd">    of the mongodb database is updated with structures which each</span>
+<span class="sd">    contain a single adsorbate on a nanocluster.</span>
+
+<span class="sd">    Besides, a descriptor matrix is written to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        adsorbate_name (str) :  element symbold of the adsorbed atom</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;</span>
+<span class="sd">        descriptor (str) :  type of descriptor to be used. For a list of</span>
+<span class="sd">                            descriptors, see the documentation of dscribe</span>
+<span class="sd">                            Defaults to &#39;soap&#39;</span>
+<span class="sd">        descriptor_params (dict) : descriptor parameters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">AdsiteCreationTask</span><span class="p">(</span>
+        <span class="n">adsorbate_name</span><span class="o">=</span><span class="n">adsorbate_name</span><span class="p">,</span> 
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="n">adsite_types</span><span class="p">,</span>
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="n">reference_energy</span><span class="p">,</span>
+        <span class="n">descriptor</span> <span class="o">=</span> <span class="n">descriptor</span><span class="p">,</span>
+        <span class="n">descriptor_params</span> <span class="o">=</span> <span class="n">descriptor_params</span>
+        <span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> 
+        <span class="n">spec</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;AdsiteCreationTask&#39;</span><span class="p">},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;AdsiteCreationWork&#39;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+<div class="viewcode-block" id="get_monodentate_adsites"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.get_monodentate_adsites">[docs]</a><span class="k">def</span> <span class="nf">get_monodentate_adsites</span><span class="p">(</span><span class="n">reference_energy</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">adsorbate</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">adsite_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bridge&quot;</span><span class="p">,</span> <span class="s2">&quot;hollow&quot;</span><span class="p">],</span> 
+        <span class="n">descriptor</span> <span class="o">=</span> <span class="s2">&quot;soap&quot;</span><span class="p">,</span> <span class="n">descriptor_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nmax&quot;</span> <span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;lmax&quot;</span> <span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;rcut&quot;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> 
+            <span class="s2">&quot;crossover&quot;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;sparse&quot;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">}):</span>
+    <span class="sd">&quot;&quot;&quot;Firetask to determine adsorption site structures. The adsorbate</span>
+<span class="sd">    is specified as a molecule with an anchor X which binds to</span>
+<span class="sd">    only one site. The position of the binding atom is exactly</span>
+<span class="sd">    determined by the adsorption vector of the adsorption site</span>
+<span class="sd">    and the bond length between X and the closest, later binding,</span>
+<span class="sd">    atom. On a set of nanoclusters, a combination of </span>
+<span class="sd">    top/bridge/hollow sites is classified and populated. </span>
+<span class="sd">    Hence, the simulation collection of the mongodb database </span>
+<span class="sd">    is updated with structures which each</span>
+<span class="sd">    contain a single adsorbate on a nanocluster.</span>
+
+<span class="sd">    Besides, a descriptor matrix is written to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an &quot;X&quot; dummy atom</span>
+<span class="sd">                            which indicates the anchor point to the nanocluster</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;</span>
+<span class="sd">        descriptor (str) :  type of descriptor to be used. For a list of</span>
+<span class="sd">                            descriptors, see the documentation of dscribe</span>
+<span class="sd">                            Defaults to &#39;soap&#39;</span>
+<span class="sd">        descriptor_params (dict) : descriptor parameters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework MonodentateAdsiteCreationWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">MonodentateAdsiteCreationTask</span><span class="p">(</span>
+        <span class="n">adsorbate</span> <span class="o">=</span> <span class="n">adsorbate</span><span class="p">,</span> 
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="n">adsite_types</span><span class="p">,</span>
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="n">reference_energy</span><span class="p">,</span>
+        <span class="n">descriptor</span> <span class="o">=</span> <span class="n">descriptor</span><span class="p">,</span>
+        <span class="n">descriptor_params</span> <span class="o">=</span> <span class="n">descriptor_params</span>
+        <span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> 
+        <span class="n">spec</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;MonodentateAdsiteCreationTask&#39;</span><span class="p">},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;MonodentateAdsiteCreationWork&#39;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+<div class="viewcode-block" id="get_monodentate_unique_adsites"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.get_monodentate_unique_adsites">[docs]</a><span class="k">def</span> <span class="nf">get_monodentate_unique_adsites</span><span class="p">(</span><span class="n">reference_energy</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">adsorbate</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">adsite_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bridge&quot;</span><span class="p">,</span> <span class="s2">&quot;hollow&quot;</span><span class="p">],</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">descriptor</span> <span class="o">=</span> <span class="s2">&quot;soap&quot;</span><span class="p">,</span> 
+        <span class="n">descriptor_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nmax&quot;</span> <span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;lmax&quot;</span> <span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;rcut&quot;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> 
+            <span class="s2">&quot;crossover&quot;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;sparse&quot;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">}):</span>
+    <span class="sd">&quot;&quot;&quot;Firework to determine unique adsorption site structures. The </span>
+<span class="sd">    adsorbate is specified as a molecule with an anchor X which </span>
+<span class="sd">    binds to only one site. The position of the binding atom is </span>
+<span class="sd">    exactly determined by the adsorption vector of the adsorption </span>
+<span class="sd">    site and the bond length between X and the closest, later </span>
+<span class="sd">    binding, atom. On a set of nanoclusters, a combination of </span>
+<span class="sd">    top/bridge/hollow sites is classified.</span>
+<span class="sd">    The sites are ranked for their dissimilarity based on a </span>
+<span class="sd">    local descriptor (default soap), then uniqueness is defined</span>
+<span class="sd">    by a threshold parameter. Only the unique sites are kept and</span>
+<span class="sd">    populated with the adsorbate. </span>
+
+<span class="sd">    Hence, the simulation collection of the mongodb database </span>
+<span class="sd">    is updated with structures which each contain a single adsorbate </span>
+<span class="sd">    on a nanocluster.</span>
+
+<span class="sd">    Besides, a descriptor matrix is written to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        adsorbate (dict) :  adsorbed molecule as atoms dict. Contains an &quot;X&quot; dummy atom</span>
+<span class="sd">                            which indicates the anchor point to the nanocluster</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;</span>
+<span class="sd">        threshold (float) :     threshold of similarity metric between the local structures</span>
+<span class="sd">                                of the adsorption sites. Only sites which are more dissimilar </span>
+<span class="sd">                                than the given threshold are computed</span>
+<span class="sd">        descriptor (str) :  type of descriptor to be used. For a list of</span>
+<span class="sd">                            descriptors, see the documentation of dscribe</span>
+<span class="sd">                            Defaults to &#39;soap&#39;</span>
+<span class="sd">        descriptor_params (dict) : descriptor parameters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework MonodentateUniqueAdsiteCreationWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">MonodentateUniqueAdsiteCreationTask</span><span class="p">(</span>
+        <span class="n">adsorbate</span> <span class="o">=</span> <span class="n">adsorbate</span><span class="p">,</span> 
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="n">adsite_types</span><span class="p">,</span>
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="n">reference_energy</span><span class="p">,</span>
+        <span class="n">descriptor</span> <span class="o">=</span> <span class="n">descriptor</span><span class="p">,</span>
+        <span class="n">descriptor_params</span> <span class="o">=</span> <span class="n">descriptor_params</span><span class="p">,</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> 
+        <span class="n">spec</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;MonodentateUniqueAdsiteCreationTask&#39;</span><span class="p">},</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;MonodentateUniqueAdsiteCreationWork&#39;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+<div class="viewcode-block" id="rank_adsites"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.singlesites.rank_adsites">[docs]</a><span class="k">def</span> <span class="nf">rank_adsites</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Firework to determine ranking of adsorption site structures.</span>
+<span class="sd">    Based on a previously calculated descriptor matrix (in</span>
+<span class="sd">    the fw_spec as a path to a file), the adsorbate structure </span>
+<span class="sd">    sites are ranked are ranked for their dissimilarity.</span>
+
+<span class="sd">    Hence, the calc_ids, the structures to be simulated are</span>
+<span class="sd">    reordered. </span>
+
+<span class="sd">    Besides, the descriptor matrix is reordered and written </span>
+<span class="sd">    to a file for later use.</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework AdsiteRankWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">AdsiteRankTask</span><span class="p">()</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;AdsiteRankTask&#39;</span><span class="p">},</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;AdsiteRankWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

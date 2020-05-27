@@ -1,0 +1,17 @@
+{
+  "meta_name":"meta_constraint_expected_meta_info",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Either a meta_name or a '!' and a meta_name.If the meta_info_entry ",
+    "corresponding to it has meta_type type-value or type-section then the ",
+    "corrsponding value must be either present or absent. type-abstract are ",
+    "evaluated all together at the end. The type-value and type-section ",
+    "meta_info_entry that are not already given explicitly in other ",
+    "meta_constraint_expected_meta_info that have all the type-abstract in ",
+    "meta_abstract_types or in their parents (through meta_abstract_types) must be ",
+    "present, whereas those that have all the '!' type-abstract must be ",
+    "absent."],
+  "meta_parent_section":"meta_constraint",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

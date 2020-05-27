@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_geometry_optimization",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters controlling the geometry ",
+    "optimization."],
+  "meta_abstract_types":[
+    "settings_sampling"]
+}

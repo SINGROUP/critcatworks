@@ -1,0 +1,12 @@
+{
+  "meta_name":"parsing_message_error_single_configuration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "This field is used for error messages of the parsing program associated with a ",
+    "single configuration calculation, see section_single_configuration_calculation."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "parsing_message_error"],
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

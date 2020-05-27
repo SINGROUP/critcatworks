@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_original_system",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing symmetry information that is specific to the original ",
+    "system."],
+  "meta_parent_section":"section_symmetry",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

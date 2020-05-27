@@ -1,0 +1,19 @@
+{
+  "meta_name":"atom_positions",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Positions of all the atoms, in Cartesian coordinates. This metadata defines a ",
+    "configuration and is therefore required. For alloys where concentrations of ",
+    "species are given for each site in the unit cell, it stores the position of the ",
+    "sites."],
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "configuration_core"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms"
+  },{
+    "meta_dimension_fixed":3
+  }],
+  "meta_units":"m"
+}

@@ -1,0 +1,15 @@
+{
+  "meta_name":"section_method",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing the various parameters that define the theory and the ",
+    "approximations (convergence, thresholds,...) to perform a *single configuration ",
+    "calculation*, see section_single_configuration_calculation.\n",
+    "\n",
+    "*NOTE*: This section does not contain settings for molecular dynamics, geometry ",
+    "optimization etc. See section frame_sequence for these other settings ",
+    "instead."],
+  "meta_parent_section":"section_run",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

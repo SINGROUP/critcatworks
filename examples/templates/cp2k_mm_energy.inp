@@ -1,0 +1,121 @@
+@SET CFN structure.xyz
+
+
+&GLOBAL                  ! section to select the kind of calculation
+   RUN_TYPE GEO_OPT   
+   PRINT_LEVEL LOW
+   PROJECT cp2k_mm_energy.inp
+&END GLOBAL
+&FORCE_EVAL              ! section with parameters and system description
+  METHOD FIST            ! Molecular Mechanics method
+  &MM                    ! specification of MM parameters 
+    &FORCEFIELD          ! parameters needed to describe the potential 
+    &SPLINE
+    EMAX_SPLINE 10000    ! numeric parameter to ensure calculation stability. Should not be changed
+    &END
+      &NONBONDED       ! parameters for the non bonded interactions
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms Cu Cu
+          EPSILON    [eV] 2.04
+          SIGMA [angstrom]   2.35
+          RCUT  [angstrom]  4.5  #9.4
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms Pt Pt
+          EPSILON    [eV] 3.14
+          SIGMA [angstrom]   2.42
+          RCUT  [angstrom]  4.5  #9.68
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H H
+          EPSILON    [eV] 4.48
+          SIGMA [angstrom]   0.55
+          RCUT  [angstrom]  2.2
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H Pt
+          EPSILON    [eV] 1.75  #3.75
+          SIGMA [angstrom]   2.49  #1.49
+          RCUT  [angstrom]  3.8  #5.94
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H Cu
+          EPSILON    [eV] 1.5  #3.02
+          SIGMA [angstrom]   2.45  #1.45
+          RCUT  [angstrom]  3.8  #5.8
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms H N
+          EPSILON    [eV] 6.61
+          SIGMA [angstrom]   0.91
+          RCUT  [angstrom]  3.64
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms N N
+          EPSILON    [eV] 9.75
+          SIGMA [angstrom]   1.27
+          RCUT  [angstrom]  5.08
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms N Cu
+          EPSILON    [eV] 4.46
+          SIGMA [angstrom]   1.81
+          RCUT  [angstrom]  7.24
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms N Pt
+          EPSILON    [eV] 5.53
+          SIGMA [angstrom]   1.85
+          RCUT  [angstrom]  7.38
+        &END LENNARD-JONES
+        &LENNARD-JONES ! Lennard-Jones parameters
+          atoms Cu Pt
+          EPSILON    [eV] 2.53
+          SIGMA [angstrom]   2.39
+          RCUT  [angstrom]  4.54 #9.54
+        &END LENNARD-JONES
+      &END NONBONDED
+      &CHARGE
+        ATOM Cu
+        CHARGE 0.0
+      &END CHARGE
+      &CHARGE
+        ATOM Pt
+        CHARGE 0.0
+      &END CHARGE
+      &CHARGE
+        ATOM H
+        CHARGE 0.0
+      &END CHARGE
+      &CHARGE
+        ATOM N
+        CHARGE 0.0
+      &END CHARGE
+    &END FORCEFIELD
+    &POISSON              ! solver for non periodic calculations
+     PERIODIC NONE
+      &EWALD
+        EWALD_TYPE none
+      &END EWALD
+    &END POISSON
+  &END MM
+  &SUBSYS                 ! system description 
+    &CELL
+     PERIODIC NONE
+    &END CELL
+    &TOPOLOGY
+      COORD_FILE_FORMAT XYZ
+      COORD_FILE_NAME ${CFN}
+      &CENTER_COORDINATES T
+      &END CENTER_COORDINATES
+    &END TOPOLOGY
+   &END SUBSYS
+&END FORCE_EVAL
+&MOTION
+  &GEO_OPT
+    TYPE MINIMIZATION
+    MAX_ITER 1000
+    OPTIMIZER LBFGS
+  &END GEO_OPT
+
+&END MOTION

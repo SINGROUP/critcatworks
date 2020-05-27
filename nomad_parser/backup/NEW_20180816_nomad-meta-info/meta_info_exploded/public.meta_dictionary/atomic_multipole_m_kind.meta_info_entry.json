@@ -1,0 +1,11 @@
+{
+  "meta_name":"atomic_multipole_m_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String describing the definition for each integer number $m$ in ",
+    "atomic_multipole_lm. Allowed values are listed in the [m_kind wiki ",
+    "page](https://gitlab.rzg.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/m-kind)",
+    "."],
+  "meta_parent_section":"section_atomic_multipoles",
+  "meta_data_type":"string"
+}

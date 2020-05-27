@@ -1,0 +1,10 @@
+{
+  "meta_name":"archive_context",
+  "meta_type":"type-section",
+  "meta_description":"Contains information relating to an archive.",
+  "meta_repeats":true,
+  "meta_context_identifier":[],
+  "contains":[
+    "calculation_context",
+    "section_stats"]
+}

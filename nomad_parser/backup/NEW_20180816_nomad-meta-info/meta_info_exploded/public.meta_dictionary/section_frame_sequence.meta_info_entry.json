@@ -1,0 +1,18 @@
+{
+  "meta_name":"section_frame_sequence",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing a sequence of frames, i.e. a trajectory which can have ",
+    "number_of_frames_in_sequence each representing one ",
+    "section_single_configuration_calculation section evaluated with a sampling ",
+    "method (e.g, molecular dynamics, Monte Carlo, geometry optimization). The ",
+    "sampling method might be a subset of the whole trajectory.\n",
+    "\n",
+    "Information on the method used for the sampling can be found in the ",
+    "section_sampling_method section and information of each frame of the sequence ",
+    "are found in the section_single_configuration_calculation ",
+    "section."],
+  "meta_parent_section":"section_run",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

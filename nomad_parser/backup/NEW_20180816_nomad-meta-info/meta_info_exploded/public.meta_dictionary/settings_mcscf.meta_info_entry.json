@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_mcscf",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters for the multi-configurational self-consistent-field (MCSCF) ",
+    "method."],
+  "meta_abstract_types":[
+    "settings_post_hartree_fock"]
+}

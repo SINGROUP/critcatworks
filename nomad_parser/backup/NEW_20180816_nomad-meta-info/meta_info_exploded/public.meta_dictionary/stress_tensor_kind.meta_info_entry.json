@@ -1,0 +1,14 @@
+{
+  "meta_name":"stress_tensor_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the method used to compute the stress tensor stored in ",
+    "stress_tensor_value. This is an *alternative* to the stress tensor defined in ",
+    "stress_tensor_method, which is stored in stress_tensor.\n",
+    "\n",
+    "This field allows for multiple definitions and evaluated values of the stress ",
+    "tensor, while only one definition is used for, e.g., molecular dynamics and ",
+    "geometry optimization."],
+  "meta_parent_section":"section_stress_tensor",
+  "meta_data_type":"string"
+}

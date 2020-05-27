@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>For Future Developers &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="critcatworks" href="src/doc/modules.html" />
+    <link rel="prev" title="Database" href="database.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src/doc/modules.html" title="critcatworks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="Database"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="for-future-developers">
+<span id="developer"></span><h1>For Future Developers<a class="headerlink" href="#for-future-developers" title="Permalink to this headline">¶</a></h1>
+<p>Become a developer if you want to add more functionality to critcatworks. Raising an issue on github would be the first step. Do not hesitate to contact us if you have any questions.</p>
+<p>The goal of critcatworks is to automate nanocluster-surface related research. In critcatworks belongs everything which joins already available building blocks into a complex workflow.</p>
+<p>If you want to improve the workflow manager side, Fireworks is the dependency to work on.</p>
+<p>If you want to instead create a nanocluster tool, it most likely belongs in cluskit (unless very simple). Since cluskit is also developed in this group, a concerted effort to make that tool available both in cluskit and in critcatworks can be tackled (contact us in that case). Make sure that the functionality is not already in cluskit!</p>
+<div class="section" id="how-to-write-custom-firetasks">
+<h2>How to Write Custom Firetasks<a class="headerlink" href="#how-to-write-custom-firetasks" title="Permalink to this headline">¶</a></h2>
+<p>Writing your custom Firetask is easy. You just need to wrap your function in a class with some decorations beforehand and afterwards. Before you start implementing your first Firetask, make sure to have a basic knowledge about Fireworks.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+
+<span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">MyCustomTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom Firetask template.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        required_parameter1 (any):  you can read any parameters</span>
+<span class="sd">                                    during creationg of this task</span>
+
+<span class="sd">        required_parameter2 (any):  lists, dictionaries, arrays, etc. are all fine,</span>
+<span class="sd">                                    but no pure python objects</span>
+
+<span class="sd">        optional_parameter1 (any):  Remember to add them to the list below</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;MyCustomTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;required_parameter1&#39;</span><span class="p">,</span> <span class="s1">&#39;required_parameter2&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;optional_parameter1&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="c1"># those values cannot be modified during runtime of the workflow</span>
+        <span class="n">optional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;optional_parameter1&quot;</span><span class="p">,</span> <span class="s2">&quot;default_value&quot;</span><span class="p">)</span>
+        <span class="n">important_parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;required_parameter1&quot;</span><span class="p">]</span>
+        <span class="n">another_parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;required_parameter2&quot;</span><span class="p">]</span>
+
+
+        <span class="c1"># you can also get information from the firework spec (this can be</span>
+        <span class="c1">#modified during runtime of the workflow)</span>
+        <span class="n">analysis_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;analysis_ids&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="c1"># analysis_ids becomes calc_ids and is stored later</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">analysis_ids</span>
+
+        <span class="c1"># run your custom code</span>
+        <span class="n">mycustom_dct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span> <span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+
+
+        <span class="c1"># check where this file gets written</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mycustomfile.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">mycustom_dct</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+
+        <span class="c1"># fireworks</span>
+        <span class="c1"># Store information for future jobs to fetch and/or to keep record</span>
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_ids</span>
+
+        <span class="c1"># important to remove those, otherwise they would</span>
+        <span class="c1"># overwrite the next Firework&#39;s _category and name</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+        <span class="c1"># always return a FWAction object.</span>
+        <span class="c1"># other arguments can deviate or defuse the workflow</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-from-and-writing-to-permanent-database">
+<h2>Reading from and Writing to Permanent database<a class="headerlink" href="#reading-from-and-writing-to-permanent-database" title="Permalink to this headline">¶</a></h2>
+<p>For interacting with an external database, consider using the functions in <code class="code docutils literal notranslate"><span class="pre">critcatworks.database.extdb</span></code>.</p>
+<p>The function <em>get_external_database</em> connects you to a database using <em>extdb_connect</em>.</p>
+<p>Then, for instance <em>fetch_simulations</em> can get multiple simulations by id.</p>
+<p>Lastly, <em>update_simulations_collection</em> uploads one simulation document to the database.</p>
+<p>For other functionalities in <code class="code docutils literal notranslate"><span class="pre">critcatworks.database.extdb</span></code> consult the code documentation.</p>
+</div>
+<div class="section" id="fireworks-spec-entries">
+<h2>Fireworks Spec Entries<a class="headerlink" href="#fireworks-spec-entries" title="Permalink to this headline">¶</a></h2>
+<p>The current workflows use the following <em>fw_spec</em> entries. It is recommended to adhere to the structure but is not prohibited in any way.</p>
+<dl class="field-list simple">
+<dt class="field-odd">simulations (dict)</dt>
+<dd class="field-odd"><p>simulation collection entries for this workflow.
+Usually, simulations are not stored here, since large amounts
+of documents would slow the workflow manager down</p>
+</dd>
+<dt class="field-even">workflow (dict)</dt>
+<dd class="field-even"><p>relevant information about this workflow,
+entry for workflow collection</p>
+</dd>
+<dt class="field-odd">machine_learning (dict)</dt>
+<dd class="field-odd"><p>machine_learning instances of this workflow
+entries for machine_learning collection</p>
+</dd>
+<dt class="field-even">n_calcs_started (int)</dt>
+<dd class="field-even"><p>number of calculations which have already been started</p>
+</dd>
+<dt class="field-odd">extdb_connect (dict)</dt>
+<dd class="field-odd"><p>Connection information to permanent mongodb database containing the keys host, username, password,
+authsource and db_name.</p>
+</dd>
+<dt class="field-even">temp (dict)</dt>
+<dd class="field-even"><dl class="simple">
+<dt>calc_paths (list of str)</dt><dd><p>paths to the dft calculations, sorted by adsorbate ids</p>
+</dd>
+<dt>calc_ids (list of int)</dt><dd><p>ids of simulations in permanent database</p>
+</dd>
+<dt>is_converged_list (list of int)</dt><dd><p>1 - converged,
+0 - not converged calculation,
+same order as calc_paths</p>
+</dd>
+<dt>fps_ranking (list of int)</dt><dd><p>adsorbate ids ordered by FPS ranking</p>
+</dd>
+<dt>analysis_ids (list of int)</dt><dd><p>calculation ids which have been analysed and where analysis can be processed</p>
+</dd>
+<dt>calc_analysis_ids_dict (dict)</dt><dd><p>keys are calculation ids before DFT
+values are calculation ids which have been analysed</p>
+</dd>
+<dt>cohesive_energy_dct (dict)</dt><dd><p>for each chemical formula key, the value corresponds
+to a dict of simulation indices and cohesive energies
+(total energies if no atomic energies were given)</p>
+</dd>
+<dt>descmatrix (str)</dt><dd><p>path to numpy array. 2D-matrix descriptor, row representing datapoint</p>
+</dd>
+<dt>property (list of str)</dt><dd><p>property of interest to machine learning</p>
+</dd>
+<dt>last_machine_learning_id (int)</dt><dd><p>id of last machine learning step</p>
+</dd>
+<dt>reference_energy (float)</dt><dd><p>reference energy for the adsorbate. Can be the total energy of the isolated adsorbate molecule or a different reference point</p>
+</dd>
+<dt>free_energy_correction (float)</dt><dd><p>constant shift in free
+energy. This is relevant for the coverage ladder
+target energy range.</p>
+</dd>
+<dt>branch_dct (dict)</dt><dd><p>keys of parent simulations
+with values being lists of child simulations</p>
+</dd>
+<dt>direction (bool)</dt><dd><p>1 - adding adsorbate
+0 - removing adsorbate</p>
+</dd>
+<dt>ne_dct (dict)</dt><dd><p>stores total energies of all calculations with respect to the number of adsorbates and their ids</p>
+</dd>
+<dt>n_adsorbates_root (int)</dt><dd><p>number of adsorbates of the root structure</p>
+</dd>
+<dt>n_adsorbates (int)</dt><dd><p>number of adsorbates of the current step</p>
+</dd>
+<dt>is_return (bool)</dt><dd><p>current state of the coverage ladder workflow. If True,
+the ladder search is on the way back to the root level</p>
+</dd>
+<dt>is_new_root (bool)</dt><dd><p>If True, the last simulation has resulted in a new
+root simulation</p>
+</dd>
+<dt>open_branches (list)</dt><dd><p>each element is a tuple containing parent simulation ids and direction</p>
+</dd>
+<dt>root_history (list)</dt><dd><p>ordered ids of root simulations during the course of
+the workflow, starting with the start_id</p>
+</dd>
+<dt>step_history (list)</dt><dd><p>each entry is a tuple of
+a list of calculation ids
+and a direction indicator</p>
+</dd>
+<dt>calc_parents (dict)</dt><dd><p>keys of simulation ids
+with values being parent simulation ids</p>
+</dd>
+<dt>start_id (int)</dt><dd><p>unique identifier of the simulation which is used to start the workflow</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">For Future Developers</a><ul>
+<li><a class="reference internal" href="#how-to-write-custom-firetasks">How to Write Custom Firetasks</a></li>
+<li><a class="reference internal" href="#reading-from-and-writing-to-permanent-database">Reading from and Writing to Permanent database</a></li>
+<li><a class="reference internal" href="#fireworks-spec-entries">Fireworks Spec Entries</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="database.html"
+                        title="previous chapter">Database</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src/doc/modules.html"
+                        title="next chapter">critcatworks</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/developer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="src/doc/modules.html" title="critcatworks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="Database"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">critcatworks 01.07.2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

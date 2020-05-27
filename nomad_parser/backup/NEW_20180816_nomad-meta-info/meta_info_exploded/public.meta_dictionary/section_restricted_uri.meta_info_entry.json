@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_restricted_uri",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Restricted URIs on this calculation (Coverage: any info or files that are ",
+    "related with this calculation can be subject to ",
+    "restriction)"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

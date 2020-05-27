@@ -1,0 +1,12 @@
+{
+  "meta_name":"gw_self_energy_singularity_treatment",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Treatment of the integrable singular terms in the calculation of the self ",
+    "energy. Values: 'mpb' - Auxiliary function method by S. Massidda, M. Posternak, ",
+    "and A. Baldereschi, PRB 48, 5058 (1993); 'crg' - Auxiliary function method by ",
+    "P. Carrier, S. Rohra, and A. Goerling, PRB 75, 205126 ",
+    "(2007)."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

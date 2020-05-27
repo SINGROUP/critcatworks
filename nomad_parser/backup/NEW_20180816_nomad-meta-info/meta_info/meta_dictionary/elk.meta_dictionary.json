@@ -1,0 +1,633 @@
+{
+  "metadict_name":"elk",
+  "metadict_description":[
+    "meta info used by the elk parser, all names are expected to start with ",
+    "x_elk"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_elk_brillouin_zone_volume",
+    "meta_type":"type-value",
+    "meta_description":"Brillouin zone volume",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"m^-3"
+  },{
+    "meta_name":"x_elk_core_charge",
+    "meta_type":"type-value",
+    "meta_description":"Core charge",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_core_charge_final",
+    "meta_type":"type-value",
+    "meta_description":"Core charge final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_core_charge_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Core charge scf iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_core_electron_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":"Core-electron kinetic energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_core_electron_kinetic_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Core-electron kinetic energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_core_states",
+    "meta_type":"type-value",
+    "meta_description":"Total number of core states",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_correlation_energy",
+    "meta_type":"type-value",
+    "meta_description":"Correlation energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_correlation_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Correlation energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_coulomb_energy",
+    "meta_type":"type-value",
+    "meta_description":"Coulomb energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_coulomb_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Coulomb energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_coulomb_potential_energy",
+    "meta_type":"type-value",
+    "meta_description":"Coulomb potential energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_coulomb_potential_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Coulomb potential energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_direct_gap",
+    "meta_type":"type-value",
+    "meta_description":"Estimated fundamental direct gap final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_direct_gap_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Estimated fundamental direct gap",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_dos_fermi",
+    "meta_type":"type-value",
+    "meta_description":"DOS at Fermi energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_units":"J^-1"
+  },{
+    "meta_name":"x_elk_dos_fermi_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"DOS at Fermi energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J^-1"
+  },{
+    "meta_name":"x_elk_electron_entropic_energy",
+    "meta_type":"type-value",
+    "meta_description":"Electron entropic energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_electron_entropic_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Electron entropic energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_electron_nuclear_energy",
+    "meta_type":"type-value",
+    "meta_description":"Electron-nuclear energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_electron_nuclear_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Electron-nuclear energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_electronic_charge",
+    "meta_type":"type-value",
+    "meta_description":"Electronic charge",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_empty_states",
+    "meta_type":"type-value",
+    "meta_description":"Number of empty states",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_exchange_energy",
+    "meta_type":"type-value",
+    "meta_description":"Exchange energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_exchange_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Exchange energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_fermi_energy",
+    "meta_type":"type-value",
+    "meta_description":"Fermi energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_fermi_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Fermi energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_geometry_atom_labels",
+    "meta_type":"type-value",
+    "meta_description":"labels of atom",
+    "meta_parent_section":"x_elk_section_atoms_group",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_elk_geometry_atom_number",
+    "meta_type":"type-value",
+    "meta_description":"number to identify the atoms of a species",
+    "meta_parent_section":"x_elk_section_atoms_group",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_elk_geometry_atom_positions_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of atomic position",
+    "meta_parent_section":"x_elk_section_atoms_group",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_geometry_atom_positions_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of atomic position",
+    "meta_parent_section":"x_elk_section_atoms_group",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_geometry_atom_positions_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of atomic position",
+    "meta_parent_section":"x_elk_section_atoms_group",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_geometry_lattice_vector_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of lattice vector",
+    "meta_parent_section":"x_elk_section_lattice_vectors",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_geometry_lattice_vector_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of lattice vector",
+    "meta_parent_section":"x_elk_section_lattice_vectors",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_geometry_lattice_vector_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of lattice vector",
+    "meta_parent_section":"x_elk_section_lattice_vectors",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_geometry_reciprocal_lattice_vector_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of reciprocal lattice vector",
+    "meta_parent_section":"x_elk_section_reciprocal_lattice_vectors",
+    "meta_data_type":"float",
+    "meta_units":"m^-1"
+  },{
+    "meta_name":"x_elk_geometry_reciprocal_lattice_vector_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of reciprocal lattice vector",
+    "meta_parent_section":"x_elk_section_reciprocal_lattice_vectors",
+    "meta_data_type":"float",
+    "meta_units":"m^-1"
+  },{
+    "meta_name":"x_elk_geometry_reciprocal_lattice_vector_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of reciprocal lattice vector",
+    "meta_parent_section":"x_elk_section_reciprocal_lattice_vectors",
+    "meta_data_type":"float",
+    "meta_units":"m^-1"
+  },{
+    "meta_name":"x_elk_gkmax",
+    "meta_type":"type-value",
+    "meta_description":"Maximum length of |G+k| for APW functions",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"m^-1"
+  },{
+    "meta_name":"x_elk_gmaxvr",
+    "meta_type":"type-value",
+    "meta_description":"Maximum length of |G|",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"m^-1"
+  },{
+    "meta_name":"x_elk_gvector_size_x",
+    "meta_type":"type-value",
+    "meta_description":"G-vector grid size x",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_gvector_size_y",
+    "meta_type":"type-value",
+    "meta_description":"G-vector grid size y",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_gvector_size_z",
+    "meta_type":"type-value",
+    "meta_description":"G-vector grid size z",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_gvector_total",
+    "meta_type":"type-value",
+    "meta_description":"G-vector total",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_hartree_energy",
+    "meta_type":"type-value",
+    "meta_description":"Hartree energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_hartree_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Hartree energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_indirect_gap",
+    "meta_type":"type-value",
+    "meta_description":"Estimated fundamental indirect gap final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_indirect_gap_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Estimated fundamental indirect gap",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_interstitial_charge_final",
+    "meta_type":"type-value",
+    "meta_description":"Interstitial charge final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_interstitial_charge_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Interstitial charge scf iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_kpoint_offset_x",
+    "meta_type":"type-value",
+    "meta_description":"K-points offset x component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_kpoint_offset_y",
+    "meta_type":"type-value",
+    "meta_description":"K-points offset y component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_kpoint_offset_z",
+    "meta_type":"type-value",
+    "meta_description":"K-points offset z component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_lmaxapw",
+    "meta_type":"type-value",
+    "meta_description":"Angular momentum cut-off for the APW functions",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_lo",
+    "meta_type":"type-value",
+    "meta_description":"Total number of local-orbitals",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_madelung_energy",
+    "meta_type":"type-value",
+    "meta_description":"Madelung energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_madelung_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Madelung energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_muffin_tin_points",
+    "meta_type":"type-value",
+    "meta_description":"muffin-tin points",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_elk_muffin_tin_radius",
+    "meta_type":"type-value",
+    "meta_description":"muffin-tin radius",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_nuclear_charge",
+    "meta_type":"type-value",
+    "meta_description":"Nuclear charge",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_nuclear_nuclear_energy",
+    "meta_type":"type-value",
+    "meta_description":"Nuclear-nuclear energy final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_component"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_nuclear_nuclear_energy_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Nuclear-nuclear energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_elk_number_kpoint_x",
+    "meta_type":"type-value",
+    "meta_description":"number k-points x",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_number_kpoint_y",
+    "meta_type":"type-value",
+    "meta_description":"number k-points y",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_number_kpoint_z",
+    "meta_type":"type-value",
+    "meta_description":"number k-points z",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_number_kpoints",
+    "meta_type":"type-value",
+    "meta_description":"number k-points",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_rgkmax",
+    "meta_type":"type-value",
+    "meta_description":"Radius MT * Gmax",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_section_atoms_group",
+    "meta_type":"type-section",
+    "meta_description":"a group of atoms of the same type",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_elk_section_lattice_vectors",
+    "meta_type":"type-section",
+    "meta_description":"lattice vectors",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_elk_section_reciprocal_lattice_vectors",
+    "meta_type":"type-section",
+    "meta_description":"reciprocal lattice vectors",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_elk_section_spin",
+    "meta_type":"type-section",
+    "meta_description":"section for exciting spin treatment",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_elk_section_xc",
+    "meta_type":"type-section",
+    "meta_description":"index for elk functional",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_elk_simulation_reciprocal_cell",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reciprocal lattice vectors of the simulation ",
+      "cell."],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_smearing_width",
+    "meta_type":"type-value",
+    "meta_description":"Smearing width for KS occupancies",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_spin_treatment",
+    "meta_type":"type-value",
+    "meta_description":"Spin treatment",
+    "meta_parent_section":"x_elk_section_spin",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_elk_unit_cell_volume",
+    "meta_type":"type-value",
+    "meta_description":"unit cell volume",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"m^3"
+  },{
+    "meta_name":"x_elk_valence_charge",
+    "meta_type":"type-value",
+    "meta_description":"Valence charge",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_valence_charge_final",
+    "meta_type":"type-value",
+    "meta_description":"Valence charge final",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_valence_charge_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Valence charge scf iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_elk_valence_states",
+    "meta_type":"type-value",
+    "meta_description":"Total number of valence states",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_elk_wigner_radius",
+    "meta_type":"type-value",
+    "meta_description":"Effective Wigner radius",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_elk_xc_functional",
+    "meta_type":"type-value",
+    "meta_description":"index for elk functional",
+    "meta_parent_section":"x_elk_section_xc",
+    "meta_data_type":"int"
+  }]
+}

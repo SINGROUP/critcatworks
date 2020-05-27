@@ -1,0 +1,9 @@
+{
+  "meta_name":"time_info",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Stores information on the date and timings of the calculation. They are useful ",
+    "for, e.g., debugging or visualization purposes."],
+  "meta_abstract_types":[
+    "accessory_info"]
+}

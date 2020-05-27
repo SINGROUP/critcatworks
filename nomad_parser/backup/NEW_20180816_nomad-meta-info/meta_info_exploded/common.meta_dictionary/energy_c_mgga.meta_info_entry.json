@@ -1,0 +1,13 @@
+{
+  "meta_name":"energy_c_mgga",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Component of the correlation (C) energy at the GGA (or MetaGGA) level using the ",
+    "self-consistent density of the target XC functional (full unscaled value, i.e., ",
+    "not scaled due to exact-exchange mixing)."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_type_c"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

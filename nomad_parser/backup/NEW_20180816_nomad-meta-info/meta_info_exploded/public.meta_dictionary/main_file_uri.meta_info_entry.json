@@ -1,0 +1,9 @@
+{
+  "meta_name":"main_file_uri",
+  "meta_type":"type-value",
+  "meta_description":[
+    "nomad uri identifying the main file corresponding to this ",
+    "calculation"],
+  "meta_parent_section":"section_calculation_info",
+  "meta_data_type":"string"
+}

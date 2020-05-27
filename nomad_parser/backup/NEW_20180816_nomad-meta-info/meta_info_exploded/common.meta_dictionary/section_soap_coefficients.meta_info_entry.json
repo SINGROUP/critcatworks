@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_soap_coefficients",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Stores the soap coefficients for the pair of atoms given in ",
+    "soap_coefficients_atom_pair."],
+  "meta_parent_section":"section_soap",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

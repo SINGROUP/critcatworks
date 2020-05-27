@@ -1,0 +1,15 @@
+{
+  "meta_name":"frame_sequence_pressure_frames",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Array containing the strictly increasing indices referring to the frames of ",
+    "frame_sequence_pressure. If not given it defaults to the trivial mapping ",
+    "0,1,..."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_pressure_evaluations_in_sequence"
+  }]
+}

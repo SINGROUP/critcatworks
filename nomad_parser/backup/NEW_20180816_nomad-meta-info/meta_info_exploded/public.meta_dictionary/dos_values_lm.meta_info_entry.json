@@ -1,0 +1,20 @@
+{
+  "meta_name":"dos_values_lm",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Array containing the density (electronic-energy) of states values projected on ",
+    "the various spherical harmonics (integrated on all atoms), see ",
+    "atom_projected_dos_values_lm for atom values."],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_dos_lms"
+  },{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_atoms"
+  },{
+    "meta_dimension_symbolic":"number_of_dos_values"
+  }],
+  "meta_units":"J"
+}

@@ -1,0 +1,405 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "Meta info used by the NWChem parser, all names are expected to start with x_nwchem_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Contains information about the starting conditions for this run",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_start_information",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Describes a part of the XC functional that is used in the calculation. Can be a local or non-local part, can be exchange or correlation, can have a weight.",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_xc_part",
+      "superNames": [
+        "settings_XC_functional"
+      ]
+    }, {
+      "description": "Shorcut for a XC functional definition.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_xc_functional_shortcut",
+      "superNames": [
+        "settings_XC_functional"
+      ]
+    }, {
+      "description": "The name of the XC functional",
+      "dtypeStr": "C",
+      "name": "x_nwchem_xc_functional_name",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_xc_part"
+      ]
+    }, {
+      "description": "The weight of the XC functional.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_xc_functional_weight",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_xc_part"
+      ]
+    }, {
+      "description": "The type of the XC functional, local or non-local",
+      "dtypeStr": "C",
+      "name": "x_nwchem_xc_functional_type",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_xc_part"
+      ]
+    }, {
+      "description": "Contains system information for a calculation to follow. Contains all of the geometries used in different NWChem tasks contained by this calculations.",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_geometry",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "The one-electron energy in a DFT calculation.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_energy_one_electron",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "The Coulomb energy energy in a DFT calculation.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_energy_coulomb",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "The nuclear repulsion energy in a DFT calculation.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_energy_nuclear_repulsion",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Section for a geometry optimization task.",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_geo_opt_module",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Section for a geometry optimization step.",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_geo_opt_step",
+      "superNames": [
+        "x_nwchem_section_geo_opt_module"
+      ]
+    }, {
+      "description": "The energy for a geometry optimization step.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_geo_opt_step_energy",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_geo_opt_step"
+      ]
+    }, {
+      "description": ".",
+      "dtypeStr": "C",
+      "name": "x_nwchem_input_filename",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The run start date and time.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_start_datetime",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The compilation date and time.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_compilation_datetime",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The host on which this calculation was made on.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_run_host_name",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The source directory of the code.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_source",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The main branch of the code.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_branch",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The SVN revision of the code.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_revision",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The ga revision.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_ga_revision",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The input prefix.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_input_prefix",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "The database filename.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_db_filename",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "Status of the run.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_status",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "Number of processes used.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_nproc",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "Time left in seconds.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_time_left",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }, {
+      "description": "Section for QMD Module.",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_qmd_module",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Number of nuclear steps.",
+      "dtypeStr": "i",
+      "name": "x_nwchem_qmd_number_of_nuclear_steps",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Nuclear time step.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_nuclear_time_step",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Target temperature.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_target_temperature",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Thermostat for QMD.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_qmd_thermostat",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Tau for QMD thermostat.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_tau",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Random seed.",
+      "dtypeStr": "i",
+      "name": "x_nwchem_qmd_random_seed",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Integrator for nuclei.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_qmd_nuclear_integrator",
+      "shape": [],
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "Initial temperature",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_initial_temperature",
+      "shape": [],
+      "unit": "K",
+      "superNames": [
+        "settings_molecular_dynamics"
+      ]
+    }, {
+      "description": "DFT QMD step",
+      "kindStr": "type_section",
+      "name": "x_nwchem_section_qmd_step",
+      "superNames": [
+        "x_nwchem_section_qmd_module"
+      ]
+    }, {
+      "description": "Elapsed simulation time.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_time",
+      "shape": [],
+      "unit": "fs",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Kinetic energy.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_kinetic_energy",
+      "shape": [],
+      "unit": "Ha",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Potential energy.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_potential_energy",
+      "shape": [],
+      "unit": "Ha",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Total energy.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_total_energy",
+      "shape": [],
+      "unit": "Ha",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Target temperature.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_target_temperature",
+      "shape": [],
+      "unit": "K",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Temperature.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_temperature",
+      "shape": [],
+      "unit": "K",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Electric dipole moment.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_qmd_step_dipole",
+      "shape": [3],
+      "unit": "bohr*e",
+      "superNames": [
+        "x_nwchem_section_qmd_step"
+      ]
+    }, {
+      "description": "Electron spin restriction.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_electron_spin_restriction",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "The simulation cell in reciprocal space.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_reciprocal_simulation_cell",
+      "shape": [3,3],
+      "unit": "m^-1",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "The lengths of the basis vectors.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_lattice_basis_vector_lengths",
+      "shape": [3],
+      "unit": "m",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "The angles between the basis vectors.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_lattice_basis_vector_angles",
+      "shape": [3],
+      "unit": "rad",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "The lattice omega value.",
+      "dtypeStr": "f",
+      "name": "x_nwchem_lattice_omega",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "The name of the program that was run.",
+      "dtypeStr": "C",
+      "name": "x_nwchem_program_name",
+      "shape": [],
+      "superNames": [
+        "x_nwchem_section_start_information"
+      ]
+    }]
+}

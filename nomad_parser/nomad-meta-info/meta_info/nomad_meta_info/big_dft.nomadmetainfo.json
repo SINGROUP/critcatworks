@@ -1,0 +1,12 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "Meta info used by the BigDFT parser, all names are expected to start with x_bigdft_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [
+
+  ]
+}

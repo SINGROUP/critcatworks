@@ -1,0 +1,16 @@
+{
+  "meta_name":"energy_correction_entropy_scf_iteration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Entropy correction to the potential energy to compensate for the change in ",
+    "occupation so that forces at finite T do not need to keep the change of ",
+    "occupation in account. The array lists the values of the entropy correction for ",
+    "each self-consistent field (SCF) iteration. Defined consistently with ",
+    "xc_method."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "energy_component",
+    "scf_info"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

@@ -1,0 +1,42 @@
+from setuptools import setup, find_packages, Extension
+
+if __name__ == "__main__":
+    setup(name='critcatworks',
+        version='0.6.1',
+        url="https://github.com/singroup/critcatworks/",
+        description='A Python package for creating DFT workflows for nanoclusters.',
+        long_description='A Python package for creating workflows for nanoclusters.',
+        packages=find_packages(),
+        install_requires=[
+            'fireworks>=1.8.8',
+            'pymongo>=3.6.1'
+            'numpy',
+            'scipy',
+            'ase',
+            'future',
+            'cluskit>=4.1.9',
+            'pathlib',
+            'pprint',
+            'sklearn',
+            'dnspython',
+            'pycp2k',
+        ],
+        license="GNU General Public License v3.0",
+        classifiers=[
+            'Development Status :: 4 - Beta',
+            'Intended Audience :: Developers',
+            'Topic :: Scientific/Engineering :: Physics',
+            'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+            'Programming Language :: Python :: 2',
+            'Programming Language :: Python :: 2.6',
+            'Programming Language :: Python :: 2.7',
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.2',
+            'Programming Language :: Python :: 3.3',
+            'Programming Language :: Python :: 3.4',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+        ],
+        keywords='atoms structure materials science nano clusters workflow DFT CP2K machine learning',
+        python_requires='>=2.6, <4',
+    )

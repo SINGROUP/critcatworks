@@ -1,0 +1,12 @@
+{
+  "meta_name":"electronic_kinetic_energy",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Self-consistent electronic kinetic energy as defined in ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

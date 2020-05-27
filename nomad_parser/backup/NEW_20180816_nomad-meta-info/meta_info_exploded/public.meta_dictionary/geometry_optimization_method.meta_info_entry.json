@@ -1,0 +1,12 @@
+{
+  "meta_name":"geometry_optimization_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Algorithm for the geometry optimization. Allowed values are listed in the ",
+    "[geometry_optimization_method wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/n",
+    "omad-meta-info/wikis/metainfo/geometry-optimization-method)."],
+  "meta_parent_section":"section_sampling_method",
+  "meta_abstract_types":[
+    "settings_geometry_optimization"],
+  "meta_data_type":"string"
+}

@@ -1,0 +1,11 @@
+{
+  "meta_name":"gw_core_treatment",
+  "meta_type":"type-value",
+  "meta_description":[
+    "It specifies whether the core states are treated in the GW calculation: all - ",
+    "All electron calculation; val - Valence electron only calculation; vab - Core ",
+    "electrons are excluded from the mixed product basis; xal - All electron ",
+    "treatment of the exchange self-energy only"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

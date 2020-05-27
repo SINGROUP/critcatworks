@@ -1,0 +1,510 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "metainfo for the fleur_parser",
+  "dependencies": [ {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }, {
+      "relativePath": "common.nomadmetainfo.json"
+    }],
+  "metaInfos": [
+ {
+      "description": "header (labels) of fleur.",
+      "kindStr": "type_section",
+      "name": "x_fleur_header",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "name of atom, labelling non-equvalent atoms",
+      "dtypeStr": "C",
+      "name": "x_fleur_atom_name",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    }, {
+      "description": "position of atom x",
+      "dtypeStr": "f",
+      "name": "x_fleur_atom_pos_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    }, {
+      "description": "position of atom y",
+      "dtypeStr": "f",
+      "name": "x_fleur_atom_pos_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    }, {
+      "description": "position of atom z",
+      "dtypeStr": "f",
+      "name": "x_fleur_atom_pos_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    }, {
+      "description": "scales coordinates by 1/scale. If film=T, scales only x&y coordinates, if film=F also z",
+      "dtypeStr": "f",
+      "name": "x_fleur_atom_coord_scale",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    },  {
+      "description": "atomic number Z",
+      "dtypeStr": "f",
+      "name": "x_fleur_atomic_number_Z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    }, {
+      "description": "x component of vector of unit cell",
+      "dtypeStr": "f",
+      "name": "x_fleur_lattice_vector_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "y component of vector of unit cell",
+      "dtypeStr": "f",
+      "name": "x_fleur_lattice_vector_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "z component of vector of unit cell",
+      "dtypeStr": "f",
+      "name": "x_fleur_lattice_vector_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "x component of reciprocal lattice vector",
+      "dtypeStr": "f",
+      "name": "x_fleur_rec_lattice_vector_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "y component of reciprocal lattice vector",
+      "dtypeStr": "f",
+      "name": "x_fleur_rec_lattice_vector_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "z component of reciprocal lattice vector",
+      "dtypeStr": "f",
+      "name": "x_fleur_rec_lattice_vector_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    },{
+      "description": "TOTAL FORCE FOR ATOM TYPE, X",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_for_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "TOTAL FORCE FOR ATOM TYPE, Y",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_for_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "TOTAL FORCE FOR ATOM TYPE, Z",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_for_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "TOTAL FORCE FOR ATOM TYPE, FX_TOT",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_for_fx",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "TOTAL FORCE FOR ATOM TYPE, FY_TOT",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_for_fy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "TOTAL FORCE FOR ATOM TYPE, FZ_TOT",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_for_fz",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },{
+      "description": "number of all the k-points",
+      "dtypeStr": "i",
+      "name": "x_fleur_nkptd",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "x component of vector of k point",
+      "dtypeStr": "f",
+      "name": "x_fleur_k_point_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "y component of vector of k point",
+      "dtypeStr": "f",
+      "name": "x_fleur_k_point_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "z component of vector of k point",
+      "dtypeStr": "f",
+      "name": "x_fleur_k_point_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "weights of k point",
+      "dtypeStr": "f",
+      "name": "x_fleur_k_point_weight",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "space group",
+      "dtypeStr": "C",
+      "name": "x_fleur_space_group",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "name of atom type",
+      "dtypeStr": "C",
+      "name": "x_fleur_name_of_atom_type",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "number_equiv_atoms_in_this_atom_type",
+      "dtypeStr": "f",
+      "name": "x_fleur_nr_equiv_atoms_in_this_atom_type",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_equiv_atoms"
+      ]
+    },  {
+      "description": "scf iteration number",
+      "dtypeStr": "i",
+      "name": "x_fleur_iteration_number",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "section containing a class of equivalent atoms",
+      "kindStr": "type_section",
+      "name": "x_fleur_section_equiv_atoms",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "user given name for this system given in the inp file",
+      "dtypeStr": "C",
+      "name": "x_fleur_system_nameIn",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "user given name for this system",
+      "dtypeStr": "C",
+      "name": "x_fleur_system_name",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "total number of atoms",
+      "dtypeStr": "i",
+      "name": "x_fleur_total_atoms",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "number of atom types",
+      "dtypeStr": "i",
+      "name": "x_fleur_nr_of_atom_types",
+      "shape": [],
+      "repeats" : true,
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "nuclear number",
+      "dtypeStr": "i",
+      "name": "x_fleur_nuclear_number",
+      "repeats" : true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "x_fleur_number_of_core_levels",
+      "dtypeStr": "i",
+      "name": "x_fleur_number_of_core_levels",
+      "shape": [],
+      "repeats" : true,
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "l-expansion cutoff",
+      "dtypeStr": "f",
+      "name": "x_fleur_lexpansion_cutoff",
+      "shape": [],
+      "repeats" : true,
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": " muffin-tin gridpoints",
+      "dtypeStr": "i",
+      "name": "x_fleur_mt_gridpoints",
+      "repeats" : true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": " muffin-tin radius",
+      "dtypeStr": "f",
+      "name": "x_fleur_mt_radius",
+      "shape": [],
+      "repeats" : true,
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "logarythmic increment",
+      "dtypeStr": "f",
+      "name": "x_fleur_logarythmic_increment",
+      "shape": [],
+      "repeats" : true,
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Kmax is the plane wave cut-off",
+      "dtypeStr": "f",
+      "name": "x_fleur_k_max",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Gmax",
+      "dtypeStr": "f",
+      "name": "x_fleur_G_max",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "The Brillouin zone integration mode. It can be one of hist - Use the histogram mode, this is the default; gauss - Use Gaussian smearing, tria - Use the tetrahedron method",
+      "dtypeStr": "C",
+      "name": "x_fleur_smearing_kind",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "specifies the width of the broadening, smearing for calculation of fermi-energy & weights. The Fermi smearing can be parametrized by this energy",
+      "dtypeStr": "f",
+      "name": "x_fleur_smearing_width",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ],
+      "units": "J"
+    }, {
+      "description": "The number of electrons to be represented within the valence electron framework",
+      "dtypeStr": "f",
+      "name": "x_fleur_nr_of_valence_electrons",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Fermi smearing temperature set in Kelvin",
+      "dtypeStr": "f",
+      "name": "x_fleur_smearing_temperature",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ],
+      "units": "Kelvin"
+    }, {
+      "description": "total nuclear charge",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_nucl_charge",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "total electronic charge",
+      "dtypeStr": "f",
+      "name": "x_fleur_tot_elec_charge",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "unit cell volume",
+      "dtypeStr": "f",
+      "name": "x_fleur_unit_cell_volume",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "bohr^3"
+    }, {
+      "description": "unit cell volume omega tilda",
+      "dtypeStr": "f",
+      "name": "x_fleur_unit_cell_volume_omega",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    },  {
+      "description": "volume of interstitial region",
+      "dtypeStr": "f",
+      "name": "x_fleur_vol_interstitial",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "energy total",
+      "dtypeStr": "f",
+      "name": "x_fleur_energy_total",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    },  {
+      "description": "free energy",
+      "dtypeStr": "f",
+      "name": "x_fleur_free_energy",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    },   {
+      "description": "(tkb*entropy) TS",
+      "dtypeStr": "f",
+      "name": "x_fleur_entropy",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "exchange-correlation potential, in out",
+      "dtypeStr": "C",
+      "name": "x_fleur_exch_pot",
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_XC"
+      ]
+    }, {
+      "description": "informaion on relativistic correction for the exchange-correlation potential, in out",
+      "dtypeStr": "C",
+      "name": "x_fleur_xc_correction",
+      "shape": [],
+      "superNames": [
+        "x_fleur_section_XC"
+      ]
+    },  {
+      "description": "exchange-correlation potential",
+      "kindStr": "type_section",
+      "name": "x_fleur_section_XC",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Version of Fleur",
+      "dtypeStr": "C",
+      "name": "x_fleur_version",
+      "shape": [],
+      "superNames": [
+        "x_fleur_header"
+      ]
+    }
+
+ ]
+}

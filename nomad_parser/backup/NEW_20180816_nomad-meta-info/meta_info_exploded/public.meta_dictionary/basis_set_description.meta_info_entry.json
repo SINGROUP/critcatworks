@@ -1,0 +1,7 @@
+{
+  "meta_name":"basis_set_description",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "One of the parts building the basis set of the system (e.g., some atom-centered ",
+    "basis set, plane-waves or both)."]
+}

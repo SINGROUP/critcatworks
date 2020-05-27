@@ -1,0 +1,12 @@
+{
+  "meta_name":"meta_inject_if_abstract_type",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Either the name of an abstract type that is required by all sections this is ",
+    "injected in, or '!' and the name of an abstract type that should not be parent ",
+    "of any of the sections that this section should be injected in. This further ",
+    "refines the selection done by meta_inject_if_section_regexp"],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

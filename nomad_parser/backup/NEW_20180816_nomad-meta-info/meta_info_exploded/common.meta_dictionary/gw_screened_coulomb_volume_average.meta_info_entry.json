@@ -1,0 +1,11 @@
+{
+  "meta_name":"gw_screened_coulomb_volume_average",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Type of volume averaging for the dynamically screened Coulomb potential: ",
+    "isotropic - Simple averaging along a specified direction using only diagonal ",
+    "components of the dielectric tensor; anisotropic - Anisotropic screening by C. ",
+    "Freysoldt et al., CPC 176, 1-13 (2007)"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

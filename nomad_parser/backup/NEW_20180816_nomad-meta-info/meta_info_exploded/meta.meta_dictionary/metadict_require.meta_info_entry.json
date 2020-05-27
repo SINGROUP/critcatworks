@@ -1,0 +1,9 @@
+{
+  "meta_name":"metadict_require",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A list of other dictionaries that should be loaded to undestand this ",
+    "dictionary."],
+  "meta_parent_section":"meta_dictionary",
+  "meta_data_type":"string"
+}

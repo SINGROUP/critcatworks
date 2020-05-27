@@ -1,0 +1,20 @@
+{
+  "meta_name":"xc_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Describes the exchange correlation (XC) method used for evaluating the XC energy ",
+    "(energy_xc). Differently from xc_functional, perturbative treatments are also ",
+    "accounted for, where the string contains the reference to both the perturbative ",
+    "(e.g., MP2) and the starting point (e.g, Hartree-Fock) XC method defined in the ",
+    "section section_method.\n",
+    "\n",
+    "The value consists of xc_method_current concatenated with the `@` character and ",
+    "the XC method (xc_method) defined in section_method that is referred to by ",
+    "method_to_method_ref where method_to_method_kind = ",
+    "\"starting_point_method\"."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_xc",
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

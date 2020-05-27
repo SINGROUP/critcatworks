@@ -1,0 +1,9 @@
+{
+  "meta_name":"number_of_atoms",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Stores the total number of atoms used in the calculation. For alloys where ",
+    "concentrations of species are given for each site in the unit cell, it stores ",
+    "the number of sites."],
+  "meta_parent_section":"section_system"
+}

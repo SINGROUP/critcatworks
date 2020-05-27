@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nanocluster Workflow &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Singlesites Workflow" href="singlesites_workflow.html" />
+    <link rel="prev" title="Workflows" href="workflows.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="singlesites_workflow.html" title="Singlesites Workflow"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="workflows.html" title="Workflows"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="workflows.html" accesskey="U">Workflows</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nanocluster-workflow">
+<h1>Nanocluster Workflow<a class="headerlink" href="#nanocluster-workflow" title="Permalink to this headline">¶</a></h1>
+<p>This workflow simply relaxes the structure of a set of nanoclusters</p>
+<p>If atomic energies (<strong>atomic_energies</strong>) are given, the cohesive energies of the relaxed nanoclusters
+are computed. Otherwise, the total energy is used to compare
+nanoclusters of the same composition.</p>
+<p>Currently, stable nanoclusters have to be picked manually once the workflow
+has finished, but this can be automated in the future.</p>
+<a class="reference internal image-reference" href="../_images/nanoclusters.svg"><img alt="../_images/nanoclusters.svg" src="../_images/nanoclusters.svg" width="800" /></a>
+<p>This is an example how to use the nanocluster workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="kn">import</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">ase</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+
+<span class="c1"># internal modules</span>
+<span class="kn">from</span> <span class="nn">critcatworks.workflows</span> <span class="kn">import</span> <span class="n">get_nanoclusters_workflow</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="kn">import</span> <span class="n">mylaunchpad</span>
+
+<span class="k">def</span> <span class="nf">read_structures_locally</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;nanocluster path &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; stem &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stem</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">atoms</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+                <span class="c1"># set cell to 2.5 the diameter</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">get_positions</span><span class="p">()</span>
+                <span class="n">pdist</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                <span class="n">diameter</span> <span class="o">=</span> <span class="n">pdist</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">mpl</span> <span class="o">=</span> <span class="mf">2.5</span>
+                
+                <span class="n">atoms</span><span class="o">.</span><span class="n">set_cell</span><span class="p">([</span><span class="n">diameter</span> <span class="o">*</span> <span class="n">mpl</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">*</span> <span class="n">mpl</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">*</span> <span class="n">mpl</span><span class="p">])</span>
+                <span class="n">structures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;WARNING: file type not understood&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unexpected error:&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">structures</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">IS_QUEUE</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">USERNAME</span> <span class="o">=</span> <span class="s2">&quot;myusername&quot;</span>
+    <span class="n">PASSWORD</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">IS_QUEUE</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(name)s</span><span class="s1">:</span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logdir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="n">logdir</span> <span class="o">+</span> <span class="s2">&quot;/nanocluster_workflow.log&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="c1"># set up the LaunchPad and reset it</span>
+    <span class="n">launchpad</span> <span class="o">=</span> <span class="n">mylaunchpad</span><span class="o">.</span><span class="n">create_launchpad</span><span class="p">(</span><span class="n">USERNAME</span><span class="p">,</span> <span class="n">PASSWORD</span><span class="p">,</span> <span class="n">lpadname</span> <span class="o">=</span> <span class="s2">&quot;mjfireworkstriton&quot;</span><span class="p">)</span>
+    <span class="c1">#launchpad.reset(&#39;&#39;, require_password=False)</span>
+
+    <span class="n">structures</span> <span class="o">=</span> <span class="n">read_structures_locally</span><span class="p">(</span><span class="s2">&quot;./ptx55&quot;</span><span class="p">)</span>
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">get_nanoclusters_workflow</span><span class="p">(</span><span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;myusername&quot;</span><span class="p">,</span> <span class="n">password</span> <span class="o">=</span> <span class="n">PASSWORD</span><span class="p">,</span>
+        <span class="n">source_path</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">template_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;templates/triton_gopt.inp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()),</span> 
+        <span class="c1">#worker_target_path = &quot;/wrk/jagermar/DONOTREMOVE/workflow_runs/nanoclusters/production/ptcu_selected_clusters&quot;,</span>
+        <span class="n">worker_target_path</span> <span class="o">=</span> <span class="s2">&quot;/scratch/work/jagerm1/workflow_runs/nanoclusters/production/selected_ptni_clusters&quot;</span><span class="p">,</span>
+        <span class="n">structures</span> <span class="o">=</span> <span class="n">structures</span><span class="p">,</span>
+        <span class="n">extdb_ids</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;db_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ncdb&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="c1"># store workflow </span>
+    <span class="n">launchpad</span><span class="o">.</span><span class="n">add_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As in most workflows, the initial structures can be read in three ways:</p>
+<dl class="field-list simple">
+<dt class="field-odd">structures</dt>
+<dd class="field-odd"><p>list of ase.Atoms objects</p>
+</dd>
+<dt class="field-even">extdb_ids</dt>
+<dd class="field-even"><p>list of unique identifiers of the simulations collection. The
+simulations in the database need to have the correct form</p>
+</dd>
+<dt class="field-odd">source_path</dt>
+<dd class="field-odd"><p>absolute path on the computing resource to the directory
+where to read the structures from</p>
+</dd>
+</dl>
+<p>There are a few workflow-specific arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">atomic_energies (dict)</dt>
+<dd class="field-odd"><p>used for computing cohesive energies, not required</p>
+</dd>
+</dl>
+<p>The other arguments are common to all workflows, such as the username and password for the
+database or the path to the DFT template.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="workflows.html"
+                        title="previous chapter">Workflows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="singlesites_workflow.html"
+                        title="next chapter">Singlesites Workflow</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/nanocluster_workflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="singlesites_workflow.html" title="Singlesites Workflow"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="workflows.html" title="Workflows"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="workflows.html" >Workflows</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

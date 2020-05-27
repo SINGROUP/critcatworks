@@ -1,0 +1,9 @@
+{
+  "meta_name":"sampling_method_expansion_order",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Order up to which the potential energy surface was expanded in a Taylor series ",
+    "(see sampling_method)."],
+  "meta_parent_section":"section_sampling_method",
+  "meta_data_type":"int"
+}

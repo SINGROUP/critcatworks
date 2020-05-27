@@ -1,0 +1,11 @@
+{
+  "meta_name":"basis_set_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String describing the use of the basis set, i.e, if it used for expanding a ",
+    "wave-function or an electron density. Allowed values are listed in the ",
+    "[basis_set_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info",
+    "/wikis/metainfo/basis-set-kind)."],
+  "meta_parent_section":"section_basis_set",
+  "meta_data_type":"string"
+}

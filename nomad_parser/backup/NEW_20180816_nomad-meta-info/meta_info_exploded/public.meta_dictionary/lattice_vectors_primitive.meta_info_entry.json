@@ -1,0 +1,17 @@
+{
+  "meta_name":"lattice_vectors_primitive",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Primitive lattice vectors. The vectors are the rows of this ",
+    "matrix."],
+  "meta_parent_section":"section_primitive_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }],
+  "meta_units":"m"
+}

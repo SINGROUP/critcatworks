@@ -1,0 +1,1433 @@
+ DBCSR| Multiplication driver                                                SMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use subcommunicators                                                   T
+ DBCSR| Use MPI combined types                                                 F
+ DBCSR| Use MPI memory allocation                                              T
+ DBCSR| Use Communication thread                                               T
+ DBCSR| Communication thread load                                             87
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2016-04-19 13:06:55.597
+ ***** ** ***  *** **   PROGRAM STARTED ON                   lauri-Lenovo-Z50-70
+ **    ****   ******    PROGRAM STARTED BY                                 lauri
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 10735
+  **** **  *******  **  PROGRAM STARTED IN /home/lauri/Dropbox/nomad-dev/nomad-l
+                                           ab-base/parsers/cp2k/test/unittests/c
+                                           p2k_2.6.2/XC_functional/pade
+
+ CP2K| version string:                                        CP2K version 2.6.2
+ CP2K| source code revision number:                                    svn:15893
+ CP2K| is freely available from                             http://www.cp2k.org/
+ CP2K| Program compiled at                           ke 4.11.2015 08.48.42 +0200
+ CP2K| Program compiled on                                   lauri-Lenovo-Z50-70
+ CP2K| Program compiled for                          Linux-x86-64-gfortran_basic
+ CP2K| Input file name                                                  pade.inp
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                     ../../BASIS_SET
+ GLOBAL| Geminal file name                                         BASIS_GEMINAL
+ GLOBAL| Potential file name                                ../../GTH_POTENTIALS
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                      __STD_INPUT__
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                    si_bulk
+ GLOBAL| Preferred FFT library                                             FFTW3
+ GLOBAL| Preferred diagonalization lib.                                       SL
+ GLOBAL| Run type                                                   ENERGY_FORCE
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Global print level                                               MEDIUM
+ GLOBAL| Total number of message passing processes                             1
+ GLOBAL| Number of threads for this process                                    1
+ GLOBAL| This output is from process                                           0
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal              8070380       8070380       8070380       8070380
+ MEMORY| MemFree               3086892       3086892       3086892       3086892
+ MEMORY| Buffers                879952        879952        879952        879952
+ MEMORY| Cached                1938140       1938140       1938140       1938140
+ MEMORY| Slab                   465608        465608        465608        465608
+ MEMORY| SReclaimable           425156        425156        425156        425156
+ MEMORY| MemLikelyFree         6330140       6330140       6330140       6330140
+
+
+ *** Fundamental physical constants (SI units) ***
+
+ *** Literature: B. J. Mohr and B. N. Taylor,
+ ***             CODATA recommended values of the fundamental physical
+ ***             constants: 2006, Web Version 5.1
+ ***             http://physics.nist.gov/constants
+
+ Speed of light in vacuum [m/s]                             2.99792458000000E+08
+ Magnetic constant or permeability of vacuum [N/A**2]       1.25663706143592E-06
+ Electric constant or permittivity of vacuum [F/m]          8.85418781762039E-12
+ Planck constant (h) [J*s]                                  6.62606896000000E-34
+ Planck constant (h-bar) [J*s]                              1.05457162825177E-34
+ Elementary charge [C]                                      1.60217648700000E-19
+ Electron mass [kg]                                         9.10938215000000E-31
+ Electron g factor [ ]                                     -2.00231930436220E+00
+ Proton mass [kg]                                           1.67262163700000E-27
+ Fine-structure constant                                    7.29735253760000E-03
+ Rydberg constant [1/m]                                     1.09737315685270E+07
+ Avogadro constant [1/mol]                                  6.02214179000000E+23
+ Boltzmann constant [J/K]                                   1.38065040000000E-23
+ Atomic mass unit [kg]                                      1.66053878200000E-27
+ Bohr radius [m]                                            5.29177208590000E-11
+
+ *** Conversion factors ***
+
+ [u] -> [a.u.]                                              1.82288848426455E+03
+ [Angstrom] -> [Bohr] = [a.u.]                              1.88972613288564E+00
+ [a.u.] = [Bohr] -> [Angstrom]                              5.29177208590000E-01
+ [a.u.] -> [s]                                              2.41888432650478E-17
+ [a.u.] -> [fs]                                             2.41888432650478E-02
+ [a.u.] -> [J]                                              4.35974393937059E-18
+ [a.u.] -> [N]                                              8.23872205491840E-08
+ [a.u.] -> [K]                                              3.15774647902944E+05
+ [a.u.] -> [kJ/mol]                                         2.62549961709828E+03
+ [a.u.] -> [kcal/mol]                                       6.27509468713739E+02
+ [a.u.] -> [Pa]                                             2.94210107994716E+13
+ [a.u.] -> [bar]                                            2.94210107994716E+08
+ [a.u.] -> [atm]                                            2.90362800883016E+08
+ [a.u.] -> [eV]                                             2.72113838565563E+01
+ [a.u.] -> [Hz]                                             6.57968392072181E+15
+ [a.u.] -> [1/cm] (wave numbers)                            2.19474631370540E+05
+ [a.u./Bohr**2] -> [1/cm]                                   5.14048714338585E+03
+ 
+
+ CELL_TOP| Volume [angstrom^3]:                                          160.165
+ CELL_TOP| Vector a [angstrom     5.431     0.000     0.000    |a| =       5.431
+ CELL_TOP| Vector b [angstrom     0.000     5.431     0.000    |b| =       5.431
+ CELL_TOP| Vector c [angstrom     0.000     0.000     5.431    |c| =       5.431
+ CELL_TOP| Angle (b,c), alpha [degree]:                                   90.000
+ CELL_TOP| Angle (a,c), beta  [degree]:                                   90.000
+ CELL_TOP| Angle (a,b), gamma [degree]:                                   90.000
+ CELL_TOP| Numerically orthorhombic:                                         YES
+
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+ CELL| Volume [angstrom^3]:                                              160.165
+ CELL| Vector a [angstrom]:       5.431     0.000     0.000    |a| =       5.431
+ CELL| Vector b [angstrom]:       0.000     5.431     0.000    |b| =       5.431
+ CELL| Vector c [angstrom]:       0.000     0.000     5.431    |c| =       5.431
+ CELL| Angle (b,c), alpha [degree]:                                       90.000
+ CELL| Angle (a,c), beta  [degree]:                                       90.000
+ CELL| Angle (a,b), gamma [degree]:                                       90.000
+ CELL| Numerically orthorhombic:                                             YES
+
+ CELL_REF| Volume [angstrom^3]:                                          160.165
+ CELL_REF| Vector a [angstrom     5.431     0.000     0.000    |a| =       5.431
+ CELL_REF| Vector b [angstrom     0.000     5.431     0.000    |b| =       5.431
+ CELL_REF| Vector c [angstrom     0.000     0.000     5.431    |c| =       5.431
+ CELL_REF| Angle (b,c), alpha [degree]:                                   90.000
+ CELL_REF| Angle (a,c), beta  [degree]:                                   90.000
+ CELL_REF| Angle (a,b), gamma [degree]:                                   90.000
+ CELL_REF| Numerically orthorhombic:                                         YES
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K Developers Group (2000 - 2014)           **
+ **                                                                           **
+ *******************************************************************************
+
+ DFT| Spin restricted Kohn-Sham (RKS) calculation                            RKS
+ DFT| Multiplicity                                                             1
+ DFT| Number of spin states                                                    1
+ DFT| Charge                                                                   0
+ DFT| Self-interaction correction (SIC)                                       NO
+ DFT| Cutoffs: density                                              1.000000E-10
+ DFT|          gradient                                             1.000000E-10
+ DFT|          tau                                                  1.000000E-10
+ DFT|          cutoff_smoothing_range                               0.000000E+00
+ DFT| XC density smoothing                                                  NONE
+ DFT| XC derivatives                                                          PW
+ FUNCTIONAL| ROUTINE=NEW
+ FUNCTIONAL| PADE:
+ FUNCTIONAL| S. Goedecker, M. Teter and J. Hutter, Phys. Rev. B 54, 1703 (1996)
+
+ QS| Method:                                                                 GPW
+ QS| Density plane wave grid type                        NON-SPHERICAL FULLSPACE
+ QS| Number of grid levels:                                                    2
+ QS| Density cutoff [a.u.]:                                                 25.0
+ QS| Multi grid cutoff [a.u.]: 1) grid level                                25.0
+ QS|                           2) grid level                                 8.3
+ QS| Grid level progression factor:                                          3.0
+ QS| Relative density cutoff [a.u.]:                                        12.5
+ QS| Consistent realspace mapping and integration 
+ QS| Interaction thresholds: eps_pgf_orb:                                3.2E-02
+ QS|                         eps_filter_matrix:                          0.0E+00
+ QS|                         eps_core_charge:                            1.0E-05
+ QS|                         eps_rho_gspace:                             1.0E-03
+ QS|                         eps_rho_rspace:                             1.0E-03
+ QS|                         eps_gvg_rspace:                             3.2E-02
+ QS|                         eps_ppl:                                    1.0E-02
+ QS|                         eps_ppnl:                                   3.2E-04
+
+
+ ATOMIC KIND INFORMATION
+
+  1. Atomic kind: Si                                    Number of atoms:       1
+
+     Orbital Basis Set                                             DZVP-GTH-PADE
+
+       Number of orbital shell sets:                                           2
+       Number of orbital shells:                                               5
+       Number of primitive Cartesian functions:                                5
+       Number of Cartesian basis functions:                                   14
+       Number of spherical basis functions:                                   13
+       Norm type:                                                              2
+
+       Normalised Cartesian orbitals:
+
+                        Set   Shell   Orbital            Exponent    Coefficient
+
+                          1       1    3s                1.203242       0.269412
+                                                         0.468841      -0.102290
+                                                         0.167986      -0.147195
+                                                         0.057562      -0.015996
+
+                          1       2    4s                1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.083755
+
+                          1       3    4px               1.203242       0.085242
+                                                         0.468841      -0.143473
+                                                         0.167986      -0.083408
+                                                         0.057562      -0.014565
+                          1       3    4py               1.203242       0.085242
+                                                         0.468841      -0.143473
+                                                         0.167986      -0.083408
+                                                         0.057562      -0.014565
+                          1       3    4pz               1.203242       0.085242
+                                                         0.468841      -0.143473
+                                                         0.167986      -0.083408
+                                                         0.057562      -0.014565
+
+                          1       4    5px               1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.040189
+                          1       4    5py               1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.040189
+                          1       4    5pz               1.203242       0.000000
+                                                         0.468841       0.000000
+                                                         0.167986       0.000000
+                                                         0.057562       0.040189
+
+                          2       1    3dx2              0.450000       0.406941
+                          2       1    3dxy              0.450000       0.704842
+                          2       1    3dxz              0.450000       0.704842
+                          2       1    3dy2              0.450000       0.406941
+                          2       1    3dyz              0.450000       0.704842
+                          2       1    3dz2              0.450000       0.406941
+
+     Potential information for                                       GTH-PADE-q4
+
+       Description:                       Goedecker-Teter-Hutter pseudopotential
+                                           Goedecker et al., PRB 54, 1703 (1996)
+                                          Hartwigsen et al., PRB 58, 3641 (1998)
+                                                      Krack, TCA 114, 145 (2005)
+
+       Gaussian exponent of the core charge distribution:               2.582645
+       Electronic configuration (s p d ...):                               2   2
+
+       Parameters of the local part of the GTH pseudopotential:
+
+                          rloc        C1          C2          C3          C4
+                        0.440000   -7.336103
+
+       Parameters of the non-local part of the GTH pseudopotential:
+
+                   l      r(l)      h(i,j,l)
+
+                   0    0.422738    5.906928   -1.261894
+                                   -1.261894    3.258196
+                   1    0.484278    2.727013
+
+
+ MOLECULE KIND INFORMATION
+
+
+ All atoms are their own molecule, skipping detailed information
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   1
+                             - Atoms:                                          1
+                             - Shell sets:                                     2
+                             - Shells:                                         5
+                             - Primitive Cartesian functions:                  5
+                             - Cartesian basis functions:                     14
+                             - Spherical basis functions:                     13
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          0
+                             - Non-local part of the GTH pseudopotential:      2
+
+
+ MODULE QUICKSTEP:  ATOMIC COORDINATES IN angstrom
+
+  Atom  Kind  Element       X           Y           Z          Z(eff)       Mass
+
+       1     1 Si  14    0.000000    0.000000    0.000000      4.00      28.0855
+
+
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             100
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        1.00E-03
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                                 0.00
+                        --------------------------------------------------------
+                        Mixing method:                           DIRECT_P_MIXING
+                        --------------------------------------------------------
+                        No outer SCF
+
+ PW_GRID| Information for grid number                                          1
+ PW_GRID| Cutoff [a.u.]                                                     25.0
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1            -12      11                Points:          24
+ PW_GRID|   Bounds   2            -12      11                Points:          24
+ PW_GRID|   Bounds   3            -12      11                Points:          24
+ PW_GRID| Volume element (a.u.^3)  0.7819E-01     Volume (a.u.^3)      1080.8451
+ PW_GRID| Grid span                                                    FULLSPACE
+
+ PW_GRID| Information for grid number                                          2
+ PW_GRID| Cutoff [a.u.]                                                      8.3
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1             -7       7                Points:          15
+ PW_GRID|   Bounds   2             -7       7                Points:          15
+ PW_GRID|   Bounds   3             -7       7                Points:          15
+ PW_GRID| Volume element (a.u.^3)  0.3203         Volume (a.u.^3)      1080.8451
+ PW_GRID| Grid span                                                    FULLSPACE
+
+ POISSON| Solver                                                        PERIODIC
+ POISSON| Periodicity                                                        XYZ
+
+ RS_GRID| Information for grid number                                          1
+ RS_GRID|   Bounds   1            -12      11                Points:          24
+ RS_GRID|   Bounds   2            -12      11                Points:          24
+ RS_GRID|   Bounds   3            -12      11                Points:          24
+
+ RS_GRID| Information for grid number                                          2
+ RS_GRID|   Bounds   1             -7       7                Points:          15
+ RS_GRID|   Bounds   2             -7       7                Points:          15
+ RS_GRID|   Bounds   3             -7       7                Points:          15
+
+ DISTRIBUTION OF THE PARTICLES (ROWS)
+              Process row      Number of particles         Number of matrix rows
+                        0                        1                            -1
+                      Sum                        1                            -1
+
+ DISTRIBUTION OF THE PARTICLES (COLUMNS)
+              Process col      Number of particles      Number of matrix columns
+                        0                        1                            -1
+                      Sum                        1                            -1
+
+ DISTRIBUTION OF THE NEIGHBOR LISTS
+              Total number of particle pairs:                                  7
+              Total number of matrix elements:                              1183
+              Average number of particle pairs:                                7
+              Maximum number of particle pairs:                                7
+              Average number of matrix element:                             1183
+              Maximum number of matrix elements:                            1183
+
+
+ DISTRIBUTION OF THE OVERLAP MATRIX
+              Number  of non-zero blocks:                                      1
+              Percentage non-zero blocks:                                 100.00
+              Average number of blocks per CPU:                                1
+              Maximum number of blocks per CPU:                                1
+              Average number of matrix elements per CPU:                     179
+              Maximum number of matrix elements per CPU:                     179
+
+ Number of electrons:                                                          4
+ Number of occupied orbitals:                                                  2
+ Number of molecular orbitals:                                                 2
+
+ Number of orbital functions:                                                 13
+ Number of independent orbital functions:                                     13
+
+ Extrapolation method: initial_guess
+
+ Atomic guess: The first density matrix is obtained in terms of atomic orbitals
+               and electronic configurations assigned to each atomic kind
+
+ Guess for atomic kind: Si
+
+ Electronic structure
+    Total number of core electrons                                         10.00
+    Total number of valence electrons                                       4.00
+    Total number of electrons                                              14.00
+    Multiplicity                                                   not specified
+    S   [  2.00  2.00] 2.00
+    P   [  6.00] 2.00
+
+
+ *******************************************************************************
+                  Iteration          Convergence                     Energy [au]
+ *******************************************************************************
+                          1        0.191310                      -3.618313869735
+                          2        0.731569E-01                  -3.691159009622
+                          3        0.405574E-02                  -3.699900512584
+                          4        0.328704E-02                  -3.699908407293
+                          5        0.320845E-02                  -3.699909118998
+                          6        0.316809E-02                  -3.699909477757
+                          7        0.331859E-05                  -3.699923449535
+                          8        0.110258E-06                  -3.699923449550
+
+ Energy components [Hartree]           Total Energy ::           -3.699923449550
+                                        Band Energy ::           -1.012729790251
+                                     Kinetic Energy ::            1.397012768229
+                                   Potential Energy ::           -5.096936217779
+                                      Virial (-V/T) ::            3.648453567279
+                                        Core Energy ::           -5.703543362687
+                                          XC Energy ::           -0.980691562795
+                                     Coulomb Energy ::            2.984311475932
+                       Total Pseudopotential Energy ::           -7.145739758818
+                       Local Pseudopotential Energy ::           -7.987908627736
+                    Nonlocal Pseudopotential Energy ::            0.842168868918
+                                        Confinement ::            0.451836279031
+
+ Orbital energies  State     L     Occupation   Energy[a.u.]          Energy[eV]
+
+                       1     0          2.000      -0.378230          -10.292155
+
+                       1     1          2.000      -0.128135           -3.486734
+
+ Re-scaling the density matrix to get the right number of electrons
+                  # Electrons              Trace(P)               Scaling factor
+                            4                 3.957                        1.011
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998453719        0.0001546281
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036805695
+  Total charge density g-space grids:          -0.0036805695
+
+     1 P_Mix/Diag. 0.40E+00    0.0     0.74330726        -3.7598777522 -3.76E+00
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998298977        0.0001701023
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036650953
+  Total charge density g-space grids:          -0.0036650953
+
+     2 P_Mix/Diag. 0.40E+00    0.0     1.18951813        -3.7551065407  4.77E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998185871        0.0001814129
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036537847
+  Total charge density g-space grids:          -0.0036537847
+
+     3 P_Mix/Diag. 0.40E+00    0.0     1.03914579        -3.7542350804  8.71E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998001829        0.0001998171
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036353805
+  Total charge density g-space grids:          -0.0036353805
+
+     4 P_Mix/Diag. 0.40E+00    0.0     0.95382681        -3.7545873699 -3.52E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998094390        0.0001905610
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036446366
+  Total charge density g-space grids:          -0.0036446366
+
+     5 P_Mix/Diag. 0.40E+00    0.0     1.37569841        -3.7533070792  1.28E-03
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998069558        0.0001930442
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036421534
+  Total charge density g-space grids:          -0.0036421534
+
+     6 P_Mix/Diag. 0.40E+00    0.0     1.12741826        -3.7529837978  3.23E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9997958309        0.0002041691
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036310285
+  Total charge density g-space grids:          -0.0036310285
+
+     7 P_Mix/Diag. 0.40E+00    0.0     1.15161657        -3.7530998000 -1.16E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998057832        0.0001942168
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036409808
+  Total charge density g-space grids:          -0.0036409808
+
+     8 P_Mix/Diag. 0.40E+00    0.0     1.45034931        -3.7527369992  3.63E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998041569        0.0001958431
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036393545
+  Total charge density g-space grids:          -0.0036393545
+
+     9 P_Mix/Diag. 0.40E+00    0.0     1.36631042        -3.7526472894  8.97E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9997974009        0.0002025991
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036325985
+  Total charge density g-space grids:          -0.0036325985
+
+    10 P_Mix/Diag. 0.40E+00    0.0     1.39188371        -3.7526864466 -3.92E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998036646        0.0001963354
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036388623
+  Total charge density g-space grids:          -0.0036388623
+
+    11 P_Mix/Diag. 0.40E+00    0.0     1.48454520        -3.7525790168  1.07E-04
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998026634        0.0001973366
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036378611
+  Total charge density g-space grids:          -0.0036378611
+
+    12 P_Mix/Diag. 0.40E+00    0.0     1.46699629        -3.7525600544  1.90E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9997993622        0.0002006378
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036345599
+  Total charge density g-space grids:          -0.0036345599
+
+    13 P_Mix/Diag. 0.40E+00    0.0     1.47401665        -3.7525706048 -1.06E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998024206        0.0001975794
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036376183
+  Total charge density g-space grids:          -0.0036376183
+
+    14 P_Mix/Diag. 0.40E+00    0.0     1.49441097        -3.7525436783  2.69E-05
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998019331        0.0001980669
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036371308
+  Total charge density g-space grids:          -0.0036371308
+
+    15 P_Mix/Diag. 0.40E+00    0.0     1.49133752        -3.7525402694  3.41E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998004793        0.0001995207
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036356769
+  Total charge density g-space grids:          -0.0036356769
+
+    16 P_Mix/Diag. 0.40E+00    0.0     1.49258154        -3.7525428101 -2.54E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998018428        0.0001981572
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036370405
+  Total charge density g-space grids:          -0.0036370405
+
+    17 P_Mix/Diag. 0.40E+00    0.0     1.49656558        -3.7525367060  6.10E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998016258        0.0001983742
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036368234
+  Total charge density g-space grids:          -0.0036368234
+
+    18 P_Mix/Diag. 0.40E+00    0.0     1.49604940        -3.7525361018  6.04E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998010009        0.0001989991
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036361986
+  Total charge density g-space grids:          -0.0036361986
+
+    19 P_Mix/Diag. 0.40E+00    0.0     1.49623705        -3.7525366433 -5.41E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998015931        0.0001984069
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036367908
+  Total charge density g-space grids:          -0.0036367908
+
+    20 P_Mix/Diag. 0.40E+00    0.0     1.49699133        -3.7525353383  1.31E-06
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014991        0.0001985009
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366968
+  Total charge density g-space grids:          -0.0036366968
+
+    21 P_Mix/Diag. 0.40E+00    0.0     1.49690779        -3.7525352237  1.15E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998012315        0.0001987685
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036364292
+  Total charge density g-space grids:          -0.0036364292
+
+    22 P_Mix/Diag. 0.40E+00    0.0     1.49693294        -3.7525353226 -9.89E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014867        0.0001985133
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366843
+  Total charge density g-space grids:          -0.0036366843
+
+    23 P_Mix/Diag. 0.40E+00    0.0     1.49707325        -3.7525350595  2.63E-07
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014463        0.0001985537
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366439
+  Total charge density g-space grids:          -0.0036366439
+
+    24 P_Mix/Diag. 0.40E+00    0.0     1.49706111        -3.7525350347  2.47E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998013317        0.0001986683
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036365293
+  Total charge density g-space grids:          -0.0036365293
+
+    25 P_Mix/Diag. 0.40E+00    0.0     1.49706396        -3.7525350476 -1.28E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014413        0.0001985587
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366389
+  Total charge density g-space grids:          -0.0036366389
+
+    26 P_Mix/Diag. 0.40E+00    0.0     1.49708921        -3.7525349993  4.83E-08
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014240        0.0001985760
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366216
+  Total charge density g-space grids:          -0.0036366216
+
+    27 P_Mix/Diag. 0.40E+00    0.0     1.49708809        -3.7525349930  6.32E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998013749        0.0001986251
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036365725
+  Total charge density g-space grids:          -0.0036365725
+
+    28 P_Mix/Diag. 0.40E+00    0.0     1.49708833        -3.7525349923  6.12E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014219        0.0001985781
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366195
+  Total charge density g-space grids:          -0.0036366195
+
+    29 P_Mix/Diag. 0.40E+00    0.0     1.49709250        -3.7525349853  7.02E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014145        0.0001985855
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366121
+  Total charge density g-space grids:          -0.0036366121
+
+    30 P_Mix/Diag. 0.40E+00    0.0     1.49709272        -3.7525349834  1.91E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998013934        0.0001986066
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036365911
+  Total charge density g-space grids:          -0.0036365911
+
+    31 P_Mix/Diag. 0.40E+00    0.0     1.49709273        -3.7525349820  1.45E-09
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014136        0.0001985864
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366112
+  Total charge density g-space grids:          -0.0036366112
+
+    32 P_Mix/Diag. 0.40E+00    0.0     1.49709325        -3.7525349818  1.69E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014104        0.0001985896
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366081
+  Total charge density g-space grids:          -0.0036366081
+
+    33 P_Mix/Diag. 0.40E+00    0.0     1.49709346        -3.7525349811  6.57E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014014        0.0001985986
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036365990
+  Total charge density g-space grids:          -0.0036365990
+
+    34 P_Mix/Diag. 0.40E+00    0.0     1.49709347        -3.7525349803  8.42E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014100        0.0001985900
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366077
+  Total charge density g-space grids:          -0.0036366077
+
+    35 P_Mix/Diag. 0.40E+00    0.0     1.49709345        -3.7525349808 -5.07E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014087        0.0001985913
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366063
+  Total charge density g-space grids:          -0.0036366063
+
+    36 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349805  2.46E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014048        0.0001985952
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366025
+  Total charge density g-space grids:          -0.0036366025
+
+    37 P_Mix/Diag. 0.40E+00    0.0     1.49709357        -3.7525349802  3.98E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014085        0.0001985915
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366062
+  Total charge density g-space grids:          -0.0036366062
+
+    38 P_Mix/Diag. 0.40E+00    0.0     1.49709351        -3.7525349805 -3.34E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014079        0.0001985921
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366056
+  Total charge density g-space grids:          -0.0036366056
+
+    39 P_Mix/Diag. 0.40E+00    0.0     1.49709357        -3.7525349804  9.75E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014063        0.0001985937
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366039
+  Total charge density g-space grids:          -0.0036366039
+
+    40 P_Mix/Diag. 0.40E+00    0.0     1.49709357        -3.7525349802  1.76E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014079        0.0001985921
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366055
+  Total charge density g-space grids:          -0.0036366055
+
+    41 P_Mix/Diag. 0.40E+00    0.0     1.49709354        -3.7525349804 -1.66E-10
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014076        0.0001985924
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366053
+  Total charge density g-space grids:          -0.0036366053
+
+    42 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  3.98E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014069        0.0001985931
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366045
+  Total charge density g-space grids:          -0.0036366045
+
+    43 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  7.62E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014076        0.0001985924
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366052
+  Total charge density g-space grids:          -0.0036366052
+
+    44 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -7.57E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014075        0.0001985925
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366051
+  Total charge density g-space grids:          -0.0036366051
+
+    45 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  1.66E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014072        0.0001985928
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366048
+  Total charge density g-space grids:          -0.0036366048
+
+    46 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  3.27E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014075        0.0001985925
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366051
+  Total charge density g-space grids:          -0.0036366051
+
+    47 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -3.33E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366051
+  Total charge density g-space grids:          -0.0036366051
+
+    48 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  6.99E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014073        0.0001985927
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366049
+  Total charge density g-space grids:          -0.0036366049
+
+    49 P_Mix/Diag. 0.40E+00    0.0     1.49709356        -3.7525349803  1.40E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366051
+  Total charge density g-space grids:          -0.0036366051
+
+    50 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -1.44E-11
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    51 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.97E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    52 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  5.98E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    53 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -6.22E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    54 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.27E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    55 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.56E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    56 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.67E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    57 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  5.41E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    58 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.10E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    59 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -1.14E-12
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    60 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.31E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    61 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.69E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    62 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.90E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    63 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  9.86E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    64 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.01E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    65 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.10E-13
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    66 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.26E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    67 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.62E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    68 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.97E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    69 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.78E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    70 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  3.69E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    71 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -3.86E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    72 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  7.99E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    73 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.60E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    74 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -1.73E-14
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    75 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  5.33E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    76 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    77 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -6.66E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    78 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.78E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    79 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  2.66E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    80 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.66E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    81 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.88E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    82 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.78E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    83 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -2.22E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    84 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    85 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.88E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    86 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.88E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    87 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.88E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    88 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    89 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  1.33E-15
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    90 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    91 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    92 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    93 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    94 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  8.88E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    95 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -8.88E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    96 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  4.44E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    97 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    98 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+    99 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803  0.00E+00
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+   100 P_Mix/Diag. 0.40E+00    0.0     1.49709355        -3.7525349803 -4.44E-16
+
+  *** SCF run NOT converged ***
+
+
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:                -10.25799242814102
+  Core Hamiltonian energy:                                      1.92653566196091
+  Hartree energy:                                               5.54684889362145
+  Exchange-correlation energy:                                 -0.96792710775123
+
+  Total energy:                                                -3.75253498030989
+
+
+ MULLIKEN POPULATION ANALYSIS
+
+ #  Atom  Element  Kind  Atomic population                Net charge
+       1     Si       1          4.000000                 -0.000000
+ # Total charge                  4.000000                 -0.000000
+
+
+ !-----------------------------------------------------------------------------!
+                           Hirschfeld Charges
+
+  #Atom  Element  Kind  Ref Charge     Population                     Net charge
+      1       Si     1       4.000          3.432                          0.568
+
+  Total Charge                                                             0.568
+ !-----------------------------------------------------------------------------!
+
+  Trace(PS):                                    4.0000000000
+  Electronic density on regular grids:         -3.9998014074        0.0001985926
+  Core density on regular grids:                3.9961648024       -0.0038351976
+  Total charge density on r-space grids:       -0.0036366050
+  Total charge density g-space grids:          -0.0036366050
+
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy (a.u.):               -3.731585307966530
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                      CPU                  ACC      ACC%
+ number of processed stacks                   101                    0       0.0
+ matmuls inhomo. stacks                         0                    0       0.0
+ matmuls total                                101                    0       0.0
+ flops  13 x   13 x    2                    68276                    0       0.0
+ flops total                                68276                    0       0.0
+ marketing flops                            68276
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ ----                             MULTIGRID INFO                            ----
+ -------------------------------------------------------------------------------
+ count for grid        1:            311          cutoff [a.u.]           25.00
+ count for grid        2:            332          cutoff [a.u.]            8.33
+ total gridlevel count  :            643
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS  TOT TIME [s]  AVE VOLUME [Bytes]  PERFORMANCE [MB/s]
+ MP_Group                3         0.000
+ MP_Bcast              102         0.000                  4.                1.71
+ MP_Allreduce         1170         0.001                  8.               19.04
+ MP_Sync                 2         0.000
+ MP_Alltoall          2316         0.001                522.              845.86
+ MP_Wait              2424         0.001
+ MP_ISend              808         0.001                228.              132.63
+ MP_IRecv              808         0.000                228.              431.94
+ MP_Memory            2424         0.001
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 2.6.2, the CP2K developers group (2015).
+ CP2K is freely available from http://www.cp2k.org/ .
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ http://dx.doi.org/10.1016/j.parco.2014.03.012
+
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WILEY INTERDISCIPLINARY REVIEWS-COMPUTATIONAL MOLECULAR SCIENCE, 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ http://dx.doi.org/10.1002/wcms.1159
+
+
+ Krack, M. 
+ THEORETICAL CHEMISTRY ACCOUNTS, 114 (1-3), 145-152 (2005). 
+ Pseudopotentials for H to Kr optimized for gradient-corrected
+ exchange-correlation functionals.
+ http://dx.doi.org/10.1007/s00214-005-0655-y
+
+
+ VandeVondele, J; Krack, M; Mohamed, F; Parrinello, M; Chassaing, T;
+ Hutter, J. COMPUTER PHYSICS COMMUNICATIONS, 167 (2), 103-128 (2005). 
+ QUICKSTEP: Fast and accurate density functional calculations using a
+ mixed Gaussian and plane waves approach.
+ http://dx.doi.org/10.1016/j.cpc.2004.12.014
+
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ http://dx.doi.org/10.1109/JPROC.2004.840301
+
+
+ Hartwigsen, C; Goedecker, S; Hutter, J. 
+ PHYSICAL REVIEW B, 58 (7), 3641-3662 (1998). 
+ Relativistic separable dual-space Gaussian pseudopotentials from H to Rn.
+ http://dx.doi.org/10.1103/PhysRevB.58.3641
+
+
+ Lippert, G; Hutter, J; Parrinello, M. 
+ MOLECULAR PHYSICS, 92 (3), 477-487 (1997). 
+ A hybrid Gaussian and plane wave density functional scheme.
+ http://dx.doi.org/10.1080/002689797170220
+
+
+ Goedecker, S; Teter, M; Hutter, J. 
+ PHYSICAL REVIEW B, 54 (3), 1703-1710 (1996). 
+ Separable dual-space Gaussian pseudopotentials.
+ http://dx.doi.org/10.1103/PhysRevB.54.1703
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.002    0.002    0.580    0.580
+ qs_forces                            1  2.0    0.000    0.000    0.554    0.554
+ qs_energies_scf                      1  3.0    0.000    0.000    0.550    0.550
+ scf_env_do_scf                       1  4.0    0.000    0.000    0.535    0.535
+ scf_env_do_scf_inner_loop          100  5.0    0.007    0.007    0.535    0.535
+ rebuild_ks_matrix                  101  7.0    0.000    0.000    0.282    0.282
+ qs_ks_build_kohn_sham_matrix       101  8.0    0.008    0.008    0.282    0.282
+ qs_ks_update_qs_env                100  6.0    0.000    0.000    0.281    0.281
+ fft_wrap_pw1pw2                    607 10.0    0.002    0.002    0.164    0.164
+ fft_wrap_pw1pw2_30                 405 10.7    0.009    0.009    0.150    0.150
+ qs_rho_update_rho                  101  6.0    0.000    0.000    0.146    0.146
+ calculate_rho_elec                 101  7.0    0.057    0.057    0.146    0.146
+ sum_up_and_integrate               101  9.0    0.002    0.002    0.131    0.131
+ integrate_v_rspace                 101 10.0    0.075    0.075    0.129    0.129
+ fft3d_s                            608 12.0    0.101    0.101    0.111    0.111
+ density_rs2pw                      101  8.0    0.001    0.001    0.088    0.088
+ qs_vxc_create                      101  9.0    0.001    0.001    0.078    0.078
+ xc_vxc_pw_create                   101 10.0    0.009    0.009    0.077    0.077
+ xc_rho_set_and_dset_create         101 11.0    0.001    0.001    0.068    0.068
+ xc_functional_eval                 101 12.0    0.065    0.065    0.065    0.065
+ calculate_dm_sparse                100  6.0    0.000    0.000    0.055    0.055
+ cp_dbcsr_plus_fm_fm_t_native       101  7.0    0.001    0.001    0.055    0.055
+ potential_pw2rs                    101 11.0    0.001    0.001    0.048    0.048
+ dbcsr_mm_cannon_multiply           101  8.0    0.004    0.004    0.041    0.041
+ quickstep_create_force_env           1  2.0    0.000    0.000    0.023    0.023
+ dbcsr_complete_redistribute        302  9.0    0.010    0.010    0.023    0.023
+ copy_dbcsr_to_fm                   400  7.0    0.003    0.003    0.022    0.022
+ pw_poisson_solve                   101  9.0    0.016    0.016    0.021    0.021
+ pw_gather_s                        304 12.0    0.021    0.021    0.021    0.021
+ pw_scatter_s                       303 12.0    0.020    0.020    0.020    0.020
+ qs_diis_b_step                      99  6.0    0.001    0.001    0.017    0.017
+ eigensolver                        100  6.0    0.000    0.000    0.014    0.014
+ create_qs_kind_set                   1  3.0    0.000    0.000    0.014    0.014
+ read_qs_kind                         1  4.0    0.008    0.008    0.014    0.014
+ pw_copy                            606 10.8    0.013    0.013    0.013    0.013
+ dbcsr_make_images                  202  9.0    0.000    0.000    0.012    0.012
+ dbcsr_finalize                     726 10.0    0.002    0.002    0.012    0.012
+ make_images                        202 10.0    0.002    0.002    0.012    0.012
+ -------------------------------------------------------------------------------
+
+  **** **** ******  **  PROGRAM ENDED AT                 2016-04-19 13:06:56.242
+ ***** ** ***  *** **   PROGRAM RAN ON                       lauri-Lenovo-Z50-70
+ **    ****   ******    PROGRAM RAN BY                                     lauri
+ ***** **    ** ** **   PROGRAM PROCESS ID                                 10735
+  **** **  *******  **  PROGRAM STOPPED IN /home/lauri/Dropbox/nomad-dev/nomad-l
+                                           ab-base/parsers/cp2k/test/unittests/c
+                                           p2k_2.6.2/XC_functional/pade

@@ -1,0 +1,11 @@
+{
+  "meta_name":"international_short_symbol",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the International Union of Crystallography (IUC) short symbol of the ",
+    "3D space group of this system"],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

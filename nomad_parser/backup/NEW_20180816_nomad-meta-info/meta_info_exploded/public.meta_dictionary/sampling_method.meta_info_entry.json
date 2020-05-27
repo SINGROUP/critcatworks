@@ -1,0 +1,41 @@
+{
+  "meta_name":"sampling_method",
+  "meta_type":"type-value",
+  "meta_description":"Type of method used to do the sampling.",
+  "meta_parent_section":"section_sampling_method",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"geometry_optimization",
+    "meta_enum_description":"Geometry optimization"
+  },{
+    "meta_enum_value":"molecular_dynamics",
+    "meta_enum_description":"Molecular dynamics"
+  },{
+    "meta_enum_value":"montecarlo",
+    "meta_enum_description":"(Metropolis) Monte Carlo         "
+  },{
+    "meta_enum_value":"steered_molecular_dynamics",
+    "meta_enum_description":"Steered molecular dynamics (with time dependent external forces) "
+  },{
+    "meta_enum_value":"meta_dynamics",
+    "meta_enum_description":[
+      "Biased molecular dynamics with history-dependent ",
+      "Hamiltonian"]
+  },{
+    "meta_enum_value":"wang_landau_montecarlo",
+    "meta_enum_description":[
+      "Monte Carlo according to the Wang-Landau ",
+      "formulation."]
+  },{
+    "meta_enum_value":"blue_moon",
+    "meta_enum_description":"Blue Moon sampling"
+  },{
+    "meta_enum_value":"langevin_dynamics",
+    "meta_enum_description":"Langevin dynamics"
+  },{
+    "meta_enum_value":"taylor_expansion",
+    "meta_enum_description":[
+      "Taylor expansion of the potential energy ",
+      "surface"]
+  }]
+}

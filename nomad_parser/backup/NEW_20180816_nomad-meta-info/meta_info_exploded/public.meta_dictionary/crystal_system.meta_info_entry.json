@@ -1,0 +1,12 @@
+{
+  "meta_name":"crystal_system",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Name of the crystal system. Can be one of the following: triclinic, monoclinic, ",
+    "orthorhombic, tetragonal, trigonal, hexagonal or ",
+    "cubic."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

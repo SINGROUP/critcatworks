@@ -1,0 +1,11 @@
+{
+  "meta_name":"dft_plus_u_projection_type",
+  "meta_type":"type-value",
+  "meta_description":[
+    "DFT+U: Type of orbitals used for projection in order to calculate occupation ",
+    "numbers. Valid names are described in the [dft\\_plus\\_u\\_projection\\_type wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/dft-p",
+    "lus-u-projection-type)."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

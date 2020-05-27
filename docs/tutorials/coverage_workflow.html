@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simple Coverage Workflow &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Coverage Ladder Workflow" href="coverageladder_workflow.html" />
+    <link rel="prev" title="Singlesites Workflow" href="singlesites_workflow.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="coverageladder_workflow.html" title="Coverage Ladder Workflow"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="singlesites_workflow.html" title="Singlesites Workflow"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="workflows.html" accesskey="U">Workflows</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="simple-coverage-workflow">
+<h1>Simple Coverage Workflow<a class="headerlink" href="#simple-coverage-workflow" title="Permalink to this headline">¶</a></h1>
+<p>The simple coverage workflow obtains a stable, simple coverage estimate. It does so by iteratively relaxing the coverage structure by DFT and removing too close adsorbates. So far, only atomic adsorbates are supported.</p>
+<a class="reference internal image-reference" href="../_images/simplecoverage.svg"><img alt="../_images/simplecoverage.svg" src="../_images/simplecoverage.svg" width="800" /></a>
+<p>Given a nanocluster structure, the adsorption sites are mapped out as described in the <a class="reference internal" href="singlesites_workflow.html"><span class="doc">Singlesites Workflow</span></a> tutorial. Similarly <strong>adsorbate_name</strong> defines which atomic adsorbate is placed onto sites classified as “top”, “bridge” and/or “hollow” in <strong>adsite_types</strong>.</p>
+<p>Since the cluster is would likely be overpopulated, the amount of adsorbates is pre-reduced: either the user defines the target number of remaining adsorbates (<strong>n_remaining</strong>) or a inter-adsorbate minimum distance (<strong>bond_length</strong>). If <strong>n_remaining</strong> is given, <strong>bond_length</strong> is ignored in this step.</p>
+<p>After each DFT relaxation, it is checked if any two adsorbate atoms have formed a molecule. Too close adsorbates (specified by <strong>bond_length</strong>) are consequently removed.</p>
+<p>If no adsorbates are too close, the search has converged and the workflow stops. Otherwise, it continues for <strong>max_iterations</strong>.</p>
+<p>At one glance, these are the simple-coverage-workflow-specific parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">adsorbate_name (str)</dt>
+<dd class="field-odd"><p>element symbol of the adsorbed atom</p>
+</dd>
+<dt class="field-even">max_iterations (int)</dt>
+<dd class="field-even"><p>maximum number of iterations in the workflow</p>
+</dd>
+<dt class="field-odd">adsite_types (list)</dt>
+<dd class="field-odd"><p>adsorption site types, can contain any combination of
+“top”, “bridge”, “hollow”</p>
+</dd>
+<dt class="field-even">bond_length (float)</dt>
+<dd class="field-even"><p>distance in angstrom under which two adsorbed atoms are
+considered bound, hence too close</p>
+</dd>
+<dt class="field-odd">n_remaining (int)</dt>
+<dd class="field-odd"><p>number of adsorbates which should remain after the
+first pre-DFT pruning of the adsorbate coverage</p>
+</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="singlesites_workflow.html"
+                        title="previous chapter">Singlesites Workflow</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="coverageladder_workflow.html"
+                        title="next chapter">Coverage Ladder Workflow</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/coverage_workflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="coverageladder_workflow.html" title="Coverage Ladder Workflow"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="singlesites_workflow.html" title="Singlesites Workflow"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="workflows.html" >Workflows</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "meta_name":"point_group",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Symbol of the crystallographic point group in the Hermann-Mauguin ",
+    "notation."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

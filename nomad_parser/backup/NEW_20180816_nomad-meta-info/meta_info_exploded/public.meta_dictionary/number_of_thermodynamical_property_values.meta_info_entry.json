@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_thermodynamical_property_values",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of thermal properties values available in ",
+    "section_thermodynamical_properties."],
+  "meta_parent_section":"section_thermodynamical_properties"
+}

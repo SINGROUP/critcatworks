@@ -1,0 +1,13 @@
+{
+  "meta_name":"time_scf_iteration_wall_end",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the internal wall-clock time at the end of a self-consistent field (SCF) ",
+    "iteration."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "scf_info",
+    "time_info"],
+  "meta_data_type":"float",
+  "meta_units":"s"
+}

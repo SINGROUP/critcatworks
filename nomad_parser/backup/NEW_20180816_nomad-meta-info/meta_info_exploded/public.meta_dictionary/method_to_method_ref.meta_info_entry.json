@@ -1,0 +1,12 @@
+{
+  "meta_name":"method_to_method_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to a local section_method. If both method_to_method_ref and ",
+    "method_to_method_external_url are given, then method_to_method_ref is a local ",
+    "copy of the value contained in method_to_method_external_url. The kind of ",
+    "relationship between the method defined in the present section_method and the ",
+    "referenced one is described by method_to_method_kind."],
+  "meta_parent_section":"section_method_to_method_refs",
+  "meta_data_type":"reference"
+}

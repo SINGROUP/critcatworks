@@ -1,0 +1,7 @@
+{
+  "meta_name":"settings_run",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters that control the whole run (but not the *single ",
+    "configuration calculation*, see section_single_configuration_calculation)."]
+}

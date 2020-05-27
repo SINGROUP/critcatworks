@@ -1,0 +1,71 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"molcas",
+  "description":"meta info used by the molcas parser.  All names are expected to start with x_molcas_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_molcas_basis_atom_label",
+    "description":"Molcas basis set atom label.",
+    "superNames":["x_molcas_section_basis"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_molcas_basis_name",
+    "description":"Molcas basis set name.  Repeated strings of '.' are compressed to a single '.'.  Any leading or trailing '.' are stripped.",
+    "superNames":["x_molcas_section_basis"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_molcas_frequency_intensity",
+    "description":"Molcas intensity value",
+    "superNames":["x_molcas_section_frequency"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_molcas_frequency_symmetry",
+    "description":"Molcas symmetry for frequencies",
+    "superNames":["x_molcas_section_frequency"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_molcas_frequency_value",
+    "description":"Molcas frequency value",
+    "superNames":["x_molcas_section_frequency"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_molcas_imaginary_frequency_value",
+    "description":"Molcas imaginary frequency value",
+    "superNames":["x_molcas_section_frequency"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_molcas_method_name",
+    "description":"Molcas method name (without UHF; see x_molcas_uhf)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_molcas_section_basis",
+    "kindStr":"type_section",
+    "description":"Section for Molcas basis sets",
+    "superNames":["section_method"]
+  },{
+    "name":"x_molcas_section_frequency",
+    "kindStr":"type_section",
+    "description":"Section for Molcas frequency (symmetry, frequency, intensity)",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_molcas_slapaf_grad_max",
+    "description":"Molcas slapaf (geometry optimization) grad (force) max",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_molcas_slapaf_grad_norm",
+    "description":"Molcas slapaf (geometry optimization) grad (force) norm",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_molcas_uhf",
+    "description":"If the Molcas method is UHF.",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  }]
+}

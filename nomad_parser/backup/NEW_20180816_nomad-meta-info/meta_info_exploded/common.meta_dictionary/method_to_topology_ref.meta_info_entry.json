@@ -1,0 +1,10 @@
+{
+  "meta_name":"method_to_topology_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference to the topology and force fields to be ",
+    "used."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_topology"
+}

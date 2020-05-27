@@ -1,0 +1,13 @@
+{
+  "meta_name":"energy_free",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Free energy (nuclei + electrons) (whose minimum gives the smeared occupation ",
+    "density calculated with smearing_kind) calculated with the method described in ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_total_potential"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

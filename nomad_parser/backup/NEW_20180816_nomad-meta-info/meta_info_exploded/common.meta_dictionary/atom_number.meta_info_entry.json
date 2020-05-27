@@ -1,0 +1,7 @@
+{
+  "meta_name":"atom_number",
+  "meta_type":"type-value",
+  "meta_description":"Atomic number Z of the atom.",
+  "meta_parent_section":"section_atom",
+  "meta_data_type":"int"
+}

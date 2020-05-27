@@ -1,0 +1,12 @@
+{
+  "meta_name":"constraint_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Short and unique name for this constraint type. Valid names are described in ",
+    "the [constraint\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-met",
+    "a-info/wikis/metainfo/constraint-kind)."],
+  "meta_parent_section":"section_constraint",
+  "meta_abstract_types":[
+    "settings_constraint"],
+  "meta_data_type":"string"
+}

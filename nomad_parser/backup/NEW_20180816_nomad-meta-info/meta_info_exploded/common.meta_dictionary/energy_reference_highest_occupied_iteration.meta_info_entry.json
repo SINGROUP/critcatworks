@@ -1,0 +1,17 @@
+{
+  "meta_name":"energy_reference_highest_occupied_iteration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Highest occupied single-particle state energy (in insulators or HOMO energy in ",
+    "finite systems) during the self-consistent field (SCF) ",
+    "iterations."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "energy_type_reference",
+    "scf_info"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  }],
+  "meta_units":"J"
+}

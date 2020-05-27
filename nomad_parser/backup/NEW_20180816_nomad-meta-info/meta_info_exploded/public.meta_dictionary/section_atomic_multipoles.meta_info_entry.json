@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_atomic_multipoles",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section describing multipoles (charges/monopoles, dipoles, quadrupoles, ...) ",
+    "for each atom."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

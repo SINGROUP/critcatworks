@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_multi_reference",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters for the multi-reference single and double configuration ",
+    "interaction method."],
+  "meta_abstract_types":[
+    "settings_post_hartree_fock"]
+}

@@ -1,0 +1,7 @@
+{
+  "meta_name":"archive_gid",
+  "meta_type":"type-value",
+  "meta_description":"unique identifier of an archive.",
+  "meta_parent_section":"archive_context",
+  "meta_data_type":"string"
+}

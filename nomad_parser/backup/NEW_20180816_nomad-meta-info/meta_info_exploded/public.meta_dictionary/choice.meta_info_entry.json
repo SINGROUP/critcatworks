@@ -1,0 +1,13 @@
+{
+  "meta_name":"choice",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String that specifies the centering, origin and basis vector settings of the 3D ",
+    "space group that defines the symmetry group of the simulated physical system ",
+    "(see section_system). Values are as defined by ",
+    "spglib."],
+  "meta_parent_section":"section_symmetry",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

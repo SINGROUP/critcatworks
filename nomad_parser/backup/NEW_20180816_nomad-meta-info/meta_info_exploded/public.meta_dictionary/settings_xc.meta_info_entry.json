@@ -1,0 +1,11 @@
+{
+  "meta_name":"settings_xc",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters connected with the definition of the exchange-correlation ",
+    "(XC) *method*. Here, the term *method* is a more general concept than just ",
+    "*functionals* and include, e.g., post Hartree-Fock methods, ",
+    "too."],
+  "meta_abstract_types":[
+    "settings_potential_energy_surface"]
+}

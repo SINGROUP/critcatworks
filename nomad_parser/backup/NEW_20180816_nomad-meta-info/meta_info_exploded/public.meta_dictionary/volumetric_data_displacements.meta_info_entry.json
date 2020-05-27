@@ -1,0 +1,18 @@
+{
+  "meta_name":"volumetric_data_displacements",
+  "meta_type":"type-value",
+  "meta_description":[
+    "displacement vectors between grid points along each axis; same indexing rules ",
+    "as lattice_vectors.  In many cases, displacements and number of points are ",
+    "related to lattice_vectors through: [displacement] * [number of points + N] = ",
+    "[lattice_vector],where N is 1 for periodic directions and 0 for non-periodic ",
+    "ones"],
+  "meta_parent_section":"section_volumetric_data",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }],
+  "meta_units":"m"
+}

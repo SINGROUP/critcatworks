@@ -1,0 +1,12 @@
+{
+  "meta_name":"excitation_energies",
+  "meta_type":"type-value",
+  "meta_description":"Excitation energies.",
+  "meta_parent_section":"section_excited_states",
+  "meta_abstract_types":[
+    "energy_value"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_excited_states"
+  }]
+}

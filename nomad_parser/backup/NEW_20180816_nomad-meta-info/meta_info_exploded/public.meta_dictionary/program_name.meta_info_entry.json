@@ -1,0 +1,11 @@
+{
+  "meta_name":"program_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the name of the program that generated the ",
+    "data."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "program_info"],
+  "meta_data_type":"string"
+}

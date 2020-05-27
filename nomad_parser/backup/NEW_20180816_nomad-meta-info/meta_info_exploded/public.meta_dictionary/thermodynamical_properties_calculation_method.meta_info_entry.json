@@ -1,0 +1,12 @@
+{
+  "meta_name":"thermodynamical_properties_calculation_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Method used to calculate the thermodynamic quantities.\n",
+    "\n",
+    "Valid values:\n",
+    "\n",
+    "  * harmonic"],
+  "meta_parent_section":"section_thermodynamical_properties",
+  "meta_data_type":"string"
+}

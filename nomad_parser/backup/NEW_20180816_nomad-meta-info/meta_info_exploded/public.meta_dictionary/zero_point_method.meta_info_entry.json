@@ -1,0 +1,10 @@
+{
+  "meta_name":"zero_point_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Describes the zero-point vibrations method. If skipped or an empty string is ",
+    "used, it means no zero-point vibrations correction is ",
+    "applied."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"string"
+}

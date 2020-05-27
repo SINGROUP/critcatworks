@@ -1,0 +1,14 @@
+{
+  "meta_name":"eigenvalues_kpoints_multiplicity",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Multiplicity of the $k$ point (i.e., how many distinct points per cell this ",
+    "expands to after applying all symmetries). This defaults to 1. If expansion is ",
+    "preformed then each point will have weight ",
+    "eigenvalues_kpoints_weights/eigenvalues_kpoints_multiplicity."],
+  "meta_parent_section":"section_eigenvalues",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+  }]
+}

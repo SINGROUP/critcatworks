@@ -1,0 +1,12 @@
+{
+  "meta_name":"energy_x",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value fo the exchange (X) energy calculated with the method described in ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_type_x"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

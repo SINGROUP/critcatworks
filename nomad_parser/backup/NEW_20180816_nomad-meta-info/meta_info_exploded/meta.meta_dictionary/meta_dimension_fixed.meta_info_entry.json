@@ -1,0 +1,7 @@
+{
+  "meta_name":"meta_dimension_fixed",
+  "meta_type":"type-value",
+  "meta_description":"A fixed dimension of exactly the given size.",
+  "meta_parent_section":"meta_dimension",
+  "meta_data_type":"int64"
+}

@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_constraints",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of constraints of this type.",
+  "meta_parent_section":"section_constraint",
+  "meta_abstract_types":[
+    "settings_constraint"]
+}

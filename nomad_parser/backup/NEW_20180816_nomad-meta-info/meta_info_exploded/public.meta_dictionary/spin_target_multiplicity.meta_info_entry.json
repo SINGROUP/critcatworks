@@ -1,0 +1,11 @@
+{
+  "meta_name":"spin_target_multiplicity",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the target (user-imposed) value of the spin multiplicity $M=2S+1$, where ",
+    "$S$ is the total spin. It is an integer number. This value is not necessarily ",
+    "the value obtained at the end of the calculation. See spin_s2 for the converged ",
+    "value of the spin moment."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"int"
+}

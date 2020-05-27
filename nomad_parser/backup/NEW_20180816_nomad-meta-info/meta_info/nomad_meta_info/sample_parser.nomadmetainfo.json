@@ -1,0 +1,11 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"sample_parser",
+  "description":"metainfo for the sample_parser",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[]
+}

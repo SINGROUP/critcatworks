@@ -1,0 +1,7 @@
+{
+  "meta_name":"meta_range_minimum",
+  "meta_type":"type-value",
+  "meta_description":"The minimum expected value",
+  "meta_parent_section":"meta_range_expected",
+  "meta_data_type":"float"
+}

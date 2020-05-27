@@ -1,0 +1,7 @@
+{
+  "meta_name":"settings_numerical_parameter",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "A parameter that can influence the convergence, but not the physics (unlike ",
+    "settings_physical_parameter)"]
+}

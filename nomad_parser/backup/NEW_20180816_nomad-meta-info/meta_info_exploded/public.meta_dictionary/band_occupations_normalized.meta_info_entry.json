@@ -1,0 +1,19 @@
+{
+  "meta_name":"band_occupations_normalized",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Occupation of the $k$-points along the normalized electronic band. The size of ",
+    "the dimensions of this third-order tensor are the same as for the tensor in ",
+    "band_energies."],
+  "meta_parent_section":"section_k_band_segment_normalized",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_normalized_k_points_per_segment"
+  },{
+    "meta_dimension_symbolic":"number_of_normalized_band_segment_eigenvalues"
+  }]
+}

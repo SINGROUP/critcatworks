@@ -1,0 +1,20 @@
+{
+  "meta_name":"dos_lm",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Tuples of $l$ and $m$ values for which dos_values_lm are given. For the quantum ",
+    "number $l$ the conventional meaning of azimuthal quantum number is always ",
+    "adopted. For the integer number $m$, besides the conventional use as magnetic ",
+    "quantum number ($l+1$ integer values from $-l$ to $l$), a set of different ",
+    "conventions is accepted (see the [m_kind wiki ",
+    "page](https://gitlab.rzg.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/m-kind)",
+    ". The actual adopted convention is specified by ",
+    "dos_m_kind."],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_dos_lms"
+  },{
+    "meta_dimension_fixed":2
+  }]
+}

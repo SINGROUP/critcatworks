@@ -1,0 +1,2955 @@
+{
+  "metadict_name":"quantum_espresso",
+  "metadict_description":[
+    "meta info used by the Quantum Espresso parser, all names are expected to start ",
+    "with qe_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_qe_alat",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Lattice Parameter 'a', constant during a run and used as unit in other ",
+      "quantities"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_allocated_array_dimensions",
+    "meta_type":"type-value",
+    "meta_description":"Allocated arrays, dimensions",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_allocated_arrays"
+    }]
+  },{
+    "meta_name":"x_qe_allocated_array_name",
+    "meta_type":"type-value",
+    "meta_description":"Allocated arrays, name",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_allocated_arrays"
+    }]
+  },{
+    "meta_name":"x_qe_allocated_array_size",
+    "meta_type":"type-value",
+    "meta_description":"Allocated arrays, size",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_allocated_arrays"
+    }]
+  },{
+    "meta_name":"x_qe_atom_dispersion_force",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_qe_atom_idx",
+    "meta_type":"type-value",
+    "meta_description":"Index of atom on Espresso side",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_qe_atom_starting_magnetization",
+    "meta_type":"type-value",
+    "meta_description":"Starting magnetic configuration: Atom magnetization",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_qe_bands_diagonalization_algorithm",
+    "meta_type":"type-value",
+    "meta_description":"Diagonalization algorithm",
+    "meta_parent_section":"x_qe_section_bands_diagonalization",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_bands_diagonalization_c_bands_n_unconverged_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of uncoverged eigenvalues (Warning from function ",
+      "c_bands)"],
+    "meta_parent_section":"x_qe_section_bands_diagonalization",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_bands_diagonalization_ethr",
+    "meta_type":"type-value",
+    "meta_description":"Convergence Threshold in bands diagonalization",
+    "meta_parent_section":"x_qe_section_bands_diagonalization",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_bands_diagonalization_iteration_avg",
+    "meta_type":"type-value",
+    "meta_description":"Average of iterations in bands diagonalization",
+    "meta_parent_section":"x_qe_section_bands_diagonalization",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_bands_diagonalization_warn_n_unconverged_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":"Number of uncoverged eigenvalues (Warning)",
+    "meta_parent_section":"x_qe_section_bands_diagonalization",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_berry_efield",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Berry phase with E-field: flag if berry-efield-calc was ",
+      "done"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_berry_efield_direction",
+    "meta_type":"type-value",
+    "meta_description":"Finite E-field: direction",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_berry_efield_intensity",
+    "meta_type":"type-value",
+    "meta_description":"Berry phase with E-field: intensity",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_berry_efield_niter",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Berry phase with E-field: number of iterative ",
+      "cycles"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_berry_efield_strings_nk",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Berry phase with E-field: number of k-points in ",
+      "string"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_cell_volume",
+    "meta_type":"type-value",
+    "meta_description":"Volume of unit cell",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_celldm",
+    "meta_type":"type-value",
+    "meta_description":"QE cell dimensions",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":6
+    }]
+  },{
+    "meta_name":"x_qe_compile_parallel_version",
+    "meta_type":"type-value",
+    "meta_description":"Parallelization compile-time options",
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_convergence_iterations",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of iterations after which self-consistency has been ",
+      "achieved"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_core_charge_imaginary",
+    "meta_type":"type-value",
+    "meta_description":"QE check: imaginary core charge",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_core_charge_negative",
+    "meta_type":"type-value",
+    "meta_description":"QE check: negative core charge",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_core_charge_realspace",
+    "meta_type":"type-value",
+    "meta_description":"QE flag: core charge treated in real space",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_dense_fft_grid",
+    "meta_type":"type-value",
+    "meta_description":"Dense-grid info, FFT grid",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_qe_dense_g_cutoff",
+    "meta_type":"type-value",
+    "meta_description":"Dense-grid info, G cutoff",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_dense_g_vectors",
+    "meta_type":"type-value",
+    "meta_description":"Dense-grid info, number of G vectors",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_diagonalization_algorithm",
+    "meta_type":"type-value",
+    "meta_description":"Algorithm used in subspace diagonalization",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_dispersion_correction",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Calculation includes semi-empirical DFT-D dispersion ",
+      "correction"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_dispersion_correction_c6",
+    "meta_type":"type-value",
+    "meta_description":"DFT-D species C6 coefficient",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_dispersion_correction_vdw_radius",
+    "meta_type":"type-value",
+    "meta_description":"DFT-D species vdW radius",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_dispersion_force_total",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_eigenvalues_number_of_planewaves",
+    "meta_type":"type-value",
+    "meta_description":"Number of plane waves for each k-point",
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+    }]
+  },{
+    "meta_name":"x_qe_energy_decomposition_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total energy decomposition: contribution ",
+      "name"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_energy_components"
+    }]
+  },{
+    "meta_name":"x_qe_energy_decomposition_value",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total energy decomposition: contribution ",
+      "value"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_energy_components"
+    }]
+  },{
+    "meta_name":"x_qe_energy_exchange_average_fock_potential",
+    "meta_type":"type-value",
+    "meta_description":"Averaged Fock potential",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_exchange_error_estimate",
+    "meta_type":"type-value",
+    "meta_description":"Estimated error on exchange",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_fock",
+    "meta_type":"type-value",
+    "meta_description":"Fock energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_total_accuracy_estimate",
+    "meta_type":"type-value",
+    "meta_description":"Accuracy estimate of total energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_total_accuracy_estimate_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Accuracy estimate of total energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_total_harris_foulkes_estimate",
+    "meta_type":"type-value",
+    "meta_description":"Harris-Foulkes estimate of total energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_total_harris_foulkes_estimate_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Harris-Foulkes estimate of total energy",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_energy_total_paw_all_electron",
+    "meta_type":"type-value",
+    "meta_description":"All-electron total energy from PAW",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_exact_exchange_fraction",
+    "meta_type":"type-value",
+    "meta_description":"Fraction of exact-exchange in EXX-refinement",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_extrapolation_charge",
+    "meta_type":"type-value",
+    "meta_description":"Charge extrapolation scheme (MD, (vc-)relax)",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_exx_grid_same_as_k_grid",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Exact-exchange k+q grid is the same as k grid ",
+      "(flag)"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_exx_refine",
+    "meta_type":"type-value",
+    "meta_description":"Flag: Exact-exchange refinement is active",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_exx_self_consistency",
+    "meta_type":"type-value",
+    "meta_description":"Exact-exchange has been reached (flag)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_fock_operator_cutoff",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Cutoff for defining the direct-space grid used to compute Fock exchange in ",
+      "EXX"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_force_total",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_force_total_scf_correction",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_gamma_algorithms",
+    "meta_type":"type-value",
+    "meta_description":"Usage of gamma-only optimized algorithms",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_ibrav",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Bravais lattice index, constant during a ",
+      "run"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_input_filename",
+    "meta_type":"type-value",
+    "meta_description":"Filename input was read from",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_input_occupations",
+    "meta_type":"type-value",
+    "meta_description":"User-specified band occupations",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"number_of_k_points"
+    },{
+      "meta_dimension_symbolic":"number_of_eigen_values"
+    }]
+  },{
+    "meta_name":"x_qe_input_positions_cell_dirname",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Directory where initial atom_positions and simulation_cell were read ",
+      "from"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_input_potential_recalculated_file",
+    "meta_type":"type-value",
+    "meta_description":[
+      "File that was used to recalculate initial ",
+      "potential"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_isolated_system_method",
+    "meta_type":"type-value",
+    "meta_description":"Method used if system is assumed to be isolated",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_isolated_system_method_martyna_tuckerman_alpha",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Isolated system with Martyna-Tuckerman method, parameter ",
+      "alpha"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_isolated_system_method_martyna_tuckerman_beta",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Isolated system with Martyna-Tuckerman method, parameter ",
+      "beta"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iter_mpersite_charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "iteration per-site magnetization data, atom ",
+      "charge"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_qe_iter_mpersite_constr",
+    "meta_type":"type-value",
+    "meta_description":"iteration per-site magnetization data, constraints",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_qe_iter_mpersite_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "iteration per-site magnetization data, atom ",
+      "index"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_qe_iter_mpersite_magn",
+    "meta_type":"type-value",
+    "meta_description":[
+      "iteration per-site magnetization data, atom ",
+      "magnetization"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_qe_iteration_beta",
+    "meta_type":"type-value",
+    "meta_description":"Mixing parameter Beta during iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_charge_negative_down",
+    "meta_type":"type-value",
+    "meta_description":"Charge in iteration (down)",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_charge_negative_up",
+    "meta_type":"type-value",
+    "meta_description":"Charge in iteration (up)",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_ecutwfc",
+    "meta_type":"type-value",
+    "meta_description":"PW cutoff used during iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_efield_dipole_electronic",
+    "meta_type":"type-value",
+    "meta_description":"E-field: Electronic dipole, in iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_efield_dipole_ionic",
+    "meta_type":"type-value",
+    "meta_description":"E-field: Ionic dipole, in iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_efield_eeigx_im",
+    "meta_type":"type-value",
+    "meta_description":[
+      "E-field: expectation value of exp(iGx), imaginary part, in ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_efield_eeigx_re",
+    "meta_type":"type-value",
+    "meta_description":[
+      "E-field: expectation value of exp(iGx), real part, in ",
+      "iteration"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_iteration_number",
+    "meta_type":"type-value",
+    "meta_description":"Iteration number",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_k_info_ik",
+    "meta_type":"type-value",
+    "meta_description":"K-point info, k-index",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_nk"
+    }]
+  },{
+    "meta_name":"x_qe_k_info_vec",
+    "meta_type":"type-value",
+    "meta_description":"K-point info, cartesian coordinate",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_nk"
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_qe_k_info_wk",
+    "meta_type":"type-value",
+    "meta_description":"K-point info, weight",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_nk"
+    }]
+  },{
+    "meta_name":"x_qe_kind_mass",
+    "meta_type":"type-value",
+    "meta_description":"Atomic mass of species",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_lmaxx",
+    "meta_type":"type-value",
+    "meta_description":"Maximum non local angular momentum (Pseudopotential)",
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_magnetization_absolute",
+    "meta_type":"type-value",
+    "meta_description":"Absolute per-cell magnetization",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_magnetization_absolute_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Absolute per-cell magnetization in iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_magnetization_total",
+    "meta_type":"type-value",
+    "meta_description":"Total per-cell magnetization",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_magnetization_total_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Total per-cell magnetization in iteration",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_md_cell_mass",
+    "meta_type":"type-value",
+    "meta_description":"Mass of cell in MD/relax calculation",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_md_max_steps",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Maximum number of ionic+electronic steps in dynamics (MD/relax) ",
+      "calculation"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nbrx",
+    "meta_type":"type-value",
+    "meta_description":"Maximum number of beta functions (Pseudopotential)",
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nchix",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Maximum number of atomic wavefunctions per ",
+      "Pseudopotential"],
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_ndmx",
+    "meta_type":"type-value",
+    "meta_description":"Maximum dimension of radial grid (Pseudopotential)",
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nk",
+    "meta_type":"type-value",
+    "meta_description":"K-point info, number of k-points",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_npk",
+    "meta_type":"type-value",
+    "meta_description":"Maximum number of k-points",
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_npool",
+    "meta_type":"type-value",
+    "meta_description":"Number of K-Point pools",
+    "meta_parent_section":"x_qe_section_parallel",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nproc",
+    "meta_type":"type-value",
+    "meta_description":"Number of MPI ranks",
+    "meta_parent_section":"x_qe_section_parallel",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nqfx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Maximum number of coefficients in Q smoothing ",
+      "(Pseudopotential)"],
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nsymm",
+    "meta_type":"type-value",
+    "meta_description":"Number of detected symmetry operations",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nsymm_ignored",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of ignored symmetry operations, due to uncommensurable fractional ",
+      "translations"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nsymm_with_fractional_translation",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of detected symmetry operations including fractional ",
+      "translations"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_nthreads",
+    "meta_type":"type-value",
+    "meta_description":"Number of OpenMP threads",
+    "meta_parent_section":"x_qe_section_parallel",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_ntypx",
+    "meta_type":"type-value",
+    "meta_description":"Maximum number of different atom species",
+    "meta_parent_section":"x_qe_section_compile_options",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_number_of_species",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of Atom species, a.k.a. unique Atom labels; a label may include ",
+      "symmetry-breaking suffices, e.g. 'Fe1' and 'Fe2', as some quantities can only ",
+      "prescribed per species and not per site"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_number_of_states",
+    "meta_type":"type-value",
+    "meta_description":"Number of Kohn-Sham states/bands",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_output_datafile",
+    "meta_type":"type-value",
+    "meta_description":"Output datafile",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_per_process_mem",
+    "meta_type":"type-value",
+    "meta_description":"Per-process dynamical memory",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_potential_convergence_threshold",
+    "meta_type":"type-value",
+    "meta_description":"Convergence threshold for potentials",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_potential_mixing_beta",
+    "meta_type":"type-value",
+    "meta_description":"Mixing scheme: parameter beta",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_potential_mixing_iterations",
+    "meta_type":"type-value",
+    "meta_description":"Mixing scheme: number of previous iterations",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_potential_mixing_scheme",
+    "meta_type":"type-value",
+    "meta_description":"Mixing scheme: type of mixing",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_pp_augmentation_shape",
+    "meta_type":"type-value",
+    "meta_description":"Shape of augmentation charge",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_comment",
+    "meta_type":"type-value",
+    "meta_description":"Comment about pseudopotential",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_filename",
+    "meta_type":"type-value",
+    "meta_description":"Filename of pseudopotential",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_idx",
+    "meta_type":"type-value",
+    "meta_description":"Index of Pseudopotential on Espresso side",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_integral_lmax_exact",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Maximum l for which integration is exact ",
+      "(PAW)"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_integral_ndirections",
+    "meta_type":"type-value",
+    "meta_description":"Number of integration directions (PAW)",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_l",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Beta function l in pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_l_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Beta function l index in pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_label",
+    "meta_type":"type-value",
+    "meta_description":"Label of Pseudopotential on Espresso side",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_md5sum",
+    "meta_type":"type-value",
+    "meta_description":"MD5 checksum of pseudopotential file",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_nbeta",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of beta functions in pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_ncoefficients",
+    "meta_type":"type-value",
+    "meta_description":"Number of coefficients in pseudopotential",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_ndmx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Radial grid of Pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_renormalized_wfc",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: renormalized WFCs in pseudopotential",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_report_contents",
+    "meta_type":"type-value",
+    "meta_description":"Pseudopotential report: contents of PP report",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_report_version",
+    "meta_type":"type-value",
+    "meta_description":"Pseudopotential report: version of PP",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Type of pseudopotential, e.g. 'Norm-conserving' or ",
+      "'Ultrasoft'"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_valence",
+    "meta_type":"type-value",
+    "meta_description":"Number of Valence electrons in pseudopotential",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pp_weight",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_pressure",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_profile_caller",
+    "meta_type":"type-value",
+    "meta_description":"QE profiling: caller name",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_profiling_entries"
+    }]
+  },{
+    "meta_name":"x_qe_profile_category",
+    "meta_type":"type-value",
+    "meta_description":"QE profiling: category",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_profiling_entries"
+    }]
+  },{
+    "meta_name":"x_qe_profile_cputime",
+    "meta_type":"type-value",
+    "meta_description":"QE profiling: cputime spent in function",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_profiling_entries"
+    }]
+  },{
+    "meta_name":"x_qe_profile_function",
+    "meta_type":"type-value",
+    "meta_description":"QE profiling: function name",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_profiling_entries"
+    }]
+  },{
+    "meta_name":"x_qe_profile_ncalls",
+    "meta_type":"type-value",
+    "meta_description":"QE profiling: how often was function called",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_profiling_entries"
+    }]
+  },{
+    "meta_name":"x_qe_profile_walltime",
+    "meta_type":"type-value",
+    "meta_description":"QE profiling: wallclock time spent in function",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_profiling_entries"
+    }]
+  },{
+    "meta_name":"x_qe_program_name",
+    "meta_type":"type-value",
+    "meta_description":"Name of program from Quantum Espresso suite",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_reciprocal_cell",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reciprocal Lattice vectors (in Cartesian coordinates). The first index runs ",
+      "over the $x,y,z$ Cartesian coordinates, and the second index runs over the 3 ",
+      "lattice vectors."],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":"1/m"
+  },{
+    "meta_name":"x_qe_rinner",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Inner Radii of pseudopotential",
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_scf_diagonalization_algorithm",
+    "meta_type":"type-value",
+    "meta_description":"Diagonalization algorithm",
+    "meta_parent_section":"x_qe_section_scf_diagonalization",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_scf_diagonalization_c_bands_n_unconverged_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of uncoverged eigenvalues (Warning from function ",
+      "c_bands)"],
+    "meta_parent_section":"x_qe_section_scf_diagonalization",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_scf_diagonalization_ethr",
+    "meta_type":"type-value",
+    "meta_description":"Convergence Threshold in scf diagonalization",
+    "meta_parent_section":"x_qe_section_scf_diagonalization",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_scf_diagonalization_iteration_avg",
+    "meta_type":"type-value",
+    "meta_description":"Average of iterations in scf diagonalization",
+    "meta_parent_section":"x_qe_section_scf_diagonalization",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_scf_diagonalization_warn_n_unconverged_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":"Number of uncoverged eigenvalues (Warning)",
+    "meta_parent_section":"x_qe_section_scf_diagonalization",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_section_bands_diagonalization",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for diagonalization info in QE band structure ",
+      "calculation"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_section_compile_options",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for compile-time options of Quantum ",
+      "Espresso"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_section_parallel",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for run-time parallization options of Quantum ",
+      "Espresso"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_section_scf_diagonalization",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for diagonalization info in QE scf ",
+      "iterations"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_smearing_kind",
+    "meta_type":"type-value",
+    "meta_description":[
+      "K-point info, QE string represenation of smearing ",
+      "technique"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_smearing_ngauss",
+    "meta_type":"type-value",
+    "meta_description":[
+      "K-point info, QE number represenation of smearing ",
+      "technique"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_smooth_fft_grid",
+    "meta_type":"type-value",
+    "meta_description":"Smooth-grid info, FFT grid",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_qe_smooth_g_cutoff",
+    "meta_type":"type-value",
+    "meta_description":"Smooth-grid info, G cutoff",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_smooth_g_vectors",
+    "meta_type":"type-value",
+    "meta_description":"Smooth-grid info, number of G vectors",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_species_integration_radius",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Radius used to integrate charge/magnetization over (per ",
+      "species)"],
+    "meta_parent_section":"section_method_atom_kind",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_spin_noncollinear",
+    "meta_type":"type-value",
+    "meta_description":"Noncollinear spin mode",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_spin_orbit",
+    "meta_type":"type-value",
+    "meta_description":"Spin-orbit coupling flag: with/without spin-orbit",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_starting_charge",
+    "meta_type":"type-value",
+    "meta_description":"Starting charge",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_starting_charge_negative",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Starting charge (warning about negative starting ",
+      "charge)"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_starting_charge_negative_down",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Starting charge down (warning about negative starting ",
+      "charge)"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_starting_charge_negative_up",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Starting charge up (warning about negative starting ",
+      "charge)"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_starting_charge_renormalized",
+    "meta_type":"type-value",
+    "meta_description":"Starting charge, renormalized",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_starting_density_file",
+    "meta_type":"type-value",
+    "meta_description":"Starting density from file",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_starting_potential",
+    "meta_type":"type-value",
+    "meta_description":"Starting potential",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_starting_wfc",
+    "meta_type":"type-value",
+    "meta_description":"Starting Wave functions",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_sticks_old",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_sticks_sum_dense",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_sum_g_dense",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_sum_g_pw",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_sum_g_smooth",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_sum_pw",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_sum_smooth",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_tot_dense",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_tot_pw",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_sticks_tot_smooth",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_stress_unimplemented",
+    "meta_type":"type-value",
+    "meta_description":"Reason why stress tensor is not implemented",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_supercell",
+    "meta_type":"type-value",
+    "meta_description":"Supercell flag",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"boolean",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_symm_inversion",
+    "meta_type":"type-value",
+    "meta_description":"Inversion symmetry",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_allocated_array_dimensions",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: allocated arrays, dimensions",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_allocated_array_name",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: allocated arrays, name",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_allocated_array_size",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: allocated arrays, size",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_atom_idx",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Index of atom on Espresso side",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_atom_labels",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Label of atom on Espresso side",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_atpos_units",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Units for atom position",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_atpos_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for atom position, x-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_atpos_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for atom position, y-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_atpos_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for atom position, z-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_bands_diagonalization_algorithm",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Diagonalization algorithm",
+    "meta_parent_section":"x_qe_section_bands_diagonalization",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_celldm",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for QE cell dimensions",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_dense_fft_grid_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Dense-grid info, FFT grid x",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_dense_fft_grid_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Dense-grid info, FFT grid y",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_dense_fft_grid_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Dense-grid info, FFT grid z",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_dispersion_force_atom_idx",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_dispersion_force_x",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_dispersion_force_y",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_dispersion_force_z",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_energy_decomposition_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Total energy decomposition: contribution ",
+      "name"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_energy_decomposition_value",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Total energy decomposition: contribution ",
+      "value"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_energy_reference_fermi",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Fermi Energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_energy_reference_fermi_down",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Fermi Energy (spin down)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_energy_reference_fermi_up",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Fermi Energy (spin up)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_energy_reference_highest_occupied",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Energy of highest occupied state",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_energy_reference_lowest_unoccupied",
+    "meta_type":"type-value",
+    "meta_description":"Energy of lowest unoccupied state",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_exact_exchange_fraction",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: store fraction of exact-exchange before defining ",
+      "section_xc_functionals"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_force_atom_idx",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_force_x",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_force_y",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_force_z",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_input_occupations",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: User-specified band occupations",
+    "meta_parent_section":"x_qe_t_section_input_occupations",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_input_occupations_spin",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: User-specified band occupations, spin ",
+      "channel"],
+    "meta_parent_section":"x_qe_t_section_input_occupations",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_iter_mpersite_charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: iteration per-site magnetization data, atom ",
+      "charge"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_iter_mpersite_constr",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: iteration per-site magnetization data, ",
+      "constraints"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_iter_mpersite_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: iteration per-site magnetization data, atom ",
+      "index"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_iter_mpersite_magn",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: iteration per-site magnetization data, atom ",
+      "magnetization"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_info_ik",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point info, k-index",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_k_info_vec_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point info, x-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_info_vec_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point info, y-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_info_vec_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point info, z-component",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_info_wk",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point info, weight",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_point_energies",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: k-point band energies",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_k_pw",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: number of plane waves for this ",
+      "k-point"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_k_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point, x-component",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point, y-component",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_k_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for k-point, z-component",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_atom_free_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom fixed flag (MD, (vc-)relax), ",
+      "x-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_md_atom_free_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom fixed flag (MD, (vc-)relax), ",
+      "y-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_md_atom_free_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom fixed flag (MD, (vc-)relax), ",
+      "z-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_md_atom_labels",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom positions (MD, (vc-)relax), atom ",
+      "labels"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_atom_mass_label",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for MD setup, atom mass, ",
+      "labels"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_atom_mass_value",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for MD setup, atom mass, ",
+      "value"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_atom_positions_units",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom positions (MD, (vc-)relax), ",
+      "units"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_atom_positions_units_vcsmd",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom positions (MD, (vc-)relax via VCSMD), ",
+      "units"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_atom_positions_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom positions (MD, (vc-)relax), ",
+      "x-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_atom_positions_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom positions (MD, (vc-)relax), ",
+      "y-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_atom_positions_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new atom positions (MD, (vc-)relax), ",
+      "z-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_case",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for BFGS case, energy comparison ",
+      "(relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_conv_thr_new",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new electronic convergence threshold ",
+      "(relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_converged",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for 'converged' flag ((vc-)relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_converged_criteria",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for converged criteria ",
+      "((vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_energy_new",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for 'new' energy (relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_energy_old",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for 'old' energy (relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_enthalpy_new",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for 'new' enthalpy (relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_enthalpy_old",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for 'old' enthalpy (relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_final_energy",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for final energy ((vc-)relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_final_enthalpy",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for final enthalpy ((vc-)relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_reset",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for BFGS history reset reason ",
+      "(relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_scf_cycles",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for number of scf cycles ",
+      "(relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_steps",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for number of steps (relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_md_bfgs_trust_new",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for new trust radius (relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_core_charge_imaginary",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD: QE check: imaginary core charge",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_core_charge_negative",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD: QE check: negative core charge",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_diffusion_atomidx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for diffusion coeffients (MD), atom ",
+      "index"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_md_diffusion_coefficient",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for diffusion coeffients (MD), atom ",
+      "coeffient"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_diffusion_coefficient_mean",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for diffusion coeffients (MD), mean ",
+      "coeffient"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_ekin_etot",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for MD, sum of energies",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_end",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for end-of-md flag (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_md_extrapolation_charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for charge extrapolation scheme (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_extrapolation_wfc",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for wave function extrapolation scheme (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_isolated_system_method_martyna_tuckerman_alpha",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary MD: Isolated system with Martyna-Tuckerman method, parameter ",
+      "alpha"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_isolated_system_method_martyna_tuckerman_beta",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary MD: Isolated system with Martyna-Tuckerman method, parameter ",
+      "beta"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_iteration",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: MD step: iteration number",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_md_k_info_ik",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD storage for k-point info, k-index",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_md_k_info_vec_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD storage for k-point info, x-component",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_k_info_vec_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD storage for k-point info, y-component",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_k_info_vec_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD storage for k-point info, z-component",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_k_info_wk",
+    "meta_type":"type-value",
+    "meta_description":"Temporary MD storage for k-point info, weight",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for MD, kinetic energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_linear_momentum_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for linear momentum (MD, (vc-)relax), ",
+      "x-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_linear_momentum_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for linear momentum (MD, (vc-)relax), ",
+      "y-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_linear_momentum_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for linear momentum (MD, (vc-)relax), ",
+      "z-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_max_steps_reached",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for max_steps-reached flag (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_t_md_new_volume",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for new cell volume ((vc-)relax)",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_starting_charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for extrapolated starting charge (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_starting_charge_negative_new",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new negative starting charge (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_starting_charge_negative_new_down",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new negative starting charge (MD, (vc-)relax), spin ",
+      "down"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_starting_charge_negative_new_up",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new negative starting charge (MD, (vc-)relax), spin ",
+      "up"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_starting_charge_negative_old",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for old negative starting charge (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_starting_charge_renormalized",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for extrapolated starting charge, renormalized (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_temperature",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for MD, temperature",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_time",
+    "meta_type":"type-value",
+    "meta_description":"MD step: time",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_timestep_size",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for MD setup, timestep ",
+      "size"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_total_energy",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for MD, total energy",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_vec_a_alat",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new direct lattice vectors (vc-relax), lattice parameter ",
+      "a"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_vec_a_units",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new direct lattice vectors (vc-relax), ",
+      "units"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_md_vec_a_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new direct lattice vectors (vc-relax), ",
+      "x-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_vec_a_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new direct lattice vectors (vc-relax), ",
+      "y-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_vec_a_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new direct lattice vectors (vc-relax), ",
+      "z-component"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_write_datafile_cputime",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for cpu time after write-datafile (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_md_write_datafile_mem_dynamical",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for dynamical memory after write-datafile (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_new_nat2_distance",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for new 2-atom distance (MD, ",
+      "(vc-)relax)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_number_of_electrons",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Number of electrons in system",
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_number_of_electrons_down",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Number of electrons in system (spin ",
+      "down)"],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_number_of_electrons_up",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Number of electrons in system (spin ",
+      "up)"],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_pp_augmentation_shape",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: shape of augmentation charge",
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_comment",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: comment about pseudopotential",
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_filename",
+    "meta_type":"type-value",
+    "meta_description":"Filename of pseudopotential",
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Index of Pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_integral_lmax_exact",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: maximum l for which integration is exact ",
+      "(PAW)"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_integral_ndirections",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: number of integration directions ",
+      "(PAW)"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_l",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: beta function l in pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_l_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: beta function l index in pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_label",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Label of Pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_md5sum",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: MD5 checksum of pseudopotential ",
+      "file"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_nbeta",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Number of beta functions in pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_ncoefficients",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Number of coefficients in pseudopotential",
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_ndmx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Radial grid of Pseudopotential on Espresso ",
+      "side"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"int",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_renormalized_filename",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: renormalized WFCs in pseudopotential: ",
+      "filename"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_renormalized_wfc",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: renormalized WFCs in pseudopotential",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_report_line",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: PP report: parsed line",
+    "meta_parent_section":"x_qe_t_section_pp_report",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_pp_report_species",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: PP report: species number",
+    "meta_parent_section":"x_qe_t_section_pp_report",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_pp_report_version",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: PP report: pp version",
+    "meta_parent_section":"x_qe_t_section_pp_report",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_pp_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Type of pseudopotential, e.g. 'Norm-conserving' or ",
+      "'Ultrasoft'"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_valence",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Number of Valence electrons in ",
+      "pseudopotential"],
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_pp_warning_filename",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: renormalized WFCs in pseudopotential: ",
+      "filename"],
+    "meta_parent_section":"x_qe_t_section_pp_warning",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_pp_warning_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: renormalized WFCs in pseudopotential: pp ",
+      "index"],
+    "meta_parent_section":"x_qe_t_section_pp_warning",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_pp_warning_wfcidx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: renormalized WFCs in pseudopotential: pseudo-wavefunction ",
+      "index"],
+    "meta_parent_section":"x_qe_t_section_pp_warning",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_pp_warning_wfclabel",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: renormalized WFCs in pseudopotential: pseudo-wavefunction ",
+      "label"],
+    "meta_parent_section":"x_qe_t_section_pp_warning",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_pp_warning_wfcnorm",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: renormalized WFCs in pseudopotential: pseudo-wavefunction original ",
+      "norm"],
+    "meta_parent_section":"x_qe_t_section_pp_warning",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_profile_caller",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: QE profiling: who was the caller",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_profile_caller_list",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: QE profiling: who was the caller (list for each ",
+      "function)"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_profile_category",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: QE profiling: category",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_profile_category_list",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: QE profiling: category (list for each ",
+      "function)"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_profile_cputime",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: QE profiling: cputime spent in ",
+      "function"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_profile_function",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: QE profiling: function name",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_profile_ncalls",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: QE profiling: how often was function ",
+      "called"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_profile_walltime",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: QE profiling: wallclock time spent in ",
+      "function"],
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_projected_velocity",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: MD step: projected velocity",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_relax_converged_steps",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary Relax: number of steps after which structure relaxation ",
+      "converged"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_relax_final_energy",
+    "meta_type":"type-value",
+    "meta_description":"Temporary Relax: final energy in relaxation",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_relax_threshold_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary Relax: convergence threshold on energy in ",
+      "relaxation"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_relax_threshold_force",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary Relax: convergence threshold on force components in ",
+      "relaxation"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_relax_threshold_pressure",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary Relax: convergence threshold on pressure in ",
+      "relaxation"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_rinner",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Inner Radii of pseudopotential",
+    "meta_parent_section":"x_qe_t_section_pseudopotential",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_scf_diagonalization_algorithm",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Diagonalization algorithm",
+    "meta_parent_section":"x_qe_section_scf_diagonalization",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_section_input_occupations",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Temporary: Section for User-specified band ",
+      "occupations"],
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_t_section_pp_report",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section to collect 'pseudopotential report' information in new QE, used only ",
+      "for 'old', non-UPF pseudopotentials"],
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_t_section_pp_warning",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section to collect 'pseudopotential warning' information in old ",
+      "QE"],
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_t_section_pseudopotential",
+    "meta_type":"type-section",
+    "meta_description":[
+      "pseudo-section for collecting pseudopotential data (atomic number lookup ",
+      "requires table printed later in output)"],
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_qe_t_smooth_fft_grid_x",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Smooth-grid info, FFT grid x",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_smooth_fft_grid_y",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Smooth-grid info, FFT grid y",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_smooth_fft_grid_z",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Smooth-grid info, FFT grid z",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_species_dispersion_correction_c6",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: DFT-D species C6 coefficient",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_species_dispersion_correction_label",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: DFT-D species label",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_species_dispersion_correction_vdw_radius",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: DFT-D species vdW radius",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_species_integration_radius",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: radius used to integrate charge/magnetization over (per ",
+      "species)"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_species_integration_radius_idx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: radius used to integrate charge/magnetization over (per species), ",
+      "species index"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_t_spin_channel",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for spin channel",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_spin_orbit_magn",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: spin-orbit msg: magnetic mode (non-)collinear / ",
+      "(non-)magnetic"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_spin_orbit_mode",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: spin-orbit msg: with/without spin-orbit",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_starting_magnetization_species",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Starting magnetic configuration: Species ",
+      "name"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_starting_magnetization_value",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary: Starting magnetic configuration: Species ",
+      "magnetization"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_stress_x",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_stress_y",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_stress_z",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_symm_inversion",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Inversion symmetry",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_temporary_array_dimensions",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: temporary arrays, dimensions",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_temporary_array_name",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: temporary arrays, name",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_temporary_array_size",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: temporary arrays, size",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_a_units",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "units"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_t_vec_a_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "x-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_a_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "y-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_a_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for direct lattice vectors, ",
+      "z-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_b_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for reciprocal lattice vectors, ",
+      "x-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_b_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for reciprocal lattice vectors, ",
+      "y-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_b_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for reciprocal lattice vectors, ",
+      "z-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_supercell_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for supercell translation vector in fractional coordinates, ",
+      "x-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_supercell_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for supercell translation vector in fractional coordinates, ",
+      "y-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_vec_supercell_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary storage for supercell translation vector in fractional coordinates, ",
+      "z-component"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_t_warning",
+    "meta_type":"type-value",
+    "meta_description":"Temporary: Warnings from Quantum Espresso",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_t_xc_functional_shortname_enforced",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Short name of User-enforced XC functional; overrides the setting implied by the ",
+      "pseudopotentials"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_temporary_array_dimensions",
+    "meta_type":"type-value",
+    "meta_description":"Temporary arrays, dimensions",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_temporary_arrays"
+    }]
+  },{
+    "meta_name":"x_qe_temporary_array_name",
+    "meta_type":"type-value",
+    "meta_description":"Temporary arrays, name",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_temporary_arrays"
+    }]
+  },{
+    "meta_name":"x_qe_temporary_array_size",
+    "meta_type":"type-value",
+    "meta_description":"Temporary arrays, size",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_temporary_arrays"
+    }]
+  },{
+    "meta_name":"x_qe_time_setup_cpu1_end",
+    "meta_type":"type-value",
+    "meta_description":"CPU time, setup up until first iteration",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_qe_vec_supercell",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Supercell translation vector(s) in fractional ",
+      "coordinates"],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_qe_number_of_supercell_translations"
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_qe_warning",
+    "meta_type":"type-value",
+    "meta_description":"Warnings from Quantum Espresso",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_qe_xc_comment",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso comment about meaning of XC functional ",
+      "component"],
+    "meta_parent_section":"section_xc_functionals",
+    "meta_abstract_types":[
+      "settings_xc_functional"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_functional_num",
+    "meta_type":"type-value",
+    "meta_description":"QE Index number representation of XC functional",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_functional_shortname",
+    "meta_type":"type-value",
+    "meta_description":"Short name of XC functional used in calculation",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_functional_user_enforced",
+    "meta_type":"type-value",
+    "meta_description":[
+      "True if the user enforced setting the XC functional; overrides the setting ",
+      "implied by the pseudopotentials"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_qe_xc_icorr",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso internal code-specific index of XC functional (density ",
+      "correlation component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_icorr_comment",
+    "meta_type":"type-value",
+    "meta_description":"Quantum Espresso comment about XC functional (density correlation component) ",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_icorr_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional (density correlation component) in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_iexch",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso internal code-specific index of XC functional (density ",
+      "exchange component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_iexch_comment",
+    "meta_type":"type-value",
+    "meta_description":"Quantum Espresso comment about XC functional (density exchange component) ",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_iexch_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional (density exchange component) in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_igcc",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso internal code-specific index of XC functional (gradient ",
+      "correlation component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_igcc_comment",
+    "meta_type":"type-value",
+    "meta_description":"Quantum Espresso comment about XC functional (gradient correlation component) ",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_igcc_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional (gradient correlation component) in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_igcx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso internal code-specific index of XC functional (gradient ",
+      "exchange component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_igcx_comment",
+    "meta_type":"type-value",
+    "meta_description":"Quantum Espresso comment about XC functional (gradient exchange component) ",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_igcx_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional (gradient exchange component) in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_imeta",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso internal code-specific index of XC functional (meta-gga ",
+      "component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_imeta_comment",
+    "meta_type":"type-value",
+    "meta_description":"Quantum Espresso comment about XC functional (meta-gga component) ",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_imeta_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional (meta-gga component) in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_index",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Index value within Quantum Espresso where XC functional component was set ",
+      "from"],
+    "meta_parent_section":"section_xc_functionals",
+    "meta_abstract_types":[
+      "settings_xc_functional"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_index_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of Index within Quantum Espresso where XC functional component was set ",
+      "from"],
+    "meta_parent_section":"section_xc_functionals",
+    "meta_abstract_types":[
+      "settings_xc_functional"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_inlc",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso internal code-specific index of XC functional (Van-der-Waals ",
+      "non-local component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_qe_xc_inlc_comment",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Quantum Espresso comment about XC functional (Van-der-Waals non-local ",
+      "component) "],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_inlc_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional (Van-der-Waals non-local component) in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_qe_xc_name",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Name of XC functional component in Quantum Espresso ",
+      "context"],
+    "meta_parent_section":"section_xc_functionals",
+    "meta_abstract_types":[
+      "settings_xc_functional"],
+    "meta_data_type":"string"
+  }]
+}

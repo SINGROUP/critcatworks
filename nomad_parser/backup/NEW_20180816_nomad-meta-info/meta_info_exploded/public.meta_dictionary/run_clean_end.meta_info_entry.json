@@ -1,0 +1,10 @@
+{
+  "meta_name":"run_clean_end",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Indicates whether this run terminated properly (true), or if it was killed or ",
+    "exited with an error code unequal to zero ",
+    "(false)."],
+  "meta_parent_section":"section_run",
+  "meta_data_type":"boolean"
+}

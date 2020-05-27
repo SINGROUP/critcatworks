@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.ml.krr &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.ml.krr</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">PyTask</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks.queue.queue_launcher</span> <span class="k">import</span> <span class="n">launch_rocket_to_queue</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.queue_adapters.common_adapter</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="k">import</span> <span class="n">KernelRidge</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">train_test_split</span>
+
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">update_machine_learning_collection</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">read_descmatrix</span><span class="p">,</span> <span class="n">write_descmatrix</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<div class="viewcode-block" id="MLTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.MLTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">MLTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Machine Learning Task. It predicts the property of all uncomputed structures</span>
+<span class="sd">    in the workflow. It is trained on all converged structures. Crossvalidation </span>
+<span class="sd">    is used to infer the optimal machine learning hyperparameters.</span>
+<span class="sd">    Currently, only KRR (kernel ridge regression) is implemented. </span>
+
+<span class="sd">    A new document is added to the machine_learning collection. </span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction :  Firework action, updates fw_spec, possibly defuses</span>
+<span class="sd">                    workflow upon failure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;MLTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;target_path&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="MLTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.MLTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;target_path&#39;</span><span class="p">]</span>
+
+        <span class="n">METHOD</span> <span class="o">=</span> <span class="s2">&quot;krr&quot;</span>
+        <span class="n">IS_PREDICT_FAILED</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">N_CV</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">time_str</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M&quot;</span><span class="p">)</span>
+        <span class="n">parent_folder_name</span> <span class="o">=</span> <span class="s1">&#39;ml_&#39;</span> <span class="o">+</span> <span class="n">METHOD</span> <span class="o">+</span> <span class="n">time_str</span>
+        <span class="n">parent_folder_path</span> <span class="o">=</span> <span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">parent_folder_name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_folder_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_folder_path</span><span class="p">)</span>
+
+
+        <span class="n">n_calcs_started</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_calcs_started&quot;</span><span class="p">]</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">is_converged_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;is_converged_list&quot;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;bool&#39;</span><span class="p">)</span>
+        <span class="n">property_lst</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;property&quot;</span><span class="p">]</span>
+        <span class="n">descmatrix</span> <span class="o">=</span> <span class="n">read_descmatrix</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+        <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;workflow&quot;</span><span class="p">][</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+        <span class="n">workflow_parameters</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;workflow&quot;</span><span class="p">][</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span>
+
+        <span class="n">enumerated_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">))</span>
+
+        <span class="c1">### PREPARE, CHECK ###</span>
+        <span class="n">is_converged_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)[</span><span class="n">is_converged_list</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">,</span> <span class="n">calc_ids</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;is_converged_list&quot;</span><span class="p">,</span> <span class="n">is_converged_list</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;is_converged_ids&quot;</span><span class="p">,</span> <span class="n">is_converged_ids</span><span class="p">)</span>
+
+        <span class="n">finished_calc_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)[:</span><span class="n">n_calcs_started</span><span class="p">]</span>
+        <span class="n">simulation_ids_training</span><span class="p">,</span> <span class="n">_</span> <span class="p">,</span> <span class="n">training_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">finished_calc_ids</span><span class="p">,</span> <span class="n">is_converged_ids</span><span class="p">,</span> <span class="n">return_indices</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;training_ids&quot;</span><span class="p">,</span> <span class="n">training_ids</span><span class="p">)</span>
+
+        <span class="c1"># magic number due to n-fold CV</span>
+        <span class="k">if</span> <span class="n">training_ids</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">N_CV</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Exiting workflow Problem detected: &#39;</span> <span class="o">+</span> 
+                <span class="s1">&#39;Too few datapoints to learn from! Something might be wrong with your DFT calculations!&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">defuse_workflow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">IS_PREDICT_FAILED</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">simulation_ids_predict</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)[</span><span class="n">is_converged_list</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">to_predict_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">enumerated_ids</span><span class="p">)[</span><span class="n">is_converged_list</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">to_predict_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)[</span><span class="n">n_calcs_started</span><span class="p">:]</span>
+
+        
+        <span class="n">features</span> <span class="o">=</span> <span class="n">descmatrix</span><span class="p">[</span><span class="n">training_ids</span><span class="p">]</span>
+        <span class="n">to_predict_features</span> <span class="o">=</span> <span class="n">descmatrix</span><span class="p">[</span><span class="n">to_predict_ids</span><span class="p">]</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">property_lst</span><span class="p">)[</span><span class="n">training_ids</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;training_ids&quot;</span><span class="p">,</span> <span class="n">training_ids</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;to_predict_ids&quot;</span><span class="p">,</span> <span class="n">to_predict_ids</span><span class="p">)</span>
+        <span class="c1">### RUN ###</span>
+
+        <span class="k">if</span> <span class="n">METHOD</span> <span class="o">==</span> <span class="s2">&quot;krr&quot;</span><span class="p">:</span>
+            <span class="n">ml_results</span> <span class="o">=</span> <span class="n">ml_krr</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">training_ids</span><span class="p">,</span> 
+                <span class="n">to_predict_features</span><span class="p">,</span> <span class="n">to_predict_ids</span><span class="p">,</span> 
+                <span class="n">is_scaled</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">n_cv</span> <span class="o">=</span> <span class="n">N_CV</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">parent_folder_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Exiting workflow Problem detected: &#39;</span> <span class="o">+</span> 
+                <span class="s1">&#39;machine learning method  &#39;</span> <span class="o">+</span> <span class="n">METHOD</span> <span class="o">+</span> <span class="s1">&#39;  not implemented&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">defuse_workflow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1">### DATABASE ###</span>
+        <span class="c1"># update machine learning data</span>
+        <span class="c1"># translate to simulation ids</span>
+        
+        <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_train&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">simulation_ids_training</span><span class="p">[</span><span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_train&quot;</span><span class="p">]]</span>
+        <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_test&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">simulation_ids_training</span><span class="p">[</span><span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_test&quot;</span><span class="p">]]</span>
+        <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_predicted&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">simulation_ids_predict</span>
+
+        <span class="c1"># update external database</span>
+        <span class="n">dct</span> <span class="o">=</span> <span class="n">update_machine_learning_collection</span><span class="p">(</span><span class="n">METHOD</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span><span class="p">,</span> 
+            <span class="n">method_params</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;method_params&quot;</span><span class="p">],</span> 
+            <span class="n">descriptor</span> <span class="o">=</span> <span class="n">workflow_parameters</span><span class="p">[</span><span class="s2">&quot;descriptor&quot;</span><span class="p">],</span>
+            <span class="n">descriptor_params</span> <span class="o">=</span> <span class="n">workflow_parameters</span><span class="p">[</span><span class="s2">&quot;descriptor_params&quot;</span><span class="p">],</span>
+            <span class="n">training_set</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> 
+            <span class="n">validation_set</span> <span class="o">=</span> <span class="p">[],</span> 
+            <span class="n">test_set</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;ids_test&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> 
+            <span class="n">prediction_set</span> <span class="o">=</span> <span class="n">simulation_ids_predict</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">metrics_training</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;metrics_training&quot;</span><span class="p">],</span> 
+            <span class="n">metrics_validation</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;metrics_validation&quot;</span><span class="p">],</span>
+            <span class="n">metrics_test</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;metrics_test&quot;</span><span class="p">],</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">ml_results</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># update internal workflow data</span>
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">machine_learning_id</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">]</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;machine_learning&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">machine_learning_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dct</span>
+
+        <span class="c1"># update temp workflow data</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;last_machine_learning_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">machine_learning_id</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">update_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_mae"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.get_mae">[docs]</a><span class="k">def</span> <span class="nf">get_mae</span><span class="p">(</span><span class="n">target_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Creates Firework from MLTask. It predicts the property of all uncomputed structures</span>
+<span class="sd">    in the workflow. It is trained on all converged structures. Crossvalidation </span>
+<span class="sd">    is used to infer the optimal machine learning hyperparameters.</span>
+<span class="sd">    Currently, only KRR (kernel ridge regression) is implemented. </span>
+
+<span class="sd">    A new document is added to the machine_learning collection. </span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction :  Firework action, updates fw_spec, possibly defuses</span>
+<span class="sd">                    workflow upon failure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">MLTask</span><span class="p">(</span><span class="n">target_path</span><span class="o">=</span><span class="n">target_path</span><span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;MLTask&#39;</span><span class="p">},</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;MLWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+
+<div class="viewcode-block" id="ml_krr"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.ml_krr">[docs]</a><span class="k">def</span> <span class="nf">ml_krr</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">train_test_ids</span><span class="p">,</span> <span class="n">to_predict_features</span><span class="p">,</span> <span class="n">to_predict_ids</span><span class="p">,</span> 
+        <span class="n">alpha_list</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="n">gamma_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> 
+        <span class="n">kernel_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> 
+        <span class="n">sample_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">is_scaled</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">n_cv</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to estimate the generalization error (MAE, MSE). The hyperparameters alpha and gamma are</span>
+<span class="sd">    by default scanned on a logarithmic scale. The data set is split randomly into training and test set.</span>
+<span class="sd">    The ratio of the split is defined by sample_size.</span>
+<span class="sd">    The training set is used for cross validation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        features (2D ndarray) : descriptor input for the machine learning algorithm for training/testing</span>
+<span class="sd">        labels (1D ndarray) :   property labels for the machine learning algorithm for training/testing</span>
+<span class="sd">        train_test_ids (1D ndarray) :   pythonic ids (of features and labels) for training and</span>
+<span class="sd">                                        testing. </span>
+<span class="sd">        to_predict_features (1D ndarray) :  descriptor input for the machine learning algorithm </span>
+<span class="sd">                                            for prediction</span>
+<span class="sd">        to_predict_ids (1D ndarray) :   pythonic ids (of features and labels) ommited from training and</span>
+<span class="sd">                                        testing. </span>
+<span class="sd">        alpha_list (lsit) :     Regularization parameter. Defaults to np.logspace(-1, -9, 9)</span>
+<span class="sd">        gamma_list (list) :     Kernel function scaling parameter. Defaults to np.logspace(-1, -9, 9)</span>
+<span class="sd">        kernel_list (list) :    List of kernel functions (see sklearn documentation for options).</span>
+<span class="sd">                                Defaults to [&#39;rbf&#39;]</span>
+<span class="sd">        sample_size (float) : The ratio of the training-test split is defined by this. Defaults to 0.8</span>
+<span class="sd">        is_scaled (bool) : If set to True, the features are scaled. Defaults to False</span>
+<span class="sd">        n_cv (int) :    Number of cross-validation splits. Defaults to 5</span>
+<span class="sd">        path (str) :    path whereto to write the machine learning output. Defaults to the</span>
+<span class="sd">                        current working directory</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict :  machine learning results with the following keys:</span>
+<span class="sd">                ids_train, ids_test, ids_predicted, method_params, </span>
+<span class="sd">                output (.label_predicted, .label_train, .label_test),</span>
+<span class="sd">                metrics_test, metrics_validation, metrics_training</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># load, split and scale data</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ids_train</span><span class="p">,</span> <span class="n">ids_test</span> <span class="o">=</span> <span class="n">split_scale_data</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">train_test_ids</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">is_scaled</span><span class="p">)</span>
+
+    <span class="c1"># Create kernel linear ridge regression object</span>
+    <span class="n">learner</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KernelRidge</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">),</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">n_cv</span><span class="p">,</span>
+                <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">alpha_list</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">gamma_list</span><span class="p">,</span> 
+                <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">kernel_list</span><span class="p">},</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">t_ml0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">t_ml1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ml time&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">t_ml1</span> <span class="o">-</span> <span class="n">t_ml0</span><span class="p">))</span>
+
+    <span class="c1"># getting best parameters</span>
+    <span class="n">learner_best</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+    <span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">train_y_pred</span><span class="p">,</span> <span class="n">learner_best</span> <span class="o">=</span> <span class="n">predict_and_error</span><span class="p">(</span><span class="n">learner_best</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+    <span class="c1"># predict remaining datapoints</span>
+    <span class="n">y_to_predict</span> <span class="o">=</span> <span class="n">learner_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">to_predict_features</span><span class="p">)</span>
+
+    <span class="c1">### OUTPUT ###</span>
+    <span class="n">write_output</span><span class="p">(</span><span class="n">learner</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="s2">&quot;krr&quot;</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="s2">&quot;param&quot;</span><span class="p">,</span> 
+        <span class="n">ids_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> 
+        <span class="n">ids_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">train_y_pred</span><span class="p">,</span>
+        <span class="n">to_predict_ids</span><span class="p">,</span> <span class="n">y_to_predict</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">ml_results</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;ids_train&quot;</span> <span class="p">:</span> <span class="n">ids_train</span><span class="p">,</span>
+        <span class="s2">&quot;ids_test&quot;</span> <span class="p">:</span> <span class="n">ids_test</span><span class="p">,</span>
+        <span class="s2">&quot;ids_predicted&quot;</span> <span class="p">:</span> <span class="n">to_predict_ids</span><span class="p">,</span>
+        <span class="s2">&quot;method_params&quot;</span> <span class="p">:</span> <span class="n">learner</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span>
+        <span class="s2">&quot;output&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;label_predicted&quot;</span> <span class="p">:</span> <span class="n">y_to_predict</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;label_train&quot;</span> <span class="p">:</span> <span class="n">train_y_pred</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;label_test&quot;</span> <span class="p">:</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">tolist</span><span class="p">()},</span>
+        <span class="s2">&quot;metrics_test&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mae&quot;</span> <span class="p">:</span> <span class="n">mae</span><span class="p">,</span> <span class="s2">&quot;mse&quot;</span> <span class="p">:</span> <span class="n">mse</span><span class="p">},</span>
+        <span class="s2">&quot;metrics_validation&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mae&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">][</span><span class="n">learner</span><span class="o">.</span><span class="n">best_index_</span><span class="p">],</span>
+            <span class="s2">&quot;std&quot;</span> <span class="p">:</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;std_test_score&#39;</span><span class="p">][</span><span class="n">learner</span><span class="o">.</span><span class="n">best_index_</span><span class="p">]},</span>
+        <span class="s2">&quot;metrics_training&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mae&quot;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_train_score&#39;</span><span class="p">][</span><span class="n">learner</span><span class="o">.</span><span class="n">best_index_</span><span class="p">],</span>
+            <span class="s2">&quot;std&quot;</span> <span class="p">:</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;std_train_score&#39;</span><span class="p">][</span><span class="n">learner</span><span class="o">.</span><span class="n">best_index_</span><span class="p">]},</span>
+        <span class="p">}</span>
+
+
+    <span class="k">return</span> <span class="n">ml_results</span></div>
+
+<div class="viewcode-block" id="scale_data"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.scale_data">[docs]</a><span class="k">def</span> <span class="nf">scale_data</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">is_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to the scale the data with respect</span>
+<span class="sd">    to the mean.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x_train (2D ndarray) : training data which is scaled</span>
+<span class="sd">        x_test (2D ndarray) : test data scaled accordingly</span>
+<span class="sd">        is_mean (bool) :    if set to False, scaled between 0 and 1.</span>
+<span class="sd">                            Otherwise, scaled centered around the mean of x_train.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple : the scaled arrays x_train, x_test</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Scale</span>
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_mean</span><span class="o">=</span><span class="n">is_mean</span><span class="p">)</span>  
+        <span class="c1"># fit only on training data</span>
+    <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>  
+    <span class="n">x_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>  
+        <span class="c1"># apply same transformation to test data</span>
+    <span class="n">x_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>  
+    <span class="k">return</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span></div>
+
+<div class="viewcode-block" id="split_scale_data"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.split_scale_data">[docs]</a><span class="k">def</span> <span class="nf">split_scale_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">ids_data</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">is_scaled</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to split and scale the data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x_data (2D ndarray) : features of the training and test data</span>
+<span class="sd">        y_data (1D ndarray) : labels of the training and test data</span>
+<span class="sd">        ids_data (1D ndarray) : complete list of ids of datapoints used for training and testing</span>
+<span class="sd">        sample_size (float) : The ratio of the training-test split is defined by this</span>
+<span class="sd">        is_scaled (bool) : True scales the features centered around the mean</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple : ndarrays    x_train, x_test (split from x_data) </span>
+<span class="sd">                            y_train, y_test (split from y_data)</span>
+<span class="sd">                            ids_train, ids_test (split from ids_data)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ids_train</span><span class="p">,</span> <span class="n">ids_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">ids_data</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sample_size</span><span class="p">)</span>
+
+        <span class="c1"># scale</span>
+    <span class="k">if</span> <span class="n">is_scaled</span><span class="p">:</span>
+        <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">=</span> <span class="n">scale_data</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">is_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">ids_train</span><span class="p">,</span> <span class="n">ids_test</span></div>
+
+<div class="viewcode-block" id="predict_and_error"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.predict_and_error">[docs]</a><span class="k">def</span> <span class="nf">predict_and_error</span><span class="p">(</span><span class="n">learner</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to predict the property on a training and a test set.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        learner (sklearn.learner) : learner object with which the training set was fitted</span>
+<span class="sd">        x_test (2D ndarray) :   test data scaled accordingly</span>
+<span class="sd">        x_train (2D ndarray) :  training data which is scaled</span>
+<span class="sd">        y_test (1D ndarray) :   labels of the test data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple : mae, mse, y_pred, train_y_pred, learner</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+    <span class="c1"># run also on training set</span>
+    <span class="n">train_y_pred</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+    <span class="c1"># errors</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mae</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mae</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">train_y_pred</span><span class="p">,</span> <span class="n">learner</span></div>
+
+
+<div class="viewcode-block" id="write_output"><a class="viewcode-back" href="../../../src/doc/critcatworks.ml.html#critcatworks.ml.krr.write_output">[docs]</a><span class="k">def</span> <span class="nf">write_output</span><span class="p">(</span><span class="n">learner</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">,</span> <span class="n">ml_method</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">runtype</span><span class="p">,</span> 
+    <span class="n">ids_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">ids_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">train_y_pred</span><span class="p">,</span>
+    <span class="n">to_predict_ids</span><span class="p">,</span> <span class="n">y_to_predict</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to write the machine learning output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">### OUTPUT ###</span>
+    <span class="c1"># y_test vs y_predict</span>
+    <span class="n">y_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ids_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">])</span>
+    <span class="n">y_compare</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">y_tmp</span><span class="p">)</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ml_method</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">runtype</span> <span class="o">+</span> <span class="s2">&quot;_size&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.predictions&quot;</span><span class="p">,</span> <span class="n">y_compare</span><span class="p">,</span> 
+        <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;###ids_test   y_test    y_pred&quot;</span><span class="p">)</span>
+
+    <span class="c1"># also y_train vs. y_pred_train</span>
+    <span class="n">y_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ids_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">train_y_pred</span><span class="p">])</span>
+    <span class="n">y_compare</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">y_tmp</span><span class="p">)</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ml_method</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">runtype</span> <span class="o">+</span> <span class="s2">&quot;_size&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.trainset_predictions&quot;</span><span class="p">,</span> <span class="n">y_compare</span><span class="p">,</span> 
+        <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;###ids_train   y_train    train_y_pred&quot;</span><span class="p">)</span>
+
+    <span class="c1"># also to_predict_ids and y_to_predict</span>
+    <span class="n">y_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">to_predict_ids</span><span class="p">,</span> <span class="n">y_to_predict</span><span class="p">])</span>
+    <span class="n">y_compare</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">y_tmp</span><span class="p">)</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ml_method</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">runtype</span> <span class="o">+</span> <span class="s2">&quot;_size&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.remaining_predictions&quot;</span><span class="p">,</span> <span class="n">y_compare</span><span class="p">,</span> 
+        <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;###ids_remaining   y_pred_remaining&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ml_method</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">runtype</span> <span class="o">+</span> <span class="s2">&quot;_size&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.out&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;MAE &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mae</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;MSE &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">runtype</span> <span class="o">==</span> <span class="s2">&quot;param&quot;</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Best parameters of &quot;</span> <span class="o">+</span> <span class="n">ml_method</span> <span class="o">+</span> <span class="s2">&quot;: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Errors of best parameters: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Grid scores on validation set:&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">means</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">]</span>
+            <span class="n">stds</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;std_test_score&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">stds</span><span class="p">,</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]):</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0.4f</span><span class="s2"> (+/-</span><span class="si">%0.04f</span><span class="s2">) for </span><span class="si">%r</span><span class="s2">&quot;</span>
+                      <span class="o">%</span> <span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Grid scores on train set:&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>        
+            <span class="n">means</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_train_score&#39;</span><span class="p">]</span>
+            <span class="n">stds</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;std_train_score&#39;</span><span class="p">]</span>        
+            <span class="k">for</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">stds</span><span class="p">,</span> <span class="n">learner</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]):</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0.4f</span><span class="s2"> (+/-</span><span class="si">%0.04f</span><span class="s2">) for </span><span class="si">%r</span><span class="s2">&quot;</span>
+                      <span class="o">%</span> <span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

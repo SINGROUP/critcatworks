@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_basis_functions",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Stores the total number of basis functions in a section_basis_set ",
+    "section."],
+  "meta_parent_section":"section_basis_set"
+}

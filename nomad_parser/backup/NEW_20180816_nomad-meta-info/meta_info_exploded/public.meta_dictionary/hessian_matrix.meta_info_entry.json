@@ -1,0 +1,18 @@
+{
+  "meta_name":"hessian_matrix",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The matrix with the second derivative with respect to atom ",
+    "displacements."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_atoms"
+  },{
+    "meta_dimension_symbolic":"number_of_atoms"
+  },{
+    "meta_dimension_fixed":3
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

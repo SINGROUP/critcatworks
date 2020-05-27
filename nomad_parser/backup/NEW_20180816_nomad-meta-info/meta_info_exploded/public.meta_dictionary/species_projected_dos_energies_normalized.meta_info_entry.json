@@ -1,0 +1,17 @@
+{
+  "meta_name":"species_projected_dos_energies_normalized",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains the set of discrete energy values with respect to the top of the ",
+    "valence band for the species-projected density of states (DOS). It is derived ",
+    "from the species_projected_dos_energies species ",
+    "field."],
+  "meta_parent_section":"section_species_projected_dos",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_species_projected_dos_values"
+  }],
+  "meta_units":"J"
+}

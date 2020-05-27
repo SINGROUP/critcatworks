@@ -1,0 +1,1217 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"exciting",
+  "description":"meta info used by the exciting parser, all names are expected to start with exciting",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_exciting_atom_core_forces",
+    "description":"core correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "shape":["x_exciting_number_of_atoms",3]
+  },{
+    "name":"x_exciting_atom_core_forces_x",
+    "description":"x-component of the core correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_core_forces_y",
+    "description":"y-component of the core correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_core_forces_z",
+    "description":"z-component of the core correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_forces",
+    "description":"Forces acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":["x_exciting_number_of_atoms",3]
+  },{
+    "name":"x_exciting_atom_forces_x",
+    "description":"x-component of the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_forces_y",
+    "description":"y-component of the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_forces_z",
+    "description":"z-component of the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_hf_forces",
+    "description":"HF correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "shape":["x_exciting_number_of_atoms",3]
+  },{
+    "name":"x_exciting_atom_hf_forces_x",
+    "description":"x-component of the HF Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_hf_forces_y",
+    "description":"y-component of the HF Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_hf_forces_z",
+    "description":"z-component of the HF Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_ibs_forces",
+    "description":"IBS correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "shape":["x_exciting_number_of_atoms",3]
+  },{
+    "name":"x_exciting_atom_ibs_forces_x",
+    "description":"x-component of the IBS correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_ibs_forces_y",
+    "description":"y-component of the IBS correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_ibs_forces_z",
+    "description":"z-component of the IBS correction to the Force acting on the atoms.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_atom_label",
+    "description":"labels of atoms in geometry optimization",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_atom_number",
+    "description":"number to identify the atoms of a species in the geometry optimization",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_atom_position_format",
+    "description":"whether the atomic positions are given in cartesian or vector coordinates",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_band_energies",
+    "description":"$k$-dependent energies of the electronic band structure.",
+    "superNames":["x_exciting_section_bandstructure"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","x_exciting_band_number_of_kpoints","x_exciting_band_number_of_eigenvalues"]
+  },{
+    "name":"x_exciting_band_k_points",
+    "description":"Fractional coordinates of the k points (in the basis of the reciprocal-lattice vectors) for which the electronic energy are given.",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_band_number_of_kpoints"]
+  },{
+    "name":"x_exciting_band_number_of_eigenvalues",
+    "description":"number of eigenvalues per k-point",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_band_number_of_kpoints",
+    "description":"number of points along the kpoint path used for the bandstructure plot",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_band_number_of_vertices",
+    "description":"number of vertices along the kpoint path used for the bandstructure plot",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_band_structure_kind",
+    "description":"String to specify the kind of band structure (either electronic or vibrational).",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_band_value",
+    "description":"Bandstructure energy values",
+    "superNames":["x_exciting_section_bandstructure"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_band_vertex_coordinates",
+    "description":"coordinates of the vertices along the kpoint path used for the bandstructure plot",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_band_number_of_vertices",3]
+  },{
+    "name":"x_exciting_band_vertex_labels",
+    "description":"labels of the vertices along the kpoint path used for the bandstructure plot",
+    "superNames":["x_exciting_section_bandstructure"],
+    "dtypeStr":"C",
+    "shape":["x_exciting_band_number_of_vertices"]
+  },{
+    "name":"x_exciting_brillouin_zone_volume",
+    "description":"Brillouin zone volume",
+    "superNames":["section_system"],
+    "units":"m^-3",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_charge_convergence_scf_iteration",
+    "description":"exciting charge convergence",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_clathrates",
+    "description":"It indicates whether the system is a clathrate.",
+    "superNames":["section_system"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_clathrates_atom_coordinates",
+    "description":"Ordered list of the atoms coordinates in the clathrates.",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_exciting_clathrates_atom_labels",
+    "description":"Labels of the atoms in the clathrates.",
+    "superNames":["section_system"],
+    "dtypeStr":"C",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_exciting_core_charge",
+    "description":"Core charge",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_core_charge_initial",
+    "description":"Core charge",
+    "superNames":["section_system"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_core_charge_scf_iteration",
+    "description":"Core charge",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_core_electron_kinetic_energy",
+    "description":"Core-electron kinetic energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_core_electron_kinetic_energy_scf_iteration",
+    "description":"Core-electron kinetic energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_core_leakage",
+    "description":"Core leakage",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_core_leakage_scf_iteration",
+    "description":"Core leakage",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_correlation_energy",
+    "description":"Correlation energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_correlation_energy_scf_iteration",
+    "description":"Correlation energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_coulomb_energy",
+    "description":"Coulomb energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_coulomb_energy_scf_iteration",
+    "description":"Coulomb energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_coulomb_potential_energy",
+    "description":"Coulomb potential energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_coulomb_potential_energy_scf_iteration",
+    "description":"Coulomb potential energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_dos_energy",
+    "description":"energy value for a dos point",
+    "superNames":["x_exciting_section_dos","energy_value"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_dos_fermi",
+    "description":"DOS at Fermi energy",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_dos_fermi_scf_iteration",
+    "description":"DOS at Fermi energy",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"J^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_dos_value",
+    "description":"Density of states values",
+    "superNames":["x_exciting_section_dos"],
+    "units":"J^-1",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_dummy",
+    "description":"dummy metadata for debuging purposes",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_exciting_dummy2",
+    "description":"dummy metadata for debuging purposes",
+    "superNames":["section_run"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_effective_potential_convergence_scf_iteration",
+    "description":"exciting effective potential convergence",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_effective_potential_energy",
+    "description":"Effective potential energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_effective_potential_energy_scf_iteration",
+    "description":"Effective potential energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_electron_nuclear_energy",
+    "description":"Electron-nuclear energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_electron_nuclear_energy_scf_iteration",
+    "description":"Electron-nuclear energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_electronic_charge",
+    "description":"Electronic charge",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_electronic_structure_method",
+    "description":"String identifying the used electronic structure method. Allowed values are BSE and TDDFT. Temporary metadata to be canceled when BSE and TDDFT will be added to public metadata electronic_structure_method",
+    "superNames":["section_method","settings_xc"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_empty_states",
+    "description":"Number of empty states",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_energy_convergence_scf_iteration",
+    "description":"exciting energy convergence",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_exchange_energy",
+    "description":"Exchange energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_exchange_energy_scf_iteration",
+    "description":"Exchange energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_fermi_energy",
+    "description":"Fermi energy final",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_fermi_energy_fermi_surface",
+    "description":"Fermi energy for Fermi surface",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_fermi_energy_scf_iteration",
+    "description":"Fermi energy",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_force_convergence_scf_iteration",
+    "description":"exciting force convergence",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_gap",
+    "description":"Estimated fundamental gap",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_gap_scf_iteration",
+    "description":"Estimated fundamental gap",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_atom_forces_x",
+    "description":"x component of the force acting on the atom",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_forces_y",
+    "description":"y component of the force acting on the atom",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_forces_z",
+    "description":"z component of the force acting on the atom",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_labels",
+    "description":"labels of atom",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_number",
+    "description":"number to identify the atoms of a species",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_positions_x",
+    "description":"x component of atomic position",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_positions_y",
+    "description":"y component of atomic position",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_atom_positions_z",
+    "description":"z component of atomic position",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_geometry_dummy",
+    "description":"time for scf in geometry optimization",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_lattice_vector_x",
+    "description":"x component of lattice vector",
+    "superNames":["x_exciting_section_lattice_vectors"],
+    "units":"m",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_lattice_vector_y",
+    "description":"y component of lattice vector",
+    "superNames":["x_exciting_section_lattice_vectors"],
+    "units":"m",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_lattice_vector_z",
+    "description":"z component of lattice vector",
+    "superNames":["x_exciting_section_lattice_vectors"],
+    "units":"m",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_optimization_method",
+    "description":"Geometry optimization method",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_geometry_optimization_step",
+    "description":"Geometry optimization step",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_geometry_optimization_threshold_force",
+    "description":"Value of threshold for the force modulus as convergence criterion of the geometry_optimization_method used in exciting",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_reciprocal_lattice_vector_x",
+    "description":"x component of reciprocal lattice vector",
+    "superNames":["x_exciting_section_reciprocal_lattice_vectors"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_reciprocal_lattice_vector_y",
+    "description":"y component of reciprocal lattice vector",
+    "superNames":["x_exciting_section_reciprocal_lattice_vectors"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_geometry_reciprocal_lattice_vector_z",
+    "description":"z component of reciprocal lattice vector",
+    "superNames":["x_exciting_section_reciprocal_lattice_vectors"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_gkmax",
+    "description":"Maximum length of |G+k| for APW functions",
+    "superNames":["section_system"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_gmaxvr",
+    "description":"Maximum length of |G|",
+    "superNames":["section_system"],
+    "units":"m^-1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_grid_fermi_surface",
+    "description":"number of points in the mesh to calculate the Fermi surface",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "dtypeStr":"i",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_exciting_gvector_size_x",
+    "description":"G-vector grid size x",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_gvector_size_y",
+    "description":"G-vector grid size y",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_gvector_size_z",
+    "description":"G-vector grid size z",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_gvector_total",
+    "description":"G-vector total",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_hamiltonian_size",
+    "description":"Maximum Hamiltonian size",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_hartree_energy",
+    "description":"Hartree energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_hartree_energy_scf_iteration",
+    "description":"Hartree energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_ibs_force_convergence_scf_iteration",
+    "description":"exciting IBS force convergence",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_interstitial_charge",
+    "description":"Interstitial charge",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_interstitial_charge_scf_iteration",
+    "description":"Interstitial charge",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_kpoint_offset_x",
+    "description":"K-points offset x component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_kpoint_offset_y",
+    "description":"K-points offset y component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_kpoint_offset_z",
+    "description":"K-points offset z component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_lmaxapw",
+    "description":"Angular momentum cut-off for the APW functions",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_lo",
+    "description":"Total number of local-orbitals",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_madelung_energy",
+    "description":"Madelung energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_madelung_energy_scf_iteration",
+    "description":"Madelung energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_magnetic_field_format",
+    "description":"whether the magnetic field is given in cartesian or vector coordinates",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_maximum_force_magnitude",
+    "description":"Maximum force magnitude in geometry optimization",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"N",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_mt_external_magnetic_field_atom_number",
+    "description":"number to identify the atoms of a species on which a magnetic field is applied",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_mt_external_magnetic_field_x",
+    "description":"x component of the magnetic field",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_mt_external_magnetic_field_y",
+    "description":"y component of the magnetic field",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_mt_external_magnetic_field_z",
+    "description":"z component of the magnetic field",
+    "superNames":["x_exciting_section_atoms_group"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_muffin_tin_points",
+    "description":"muffin-tin points",
+    "superNames":["section_system"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_exciting_muffin_tin_radius",
+    "description":"muffin-tin radius",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_nuclear_charge",
+    "description":"Nuclear charge",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_nuclear_nuclear_energy",
+    "description":"Nuclear-nuclear energy final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_nuclear_nuclear_energy_scf_iteration",
+    "description":"Nuclear-nuclear energy",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_number_kpoint_x",
+    "description":"number k-points x",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_number_kpoint_y",
+    "description":"number k-points y",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_number_kpoint_z",
+    "description":"number k-points z",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_number_kpoints",
+    "description":"number k-points",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_number_of_atoms",
+    "description":"The number of atoms in the unit cell",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_number_of_bands_fermi_surface",
+    "description":"Number of bands for fermi surface",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_number_of_mesh_points_fermi_surface",
+    "description":"Number of mesh points for fermi surface",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_origin_fermi_surface",
+    "description":"Origin (in lattice coordinate) of the region where the Fermi surface is calculated",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_exciting_potential_mixing",
+    "description":"Mixing type for potential",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_pw",
+    "description":"Maximum number of plane-waves",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_rgkmax",
+    "description":"Radius MT * Gmax",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_scf_threshold_charge_change",
+    "description":"Specifies the threshold for the x_exciting_effective_potential_convergence between two subsequent self-consistent field (SCF) iterations.",
+    "superNames":["section_method","settings_scf"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_scf_threshold_charge_change_list",
+    "description":"Specifies the threshold for the x_exciting_effective_potential_convergence between two subsequent self-consistent field (SCF) iterations.",
+    "superNames":["section_method","settings_scf"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_scf_threshold_energy_change",
+    "description":"Specifies the threshold for the x_exciting_energy_total_scf_iteration change between two subsequent self-consistent field (SCF) iterations.",
+    "superNames":["section_method","settings_scf"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_scf_threshold_force_change",
+    "description":"Convergence tolerance for forces (not including IBS contribution) during the SCF run",
+    "superNames":["section_method","settings_scf"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_scf_threshold_force_change_list",
+    "description":"Convergence tolerance for forces (not including IBS contribution) during the SCF run.",
+    "superNames":["section_method","settings_scf"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_scf_threshold_potential_change",
+    "description":"Specifies the threshold for the x_exciting_effective_potential_convergence between two subsequent self-consistent field (SCF) iterations.",
+    "superNames":["section_method","settings_scf"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_scf_threshold_potential_change_list",
+    "description":"Specifies the threshold for the x_exciting_effective_potential_convergence between two subsequent self-consistent field (SCF) iterations.",
+    "superNames":["section_method","settings_scf"],
+    "units":"J",
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_section_atoms_group",
+    "kindStr":"type_section",
+    "description":"a group of atoms of the same type",
+    "superNames":["section_system"]
+  },{
+    "name":"x_exciting_section_bandstructure",
+    "kindStr":"type_section",
+    "description":"bandstructure values",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_exciting_section_dos",
+    "kindStr":"type_section",
+    "description":"dos values",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_exciting_section_fermi_surface",
+    "kindStr":"type_section",
+    "description":"Fermi surface values",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_exciting_section_geometry_optimization",
+    "kindStr":"type_section",
+    "description":"section for geometry optimization",
+    "superNames":["section_run"]
+  },{
+    "name":"x_exciting_section_lattice_vectors",
+    "kindStr":"type_section",
+    "description":"lattice vectors",
+    "superNames":["section_system"]
+  },{
+    "name":"x_exciting_section_reciprocal_lattice_vectors",
+    "kindStr":"type_section",
+    "description":"reciprocal lattice vectors",
+    "superNames":["section_system"]
+  },{
+    "name":"x_exciting_section_spin",
+    "kindStr":"type_section",
+    "description":"section for exciting spin treatment",
+    "superNames":["section_system"]
+  },{
+    "name":"x_exciting_section_xc",
+    "kindStr":"type_section",
+    "description":"index for exciting functional",
+    "superNames":["section_system"]
+  },{
+    "name":"x_exciting_simulation_reciprocal_cell",
+    "description":"Reciprocal lattice vectors (in Cartesian coordinates) of the simulation cell. The first index runs over the $x,y,z$ Cartesian coordinates, and the second index runs over the 3 lattice vectors.",
+    "superNames":["section_system","configuration_core"],
+    "units":"m",
+    "dtypeStr":"f",
+    "shape":[3,3]
+  },{
+    "name":"x_exciting_smearing_type",
+    "description":"Smearing scheme for KS occupancies",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_smearing_width",
+    "description":"Smearing width for KS occupancies",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_spin_treatment",
+    "description":"Spin treatment",
+    "superNames":["x_exciting_section_spin"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_store_total_forces",
+    "description":"Temporary storing converged atom forces cartesian",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_exciting_time_scf_iteration",
+    "description":"scf iteration time",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_total_mt_charge",
+    "description":"Total charge in muffin-tins",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_total_mt_charge_scf_iteration",
+    "description":"Total charge in muffin-tins",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_unit_cell_volume",
+    "description":"unit cell volume",
+    "superNames":["section_system"],
+    "units":"m^3",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_valence_charge",
+    "description":"Valence charge",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_valence_charge_initial",
+    "description":"Valence charge",
+    "superNames":["section_system"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_valence_charge_scf_iteration",
+    "description":"Valence charge",
+    "superNames":["section_scf_iteration","scf_info"],
+    "units":"C",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_valence_states",
+    "description":"Total number of valence states",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_values_fermi_surface",
+    "description":"Fermi surface values",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["x_exciting_number_of_bands_fermi_surface","x_exciting_number_of_mesh_points_fermi_surface"]
+  },{
+    "name":"x_exciting_vectors_fermi_surface",
+    "description":"Vectors (in lattice coordinate) defining the region where the Fermi surface is calculated",
+    "superNames":["x_exciting_section_fermi_surface"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3,3]
+  },{
+    "name":"x_exciting_volume_optimization",
+    "description":"If the volume optimization is performed.",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_wigner_radius",
+    "description":"Effective Wigner radius",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_xc_functional",
+    "description":"index for exciting functional",
+    "superNames":["x_exciting_section_xc"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xc_potential",
+    "description":"XC potential final",
+    "superNames":["section_single_configuration_calculation","energy_component"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_xc_potential_scf_iteration",
+    "description":"XC potential",
+    "superNames":["section_scf_iteration","energy_component","scf_info"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_xs_broadening",
+    "description":"Lorentzian broadening applied to the spectra.",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_xs_bse_angular_momentum_cutoff",
+    "description":"Angular momentum cutoff of the spherical harmonics expansion of the dielectric matrix.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_bse_antiresonant",
+    "description":"If the anti-resonant part of the Hamiltonian is used for the BSE spectrum",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_xs_bse_epsilon_energies",
+    "description":"Energies of the dielectric function epsilon",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_epsilon_im",
+    "description":"Imaginary part of the dielectric function epsilon",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_epsilon_re",
+    "description":"Real part of the dielectric function epsilon",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_exciton_amplitude_im",
+    "description":"Imaginary part of the transition amplitude",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_excitons"]
+  },{
+    "name":"x_exciting_xs_bse_exciton_amplitude_re",
+    "description":"Real part of the transition amplitude",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_excitons"]
+  },{
+    "name":"x_exciting_xs_bse_exciton_binding_energies",
+    "description":"Exciton binding energies",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_excitons"]
+  },{
+    "name":"x_exciting_xs_bse_exciton_energies",
+    "description":"Exciton energies",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_excitons"]
+  },{
+    "name":"x_exciting_xs_bse_exciton_oscillator_strength",
+    "description":"Exciton oscillator strength",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_excitons"]
+  },{
+    "name":"x_exciting_xs_bse_loss",
+    "description":"Loss function",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_loss_energies",
+    "description":"Energies of the loss function",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_number_of_bands",
+    "description":"Range of bands included for the BSE calculation. The first pair of numbers corresponds to the band index for local orbitals and valence states (counted from the lowest eigenenergy), the second pair corresponds to the band index of the conduction states (counted from the Fermi level).",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "shape":[4]
+  },{
+    "name":"x_exciting_xs_bse_number_of_components",
+    "description":"Number of independent components in the dielectric tensor",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_bse_number_of_energy_points",
+    "description":"Energy mesh for the dielectric function, conductivity and loss function",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_bse_number_of_excitons",
+    "description":"Total number of excitons",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_bse_rgkmax",
+    "description":"Smallest muffin-tin radius times gkmax.",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_xs_bse_sciavbd",
+    "description":"if the body of the screened Coulomb interaction is averaged (q=0).",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_xs_bse_sciavqbd",
+    "description":"if the body of the screened Coulomb interaction is averaged (q!=0).",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_xs_bse_sciavqhd",
+    "description":"if the head of the screened Coulomb interaction is averaged (q=0).",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_xs_bse_sciavqwg",
+    "description":"if the wings of the screened Coulomb interaction is averaged (q=0).",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_xs_bse_sciavtype",
+    "description":"how the screened Coulomb interaction matrix is averaged",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_xs_bse_sigma_energies",
+    "description":"Energies of the conductivity function sigma",
+    "superNames":["section_single_configuration_calculation"],
+    "units":"J",
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_sigma_im",
+    "description":"Imaginary part of the conductivity function sigma",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_sigma_re",
+    "description":"Real part of the conductivity function sigma",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_exciting_xs_bse_number_of_components","x_exciting_xs_bse_number_of_energy_points"]
+  },{
+    "name":"x_exciting_xs_bse_type",
+    "description":"which parts of the BSE Hamiltonian is considered. Possible values are IP, RPA, singlet, triplet.",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_xs_bse_xas",
+    "description":"X-ray absorption spectrum",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_exciting_xs_bse_xas_number_of_bands",
+    "description":"Range of bands included for the BSE calculation. The pair corresponds to the band index of the conduction states (counted from the Fermi level).",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "shape":[2]
+  },{
+    "name":"x_exciting_xs_bse_xasatom",
+    "description":"Atom number for which the XAS is calculated.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_bse_xasedge",
+    "description":"Defines the initial states of the XAS calculation.",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_xs_bse_xasspecies",
+    "description":"Species number for which the XAS is calculated..",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_gqmax",
+    "description":"G vector cutoff for the plane-waves matrix elements.",
+    "superNames":["section_method"],
+    "units":"m_1",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_xs_lmaxapw",
+    "description":"Angular momentum cut-off for the APW functions.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_ngridk",
+    "description":"k-point mesh for the excited states calculation.",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "shape":[3]
+  },{
+    "name":"x_exciting_xs_ngridq",
+    "description":"q-point mesh for the excited states calculation.",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "shape":[3]
+  },{
+    "name":"x_exciting_xs_number_of_empty_states",
+    "description":"Number of empty states used in the calculation of the response function.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_rgkmax",
+    "description":"Smallest muffin-tin radius times gkmax.",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_xs_scissor",
+    "description":"Scissor operator",
+    "superNames":["section_method"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_exciting_xs_screening_ngridk",
+    "description":"k-point mesh for the calculation of the screening.",
+    "superNames":["section_method"],
+    "dtypeStr":"i",
+    "shape":[3]
+  },{
+    "name":"x_exciting_xs_screening_number_of_empty_states",
+    "description":"Number of empty states used in the calculation of the screening.",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_exciting_xs_screening_rgkmax",
+    "description":"Smallest muffin-tin radius times gkmax.",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_exciting_xs_screening_type",
+    "description":"Type of screening used in the calculations. POssible values are full, diag, noinvdiag, longrange.",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_xs_screening_vkloff",
+    "description":"k-point set offset for the screening",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "shape":[3]
+  },{
+    "name":"x_exciting_xs_starting_point",
+    "description":"Exchange-correlation functional of the ground-state calculation. See xc_functional list at https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/XC-functional",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_exciting_xs_vkloff",
+    "description":"k-point set offset",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "shape":[3]
+  },{
+    "name":"x_exciting_xs_xstype",
+    "description":"Type of excited states calculation, BSE or TDDFT",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  }]
+}

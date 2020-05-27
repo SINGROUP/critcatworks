@@ -1,0 +1,18 @@
+{
+  "meta_name":"band_segm_start_end_normalized",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Fractional coordinates of the start and end point (in the basis of the ",
+    "reciprocal lattice vectors) of the segment sampled in the $k$ space. The ",
+    "conventional symbols (e.g., Gamma, K, L) of the same points are given in ",
+    "band_segm_labels"],
+  "meta_parent_section":"section_k_band_segment_normalized",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_fixed":2
+  },{
+    "meta_dimension_fixed":3
+  }]
+}

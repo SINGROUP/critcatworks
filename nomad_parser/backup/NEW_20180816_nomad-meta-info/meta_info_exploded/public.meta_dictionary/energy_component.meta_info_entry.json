@@ -1,0 +1,9 @@
+{
+  "meta_name":"energy_component",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "A value of an energy component, expected to be an extensive ",
+    "property."],
+  "meta_abstract_types":[
+    "energy_value"]
+}

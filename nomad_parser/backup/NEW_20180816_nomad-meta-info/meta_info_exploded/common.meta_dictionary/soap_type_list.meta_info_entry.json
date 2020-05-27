@@ -1,0 +1,10 @@
+{
+  "meta_name":"soap_type_list",
+  "meta_type":"type-value",
+  "meta_description":"Type list",
+  "meta_parent_section":"section_soap",
+  "meta_abstract_types":[
+    "soap_parameter"],
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

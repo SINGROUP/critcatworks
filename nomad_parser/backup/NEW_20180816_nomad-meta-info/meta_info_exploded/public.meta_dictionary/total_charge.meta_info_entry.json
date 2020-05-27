@@ -1,0 +1,10 @@
+{
+  "meta_name":"total_charge",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Provides the total amount of charge of the system in a ",
+    "run."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"int",
+  "meta_units":"C"
+}

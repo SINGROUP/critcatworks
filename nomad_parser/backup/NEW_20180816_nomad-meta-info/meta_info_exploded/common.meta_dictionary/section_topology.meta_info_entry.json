@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_topology",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing the definition of topology (connectivity among atoms) of a ",
+    "system."],
+  "meta_parent_section":"section_run",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

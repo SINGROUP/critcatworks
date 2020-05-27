@@ -1,0 +1,17 @@
+{
+  "meta_name":"frame_sequence_external_url",
+  "meta_type":"type-value",
+  "meta_description":[
+    "If the energy, forces, and other quantities for the frames (a frame is one ",
+    "section_single_configuration_calculation) in  section_frame_sequence are ",
+    "obtained by calling a different code than the code that drives the sequence ",
+    "(e.g., a wrapper that drives a molecular dynamics, Monte Carlo, geometry ",
+    "optimization and calls an electronic-structure code for energy and forces for ",
+    "each configuration), this metadata holds the reference to where the ",
+    "section_single_configuration_calculation for each frame are located. The format ",
+    "for this reference is described in the [frame_sequence_external_url wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/frame",
+    "-sequence-external-url)."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"string"
+}

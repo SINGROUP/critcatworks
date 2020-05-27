@@ -1,0 +1,12 @@
+{
+  "meta_name":"energy_c",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Correlation (C) energy calculated with the method described in ",
+    "xc_functional."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_type_c"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

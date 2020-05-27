@@ -1,0 +1,9 @@
+{
+  "metadict_name":"sample_parser",
+  "metadict_description":"metainfo for the sample_parser",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[]
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"response_message",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Message outputted by the program formatting the data in the current ",
+    "format"],
+  "meta_parent_section":"section_response_message",
+  "meta_data_type":"string"
+}

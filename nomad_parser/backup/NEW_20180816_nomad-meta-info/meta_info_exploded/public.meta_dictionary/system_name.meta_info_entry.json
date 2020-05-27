@@ -1,0 +1,10 @@
+{
+  "meta_name":"system_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the name of the system. This information is provided by the user in ",
+    "some codes and is stored here for debugging or visualization ",
+    "purposes."],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"string"
+}

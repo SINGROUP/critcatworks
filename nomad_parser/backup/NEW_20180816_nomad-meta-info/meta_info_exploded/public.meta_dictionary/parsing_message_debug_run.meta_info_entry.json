@@ -1,0 +1,13 @@
+{
+  "meta_name":"parsing_message_debug_run",
+  "meta_type":"type-value",
+  "meta_description":[
+    "This field is used for debugging messages of the parsing program associated ",
+    "with a single configuration calculation, see ",
+    "section_single_configuration_calculation."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "parsing_message_debug"],
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

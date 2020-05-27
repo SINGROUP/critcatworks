@@ -1,0 +1,5 @@
+{
+  "meta_name":"settings_constraint",
+  "meta_type":"type-abstract",
+  "meta_description":"Some parameters that describe a constraint"
+}

@@ -1,0 +1,7 @@
+{
+  "meta_name":"message_warning",
+  "meta_type":"type-abstract",
+  "meta_description":"A warning message of the computational program.",
+  "meta_abstract_types":[
+    "message_info"]
+}

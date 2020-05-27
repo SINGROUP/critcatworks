@@ -1,0 +1,13 @@
+{
+  "meta_name":"time_scf_iteration_cpu1_end",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the end time of a self-consistent field (SCF) iteration on CPU ",
+    "1."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "scf_info",
+    "time_info"],
+  "meta_data_type":"float",
+  "meta_units":"s"
+}

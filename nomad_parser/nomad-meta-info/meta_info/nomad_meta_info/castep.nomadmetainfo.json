@@ -1,0 +1,2274 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the EP parser, all names are expected to start with castep_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Forces on the atoms as minus gradient of energy_total, including forces' unitary-transformation (rigid body) filtering and including constraints, if present. The derivatives with respect to displacements of the nuclei in the gradient are evaluated according to the coordinate system defined in coordinate_system. In addition, these forces are obtained by filtering out the unitary transformations (translations of the center of mass and rigid rotations of the whole system, when non periodic), atom_forces_raw for the unfiltered counterpart. Furthermore, forces due to constraints like fixed atoms, distances, angles, dihedrals, and so on, are here included (see atom_forces_raw for the unfiltered counterpart).",
+      "dtypeStr": "f",
+      "name": "x_castep_atom_forces",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "section_run"
+      ]
+    
+    }, {
+      "description": "Net charge of system",
+      "dtypeStr": "f",
+      "name": "x_castep_net_charge",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Number of bands",
+      "dtypeStr": "i",
+      "name": "x_castep_number_of_bands",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Number of electrons",
+      "dtypeStr": "f",
+      "name": "x_castep_number_of_electrons",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]  
+    }, {
+      "description": "Storing atomic positions in fractional coordinates",
+      "dtypeStr": "f",
+      "name": "x_castep_atom_positions",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "cutoff at iteration 0 of geometry optimisation",
+      "dtypeStr": "C",
+      "name": "x_castep_basis_set_planewave_cutoff_iteration_0",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Temporary storing plane wave cutoff as string",
+      "dtypeStr": "C",
+      "name": "x_castep_basis_set_planewave_cutoff",
+      "shape": [],
+      "superNames": [
+        "section_basis_set_cell_dependent"
+      ]
+    }, {
+      "description": "size of standard grid (eV)",
+      "dtypeStr": "f",
+      "name": "x_castep_size_std_grid",
+      "shape": [],
+      "superNames": [
+        "section_basis_set_cell_dependent"
+      ]
+    }, {
+      "description": "sise of fine grid (1/A)",
+      "dtypeStr": "f",
+      "name": "x_castep_size_fine_grid",
+      "shape": [],
+      "superNames": [
+        "section_basis_set_cell_dependent"
+      ]
+    }, {
+      "description": "castep_calculation_time",
+      "dtypeStr": "f",
+      "name": "x_castep_calculation_time",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_time"
+      ]
+    }, {
+      "description": "Simulation cell angle alpha",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_angle_alpha_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions_optim"
+      ]
+    }, {
+      "description": "Simulation cell angle alpha",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_angle_alpha",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions"
+      ]
+    }, {
+      "description": "Simulation cell angle beta",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_angle_beta_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions_optim"
+      ]
+    }, {
+      "description": "Simulation cell angle beta",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_angle_beta",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions"
+      ]
+    }, {
+      "description": "Simulation cell angle gamma",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_angle_gamma_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions_optim"
+      ]
+    }, {
+      "description": "Simulation cell angle gamma",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_angle_gamma",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions"
+      ]
+    }, {
+      "description": "a unit cell edge length",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_length_a_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions_optim"
+      ]
+    }, {
+      "description": "a unit cell edge length",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_length_a",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions"
+      ]
+    }, {
+      "description": "b unit cell edge length",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_length_b_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions_optim"
+      ]
+    }, {
+      "description": "b unit cell edge length",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_length_b",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions"
+      ]
+    }, {
+      "description": "c unit cell edge length",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_length_c_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions_optim"
+      ]
+    }, {
+      "description": "c unit cell edge length",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_length_c",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_atom_positions"
+      ]
+    }, {
+      "description": "Temporay storage for cell vectors",
+      "dtypeStr": "C",
+      "name": "x_castep_cell_vector_optim",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_cell_optim"
+      ]
+    }, {
+      "description": "Temporay storage for cell vectors",
+      "dtypeStr": "C",
+      "name": "x_castep_cell_vector",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_cell"
+      ]
+    }, {
+      "description": "CASTEP_cell_volume",
+      "dtypeStr": "f",
+      "name": "x_castep_cell_volume",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Compiler name",
+      "dtypeStr": "C",
+      "name": "x_castep_compiler",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Fundamental constant data source",
+      "dtypeStr": "C",
+      "name": "x_castep_constants_reference",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "CASTEP_Enthalpy",
+      "dtypeStr": "f",
+      "name": "x_castep_enthalpy",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "CASTEP_frequency (cm-1)",
+      "dtypeStr": "f",
+      "name": "x_castep_frequency",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+       "description": "md_forces",
+      "dtypeStr": "f",
+      "name": "x_castep_improved_energy_total",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]       
+     }, {
+      "description": "CASTEP_store_t_md_frame",
+      "dtypeStr": "f",
+      "name": "x_castep_frame_time",
+      "shape": [],
+      "superNames": [
+       "x_castep_section_SCF_iteration_frame"
+      ]
+    }, {
+      "description": "CASTEP_store_t_md_frame",
+      "dtypeStr": "f",
+      "name": "x_castep_frame_time_0",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "fft library name",
+      "dtypeStr": "C",
+      "name": "x_castep_fft_library",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "castep_finalisation_time",
+      "dtypeStr": "f",
+      "name": "x_castep_finalisation_time",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_time"
+      ]
+    }, {
+      "description": "XC functional+weight in CASTEP convention",
+      "dtypeStr": "C",
+      "name": "x_castep_functional_and_weight",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "XC functional in CASTEP convention",
+      "dtypeStr": "C",
+      "name": "x_castep_functional_name",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_functionals"
+      ]
+    }, {
+      "description": "XC functional definition in CASTEP convention",
+      "dtypeStr": "C",
+      "name": "x_castep_functional_type",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_functional_definition"
+      ]
+    }, {
+      "description": "XC functional weight in CASTEP convention",
+      "dtypeStr": "C",
+      "name": "x_castep_functional_weight",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_functional_definition"
+      ]
+    }, {
+      "description": "CASTEP_geom_converged",
+      "dtypeStr": "C",
+      "name": "x_castep_geom_converged",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]  
+    
+    }, {
+      "description": "Index for number of iterations in geometry optimisation",
+      "dtypeStr": "f",
+      "name": "x_castep_geom_iteration_index",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Determines optimisation method used",
+      "dtypeStr": "C",
+      "name": "x_castep_geometry_optim_method",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_geom_optimisation_method"
+      ]
+     }, {
+      "description": "tolerance for stress components in geometry optimisation (GPa)",
+      "dtypeStr": "f",
+      "name": "x_castep_geometry_stress_com_tolerance",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]  
+    }, {
+      "description": "x_castep_Initialisation_time",
+      "dtypeStr": "f",
+      "name": "x_castep_initialisation_time",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_time"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_castep_k_path",
+      "shape": [],
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "Maths library name",
+      "dtypeStr": "C",
+      "name": "x_castep_maths_library",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Temporary storing atomic positions",
+      "dtypeStr": "C",
+      "name": "x_castep_optimised_atom_labels",
+      "shape": [
+        "number_of_atoms"
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Storing atomic optimised positions in fractional coordinates",
+      "dtypeStr": "f",
+      "name": "x_castep_optimised_atom_positions",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "cell vector velocities",
+      "dtypeStr": "f",
+      "name": "x_castep_velocities_cell_vector",
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Compilation date (string)",
+      "dtypeStr": "C",
+      "name": "x_castep_program_compilation_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Compilation time (string)",
+      "dtypeStr": "C",
+      "name": "x_castep_program_compilation_time",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Run execution date (string)",
+      "dtypeStr": "C",
+      "name": "x_castep_program_execution_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Run execution start time (string)",
+      "dtypeStr": "C",
+      "name": "x_castep_program_execution_time",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Energy Threshold store ",
+      "dtypeStr": "f",
+      "name": "x_castep_energy_threshold_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_scf_parameters"
+      ]
+    }, {
+      "description": "Number of maximum iterations steps store",
+      "dtypeStr": "f",
+      "name": "x_castep_max_iter_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_scf_parameters"
+      ]  
+    }, {
+      "description": "Smearing kind",
+      "dtypeStr": "C",
+      "name": "x_castep_smearing_kind",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_scf_parameters"
+      ]  
+    }, {
+      "description": "Smearing width",
+      "dtypeStr": "f",
+      "name": "x_castep_smearing_width",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_scf_parameters"
+      ]  
+    }, {
+      "description": "Relativity treatment in CASTEP convention",
+      "dtypeStr": "C",
+      "name": "x_castep_relativity_treatment_scf",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_relativity_treatment"
+      ]
+    }, {
+       "description": "Phonon calculation method",
+      "dtypeStr": "C",
+      "name": "x_castep_phonon_method",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_phonons"
+      ]
+    }, {
+       "description": "Phonon DFPT solver method",
+      "dtypeStr": "C",
+      "name": "x_castep_DFPT_solver_method",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_phonons"
+      ]   
+    
+    }, {
+       "description": "Phonon calculation tolerance (eV/A**2)",
+      "dtypeStr": "f",
+      "name": "x_castep_phonon_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_phonons"
+      ]  
+    }, {
+       "description": "Phonon calculation cycles",
+      "dtypeStr": "f",
+      "name": "x_castep_phonon_cycles",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_phonons"
+      ]  
+    }, {
+       "description": "Phonon band convergence tolerance window",
+      "dtypeStr": "f",
+      "name": "x_castep_band_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_phonons"
+      ]  
+    }, {
+       "description": "Vibration Frequenices (cm-1)",
+      "dtypeStr": "f",
+      "name": "x_castep_vibrationl_frequencies",
+      "shape": ["len(self.nr_iter)"],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Vibration Frequenices (cm-1)",
+      "dtypeStr": "C",
+      "name": "x_castep_vibrationl_frequencies_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Irreducible representation in the Point Group",
+      "dtypeStr": "C",
+      "name": "x_castep_ir_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Irreducible representation in the Point Group",
+      "dtypeStr": "C",
+      "name": "x_castep_ir",
+      "shape": ["len(self.nr_iter)"],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Raman activity (A**4/amu)",
+      "dtypeStr": "f",
+      "name": "x_castep_raman_activity",
+      "shape": ["len(self.nr_iter)"],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Raman activity (A**4/amu)",
+      "dtypeStr": "C",
+      "name": "x_castep_raman_active",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Number of iterations in phonons",
+      "dtypeStr": "i",
+      "name": "x_castep_n_iterations_phonons",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "Raman activity (A**4/amu)",
+      "dtypeStr": "C",
+      "name": "x_castep_raman_activity_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]
+    }, {
+       "description": "IR intensities (D/A)**2/amu",
+      "dtypeStr": "f",
+      "name": "x_castep_ir_intensity",
+      "shape": ["len(self.nr_iter)"],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]        
+     }, {
+       "description": "IR intensities (D/A)**2/amu",
+      "dtypeStr": "C",
+      "name": "x_castep_ir_intensity_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_vibrational_frequencies"
+      ]      
+     }, {
+       "description": "Point group of the crystal (Schoenflies notation)",
+      "dtypeStr": "C",
+      "name": "x_castep_crystal_point_group",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]   
+     }, {
+       "description": "Point space of the crystal",
+      "dtypeStr": "C",
+      "name": "x_castep_space_group",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]   
+    }, {
+       "description": "Mulliken_atom_index",
+      "dtypeStr": "C",
+      "name": "x_castep_mulliken_atom_index",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]   
+    }, {
+       "description": "Mulliken_atom kind",
+      "dtypeStr": "C",
+      "name": "x_castep_mulliken_atom",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]   
+    }, {
+       "description": "Mulliken_contributions",
+      "dtypeStr": "C",
+      "name": "x_castep_orbital_contributions",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]     
+    }, {
+       "description": "Mulliken_contribution_orbital s",
+      "dtypeStr": "f",
+      "name": "x_castep_orbital_s",
+      "shape": ["number_of_atoms"],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]     
+    }, {
+       "description": "Mulliken_contribution_orbital p",
+      "dtypeStr": "f",
+      "name": "x_castep_orbital_p",
+      "shape": ["number_of_atoms"],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]     
+    
+    }, {
+       "description": "Mulliken_contribution_orbital d",
+      "dtypeStr": "f",
+      "name": "x_castep_orbital_d",
+      "shape": ["number_of_atoms"],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]     
+    }, {
+       "description": "Mulliken_contribution_orbital f",
+      "dtypeStr": "f",
+      "name": "x_castep_orbital_f",
+      "shape": ["number_of_atoms"],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]     
+    }, {
+       "description": "Mulliken_total_contribution",
+      "dtypeStr": "f",
+      "name": "x_castep_total_orbital",
+      "shape": ["number_of_atoms"],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]     
+    }, {
+       "description": "Mulliken_charges",
+      "dtypeStr": "C",
+      "name": "x_castep_mulliken_charge_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]       
+     }, {
+       "description": "Mulliken_charges",
+      "dtypeStr": "f",
+      "name": "x_castep_mulliken_charge",
+      "shape": ["number_of_atoms"],
+      "superNames": [
+        "x_castep_section_population_analysis"
+      ]         
+    }, {
+       "description": "md_energy_components",
+      "dtypeStr": "C",
+      "name": "x_castep_md_energies",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]         
+    }, {
+       "description": "ts_energy_components_ts_store",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_energy",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_store"
+      ]    
+    }, {
+       "description": "ts_energy_components_ts",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_energy_final_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_final_store"
+      ]    
+    }, {
+       "description": "ts_energy_components_pro",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_energy_product_store",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_product_store"
+      ]      
+    }, {
+       "description": "ts_energy_components_total",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_energy_total",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts"
+      ]     
+    }, {
+       "description": "ts_energy_final",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_energy_final",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_final"
+      ]    
+    }, {
+       "description": "ts_energy_prod",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_energy_product",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_product"
+      ]    
+    }, {
+       "description": "ts_forces_final",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_forces_final_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_final_store"
+      ]    
+     }, {
+       "description": "ts_energy_forces_pro_store",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_forces_pro_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_product_store"
+      ]    
+    }, {
+       "description": "ts_energy_forces_pro",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_forces_product",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts_product"
+      ]    
+    }, {
+       "description": "ts_energy_positions_final",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_positions_final_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_final_store"
+      ]  
+    }, {
+       "description": "ts_energy_positions_pro_store",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_positions_pro_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_product_store"
+      ]  
+    }, {
+      "description": "ts_energy_positions_pro",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_positions_product",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts_product"
+      ]  
+    }, {
+       "description": "md_temp(K)",
+      "dtypeStr": "f",
+      "name": "x_castep_md_temperature",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]         
+    }, {
+       "description": "md_pressure",
+      "dtypeStr": "f",
+      "name": "x_castep_md_pressure",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]           
+    }, {
+       "description": "md_cell_vectors",
+      "dtypeStr": "C",
+      "name": "x_castep_md_cell_vectors",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]           
+    }, {
+       "description": "ts_cell_vectors",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_cell_vectors_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_store"
+      ]         
+    }, {
+       "description": "ts_cell_vectors",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_cell_vectors",
+      "repeats": true,
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts"
+      ]         
+    }, {
+       "description": "ts_cell_vectors",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_cell_vectors_final",
+      "repeats": true,
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts_final"
+      ]       
+    }, {
+       "description": "ts_cell_vectors_final",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_cell_vectors_final_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_final_store"
+      ]   
+    }, {
+       "description": "ts_cell_vectors_pro",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_cell_vectors_pro_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_product_store"
+      ]   
+    }, {
+       "description": "ts_product_cell_vectors",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_cell_vectors_product",
+      "repeats": true,
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts_product"
+      ]       
+    }, {
+      "description": "md_cell_vectors_velocities",
+      "dtypeStr": "C",
+      "name": "x_castep_md_cell_vectors_vel",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]       
+    }, {
+      "description": "md_stress_tensor",
+      "dtypeStr": "C",
+      "name": "x_castep_md_stress_tensor",
+      "shape":[],
+      "superNames": [
+        "x_castep_section_md"
+      ]       
+     }, {
+       "description": "md_positions",
+      "dtypeStr": "C",
+      "name": "x_castep_md_positions",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]       
+    }, {
+       "description": "ts_positions_store",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_positions_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_store"
+      ]       
+    }, {
+       "description": "ts_positions",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_positions",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts"
+      ]    
+    }, {
+       "description": "ts_positions_final",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_positions_final",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts_final"
+      ]    
+    }, {
+       "description": "md_forces",
+      "dtypeStr": "C",
+      "name": "x_castep_md_forces",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]       
+    }, {
+       "description": "ts_forces_store",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_forces_store",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_store"
+      ]      
+    }, {
+       "description": "ts_forces",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_forces",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts"
+      ]      
+    }, {
+       "description": "ts_force_finals",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_forces_final",
+      "repeats": true,
+      "shape": [
+      "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_castep_section_ts_final"
+      ]      
+    }, {
+       "description": "ts_method",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_method",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_parameters"
+      ]    
+    }, {
+       "description": "ts_protocol",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_protocol",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_parameters"
+      ]
+    }, {
+       "description": "ts_qst_iterations",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_number_qst",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_parameters"
+      ]
+    }, {
+       "description": "ts_number_of_cg_iterations",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_number_cg",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_parameters"
+      ]
+    }, {
+       "description": "ts_force_tolerance (eV/A)",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_force_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_parameters"
+      ]
+    }, {
+       "description": "ts_displacement_tolerance (A)",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_displacement_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_parameters"
+      ]
+    }, {
+       "description": "optics_number_of_bands",
+      "dtypeStr": "i",
+      "name": "x_castep_optics_n_bands",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_optics_parameters"
+      ]
+    }, {
+       "description": "optics_band_convergence_tolerance",
+      "dtypeStr": "f",
+      "name": "x_castep_optics_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_optics_parameters"
+      ]
+    }, {
+       "description": "number of excited states",
+      "dtypeStr": "i",
+      "name": "x_castep_tddft_n_excited_states",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "number of states for forces",
+      "dtypeStr": "i",
+      "name": "x_castep_tddft_n_states_forces",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tolerance (eV)",
+      "dtypeStr": "f",
+      "name": "x_castep_tddft_state_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tolerance window iterations",
+      "dtypeStr": "i",
+      "name": "x_castep_tddft_state_tolerance_window",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "max number iterations",
+      "dtypeStr": "i",
+      "name": "x_castep_tddft_max_iter",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "number of extra states",
+      "dtypeStr": "i",
+      "name": "x_castep_tddft_extra_states",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tddft functional",
+      "dtypeStr": "C",
+      "name": "x_castep_tddft_functional",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tddft method",
+      "dtypeStr": "C",
+      "name": "x_castep_tddft_method",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tddft eigenmethod",
+      "dtypeStr": "C",
+      "name": "x_castep_tddft_eigenmethod",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tddft approximation",
+      "dtypeStr": "C",
+      "name": "x_castep_tddft_approximation",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "tddft position operator",
+      "dtypeStr": "C",
+      "name": "x_castep_tddft_position_op",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft_parameters"
+      ]
+    }, {
+       "description": "ts_path_number",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_path",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]      
+    }, {
+       "description": "ts_path_final",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_path_ts_final",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]      
+    }, {
+       "description": "ts_path_pro",
+      "dtypeStr": "f",
+      "name": "x_castep_ts_path_product",
+      "repeats": true,     
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]      
+    }, {
+       "description": "md_lables",
+      "dtypeStr": "C",
+      "name": "x_castep_md_lab",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]       
+     }, {
+       "description": "ts_lables",
+      "dtypeStr": "C",
+      "name": "x_castep_ts_lab",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts"
+      ]       
+    }, {
+       "description": "md_veloc",
+      "dtypeStr": "C",
+      "name": "x_castep_md_veloc",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_md"
+      ]        
+    }, {
+       "description": "thermostat_target_temperature(K)",
+      "dtypeStr": "f",
+      "name": "x_castep_thermostat_target_temperature",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+       "description": "barostat_type",
+      "dtypeStr": "C",
+      "name": "x_castep_barostat_type",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+       "description": "thermostat_type",
+      "dtypeStr": "C",
+      "name": "x_castep_thermostat_type",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+     }, {
+       "description": "thermostat_type",
+      "dtypeStr": "f",
+      "name": "x_castep_thermostat_tau",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+       "description": "barostat_tau",
+      "dtypeStr": "f",
+      "name": "x_castep_barostat_tau",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+       "description": "MD_time_step (ps)",
+      "dtypeStr": "f",
+      "name": "x_castep_integrator_dt",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+       "description": "MD_time_step_number",
+      "dtypeStr": "f",
+      "name": "x_castep_number_of_steps_requested",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+      "description": "Number_of iterations geom_optim",
+      "dtypeStr": "f",
+      "name": "x_castep_max_number_of_steps",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+      "description": "MD_pressure",
+      "dtypeStr": "C",
+      "name": "x_castep_frame_pressure",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]         
+    }, {
+      "description": "MD_scf_energy tolerance (eV)",
+      "dtypeStr": "f",
+      "name": "x_castep_frame_energy_tolerance",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]          
+    }, {
+      "description": "MD_scf_eigen tolerance (eV)",
+      "dtypeStr": "f",
+      "name": "x_castep_frame_eigen_tolerance",
+      "shape": [],
+      "superNames": [
+        "section_sampling_method"
+      ]       
+    }, {
+      "description": "x_castep_core_spectra_n_bands",
+      "dtypeStr": "i",
+      "name": "x_castep_core_spectra_n_bands",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_core_parameters"
+      ]       
+    }, {
+      "description": "x_castep_band_n_bands",
+      "dtypeStr": "i",
+      "name": "x_castep_band_n_bands",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_band_parameters"
+      ]   
+    }, {
+      "description": "x_castep_core_spectra_conv_tolerance",
+      "dtypeStr": "f",
+      "name": "x_castep_core_spectra_conv_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_core_parameters"
+      ]  
+    }, {
+      "description": "x_castep_band_conv_tolerance",
+      "dtypeStr": "f",
+      "name": "x_castep_band_conv_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_band_parameters"
+      ]  
+    }, {
+      "description": "x_castep_band_n_iterations",
+      "dtypeStr": "i",
+      "name": "x_castep_band_n_iterations",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_band_parameters"
+      ]  
+    }, {
+      "description": "x_castep_band_max_cg",
+      "dtypeStr": "f",
+      "name": "x_castep_band_max_cg",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_band_parameters"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_vibrational_frequencies",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_band_parameters",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_core_parameters",
+      "superNames": [
+        "section_run"
+      ] 
+    }, {
+      "description": "energy_frame_iterations",
+      "dtypeStr": "C",
+      "name": "x_castep_SCF_frame_energy",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_SCF_iteration_frame"
+      ]        
+     }, {
+      "description": "energy_frame_iterations_gain",
+      "dtypeStr": "C",
+      "name": "x_castep_SCF_frame_energy_gain",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_SCF_iteration_frame"
+      ]        
+    }, {
+      "description": "energy_frame_wall_end_time",
+      "dtypeStr": "C",
+      "name": "x_castep_frame_time_scf_iteration_wall_end",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_SCF_iteration_frame"
+      ]        
+    }, {
+      "description": "energy_free",
+      "dtypeStr": "f",
+      "name": "x_castep_frame_energy_free",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_SCF_iteration_frame"
+      ]      
+    }, {
+      "description": "energy_free_corrected_for_finite_basis",
+      "dtypeStr": "f",
+      "name": "x_castep_frame_energy_total_T0",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_SCF_iteration_frame"
+      ]          
+    }, {
+      "description": "density_mixing_scheme",
+      "dtypeStr": "C",
+      "name": "x_castep_density_mixing_scheme",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_density_mixing_parameters"
+      ]        
+    }, {
+      "description": "density_mixing_scheme_length",
+      "dtypeStr": "f",
+      "name": "x_castep_density_mixing_length",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_density_mixing_parameters"
+      ]      
+    }, {
+      "description": "charge_density_mixing_amplitude",
+      "dtypeStr": "f",
+      "name": "x_castep_charge_density_mixing_amplitude",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_density_mixing_parameters"
+      ]      
+     }, {
+      "description": "charge_density_mixing_cut_off_energy_for_mixing (A)",
+      "dtypeStr": "f",
+      "name": "x_castep_cut_off_energy_for_mixing",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_density_mixing_parameters"
+      ]      
+    }, {
+      "description": "Population_analysis_cutoff_(A)",
+      "dtypeStr": "f",
+      "name": "x_castep_population_analysis_cutoff",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_population_analysis_parameters"
+      ]      
+    }, {
+      "description": "Electronic spectroscopy parameters theory level",
+      "dtypeStr": "C",
+      "name": "x_castep_theory_level",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_electronic_spectroscpy_parameters"
+      ]      
+    }, {
+      "description": "Electronic spectroscopy parameters calculation type",
+      "dtypeStr": "C",
+      "name": "x_castep_spectroscopy_calculation",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_electronic_spectroscpy_parameters"
+      ]   
+    }, {
+      "description": "Max number of iterations",
+      "dtypeStr": "i",
+      "name": "x_castep_spec_max_iter",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_electronic_spectroscpy_parameters"
+      ]   
+    }, {
+      "description": "Max number of steps",
+      "dtypeStr": "i",
+      "name": "x_castep_spec_max_steps",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_electronic_spectroscpy_parameters"
+      ]   
+    }, {
+      "description": "Max number of bands",
+      "dtypeStr": "i",
+      "name": "x_castep_spec_max_bands",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_electronic_spectroscpy_parameters"
+      ]   
+    }, {
+      "description": "Tolerance (eV)",
+      "dtypeStr": "f",
+      "name": "x_castep_spec_tolerance",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_electronic_spectroscpy_parameters"
+      ]   
+    }, {
+      "description": "SCF_ts_energy",
+      "dtypeStr": "f",
+      "name": "x_castep_scf_ts_iteration_energy",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_scf_iteration"
+      ]  
+    }, {
+      "description": "SCF_ts_energy change",
+      "dtypeStr": "f",
+      "name": "x_castep_scf_ts_iteration_energy_change",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_scf_iteration"
+      ]  
+    }, {
+      "description": "SCF_ts_energy time",
+      "dtypeStr": "f",
+      "name": "x_castep_scf_ts_time",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_scf_iteration"
+      ]  
+    }, {
+      "description": "SCF_ts_energy Total",
+      "dtypeStr": "f",
+      "name": "x_castep_scf_ts_total",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_scf"
+      ]  
+    }, {
+      "description": "SCF_ts_energy Total free",
+      "dtypeStr": "f",
+      "name": "x_castep_scf_ts_total_energy_free",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_scf"
+      ]  
+    }, {
+      "description": "SCF_ts_energy T0 free",
+      "dtypeStr": "f",
+      "name": "x_castep_scf_ts_T0",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_ts_scf"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_scf_iteration",
+      "superNames": [
+        "x_castep_section_ts_scf"
+      ]
+    }, {
+      "description": "Iteration number",
+      "dtypeStr": "i",
+      "name": "x_castep_tddft_iteration",
+      "repeats": true, 
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft"
+      ]  
+    }, {
+      "description": "Iteration wall time (s)",
+      "dtypeStr": "f",
+      "name": "x_castep_wall_time",
+      "repeats": true, 
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft"
+      ]  
+    }, {
+      "description": "state number",
+      "dtypeStr": "i",
+      "name": "x_castep_state_number",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft"
+      ]  
+    }, {
+      "description": "state energy",
+      "dtypeStr": "f",
+      "name": "x_castep_state_energy",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft"
+      ]  
+    }, {
+      "description": "state energy error",
+      "dtypeStr": "f",
+      "name": "x_castep_state_energy_error",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft"
+      ] 
+    }, {
+      "description": "calculation time",
+      "dtypeStr": "f",
+      "name": "x_castep_tddft_calculation_time",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_tddft"
+      ] 
+    }, {
+      "description": "correlation energy",
+      "dtypeStr": "f",
+      "name": "x_castep_correction_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+    }, {
+      "description": "dE/atom",
+      "dtypeStr": "f",
+      "name": "x_castep_de_atom",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+    }, {
+      "description": "dfmax/atom",
+      "dtypeStr": "f",
+      "name": "x_castep_dfmax_atom",
+      "shape": [],
+      "repeats": true,
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+    }, {
+      "description": "structure energy correction",
+      "dtypeStr": "f",
+      "name": "x_castep_structure_energy_corr",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+    }, {
+      "description": "PBC image interaction corr.",
+      "dtypeStr": "f",
+      "name": "x_castep_PBC_image_inter_corr",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+    }, {
+      "description": "total energy correction",
+      "dtypeStr": "f",
+      "name": "x_castep_total_energy_correction",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+    }, {
+      "description": "correction F max ev/A",
+      "dtypeStr": "f",
+      "name": "x_castep_total_fmax_correction",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]  
+    }, {
+      "description": "shell",
+      "dtypeStr": "i",
+      "name": "x_castep_shell",
+      "shape": [],
+      "repeats": true,
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ]   
+   
+    }, {
+      "description": "total_dispersion_corrected_free_energy",
+      "dtypeStr": "f",
+      "name": "x_castep_total_dispersion_corrected_free_energy",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ] 
+    }, {
+      "description": "dispersion corrected zero point",
+      "dtypeStr": "f",
+      "name": "x_castep_disp_corrected_energy_total_T0",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_DFT_SEDC"
+      ] 
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_tddft",
+      "superNames": [
+        "section_system"
+      ]
+    
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_atom_ionic_velocities",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_atom_positions_optim",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_atom_positions",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_cell_optim",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_cell",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_collect_scf_eigenvalues",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_eigenvalues_1",
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_eigenvalues",
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_functional_definition",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_functionals",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_population_analysis",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_geom_optimisation_method",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_optics_parameters",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_tddft_parameters",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_phonons",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_density_mixing_parameters",
+      "superNames": [
+        "section_run"
+      ]  
+     }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_population_analysis_parameters",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_scf",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_k_band",
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "kindStr": "type_section",
+      "name": "x_castep_section_k_points_1",
+      "shape": [],
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_k_points",
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_relativity_treatment",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_scf_eigenvalues",
+      "superNames": [
+        "x_castep_section_scf_k_points"
+      ]
+    
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_SCF_iteration_frame",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_scf_k_points",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_spin_number",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_stress_tensor",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+   
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_time",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_raman_tensor",
+      "superNames": [
+        "section_run"
+      ]  
+     }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_scf_parameters",
+      "superNames": [
+        "section_run"
+      ]  
+     }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_electronic_spectroscpy_parameters",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_md",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_store",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_final_store",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_final",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_product",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_product_store",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_ts_parameters",
+      "superNames": [
+        "section_run"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_DFT_SEDC",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]  
+    }, {
+      "description": "-",
+      "kindStr": "type_section",
+      "name": "x_castep_section_van_der_Waals_parameters",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "i",
+      "name": "x_castep_spin_number",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_spin_number"
+      ]
+    }, {
+      "description": "Temporary storing converged atom forces (ev/A)",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_forces_band",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    
+    }, {
+      "description": "Temporary storing converged atom forces (ev/A)",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_forces",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation",
+        "section_run"
+      ]
+    
+    }, {
+      "description": "Temporary storing converged Raman susceptibility tensor",
+      "dtypeStr": "C",
+      "name": "x_castep_store_raman_tensor",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_raman_tensor"
+      ]
+ 
+    }, {
+      "description": "Ramen_tensor",
+      "dtypeStr": "f",
+      "name": "x_castep_ramen_tensor",
+      "shape": [
+        3,
+        3
+      ],
+      "superNames": [
+        "x_castep_section_raman_tensor"
+      ],
+      "units": "(A/amu)*0.5" 
+    }, {
+      "description": "Temporary storing atom labels",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_labels",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Temporary storing atom labels",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_number",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Temporary storing atom mass",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_mass",
+      "shape": [],
+      "superNames": [
+        "section_topology"
+      ]
+    }, {
+      "description": "Temporary storing atom name",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_name",
+      "shape": [],
+      "superNames": [
+        "section_topology"
+      ]
+    }, {
+      "description": "Temporary storing atomic positions",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_positions",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Temporary storing electronic structure method",
+      "dtypeStr": "C",
+      "name": "x_castep_elec_methd",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Temporary storing atomic positions",
+      "dtypeStr": "C",
+      "name": "x_castep_store_atom_ionic_velocities",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Temporary storing atomic positions",
+      "dtypeStr": "f",
+      "name": "x_castep_atom_ionic_velocities",
+       "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Temporary storing eigenvalues",
+      "dtypeStr": "f",
+      "name": "x_castep_store_eigenvalues_1",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_eigenvalues_1"
+      ]
+    }, {
+      "description": "Temporary storing eigenvalues",
+      "dtypeStr": "f",
+      "name": "x_castep_store_eigenvalues",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_eigenvalues"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_castep_store_k_path",
+      "shape": [],
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_castep_store_k_label",
+      "shape": [],
+      "superNames": [
+        "section_k_band"
+      ]
+    }, {
+      "description": "Temporary storing k points coordinates (fractional)",
+      "dtypeStr": "C",
+      "name": "x_castep_store_k_points_1",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_k_points_1"
+      ]
+    }, {
+      "description": "Temporary storing k points coordinates (fractional)",
+      "dtypeStr": "C",
+      "name": "x_castep_store_k_points",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_k_points"
+      ]
+    }, {
+      "description": "Temporary storing atomic positions",
+      "dtypeStr": "C",
+      "name": "x_castep_store_optimised_atom_labels",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Temporary storing atomic positions",
+      "dtypeStr": "C",
+      "name": "x_castep_store_optimised_atom_positions",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_castep_store_scf_eigenvalues",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_scf_eigenvalues"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_castep_store_scf_k_points",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_scf_k_points"
+      ]
+    }, {
+      "description": "Temporary storing stress tensor components",
+      "dtypeStr": "C",
+      "name": "x_castep_store_stress_tensor",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_stress_tensor"
+      ]
+     }, {
+      "description": "Initial SCF iteration wall time",
+      "dtypeStr": "f",
+      "name": "x_castep_initial_scf_iteration_wall_time",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Total electronic energy that includes dispersion energy computed with Disp_method_name not corrected for finite basis-set",
+      "dtypeStr": "f",
+      "name": "x_castep_total_dispersion_corrected_energy",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "CASTEP_total_energy_corrected_for_finite_basis",
+      "dtypeStr": "f",
+      "name": "x_castep_total_energy_corrected_for_finite_basis",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "CASTEP_total_energy_corrected_for_finite_basis_store",
+      "dtypeStr": "C",
+      "name": "x_castep_total_energy_corrected_for_finite_basis_store",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Name type",
+      "dtypeStr": "C",
+      "name": "x_castep_disp_method_name",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_van_der_Waals_parameters"
+      ]
+    }, {
+      "description": "Total electronic energy calculated with XC_method_scf during the scf iterations is stored in a list",
+      "dtypeStr": "f",
+      "name": "energy_total_scf_iteration_list",
+      "shape": [
+        -1
+      ],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Parameter for dispersion method G06",
+      "dtypeStr": "f",
+      "name": "x_castep_Parameter_d",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_van_der_Waals_parameters"
+      ]
+    }, {
+      "description": "Parameter for dispersion method OBS",
+      "dtypeStr": "f",
+      "name": "x_castep_Parameter_LAMBDA",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_van_der_Waals_parameters"
+      ]
+    }, {
+      "description": "Parameter for dispersion method OBS",
+      "dtypeStr": "f",
+      "name": "x_castep_Parameter_n",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_van_der_Waals_parameters"
+      ]
+    }, {
+      "description": "Parameter for dispersion method G06",
+      "dtypeStr": "f",
+      "name": "x_castep_Parameter_s6",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_van_der_Waals_parameters"
+      ]
+    }, {
+      "description": "Parameter for dispersion method TS",
+      "dtypeStr": "f",
+      "name": "x_castep_Parameter_sR",
+      "shape": [],
+      "superNames": [
+        "x_castep_section_van_der_Waals_parameters"
+      ]
+    }]
+}

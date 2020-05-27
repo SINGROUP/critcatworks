@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_frame_sequence_user_quantity",
+  "meta_type":"type-section",
+  "meta_description":[
+    "(deprecated) Section collecting some user-defined quantities evaluated along a ",
+    "sequence of frame."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

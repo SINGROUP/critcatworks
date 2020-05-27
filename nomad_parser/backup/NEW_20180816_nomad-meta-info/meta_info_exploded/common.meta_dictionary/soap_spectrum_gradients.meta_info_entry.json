@@ -1,0 +1,9 @@
+{
+  "meta_name":"soap_spectrum_gradients",
+  "meta_type":"type-value",
+  "meta_description":"gradients in specturm",
+  "meta_parent_section":"section_soap",
+  "meta_abstract_types":[
+    "soap_parameter"],
+  "meta_data_type":"boolean"
+}

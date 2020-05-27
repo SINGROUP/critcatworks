@@ -1,0 +1,25 @@
+{
+  "meta_name":"basis_set_atom_centered_unique_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Code-specific, but explicative, base name for the basis set (not unique). This ",
+    "string starts with basis_set_atom_centered_short_name. If the basis set defined ",
+    "in this section_basis_set_atom_centered is not identical to the default ",
+    "definition (stored in a database) of the basis set with the same name stored in ",
+    "a database, then the string is extended by 10 identifiable characters as ",
+    "explained in the [basis_set_atom_centered_name wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/basis",
+    "-set-atom-centered-unique-name). The reason for this procedure is that often ",
+    "atom-centered basis sets are obtained by fine tuning basis sets provided by the ",
+    "code developers or other sources. Each basis sets, which has normally a ",
+    "standard name, often reported in publications, has also several parameters that ",
+    "can be tuned. This metadata tries to keep track of the original basis set and ",
+    "its modifications. This string here defined should not contain the *atom kind* ",
+    "for which this basis set is intended for, in order to simplify the use of a ",
+    "single name for multiple *atom kinds* (see atom_labels for the actual meaning ",
+    "of *atom kind*)."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"string"
+}

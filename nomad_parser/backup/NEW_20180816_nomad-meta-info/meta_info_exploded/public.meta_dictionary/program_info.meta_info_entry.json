@@ -1,0 +1,11 @@
+{
+  "meta_name":"program_info",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains information on the program that generated the data, i.e. the ",
+    "program_name, program_version, program_compilation_host and ",
+    "program_compilation_datetime as direct children of this ",
+    "field."],
+  "meta_abstract_types":[
+    "accessory_info"]
+}

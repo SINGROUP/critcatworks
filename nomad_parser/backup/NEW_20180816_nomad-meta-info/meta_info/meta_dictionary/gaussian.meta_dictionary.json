@@ -1,0 +1,1460 @@
+{
+  "metadict_name":"gaussian",
+  "metadict_description":[
+    "meta info used by the x_gaussian parser, all names are expected to start with ",
+    "x_gaussian"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the total charge of the system (in electronic ",
+      "units)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dipole_moment_x",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the x component of the dipole moment ",
+      "(Debye)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dipole_moment_y",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the y component of the dipole moment ",
+      "(Debye)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"dipole_moment_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the z component of the dipole moment ",
+      "(Debye)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"energy_total",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the total energy (nuclei + electrons), calculated with the method ",
+      "described in calculation_method."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "energy_total_potential"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"hexadecapole_moment_xxxx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxxx component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_xxxy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxxy component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_xxxz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxxz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_xxyy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxyy component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_xxyz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxyz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_xxzz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxzz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_yyxz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyxz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_yyyx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyyx component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_yyyy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyyy component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_yyyz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyyz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_yyzz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyzz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_zzxy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the zzxy component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_zzzx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the zzzx component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_zzzy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the zzzy component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hexadecapole_moment_zzzz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the zzzz component of the hexadecapole moment ",
+      "(Debye-Ang**3)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"hybrid_xc_coeff1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Coefficient for Hartree-Fock exchange in hybrid DFT ",
+      "functionals"],
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"hybrid_xc_coeff2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Coefficients for Slater exchange, non-local exchange, local correlation, and ",
+      "non-local correlation, respectively, in hybrid DFT ",
+      "functionals"],
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_xxx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxx component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_xxy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxy component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_xxz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xxz component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_xyy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xyy component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_xyz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xyz component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_xzz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xzz component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_yyy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyy component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_yyz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yyz component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_yzz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yzz component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"octapole_moment_zzz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the zzz component of the octapole moment ",
+      "(Debye-Ang**2)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"quadrupole_moment_xx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xx component of the quadrupole moment ",
+      "(Debye-Ang)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"quadrupole_moment_xy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xy component of the quadrupole moment ",
+      "(Debye-Ang)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"quadrupole_moment_xz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the xz component of the quadrupole moment ",
+      "(Debye-Ang)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"quadrupole_moment_yy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yy component of the quadrupole moment ",
+      "(Debye-Ang)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"quadrupole_moment_yz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the yz component of the quadrupole moment ",
+      "(Debye-Ang)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"quadrupole_moment_zz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the zz component of the quadrupole moment ",
+      "(Debye-Ang)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"section_eigenvalues",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section containing (electronic-energy) eigenvalues for one spin channel. If, ",
+      "for example, the eigenvalues of the Kohn-Sham operator are to be stored, a ",
+      "string identifying this kind of eigenvalues is put in eigenvalues_kind (see the ",
+      "[eigenvalues\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-i",
+      "nfo/wikis/metainfo/eigenvalues-kind for the allowed strings), the coordinates ",
+      "of the $k$-points at which the eigenvalues were evaluated is stored in ",
+      "eigenvalues_kpoints, and the energy values of the eigenstates and their ",
+      "occupation is stored in eigenvalues_values and eigenvalues_occupation , ",
+      "respectively."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_after_annihilation_spin_s2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Real value of spin squared resulting from the annihilation of the first spin ",
+      "contaminant."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_alpha_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":"values of eigenenergies, alpha occ",
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_alpha_mos"
+    }]
+  },{
+    "meta_name":"x_gaussian_alpha_occ_eigenvalues_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "values of eigenenergies for occupied alpha ",
+      "MOs"],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_alpha_occ_symmetry_values",
+    "meta_type":"type-value",
+    "meta_description":"symmetry of the alpha occupied MOs",
+    "meta_parent_section":"x_gaussian_section_orbital_symmetries",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_alpha_occ_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_alpha_occupations",
+    "meta_type":"type-value",
+    "meta_description":"values of eigenenergies, alpha occ",
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_alpha_mos"
+    }]
+  },{
+    "meta_name":"x_gaussian_alpha_symmetries",
+    "meta_type":"type-value",
+    "meta_description":"symmetry of the alpha MOs",
+    "meta_parent_section":"x_gaussian_section_orbital_symmetries",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_alpha_mos"
+    }]
+  },{
+    "meta_name":"x_gaussian_alpha_vir_eigenvalues_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "values of eigenenergies for virtual alpha ",
+      "MOs"],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_alpha_vir_symmetry_values",
+    "meta_type":"type-value",
+    "meta_description":"symmetry of the alpha virtual MOs",
+    "meta_parent_section":"x_gaussian_section_orbital_symmetries",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_alpha_vir_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_atom_forces",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Forces acting on the atoms, calculated as minus gradient of ",
+      "energy_total."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "x_gaussian_atom_forces_type"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_gaussian_atom_forces_type",
+    "meta_type":"type-abstract",
+    "meta_description":[
+      "Some forces on the atoms (i.e. minus derivatives of some energy with respect to ",
+      "the atom position)."]
+  },{
+    "meta_name":"x_gaussian_atom_labels",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Labels of the atoms. These strings identify the atom kind and conventionally ",
+      "start with the symbol of the atomic species, possibly followed by a number. The ",
+      "same atomic species can be labelled with more than one atom_labels in order to ",
+      "distinguish, e.g., atoms of the same species assigned to different ",
+      "atom-centered basis sets or pseudopotentials, or simply atoms in different ",
+      "locations in the structure (e.g., bulk and surface). These labels can also be ",
+      "used for *particles* that do not correspond to physical atoms (e.g., ghost ",
+      "atoms in some codes using atom-centered basis sets). This metadata defines a ",
+      "configuration and is therefore required."],
+    "meta_parent_section":"section_run",
+    "meta_abstract_types":[
+      "x_gaussian_configuration_core"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_atom_positions",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Positions of all the atoms, in Cartesian coordinates. This metadata defines a ",
+      "configuration and is therefore required."],
+    "meta_parent_section":"section_run",
+    "meta_abstract_types":[
+      "x_gaussian_configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":"m"
+  },{
+    "meta_name":"x_gaussian_atom_x_coord",
+    "meta_type":"type-value",
+    "meta_description":"x coordinate for the atoms",
+    "meta_parent_section":"x_gaussian_section_geometry",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_gaussian_atom_x_force",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"x_gaussian_section_atom_forces",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_gaussian_atom_y_coord",
+    "meta_type":"type-value",
+    "meta_description":"y coordinate for the atoms",
+    "meta_parent_section":"x_gaussian_section_geometry",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_gaussian_atom_y_force",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"x_gaussian_section_atom_forces",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_gaussian_atom_z_coord",
+    "meta_type":"type-value",
+    "meta_description":"z coordinate for the atoms",
+    "meta_parent_section":"x_gaussian_section_geometry",
+    "meta_data_type":"float",
+    "meta_units":"m"
+  },{
+    "meta_name":"x_gaussian_atom_z_force",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"x_gaussian_section_atom_forces",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"N"
+  },{
+    "meta_name":"x_gaussian_atomic_masses",
+    "meta_type":"type-value",
+    "meta_description":"atomic masses for atoms",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_atomic_number",
+    "meta_type":"type-value",
+    "meta_description":"atomic number for atoms",
+    "meta_parent_section":"x_gaussian_section_geometry",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_beta_eigenvalues",
+    "meta_type":"type-value",
+    "meta_description":"values of eigenenergies, beta occ",
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_beta_mos"
+    }]
+  },{
+    "meta_name":"x_gaussian_beta_occ_eigenvalues_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "values of eigenenergies for occupied beta ",
+      "MOs"],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_beta_occ_symmetry_values",
+    "meta_type":"type-value",
+    "meta_description":"symmetry of the beta occupied MOs",
+    "meta_parent_section":"x_gaussian_section_orbital_symmetries",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_beta_occ_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_beta_occupations",
+    "meta_type":"type-value",
+    "meta_description":"values of eigenenergies, beta occ",
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_beta_mos"
+    }]
+  },{
+    "meta_name":"x_gaussian_beta_symmetries",
+    "meta_type":"type-value",
+    "meta_description":"symmetry of the beta MOs",
+    "meta_parent_section":"x_gaussian_section_orbital_symmetries",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_beta_mos"
+    }]
+  },{
+    "meta_name":"x_gaussian_beta_vir_eigenvalues_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "values of eigenenergies for virtual beta ",
+      "MOs"],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_beta_vir_symmetry_values",
+    "meta_type":"type-value",
+    "meta_description":"symmetry of the beta virtual MOs",
+    "meta_parent_section":"x_gaussian_section_orbital_symmetries",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_beta_vir_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_casscf_coefficient",
+    "meta_type":"type-value",
+    "meta_description":"CASSCF determinant coefficient",
+    "meta_parent_section":"x_gaussian_section_casscf",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_casscf_determinant",
+    "meta_type":"type-value",
+    "meta_description":"CASSCF determinant number",
+    "meta_parent_section":"x_gaussian_section_casscf",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gaussian_casscf_energy",
+    "meta_type":"type-value",
+    "meta_description":"CASSCF energy",
+    "meta_parent_section":"x_gaussian_section_casscf",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_ccsd_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and CCSD energies.",
+    "meta_parent_section":"x_gaussian_section_coupled_cluster",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_chk_file",
+    "meta_type":"type-value",
+    "meta_description":"binary file with detailed output information",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_ci_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and CI energies.",
+    "meta_parent_section":"x_gaussian_section_ci",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_configuration_core",
+    "meta_type":"type-abstract",
+    "meta_description":"Properties defining the current configuration."
+  },{
+    "meta_name":"x_gaussian_delta_energy_total_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total energy increment calculated with a given method during the ",
+      "self-consistent field (SCF) iterations."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_eigenvalues_occupation",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Occupation of the eigenstates whose (energy) eigenvalues are given in ",
+      "eigenvalues_values."],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues"
+    }]
+  },{
+    "meta_name":"x_gaussian_eigenvalues_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Values of the (electronic-energy) eigenvalues. Their occupations are given in ",
+      "eigenvalues_occupation."],
+    "meta_parent_section":"section_eigenvalues",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_spin_channels"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues_kpoints"
+    },{
+      "meta_dimension_symbolic":"number_of_eigenvalues"
+    }],
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_electronic_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Self-consistent electronic kinetic energy as defined in ",
+      "xc_method."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_electronic_structure_method",
+    "meta_type":"type-value",
+    "meta_description":"Name of electronic structure method.",
+    "meta_parent_section":"x_gaussian_section_elstruc_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_elstate_symmetry",
+    "meta_type":"type-value",
+    "meta_description":"symmetry group of the electronic state",
+    "meta_parent_section":"x_gaussian_section_symmetry",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_energy_electrostatic",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total electrostatic energy (nuclei + electrons), defined consistently with ",
+      "calculation_method."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_component",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_energy_error",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Error in the total energy. Defined consistently with ",
+      "xc_method."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_value",
+      "error_estimate_contribution",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_energy_scf",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the SCF total energy, either HF or ",
+      "DFT."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_total_potential",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_energy_total_scf_converged",
+    "meta_type":"type-value",
+    "meta_description":"SCF total energy converged for a given geometry.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_energy_total_scf_iteration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Total energy calculated with a given method during the self-consistent field ",
+      "(SCF) iterations."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_excited_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state ",
+      "energy"],
+    "meta_parent_section":"x_gaussian_section_excited",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_excited_oscstrength",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state oscillator ",
+      "strength"],
+    "meta_parent_section":"x_gaussian_section_excited",
+    "meta_data_type":"float",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_excited_spin_squared",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state spin squared ",
+      "value"],
+    "meta_parent_section":"x_gaussian_section_excited",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_excited_state_number",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state ",
+      "number"],
+    "meta_parent_section":"x_gaussian_section_excited",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gaussian_excited_transition",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state MOs involved in transitions and ",
+      "their coefficients"],
+    "meta_parent_section":"x_gaussian_section_excited",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_force_constant_values",
+    "meta_type":"type-value",
+    "meta_description":"Force constant matrix element values",
+    "meta_parent_section":"x_gaussian_section_force_constant_matrix",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_degrees_of_freedom"
+    },{
+      "meta_dimension_symbolic":"number_of_degrees_of_freedom"
+    }]
+  },{
+    "meta_name":"x_gaussian_force_constants",
+    "meta_type":"type-value",
+    "meta_description":"Force constant matrix elements",
+    "meta_parent_section":"x_gaussian_section_force_constant_matrix",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_frequencies",
+    "meta_type":"type-value",
+    "meta_description":"values of frequencies, in cm-1",
+    "meta_parent_section":"x_gaussian_section_frequencies",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_frequencies"
+    }]
+  },{
+    "meta_name":"x_gaussian_frequency_values",
+    "meta_type":"type-value",
+    "meta_description":"values of frequencies, in cm-1",
+    "meta_parent_section":"x_gaussian_section_frequencies",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_frequency_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_geometry_lattice_vector_x",
+    "meta_type":"type-value",
+    "meta_description":"x component of lattice vector",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_geometry_lattice_vector_y",
+    "meta_type":"type-value",
+    "meta_description":"y component of lattice vector",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_geometry_lattice_vector_z",
+    "meta_type":"type-value",
+    "meta_description":"z component of lattice vector",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_geometry_optimization_converged",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Specifies whether a geometry optimization is ",
+      "converged."],
+    "meta_parent_section":"x_gaussian_section_geometry_optimization_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_hf_detect",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Determine if the SCF method is one of RHF, UHF, or ",
+      "ROHF"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_hybrid_xc_hfx",
+    "meta_type":"type-value",
+    "meta_description":"Hartree-Fock exchange",
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_hybrid_xc_localcorr",
+    "meta_type":"type-value",
+    "meta_description":"Slater exchange",
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_hybrid_xc_nonlocalcorr",
+    "meta_type":"type-value",
+    "meta_description":"Slater exchange",
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_hybrid_xc_nonlocalex",
+    "meta_type":"type-value",
+    "meta_description":"Slater exchange",
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_hybrid_xc_slater",
+    "meta_type":"type-value",
+    "meta_description":"Slater exchange",
+    "meta_parent_section":"x_gaussian_section_hybrid_coeffs",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_masses",
+    "meta_type":"type-value",
+    "meta_description":"values of atomic masses",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    }]
+  },{
+    "meta_name":"x_gaussian_memory",
+    "meta_type":"type-value",
+    "meta_description":"total memory for the run",
+    "meta_parent_section":"section_run",
+    "meta_abstract_types":[
+      "settings_run"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_method",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying in an unique way the electronic structure method used for ",
+      "the final wavefunctions."],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_molecular_multipole_lm",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Tuples of $l$ and $m$ values for which the molecular multipoles (including the ",
+      "electric charge, dipole, etc.) are given. The meaning of the integer number $l$ ",
+      "is monopole/charge for $l=0$, dipole for $l=1$, quadrupole for $l=2$, etc. The ",
+      "meaning of the integer numbers $m$ is specified by ",
+      "molecular_multipole_m_kind."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gaussian_number_of_lm_molecular_multipoles"
+    },{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_gaussian_molecular_multipole_m_kind",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String describing what the integer numbers $m$ in molecular_multipole_lm mean. ",
+      "Allowed values (for atomic multipoles) are listed in the [m\\_kind wiki ",
+      "page](https://gitlab.rzg.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/m-kind)",
+      "."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_molecular_multipole_values",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the multipoles (including the monopole/charge for $l$ = 0, the dipole ",
+      "for $l$ = 1, etc.)."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gaussian_number_of_lm_molecular_multipoles"
+    }]
+  },{
+    "meta_name":"x_gaussian_molmech_method",
+    "meta_type":"type-value",
+    "meta_description":"molecular mechanics method.",
+    "meta_parent_section":"x_gaussian_section_molmech",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_moment_of_inertia_x",
+    "meta_type":"type-value",
+    "meta_description":"X component of moment of inertia",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_moment_of_inertia_y",
+    "meta_type":"type-value",
+    "meta_description":"Y component of moment of inertia",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_moment_of_inertia_z",
+    "meta_type":"type-value",
+    "meta_description":"Z component of moment of inertia",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_moments",
+    "meta_type":"type-value",
+    "meta_description":"Values of moments of inertia",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gaussian_mp2_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and MP2 energies.",
+    "meta_parent_section":"x_gaussian_section_moller_plesset",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_mp3_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and MP3 energies.",
+    "meta_parent_section":"x_gaussian_section_moller_plesset",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_mp4dq_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and MP4(DQ) energies.",
+    "meta_parent_section":"x_gaussian_section_moller_plesset",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_mp4sdq_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and MP4(SDQ) energies.",
+    "meta_parent_section":"x_gaussian_section_moller_plesset",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_mp4sdtq_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and MP4(SDTQ) energies.",
+    "meta_parent_section":"x_gaussian_section_moller_plesset",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_mp5_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and MP5 energies.",
+    "meta_parent_section":"x_gaussian_section_moller_plesset",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_normal_mode_values",
+    "meta_type":"type-value",
+    "meta_description":"normal mode vectors",
+    "meta_parent_section":"x_gaussian_section_frequencies",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_frequencies"
+    },{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gaussian_normal_modes",
+    "meta_type":"type-value",
+    "meta_description":"normal mode vectors",
+    "meta_parent_section":"x_gaussian_section_frequencies",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_normal_modes_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_number_of_atoms",
+    "meta_type":"type-value",
+    "meta_description":"number of atoms of the system",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_number_of_lm_molecular_multipoles",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Number of $l,m$ combinations for which molecular multipoles are ",
+      "given."],
+    "meta_parent_section":"x_gaussian_section_molecular_multipoles"
+  },{
+    "meta_name":"x_gaussian_number_of_processors",
+    "meta_type":"type-value",
+    "meta_description":"number of processors used",
+    "meta_parent_section":"section_run",
+    "meta_abstract_types":[
+      "parallelization_info",
+      "settings_run"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_number_of_scf_iterations",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Number of performed self-consistent field (SCF) iterations at DFT ",
+      "level."],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_abstract_types":[
+      "x_gaussian_scf_info"]
+  },{
+    "meta_name":"x_gaussian_perturbation_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of the perturbation energy for double ",
+      "hybrids"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "energy_total_potential",
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_pressure",
+    "meta_type":"type-value",
+    "meta_description":"Value of pressure for thermochemical values",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_program_cpu_time",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"x_gaussian_section_times",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_program_execution_date",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_program_implementation",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_program_release_date",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_program_termination_date",
+    "meta_type":"type-value",
+    "meta_description":"-",
+    "meta_parent_section":"x_gaussian_section_times",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_qcisd_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and QCISD energies.",
+    "meta_parent_section":"x_gaussian_section_quadratic_ci",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_qcisdtq_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Difference between SCF and QCISD(TQ) energies.",
+    "meta_parent_section":"x_gaussian_section_quadratic_ci",
+    "meta_data_type":"float",
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_red_masses",
+    "meta_type":"type-value",
+    "meta_description":"values of normal mode reduced masses",
+    "meta_parent_section":"x_gaussian_section_frequencies",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_frequencies"
+    }]
+  },{
+    "meta_name":"x_gaussian_reduced_masses",
+    "meta_type":"type-value",
+    "meta_description":"values of normal mode reduced masses",
+    "meta_parent_section":"x_gaussian_section_frequencies",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_reduced_masses_rows"
+    }]
+  },{
+    "meta_name":"x_gaussian_scf_info",
+    "meta_type":"type-abstract",
+    "meta_description":[
+      "Information on the self-consistent field (SCF) ",
+      "procedure."]
+  },{
+    "meta_name":"x_gaussian_section_atom_forces",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section that contains Cartesian coordinates of the system for a given ",
+      "geometry"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_casscf",
+    "meta_type":"type-section",
+    "meta_description":"CASSCF energies and properties",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_ci",
+    "meta_type":"type-section",
+    "meta_description":"CI energies.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_coupled_cluster",
+    "meta_type":"type-section",
+    "meta_description":"Coupled cluster energies.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_elstruc_method",
+    "meta_type":"type-section",
+    "meta_description":"Section containing electronic structure method.",
+    "meta_parent_section":"section_method",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_energy_components",
+    "meta_type":"type-section",
+    "meta_description":"Section containing total energy components",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_excited",
+    "meta_type":"type-section",
+    "meta_description":[
+      "CI singles, TDDFT/TDHF, ZINDO or EOMCCSD excited state energies and ",
+      "properties"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_excited_initial",
+    "meta_type":"type-section",
+    "meta_description":"Excited state energies and properties",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_force_constant_matrix",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for force constant matrix in Cartesians. Units are ",
+      "mdyne.Angstrom"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_frequencies",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for the values of the frequencies, reduced masses and normal mode ",
+      "vectors"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_geometry",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section that contains Cartesian coordinates of the system for a given ",
+      "geometry"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_geometry_optimization_info",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Specifies whether a geometry optimization is ",
+      "converged."],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_hybrid_coeffs",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section that contains coefficients for the hybrid DFT ",
+      "functionals"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_models",
+    "meta_type":"type-section",
+    "meta_description":"composite model chemistries.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_molecular_multipoles",
+    "meta_type":"type-section",
+    "meta_description":"Section describing multipoles (charges, dipoles,...).",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_moller_plesset",
+    "meta_type":"type-section",
+    "meta_description":"Perturbative Moller-Plesset energies.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_molmech",
+    "meta_type":"type-section",
+    "meta_description":"molecular mechanics method and energies.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_orbital_symmetries",
+    "meta_type":"type-section",
+    "meta_description":"section for the symmetry of the MOs",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_quadratic_ci",
+    "meta_type":"type-section",
+    "meta_description":"Quadratic CI energies.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_semiempirical",
+    "meta_type":"type-section",
+    "meta_description":"semiempirical convergence cycles and energies.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_symmetry",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section for the symmetry of the electronic ",
+      "state"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_thermochem",
+    "meta_type":"type-section",
+    "meta_description":"section for thermochemical quantities",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_times",
+    "meta_type":"type-section",
+    "meta_description":[
+      "section that contains the execution times of the ",
+      "run"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_section_total_scf_one_geometry",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Check for SCF convergence and writes the total energy value to ",
+      "backend"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gaussian_semiempirical_energy",
+    "meta_type":"type-value",
+    "meta_description":"semiempirical energies.",
+    "meta_parent_section":"x_gaussian_section_semiempirical",
+    "meta_data_type":"float",
+    "meta_repeats":true,
+    "meta_units":"J"
+  },{
+    "meta_name":"x_gaussian_semiempirical_method",
+    "meta_type":"type-value",
+    "meta_description":"semiempirical method.",
+    "meta_parent_section":"x_gaussian_section_semiempirical",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_settings",
+    "meta_type":"type-value",
+    "meta_description":"electronic structure method, basis set, etc.",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string",
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gaussian_settings_corrected",
+    "meta_type":"type-value",
+    "meta_description":"electronic structure method, basis set, etc.",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_single_configuration_calculation_converged",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Determines whether a single configuration calculation is ",
+      "converged."],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_spin_s2",
+    "meta_type":"type-value",
+    "meta_description":"Real value of spin squared.",
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_spin_target_multiplicity",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Target (user-imposed) value of the spin multiplicity $M=2S+1$, where $S$ is the ",
+      "total spin. It is an integer value. This value is not necessarly the value ",
+      "obtained at the end of the calculation. See spin_s2 for the converged value of ",
+      "the spin moment."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gaussian_temperature",
+    "meta_type":"type-value",
+    "meta_description":"Value of temperature for thermochemical values",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_thermal_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":"Value of thermal correction to total energy",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_thermal_correction_enthalpy",
+    "meta_type":"type-value",
+    "meta_description":"Value of thermal correction to enthalpy",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_thermal_correction_free_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Value of thermal correction to Gibbs free ",
+      "energy"],
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gaussian_total_charge",
+    "meta_type":"type-value",
+    "meta_description":"Total charge of the system.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gaussian_xc",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String identifying in an unique way the XC method used for the final ",
+      "wavefunctions."],
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gaussian_zero_point_energy",
+    "meta_type":"type-value",
+    "meta_description":"Value of zero-point energy",
+    "meta_parent_section":"x_gaussian_section_thermochem",
+    "meta_data_type":"float"
+  }]
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"method_atom_kind_atom_number",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Atomic number (number of protons) of this atom kind, use 0 if not an ",
+    "atom."],
+  "meta_parent_section":"section_method_atom_kind",
+  "meta_data_type":"int"
+}

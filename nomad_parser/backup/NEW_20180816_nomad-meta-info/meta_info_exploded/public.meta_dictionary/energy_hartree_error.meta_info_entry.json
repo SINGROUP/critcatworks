@@ -1,0 +1,13 @@
+{
+  "meta_name":"energy_hartree_error",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Error in the Hartree (electrostatic) potential energy. Defined consistently ",
+    "with xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_value",
+    "error_estimate_contribution"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

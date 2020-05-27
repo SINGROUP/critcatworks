@@ -1,0 +1,10 @@
+{
+  "meta_name":"configuration_raw_gid",
+  "meta_type":"type-value",
+  "meta_description":[
+    "checksum of the configuration_core, i.e. the geometry of the system. The values ",
+    "are not normalized in any way so equivalent configurations might have different ",
+    "values"],
+  "meta_parent_section":"section_system",
+  "meta_data_type":"string"
+}

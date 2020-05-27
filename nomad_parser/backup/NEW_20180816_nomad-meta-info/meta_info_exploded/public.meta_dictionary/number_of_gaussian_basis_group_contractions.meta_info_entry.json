@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_gaussian_basis_group_contractions",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of different contractions, i.e. resulting basis functions in a ",
+    "section_gaussian_basis_group section."],
+  "meta_parent_section":"section_gaussian_basis_group",
+  "meta_abstract_types":[
+    "basis_set_description"]
+}

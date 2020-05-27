@@ -1,0 +1,12 @@
+{
+  "meta_name":"number_of_electrons",
+  "meta_type":"type-value",
+  "meta_description":"Number of electrons in system",
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "configuration_core"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  }]
+}

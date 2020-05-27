@@ -1,0 +1,16 @@
+{
+  "meta_name":"frame_sequence_pressure",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Array containing the values of the pressure (one third of the ",
+    "trace of the stress tensor) along this sequence of frames (a frame is one ",
+    "section_single_configuration_calculation). If not all frames have a value the ",
+    "indices of the frames that have a value are stored in ",
+    "frame_sequence_pressure_frames."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_pressure_evaluations_in_sequence"
+  }],
+  "meta_units":"Pa"
+}

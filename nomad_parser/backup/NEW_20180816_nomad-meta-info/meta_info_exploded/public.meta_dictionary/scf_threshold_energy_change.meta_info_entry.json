@@ -1,0 +1,15 @@
+{
+  "meta_name":"scf_threshold_energy_change",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the threshold for the energy_total_scf_iteration change between two ",
+    "subsequent self-consistent field (SCF) iterations. The SCF is considered ",
+    "converged when the total-energy change between two SCF cycles is below the ",
+    "threshold (possibly in combination with other ",
+    "criteria)."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_scf"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

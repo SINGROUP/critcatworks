@@ -1,0 +1,24 @@
+{
+  "meta_name":"section_gaussian_basis_group",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section that describes a group of Gaussian contractions. Groups allow one to ",
+    "calculate the primitive Gaussian integrals once for several different linear ",
+    "combinations of them. This defines basis functions with radial part $f_i(r) = ",
+    "r^{l_i} \\\\sum_{j} c_{i j} A(l_i, \\\\alpha_j) exp(-\\\\alpha_j r^2)$ where $A(l_i, ",
+    "\\\\alpha_j)$ is a the normalization coefficient for primitive Gaussian basis ",
+    "functions. Here, $\\\\alpha_j$ is defined in gaussian_basis_group_exponents, $l_i$ ",
+    "is given in gaussian_basis_group_ls, and $c_{i j}$ is given in ",
+    "gaussian_basis_group_contractions, whereas the radial part is given by the ",
+    "spherical harmonics $Y_{l m}$.\n",
+    "\n",
+    "This section is defined only if the original basis function uses Gaussian basis ",
+    "functions, and the sequence of radial functions $f_i$ across all ",
+    "section_gaussian_basis_group in section_basis_set_atom_centered should match ",
+    "the one of basis_set_atom_centered_radial_functions."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

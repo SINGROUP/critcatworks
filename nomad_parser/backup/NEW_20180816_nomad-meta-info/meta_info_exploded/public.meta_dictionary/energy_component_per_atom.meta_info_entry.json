@@ -1,0 +1,9 @@
+{
+  "meta_name":"energy_component_per_atom",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "A value of an energy component per atom, concurring in defining the total ",
+    "energy per atom."],
+  "meta_abstract_types":[
+    "energy_value"]
+}

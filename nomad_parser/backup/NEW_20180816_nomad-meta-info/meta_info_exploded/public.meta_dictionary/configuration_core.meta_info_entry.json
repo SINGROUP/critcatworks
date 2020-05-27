@@ -1,0 +1,5 @@
+{
+  "meta_name":"configuration_core",
+  "meta_type":"type-abstract",
+  "meta_description":"Properties defining the current configuration."
+}

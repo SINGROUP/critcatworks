@@ -1,0 +1,15 @@
+{
+  "meta_name":"section_eigenvalues",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section containing (electronic-energy) eigenvalues for one spin channel. If, ",
+    "for example, the eigenvalues of the Kohn-Sham operator are to be stored, a ",
+    "string identifying this kind of eigenvalues is put in eigenvalues_kind, the ",
+    "coordinates of the $k$-points at which the eigenvalues are evaluated is stored ",
+    "in eigenvalues_kpoints, and the energy values of the eigenstates and their ",
+    "occupation is stored in eigenvalues_values and eigenvalues_occupation, ",
+    "respectively."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

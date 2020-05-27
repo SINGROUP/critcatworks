@@ -1,0 +1,9 @@
+{
+  "meta_name":"geometry_optimization_converged",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Arrays specify whether a geometry optimization is ",
+    "converged."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"boolean"
+}

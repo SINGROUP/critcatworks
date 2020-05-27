@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_van_der_waals_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Method used to compute van der Waals energy stored in ",
+    "energy_van_der_waals_value. This metadata is used when more than one van der ",
+    "Waals method is applied in the same *single configuration calculation* (see ",
+    "section_single_configuration_calculation). The method used for van der Waals  ",
+    "(the one consistent with energy_current and, e.g., for evaluating the forces ",
+    "for a relaxation or dynamics) is defined in ",
+    "settings_van_der_waals."],
+  "meta_parent_section":"section_energy_van_der_waals",
+  "meta_data_type":"string"
+}

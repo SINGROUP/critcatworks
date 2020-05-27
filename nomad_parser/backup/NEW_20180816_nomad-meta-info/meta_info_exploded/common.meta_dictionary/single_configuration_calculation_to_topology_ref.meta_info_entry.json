@@ -1,0 +1,8 @@
+{
+  "meta_name":"single_configuration_calculation_to_topology_ref",
+  "meta_type":"type-value",
+  "meta_description":"Reference to the topology used for this system.",
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_topology"
+}

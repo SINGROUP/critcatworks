@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.dft.general &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.dft.general</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Setup of folders</span>
+<span class="c1"># ChunkCalculations</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">atoms_dict_to_ase</span><span class="p">,</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.dft.cp2k</span> <span class="k">import</span> <span class="n">setup_cp2k</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">fetch_simulations</span>
+
+<div class="viewcode-block" id="StructureFolderTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.dft.html#critcatworks.dft.general.StructureFolderTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">StructureFolderTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Task to setup folders with xyz structures.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        name (str) :        individual calculation folder name </span>
+<span class="sd">                            is prefixed with the given string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;StructureFolderTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;target_path&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="StructureFolderTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.dft.html#critcatworks.dft.general.StructureFolderTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;target_path&#39;</span><span class="p">]</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">time_str</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M&quot;</span><span class="p">)</span>
+
+        <span class="n">parent_folder_name</span> <span class="o">=</span> <span class="s1">&#39;cp2k_calculations_&#39;</span> <span class="o">+</span> <span class="n">time_str</span>
+        <span class="n">parent_folder_path</span> <span class="o">=</span> <span class="n">target_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">parent_folder_name</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids</span><span class="p">)</span> 
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_folder_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_folder_path</span><span class="p">)</span>
+
+        <span class="n">calc_paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1">#iterating over available structures</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">):</span>
+
+            <span class="n">atoms_dict</span> <span class="o">=</span> <span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)][</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms_dict_to_ase</span><span class="p">(</span><span class="n">atoms_dict</span><span class="p">)</span>
+            <span class="n">structure_folder</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+            <span class="n">structure_folder_path</span> <span class="o">=</span> <span class="n">parent_folder_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">structure_folder</span>
+            <span class="n">calc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">structure_folder_path</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">structure_folder_path</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">structure_folder_path</span><span class="p">)</span>
+
+            <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">structure_folder_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;structure.xyz&quot;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+        
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+
+
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_paths&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_paths</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span> <span class="o">=</span> <span class="n">update_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ChunkCalculationsTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.dft.html#critcatworks.dft.general.ChunkCalculationsTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">ChunkCalculationsTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Create Fireworks with new calculations to setup and run</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template (str)    : input file for calculations represented as string. </span>
+<span class="sd">                            It works as a template which is later modified by the</span>
+<span class="sd">                            simulation-specific Firework.</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        name (str) :        individual calculation folder name </span>
+<span class="sd">                            is prefixed with the given string</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">        chunk_size (int) :  number of calculations to be run simulataneously. Default -1</span>
+<span class="sd">                            means all calculations are run at once.</span>
+<span class="sd">        simulation_method (str) :   Specifies which simulation code to use.</span>
+<span class="sd">                                    Currently, only CP2K is implemented.</span>
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction :  Firework action, updates fw_spec, </span>
+<span class="sd">                    creates new Fireworks as detours from workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;ChunkCalculationsTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;target_path&#39;</span><span class="p">,</span>  <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;n_max_restarts&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chunk_size&#39;</span><span class="p">,</span> <span class="s1">&#39;simulation_method&#39;</span><span class="p">,</span> <span class="s1">&#39;skip_dft&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="ChunkCalculationsTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.dft.html#critcatworks.dft.general.ChunkCalculationsTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">]</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;target_path&quot;</span><span class="p">]</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chunk_size&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">simulation_method</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;simulation_method&quot;</span><span class="p">,</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;n_max_restarts&quot;</span><span class="p">]</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;skip_dft&quot;</span><span class="p">]</span>
+        <span class="n">calc_paths</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_paths&quot;</span><span class="p">]</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids</span><span class="p">)</span>
+
+        <span class="c1"># define what chunk to run</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">n_calcs_started</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_calcs_started&quot;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting Chunk&quot;</span><span class="p">)</span>
+            <span class="n">n_calcs_started</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">chunk_size</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">calc_ids</span><span class="p">[</span><span class="n">n_calcs_started</span> <span class="p">:</span> <span class="n">n_calcs_started</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">]</span>
+            <span class="n">calc_paths</span> <span class="o">=</span> <span class="n">calc_paths</span><span class="p">[</span><span class="n">n_calcs_started</span> <span class="p">:</span> <span class="n">n_calcs_started</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">]</span>
+
+        <span class="n">wfs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">links_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)</span>
+            <span class="n">target_path</span> <span class="o">=</span> <span class="n">calc_paths</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)]</span>
+
+            <span class="k">if</span> <span class="n">simulation_method</span> <span class="o">==</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">:</span>
+                <span class="c1"># create detour to setup cp2k calculation</span>
+                <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)]</span>
+                <span class="n">new_fw</span><span class="p">,</span> <span class="n">links</span> <span class="o">=</span> <span class="n">setup_cp2k</span><span class="p">(</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">,</span>
+                    <span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span>
+                    <span class="n">calc_id</span> <span class="o">=</span> <span class="n">calc_id</span><span class="p">,</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+                    <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">,</span>
+                    <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">,</span>
+                    <span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="n">wfs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_fw</span><span class="p">)</span>
+                <span class="n">links_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">links_dict</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;WARNING! &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulation_method</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; unknown simulation method.&quot;</span><span class="p">)</span>
+        <span class="n">detours</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">wfs</span><span class="p">,</span> <span class="n">links_dict</span><span class="p">)</span>
+
+        <span class="n">update_spec</span> <span class="o">=</span> <span class="n">fw_spec</span>
+        <span class="n">update_spec</span><span class="p">[</span><span class="s2">&quot;n_calcs_started&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_calcs_started</span> <span class="o">+</span> <span class="n">chunk_size</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">update_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span> <span class="o">=</span> <span class="n">update_spec</span><span class="p">,</span> <span class="n">detours</span> <span class="o">=</span> <span class="n">detours</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="setup_folders"><a class="viewcode-back" href="../../../src/doc/critcatworks.dft.html#critcatworks.dft.general.setup_folders">[docs]</a><span class="k">def</span> <span class="nf">setup_folders</span><span class="p">(</span><span class="n">target_path</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cp2k_run_id&quot;</span><span class="p">,):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Creates folders with xyz structures.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        name (str) :        individual calculation folder name </span>
+<span class="sd">                            is prefixed with the given string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : StructureFolderWork Firework</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">StructureFolderTask</span><span class="p">(</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;StructureFolderTask&#39;</span><span class="p">},</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;StructureFolderWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+
+
+<div class="viewcode-block" id="chunk_calculations"><a class="viewcode-back" href="../../../src/doc/critcatworks.dft.html#critcatworks.dft.general.chunk_calculations">[docs]</a><span class="k">def</span> <span class="nf">chunk_calculations</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cp2k_run_id&quot;</span><span class="p">,</span> <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">simulation_method</span> <span class="o">=</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">,</span> <span class="n">skip_dft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Create Fireworks with new calculations to setup and run.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template (str)    : input file for calculations represented as string. </span>
+<span class="sd">                            It works as a template which is later modified by the</span>
+<span class="sd">                            simulation-specific Firework.</span>
+<span class="sd">        target_path (str) : absolute path to the target directory </span>
+<span class="sd">                            (needs to exist) on the computing resource.</span>
+<span class="sd">        name (str) :        individual calculation folder name </span>
+<span class="sd">                            is prefixed with the given string</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">        chunk_size (int) : det :    number of calculations to be run simulataneously. Default -1</span>
+<span class="sd">                                    means all calculations are run at once.</span>
+<span class="sd">        simulation_method (str) :   Specifies which simulation code to use.</span>
+<span class="sd">                                    Currently, only CP2K is implemented.</span>
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">                Firework : StructureFolderWork Firework,</span>
+<span class="sd">                           creates new Fireworks as detours from workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">ChunkCalculationsTask</span><span class="p">(</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">,</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="p">,</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="n">chunk_size</span><span class="p">,</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span>
+        <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+        <span class="n">simulation_method</span> <span class="o">=</span> <span class="n">simulation_method</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;lightweight&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;ChunkCalculationsTask&#39;</span><span class="p">},</span>
+                     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ChunkCalculationsWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

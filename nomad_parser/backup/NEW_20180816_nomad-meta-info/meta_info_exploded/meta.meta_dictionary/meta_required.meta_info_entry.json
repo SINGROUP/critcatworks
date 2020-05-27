@@ -1,0 +1,9 @@
+{
+  "meta_name":"meta_required",
+  "meta_type":"type-value",
+  "meta_description":[
+    "If each meta_parent_section requires at least a value of this type.\n",
+    "Defaults to false."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"boolean"
+}

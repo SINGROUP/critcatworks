@@ -1,0 +1,9 @@
+{
+  "meta_name":"response_context",
+  "meta_type":"type-section",
+  "meta_description":[
+    "The top level context containing the reponse to an api query, when using ",
+    "jsonAPI they are tipically in the meta part"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

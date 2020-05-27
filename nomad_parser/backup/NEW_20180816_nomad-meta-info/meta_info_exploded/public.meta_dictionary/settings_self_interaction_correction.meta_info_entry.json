@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_self_interaction_correction",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters and information connected with the self-interaction ",
+    "correction (SIC) method being used in self_interaction_correction_method."],
+  "meta_abstract_types":[
+    "settings_xc"]
+}

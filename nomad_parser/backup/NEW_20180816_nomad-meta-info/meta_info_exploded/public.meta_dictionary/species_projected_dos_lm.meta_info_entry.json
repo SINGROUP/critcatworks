@@ -1,0 +1,20 @@
+{
+  "meta_name":"species_projected_dos_lm",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Consists of tuples of $l$ and $m$ values for all given values in the ",
+    "species_projected_dos_values_lm species field.\n",
+    "\n",
+    "The quantum number $l$ represents the azimuthal quantum number, whereas for the ",
+    "quantum number $m$, besides the conventional use as magnetic quantum number ",
+    "($l+1$ integer values from $-l$ to $l$), a set of different conventions is ",
+    "accepted. The adopted convention is specified by ",
+    "atom_projected_dos_m_kind."],
+  "meta_parent_section":"section_species_projected_dos",
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_lm_species_projected_dos"
+  },{
+    "meta_dimension_fixed":2
+  }]
+}

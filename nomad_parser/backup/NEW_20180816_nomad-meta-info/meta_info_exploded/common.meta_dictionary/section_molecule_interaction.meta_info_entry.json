@@ -1,0 +1,12 @@
+{
+  "meta_name":"section_molecule_interaction",
+  "meta_type":"type-section",
+  "meta_description":[
+    "(deprecated) Section describing a bonded interaction between atoms within a ",
+    "molecule."],
+  "meta_parent_section":"section_molecule_type",
+  "meta_abstract_types":[
+    "settings_interaction"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,19 @@
+{
+  "meta_name":"energy_current",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value of the energy calculated with calculation_method_current. energy_current ",
+    "is equal to energy_total for non-perturbative methods. For perturbative ",
+    "methods, energy_current is equal to the correction: energy_total minus ",
+    "energy_total of the calculation_to_calculation_ref with ",
+    "calculation_to_calculation_kind = starting_point (see the ",
+    "[method_to_method_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-me",
+    "ta-info/wikis/metainfo/method-to-method-kind)). See also [energy_current wiki ",
+    "page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/energ",
+    "y-current)."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_total_potential"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

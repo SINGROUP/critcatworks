@@ -1,0 +1,11 @@
+{
+  "meta_name":"instant_pressure",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The values of the pressure (one third of the trace of the stress tensor) along ",
+    "this frame. If not all frames have a value the indices of the frames that have ",
+    "a value are stored in frame_sequence_pressure_frames."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "meta_units":"Pa"
+}

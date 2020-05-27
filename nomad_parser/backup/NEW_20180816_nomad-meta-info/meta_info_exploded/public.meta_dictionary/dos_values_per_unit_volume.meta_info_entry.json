@@ -1,0 +1,15 @@
+{
+  "meta_name":"dos_values_per_unit_volume",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Values (number of states for a given energy divided by volume, the set of ",
+    "discrete energy values is given in dos_energies) of density (electronic-energy ",
+    "or vibrational-energy) of states."],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_dos_values"
+  }]
+}

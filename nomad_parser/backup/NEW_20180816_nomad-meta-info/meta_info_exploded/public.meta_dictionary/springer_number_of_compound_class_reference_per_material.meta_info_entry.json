@@ -1,0 +1,9 @@
+{
+  "meta_name":"springer_number_of_compound_class_reference_per_material",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Number of publications/references using this compound class for the current ",
+    "compound in the Springer Materials database"],
+  "meta_parent_section":"section_springer_compound_class",
+  "meta_data_type":"int"
+}

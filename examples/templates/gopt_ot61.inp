@@ -1,0 +1,159 @@
+#==========================================================================#
+#                                                                          #
+#  CP2K 6.1 input file                                                     #
+#  Project: post-CritCat research                                          #
+#  Project keywords: Pt-TM clusters, hydrogen evolution, catalysis         #
+#  Olli Ahlstedt : M&MM Group : Physics department : Tampere University    #
+#  Modified 3rd October 2019                                               #
+#                                                                          #
+#==========================================================================#
+
+&GLOBAL
+  PROJECT 69H_at_Pt12Ni43_gas_phase
+  PREFERRED_FFT_LIBRARY FFTSG
+  PRINT_LEVEL MEDIUM
+  RUN_TYPE GEO_OPT
+  WALLTIME 09:45:00
+&END GLOBAL
+
+&FORCE_EVAL
+  METHOD Quickstep
+  
+  &DFT
+
+    # Specify the total charge of system
+    CHARGE 0
+    
+    UKS TRUE
+    #MULTIPLICITY 8
+    
+    # Poisson Solver required for charge species
+    &POISSON
+      PERIODIC XYZ
+      POISSON_SOLVER WAVELET
+    &END POISSON
+
+    BASIS_SET_FILE_NAME BASIS_MOLOPT
+    POTENTIAL_FILE_NAME POTENTIAL
+
+    &MGRID
+      # Plane wave basis
+      # The default unit is Ry \approx 13.6eV 
+      REL_CUTOFF 60
+      CUTOFF 600
+    &END MGRID
+
+    &QS
+      # Gaussians, planewaves and pseudopotentials, GPW is default value
+      METHOD GPW
+    &END QS
+
+    &SCF
+      # Accuracy of scf cycle in hartree, default 1.0E-5
+      EPS_SCF 1.0E-6
+      # How to start off - Use the RESTART file as an initial guess (and ATOMIC if not present)
+      SCF_GUESS RESTART
+
+      # How many scf steps - default is 50
+      MAX_SCF 50
+
+      # Set various options for the orbital transformation (OT) method
+      &OT ON
+        # Quick for larger systems
+        PRECONDITIONER FULL_SINGLE_INVERSE
+        # Minimizer to be used with the OT method - default is CG (Conjugate Gradient)
+        MINIMIZER CG
+        # Should be an estimate for the energy gap [a.u.] (HOMO-LUMO) and is used in preconditioning, default -1.0
+        # Especially effective with the FULL_ALL preconditioner, in which case it should be an underestimate of the gap (can be a small number, e.g. 0.002).
+        # FULL_SINGLE_INVERSE takes it as lower bound (values below 0.05 can cause stability issues).
+        # In general, heigher values will tame the preconditioner in case of poor initial guesses.
+        # A negative value will leave the choice to CP2K depending on type of preconditioner.
+        ENERGY_GAP 0.1
+      &END
+
+      # Parameters controlling the outer SCF loop
+      &OUTER_SCF
+      # Start again if not converged
+      # Must be smaller than the one in inner loop, default 1.0E-5
+        EPS_SCF 1.0E-6
+        MAX_SCF 10
+      &END OUTER_SCF
+
+    &END SCF
+
+    # Next section defines the density functional used
+    &XC
+      &XC_FUNCTIONAL
+        # Uses the PBE functional
+        &PBE
+        &END
+      &END XC_FUNCTIONAL
+      
+      &VDW_POTENTIAL
+        DISPERSION_FUNCTIONAL PAIR_POTENTIAL
+        &PAIR_POTENTIAL
+          TYPE DFTD3 
+          PARAMETER_FILE_NAME dftd3.dat
+          REFERENCE_FUNCTIONAL PBE
+        &END PAIR_POTENTIAL
+      &END VDW_POTENTIAL
+      
+    &END XC
+  &END DFT
+
+  # This section defines the atoms and boundary conditions
+  &SUBSYS
+    &CELL
+    # Specify the lengths of the cell vectors A, B, and C,
+    # which defines the diagonal elements of h matrix for an orthorhombic cell
+    # By default in angstrom - everywhere else in AU!
+      ABC 25.0 25.0 25.0
+      PERIODIC XYZ
+    &END CELL
+
+    &TOPOLOGY
+      # Read coords from file
+      COORD_FILE_NAME structure.xyz
+      COORD_FILE_FORMAT XYZ
+
+      # Allows centering the coordinates of the system in the box
+      &CENTER_COORDINATES FALSE
+      &END CENTER_COORDINATES
+    &END TOPOLOGY
+
+    # For each QM atom need to define basis set and pseudo potential
+    &KIND Pt
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE-q18
+    &END KIND
+
+    &KIND Ni
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE-q18
+    &END KIND
+
+    &KIND H
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE-q1
+    &END KIND
+
+  &END SUBSYS
+
+  &PRINT
+    &FORCES ON
+      FILENAME forces
+    &END FORCES
+  &END PRINT
+
+&END FORCE_EVAL
+
+&MOTION
+  # How to move atoms
+  &GEO_OPT
+    MAX_ITER 300
+    MAX_FORCE 4.5E-4  # Default: 4.5E-4 [hartree/bohr]
+    RMS_FORCE 3.0E-4  # Default: 3.0E-4 [hartree/bohr]
+    OPTIMIZER BFGS
+  &END GEO_OPT
+&END MOTION
+

@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_correction_hartree",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Correction to the density-density electrostatic energy in the sum of ",
+    "eigenvalues (that uses the mixed density on one side), and the fully consistent ",
+    "density-density electrostatic energy. Defined consistently with ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

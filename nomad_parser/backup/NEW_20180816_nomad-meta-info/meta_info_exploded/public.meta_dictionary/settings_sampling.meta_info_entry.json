@@ -1,0 +1,5 @@
+{
+  "meta_name":"settings_sampling",
+  "meta_type":"type-abstract",
+  "meta_description":"Contains parameters controlling the sampling."
+}

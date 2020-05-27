@@ -1,0 +1,271 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"nwchem",
+  "description":"Meta info used by the NWChem parser, all names are expected to start with x_nwchem_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_nwchem_branch",
+    "description":"The main branch of the code.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_compilation_datetime",
+    "description":"The compilation date and time.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_db_filename",
+    "description":"The database filename.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_electron_spin_restriction",
+    "description":"Electron spin restriction.",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_energy_coulomb",
+    "description":"The Coulomb energy energy in a DFT calculation.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_energy_nuclear_repulsion",
+    "description":"The nuclear repulsion energy in a DFT calculation.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_energy_one_electron",
+    "description":"The one-electron energy in a DFT calculation.",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_ga_revision",
+    "description":"The ga revision.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_geo_opt_step_energy",
+    "description":"The energy for a geometry optimization step.",
+    "superNames":["x_nwchem_section_geo_opt_step"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_input_filename",
+    "description":".",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_input_prefix",
+    "description":"The input prefix.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_lattice_basis_vector_angles",
+    "description":"The angles between the basis vectors.",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":[3],
+    "unit":"rad"
+  },{
+    "name":"x_nwchem_lattice_basis_vector_lengths",
+    "description":"The lengths of the basis vectors.",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":[3],
+    "unit":"m"
+  },{
+    "name":"x_nwchem_lattice_omega",
+    "description":"The lattice omega value.",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_nproc",
+    "description":"Number of processes used.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_program_name",
+    "description":"The name of the program that was run.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_qmd_initial_temperature",
+    "description":"Initial temperature",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_nwchem_qmd_nuclear_integrator",
+    "description":"Integrator for nuclei.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_qmd_nuclear_time_step",
+    "description":"Nuclear time step.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_qmd_number_of_nuclear_steps",
+    "description":"Number of nuclear steps.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_nwchem_qmd_random_seed",
+    "description":"Random seed.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_nwchem_qmd_step_dipole",
+    "description":"Electric dipole moment.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "shape":[3],
+    "unit":"bohr*e"
+  },{
+    "name":"x_nwchem_qmd_step_kinetic_energy",
+    "description":"Kinetic energy.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "unit":"Ha"
+  },{
+    "name":"x_nwchem_qmd_step_potential_energy",
+    "description":"Potential energy.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "unit":"Ha"
+  },{
+    "name":"x_nwchem_qmd_step_target_temperature",
+    "description":"Target temperature.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_nwchem_qmd_step_temperature",
+    "description":"Temperature.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_nwchem_qmd_step_time",
+    "description":"Elapsed simulation time.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "unit":"fs"
+  },{
+    "name":"x_nwchem_qmd_step_total_energy",
+    "description":"Total energy.",
+    "superNames":["x_nwchem_section_qmd_step"],
+    "dtypeStr":"f",
+    "unit":"Ha"
+  },{
+    "name":"x_nwchem_qmd_target_temperature",
+    "description":"Target temperature.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_qmd_tau",
+    "description":"Tau for QMD thermostat.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_nwchem_qmd_thermostat",
+    "description":"Thermostat for QMD.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_reciprocal_simulation_cell",
+    "description":"The simulation cell in reciprocal space.",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":[3,3],
+    "unit":"m^-1"
+  },{
+    "name":"x_nwchem_revision",
+    "description":"The SVN revision of the code.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_run_host_name",
+    "description":"The host on which this calculation was made on.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_section_geo_opt_module",
+    "kindStr":"type_section",
+    "description":"Section for a geometry optimization task.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_nwchem_section_geo_opt_step",
+    "kindStr":"type_section",
+    "description":"Section for a geometry optimization step.",
+    "superNames":["x_nwchem_section_geo_opt_module"]
+  },{
+    "name":"x_nwchem_section_geometry",
+    "kindStr":"type_section",
+    "description":"Contains system information for a calculation to follow. Contains all of the geometries used in different NWChem tasks contained by this calculations.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_nwchem_section_qmd_module",
+    "kindStr":"type_section",
+    "description":"Section for QMD Module.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_nwchem_section_qmd_step",
+    "kindStr":"type_section",
+    "description":"DFT QMD step",
+    "superNames":["x_nwchem_section_qmd_module"]
+  },{
+    "name":"x_nwchem_section_start_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the starting conditions for this run",
+    "superNames":["section_run"]
+  },{
+    "name":"x_nwchem_section_xc_part",
+    "kindStr":"type_section",
+    "description":"Describes a part of the XC functional that is used in the calculation. Can be a local or non-local part, can be exchange or correlation, can have a weight.",
+    "superNames":["section_method","settings_xc_functional"]
+  },{
+    "name":"x_nwchem_source",
+    "description":"The source directory of the code.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_start_datetime",
+    "description":"The run start date and time.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_status",
+    "description":"Status of the run.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_time_left",
+    "description":"Time left in seconds.",
+    "superNames":["x_nwchem_section_start_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_xc_functional_name",
+    "description":"The name of the XC functional",
+    "superNames":["x_nwchem_section_xc_part","settings_xc_functional"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_xc_functional_shortcut",
+    "description":"Shorcut for a XC functional definition.",
+    "superNames":["section_method","settings_xc_functional"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_xc_functional_type",
+    "description":"The type of the XC functional, local or non-local",
+    "superNames":["x_nwchem_section_xc_part","settings_xc_functional"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_nwchem_xc_functional_weight",
+    "description":"The weight of the XC functional.",
+    "superNames":["x_nwchem_section_xc_part","settings_xc_functional"],
+    "dtypeStr":"f"
+  }]
+}

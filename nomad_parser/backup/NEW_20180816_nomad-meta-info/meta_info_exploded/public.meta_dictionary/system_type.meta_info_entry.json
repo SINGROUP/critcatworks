@@ -1,0 +1,35 @@
+{
+  "meta_name":"system_type",
+  "meta_type":"type-value",
+  "meta_description":"Type of the system ",
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"Polymer",
+    "meta_enum_description":[
+      "systems with one periodic dimension and a minimum thickness along the other ",
+      "axes"]
+  },{
+    "meta_enum_value":"Atom",
+    "meta_enum_description":"A single atom"
+  },{
+    "meta_enum_value":"2D",
+    "meta_enum_description":"systems with two periodic dimensions"
+  },{
+    "meta_enum_value":"Bulk",
+    "meta_enum_description":"systems with three periodic dimensions"
+  },{
+    "meta_enum_value":"1D",
+    "meta_enum_description":"systems with one periodic dimension"
+  },{
+    "meta_enum_value":"Molecule / Cluster",
+    "meta_enum_description":"A system with no periodic dimensions"
+  },{
+    "meta_enum_value":"Surface",
+    "meta_enum_description":[
+      "systems with two periodic dimensions and a minimum thickness along the third ",
+      "axis"]
+  }]
+}

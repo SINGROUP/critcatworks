@@ -1,0 +1,6 @@
+{
+  "metadict_name":"public",
+  "metadict_description":"Public meta info, not specific to any code",
+  "metadict_version":"0.1",
+  "metadict_require":[]
+}

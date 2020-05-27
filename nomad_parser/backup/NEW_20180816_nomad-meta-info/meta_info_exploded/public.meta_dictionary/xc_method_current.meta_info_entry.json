@@ -1,0 +1,29 @@
+{
+  "meta_name":"xc_method_current",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Identifies the exchange correlation (XC) method used for energy_xc and related ",
+    "quantities in a standardized short form as a string.\n",
+    "\n",
+    "It is built by joining the values in the following order using the underscore",
+    " `_` character: electronic_structure_method, xc_functional, ",
+    "self_interaction_correction_method, van_der_waals_method and relativity_method.\n",
+    "\n",
+    "If any of the methods listed in the string contain non-standard settings, then ",
+    "the first 10 characters of the Base64 URL encoding of SHA 512 checksum of a ",
+    "normalized JSON with all non-redundant non-derived settings_xc are appended to ",
+    "the the string preceded by an underscore.\n",
+    "\n",
+    "With empty strings, the underscore `_` character is skipped.\n",
+    "\n",
+    "If the method defined in the section_method section is perturbative, the ",
+    "xc_method_current contains only the perturbative method, not the starting point ",
+    "(e.g. the DFT XC functional used as a starting point for a RPA perturbative ",
+    "calculation). In this case, the string that contains both the perturbative and ",
+    "starting point method is stored in xc_method."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_xc",
+    "derived_quantity"],
+  "meta_data_type":"string"
+}

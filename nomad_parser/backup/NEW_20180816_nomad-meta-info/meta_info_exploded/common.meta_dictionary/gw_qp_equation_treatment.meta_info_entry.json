@@ -1,0 +1,9 @@
+{
+  "meta_name":"gw_qp_equation_treatment",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Methods to solve the quasi-particle equation: 'linearization', ",
+    "'self-consistent'"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

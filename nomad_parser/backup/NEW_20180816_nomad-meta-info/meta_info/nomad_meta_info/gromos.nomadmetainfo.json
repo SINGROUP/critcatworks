@@ -1,0 +1,1566 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"gromos",
+  "description":"meta info used by the gromos parser, all names are expected to start with x_gromos_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"number_of_atoms_per_type",
+    "kindStr":"type_dimension",
+    "description":"Number of atoms involved in this type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_atom_element",
+    "description":"Atom type of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_atom_name",
+    "description":"Atom name of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_atom_positions_image_index",
+    "description":"PBC image flag index.",
+    "superNames":["section_system"],
+    "units":" ",
+    "dtypeStr":"i",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_gromos_atom_positions_scaled",
+    "description":"Position of the atoms in a scaled format [0, 1].",
+    "superNames":["section_system"],
+    "units":" ",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_gromos_atom_positions_wrapped",
+    "description":"Position of the atoms wrapped back to the periodic box.",
+    "superNames":["section_system"],
+    "units":"m",
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_gromos_atom_to_atom_type_ref",
+    "description":"Reference to the atoms of each atom type.",
+    "superNames":["x_gromos_section_atom_to_atom_type_ref"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_type"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_gromos_atom_type",
+    "description":"Atom type of an atom in topology definition.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_atom_type_element",
+    "description":"Element symbol of an atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_atom_type_radius",
+    "description":"van der Waals radius of an atom type.",
+    "superNames":["section_atom_type"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_barostat_target_pressure",
+    "description":"MD barostat target pressure.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "units":"Pa",
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_barostat_tau",
+    "description":"MD barostat relaxation time.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_barostat_type",
+    "description":"MD barostat type, valid values are defined in the barostat_type wiki page.",
+    "superNames":["section_sampling_method","settings_barostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_build_osarch",
+    "description":"Program Build OS/ARCH",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_angle_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_data_angle_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_angles_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_atom_types_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_data_bond_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_data_bond_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_bond_types_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_data_dihedral_coeff_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_dihedral_count_store",
+    "description":"store temporarly",
+    "superNames":["section_topology"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_data_dihedral_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_file_store",
+    "description":"Filename of data file",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_data_topo_list_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_dummy",
+    "description":"dummy",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_frame_sequence_angle_energy",
+    "description":"Array containing the values of the angle_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_angle_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_angle_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_angle_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_angle_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_angle_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_bond_energy",
+    "description":"Array containing the values of the bond_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_bond_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_bond_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_bond_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_bond_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_bond_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_boundary",
+    "description":"Array containing the values of the boundary along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_boundary_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_boundary_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_boundary_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_boundary values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_boundary_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_covalent_energy",
+    "description":"Array containing the values of the covalent_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_covalent_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_covalent_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_covalent_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_covalent_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_covalent_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_cross_dihedral_energy",
+    "description":"Array containing the values of the cross_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_cross_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_cross_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_cross_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_cross_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_cross_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_density",
+    "description":"Array containing the values of the density along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_density_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_densities_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_density_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_densities values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_densities_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_electrostatic_energy",
+    "description":"Array containing the values of the electrostatic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_electrostatic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_electrostatic_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_electrostatic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_electrostatic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_electrostatic_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_improper_dihedral_energy",
+    "description":"Array containing the values of the improper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_improper_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_improper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_improper_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_improper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_improper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_misc_energy",
+    "description":"Array containing the values of the misc_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_misc_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_misc_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_misc_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_misc_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_misc_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_proper_dihedral_energy",
+    "description":"Array containing the values of the proper_dihedral_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_proper_dihedral_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_proper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_proper_dihedral_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_proper_dihedral_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_proper_dihedral_energy_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_total_energy",
+    "description":"Array containing the values of the total_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_total_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_total_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_total_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_total_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_total_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_total_kinetic_energy",
+    "description":"Array containing the values of the total_kinetic_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_total_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_total_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_total_kinetic_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_total_kinetic_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_total_kinetic_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_vdw_energy",
+    "description":"Array containing the values of the vdw_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_vdw_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_vdw_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_vdw_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_vdw_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_vdw_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_virial_energy",
+    "description":"Array containing the values of the virial_energy along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_virial_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_virial_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_virial_energy_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_virial_energy values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_virial_energies_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_volume",
+    "description":"Array containing the values of the volume along this sequence of frames (i.e., a trajectory, a frame is one section_single_configuration_calculation). If not all frames have a value the indices of the frames that have a value are stored in frame_sequence_volume_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_volumes_in_sequence"]
+  },{
+    "name":"x_gromos_frame_sequence_volume_frames",
+    "description":"Array containing the strictly increasing indices of the frames the x_gromos_frame_sequence_volume values refers to. If not given it defaults to the trivial mapping 0,1,...",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i",
+    "shape":["x_gromos_number_of_volumes_in_sequence"]
+  },{
+    "name":"x_gromos_inout_control_bath_alg",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_combath",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_dofset",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_irbath",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_last",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_nbaths",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_num",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_tau",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bath_temp",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bcnd_ndfmin",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bcnd_ntb",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bond_angle_interaction_in_force_field",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bondangles_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_bondangles_not_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_cnst_ntc",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_cnst_ntcp",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_cnst_ntcp0",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_cnst_ntcs",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_cnst_ntcs0",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_comt_nscm",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_configuration_file",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_covf_ntbah",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_covf_ntbbh",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_covf_ntbdn",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_crossdihedrals_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_crossdihedrals_not_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_cutoff_type",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_dielectric",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_dihedral_interaction_in_force_field",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_dihedrals_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_dihedrals_not_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_dele",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_dx0",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_dxm",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_flim",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_ncyc",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_nmin",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_emin_ntem",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_angs",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_bonds",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_dihs",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_elec",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_imps",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_negr",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_nre",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_forc_vdw",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_force_field_epsilon",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_force_field_kappa",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_force_field_perturbation",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_improper_dihedral_interaction_in_force_field",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_improper_dihedrals_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_improper_dihedrals_not_containing_hydrogens",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ig",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_nticom",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntinhb",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntinht",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntirtc",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntishi",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntishk",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntisti",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_ntivel",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_init_tempi",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_initial_temperature",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_input_file",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_lennard_jones_exceptions",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_longrange_cutoff",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_minimization",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_appak",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_ashape",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_epsls",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_epsrf",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_faccur",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_kcut",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_na2clc",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nalias",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nasord",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nfdord",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_ngx",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_ngy",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_ngz",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nkx",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nky",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nkz",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nlrele",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nlrlj",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nqeval",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nrdgrd",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nshape",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nslfexcl",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nspord",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_nwrgrd",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_rcrf",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_slvdns",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonb_tola2",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_nonbonded_definitions_in_force_field",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_atom_types",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_atoms_solute",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_bonds_at_constraint",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_h_bonds_at_constraint",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_molecules_in_solute",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_parameters",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_inout_control_number_of_pressure_groups_for_solute",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_solvent_atoms",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_solvent_constraints",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_solvents_added",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_steps",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_number_of_temperature_groups_for_solute",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pair_alg",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pair_nsnb",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pair_rcutl",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pair_rcutp",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pair_size",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pair_type",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pairlist_algorithm",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pairlist_update_step_frequency",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_parameter_file",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_parameters",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C",
+    "shape":["x_gromos_inout_control_number_of_parameters"]
+  },{
+    "name":"x_gromos_inout_control_periodic_boundary_conditions",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_aniso",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_comp",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_couple",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_init0",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_scale",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_taup",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_pres_virial",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_prnt_ntpp",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_prnt_ntpr",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_reactionfield_cutoff",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_reactionfield_epsilon",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_resname",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_shortrange_cutoff",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_solm_nsp",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_solm_nspm",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_step_dt",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_step_nstlim",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_step_t",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_steps_per_cycle",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_structure_file",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_sys_npm",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_sys_nsm",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_title",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_topology_file",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_topology_parameters",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_topology_type",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_verlet_integrator",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_virial",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwb",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwe",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwf",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwg",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwse",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwv",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_control_writ_ntwx",
+    "description":"gromos running environment and control parameters.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_input_coord",
+    "description":"gromos input coordinates file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_input_vel",
+    "description":"gromos input velocities file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_output_coord",
+    "description":"gromos output coordinates file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_output_force",
+    "description":"gromos output forces file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_output_log",
+    "description":"gromos MD output log file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_output_vel",
+    "description":"gromos output velocities file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_restart_coord",
+    "description":"gromos restart coordinates file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_restart_vel",
+    "description":"gromos restart velocities file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_structure",
+    "description":"gromos input topology file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_traj_coord",
+    "description":"gromos output trajectory file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_traj_force",
+    "description":"gromos output file for forces in the trajectory.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_traj_vel",
+    "description":"gromos output file for velocities in the trajectory.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_inout_file_trajectory",
+    "description":"gromos output trajectory file.",
+    "superNames":["x_gromos_section_control_parameters"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_input_units_store",
+    "description":"It determines the units of all quantities specified in the input script and data file, as well as quantities output to the screen, log file, and dump files.",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_integrator_dt",
+    "description":"MD integration time step.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_integrator_type",
+    "description":"MD integrator type, valid values are defined in the integrator_type wiki page.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_interaction_atom_to_atom_type_ref",
+    "description":"Reference to the atom type of each interaction atoms.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_gromos_langevin_gamma",
+    "description":"Langevin thermostat damping factor.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_lattice_angles",
+    "description":"Angles of lattice vectors. Vector includes [alpha, beta, gamma] in degrees.",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_gromos_lattice_lengths",
+    "description":"Lattice dimensions in a vector. Vector includes [a, b, c] lengths.",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":[3]
+  },{
+    "name":"x_gromos_masses_store",
+    "description":"tmp",
+    "superNames":["section_topology"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_mdin_control_parameters",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to x_gromos_section_control_parameters.",
+    "superNames":[]
+  },{
+    "name":"x_gromos_mdin_finline",
+    "description":"finline in mdin",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_mdin_header",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_mdin_input_output_files",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to x_gromos_section_control_parameters.",
+    "superNames":[]
+  },{
+    "name":"x_gromos_mdin_method",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to section method.",
+    "superNames":[]
+  },{
+    "name":"x_gromos_mdin_run",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to settings run.",
+    "superNames":["settings_run"]
+  },{
+    "name":"x_gromos_mdin_wt",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_mdout_method",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to section method.",
+    "superNames":[]
+  },{
+    "name":"x_gromos_mdout_run",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdin belonging to settings run.",
+    "superNames":["settings_run"]
+  },{
+    "name":"x_gromos_mdout_single_configuration_calculation",
+    "kindStr":"type_abstract_document_content",
+    "description":"Parameters of mdout belonging to section_single_configuration_calculation.",
+    "superNames":[]
+  },{
+    "name":"x_gromos_molecule_interaction_atom_to_atom_type_ref",
+    "description":"Reference to the atom type of each molecule interaction atoms.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_gromos_most_severe_warning_level",
+    "description":"Highest gromos warning level in the run.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_number_of_angle_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of angle_energies in this sequence of frames, see x_gromos_frame_sequence_angle_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_bond_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_gromos_frame_sequence_bond_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_boundary_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of boundary_energies in this sequence of frames, see x_gromos_frame_sequence_boundary_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_covalent_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of covalent_energies in this sequence of frames, see x_gromos_frame_sequence_covalent_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_cross_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of cross_dihedral_energies in this sequence of frames, see x_gromos_frame_sequence_cross_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_defined_molecule_pair_interactions",
+    "description":"Number of defined pair interactions within a molecule (L-J pairs).",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_defined_pair_interactions",
+    "description":"Number of defined pair interactions (L-J pairs).",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_densities_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of densities in this sequence of frames, see x_gromos_frame_sequence_density.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_electrostatic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of electrostatic_energies in this sequence of frames, see x_gromos_frame_sequence_electrostatic_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_improper_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of improper_dihedral_energies in this sequence of frames, see x_gromos_frame_sequence_improper_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_misc_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of misc_energies in this sequence of frames, see x_gromos_frame_sequence_misc_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_proper_dihedral_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of proper_dihedral_energies in this sequence of frames, see x_gromos_frame_sequence_proper_dihedral_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_steps_requested",
+    "description":"Number of requested MD integration time steps.",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_number_of_tasks",
+    "description":"Number of tasks in parallel program (MPI).",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_number_of_total_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of total_energies in this sequence of frames, see x_gromos_frame_sequence_total_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_total_kinetic_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of total_kinetic_energies in this sequence of frames, see x_gromos_frame_sequence_total_kinetic_energy_frames.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_vdw_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of vdw_energies in this sequence of frames, see x_gromos_frame_sequence_vdw_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_virial_energies_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of bond_energies in this sequence of frames, see x_gromos_frame_sequence_virial_energy.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_number_of_volumes_in_sequence",
+    "kindStr":"type_dimension",
+    "description":"Gives the number of volumes in this sequence of frames, see x_gromos_frame_sequence_volume.",
+    "superNames":["section_frame_sequence"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_gromos_output_created_by_user",
+    "description":"Output file creator",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_pair_interaction_atom_type_ref",
+    "description":"Reference to the atom type for pair interactions.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["x_gromos_number_of_defined_pair_interactions","number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_gromos_pair_interaction_parameters",
+    "description":"Pair interactions parameters.",
+    "superNames":["section_interaction","settings_interaction"],
+    "dtypeStr":"f",
+    "shape":["x_gromos_number_of_defined_pair_interactions",2]
+  },{
+    "name":"x_gromos_pair_molecule_interaction_parameters",
+    "description":"Molecule pair interactions parameters.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"f",
+    "shape":["number_of_defined_molecule_pair_interactions",2]
+  },{
+    "name":"x_gromos_pair_molecule_interaction_to_atom_type_ref",
+    "description":"Reference to the atom type for pair interactions within a molecule.",
+    "superNames":["section_molecule_interaction","settings_interaction"],
+    "dtypeStr":"r",
+    "shape":["x_gromos_number_of_defined_pair_interactions","number_of_atoms_per_interaction"],
+    "referencedSections":["section_atom_type"]
+  },{
+    "name":"x_gromos_parallel_task_nr",
+    "description":"Program task no.",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_periodicity_type",
+    "description":"Periodic boundary condition type in the sampling (non-PBC or PBC).",
+    "superNames":["section_sampling_method","settings_integrator"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_build_date",
+    "description":"Program Build date",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_citation",
+    "description":"Program citations",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_copyright",
+    "description":"Program copyright",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_execution_date",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_execution_host",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_execution_path",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_execution_time",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_license",
+    "description":"gromos program license.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_module",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_module_version",
+    "description":"gromos program module version.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_version_date",
+    "description":"Program version date.",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_program_working_path",
+    "description":"tmp",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_section_atom_to_atom_type_ref",
+    "kindStr":"type_section",
+    "description":"Section to store atom label to atom type definition list",
+    "superNames":["section_topology"]
+  },{
+    "name":"x_gromos_section_control_parameters",
+    "kindStr":"type_section",
+    "description":"Section to store the input and output control parameters",
+    "superNames":["section_run"]
+  },{
+    "name":"x_gromos_section_input_output_files",
+    "kindStr":"type_section",
+    "description":"Section to store input and output file names",
+    "superNames":["x_gromos_section_control_parameters"]
+  },{
+    "name":"x_gromos_section_single_configuration_calculation",
+    "kindStr":"type_section",
+    "description":"section for gathering values for MD steps",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_gromos_thermostat_level",
+    "description":"MD thermostat level (see wiki: single, multiple, regional).",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_thermostat_target_temperature",
+    "description":"MD thermostat target temperature.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"K",
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_thermostat_tau",
+    "description":"MD thermostat relaxation time.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "units":"s",
+    "dtypeStr":"f"
+  },{
+    "name":"x_gromos_thermostat_type",
+    "description":"MD thermostat type, valid values are defined in the thermostat_type wiki page.",
+    "superNames":["section_sampling_method","settings_thermostat"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_traj_atoms_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_traj_box_bound_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_traj_box_bounds_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_traj_number_of_atoms_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_traj_timestep_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_traj_variables_store",
+    "description":"tmp",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_gromos_xlo_xhi",
+    "description":"test",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  }]
+}

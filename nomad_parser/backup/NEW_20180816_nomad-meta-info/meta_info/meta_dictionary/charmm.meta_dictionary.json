@@ -1,0 +1,2204 @@
+{
+  "metadict_name":"charmm",
+  "metadict_description":[
+    "meta info used by the charmm parser, all names are expected to start with ",
+    "x_charmm_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"number_of_atoms_per_type",
+    "meta_type":"type-dimension",
+    "meta_description":"Number of atoms involved in this type.",
+    "meta_parent_section":"section_atom_type"
+  },{
+    "meta_name":"x_charmm_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom type of an atom in topology definition.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_atom_name",
+    "meta_type":"type-value",
+    "meta_description":"Atom name of an atom in topology definition.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_atom_positions_image_index",
+    "meta_type":"type-value",
+    "meta_description":"PBC image flag index.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":" "
+  },{
+    "meta_name":"x_charmm_atom_positions_scaled",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Position of the atoms in a scaled format [0, ",
+      "1]."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":" "
+  },{
+    "meta_name":"x_charmm_atom_positions_wrapped",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Position of the atoms wrapped back to the periodic ",
+      "box."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":"m"
+  },{
+    "meta_name":"x_charmm_atom_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":"Reference to the atoms of each atom type.",
+    "meta_parent_section":"x_charmm_section_atom_to_atom_type_ref",
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms_per_type"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_charmm_atom_type",
+    "meta_type":"type-value",
+    "meta_description":"Atom type of an atom in topology definition.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_atom_type_element",
+    "meta_type":"type-value",
+    "meta_description":"Element symbol of an atom type.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_atom_type_radius",
+    "meta_type":"type-value",
+    "meta_description":"van der Waals radius of an atom type.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_charmm_barostat_target_pressure",
+    "meta_type":"type-value",
+    "meta_description":"MD barostat target pressure.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"float",
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_charmm_barostat_tau",
+    "meta_type":"type-value",
+    "meta_description":"MD barostat relaxation time.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_charmm_barostat_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD barostat type, valid values are defined in the barostat_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_build_osarch",
+    "meta_type":"type-value",
+    "meta_description":"Program Build OS/ARCH",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_angle_count_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_data_angle_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_angles_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_atom_types_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_data_bond_count_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_data_bond_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_bond_types_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_data_dihedral_coeff_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_dihedral_count_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_data_dihedral_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_file_store",
+    "meta_type":"type-value",
+    "meta_description":"Filename of data file",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_data_topo_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_dummy",
+    "meta_type":"type-value",
+    "meta_description":"dummy",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_frame_sequence_angle_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the angle_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_angle_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_angle_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_angle_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_angle_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_angle_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_bond_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the bond_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_bond_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_bond_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_bond_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_bond_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_bond_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_boundary",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the boundary along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_boundary_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_boundary_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_boundary_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_boundary values refers to. If not given it defaults to ",
+      "the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_boundary_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_cmap_dihedral_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the cmap_dihedral_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_cmap_dihedral_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_cmap_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_cmap_dihedral_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_cmap_dihedral_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_cmap_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_density",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the density along this sequence of frames (i.e., ",
+      "a trajectory, a frame is one section_single_configuration_calculation). If not ",
+      "all frames have a value the indices of the frames that have a value are stored ",
+      "in frame_sequence_density_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_densities_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_density_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_densities values refers to. If not given it defaults to ",
+      "the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_densities_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_electrostatic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the electrostatic_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_electrostatic_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_electrostatic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_electrostatic_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_electrostatic_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_electrostatic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_high_frequency_correction_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the high_frequency_correction_energy along this ",
+      "sequence of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_high_frequency_correction_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_high_frequency_correction_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_high_frequency_correction_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_high_frequency_correction_energy values refers to. If ",
+      "not given it defaults to the trivial mapping ",
+      "0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_high_frequency_correction_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_high_frequency_correction_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the high_frequency_correction_kinetic_energy ",
+      "along this sequence of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_high_frequency_correction_kinetic_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_high_frequency_correction_kinetic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_high_frequency_correction_kinetic_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_high_frequency_correction_kinetic_energy values refers ",
+      "to. If not given it defaults to the trivial mapping ",
+      "0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_high_frequency_correction_kinetic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_high_frequency_correction_total_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the high_frequency_correction_total_energy along ",
+      "this sequence of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_high_frequency_correction_total_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_high_frequency_correction_total_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_high_frequency_correction_total_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_high_frequency_correction_total_energy values refers ",
+      "to. If not given it defaults to the trivial mapping ",
+      "0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_high_frequency_correction_total_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_improper_dihedral_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the improper_dihedral_energy along this sequence ",
+      "of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_improper_dihedral_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_improper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_improper_dihedral_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_improper_dihedral_energy values refers to. If not given ",
+      "it defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_improper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_misc_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the misc_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_misc_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_misc_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_misc_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_misc_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_misc_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_proper_dihedral_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the proper_dihedral_energy along this sequence ",
+      "of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_proper_dihedral_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_proper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_proper_dihedral_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_proper_dihedral_energy values refers to. If not given ",
+      "it defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_proper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_total_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the total_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_total_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_total_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_total_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_total_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_total_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_total_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the total_kinetic_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_total_kinetic_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_total_kinetic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_total_kinetic_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_total_kinetic_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_total_kinetic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_urey_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the urey_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_urey_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_urey_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_urey_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_urey_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_urey_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_vdw_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the vdw_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_vdw_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_vdw_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_vdw_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_vdw_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_vdw_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_virial_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the virial_kinetic_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_virial_kinetic_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_virial_kinetic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_virial_kinetic_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_virial_kinetic_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_virial_kinetic_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_volume",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the volume along this sequence of frames (i.e., ",
+      "a trajectory, a frame is one section_single_configuration_calculation). If not ",
+      "all frames have a value the indices of the frames that have a value are stored ",
+      "in frame_sequence_volume_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_volumes_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_frame_sequence_volume_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_charmm_frame_sequence_volume values refers to. If not given it defaults to ",
+      "the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_volumes_in_sequence"
+    }]
+  },{
+    "meta_name":"x_charmm_inout_control_1_4_electrostatics_scale",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_a_length",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_acceptor_antecedents",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_akmastp",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_alpha",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_atoms",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_b_length",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_beta",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_c_length",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_cdie",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_cgofnb",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_cgonnb",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_coupling_temperature",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_crystal",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_crystal_type",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ctexnb",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ctofnb",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ctonnb",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_cutnb",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_dielectric",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_dyna",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_e14fac",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_eps",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_excluded_species_or_groups",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_finalt",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_firstt",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_gamma",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_gaussian_option",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_gaussian_option_is",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_deletions_due_to_best_option",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_deletions_due_to_duplications",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_deletions_due_to_exclusion",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_deletions_due_to_fixed_atoms",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_exclusions_due_to_angle_cutoff",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_exclusions_due_to_distance_cutoff",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hbond_exclusions_due_to_duplications",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hoover",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bond_cutoff_angle",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bond_cutoff_distance",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bond_switching_off_angle",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bond_switching_off_distance",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bond_switching_on_angle",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bond_switching_on_distance",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_hydrogen_bonds_present",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iasors",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iasvel",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ichecw",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ieqfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ihbfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ihtfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ilbfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_imgfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_inbfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_initial_temperature",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iprfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iscale",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iscvel",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iseed",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_isvfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iuncrd",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iunos",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iunrea",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iunvel",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iunwri",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_iunxyz",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_kunit",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_damping_coefficient_unit",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_decay_time",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_dynamics",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_integrator",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_oscillation_period",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_piston_temperature",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_langevin_temperature",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_mini",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_minimization",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_minimization_exit_status",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nbxmod",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ncgcyc",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ncycle",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nonbond_option_flags",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nprint",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nsavc",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nsavv",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nsavx",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nsnos",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_nstep",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_ntrfrq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_number_of_degrees_of_freedom",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_number_of_parameters",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_inout_control_number_of_steps",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_parameter_file",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_parameters",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_inout_control_number_of_parameters"
+    }]
+  },{
+    "meta_name":"x_charmm_inout_control_particle_mesh_ewald",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pcons",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pcut",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pmass",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pme_ewald_coefficient",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pme_grid_dimensions",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pme_interpolation_order",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pme_maximum_grid_spacing",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pme_tolerance",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_pressure_control",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_prtmin",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_qref",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_random_num_gen_seeds",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_random_number_seed",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_reft",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_rest",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_seeds",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_shake_tolerance",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_step",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_steps_per_cycle",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_strt",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_structure_file",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_switch",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_target_pressure",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_teminc",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_temperature_coupling",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tfreq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_time_step",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tmass",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tolfun",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tolgrd",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tolitr",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tolstp",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tref",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_tstruc",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_twindh",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_twindl",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_velocities_assigned_at_temperature",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_velocity_reassignment_freq",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_velocity_reassignment_temp",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_velocity_rescale_temp",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_verlet_integrator",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_vswitch",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_wmin",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_control_wrnmxd",
+    "meta_type":"type-value",
+    "meta_description":"charmm running environment and control parameters.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_cor_file",
+    "meta_type":"type-value",
+    "meta_description":"charmm CRD coordinates file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_in_coor_str",
+    "meta_type":"type-value",
+    "meta_description":"charmm input coordinate on log file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_input_coord",
+    "meta_type":"type-value",
+    "meta_description":"charmm input coordinates file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_input_vel",
+    "meta_type":"type-value",
+    "meta_description":"charmm input velocities file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_out_coor_str",
+    "meta_type":"type-value",
+    "meta_description":"charmm output coordinates on log.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_output_coord",
+    "meta_type":"type-value",
+    "meta_description":"charmm output coordinates file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_output_force",
+    "meta_type":"type-value",
+    "meta_description":"charmm output forces file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_output_log",
+    "meta_type":"type-value",
+    "meta_description":"charmm MD output log file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_output_vel",
+    "meta_type":"type-value",
+    "meta_description":"charmm output velocities file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_par_str",
+    "meta_type":"type-value",
+    "meta_description":"charmm stream parameter input.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_prm_file",
+    "meta_type":"type-value",
+    "meta_description":"charmm PRM parameter file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_restart_coord",
+    "meta_type":"type-value",
+    "meta_description":"charmm restart coordinates file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_restart_vel",
+    "meta_type":"type-value",
+    "meta_description":"charmm restart velocities file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_rtf_file",
+    "meta_type":"type-value",
+    "meta_description":"charmm RTF residue file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_rtf_str",
+    "meta_type":"type-value",
+    "meta_description":"charmm stream RTF input.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_stream",
+    "meta_type":"type-value",
+    "meta_description":"charmm stream input/output.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_structure",
+    "meta_type":"type-value",
+    "meta_description":"charmm input topology file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_traj_coord",
+    "meta_type":"type-value",
+    "meta_description":"charmm output trajectory file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_traj_force",
+    "meta_type":"type-value",
+    "meta_description":"charmm output file for forces in the trajectory.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_traj_vel",
+    "meta_type":"type-value",
+    "meta_description":[
+      "charmm output file for velocities in the ",
+      "trajectory."],
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_inout_file_trajectory",
+    "meta_type":"type-value",
+    "meta_description":"charmm output trajectory file.",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_input_units_store",
+    "meta_type":"type-value",
+    "meta_description":[
+      "It determines the units of all quantities specified in the input script and ",
+      "data file, as well as quantities output to the screen, log file, and dump ",
+      "files."],
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_integrator_dt",
+    "meta_type":"type-value",
+    "meta_description":"MD integration time step.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_charmm_integrator_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD integrator type, valid values are defined in the integrator_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_interaction_atom_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reference to the atom type of each interaction ",
+      "atoms."],
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_charmm_langevin_gamma",
+    "meta_type":"type-value",
+    "meta_description":"Langevin thermostat damping factor.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_charmm_lattice_angles",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Angles of lattice vectors. Vector includes [alpha, beta, gamma] in ",
+      "degrees."],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }],
+    "meta_repeats":true
+  },{
+    "meta_name":"x_charmm_lattice_lengths",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Lattice dimensions in a vector. Vector includes [a, b, c] ",
+      "lengths."],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }],
+    "meta_repeats":true
+  },{
+    "meta_name":"x_charmm_masses_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_mdin_control_parameters",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to x_charmm_section_control_parameters."
+  },{
+    "meta_name":"x_charmm_mdin_finline",
+    "meta_type":"type-value",
+    "meta_description":"finline in mdin",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_mdin_header",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_mdin_input_output_files",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to x_charmm_section_control_parameters."
+  },{
+    "meta_name":"x_charmm_mdin_method",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to section method."
+  },{
+    "meta_name":"x_charmm_mdin_run",
+    "meta_type":"type-abstract",
+    "meta_description":[
+      "Parameters of mdin belonging to settings ",
+      "run."],
+    "meta_abstract_types":[
+      "settings_run"]
+  },{
+    "meta_name":"x_charmm_mdin_wt",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_mdout_method",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to section method."
+  },{
+    "meta_name":"x_charmm_mdout_run",
+    "meta_type":"type-abstract",
+    "meta_description":[
+      "Parameters of mdin belonging to settings ",
+      "run."],
+    "meta_abstract_types":[
+      "settings_run"]
+  },{
+    "meta_name":"x_charmm_mdout_single_configuration_calculation",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdout belonging to section_single_configuration_calculation."
+  },{
+    "meta_name":"x_charmm_molecule_interaction_atom_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reference to the atom type of each molecule interaction ",
+      "atoms."],
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_charmm_most_severe_warning_level",
+    "meta_type":"type-value",
+    "meta_description":"Highest charmm warning level in the run.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_number_of_angle_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of angle_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_angle_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_bond_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_bond_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_boundary_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of boundary_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_boundary_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_cmap_dihedral_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of cmap_dihedral_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_cmap_dihedral_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_defined_molecule_pair_interactions",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of defined pair interactions within a molecule (L-J ",
+      "pairs)."],
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_number_of_defined_pair_interactions",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of defined pair interactions (L-J ",
+      "pairs)."],
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_charmm_number_of_densities_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of densities in this sequence of frames, see ",
+      "x_charmm_frame_sequence_density."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_electrostatic_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of electrostatic_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_electrostatic_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_high_frequency_correction_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_high_frequency_correction_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_high_frequency_correction_kinetic_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_high_frequency_correction_kinetic_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_high_frequency_correction_total_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_high_frequency_correction_total_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_improper_dihedral_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of improper_dihedral_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_improper_dihedral_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_misc_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of misc_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_misc_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_proper_dihedral_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of proper_dihedral_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_proper_dihedral_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_steps_requested",
+    "meta_type":"type-value",
+    "meta_description":"Number of requested MD integration time steps.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_charmm_number_of_tasks",
+    "meta_type":"type-value",
+    "meta_description":"Number of tasks in parallel program (MPI).",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_charmm_number_of_total_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of total_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_total_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_total_kinetic_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of total_kinetic_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_total_kinetic_energy_frames."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_urey_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_urey_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_vdw_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of vdw_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_vdw_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_virial_kinetic_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_charmm_frame_sequence_virial_kinetic_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_number_of_volumes_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of volumes in this sequence of frames, see ",
+      "x_charmm_frame_sequence_volume."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_charmm_output_created_by_user",
+    "meta_type":"type-value",
+    "meta_description":"Output file creator",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_pair_interaction_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":"Reference to the atom type for pair interactions.",
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_defined_pair_interactions"
+    },{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_charmm_pair_interaction_parameters",
+    "meta_type":"type-value",
+    "meta_description":"Pair interactions parameters.",
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_defined_pair_interactions"
+    },{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_charmm_pair_molecule_interaction_parameters",
+    "meta_type":"type-value",
+    "meta_description":"Molecule pair interactions parameters.",
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_defined_molecule_pair_interactions"
+    },{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_charmm_pair_molecule_interaction_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reference to the atom type for pair interactions within a ",
+      "molecule."],
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_charmm_number_of_defined_pair_interactions"
+    },{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_charmm_parallel_task_nr",
+    "meta_type":"type-value",
+    "meta_description":"Program task no.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_charmm_periodicity_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Periodic boundary condition type in the sampling (non-PBC or ",
+      "PBC)."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_build_date",
+    "meta_type":"type-value",
+    "meta_description":"Program Build date",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_citation",
+    "meta_type":"type-value",
+    "meta_description":"Program citations",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_copyright",
+    "meta_type":"type-value",
+    "meta_description":"Program copyright",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_execution_date",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_execution_host",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_execution_path",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_execution_time",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_license",
+    "meta_type":"type-value",
+    "meta_description":"charmm program license.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_module",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_module_version",
+    "meta_type":"type-value",
+    "meta_description":"charmm program module version.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_version_date",
+    "meta_type":"type-value",
+    "meta_description":"Program version date.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_program_working_path",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_section_atom_to_atom_type_ref",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section to store atom label to atom type definition ",
+      "list"],
+    "meta_parent_section":"section_topology",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_charmm_section_control_parameters",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section to store the input and output control ",
+      "parameters"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_charmm_section_input_output_files",
+    "meta_type":"type-section",
+    "meta_description":"Section to store input and output file names",
+    "meta_parent_section":"x_charmm_section_control_parameters",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_charmm_section_single_configuration_calculation",
+    "meta_type":"type-section",
+    "meta_description":"section for gathering values for MD steps",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_charmm_thermostat_level",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD thermostat level (see wiki: single, multiple, ",
+      "regional)."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_thermostat_target_temperature",
+    "meta_type":"type-value",
+    "meta_description":"MD thermostat target temperature.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"K"
+  },{
+    "meta_name":"x_charmm_thermostat_tau",
+    "meta_type":"type-value",
+    "meta_description":"MD thermostat relaxation time.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_charmm_thermostat_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD thermostat type, valid values are defined in the thermostat_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_traj_atoms_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_traj_box_bound_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_traj_box_bounds_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_traj_number_of_atoms_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_traj_timestep_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_traj_variables_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_charmm_xlo_xhi",
+    "meta_type":"type-value",
+    "meta_description":"test",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  }]
+}

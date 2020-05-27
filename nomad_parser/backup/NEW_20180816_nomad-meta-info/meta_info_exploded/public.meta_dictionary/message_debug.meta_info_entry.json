@@ -1,0 +1,7 @@
+{
+  "meta_name":"message_debug",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "A debugging message of the computational ",
+    "program."]
+}

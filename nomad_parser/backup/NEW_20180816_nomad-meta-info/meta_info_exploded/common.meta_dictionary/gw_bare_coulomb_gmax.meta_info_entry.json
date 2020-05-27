@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_bare_coulomb_gmax",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Maximum G for the pw basis for the Coulomb ",
+    "potential."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"float",
+  "meta_units":"m^-1"
+}

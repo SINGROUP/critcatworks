@@ -1,0 +1,728 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the wien2k parser.  All names are expected to start with x_wien2k_",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "position of atom x in internal units",
+      "dtypeStr": "f",
+      "name": "x_wien2k_atom_pos_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ],
+      "units": "m"
+    }, {
+      "description": "position of atom y in internal units",
+      "dtypeStr": "f",
+      "name": "x_wien2k_atom_pos_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ],
+      "units": "m"
+    }, {
+      "description": "position of atom z  in internal units",
+      "dtypeStr": "f",
+      "name": "x_wien2k_atom_pos_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ],
+      "units": "m"
+    }, {
+      "description": "name of atom, labelling non-equvalent atoms",
+      "dtypeStr": "C",
+      "name": "x_wien2k_atom_name",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ]
+    },{
+      "description": "number of radial mesh points",
+      "dtypeStr": "i",
+      "name": "x_wien2k_NPT",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ]
+    },{
+      "description": "atomic sphere radius (muffin-tin radius)",
+      "dtypeStr": "f",
+      "name": "x_wien2k_RMT",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ]
+    },{
+      "description": "first radial mesh point",
+      "dtypeStr": "f",
+      "name": "x_wien2k_R0",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ]
+    },{
+      "description": "atomic number Z",
+      "dtypeStr": "f",
+      "name": "x_wien2k_atomic_number_Z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_equiv_atoms"
+      ]
+    }, {
+      "description": "header (labels) of wien2k.",
+      "kindStr": "type_section",
+      "name": "x_wien2k_header",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "scf iteration number",
+      "dtypeStr": "i",
+      "name": "x_wien2k_iteration_number",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "number of inequivalent atoms in the unit cell",
+      "dtypeStr": "i",
+      "name": "x_wien2k_nonequiv_atoms",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "exchange-correlation potential, in in0",
+      "dtypeStr": "C",
+      "name": "x_wien2k_indxc",
+      "shape": [],
+      "superNames": [
+        "x_wien2k_section_XC"
+      ]
+    }, {
+      "description": "exchange-correlation potential, in in0",
+      "kindStr": "type_section",
+      "name": "x_wien2k_section_XC",
+      "superNames": [
+        "section_method"
+      ]
+    },
+ {
+      "description": "switch in in0 between TOT, KXC, POT, MULT, COUL, EXCH",
+      "dtypeStr": "C",
+      "name": "x_wien2k_switch",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "FFT-mesh parameters in x direction for the calculation of the XC-potential in the interstitial region, in in0",
+      "dtypeStr": "i",
+      "name": "x_wien2k_ifft_x",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "FFT-mesh parameters in y direction for the calculation of the XC-potential in the interstitial region, in in0",
+      "dtypeStr": "i",
+      "name": "x_wien2k_ifft_y",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "FFT-mesh parameters in z direction for the calculation of the XC-potential in the interstitial region, in in0",
+      "dtypeStr": "i",
+      "name": "x_wien2k_ifft_z",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Multiplicative factor to the IFFT grid, in in0",
+      "dtypeStr": "f",
+      "name": "x_wien2k_ifft_factor",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "optional print switch, in in0",
+      "dtypeStr": "i",
+      "name": "x_wien2k_iprint",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "wave function switch between WFFIL, SUPWF, WPPRI",
+      "dtypeStr": "C",
+      "name": "x_wien2k_wf_switch",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "RmtKmax - determines matrix size (convergence), where Kmax is the plane wave cut-off, Rmt is the smallest of all atomic sphere radii",
+      "dtypeStr": "f",
+      "name": "x_wien2k_rkmax",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "switch, in in2c between (TOT,FOR,QTL,EFG,ALM,CLM,FERMI)",
+      "dtypeStr": "C",
+      "name": "x_wien2k_in2c_switch",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "lower energy cut-off for defining the range of occupied states; in in2c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_in2c_emin",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "number of electrons (per unit cell) in given energy range in in2c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_in2c_ne",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "LAPW2 tries to find the .mean. energies for each l channel, for both the valence and the semicore states. To define .valence. and .semicore. it starts at (EF - .esepermin.) and searches for a .gap. with a width of at least .eseper0. and defines this as separation energy of valence and semicore; in in2c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_in2c_espermin",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "minimum gap width; in in2c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_in2c_esper0",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    },  {
+      "description": "determines how EF is determined; in in2c",
+      "dtypeStr": "C",
+      "name": "x_wien2k_smearing_kind",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "specifies the width of the broadening, if efmod is set to ALL, eval specifies the upper limit of the energy window; in in2c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_smearing_width",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ],
+      "units": "J"
+    }, {
+      "description": "max. G (magnitude of largest vector) in charge density Fourier expansion; in in2c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_in2c_gmax",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "number of independent atoms in the cell",
+      "dtypeStr": "i",
+      "name": "x_wien2k_nr_of_independent_atoms",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "exchange correlation potential option",
+      "dtypeStr": "i",
+      "name": "x_wien2k_potential_option",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Release date of wien2k.",
+      "dtypeStr": "C",
+      "name": "x_wien2k_release_date",
+      "shape": [],
+      "superNames": [
+        "x_wien2k_header"
+      ]
+    }, {
+      "description": "section containing a class of equivalent atoms",
+      "kindStr": "type_section",
+      "name": "x_wien2k_section_equiv_atoms",
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "user given name for this system given in the struct file",
+      "dtypeStr": "C",
+      "name": "x_wien2k_system_nameIn",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "user given name for this system",
+      "dtypeStr": "C",
+      "name": "x_wien2k_system_name",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "relativistic or nonrelativistic calculation mode",
+      "dtypeStr": "C",
+      "name": "x_wien2k_calc_mode",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "unit cell parameters - a",
+      "dtypeStr": "f",
+      "name": "x_wien2k_unit_cell_param_a",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "unit cell parameters - b",
+      "dtypeStr": "f",
+      "name": "x_wien2k_unit_cell_param_b",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "unit cell parameters - c",
+      "dtypeStr": "f",
+      "name": "x_wien2k_unit_cell_param_c",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ],
+      "units": "m"
+    }, {
+      "description": "unit cell parameters - alfa",
+      "dtypeStr": "f",
+      "name": "x_wien2k_angle_between_unit_axis_alfa",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "unit cell parameters - beta",
+      "dtypeStr": "f",
+      "name": "x_wien2k_angle_between_unit_axis_beta",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "unit cell parameters - gamma",
+      "dtypeStr": "f",
+      "name": "x_wien2k_angle_between_unit_axis_gamma",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "total number of atoms in the cell",
+      "dtypeStr": "i",
+      "name": "x_wien2k_total_atoms",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "lattice parameter a in this calculation",
+      "dtypeStr": "f",
+      "name": "x_wien2k_lattice_const_a",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "lattice parameter b in this calculation",
+      "dtypeStr": "f",
+      "name": "x_wien2k_lattice_const_b",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "lattice parameter c in this calculation",
+      "dtypeStr": "f",
+      "name": "x_wien2k_lattice_const_c",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "unit cell volume",
+      "dtypeStr": "f",
+      "name": "x_wien2k_unit_cell_volume_bohr3",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "bohr^3"
+    }, {
+      "description": "energy total",
+      "dtypeStr": "f",
+      "name": "x_wien2k_energy_total",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    },  {
+      "description": "Fermi energy",
+      "dtypeStr": "f",
+      "name": "x_wien2k_fermi_ene",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    },  {
+      "description": "number of electrons",
+      "dtypeStr": "f",
+      "name": "x_wien2k_noe",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "number of k-points",
+      "dtypeStr": "f",
+      "name": "x_wien2k_nr_kpts",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "Potential and charge cut-off, Ry**.5",
+      "dtypeStr": "f",
+      "name": "x_wien2k_cutoff",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "energy gap in Ry",
+      "dtypeStr": "f",
+      "name": "x_wien2k_ene_gap",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "energy gap in eV",
+      "dtypeStr": "f",
+      "name": "x_wien2k_ene_gap_eV",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "eV"
+    }, {
+      "description": "matrix size",
+      "dtypeStr": "i",
+      "name": "x_wien2k_matrix_size",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "rkm",
+      "dtypeStr": "f",
+      "name": "x_wien2k_rkm",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "LOs",
+      "dtypeStr": "i",
+      "name": "x_wien2k_LOs",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "total magnetic moment in cell",
+      "dtypeStr": "f",
+      "name": "x_wien2k_mmtot",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "magnetic moment in the interstital region",
+      "dtypeStr": "f",
+      "name": "x_wien2k_mmint",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "magnetic moment inside the sphere",
+      "dtypeStr": "f",
+      "name": "x_wien2k_mmi001",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "charge distance between last 2 iterations",
+      "dtypeStr": "f",
+      "name": "x_wien2k_charge_distance",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "force on atom xx in mRy/bohr (in the local (for each atom) cartesian coordinate system): |F|",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_abs",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "force on atom xx in mRy/bohr (in the local (for each atom) cartesian coordinate system): Fx",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "force on atom xx in mRy/bohr (in the local (for each atom) cartesian coordinate system): Fy",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "force on atom xx in mRy/bohr (in the local (for each atom) cartesian coordinate system): Fz",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "force on atom xx in mRy/bohr (in the global coordinate system of the unit cell (in the same way as the atomic positions are specified)): Fx",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_x_gl",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "force on atom xx in mRy/bohr (in the global coordinate system of the unit cell (in the same way as the atomic positions are specified)): Fy",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_y_gl",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "force on atom xx in mRy/bohr (in the global coordinate system of the unit cell (in the same way as the atomic positions are specified)): Fz",
+      "dtypeStr": "f",
+      "name": "x_wien2k_for_z_gl",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "number of atom, labelling atoms",
+      "dtypeStr": "C",
+      "name": "x_wien2k_atom_nr",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "number of sphere, labelling spheres",
+      "dtypeStr": "C",
+      "name": "x_wien2k_sphere_nr",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "total difference charge density for atom xx between last 2 iterations",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_diff_charge",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "total interstitial charge (mixed after MIXER)",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_int_charge",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "total charge in sphere xx (mixed after MIXER)",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_charge_in_sphere",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "total interstitial charge (new (not mixed) from LAPW2+LCORE",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_int_charge_nm",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "total charge in sphere xx (new (not mixed) from LAPW2+LCORE",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_charge_in_sphere_nm",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "total valence charge inside unit cell",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_val_charge_cell",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "total valence charge in sphere xx",
+      "dtypeStr": "f",
+      "name": "x_wien2k_tot_val_charge_sphere",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "density for atom xx at the nucleus (first radial mesh point); valence",
+      "dtypeStr": "f",
+      "name": "x_wien2k_density_at_nucleus_valence",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "density for atom xx at the nucleus (first radial mesh point); semi-core",
+      "dtypeStr": "f",
+      "name": "x_wien2k_density_at_nucleus_semicore",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "density for atom xx at the nucleus (first radial mesh point); core",
+      "dtypeStr": "f",
+      "name": "x_wien2k_density_at_nucleus_core",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "density for atom xx at the nucleus (first radial mesh point); total",
+      "dtypeStr": "f",
+      "name": "x_wien2k_density_at_nucleus_tot",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "nuclear and electronic charge; normalization check of electronic charge densities. If a significant amount of electrons is missing, one might have core states, whose charge density is not completely confined within the respective atomic sphere. In such a case the corresponding states should be treated as band states (using LOs).",
+      "dtypeStr": "f",
+      "name": "x_wien2k_nuclear_charge",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    },  {
+      "description": "nuclear and electronic charge; normalization check of electronic charge densities. If a significant amount of electrons is missing, one might have core states, whose charge density is not completely confined within the respective atomic sphere. In such a case the corresponding states should be treated as band states (using LOs).",
+      "dtypeStr": "f",
+      "name": "x_wien2k_electronic_charge",
+      "shape": [],
+      "repeats": true,
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "number of the nec test, labelling nec",
+      "dtypeStr": "i",
+      "name": "x_wien2k_necnr",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Version of WIEN2k.",
+      "dtypeStr": "C",
+      "name": "x_wien2k_version",
+      "shape": [],
+      "superNames": [
+        "x_wien2k_header"
+      ]
+    }]
+}

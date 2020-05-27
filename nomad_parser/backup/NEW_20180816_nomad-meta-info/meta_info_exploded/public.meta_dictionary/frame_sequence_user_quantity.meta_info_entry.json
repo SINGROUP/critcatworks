@@ -1,0 +1,19 @@
+{
+  "meta_name":"frame_sequence_user_quantity",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Array containing the values of the user-defined quantity defined ",
+    "in frame_sequence_user_quantity_name, evaluated along this sequence of frames ",
+    "(i.e., trajectory, a frame is one section_single_configuration_calculation). If ",
+    "not all frames have a value the indices of the frames that have a value are ",
+    "stored in frame_sequence_kinetic_energy_frames. If not all frames have a value ",
+    "the indices of the frames that have a value are stored in ",
+    "frame_sequence_kinetic_energy_frames."],
+  "meta_parent_section":"section_frame_sequence_user_quantity",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_frame_sequence_user_quantity_evaluations_in_sequence"
+  },{
+    "meta_dimension_symbolic":"number_of_frame_sequence_user_quantity_components"
+  }]
+}

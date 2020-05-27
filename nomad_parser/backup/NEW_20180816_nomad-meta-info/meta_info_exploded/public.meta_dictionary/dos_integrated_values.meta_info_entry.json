@@ -1,0 +1,15 @@
+{
+  "meta_name":"dos_integrated_values",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Integrated density of states (starting at $-\\infty$), pseudo potential ",
+    "calculations should start with the number of core electrons if they cover only ",
+    "the active electrons"],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_spin_channels"
+  },{
+    "meta_dimension_symbolic":"number_of_dos_values"
+  }]
+}

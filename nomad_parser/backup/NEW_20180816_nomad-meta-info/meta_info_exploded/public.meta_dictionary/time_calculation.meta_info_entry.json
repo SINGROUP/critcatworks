@@ -1,0 +1,14 @@
+{
+  "meta_name":"time_calculation",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the wall-clock time needed for a calculation using ",
+    "calculation_method_current. Basically, it tracks the real time that has been ",
+    "elapsed from start to end."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "time_info"],
+  "meta_data_type":"float",
+  "meta_repeats":true,
+  "meta_units":"s"
+}

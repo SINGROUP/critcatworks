@@ -1,0 +1,183 @@
+{
+  "metadict_name":"lib_atoms",
+  "metadict_description":[
+    "meta info used by the EP parser, all names are expected to start with ",
+    "x_lib_atoms_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_lib_atoms_command_line_command_line",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_config_type",
+    "meta_type":"type-value",
+    "meta_description":"Configuration type, e.g. = dislocation_quadrupole.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gap_data_do_core",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gap_data_e0",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_lib_atoms_gap_params_label",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gap_params_svn_version",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_alpha",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n_sparseX"
+    },{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_covariance_type",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_descriptor",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_dimensions",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_label",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_n_permutations",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_n_sparsex",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_perm_i",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_perm_permutation",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_signal_mean",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_signal_variance",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_sparsex",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n_sparseX"
+    },{
+      "meta_dimension_symbolic":"dimensions"
+    }]
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_sparsex_filename",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_sparsified",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_lib_atoms_gpcoordinates_theta",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_lib_atoms_gpsparse_n_coordinate",
+    "meta_type":"type-value",
+    "meta_description":"GAP classifier.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_lib_atoms_section_gap",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Description of Gaussian Approximation Potentials ",
+      "(GAPs)."],
+    "meta_parent_section":"section_run",
+    "meta_repeats":false,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_lib_atoms_training_config_refs",
+    "meta_type":"type-value",
+    "meta_description":"References to frames in training configuration.",
+    "meta_parent_section":"x_lib_atoms_section_gap",
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n_sparseX"
+    }]
+  },{
+    "meta_name":"x_lib_atoms_virial_tensor",
+    "meta_type":"type-value",
+    "meta_description":"Virial tensor for this frame.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":"Pa"
+  }]
+}

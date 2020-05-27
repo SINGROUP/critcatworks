@@ -1,0 +1,15 @@
+{
+  "meta_name":"frame_sequence_time",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Time along this sequence of frames (i.e., a trajectory, a frame is one ",
+    "section_single_configuration_calculation). Time start is arbitrary, but when a ",
+    "sequence is a continuation of another time should be continued ",
+    "too."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_frames_in_sequence"
+  }],
+  "meta_units":"s"
+}

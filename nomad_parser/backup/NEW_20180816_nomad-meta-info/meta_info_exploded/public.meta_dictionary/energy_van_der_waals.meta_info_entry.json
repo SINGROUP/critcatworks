@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_van_der_waals",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value for the converged van der Waals energy calculated using the method ",
+    "described in van_der_waals_method, and used in energy_current. This is the van ",
+    "der Waals method consistent with, e.g., forces used for relaxation or dynamics. ",
+    "Alternative methods are listed in section_energy_van_der_waals."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_type_van_der_waals"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

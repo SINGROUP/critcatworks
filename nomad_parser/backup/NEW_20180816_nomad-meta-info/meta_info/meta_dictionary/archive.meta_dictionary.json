@@ -1,0 +1,25 @@
+{
+  "metadict_name":"archive",
+  "metadict_description":"Meta Info that is used in the Nomad Archive",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"all"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"number_of_single_configurations",
+    "meta_type":"type-value",
+    "meta_description":[
+      "number of single_configuration_calculations performed in the ",
+      "calculation"],
+    "meta_parent_section":"section_query_auxiliary_data",
+    "meta_data_type":"int32"
+  },{
+    "meta_name":"section_query_auxiliary_data",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Additional information that is used to support ElasticSearch ",
+      "queries"],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  }]
+}

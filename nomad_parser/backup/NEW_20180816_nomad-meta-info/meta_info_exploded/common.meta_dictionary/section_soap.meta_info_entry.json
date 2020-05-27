@@ -1,0 +1,8 @@
+{
+  "meta_name":"section_soap",
+  "meta_type":"type-section",
+  "meta_description":"Stores a soap descriptor for this configuration.",
+  "meta_parent_section":"section_system",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

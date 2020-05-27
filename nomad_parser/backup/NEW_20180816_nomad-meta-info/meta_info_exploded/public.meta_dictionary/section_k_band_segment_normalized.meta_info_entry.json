@@ -1,0 +1,23 @@
+{
+  "meta_name":"section_k_band_segment_normalized",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section collecting the information on a normalized $k$-band segment. This ",
+    "section stores band structures along a one-dimensional pathway in the $k$ ",
+    "(reciprocal) space.\n",
+    "\n",
+    "Eigenvalues calculated at the actual $k$-mesh used for energy_total evaluations ",
+    "are defined in section_eigenvalues and the band structures are represented as ",
+    "third-order tensors: one dimension for the spin channels, one for the sequence ",
+    "of $k$ points for the segment (given in number_of_k_points_per_segment), and ",
+    "one for the sequence of eigenvalues at a given $k$ point. The values of the $k$ ",
+    "points in each segment are stored in band_k_points. The energies and occupation ",
+    "for each eigenstate, at each $k$ point, segment, and spin channel are stored in ",
+    "band_energies and band_occupations, respectively. The labels for the segment ",
+    "are specified in band_segm_labels."],
+  "meta_parent_section":"section_k_band_normalized",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

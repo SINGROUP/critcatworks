@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_starting_point",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Exchange-correlation functional of the ground-state calculation. See ",
+    "xc_functional list at https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wiki",
+    "s/metainfo/XC-functional"],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

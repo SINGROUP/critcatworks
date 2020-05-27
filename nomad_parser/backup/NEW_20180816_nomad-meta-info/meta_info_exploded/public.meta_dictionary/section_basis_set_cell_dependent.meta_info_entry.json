@@ -1,0 +1,16 @@
+{
+  "meta_name":"section_basis_set_cell_dependent",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section describing a cell-dependent (atom-independent) basis set, e.g. plane ",
+    "waves. The contained information is the type of basis set (in ",
+    "basis_set_cell_dependent_kind), its parameters (e.g., for plane waves in ",
+    "basis_set_planewave_cutoff), and a name that identifies the actually used basis ",
+    "set (a string combining the type and the parameter(s), stored in ",
+    "basis_set_cell_dependent_name)."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_springer_classification",
+  "meta_type":"type-section",
+  "meta_description":[
+    "section_springer_classification contains a classification tag of a material ",
+    "according to Springer Materials"],
+  "meta_parent_section":"section_springer_material",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

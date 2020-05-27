@@ -1,0 +1,21 @@
+----------------------------------------------------------------------------
+  Setting up new environment, removing all currently loaded modules
+----------------------------------------------------------------------------
+  Loading new modules:
+    binutils     intelmpi/5.1.1    fftw/3.3.4    vmd/1.9.1
+    gcc/4.9.3    mkl/11.3.0        cp2k/4.1
+CP2K version 4.1/taito_gcc revision 17462 loaded
+Passes all regression tests
+VMD version 1.9.1 is now in use
+
+Due to MODULEPATH changes the following have been reloaded:
+  1) intelmpi/5.1.1  2) mkl/11.3.0
+
+start
+.
+arguments to srun cp2k.popt sp.out sp.inp
+Name of the partition in which the job is running: test
+Name of the node running the job script: c984
+     The ID of the job allocation: 17813337
+     List of nodes allocated to the job: c984
+finnish

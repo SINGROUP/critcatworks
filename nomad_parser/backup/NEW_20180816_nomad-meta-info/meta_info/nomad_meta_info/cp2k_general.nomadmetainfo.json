@@ -1,0 +1,922 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"cp2k_general",
+  "description":"meta info used by the CP2K parser, all names are expected to start with x_cp2k_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_cp2k_atom_forces",
+    "description":"Forces acting on the atoms in this Quickstep calculation.",
+    "superNames":["x_cp2k_section_quickstep_calculation"],
+    "units":"N",
+    "dtypeStr":"f",
+    "repeats":true,
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_cp2k_atomic_kinds",
+    "description":"The number of atomic kinds in the calculation.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_atoms",
+    "description":"The number of atoms in the calculation.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_basis_set_filename",
+    "description":"The name of the basis set file.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_basis_set_norm_type",
+    "description":"Norm type.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_basis_set_number_of_cartesian_basis_functions",
+    "description":"Number of Cartesian basis functions.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_basis_set_number_of_orbital_shell_sets",
+    "description":"Number of orbital shell sets.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_basis_set_number_of_orbital_shells",
+    "description":"Number of orbital shells.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_basis_set_number_of_primitive_cartesian_functions",
+    "description":"Number of primitive Cartesian functions.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_basis_set_number_of_spherical_basis_functions",
+    "description":"Number of spherical basis functions.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_cartesian_basis_functions",
+    "description":"The number of Cartesian basis functions.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_coordinate_filename",
+    "description":"The name of the coordinate file.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_dbcsr_communication_thread_load",
+    "description":"Load of the communication thread.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_dbcsr_multiplication_driver",
+    "description":"DBCSR Multiplication driver",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_dbcsr_multiplication_size_stacks",
+    "description":"DBCSR Multiplication size of stacks.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_dbcsr_multiplication_stack_size",
+    "description":"DBCSR Multiplication stack size.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_dbcsr_multrec_recursion_limit",
+    "description":"DBCSR Multrec recursion limit",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_dbcsr_use_communication_thread",
+    "description":"Boolean indicating if communication thread is used.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_dbcsr_use_mpi_combined_types",
+    "description":"Boolean indicating if MPI combined types are used.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_dbcsr_use_mpi_memory_allocation",
+    "description":"Boolean indicating if MPI memory allocation is used.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_dbcsr_use_subcommunicators",
+    "description":"Boolean indicating if subcommunicators are used.",
+    "superNames":["x_cp2k_section_dbcsr","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_electronic_kinetic_energy",
+    "description":"Self-consistent electronic kinetic energy calculated with Quickstep",
+    "superNames":["x_cp2k_section_quickstep_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_end_host",
+    "description":"The name of the host machine this calculation ended on.",
+    "superNames":["x_cp2k_section_end_information","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_end_id",
+    "description":"The process id at the end of this run.",
+    "superNames":["x_cp2k_section_end_information","program_info"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_end_path",
+    "description":"The path where this calculation ended.",
+    "superNames":["x_cp2k_section_end_information","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_end_time",
+    "description":"The ending time for this run.",
+    "superNames":["x_cp2k_section_end_information","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_end_user",
+    "description":"The name of the user at the end of the calculation.",
+    "superNames":["x_cp2k_section_end_information","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_energy_change_scf_iteration",
+    "description":"At each self-consistent field (SCF) iteration, change of total energy with respect to the previous SCF iteration.",
+    "superNames":["x_cp2k_section_scf_iteration"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_energy_total",
+    "description":"Value of the total energy (nuclei + electrons) calculated with Quickstep.",
+    "superNames":["x_cp2k_section_quickstep_calculation"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_energy_total_scf_iteration",
+    "description":"Total electronic energy calculated with xc_method during the self-consistent field (SCF) iterations.",
+    "superNames":["x_cp2k_section_scf_iteration"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_energy_xc_scf_iteration",
+    "description":"Exchange-correlation (XC) energy during the self-consistent field (SCF) iteration.",
+    "superNames":["x_cp2k_section_scf_iteration"],
+    "units":"J",
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_geminal_filename",
+    "description":"The name of the geminal file.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_input_filename",
+    "description":"The name of the CP2K input file that produced this calculation.",
+    "superNames":["x_cp2k_section_program_information","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_kind_basis_set_name",
+    "description":"The name of the orbital basis set used for this kind.",
+    "superNames":["x_cp2k_section_kind_basis_set"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_kind_label",
+    "description":"The label for this atomic kind.",
+    "superNames":["x_cp2k_section_atomic_kind"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_kind_number",
+    "description":"The atomic kind number. For each element there may be multiple kinds specified. This number differentiates them. Not the atomic number.",
+    "superNames":["x_cp2k_section_atomic_kind"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_kind_number_of_atoms",
+    "description":"The number of atoms with this kind.",
+    "superNames":["x_cp2k_section_atomic_kind"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_local_part_of_gth_pseudopotential",
+    "description":"Maximum angular momentum of the local part of the GTH pseudopotential.",
+    "superNames":["x_cp2k_section_maximum_angular_momentum"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_barostat_temperature_average",
+    "description":"Average barostat temperature in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_barostat_temperature_instantaneous",
+    "description":"Instantaneous barostat temperature in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_barostat_time_constant",
+    "description":"Barostat time constant.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cp2k_md_cell_angle_a_average",
+    "description":"Average cell vector a angle in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"rad"
+  },{
+    "name":"x_cp2k_md_cell_angle_a_instantaneous",
+    "description":"Instantaneous cell vector a angle in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"rad"
+  },{
+    "name":"x_cp2k_md_cell_angle_b_average",
+    "description":"Average cell vector b angle in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"rad"
+  },{
+    "name":"x_cp2k_md_cell_angle_b_instantaneous",
+    "description":"Instantaneous cell vector b angle in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"rad"
+  },{
+    "name":"x_cp2k_md_cell_angle_c_average",
+    "description":"Average cell vector c angle in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"rad"
+  },{
+    "name":"x_cp2k_md_cell_angle_c_instantaneous",
+    "description":"Instantaneous cell vector c angle in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"rad"
+  },{
+    "name":"x_cp2k_md_cell_length_a_average",
+    "description":"Average cell vector a length in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_md_cell_length_a_instantaneous",
+    "description":"Instantaneous cell vector a length in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_md_cell_length_b_average",
+    "description":"Average cell vector b length in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_md_cell_length_b_instantaneous",
+    "description":"Instantaneous cell vector b length in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_md_cell_length_c_average",
+    "description":"Average cell vector c length in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_md_cell_length_c_instantaneous",
+    "description":"Instantaneous cell vector c length in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_md_conserved_quantity",
+    "description":"Conserved quantity for this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_md_coordinates_filename",
+    "description":"Name of the coordinate file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_md_coordinates_print_frequency",
+    "description":"Print frequency for the coordinate file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_cpu_time_average",
+    "description":"Average CPU time for this step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cp2k_md_cpu_time_instantaneous",
+    "description":"Instantaneous CPU time for this step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cp2k_md_dump_filename",
+    "description":"Name of the dump file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_md_dump_print_frequency",
+    "description":"Print frequency for the dump file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_energies_filename",
+    "description":"Name of the energies file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_md_energies_print_frequency",
+    "description":"Print frequency for the energies file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_energy_drift_average",
+    "description":"Average kinetic energy in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_energy_drift_instantaneous",
+    "description":"Instantaneous energy drift in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_ensemble_type",
+    "description":"The ensemble type in molecular dynamics.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_md_kinetic_energy_average",
+    "description":"Average kinetic energy in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_md_kinetic_energy_instantaneous",
+    "description":"Instantaneous kinetic energy in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_md_number_of_time_steps",
+    "description":"Number of requested time steps in molecular dynamics.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_md_potential_energy_average",
+    "description":"Average potential energy for an MD step. Averaged over this and the previous steps.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_md_potential_energy_instantaneous",
+    "description":"Instantaneous potential energy in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_md_pressure_average",
+    "description":"Average pressure in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"Pa"
+  },{
+    "name":"x_cp2k_md_pressure_instantaneous",
+    "description":"Instantaneous pressure in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"Pa"
+  },{
+    "name":"x_cp2k_md_print_frequency",
+    "description":"The print frequency of molecular dynamics information in the CP2K output file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_simulation_cell_filename",
+    "description":"Simulation cell filename.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_md_simulation_cell_print_frequency",
+    "description":"Simulation cell print frequency.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_step_number",
+    "description":"Step number.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_target_pressure",
+    "description":"Target pressure for the barostat.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"f",
+    "unit":"Pa"
+  },{
+    "name":"x_cp2k_md_target_temperature",
+    "description":"Thermostat target temperature.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_target_temperature_tolerance",
+    "description":"Target temperature tolerance.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_temperature_average",
+    "description":"Average temperature in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_temperature_instantaneous",
+    "description":"Instantaneous temperature in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"K"
+  },{
+    "name":"x_cp2k_md_time",
+    "description":"Simulation time for this step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cp2k_md_time_step",
+    "description":"Time step.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cp2k_md_velocities_filename",
+    "description":"Name of the velocities file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_md_velocities_print_frequency",
+    "description":"Print frequency for the velocities file.",
+    "superNames":["x_cp2k_section_md_settings","settings_molecular_dynamics"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_md_volume_average",
+    "description":"Average cell volume in an MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m^3"
+  },{
+    "name":"x_cp2k_md_volume_instantaneous",
+    "description":"Instantaneous cell volume in this MD step.",
+    "superNames":["x_cp2k_section_md_step"],
+    "dtypeStr":"f",
+    "unit":"m^3"
+  },{
+    "name":"x_cp2k_method_name",
+    "description":"The method name for this run.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_mm_potential_filename",
+    "description":"The name of the MM potential file.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_non_local_part_of_gth_pseudopotential",
+    "description":"Maximum angular momentum of the non-local part of the GTH pseudopotential.",
+    "superNames":["x_cp2k_section_maximum_angular_momentum"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_optimization_energy",
+    "description":"Energy for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_optimization_energy_change",
+    "description":"Energy change for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"J"
+  },{
+    "name":"x_cp2k_optimization_energy_decrease",
+    "description":"Whether there has been energy decrease. YES or NO.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_optimization_gradient_convergence_limit",
+    "description":"Convergence criterium for the maximum force component of the current configuration.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"m^-1*J"
+  },{
+    "name":"x_cp2k_optimization_max_gradient",
+    "description":"Max gradient for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"m^-1*J"
+  },{
+    "name":"x_cp2k_optimization_max_gradient_convergence",
+    "description":"Whether there is convergence in max gradient. YES or NO.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_optimization_max_step_size",
+    "description":"Maximum step size for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_optimization_method",
+    "description":"Optimization method for this step",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_optimization_rms_gradient",
+    "description":"RMS gradient for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"m^-1*J"
+  },{
+    "name":"x_cp2k_optimization_rms_gradient_convergence",
+    "description":"Whether there is convergence in rms gradient. YES or NO.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_optimization_rms_step_size",
+    "description":"RMS step size for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_optimization_rms_step_size_convergence",
+    "description":"Whether there is convergence in rms step size. YES or NO.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_optimization_step_size_convergence",
+    "description":"Whether there is convergence in step size. YES or NO.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_optimization_step_size_convergence_limit",
+    "description":"Convergence criterium for the maximum geometry change between the current and the last optimizer iteration.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"m"
+  },{
+    "name":"x_cp2k_optimization_used_time",
+    "description":"Time used for this optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization_step"],
+    "dtypeStr":"f",
+    "unit":"s"
+  },{
+    "name":"x_cp2k_orbital_basis_functions",
+    "description":"Maximum angular momentum of orbital basis functions.",
+    "superNames":["x_cp2k_section_maximum_angular_momentum"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_planewave_cutoff",
+    "description":"The plane-wave cutoff for the auxiliary basis.",
+    "superNames":["x_cp2k_section_quickstep_settings"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_potential_filename",
+    "description":"The name of the potential file.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_preferred_diagonalization_library",
+    "description":"The name of the preferred diagonalization library.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_preferred_fft_library",
+    "description":"The name of the preferred FFT library.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_primitive_cartesian_functions",
+    "description":"The number of primitive Cartesian functions.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_program_compilation_datetime",
+    "description":"The time when this program was compiled.",
+    "superNames":["x_cp2k_section_program_information","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_quickstep_converged",
+    "description":"Boolean indicating whether the quickstep SCF cycle converged or not.",
+    "superNames":["x_cp2k_section_quickstep_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_cp2k_quickstep_method",
+    "description":"The method used for the Quickstep calculations (GPW, GAPW).",
+    "superNames":["x_cp2k_section_quickstep_settings"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_restart_file_name",
+    "description":"Name of the restart file.",
+    "superNames":["x_cp2k_section_restart_information"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_restarted_quantity_name",
+    "description":"Name of a restarted quantity.",
+    "superNames":["x_cp2k_section_restart_information"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_cp2k_run_type",
+    "description":"The run type for this calculation.",
+    "superNames":["x_cp2k_section_global_settings","settings_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_section_atomic_kind",
+    "kindStr":"type_section",
+    "description":"Information one atomic kind.",
+    "superNames":["x_cp2k_section_atomic_kinds"]
+  },{
+    "name":"x_cp2k_section_atomic_kinds",
+    "kindStr":"type_section",
+    "description":"Information about all the atomic kinds in this Quickstep calculation.",
+    "superNames":["x_cp2k_section_quickstep_settings"]
+  },{
+    "name":"x_cp2k_section_dbcsr",
+    "kindStr":"type_section",
+    "description":"The DBCSR (Distributed Block Compressed Sparse Row) information.",
+    "superNames":["section_run","settings_run"]
+  },{
+    "name":"x_cp2k_section_end_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the ending conditions for this run.",
+    "superNames":["section_run","program_info"]
+  },{
+    "name":"x_cp2k_section_geometry_optimization",
+    "kindStr":"type_section",
+    "description":"CP2K geometry optimization information.",
+    "superNames":["section_frame_sequence"]
+  },{
+    "name":"x_cp2k_section_geometry_optimization_energy_reevaluation",
+    "kindStr":"type_section",
+    "description":"Information for the energy re-evaluation at the end of an optimization procedure.",
+    "superNames":["x_cp2k_section_geometry_optimization"]
+  },{
+    "name":"x_cp2k_section_geometry_optimization_step",
+    "kindStr":"type_section",
+    "description":"Contains information about the geometry optimization process for every optimization step.",
+    "superNames":["x_cp2k_section_geometry_optimization"]
+  },{
+    "name":"x_cp2k_section_global_settings",
+    "kindStr":"type_section",
+    "description":"Global settings for this calculation.",
+    "superNames":["section_run","settings_run"]
+  },{
+    "name":"x_cp2k_section_kind_basis_set",
+    "kindStr":"type_section",
+    "description":"Description of the basis set used for this kind.",
+    "superNames":["x_cp2k_section_atomic_kind"]
+  },{
+    "name":"x_cp2k_section_maximum_angular_momentum",
+    "kindStr":"type_section",
+    "description":"Contains the maximum angular momentum values used in the calculation.",
+    "superNames":["x_cp2k_section_quickstep_settings"]
+  },{
+    "name":"x_cp2k_section_md",
+    "kindStr":"type_section",
+    "description":"CP2K Molecular Dynamics information.",
+    "superNames":["section_frame_sequence"]
+  },{
+    "name":"x_cp2k_section_md_settings",
+    "kindStr":"type_section",
+    "description":"Settings for CP2K Molecular Dynamics.",
+    "superNames":["section_sampling_method","settings_molecular_dynamics"]
+  },{
+    "name":"x_cp2k_section_md_step",
+    "kindStr":"type_section",
+    "description":"Information from MD step.",
+    "superNames":["x_cp2k_section_md"]
+  },{
+    "name":"x_cp2k_section_program_information",
+    "kindStr":"type_section",
+    "description":"Contains information about the software version used for this run.",
+    "superNames":["section_run","program_info"]
+  },{
+    "name":"x_cp2k_section_quickstep_calculation",
+    "kindStr":"type_section",
+    "description":"Section for a CP2K QuickStep calculation.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cp2k_section_quickstep_settings",
+    "kindStr":"type_section",
+    "description":"Quickstep settings.",
+    "superNames":["section_method"]
+  },{
+    "name":"x_cp2k_section_restart_information",
+    "kindStr":"type_section",
+    "description":"Contains restart information for this calculation.",
+    "superNames":["section_run"]
+  },{
+    "name":"x_cp2k_section_scf_iteration",
+    "kindStr":"type_section",
+    "description":"Section for a CP2K QuickStep SCF iteration.",
+    "superNames":["x_cp2k_section_quickstep_calculation"]
+  },{
+    "name":"x_cp2k_section_startinformation",
+    "kindStr":"type_section",
+    "description":"Contains information about the starting conditions for this run.",
+    "superNames":["section_run","program_info"]
+  },{
+    "name":"x_cp2k_section_stress_tensor",
+    "kindStr":"type_section",
+    "description":"Section for stress tensor information.",
+    "superNames":["x_cp2k_section_quickstep_calculation"]
+  },{
+    "name":"x_cp2k_section_total_numbers",
+    "kindStr":"type_section",
+    "description":"The total number of different entities in the calculation.",
+    "superNames":["x_cp2k_section_quickstep_settings"]
+  },{
+    "name":"x_cp2k_section_vdw_d2_settings",
+    "kindStr":"type_section",
+    "description":"D2 settings.",
+    "superNames":["x_cp2k_section_vdw_settings","settings_van_der_waals"]
+  },{
+    "name":"x_cp2k_section_vdw_d3_settings",
+    "kindStr":"type_section",
+    "description":"D3 settings.",
+    "superNames":["x_cp2k_section_vdw_settings","settings_van_der_waals"]
+  },{
+    "name":"x_cp2k_section_vdw_element_settings",
+    "kindStr":"type_section",
+    "description":"Contains element-specific Van der Waals settings.",
+    "superNames":["x_cp2k_section_vdw_d2_settings","settings_van_der_waals"]
+  },{
+    "name":"x_cp2k_section_vdw_settings",
+    "kindStr":"type_section",
+    "description":"Van der Waals settings.",
+    "superNames":["section_method","settings_van_der_waals"]
+  },{
+    "name":"x_cp2k_shell_sets",
+    "description":"The number of shell sets in the calculation.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_shells",
+    "description":"The number of shells.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_spherical_basis_functions",
+    "description":"The number of Spherical basis functions.",
+    "superNames":["x_cp2k_section_total_numbers"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_spin_restriction",
+    "description":"Indicates the restriction applied for the spin (e.g. RKS).",
+    "superNames":["x_cp2k_section_quickstep_settings"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_start_host",
+    "description":"The name of the host machine this calculation started on.",
+    "superNames":["x_cp2k_section_startinformation","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_start_id",
+    "description":"The process id at the start of this run.",
+    "superNames":["x_cp2k_section_startinformation","program_info"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_start_path",
+    "description":"The path where this calculation started.",
+    "superNames":["x_cp2k_section_startinformation","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_start_time",
+    "description":"The starting time for this run.",
+    "superNames":["x_cp2k_section_startinformation","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_start_user",
+    "description":"The name of the user at the start of the calculation.",
+    "superNames":["x_cp2k_section_startinformation","program_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_stress_tensor",
+    "description":"A final value of the stress tensor in a Quickstep calculation",
+    "superNames":["x_cp2k_section_stress_tensor"],
+    "units":"Pa",
+    "dtypeStr":"f",
+    "shape":[3,3]
+  },{
+    "name":"x_cp2k_stress_tensor_determinant",
+    "description":"The determinant of the stress tensor.",
+    "superNames":["x_cp2k_section_stress_tensor"],
+    "dtypeStr":"f",
+    "unit":"Pa**3"
+  },{
+    "name":"x_cp2k_stress_tensor_eigenvalues",
+    "description":"The eigenvalues of the stress tensor.",
+    "superNames":["x_cp2k_section_stress_tensor"],
+    "dtypeStr":"f",
+    "shape":[3],
+    "unit":"Pa"
+  },{
+    "name":"x_cp2k_stress_tensor_eigenvectors",
+    "description":"The eigenvectors of the stress tensor.",
+    "superNames":["x_cp2k_section_stress_tensor"],
+    "dtypeStr":"f",
+    "shape":[3,3]
+  },{
+    "name":"x_cp2k_stress_tensor_one_third_of_trace",
+    "description":"1/3 of the trace of the stress tensor.",
+    "superNames":["x_cp2k_section_stress_tensor"],
+    "dtypeStr":"f",
+    "unit":"Pa"
+  },{
+    "name":"x_cp2k_svn_revision",
+    "description":"The SVN revision number.",
+    "superNames":["x_cp2k_section_program_information","program_info"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_cp2k_vdw_bj_damping_name",
+    "description":"Name of the BJ damping method.",
+    "superNames":["x_cp2k_section_vdw_settings","settings_van_der_waals"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_vdw_cn_cutoff",
+    "description":"Cutoff for CN calculation.",
+    "superNames":["x_cp2k_section_vdw_d3_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_cutoff_radius",
+    "description":"Cutoff radius of the van der Waals method.",
+    "superNames":["x_cp2k_section_vdw_settings","settings_van_der_waals"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_vdw_damping_factor",
+    "description":"Exponential damping prefactor for the van der Waals method.",
+    "superNames":["x_cp2k_section_vdw_d2_settings","settings_van_der_waals"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_vdw_name",
+    "description":"Name of the van der Waals method.",
+    "superNames":["x_cp2k_section_vdw_settings","settings_van_der_waals"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_vdw_parameter_c6",
+    "description":"C6 parameter.",
+    "superNames":["x_cp2k_section_vdw_element_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_parameter_element_name",
+    "description":"Name of the element.",
+    "superNames":["x_cp2k_section_vdw_element_settings","settings_van_der_waals"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_cp2k_vdw_parameter_radius",
+    "description":"Radius parameter.",
+    "superNames":["x_cp2k_section_vdw_element_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_s6_scaling_factor",
+    "description":"S6 scaling factor.",
+    "superNames":["x_cp2k_section_vdw_d3_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_s8_scaling_factor",
+    "description":"S8 scaling factor.",
+    "superNames":["x_cp2k_section_vdw_d3_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_scaling_factor",
+    "description":"Scaling factor.",
+    "superNames":["x_cp2k_section_vdw_d2_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_sr6_scaling_factor",
+    "description":"SR6 scaling factor.",
+    "superNames":["x_cp2k_section_vdw_d3_settings","settings_van_der_waals"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_cp2k_vdw_type",
+    "description":"Type of the van der Waals method.",
+    "superNames":["x_cp2k_section_vdw_settings","settings_van_der_waals"],
+    "dtypeStr":"C"
+  }]
+}

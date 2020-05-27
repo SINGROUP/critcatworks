@@ -1,0 +1,9 @@
+{
+  "meta_name":"dos_fermi_energy",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the Fermi energy of the density of ",
+    "states."],
+  "meta_parent_section":"section_dos",
+  "meta_data_type":"float"
+}

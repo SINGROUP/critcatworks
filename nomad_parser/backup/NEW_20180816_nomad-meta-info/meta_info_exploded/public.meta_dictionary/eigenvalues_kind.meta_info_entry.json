@@ -1,0 +1,20 @@
+{
+  "meta_name":"eigenvalues_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A short string describing the kind of eigenvalues, as defined in the ",
+    "[eigenvalues_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-in",
+    "fo/wikis/metainfo/eigenvalues-kind)."],
+  "meta_parent_section":"section_eigenvalues",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"normal",
+    "meta_enum_description":"all eigenvalues of the Kohn Sham / Fock operator"
+  },{
+    "meta_enum_value":"partial",
+    "meta_enum_description":[
+      "partial eigenvalue spectrum, usually around the HOMO-LOMO. In this case, ",
+      "number_of_eigenvalues only refers to the number of stored eigenvalues, not the ",
+      "full spectrum."]
+  }]
+}

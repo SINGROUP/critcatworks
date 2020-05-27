@@ -1,0 +1,2161 @@
+{
+  "metadict_name":"gromacs",
+  "metadict_description":[
+    "meta info used by the GROMACS parser, all names are expected to start with ",
+    "x_gromacs_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"number_of_atoms_per_type",
+    "meta_type":"type-dimension",
+    "meta_description":"Number of atoms involved in this type.",
+    "meta_parent_section":"section_atom_type"
+  },{
+    "meta_name":"x_gromacs_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom type of an atom in topology definition.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_atom_name",
+    "meta_type":"type-value",
+    "meta_description":"Atom name of an atom in topology definition.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_atom_positions_image_index",
+    "meta_type":"type-value",
+    "meta_description":"PBC image flag index.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":" "
+  },{
+    "meta_name":"x_gromacs_atom_positions_scaled",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Position of the atoms in a scaled format [0, ",
+      "1]."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":" "
+  },{
+    "meta_name":"x_gromacs_atom_positions_wrapped",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Position of the atoms wrapped back to the periodic ",
+      "box."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms"
+    },{
+      "meta_dimension_fixed":3
+    }],
+    "meta_units":"m"
+  },{
+    "meta_name":"x_gromacs_atom_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":"Reference to the atoms of each atom type.",
+    "meta_parent_section":"x_gromacs_section_atom_to_atom_type_ref",
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms_per_type"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_gromacs_atom_type",
+    "meta_type":"type-value",
+    "meta_description":"Atom type of an atom in topology definition.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_atom_type_element",
+    "meta_type":"type-value",
+    "meta_description":"Element symbol of an atom type.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_atom_type_radius",
+    "meta_type":"type-value",
+    "meta_description":"van der Waals radius of an atom type.",
+    "meta_parent_section":"section_atom_type",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gromacs_barostat_target_pressure",
+    "meta_type":"type-value",
+    "meta_description":"MD barostat target pressure.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"float",
+    "meta_units":"Pa"
+  },{
+    "meta_name":"x_gromacs_barostat_tau",
+    "meta_type":"type-value",
+    "meta_description":"MD barostat relaxation time.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_gromacs_barostat_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD barostat type, valid values are defined in the barostat_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_barostat"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_angle_count_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_data_angle_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_angles_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_atom_types_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_data_bond_count_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_data_bond_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_bond_types_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_data_dihedral_coeff_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_dihedral_count_store",
+    "meta_type":"type-value",
+    "meta_description":"store temporarly",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_data_dihedral_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_file_store",
+    "meta_type":"type-value",
+    "meta_description":"Filename of data file",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_data_topo_list_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_dummy",
+    "meta_type":"type-value",
+    "meta_description":"dummy",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_frame_sequence_bond_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the bond_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_bond_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_bond_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_bond_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_bond_energy values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_bond_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_cmap_dihedral_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the cmap_dihedral_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_cmap_dihedral_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_cmap_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_cmap_dihedral_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_cmap_dihedral_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_cmap_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_constrain_rmsd",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the constrain_rmsd_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_constrain_rmsd_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_constrain_rmsd_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_constrain_rmsd_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_constrain_rmsd_energy values refers to. If not given ",
+      "it defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_constrain_rmsd_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_coulomb_14_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the coulomb_14_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_coulomb_14_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_coulomb_14_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_coulomb_14_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_coulomb_14_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_coulomb_14_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_coulomb_sr_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the coulomb_sr_energy along this sequence of ",
+      "frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_coulomb_sr_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_coulomb_sr_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_coulomb_sr_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_coulomb_sr_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_coulomb_sr_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_density",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the density along this sequence of frames (i.e., ",
+      "a trajectory, a frame is one section_single_configuration_calculation). If not ",
+      "all frames have a value the indices of the frames that have a value are stored ",
+      "in frame_sequence_density_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_densities_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_density_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_densities values refers to. If not given it defaults ",
+      "to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_densities_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_improper_dihedral_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the improper_dihedral_energy along this sequence ",
+      "of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_improper_dihedral_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_improper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_improper_dihedral_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_improper_dihedral_energy values refers to. If not ",
+      "given it defaults to the trivial mapping ",
+      "0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_improper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_lj_14_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the lj_14_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_lj_14_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_lj_14_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_lj_14_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_lj_14_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_lj_14_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_lj_sr_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the lj_sr_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_lj_sr_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_lj_sr_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_lj_sr_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_lj_sr_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_lj_sr_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_proper_dihedral_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the proper_dihedral_energy along this sequence ",
+      "of frames (i.e., a trajectory, a frame is one ",
+      "section_single_configuration_calculation). If not all frames have a value the ",
+      "indices of the frames that have a value are stored in ",
+      "frame_sequence_proper_dihedral_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_proper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_proper_dihedral_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_proper_dihedral_energy values refers to. If not given ",
+      "it defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_proper_dihedral_energy_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_ubond_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the ubond_energy along this sequence of frames ",
+      "(i.e., a trajectory, a frame is one section_single_configuration_calculation). ",
+      "If not all frames have a value the indices of the frames that have a value are ",
+      "stored in frame_sequence_ubond_energy_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_ubond_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_ubond_energy_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_ubond_energy values refers to. If not given it ",
+      "defaults to the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_ubond_energies_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_volume",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the values of the volume along this sequence of frames (i.e., ",
+      "a trajectory, a frame is one section_single_configuration_calculation). If not ",
+      "all frames have a value the indices of the frames that have a value are stored ",
+      "in frame_sequence_volume_frames."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_volumes_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_frame_sequence_volume_frames",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Array containing the strictly increasing indices of the frames the ",
+      "x_gromacs_frame_sequence_volume values refers to. If not given it defaults to ",
+      "the trivial mapping 0,1,..."],
+    "meta_parent_section":"section_frame_sequence",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_volumes_in_sequence"
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_acc",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_adress",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_annealing",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_annealingnpoints",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_bdfric",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_boost_version",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_build_cpu_brand",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_build_cpu_family",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_build_cpu_features",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_build_cpu_vendor",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_build_osarch",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_built_by",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_built_on",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_c_compiler",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_c_compiler_flags",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_commmode",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_compressedxprecision",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_compressibility0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_compressibility1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_compressibility2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_constraintalgorithm",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_continuation",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_cosacceleration",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_coulombmodifier",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_coulombtype",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_cutoffscheme",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_cxx11_compilation",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_cxx_compiler",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_cxx_compiler_flags",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_deform0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_deform1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_deform2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_dispcorr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_disre",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_disremixed",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_disreweighting",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_drfc",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_drtau",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_dt",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_emstep",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_emtol",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_energygrpflags0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_energygrpflags1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_energygrpflags2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_epsilonr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_epsilonrf",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_epsilonsurface",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ewaldgeometry",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ewaldrtol",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ewaldrtollj",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ex",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ext",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ey",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_eyt",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ez",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ezt",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_fcstep",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_fft_library",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_fouriernx",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_fourierny",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_fouriernz",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_fourierspacing",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_freeenergy",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbalgorithm",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbdielectricoffset",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbepsilonsolvent",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbobcalpha",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbobcbeta",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbobcgamma",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gbsaltconc",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gpu_support",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_gromacs_version",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_implicitsolvent",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_initstep",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_integrator",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_interactivemd",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_invsqrt_routine",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ldseed",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_lincsiter",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_lincsorder",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_lincswarnangle",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_ljpmecombrule",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_memory_model",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_mmchargescalefactor",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_mpi_library",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nbfgscorr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nfreeze",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_ngqm",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nhchainlength",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_niter",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nrdf",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstcalcenergy",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstcalclr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstcgsteep",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstcomm",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstdisreout",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstenergy",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nsteps",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstfout",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstgbradii",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstlist",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstlog",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstorireout",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstpcouple",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nsttcouple",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstvout",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstxout",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstxoutcompressed",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nstype",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_nwall",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_opencl_support",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_openmp_support",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_orirefc",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_oriretau",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_pbc",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_pcoupl",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_pcoupltype",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_periodicmolecules",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_pmeorder",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_posrescom0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_posrescom1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_posrescom2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_posrescomb0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_posrescomb1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_posrescomb2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_precision",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_printnosehooverchainvariables",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_pull",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_qmconstraints",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_qmmm",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_qmmmscheme",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rcoulomb",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rcoulombswitch",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rdtscp_usage",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_refcoordscaling",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_refp0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_refp1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_refp2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_gromacs_inout_control_reft",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rgbradii",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rlist",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rlistlong",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rotation",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rtpi",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rvdw",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_rvdwswitch",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_saalgorithm",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_sasurfacetension",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_shakesor",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_shaketol",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_simd_instructions",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_simulatedtempering",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_simulationpart",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_swapcoords",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_tableextension",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_taup",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_taut",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_tcoupl",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_tinit",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_tng_support",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_tracing_support",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userint1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userint2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userint3",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userint4",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userreal1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userreal2",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userreal3",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_userreal4",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_vdwmodifier",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_vdwtype",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_verletbuffertolerance",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_wallatomtype0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_wallatomtype1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_walldensity0",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_walldensity1",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_wallewaldzfac",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_wallrlinpot",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_control_walltype",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs running environment and control parameters.",
+    "meta_parent_section":"x_gromacs_section_control_parameters",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_file_confoutgro",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs output configuration file.",
+    "meta_parent_section":"x_gromacs_section_input_output_files",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_file_eneredr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs output energies file.",
+    "meta_parent_section":"x_gromacs_section_input_output_files",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_file_statecpt",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs input coordinates and state file.",
+    "meta_parent_section":"x_gromacs_section_input_output_files",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_file_topoltpr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs input topology file.",
+    "meta_parent_section":"x_gromacs_section_input_output_files",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_file_trajcompxtc",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs input compressed trajectory file.",
+    "meta_parent_section":"x_gromacs_section_input_output_files",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_inout_file_trajtrr",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs input trajectory file.",
+    "meta_parent_section":"x_gromacs_section_input_output_files",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_input_units_store",
+    "meta_type":"type-value",
+    "meta_description":[
+      "It determines the units of all quantities specified in the input script and ",
+      "data file, as well as quantities output to the screen, log file, and dump ",
+      "files."],
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_integrator_dt",
+    "meta_type":"type-value",
+    "meta_description":"MD integration time step.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_gromacs_integrator_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD integrator type, valid values are defined in the integrator_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_interaction_atom_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reference to the atom type of each interaction ",
+      "atoms."],
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_gromacs_langevin_gamma",
+    "meta_type":"type-value",
+    "meta_description":"Langevin thermostat damping factor.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_gromacs_lattice_angles",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Angles of lattice vectors. Vector includes [alpha, beta, gamma] in ",
+      "degrees."],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }],
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gromacs_lattice_lengths",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Lattice dimensions in a vector. Vector includes [a, b, c] ",
+      "lengths."],
+    "meta_parent_section":"section_system",
+    "meta_abstract_types":[
+      "configuration_core"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }],
+    "meta_repeats":true
+  },{
+    "meta_name":"x_gromacs_masses_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_topology",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_mdin_control_parameters",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to x_gromacs_section_control_parameters."
+  },{
+    "meta_name":"x_gromacs_mdin_finline",
+    "meta_type":"type-value",
+    "meta_description":"finline in mdin",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_mdin_header",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_mdin_input_output_files",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to x_gromacs_section_control_parameters."
+  },{
+    "meta_name":"x_gromacs_mdin_method",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to section method."
+  },{
+    "meta_name":"x_gromacs_mdin_run",
+    "meta_type":"type-abstract",
+    "meta_description":[
+      "Parameters of mdin belonging to settings ",
+      "run."],
+    "meta_abstract_types":[
+      "settings_run"]
+  },{
+    "meta_name":"x_gromacs_mdin_wt",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_mdout_method",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdin belonging to section method."
+  },{
+    "meta_name":"x_gromacs_mdout_run",
+    "meta_type":"type-abstract",
+    "meta_description":[
+      "Parameters of mdin belonging to settings ",
+      "run."],
+    "meta_abstract_types":[
+      "settings_run"]
+  },{
+    "meta_name":"x_gromacs_mdout_single_configuration_calculation",
+    "meta_type":"type-abstract",
+    "meta_description":"Parameters of mdout belonging to section_single_configuration_calculation."
+  },{
+    "meta_name":"x_gromacs_molecule_interaction_atom_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reference to the atom type of each molecule interaction ",
+      "atoms."],
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_gromacs_number_of_bond_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of bond_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_bond_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_cmap_dihedral_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of cmap_dihedral_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_cmap_dihedral_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_constrain_rmsd_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of constrain_rmsd_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_constrain_rmsd_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_coulomb_14_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of coulomb_14_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_coulomb_14_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_coulomb_sr_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of coulomb_sr_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_coulomb_sr_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_defined_molecule_pair_interactions",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of defined pair interactions within a molecule (L-J ",
+      "pairs)."],
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_number_of_defined_pair_interactions",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of defined pair interactions (L-J ",
+      "pairs)."],
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_gromacs_number_of_densities_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of densities in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_density."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_improper_dihedral_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of improper_dihedral_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_improper_dihedral_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_lj_14_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of lj_14_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_lj_14_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_lj_sr_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of lj_sr_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_lj_sr_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_proper_dihedral_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of proper_dihedral_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_proper_dihedral_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_steps_requested",
+    "meta_type":"type-value",
+    "meta_description":"Number of requested MD integration time steps.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gromacs_number_of_tasks",
+    "meta_type":"type-value",
+    "meta_description":"Number of tasks in parallel program (MPI).",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gromacs_number_of_ubond_energies_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of ubond_energies in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_ubond_energy."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_number_of_volumes_in_sequence",
+    "meta_type":"type-dimension",
+    "meta_description":[
+      "Gives the number of volumes in this sequence of frames, see ",
+      "x_gromacs_frame_sequence_volume."],
+    "meta_parent_section":"section_frame_sequence"
+  },{
+    "meta_name":"x_gromacs_pair_interaction_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":"Reference to the atom type for pair interactions.",
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_defined_pair_interactions"
+    },{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_gromacs_pair_interaction_parameters",
+    "meta_type":"type-value",
+    "meta_description":"Pair interactions parameters.",
+    "meta_parent_section":"section_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_defined_pair_interactions"
+    },{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_gromacs_pair_molecule_interaction_parameters",
+    "meta_type":"type-value",
+    "meta_description":"Molecule pair interactions parameters.",
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"number_of_defined_molecule_pair_interactions"
+    },{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_gromacs_pair_molecule_interaction_to_atom_type_ref",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Reference to the atom type for pair interactions within a ",
+      "molecule."],
+    "meta_parent_section":"section_molecule_interaction",
+    "meta_abstract_types":[
+      "settings_interaction"],
+    "meta_data_type":"reference",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"x_gromacs_number_of_defined_pair_interactions"
+    },{
+      "meta_dimension_symbolic":"number_of_atoms_per_interaction"
+    }],
+    "meta_referenced_section":"section_atom_type"
+  },{
+    "meta_name":"x_gromacs_parallel_task_nr",
+    "meta_type":"type-value",
+    "meta_description":"Program task no.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_gromacs_periodicity_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Periodic boundary condition type in the sampling (non-PBC or ",
+      "PBC)."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_integrator"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_execution_date",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_execution_host",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_execution_path",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_execution_time",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_license",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs program license.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_module",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_module_version",
+    "meta_type":"type-value",
+    "meta_description":"Gromacs program module (gmx) version.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_version_date",
+    "meta_type":"type-value",
+    "meta_description":"Program version date.",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_program_working_path",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_section_atom_to_atom_type_ref",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section to store atom label to atom type definition ",
+      "list"],
+    "meta_parent_section":"section_topology",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gromacs_section_control_parameters",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section to store the input and output control ",
+      "parameters"],
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gromacs_section_input_output_files",
+    "meta_type":"type-section",
+    "meta_description":"Section to store input and output file names",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gromacs_section_single_configuration_calculation",
+    "meta_type":"type-section",
+    "meta_description":"section for gathering values for MD steps",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_gromacs_thermostat_level",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD thermostat level (see wiki: single, multiple, ",
+      "regional)."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_thermostat_target_temperature",
+    "meta_type":"type-value",
+    "meta_description":"MD thermostat target temperature.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"K"
+  },{
+    "meta_name":"x_gromacs_thermostat_tau",
+    "meta_type":"type-value",
+    "meta_description":"MD thermostat relaxation time.",
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"float",
+    "meta_units":"s"
+  },{
+    "meta_name":"x_gromacs_thermostat_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MD thermostat type, valid values are defined in the thermostat_type wiki ",
+      "page."],
+    "meta_parent_section":"section_sampling_method",
+    "meta_abstract_types":[
+      "settings_thermostat"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_traj_atoms_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_traj_box_bound_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_traj_box_bounds_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_traj_number_of_atoms_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_traj_timestep_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_traj_variables_store",
+    "meta_type":"type-value",
+    "meta_description":"tmp",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_gromacs_xlo_xhi",
+    "meta_type":"type-value",
+    "meta_description":"test",
+    "meta_parent_section":"section_run",
+    "meta_data_type":"string"
+  }]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"number_of_basis_sets_atom_centered",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "String describing the use of the basis set, i.e, if it used for expanding a ",
+    "wavefunction or an electron density. Allowed values are listed in the ",
+    "[basis\\_set\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-in",
+    "fo/wikis/metainfo/basis-set-kind)."],
+  "meta_parent_section":"section_method_basis_set"
+}

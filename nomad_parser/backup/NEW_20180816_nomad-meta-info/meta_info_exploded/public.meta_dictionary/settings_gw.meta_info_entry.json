@@ -1,0 +1,10 @@
+{
+  "meta_name":"settings_gw",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters for the GW-method in the post Hartree-Fock step, that ",
+    "expands the self-energy in terms of the single particle Green's function $G$ ",
+    "and the screened Coulomb interaction $W$."],
+  "meta_abstract_types":[
+    "settings_post_hartree_fock"]
+}

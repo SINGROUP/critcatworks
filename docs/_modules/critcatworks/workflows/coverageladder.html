@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.workflows.coverageladder &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.workflows.coverageladder</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span>
+
+<span class="c1"># internal modules</span>
+<span class="kn">from</span> <span class="nn">critcatworks.structure</span> <span class="k">import</span> <span class="n">start_coverage_ladder</span><span class="p">,</span> <span class="n">add_remove_adsorbate</span><span class="p">,</span> <span class="n">gather_ladder</span><span class="p">,</span> <span class="n">step_coverage_ladder</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.update</span> <span class="k">import</span> <span class="n">initialize_workflow_data</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.format</span> <span class="k">import</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">start_from_structures</span><span class="p">,</span> <span class="n">start_from_database</span><span class="p">,</span> <span class="n">read_structures</span>
+<span class="kn">from</span> <span class="nn">critcatworks.structure</span> <span class="k">import</span> <span class="n">update_converged_data</span>
+<span class="kn">from</span> <span class="nn">critcatworks.dft</span> <span class="k">import</span> <span class="n">setup_folders</span><span class="p">,</span> <span class="n">chunk_calculations</span>
+<span class="kn">from</span> <span class="nn">critcatworks.structure</span> <span class="k">import</span> <span class="n">get_per_type_coverage</span><span class="p">,</span> <span class="n">eliminate_pairs</span><span class="p">,</span> <span class="n">eliminate_closest</span>
+
+
+<div class="viewcode-block" id="get_coverage_ladder_workflow"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.coverageladder.get_coverage_ladder_workflow">[docs]</a><span class="k">def</span> <span class="nf">get_coverage_ladder_workflow</span><span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span>
+        <span class="n">worker_target_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">start_ids</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reference_energy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">free_energy_correction</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">adsorbate_name</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">skip_dft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bond_length</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">initial_direction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ranking_metric</span> <span class="o">=</span> <span class="s2">&quot;similarity&quot;</span><span class="p">,</span>
+        <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Workflow to determine a stable coverage of a nanocluster with single adsorbate atoms. One adsorbate at </span>
+<span class="sd">    a time is added or removed until certain break criteria are met. Currently only d and max_iterations</span>
+<span class="sd">    are stopping criterions.</span>
+<span class="sd">    d, l, k, initial_direction and ranking_metric are parameters specific </span>
+<span class="sd">    to the coverage ladder workflow.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        template_path (str) :   absolute path to input file for calculations. </span>
+<span class="sd">                                It works as a template which is later modified by the</span>
+<span class="sd">                                simulation-specific Firework.</span>
+<span class="sd">        username (str) :        user who executed the workflow</span>
+<span class="sd">        password (str) :        password for user to upload to the database</span>
+<span class="sd">        worker_target_path (str) :  absolute path on computing resource </span>
+<span class="sd">                                    directory needs to exist</span>
+<span class="sd">        start_ids (list) :  unique identifiers of the simulations collection which</span>
+<span class="sd">                            are used to start the workflow</span>
+<span class="sd">        reference_energy (float) :  reference energy for the adsorbate. Can be the</span>
+<span class="sd">                                    total energy of the isolated adsorbate molecule</span>
+<span class="sd">                                    or a different reference point</span>
+<span class="sd">        free_energy_correction (float) :    free energy correction of the adsorption </span>
+<span class="sd">                                            reaction at hand</span>
+<span class="sd">        adsorbate_name (str) : element symbol of the adsorbed atom</span>
+<span class="sd">        max_iterations (int) : maximum number of iterations in the workflow</span>
+<span class="sd">        n_max_restarts (int)  : number of times the calculation is restarted upon failure</span>
+<span class="sd">        skip_dft (bool) :   If set to true, the simulation step is skipped in all</span>
+<span class="sd">                            following simulation runs. Instead the structure is returned unchanged.</span>
+<span class="sd">        bond_length (float) :   distance in angstrom under which two adsorbed atoms are </span>
+<span class="sd">                                considered bound, hence too close</span>
+<span class="sd">        d (int) : maximum depth of the coverage ladder (termination criterion)</span>
+<span class="sd">        l (int) : number of low-energy structures to carry over to the next step</span>
+<span class="sd">        k (int) :   number of empty candidate sites for adding / </span>
+<span class="sd">                    adsorbed atoms for removing to consider per step</span>
+<span class="sd">        initial_direction (bool) :  True will force the initial step to add an adsorbate,</span>
+<span class="sd">                                    False will force the initial step to remove an adsorbate</span>
+<span class="sd">        ranking_metric (str) : &#39;similarity&#39; or &#39;distance&#39;. Metric based on which to choose</span>
+<span class="sd">                                k candidates (empty sites / adsorbates)</span>
+
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        fireworks.Workflow : coverageladder Fireworks Workflow object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="n">template_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1">#FireWork: Initialize workflow with workflow_id from external database</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;template&quot;</span> <span class="p">:</span> <span class="n">template</span><span class="p">,</span>
+        <span class="s2">&quot;template_path&quot;</span> <span class="p">:</span> <span class="n">template_path</span><span class="p">,</span>
+        <span class="s2">&quot;worker_target_path&quot;</span> <span class="p">:</span> <span class="n">worker_target_path</span><span class="p">,</span>
+        <span class="s2">&quot;start_ids&quot;</span> <span class="p">:</span> <span class="n">start_ids</span><span class="p">,</span>
+        <span class="s2">&quot;reference_energy&quot;</span> <span class="p">:</span> <span class="n">reference_energy</span><span class="p">,</span>
+        <span class="s2">&quot;max_iterations&quot;</span> <span class="p">:</span> <span class="n">max_iterations</span><span class="p">,</span>
+        <span class="s2">&quot;adsorbate_name&quot;</span> <span class="p">:</span> <span class="n">adsorbate_name</span><span class="p">,</span>
+        <span class="s2">&quot;descriptor&quot;</span> <span class="p">:</span> <span class="s2">&quot;soap&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;descriptor_params&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nmax&quot;</span> <span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;lmax&quot;</span> <span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;rcut&quot;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> 
+            <span class="s2">&quot;crossover&quot;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;sparse&quot;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+        <span class="s2">&quot;simulation_method&quot;</span> <span class="p">:</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;n_max_restarts&quot;</span> <span class="p">:</span> <span class="n">n_max_restarts</span><span class="p">,</span>
+        <span class="s2">&quot;workflow_type&quot;</span> <span class="p">:</span> <span class="s2">&quot;coverageladder&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;d&quot;</span> <span class="p">:</span> <span class="n">d</span><span class="p">,</span>
+        <span class="s2">&quot;l&quot;</span> <span class="p">:</span> <span class="n">l</span><span class="p">,</span>
+        <span class="s2">&quot;k&quot;</span> <span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;bond_length&quot;</span> <span class="p">:</span> <span class="n">bond_length</span><span class="p">,</span>
+        <span class="s2">&quot;ranking_metric&quot;</span> <span class="p">:</span> <span class="n">ranking_metric</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">fw_init</span> <span class="o">=</span> <span class="n">initialize_workflow_data</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> 
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;UNNAMED&quot;</span><span class="p">,</span> <span class="n">workflow_type</span> <span class="o">=</span> <span class="s2">&quot;coverageladder&quot;</span><span class="p">,</span>
+        <span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">extdb_connect</span><span class="p">)</span>
+
+    <span class="c1"># FireWork: Initialize coverage ladder</span>
+    <span class="n">fw_start_coverage_ladder</span> <span class="o">=</span> <span class="n">start_coverage_ladder</span><span class="p">(</span><span class="n">start_ids</span><span class="p">,</span> <span class="n">initial_direction</span> <span class="o">=</span> <span class="n">initial_direction</span><span class="p">,</span> 
+        <span class="n">reference_energy</span> <span class="o">=</span> <span class="n">reference_energy</span><span class="p">,</span> <span class="n">free_energy_correction</span> <span class="o">=</span> <span class="n">free_energy_correction</span> <span class="p">)</span>
+
+    <span class="c1"># add above Fireworks with links</span>
+    <span class="n">workflow_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_init</span><span class="p">,</span>
+        <span class="n">fw_start_coverage_ladder</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="n">links_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">fw_init</span> <span class="p">:</span> <span class="p">[</span><span class="n">fw_start_coverage_ladder</span><span class="p">],</span>
+            <span class="p">}</span>
+
+    <span class="c1">### loop starts ###</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+        <span class="c1"># Firework: add or remove one adsorbate, several times</span>
+        <span class="n">fw_add_remove_adsorbate</span> <span class="o">=</span>  <span class="n">add_remove_adsorbate</span><span class="p">(</span><span class="n">bond_length</span> <span class="o">=</span> <span class="n">bond_length</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span> <span class="n">ranking_metric</span> <span class="o">=</span> <span class="n">ranking_metric</span><span class="p">)</span>
+        <span class="n">workflow_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fw_add_remove_adsorbate</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">links_dict</span><span class="p">[</span><span class="n">fw_start_coverage_ladder</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_add_remove_adsorbate</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">links_dict</span><span class="p">[</span><span class="n">fw_step_coverage_ladder</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_add_remove_adsorbate</span><span class="p">]</span>
+
+        <span class="c1"># Firework: setup folders for DFT calculations,</span>
+        <span class="n">fw_setup_folders</span> <span class="o">=</span> <span class="n">setup_folders</span><span class="p">(</span><span class="n">target_path</span> <span class="o">=</span> <span class="n">worker_target_path</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cp2k_ladder_iter_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">workflow_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fw_setup_folders</span><span class="p">)</span>
+        <span class="n">links_dict</span><span class="p">[</span><span class="n">fw_add_remove_adsorbate</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_setup_folders</span><span class="p">]</span>
+
+        <span class="c1"># FireWork: setup, run and extract DFT calculation</span>
+        <span class="c1"># (involves checking for errors in DFT and rerunning)</span>
+        <span class="n">fw_chunk_calculations</span> <span class="o">=</span> <span class="n">chunk_calculations</span><span class="p">(</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="p">,</span> 
+            <span class="n">target_path</span> <span class="o">=</span> <span class="n">worker_target_path</span><span class="p">,</span> 
+            <span class="n">chunk_size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max_restarts</span> <span class="o">=</span> <span class="n">n_max_restarts</span><span class="p">,</span> 
+            <span class="n">simulation_method</span> <span class="o">=</span> <span class="s2">&quot;cp2k&quot;</span><span class="p">,</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cp2k_ladder_iter_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> 
+            <span class="n">skip_dft</span> <span class="o">=</span> <span class="n">skip_dft</span><span class="p">)</span>
+        <span class="n">workflow_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fw_chunk_calculations</span><span class="p">)</span>
+
+        <span class="n">links_dict</span><span class="p">[</span><span class="n">fw_setup_folders</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_chunk_calculations</span><span class="p">]</span> 
+
+        <span class="c1"># FireWork: update ladder</span>
+        <span class="n">fw_gather_ladder</span> <span class="o">=</span> <span class="n">gather_ladder</span><span class="p">()</span>
+        <span class="n">workflow_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fw_gather_ladder</span><span class="p">)</span>
+        <span class="n">links_dict</span><span class="p">[</span><span class="n">fw_chunk_calculations</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_gather_ladder</span><span class="p">]</span>
+
+        <span class="c1"># Firework: Decision to go up or down the coverage ladder</span>
+        <span class="n">fw_step_coverage_ladder</span> <span class="o">=</span> <span class="n">step_coverage_ladder</span><span class="p">(</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">,)</span>
+        <span class="n">workflow_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fw_step_coverage_ladder</span><span class="p">)</span>
+        <span class="n">links_dict</span><span class="p">[</span><span class="n">fw_gather_ladder</span><span class="p">]</span> <span class="o">=</span><span class="p">[</span><span class="n">fw_step_coverage_ladder</span><span class="p">]</span>
+    <span class="c1">### loop ends ###</span>
+
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">workflow_list</span><span class="p">,</span> <span class="n">links_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wf</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "meta_name":"processor_log_event_level",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Level of the logging, a lower number has more priority. The levels are the same ",
+    "as log4j: FATAL -> 100, ERROR -> 200, WARN -> 300, INFO -> 400, DEBUG -> 500, ",
+    "TRACE -> 600"],
+  "meta_parent_section":"section_processor_log_event",
+  "meta_data_type":"int"
+}

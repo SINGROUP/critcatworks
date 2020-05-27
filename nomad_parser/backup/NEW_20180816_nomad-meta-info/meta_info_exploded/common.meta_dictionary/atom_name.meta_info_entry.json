@@ -1,0 +1,7 @@
+{
+  "meta_name":"atom_name",
+  "meta_type":"type-value",
+  "meta_description":"Name (label) of the atom type.",
+  "meta_parent_section":"section_atom",
+  "meta_data_type":"string"
+}

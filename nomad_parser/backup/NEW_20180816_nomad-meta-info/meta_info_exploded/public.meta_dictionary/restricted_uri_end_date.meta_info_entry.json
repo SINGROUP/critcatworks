@@ -1,0 +1,12 @@
+{
+  "meta_name":"restricted_uri_end_date",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The deadline date of the restriction for the uri or file. The end date can be ",
+    "in date format string for those restrictions set by authors or NOMAD otherwise ",
+    "it is set to 'unlimited' for the restriction related to ",
+    "license."],
+  "meta_parent_section":"section_restricted_uri",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

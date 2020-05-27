@@ -1,0 +1,13 @@
+{
+  "meta_name":"mapping_section_basis_set_cell_dependent",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Assignment of the cell-dependent (i.e., non atom centered, e.g., plane-waves) ",
+    "parts of the basis set, which is defined (type, parameters) in ",
+    "section_basis_set_cell_dependent that is referred to by this ",
+    "metadata."],
+  "meta_parent_section":"section_basis_set",
+  "meta_data_type":"reference",
+  "meta_repeats":true,
+  "meta_referenced_section":"section_basis_set_cell_dependent"
+}

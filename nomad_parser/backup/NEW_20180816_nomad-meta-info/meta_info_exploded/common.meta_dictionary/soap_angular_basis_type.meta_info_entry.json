@@ -1,0 +1,15 @@
+{
+  "meta_name":"soap_angular_basis_type",
+  "meta_type":"type-value",
+  "meta_description":"angular basis type",
+  "meta_parent_section":"section_soap",
+  "meta_abstract_types":[
+    "soap_parameter"],
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"spherical-harmonic",
+    "meta_enum_description":[
+      "Uses spherical harmonics for the angular ",
+      "basis"]
+  }]
+}

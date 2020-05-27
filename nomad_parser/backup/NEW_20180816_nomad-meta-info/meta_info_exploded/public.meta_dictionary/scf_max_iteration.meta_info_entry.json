@@ -1,0 +1,11 @@
+{
+  "meta_name":"scf_max_iteration",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Specifies the maximum number of allowed self-consistent field (SCF) iterations ",
+    "in a calculation run, see section_run."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_scf"],
+  "meta_data_type":"float"
+}

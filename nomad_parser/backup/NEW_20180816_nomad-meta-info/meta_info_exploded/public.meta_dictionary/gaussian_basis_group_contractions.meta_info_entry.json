@@ -1,0 +1,17 @@
+{
+  "meta_name":"gaussian_basis_group_contractions",
+  "meta_type":"type-value",
+  "meta_description":[
+    "contraction coefficients $c_{i j}$ defining the contracted basis functions with ",
+    "respect to *normalized* primitive Gaussian functions. They define the Gaussian ",
+    "basis functions as described in section_gaussian_basis_group."],
+  "meta_parent_section":"section_gaussian_basis_group",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_gaussian_basis_group_contractions"
+  },{
+    "meta_dimension_symbolic":"number_of_gaussian_basis_group_exponents"
+  }]
+}

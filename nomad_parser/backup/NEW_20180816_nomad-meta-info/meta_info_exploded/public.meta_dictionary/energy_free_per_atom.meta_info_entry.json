@@ -1,0 +1,14 @@
+{
+  "meta_name":"energy_free_per_atom",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Free energy per atom (whose minimum gives the smeared occupation density ",
+    "calculated with smearing_kind) calculated with ",
+    "xc_method."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "energy_component_per_atom",
+    "derived_quantity"],
+  "meta_data_type":"float",
+  "meta_units":"J"
+}

@@ -1,0 +1,14 @@
+{
+  "meta_name":"section_stress_tensor",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section collecting alternative values to stress_tensor that have been ",
+    "calculated.\n",
+    "\n",
+    "This section allows the storage of multiple definitions and evaluated values of ",
+    "the stress tensor, while only one definition is used for, e.g., molecular ",
+    "dynamics or geometry optimization (if needed)."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

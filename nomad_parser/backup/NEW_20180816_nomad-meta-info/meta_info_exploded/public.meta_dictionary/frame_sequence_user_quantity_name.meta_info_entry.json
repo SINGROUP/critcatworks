@@ -1,0 +1,16 @@
+{
+  "meta_name":"frame_sequence_user_quantity_name",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Descriptive name of a user-defined quantity, sampled along this ",
+    "sequence of frames (i.e., a trajectory, a frame is one ",
+    "section_single_configuration_calculation). Dedicated metadata are created for ",
+    "the conserved energy-like quantity (frame_sequence_conserved_quantity), the ",
+    "kinetic and potential energies (frame_sequence_kinetic_energy and ",
+    "frame_sequence_potential_energy), the instantaneous temperature ",
+    "(frame_sequence_temperature) and pressure (frame_sequence_pressure). This ",
+    "metadata should be used for other quantities that are monitored along a ",
+    "sequence of frames."],
+  "meta_parent_section":"section_frame_sequence_user_quantity",
+  "meta_data_type":"string"
+}

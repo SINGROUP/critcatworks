@@ -1,0 +1,6 @@
+{
+  "meta_name":"gw_self_energy_c_number_of_poles",
+  "meta_type":"type-dimension",
+  "meta_description":"Number of poles used in the analytical continuation.",
+  "meta_parent_section":"section_method"
+}

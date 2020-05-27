@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_user_quantity",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section collecting some user-defined quantities evaluated along a sequence of ",
+    "frame."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

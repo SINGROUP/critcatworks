@@ -1,0 +1,10 @@
+{
+  "meta_name":"ensemble_type",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Kind of sampled ensemble stored in section_frame_sequence; valid values are ",
+    "defined in [ensemble_type wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad",
+    "-meta-info/wikis/metainfo/ensemble-type)."],
+  "meta_parent_section":"section_sampling_method",
+  "meta_data_type":"string"
+}

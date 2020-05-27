@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_prototype",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Information on the prototype corresponding to the current ",
+    "section."],
+  "meta_parent_section":"section_system",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

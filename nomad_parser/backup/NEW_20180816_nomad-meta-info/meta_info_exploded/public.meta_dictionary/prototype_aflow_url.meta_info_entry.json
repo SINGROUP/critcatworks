@@ -1,0 +1,10 @@
+{
+  "meta_name":"prototype_aflow_url",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Url to the AFLOW definition of the prototype (see ",
+    "http://aflowlib.org/CrystalDatabase/prototype_index.html) identified on the ",
+    "basis of the space_group and normalized_wyckoff."],
+  "meta_parent_section":"section_prototype",
+  "meta_data_type":"string"
+}

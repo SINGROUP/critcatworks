@@ -1,0 +1,6 @@
+{
+  "meta_name":"number_of_atoms_in_molecule",
+  "meta_type":"type-dimension",
+  "meta_description":"(deprecated) Number of atoms in this molecule.",
+  "meta_parent_section":"section_molecule_type"
+}

@@ -1,0 +1,9 @@
+{
+  "meta_name":"user_quantity_unit",
+  "meta_type":"type-value",
+  "meta_description":[
+    "the usnit of a user-defined quantity, sampled along this sequence of frames ",
+    "(i.e., a trajectory, a frame is one section_single_configuration_calculation)."],
+  "meta_parent_section":"section_user_quantity_definition",
+  "meta_data_type":"string"
+}

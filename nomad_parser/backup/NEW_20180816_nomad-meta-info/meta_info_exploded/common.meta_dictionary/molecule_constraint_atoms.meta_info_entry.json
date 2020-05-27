@@ -1,0 +1,16 @@
+{
+  "meta_name":"molecule_constraint_atoms",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) List of the indexes involved in this constraint. The fist atom has ",
+    "index 1, the last index is number_of_atoms_in_molecule."],
+  "meta_parent_section":"section_molecule_constraint",
+  "meta_abstract_types":[
+    "settings_constraint"],
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_molecule_constraints"
+  },{
+    "meta_dimension_symbolic":"number_of_atoms_per_molecule_constraint"
+  }]
+}

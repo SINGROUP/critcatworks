@@ -1,0 +1,9 @@
+{
+  "meta_name":"processor_id",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Id (name+version) of the processor that generated or added information to the ",
+    "current calculation."],
+  "meta_parent_section":"section_processor_info",
+  "meta_data_type":"string"
+}

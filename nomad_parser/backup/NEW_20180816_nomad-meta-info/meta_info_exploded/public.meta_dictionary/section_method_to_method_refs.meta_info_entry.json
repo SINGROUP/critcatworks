@@ -1,0 +1,22 @@
+{
+  "meta_name":"section_method_to_method_refs",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section that describes the relationship between different section_method ",
+    "sections.\n",
+    "\n",
+    "For instance, one calculation is a perturbation performed using a ",
+    "self-consistent field (SCF) calculation as starting point, or a simulated system ",
+    "is partitioned in regions with different but connected Hamiltonians (e.g., ",
+    "QM/MM, or a region treated via Kohn-Sham DFT embedded into a region treated via ",
+    "orbital-free DFT).\n",
+    "\n",
+    "The kind of relationship between the method defined in this section and the ",
+    "referenced one is described by method_to_method_kind. The referenced section ",
+    "section_method is identified via method_to_method_ref (typically used for a ",
+    "section_method section in the same section_run) or ",
+    "method_to_method_external_url."],
+  "meta_parent_section":"section_method",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"section_dos",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Section collecting information of a (electronic-energy or vibrational-energy) ",
+    "density of states (DOS) evaluation."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

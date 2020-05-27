@@ -1,0 +1,9 @@
+{
+  "meta_name":"gw_mixed_basis_lmax",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Maximum l value used for the radial functions within the ",
+    "muffin-tin."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"int"
+}

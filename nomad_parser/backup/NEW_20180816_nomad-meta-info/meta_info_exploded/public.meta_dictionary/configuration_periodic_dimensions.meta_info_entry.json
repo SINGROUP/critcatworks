@@ -1,0 +1,19 @@
+{
+  "meta_name":"configuration_periodic_dimensions",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Array labeling which of the lattice vectors use periodic boundary conditions. ",
+    "Note for the parser developers: This value is not expected to be given for each ",
+    "section_single_configuration_calculation. It is assumed to be valid from the ",
+    "section_single_configuration_calculation where it is defined for all subsequent ",
+    "section_single_configuration_calculation in section_run, until ",
+    "redefined."],
+  "meta_parent_section":"section_system",
+  "meta_abstract_types":[
+    "configuration_core"],
+  "meta_data_type":"boolean",
+  "meta_dimension":[{
+    "meta_dimension_fixed":3
+  }],
+  "meta_repeats":true
+}

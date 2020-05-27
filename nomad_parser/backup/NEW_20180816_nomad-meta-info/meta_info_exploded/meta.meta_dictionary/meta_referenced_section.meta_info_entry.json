@@ -1,0 +1,9 @@
+{
+  "meta_name":"meta_referenced_section",
+  "meta_type":"type-value",
+  "meta_description":[
+    "If the datatype is a reference this attribute must give the name of the ",
+    "sections that is referenced."],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string"
+}

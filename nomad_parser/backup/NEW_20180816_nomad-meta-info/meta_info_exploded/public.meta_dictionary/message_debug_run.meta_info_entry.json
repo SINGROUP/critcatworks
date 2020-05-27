@@ -1,0 +1,12 @@
+{
+  "meta_name":"message_debug_run",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A debugging message of the computational program, associated with a ",
+    "run."],
+  "meta_parent_section":"section_run",
+  "meta_abstract_types":[
+    "message_debug"],
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

@@ -1,0 +1,7 @@
+{
+  "meta_name":"time_reversal_symmetry",
+  "meta_type":"type-value",
+  "meta_description":"Is time-reversal symmetry present?",
+  "meta_parent_section":"section_system",
+  "meta_data_type":"boolean"
+}

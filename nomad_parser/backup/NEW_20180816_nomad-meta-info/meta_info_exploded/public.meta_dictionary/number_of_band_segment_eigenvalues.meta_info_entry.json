@@ -1,0 +1,8 @@
+{
+  "meta_name":"number_of_band_segment_eigenvalues",
+  "meta_type":"type-dimension",
+  "meta_description":[
+    "Gives the number of eigenvalues in a band segment, see ",
+    "band_energies."],
+  "meta_parent_section":"section_eigenvalues"
+}

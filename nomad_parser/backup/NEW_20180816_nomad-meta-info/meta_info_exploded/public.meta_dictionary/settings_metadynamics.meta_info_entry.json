@@ -1,0 +1,9 @@
+{
+  "meta_name":"settings_metadynamics",
+  "meta_type":"type-abstract",
+  "meta_description":[
+    "Contains parameters that control the metadynamics ",
+    "sampling."],
+  "meta_abstract_types":[
+    "settings_sampling"]
+}

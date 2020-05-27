@@ -1,0 +1,9 @@
+{
+  "meta_name":"meta_enum_from",
+  "meta_type":"type-value",
+  "meta_description":[
+    "The meta_name of a meta_info_entry from which to take the meta_enum to easily ",
+    "share enumeration values across several meta_info_entry"],
+  "meta_parent_section":"meta_info_entry",
+  "meta_data_type":"string"
+}

@@ -1,0 +1,10 @@
+{
+  "meta_name":"gw_basis_set",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Auxillary basis set used for non-local operators: mixed - mixed basis set, ",
+    "Kotani and Schilfgaarde, Solid State Comm. 121, 461 ",
+    "(2002)."],
+  "meta_parent_section":"section_method",
+  "meta_data_type":"string"
+}

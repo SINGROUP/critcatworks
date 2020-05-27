@@ -1,0 +1,13 @@
+{
+  "meta_name":"section_scf_iteration",
+  "meta_type":"type-section",
+  "meta_description":[
+    "Every section_scf_iteration represents a self-consistent field (SCF) iteration, ",
+    "see scf_info, and gives detailed information on the SCF procedure of the ",
+    "specified quantities."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_abstract_types":[
+    "scf_info"],
+  "meta_repeats":true,
+  "meta_context_identifier":[]
+}

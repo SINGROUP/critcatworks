@@ -1,0 +1,5 @@
+{
+  "meta_name":"settings_interaction",
+  "meta_type":"type-abstract",
+  "meta_description":"Some parameters that describe a bonded interaction."
+}

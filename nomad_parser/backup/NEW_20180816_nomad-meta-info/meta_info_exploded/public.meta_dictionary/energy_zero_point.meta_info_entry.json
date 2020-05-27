@@ -1,0 +1,11 @@
+{
+  "meta_name":"energy_zero_point",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Value for the converged zero-point vibrations energy calculated using the ",
+    "method described in zero_point_method , and used in energy_current ",
+    "."],
+  "meta_parent_section":"section_single_configuration_calculation",
+  "meta_data_type":"float",
+  "unit":"J"
+}

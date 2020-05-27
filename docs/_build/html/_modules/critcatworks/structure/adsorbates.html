@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.structure.adsorbates &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.structure.adsorbates</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">PyTask</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks.queue.queue_launcher</span> <span class="k">import</span> <span class="n">launch_rocket_to_queue</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.queue_adapters.common_adapter</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">ase</span><span class="o">,</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">update_workflows_collection</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">get_external_database</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.extdb</span> <span class="k">import</span> <span class="n">fetch_simulations</span>
+
+<div class="viewcode-block" id="GatherPropertyTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.adsorbates.GatherPropertyTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">GatherPropertyTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Task to update database from chunk of calculations. </span>
+<span class="sd">    Computes properties of systems. Currently, only</span>
+<span class="sd">    reaction energies (adsorption energies) are computed.</span>
+<span class="sd">    The ids of the input structures in calc_ids are </span>
+<span class="sd">    replaced by the ids of the post-simulation structures </span>
+<span class="sd">    from analysis_ids.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        chunk_size (int) :  number of calculations that are run simulataneously. </span>
+<span class="sd">                            Default -1 means all calculations are run at once.</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;    </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FWAction : Firework action, updates fw_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;GatherPropertyTask&#39;</span>
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chunk_size&#39;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;adsite_types&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="GatherPropertyTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.adsorbates.GatherPropertyTask.run_task">[docs]</a>    <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">calc_analysis_ids_dict</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_analysis_ids_dict&quot;</span><span class="p">]</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;chunk_size&quot;</span><span class="p">])</span>
+        <span class="n">adsite_types</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;adsite_types&quot;</span><span class="p">]</span>
+        <span class="n">n_calcs_started</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;n_calcs_started&quot;</span><span class="p">])</span>
+        <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span>
+        <span class="c1"># analysis ids becomes part of calc_ids</span>
+        <span class="n">analysis_ids</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;analysis_ids&quot;</span><span class="p">]</span>
+        <span class="n">n_calcs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">)</span>
+        <span class="n">reaction_energies_list</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;property&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_calcs</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="n">is_converged_list</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_converged_list&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_calcs</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="c1"># reorder analysis_ids</span>
+        <span class="n">reordered_analysis_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="n">calc_ids</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)</span> <span class="ow">in</span> <span class="n">calc_analysis_ids_dict</span><span class="p">:</span>
+                <span class="n">analysis_id</span> <span class="o">=</span> <span class="n">calc_analysis_ids_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)]</span>
+                <span class="n">reordered_analysis_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analysis_id</span><span class="p">)</span>
+
+        <span class="n">analysis_ids</span> <span class="o">=</span>  <span class="n">reordered_analysis_ids</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">chunk_size</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">calc_ids</span> <span class="o">=</span> <span class="n">analysis_ids</span>
+            <span class="n">id_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">calc_ids</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">calc_ids</span><span class="p">[</span><span class="n">n_calcs_started</span> <span class="o">-</span> <span class="n">chunk_size</span> <span class="p">:</span> <span class="n">n_calcs_started</span><span class="p">]</span> <span class="o">=</span> <span class="n">analysis_ids</span>
+            <span class="n">id_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_calcs_started</span> <span class="o">-</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">n_calcs_started</span><span class="p">)</span>
+        <span class="n">calc_ids_chunk</span> <span class="o">=</span> <span class="n">analysis_ids</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">fetch_simulations</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">],</span> <span class="n">calc_ids_chunk</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Gather Properties of following calculations:&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">calc_ids_chunk</span><span class="p">)</span>
+
+        <span class="n">ext_db</span> <span class="o">=</span><span class="n">get_external_database</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;extdb_connect&quot;</span><span class="p">])</span>
+        <span class="c1"># compute reaction energy and store them as lists for ml</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;id_range&quot;</span><span class="p">,</span> <span class="n">id_range</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">calc_id</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">id_range</span><span class="p">,</span> <span class="n">calc_ids_chunk</span><span class="p">):</span>
+            <span class="n">simulation</span> <span class="o">=</span> <span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">calc_id</span><span class="p">)]</span>
+
+            <span class="n">structure</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;atoms&quot;</span><span class="p">]</span>
+            <span class="c1"># TODO add how adsorbate moved</span>
+            <span class="c1"># get closest site classified</span>
+
+            <span class="n">is_converged_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;is_converged&quot;</span><span class="p">]</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="n">is_converged_list</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">idx</span><span class="p">)</span>
+            
+            <span class="c1"># get current simulation total_energy</span>
+            <span class="n">simulation_total_energy</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;total_energy&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="c1"># iterate over</span>
+            <span class="c1"># adsorbates</span>
+            <span class="n">adsorbates</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;adsorbates&quot;</span><span class="p">]</span>
+            <span class="c1"># nanoclusters</span>
+            <span class="n">nanoclusters</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;nanoclusters&quot;</span><span class="p">]</span>
+            <span class="c1"># substrates</span>
+            <span class="n">substrates</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">[</span><span class="s2">&quot;substrates&quot;</span><span class="p">]</span>
+
+            <span class="n">component_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">adsorbates</span><span class="p">,</span> <span class="n">nanoclusters</span><span class="p">,</span> <span class="n">substrates</span><span class="p">]</span>
+            <span class="n">reaction_energy</span> <span class="o">=</span> <span class="n">simulation_total_energy</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;energy before adding references&quot;</span><span class="p">,</span> <span class="n">reaction_energy</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">components</span> <span class="ow">in</span> <span class="n">component_types</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+                    <span class="n">reference_id</span> <span class="o">=</span> <span class="n">component</span><span class="p">[</span><span class="s2">&quot;reference_id&quot;</span><span class="p">]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">reference_id</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">reference_simulation</span> <span class="o">=</span> <span class="n">simulations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">reference_id</span><span class="p">)]</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;getting reference from database&quot;</span><span class="p">)</span>
+                        <span class="n">reference_simulation</span>  <span class="o">=</span> <span class="n">ext_db</span><span class="p">[</span><span class="s2">&quot;simulations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">reference_id</span><span class="p">})</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">total_energy</span> <span class="o">=</span> <span class="n">reference_simulation</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;total_energy&quot;</span><span class="p">]</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;total_energy not found! Not contributing to reaction energy!&quot;</span><span class="p">)</span>
+                        <span class="n">total_energy</span> <span class="o">=</span> <span class="mf">0.0</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">reaction_energy</span> <span class="o">-=</span> <span class="nb">float</span><span class="p">(</span><span class="n">total_energy</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Energy not understood!&quot;</span><span class="p">)</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">total_energy</span><span class="p">)</span>
+
+                    <span class="nb">print</span><span class="p">(</span><span class="n">reaction_energy</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">reference_id</span><span class="p">)</span>
+            <span class="n">reaction_energies_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">reaction_energy</span>
+
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_analysis_ids_dict&quot;</span><span class="p">]</span> <span class="o">=</span><span class="p">{}</span>
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;property&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reaction_energies_list</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reaction_energies_list&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">reaction_energies_list</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reaction_energies_list</span><span class="p">))</span>
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;is_converged_list&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_converged_list</span> 
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;analysis_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;temp&quot;</span><span class="p">][</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_ids</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;is_converged_list&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">is_converged_list</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calc_ids&quot;</span><span class="p">,</span> <span class="n">calc_ids</span><span class="p">)</span>
+
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_category&quot;</span><span class="p">)</span>
+        <span class="n">fw_spec</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span><span class="o">=</span><span class="n">fw_spec</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="update_converged_data"><a class="viewcode-back" href="../../../src/doc/critcatworks.structure.html#critcatworks.structure.adsorbates.update_converged_data">[docs]</a><span class="k">def</span> <span class="nf">update_converged_data</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">adsite_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bridge&quot;</span><span class="p">,</span> <span class="s2">&quot;hollow&quot;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Updates the internal fw_spec data from chunk of calculations. </span>
+<span class="sd">    Computes properties of systems. Currently, only</span>
+<span class="sd">    reaction energies (adsorption energies) are computed.</span>
+<span class="sd">    The ids of the input structures in calc_ids are </span>
+<span class="sd">    replaced by the ids of the post-simulation structures </span>
+<span class="sd">    from analysis_ids.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        chunk_size (int) :  number of calculations that are run simulataneously. </span>
+<span class="sd">                            Default -1 means all calculations are run at once.</span>
+<span class="sd">        adsite_types (list) :   adsorption site types, can contain any combination of</span>
+<span class="sd">                                &quot;top&quot;, &quot;bridge&quot;, &quot;hollow&quot;    </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Firework : Firework GatherPropertyWork</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">firetask1</span>  <span class="o">=</span> <span class="n">GatherPropertyTask</span><span class="p">(</span><span class="n">chunk_size</span> <span class="o">=</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">adsite_types</span> <span class="o">=</span> <span class="n">adsite_types</span><span class="p">)</span>
+    <span class="n">fw</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span> <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_category&#39;</span> <span class="p">:</span> <span class="s2">&quot;lightweight&quot;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="s1">&#39;GatherPropertyTask&#39;</span><span class="p">},</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;GatherPropertyWork&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fw</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

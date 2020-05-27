@@ -1,0 +1,6 @@
+{
+  "meta_name":"number_of_eigenvalues",
+  "meta_type":"type-dimension",
+  "meta_description":"Gives the number of eigenvalues, see eigenvalues_values.",
+  "meta_parent_section":"section_eigenvalues"
+}

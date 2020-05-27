@@ -1,0 +1,7 @@
+{
+  "meta_name":"meta_constraint_description",
+  "meta_type":"type-value",
+  "meta_description":"Description of the constraint.",
+  "meta_parent_section":"meta_constraint",
+  "meta_data_type":"string"
+}

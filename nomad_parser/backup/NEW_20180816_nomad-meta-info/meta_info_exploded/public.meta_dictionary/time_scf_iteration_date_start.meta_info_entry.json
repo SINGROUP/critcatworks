@@ -1,0 +1,15 @@
+{
+  "meta_name":"time_scf_iteration_date_start",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Stores the start date of a self-consistent field (SCF) iteration as time since ",
+    "the *Unix epoch* (00:00:00 UTC on 1 January 1970) in seconds. For date and ",
+    "times without a timezone, the default timezone GMT is ",
+    "used."],
+  "meta_parent_section":"section_scf_iteration",
+  "meta_abstract_types":[
+    "scf_info",
+    "time_info"],
+  "meta_data_type":"float",
+  "meta_units":"s"
+}

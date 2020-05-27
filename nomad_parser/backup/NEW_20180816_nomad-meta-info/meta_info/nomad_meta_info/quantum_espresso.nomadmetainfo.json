@@ -1,0 +1,2076 @@
+{
+  "type":"nomad_meta_info_1_0",
+  "name":"quantum_espresso",
+  "description":"meta info used by the Quantum Espresso parser, all names are expected to start with qe_",
+  "dependencies":[{
+    "relativePath":"common.nomadmetainfo.json"
+  },{
+    "relativePath":"public.nomadmetainfo.json"
+  }],
+  "metaInfos":[{
+    "name":"x_qe_alat",
+    "description":"Lattice Parameter 'a', constant during a run and used as unit in other quantities",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_allocated_array_dimensions",
+    "description":"Allocated arrays, dimensions",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "shape":["x_qe_allocated_arrays"]
+  },{
+    "name":"x_qe_allocated_array_name",
+    "description":"Allocated arrays, name",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "shape":["x_qe_allocated_arrays"]
+  },{
+    "name":"x_qe_allocated_array_size",
+    "description":"Allocated arrays, size",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "shape":["x_qe_allocated_arrays"]
+  },{
+    "name":"x_qe_atom_dispersion_force",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms",3]
+  },{
+    "name":"x_qe_atom_idx",
+    "description":"Index of atom on Espresso side",
+    "superNames":["section_system"],
+    "dtypeStr":"i",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_qe_atom_starting_magnetization",
+    "description":"Starting magnetic configuration: Atom magnetization",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_qe_bands_diagonalization_algorithm",
+    "description":"Diagonalization algorithm",
+    "superNames":["x_qe_section_bands_diagonalization"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_bands_diagonalization_c_bands_n_unconverged_eigenvalues",
+    "description":"Number of uncoverged eigenvalues (Warning from function c_bands)",
+    "superNames":["x_qe_section_bands_diagonalization"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_bands_diagonalization_ethr",
+    "description":"Convergence Threshold in bands diagonalization",
+    "superNames":["x_qe_section_bands_diagonalization"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_bands_diagonalization_iteration_avg",
+    "description":"Average of iterations in bands diagonalization",
+    "superNames":["x_qe_section_bands_diagonalization"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_bands_diagonalization_warn_n_unconverged_eigenvalues",
+    "description":"Number of uncoverged eigenvalues (Warning)",
+    "superNames":["x_qe_section_bands_diagonalization"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_berry_efield",
+    "description":"Berry phase with E-field: flag if berry-efield-calc was done",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_berry_efield_direction",
+    "description":"Finite E-field: direction",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_berry_efield_intensity",
+    "description":"Berry phase with E-field: intensity",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_berry_efield_niter",
+    "description":"Berry phase with E-field: number of iterative cycles",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_berry_efield_strings_nk",
+    "description":"Berry phase with E-field: number of k-points in string",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_cell_volume",
+    "description":"Volume of unit cell",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_celldm",
+    "description":"QE cell dimensions",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":[6]
+  },{
+    "name":"x_qe_compile_parallel_version",
+    "description":"Parallelization compile-time options",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_convergence_iterations",
+    "description":"Number of iterations after which self-consistency has been achieved",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_core_charge_imaginary",
+    "description":"QE check: imaginary core charge",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_core_charge_negative",
+    "description":"QE check: negative core charge",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_core_charge_realspace",
+    "description":"QE flag: core charge treated in real space",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_dense_fft_grid",
+    "description":"Dense-grid info, FFT grid",
+    "superNames":["section_system"],
+    "dtypeStr":"i",
+    "shape":[3]
+  },{
+    "name":"x_qe_dense_g_cutoff",
+    "description":"Dense-grid info, G cutoff",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_dense_g_vectors",
+    "description":"Dense-grid info, number of G vectors",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_diagonalization_algorithm",
+    "description":"Algorithm used in subspace diagonalization",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_dispersion_correction",
+    "description":"Calculation includes semi-empirical DFT-D dispersion correction",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_dispersion_correction_c6",
+    "description":"DFT-D species C6 coefficient",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_dispersion_correction_vdw_radius",
+    "description":"DFT-D species vdW radius",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_dispersion_force_total",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_eigenvalues_number_of_planewaves",
+    "description":"Number of plane waves for each k-point",
+    "superNames":["section_eigenvalues"],
+    "dtypeStr":"i",
+    "shape":["number_of_eigenvalues_kpoints"]
+  },{
+    "name":"x_qe_energy_decomposition_name",
+    "description":"Total energy decomposition: contribution name",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C",
+    "shape":["x_qe_number_of_energy_components"]
+  },{
+    "name":"x_qe_energy_decomposition_value",
+    "description":"Total energy decomposition: contribution value",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f",
+    "shape":["x_qe_number_of_energy_components"]
+  },{
+    "name":"x_qe_energy_exchange_average_fock_potential",
+    "description":"Averaged Fock potential",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_exchange_error_estimate",
+    "description":"Estimated error on exchange",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_fock",
+    "description":"Fock energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_total_accuracy_estimate",
+    "description":"Accuracy estimate of total energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_total_accuracy_estimate_iteration",
+    "description":"Accuracy estimate of total energy",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_total_harris_foulkes_estimate",
+    "description":"Harris-Foulkes estimate of total energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_total_harris_foulkes_estimate_iteration",
+    "description":"Harris-Foulkes estimate of total energy",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_energy_total_paw_all_electron",
+    "description":"All-electron total energy from PAW",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_exact_exchange_fraction",
+    "description":"Fraction of exact-exchange in EXX-refinement",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_extrapolation_charge",
+    "description":"Charge extrapolation scheme (MD, (vc-)relax)",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_exx_grid_same_as_k_grid",
+    "description":"Exact-exchange k+q grid is the same as k grid (flag)",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_exx_refine",
+    "description":"Flag: Exact-exchange refinement is active",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_exx_self_consistency",
+    "description":"Exact-exchange has been reached (flag)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_fock_operator_cutoff",
+    "description":"Cutoff for defining the direct-space grid used to compute Fock exchange in EXX",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_force_total",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_force_total_scf_correction",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_gamma_algorithms",
+    "description":"Usage of gamma-only optimized algorithms",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_ibrav",
+    "description":"Bravais lattice index, constant during a run",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_input_filename",
+    "description":"Filename input was read from",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_input_occupations",
+    "description":"User-specified band occupations",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "shape":["number_of_spin_channels","number_of_k_points","number_of_eigen_values"]
+  },{
+    "name":"x_qe_input_positions_cell_dirname",
+    "description":"Directory where initial atom_positions and simulation_cell were read from",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_input_potential_recalculated_file",
+    "description":"File that was used to recalculate initial potential",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_isolated_system_method",
+    "description":"Method used if system is assumed to be isolated",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_isolated_system_method_martyna_tuckerman_alpha",
+    "description":"Isolated system with Martyna-Tuckerman method, parameter alpha",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_isolated_system_method_martyna_tuckerman_beta",
+    "description":"Isolated system with Martyna-Tuckerman method, parameter beta",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iter_mpersite_charge",
+    "description":"iteration per-site magnetization data, atom charge",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_qe_iter_mpersite_constr",
+    "description":"iteration per-site magnetization data, constraints",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_qe_iter_mpersite_idx",
+    "description":"iteration per-site magnetization data, atom index",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"i",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_qe_iter_mpersite_magn",
+    "description":"iteration per-site magnetization data, atom magnetization",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f",
+    "shape":["number_of_atoms"]
+  },{
+    "name":"x_qe_iteration_beta",
+    "description":"Mixing parameter Beta during iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_charge_negative_down",
+    "description":"Charge in iteration (down)",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_charge_negative_up",
+    "description":"Charge in iteration (up)",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_ecutwfc",
+    "description":"PW cutoff used during iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_efield_dipole_electronic",
+    "description":"E-field: Electronic dipole, in iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_efield_dipole_ionic",
+    "description":"E-field: Ionic dipole, in iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_efield_eeigx_im",
+    "description":"E-field: expectation value of exp(iGx), imaginary part, in iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_efield_eeigx_re",
+    "description":"E-field: expectation value of exp(iGx), real part, in iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_iteration_number",
+    "description":"Iteration number",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_k_info_ik",
+    "description":"K-point info, k-index",
+    "superNames":["section_system"],
+    "dtypeStr":"i",
+    "shape":["x_qe_nk"]
+  },{
+    "name":"x_qe_k_info_vec",
+    "description":"K-point info, cartesian coordinate",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":["x_qe_nk",3]
+  },{
+    "name":"x_qe_k_info_wk",
+    "description":"K-point info, weight",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":["x_qe_nk"]
+  },{
+    "name":"x_qe_kind_mass",
+    "description":"Atomic mass of species",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_lmaxx",
+    "description":"Maximum non local angular momentum (Pseudopotential)",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_magnetization_absolute",
+    "description":"Absolute per-cell magnetization",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_magnetization_absolute_iteration",
+    "description":"Absolute per-cell magnetization in iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_magnetization_total",
+    "description":"Total per-cell magnetization",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_magnetization_total_iteration",
+    "description":"Total per-cell magnetization in iteration",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_md_cell_mass",
+    "description":"Mass of cell in MD/relax calculation",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_md_max_steps",
+    "description":"Maximum number of ionic+electronic steps in dynamics (MD/relax) calculation",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nbrx",
+    "description":"Maximum number of beta functions (Pseudopotential)",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nchix",
+    "description":"Maximum number of atomic wavefunctions per Pseudopotential",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_ndmx",
+    "description":"Maximum dimension of radial grid (Pseudopotential)",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nk",
+    "description":"K-point info, number of k-points",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_npk",
+    "description":"Maximum number of k-points",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_npool",
+    "description":"Number of K-Point pools",
+    "superNames":["x_qe_section_parallel"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nproc",
+    "description":"Number of MPI ranks",
+    "superNames":["x_qe_section_parallel"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nqfx",
+    "description":"Maximum number of coefficients in Q smoothing (Pseudopotential)",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nsymm",
+    "description":"Number of detected symmetry operations",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nsymm_ignored",
+    "description":"Number of ignored symmetry operations, due to uncommensurable fractional translations",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nsymm_with_fractional_translation",
+    "description":"Number of detected symmetry operations including fractional translations",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_nthreads",
+    "description":"Number of OpenMP threads",
+    "superNames":["x_qe_section_parallel"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_ntypx",
+    "description":"Maximum number of different atom species",
+    "superNames":["x_qe_section_compile_options"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_number_of_species",
+    "description":"Number of Atom species, a.k.a. unique Atom labels; a label may include symmetry-breaking suffices, e.g. 'Fe1' and 'Fe2', as some quantities can only prescribed per species and not per site",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_number_of_states",
+    "description":"Number of Kohn-Sham states/bands",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_output_datafile",
+    "description":"Output datafile",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_per_process_mem",
+    "description":"Per-process dynamical memory",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_potential_convergence_threshold",
+    "description":"Convergence threshold for potentials",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_potential_mixing_beta",
+    "description":"Mixing scheme: parameter beta",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_potential_mixing_iterations",
+    "description":"Mixing scheme: number of previous iterations",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_potential_mixing_scheme",
+    "description":"Mixing scheme: type of mixing",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_pp_augmentation_shape",
+    "description":"Shape of augmentation charge",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_comment",
+    "description":"Comment about pseudopotential",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_filename",
+    "description":"Filename of pseudopotential",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_idx",
+    "description":"Index of Pseudopotential on Espresso side",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_integral_lmax_exact",
+    "description":"Maximum l for which integration is exact (PAW)",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_integral_ndirections",
+    "description":"Number of integration directions (PAW)",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_l",
+    "description":"Beta function l in pseudopotential on Espresso side",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_l_idx",
+    "description":"Beta function l index in pseudopotential on Espresso side",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_label",
+    "description":"Label of Pseudopotential on Espresso side",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_md5sum",
+    "description":"MD5 checksum of pseudopotential file",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_nbeta",
+    "description":"Number of beta functions in pseudopotential on Espresso side",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_ncoefficients",
+    "description":"Number of coefficients in pseudopotential",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_ndmx",
+    "description":"Radial grid of Pseudopotential on Espresso side",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_renormalized_wfc",
+    "description":"Temporary: renormalized WFCs in pseudopotential",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_report_contents",
+    "description":"Pseudopotential report: contents of PP report",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_report_version",
+    "description":"Pseudopotential report: version of PP",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_type",
+    "description":"Type of pseudopotential, e.g. 'Norm-conserving' or 'Ultrasoft'",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_valence",
+    "description":"Number of Valence electrons in pseudopotential",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_pp_weight",
+    "description":"-",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_pressure",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_profile_caller",
+    "description":"QE profiling: caller name",
+    "superNames":["section_run"],
+    "dtypeStr":"C",
+    "shape":["x_qe_number_of_profiling_entries"]
+  },{
+    "name":"x_qe_profile_category",
+    "description":"QE profiling: category",
+    "superNames":["section_run"],
+    "dtypeStr":"C",
+    "shape":["x_qe_number_of_profiling_entries"]
+  },{
+    "name":"x_qe_profile_cputime",
+    "description":"QE profiling: cputime spent in function",
+    "superNames":["section_run"],
+    "dtypeStr":"f",
+    "shape":["x_qe_number_of_profiling_entries"]
+  },{
+    "name":"x_qe_profile_function",
+    "description":"QE profiling: function name",
+    "superNames":["section_run"],
+    "dtypeStr":"C",
+    "shape":["x_qe_number_of_profiling_entries"]
+  },{
+    "name":"x_qe_profile_ncalls",
+    "description":"QE profiling: how often was function called",
+    "superNames":["section_run"],
+    "dtypeStr":"i",
+    "shape":["x_qe_number_of_profiling_entries"]
+  },{
+    "name":"x_qe_profile_walltime",
+    "description":"QE profiling: wallclock time spent in function",
+    "superNames":["section_run"],
+    "dtypeStr":"f",
+    "shape":["x_qe_number_of_profiling_entries"]
+  },{
+    "name":"x_qe_program_name",
+    "description":"Name of program from Quantum Espresso suite",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_reciprocal_cell",
+    "description":"Reciprocal Lattice vectors (in Cartesian coordinates). The first index runs over the $x,y,z$ Cartesian coordinates, and the second index runs over the 3 lattice vectors.",
+    "superNames":["section_system","configuration_core"],
+    "units":"1/m",
+    "dtypeStr":"f",
+    "shape":[3,3]
+  },{
+    "name":"x_qe_rinner",
+    "description":"Temporary: Inner Radii of pseudopotential",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_scf_diagonalization_algorithm",
+    "description":"Diagonalization algorithm",
+    "superNames":["x_qe_section_scf_diagonalization","scf_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_scf_diagonalization_c_bands_n_unconverged_eigenvalues",
+    "description":"Number of uncoverged eigenvalues (Warning from function c_bands)",
+    "superNames":["x_qe_section_scf_diagonalization","scf_info"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_scf_diagonalization_ethr",
+    "description":"Convergence Threshold in scf diagonalization",
+    "superNames":["x_qe_section_scf_diagonalization","scf_info"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_scf_diagonalization_iteration_avg",
+    "description":"Average of iterations in scf diagonalization",
+    "superNames":["x_qe_section_scf_diagonalization","scf_info"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_scf_diagonalization_warn_n_unconverged_eigenvalues",
+    "description":"Number of uncoverged eigenvalues (Warning)",
+    "superNames":["x_qe_section_scf_diagonalization","scf_info"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_section_bands_diagonalization",
+    "kindStr":"type_section",
+    "description":"section for diagonalization info in QE band structure calculation",
+    "superNames":["section_single_configuration_calculation"]
+  },{
+    "name":"x_qe_section_compile_options",
+    "kindStr":"type_section",
+    "description":"section for compile-time options of Quantum Espresso",
+    "superNames":["section_run"]
+  },{
+    "name":"x_qe_section_parallel",
+    "kindStr":"type_section",
+    "description":"section for run-time parallization options of Quantum Espresso",
+    "superNames":["section_run"]
+  },{
+    "name":"x_qe_section_scf_diagonalization",
+    "kindStr":"type_section",
+    "description":"section for diagonalization info in QE scf iterations",
+    "superNames":["section_scf_iteration","scf_info"]
+  },{
+    "name":"x_qe_smearing_kind",
+    "description":"K-point info, QE string represenation of smearing technique",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_smearing_ngauss",
+    "description":"K-point info, QE number represenation of smearing technique",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_smooth_fft_grid",
+    "description":"Smooth-grid info, FFT grid",
+    "superNames":["section_system"],
+    "dtypeStr":"i",
+    "shape":[3]
+  },{
+    "name":"x_qe_smooth_g_cutoff",
+    "description":"Smooth-grid info, G cutoff",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_smooth_g_vectors",
+    "description":"Smooth-grid info, number of G vectors",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_species_integration_radius",
+    "description":"Radius used to integrate charge/magnetization over (per species)",
+    "superNames":["section_method_atom_kind"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_spin_noncollinear",
+    "description":"Noncollinear spin mode",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_spin_orbit",
+    "description":"Spin-orbit coupling flag: with/without spin-orbit",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_starting_charge",
+    "description":"Starting charge",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_starting_charge_negative",
+    "description":"Starting charge (warning about negative starting charge)",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_starting_charge_negative_down",
+    "description":"Starting charge down (warning about negative starting charge)",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_starting_charge_negative_up",
+    "description":"Starting charge up (warning about negative starting charge)",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_starting_charge_renormalized",
+    "description":"Starting charge, renormalized",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_starting_density_file",
+    "description":"Starting density from file",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_starting_potential",
+    "description":"Starting potential",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_starting_wfc",
+    "description":"Starting Wave functions",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_sticks_old",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_sticks_sum_dense",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_sum_g_dense",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_sum_g_pw",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_sum_g_smooth",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_sum_pw",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_sum_smooth",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_tot_dense",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_tot_pw",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_sticks_tot_smooth",
+    "description":"-",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_stress_unimplemented",
+    "description":"Reason why stress tensor is not implemented",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_supercell",
+    "description":"Supercell flag",
+    "superNames":["section_system"],
+    "dtypeStr":"b",
+    "repeats":true
+  },{
+    "name":"x_qe_symm_inversion",
+    "description":"Inversion symmetry",
+    "superNames":["section_system"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_allocated_array_dimensions",
+    "description":"Temporary: allocated arrays, dimensions",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_allocated_array_name",
+    "description":"Temporary: allocated arrays, name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_allocated_array_size",
+    "description":"Temporary: allocated arrays, size",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_atom_idx",
+    "description":"Temporary: Index of atom on Espresso side",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_atom_labels",
+    "description":"Temporary: Label of atom on Espresso side",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_atpos_units",
+    "description":"Temporary: Units for atom position",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_atpos_x",
+    "description":"Temporary storage for atom position, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_atpos_y",
+    "description":"Temporary storage for atom position, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_atpos_z",
+    "description":"Temporary storage for atom position, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_bands_diagonalization_algorithm",
+    "description":"Temporary: Diagonalization algorithm",
+    "superNames":["x_qe_section_bands_diagonalization"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_celldm",
+    "description":"Temporary storage for QE cell dimensions",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_dense_fft_grid_x",
+    "description":"Temporary: Dense-grid info, FFT grid x",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_dense_fft_grid_y",
+    "description":"Temporary: Dense-grid info, FFT grid y",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_dense_fft_grid_z",
+    "description":"Temporary: Dense-grid info, FFT grid z",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_dispersion_force_atom_idx",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_dispersion_force_x",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_dispersion_force_y",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_dispersion_force_z",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_energy_decomposition_name",
+    "description":"Temporary: Total energy decomposition: contribution name",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_energy_decomposition_value",
+    "description":"Temporary: Total energy decomposition: contribution value",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_energy_reference_fermi",
+    "description":"Temporary: Fermi Energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_energy_reference_fermi_down",
+    "description":"Temporary: Fermi Energy (spin down)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_energy_reference_fermi_up",
+    "description":"Temporary: Fermi Energy (spin up)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_energy_reference_highest_occupied",
+    "description":"Temporary: Energy of highest occupied state",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_energy_reference_lowest_unoccupied",
+    "description":"Energy of lowest unoccupied state",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_exact_exchange_fraction",
+    "description":"Temporary: store fraction of exact-exchange before defining section_xc_functionals",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_force_atom_idx",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_force_x",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_force_y",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_force_z",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_input_occupations",
+    "description":"Temporary: User-specified band occupations",
+    "superNames":["x_qe_t_section_input_occupations"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_input_occupations_spin",
+    "description":"Temporary: User-specified band occupations, spin channel",
+    "superNames":["x_qe_t_section_input_occupations"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_iter_mpersite_charge",
+    "description":"Temporary: iteration per-site magnetization data, atom charge",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_iter_mpersite_constr",
+    "description":"Temporary: iteration per-site magnetization data, constraints",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_iter_mpersite_idx",
+    "description":"Temporary: iteration per-site magnetization data, atom index",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_iter_mpersite_magn",
+    "description":"Temporary: iteration per-site magnetization data, atom magnetization",
+    "superNames":["section_scf_iteration","scf_info"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_info_ik",
+    "description":"Temporary storage for k-point info, k-index",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_k_info_vec_x",
+    "description":"Temporary storage for k-point info, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_info_vec_y",
+    "description":"Temporary storage for k-point info, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_info_vec_z",
+    "description":"Temporary storage for k-point info, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_info_wk",
+    "description":"Temporary storage for k-point info, weight",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_point_energies",
+    "description":"Temporary: k-point band energies",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_k_pw",
+    "description":"Temporary: number of plane waves for this k-point",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_k_x",
+    "description":"Temporary storage for k-point, x-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_y",
+    "description":"Temporary storage for k-point, y-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_k_z",
+    "description":"Temporary storage for k-point, z-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_atom_free_x",
+    "description":"Temporary storage for new atom fixed flag (MD, (vc-)relax), x-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_md_atom_free_y",
+    "description":"Temporary storage for new atom fixed flag (MD, (vc-)relax), y-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_md_atom_free_z",
+    "description":"Temporary storage for new atom fixed flag (MD, (vc-)relax), z-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_md_atom_labels",
+    "description":"Temporary storage for new atom positions (MD, (vc-)relax), atom labels",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_atom_mass_label",
+    "description":"Temporary storage for MD setup, atom mass, labels",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_atom_mass_value",
+    "description":"Temporary storage for MD setup, atom mass, value",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_atom_positions_units",
+    "description":"Temporary storage for new atom positions (MD, (vc-)relax), units",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_atom_positions_units_vcsmd",
+    "description":"Temporary storage for new atom positions (MD, (vc-)relax via VCSMD), units",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_atom_positions_x",
+    "description":"Temporary storage for new atom positions (MD, (vc-)relax), x-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_atom_positions_y",
+    "description":"Temporary storage for new atom positions (MD, (vc-)relax), y-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_atom_positions_z",
+    "description":"Temporary storage for new atom positions (MD, (vc-)relax), z-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_case",
+    "description":"Temporary storage for BFGS case, energy comparison (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_bfgs_conv_thr_new",
+    "description":"Temporary storage for new electronic convergence threshold (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_converged",
+    "description":"Temporary storage for 'converged' flag ((vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_md_bfgs_converged_criteria",
+    "description":"Temporary storage for converged criteria ((vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_bfgs_energy_new",
+    "description":"Temporary storage for 'new' energy (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_energy_old",
+    "description":"Temporary storage for 'old' energy (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_enthalpy_new",
+    "description":"Temporary storage for 'new' enthalpy (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_enthalpy_old",
+    "description":"Temporary storage for 'old' enthalpy (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_final_energy",
+    "description":"Temporary storage for final energy ((vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_final_enthalpy",
+    "description":"Temporary storage for final enthalpy ((vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_bfgs_reset",
+    "description":"Temporary storage for BFGS history reset reason (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_bfgs_scf_cycles",
+    "description":"Temporary storage for number of scf cycles (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_md_bfgs_steps",
+    "description":"Temporary storage for number of steps (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_md_bfgs_trust_new",
+    "description":"Temporary storage for new trust radius (relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_core_charge_imaginary",
+    "description":"Temporary MD: QE check: imaginary core charge",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_core_charge_negative",
+    "description":"Temporary MD: QE check: negative core charge",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_diffusion_atomidx",
+    "description":"Temporary storage for diffusion coeffients (MD), atom index",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_md_diffusion_coefficient",
+    "description":"Temporary storage for diffusion coeffients (MD), atom coeffient",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_diffusion_coefficient_mean",
+    "description":"Temporary storage for diffusion coeffients (MD), mean coeffient",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_ekin_etot",
+    "description":"Temporary storage for MD, sum of energies",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_end",
+    "description":"Temporary storage for end-of-md flag (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_md_extrapolation_charge",
+    "description":"Temporary storage for charge extrapolation scheme (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_extrapolation_wfc",
+    "description":"Temporary storage for wave function extrapolation scheme (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_isolated_system_method_martyna_tuckerman_alpha",
+    "description":"Temporary MD: Isolated system with Martyna-Tuckerman method, parameter alpha",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_isolated_system_method_martyna_tuckerman_beta",
+    "description":"Temporary MD: Isolated system with Martyna-Tuckerman method, parameter beta",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_iteration",
+    "description":"Temporary: MD step: iteration number",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_md_k_info_ik",
+    "description":"Temporary MD storage for k-point info, k-index",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_md_k_info_vec_x",
+    "description":"Temporary MD storage for k-point info, x-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_k_info_vec_y",
+    "description":"Temporary MD storage for k-point info, y-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_k_info_vec_z",
+    "description":"Temporary MD storage for k-point info, z-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_k_info_wk",
+    "description":"Temporary MD storage for k-point info, weight",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_kinetic_energy",
+    "description":"Temporary storage for MD, kinetic energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_linear_momentum_x",
+    "description":"Temporary storage for linear momentum (MD, (vc-)relax), x-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_linear_momentum_y",
+    "description":"Temporary storage for linear momentum (MD, (vc-)relax), y-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_linear_momentum_z",
+    "description":"Temporary storage for linear momentum (MD, (vc-)relax), z-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_max_steps_reached",
+    "description":"Temporary storage for max_steps-reached flag (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_t_md_new_volume",
+    "description":"Temporary storage for new cell volume ((vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_starting_charge",
+    "description":"Temporary storage for extrapolated starting charge (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_starting_charge_negative_new",
+    "description":"Temporary storage for new negative starting charge (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_starting_charge_negative_new_down",
+    "description":"Temporary storage for new negative starting charge (MD, (vc-)relax), spin down",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_starting_charge_negative_new_up",
+    "description":"Temporary storage for new negative starting charge (MD, (vc-)relax), spin up",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_starting_charge_negative_old",
+    "description":"Temporary storage for old negative starting charge (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_starting_charge_renormalized",
+    "description":"Temporary storage for extrapolated starting charge, renormalized (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_temperature",
+    "description":"Temporary storage for MD, temperature",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_time",
+    "description":"MD step: time",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_timestep_size",
+    "description":"Temporary storage for MD setup, timestep size",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_total_energy",
+    "description":"Temporary storage for MD, total energy",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_vec_a_alat",
+    "description":"Temporary storage for new direct lattice vectors (vc-relax), lattice parameter a",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_vec_a_units",
+    "description":"Temporary storage for new direct lattice vectors (vc-relax), units",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_md_vec_a_x",
+    "description":"Temporary storage for new direct lattice vectors (vc-relax), x-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_vec_a_y",
+    "description":"Temporary storage for new direct lattice vectors (vc-relax), y-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_vec_a_z",
+    "description":"Temporary storage for new direct lattice vectors (vc-relax), z-component",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_write_datafile_cputime",
+    "description":"Temporary storage for cpu time after write-datafile (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_md_write_datafile_mem_dynamical",
+    "description":"Temporary storage for dynamical memory after write-datafile (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_new_nat2_distance",
+    "description":"Temporary storage for new 2-atom distance (MD, (vc-)relax)",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_number_of_electrons",
+    "description":"Temporary: Number of electrons in system",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_number_of_electrons_down",
+    "description":"Temporary: Number of electrons in system (spin down)",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_number_of_electrons_up",
+    "description":"Temporary: Number of electrons in system (spin up)",
+    "superNames":["section_system","configuration_core"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_pp_augmentation_shape",
+    "description":"Temporary: shape of augmentation charge",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_comment",
+    "description":"Temporary: comment about pseudopotential",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_filename",
+    "description":"Filename of pseudopotential",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_idx",
+    "description":"Temporary: Index of Pseudopotential on Espresso side",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_integral_lmax_exact",
+    "description":"Temporary: maximum l for which integration is exact (PAW)",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_integral_ndirections",
+    "description":"Temporary: number of integration directions (PAW)",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_l",
+    "description":"Temporary: beta function l in pseudopotential on Espresso side",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_l_idx",
+    "description":"Temporary: beta function l index in pseudopotential on Espresso side",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_label",
+    "description":"Temporary: Label of Pseudopotential on Espresso side",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_md5sum",
+    "description":"Temporary: MD5 checksum of pseudopotential file",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_nbeta",
+    "description":"Temporary: Number of beta functions in pseudopotential on Espresso side",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_ncoefficients",
+    "description":"Temporary: Number of coefficients in pseudopotential",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_ndmx",
+    "description":"Temporary: Radial grid of Pseudopotential on Espresso side",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"i",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_renormalized_filename",
+    "description":"Temporary: renormalized WFCs in pseudopotential: filename",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_renormalized_wfc",
+    "description":"Temporary: renormalized WFCs in pseudopotential",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_report_line",
+    "description":"Temporary: PP report: parsed line",
+    "superNames":["x_qe_t_section_pp_report"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_pp_report_species",
+    "description":"Temporary: PP report: species number",
+    "superNames":["x_qe_t_section_pp_report"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_pp_report_version",
+    "description":"Temporary: PP report: pp version",
+    "superNames":["x_qe_t_section_pp_report"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_pp_type",
+    "description":"Temporary: Type of pseudopotential, e.g. 'Norm-conserving' or 'Ultrasoft'",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_valence",
+    "description":"Temporary: Number of Valence electrons in pseudopotential",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"f",
+    "repeats":true
+  },{
+    "name":"x_qe_t_pp_warning_filename",
+    "description":"Temporary: renormalized WFCs in pseudopotential: filename",
+    "superNames":["x_qe_t_section_pp_warning"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_pp_warning_idx",
+    "description":"Temporary: renormalized WFCs in pseudopotential: pp index",
+    "superNames":["x_qe_t_section_pp_warning"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_pp_warning_wfcidx",
+    "description":"Temporary: renormalized WFCs in pseudopotential: pseudo-wavefunction index",
+    "superNames":["x_qe_t_section_pp_warning"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_pp_warning_wfclabel",
+    "description":"Temporary: renormalized WFCs in pseudopotential: pseudo-wavefunction label",
+    "superNames":["x_qe_t_section_pp_warning"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_pp_warning_wfcnorm",
+    "description":"Temporary: renormalized WFCs in pseudopotential: pseudo-wavefunction original norm",
+    "superNames":["x_qe_t_section_pp_warning"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_profile_caller",
+    "description":"Temporary: QE profiling: who was the caller",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_profile_caller_list",
+    "description":"Temporary: QE profiling: who was the caller (list for each function)",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_profile_category",
+    "description":"Temporary: QE profiling: category",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_profile_category_list",
+    "description":"Temporary: QE profiling: category (list for each function)",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_profile_cputime",
+    "description":"Temporary: QE profiling: cputime spent in function",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_profile_function",
+    "description":"Temporary: QE profiling: function name",
+    "superNames":["section_run"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_profile_ncalls",
+    "description":"Temporary: QE profiling: how often was function called",
+    "superNames":["section_run"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_profile_walltime",
+    "description":"Temporary: QE profiling: wallclock time spent in function",
+    "superNames":["section_run"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_projected_velocity",
+    "description":"Temporary: MD step: projected velocity",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_relax_converged_steps",
+    "description":"Temporary Relax: number of steps after which structure relaxation converged",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_relax_final_energy",
+    "description":"Temporary Relax: final energy in relaxation",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_relax_threshold_energy",
+    "description":"Temporary Relax: convergence threshold on energy in relaxation",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_relax_threshold_force",
+    "description":"Temporary Relax: convergence threshold on force components in relaxation",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_relax_threshold_pressure",
+    "description":"Temporary Relax: convergence threshold on pressure in relaxation",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_rinner",
+    "description":"Temporary: Inner Radii of pseudopotential",
+    "superNames":["x_qe_t_section_pseudopotential"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_scf_diagonalization_algorithm",
+    "description":"Temporary: Diagonalization algorithm",
+    "superNames":["x_qe_section_scf_diagonalization","scf_info"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_section_input_occupations",
+    "kindStr":"type_section",
+    "description":"Temporary: Section for User-specified band occupations",
+    "superNames":["section_method"]
+  },{
+    "name":"x_qe_t_section_pp_report",
+    "kindStr":"type_section",
+    "description":"section to collect 'pseudopotential report' information in new QE, used only for 'old', non-UPF pseudopotentials",
+    "superNames":["section_method"]
+  },{
+    "name":"x_qe_t_section_pp_warning",
+    "kindStr":"type_section",
+    "description":"section to collect 'pseudopotential warning' information in old QE",
+    "superNames":["section_method"]
+  },{
+    "name":"x_qe_t_section_pseudopotential",
+    "kindStr":"type_section",
+    "description":"pseudo-section for collecting pseudopotential data (atomic number lookup requires table printed later in output)",
+    "superNames":["section_method"]
+  },{
+    "name":"x_qe_t_smooth_fft_grid_x",
+    "description":"Temporary: Smooth-grid info, FFT grid x",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_smooth_fft_grid_y",
+    "description":"Temporary: Smooth-grid info, FFT grid y",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_smooth_fft_grid_z",
+    "description":"Temporary: Smooth-grid info, FFT grid z",
+    "superNames":["section_system"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_species_dispersion_correction_c6",
+    "description":"Temporary: DFT-D species C6 coefficient",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_species_dispersion_correction_label",
+    "description":"Temporary: DFT-D species label",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_species_dispersion_correction_vdw_radius",
+    "description":"Temporary: DFT-D species vdW radius",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_species_integration_radius",
+    "description":"Temporary: radius used to integrate charge/magnetization over (per species)",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_species_integration_radius_idx",
+    "description":"Temporary: radius used to integrate charge/magnetization over (per species), species index",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_t_spin_channel",
+    "description":"Temporary storage for spin channel",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_spin_orbit_magn",
+    "description":"Temporary: spin-orbit msg: magnetic mode (non-)collinear / (non-)magnetic",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_spin_orbit_mode",
+    "description":"Temporary: spin-orbit msg: with/without spin-orbit",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_starting_magnetization_species",
+    "description":"Temporary: Starting magnetic configuration: Species name",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_starting_magnetization_value",
+    "description":"Temporary: Starting magnetic configuration: Species magnetization",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_stress_x",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_stress_y",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_stress_z",
+    "description":"-",
+    "superNames":["section_single_configuration_calculation"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_symm_inversion",
+    "description":"Temporary: Inversion symmetry",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_temporary_array_dimensions",
+    "description":"Temporary: temporary arrays, dimensions",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_temporary_array_name",
+    "description":"Temporary: temporary arrays, name",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_temporary_array_size",
+    "description":"Temporary: temporary arrays, size",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_a_units",
+    "description":"Temporary storage for direct lattice vectors, units",
+    "superNames":["section_system"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_t_vec_a_x",
+    "description":"Temporary storage for direct lattice vectors, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_a_y",
+    "description":"Temporary storage for direct lattice vectors, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_a_z",
+    "description":"Temporary storage for direct lattice vectors, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_b_x",
+    "description":"Temporary storage for reciprocal lattice vectors, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_b_y",
+    "description":"Temporary storage for reciprocal lattice vectors, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_b_z",
+    "description":"Temporary storage for reciprocal lattice vectors, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_supercell_x",
+    "description":"Temporary storage for supercell translation vector in fractional coordinates, x-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_supercell_y",
+    "description":"Temporary storage for supercell translation vector in fractional coordinates, y-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_vec_supercell_z",
+    "description":"Temporary storage for supercell translation vector in fractional coordinates, z-component",
+    "superNames":["section_system"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_t_warning",
+    "description":"Temporary: Warnings from Quantum Espresso",
+    "superNames":["section_run"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_t_xc_functional_shortname_enforced",
+    "description":"Short name of User-enforced XC functional; overrides the setting implied by the pseudopotentials",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_temporary_array_dimensions",
+    "description":"Temporary arrays, dimensions",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "shape":["x_qe_temporary_arrays"]
+  },{
+    "name":"x_qe_temporary_array_name",
+    "description":"Temporary arrays, name",
+    "superNames":["section_method"],
+    "dtypeStr":"C",
+    "shape":["x_qe_temporary_arrays"]
+  },{
+    "name":"x_qe_temporary_array_size",
+    "description":"Temporary arrays, size",
+    "superNames":["section_method"],
+    "dtypeStr":"f",
+    "shape":["x_qe_temporary_arrays"]
+  },{
+    "name":"x_qe_time_setup_cpu1_end",
+    "description":"CPU time, setup up until first iteration",
+    "superNames":["section_method"],
+    "dtypeStr":"f"
+  },{
+    "name":"x_qe_vec_supercell",
+    "description":"Supercell translation vector(s) in fractional coordinates",
+    "superNames":["section_system"],
+    "dtypeStr":"f",
+    "shape":["x_qe_number_of_supercell_translations",3]
+  },{
+    "name":"x_qe_warning",
+    "description":"Warnings from Quantum Espresso",
+    "superNames":["section_run"],
+    "dtypeStr":"C",
+    "repeats":true
+  },{
+    "name":"x_qe_xc_comment",
+    "description":"Quantum Espresso comment about meaning of XC functional component",
+    "superNames":["section_xc_functionals","settings_xc_functional"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_functional_num",
+    "description":"QE Index number representation of XC functional",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_functional_shortname",
+    "description":"Short name of XC functional used in calculation",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_functional_user_enforced",
+    "description":"True if the user enforced setting the XC functional; overrides the setting implied by the pseudopotentials",
+    "superNames":["section_method"],
+    "dtypeStr":"b"
+  },{
+    "name":"x_qe_xc_icorr",
+    "description":"Quantum Espresso internal code-specific index of XC functional (density correlation component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_icorr_comment",
+    "description":"Quantum Espresso comment about XC functional (density correlation component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_icorr_name",
+    "description":"Name of XC functional (density correlation component) in Quantum Espresso context",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_iexch",
+    "description":"Quantum Espresso internal code-specific index of XC functional (density exchange component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_iexch_comment",
+    "description":"Quantum Espresso comment about XC functional (density exchange component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_iexch_name",
+    "description":"Name of XC functional (density exchange component) in Quantum Espresso context",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_igcc",
+    "description":"Quantum Espresso internal code-specific index of XC functional (gradient correlation component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_igcc_comment",
+    "description":"Quantum Espresso comment about XC functional (gradient correlation component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_igcc_name",
+    "description":"Name of XC functional (gradient correlation component) in Quantum Espresso context",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_igcx",
+    "description":"Quantum Espresso internal code-specific index of XC functional (gradient exchange component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_igcx_comment",
+    "description":"Quantum Espresso comment about XC functional (gradient exchange component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_igcx_name",
+    "description":"Name of XC functional (gradient exchange component) in Quantum Espresso context",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_imeta",
+    "description":"Quantum Espresso internal code-specific index of XC functional (meta-gga component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_imeta_comment",
+    "description":"Quantum Espresso comment about XC functional (meta-gga component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_imeta_name",
+    "description":"Name of XC functional (meta-gga component) in Quantum Espresso context",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_index",
+    "description":"Index value within Quantum Espresso where XC functional component was set from",
+    "superNames":["section_xc_functionals","settings_xc_functional"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_index_name",
+    "description":"Name of Index within Quantum Espresso where XC functional component was set from",
+    "superNames":["section_xc_functionals","settings_xc_functional"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_inlc",
+    "description":"Quantum Espresso internal code-specific index of XC functional (Van-der-Waals non-local component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"i"
+  },{
+    "name":"x_qe_xc_inlc_comment",
+    "description":"Quantum Espresso comment about XC functional (Van-der-Waals non-local component) ",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_inlc_name",
+    "description":"Name of XC functional (Van-der-Waals non-local component) in Quantum Espresso context",
+    "superNames":["section_method"],
+    "dtypeStr":"C"
+  },{
+    "name":"x_qe_xc_name",
+    "description":"Name of XC functional component in Quantum Espresso context",
+    "superNames":["section_xc_functionals","settings_xc_functional"],
+    "dtypeStr":"C"
+  }]
+}

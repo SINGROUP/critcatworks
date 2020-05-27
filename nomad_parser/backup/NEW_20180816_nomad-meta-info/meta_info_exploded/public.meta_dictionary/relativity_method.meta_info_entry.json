@@ -1,0 +1,40 @@
+{
+  "meta_name":"relativity_method",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Describes the relativistic treatment used for the calculation of the final ",
+    "energy and related quantities. If skipped or empty, no relativistic treatment ",
+    "is applied."],
+  "meta_parent_section":"section_method",
+  "meta_abstract_types":[
+    "settings_relativity"],
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"",
+    "meta_enum_description":"No special treatment"
+  },{
+    "meta_enum_value":"pseudo_scalar_relativistic",
+    "meta_enum_description":[
+      "Scalar relativistic corrections through pseudo potential ",
+      "fitting"]
+  },{
+    "meta_enum_value":"scalar_relativistic",
+    "meta_enum_description":"Scalar relativistic corrections"
+  },{
+    "meta_enum_value":"4_component_relativistic",
+    "meta_enum_description":"Full 4 component Dirac equation"
+  },{
+    "meta_enum_value":"scaled_ZORA",
+    "meta_enum_description":[
+      "Scaled version of scalar Zeroth-Order Regular Approximation to the Dirac ",
+      "equation, as explained in: *E. van Lenthe et al.*, J. Chem. Phys. **101**, 9783 ",
+      "(1994) DOI: [10.1063/1.467943](https://dx.doi.org/10.1063/1.467943)."]
+  },{
+    "meta_enum_value":"atomic_ZORA",
+    "meta_enum_description":[
+      "Scalar Zeroth-Order Regular Approximation to the Dirac equation, scaled using ",
+      "on-site free-atom potentials, as described in: *J.H. van Lenthe et al.*, Chem. ",
+      "Phys. Lett. **328**, 107 (2000) DOI: [10.1016/S0009-2614(00)00832-0](https://dx.",
+      "doi.org/10.1016/S0009-2614(00)00832-0)."]
+  }]
+}

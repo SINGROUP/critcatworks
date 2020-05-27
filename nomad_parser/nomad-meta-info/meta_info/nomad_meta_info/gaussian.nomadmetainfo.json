@@ -1,0 +1,1536 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "meta info used by the x_gaussian parser, all names are expected to start with x_gaussian",
+  "dependencies": [ {
+      "relativePath": "common.nomadmetainfo.json"
+    }, {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }],
+  "metaInfos": [{
+      "description": "number of atoms of the system",
+      "dtypeStr": "f",
+      "name": "x_gaussian_number_of_atoms",
+      "shape": [],
+      "superNames": [
+        "section_system"
+       ]
+    }, {
+      "description": "atomic number for atoms",
+      "dtypeStr": "C",
+      "name": "x_gaussian_atomic_number",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_geometry"
+       ]
+    }, { 
+      "description": "atomic masses for atoms",
+      "dtypeStr": "C",
+      "name": "x_gaussian_atomic_masses",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+       ]
+    }, {
+      "description": "x coordinate for the atoms",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_x_coord",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "y coordinate for the atoms",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_y_coord",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "z coordinate for the atoms",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_z_coord",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_geometry"
+      ],
+      "units": "m"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_x_force",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_atom_forces"
+      ],
+      "units": "N"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_y_force",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_atom_forces"
+      ],
+      "units": "N"
+    }, {
+      "description": "-",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_z_force",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_atom_forces"
+      ],
+      "units": "N"
+    }, {
+      "description": "Forces acting on the atoms, calculated as minus gradient of energy_total.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_forces",
+      "repeats": true,
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_gaussian_atom_forces_type"
+      ],
+      "units": "N"
+    }, {
+      "description": "binary file with detailed output information",
+      "dtypeStr": "C",
+      "name": "x_gaussian_chk_file",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "total memory for the run",
+      "dtypeStr": "C",
+      "name": "x_gaussian_memory",
+      "shape": [],
+      "superNames": [
+        "settings_run"
+      ]
+    }, {
+      "description": "number of processors used",
+      "dtypeStr": "C",
+      "name": "x_gaussian_number_of_processors",
+      "shape": [],
+      "superNames": [
+        "settings_run",
+        "parallelization_info"
+      ]
+    }, {
+      "description": "section that contains Cartesian coordinates of the system for a given geometry",
+      "kindStr": "type_section",
+      "shape": [],
+      "name": "x_gaussian_section_geometry",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gaussian_program_execution_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gaussian_program_release_date",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gaussian_program_implementation",
+      "shape": [],
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gaussian_program_termination_date",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_times",
+        "section_run"
+      ]
+    }, {
+      "description": "-",
+      "dtypeStr": "C",
+      "name": "x_gaussian_program_cpu_time",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_times",
+        "section_run"
+      ]
+    }, {
+      "description": "section that contains coefficients for the hybrid DFT functionals",
+      "kindStr": "type_section",
+      "shape": [],
+      "name": "x_gaussian_section_hybrid_coeffs",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Coefficient for Hartree-Fock exchange in hybrid DFT functionals",
+      "dtypeStr": "f",
+      "name": "hybrid_xc_coeff1",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    }, {
+      "description": "Coefficients for Slater exchange, non-local exchange, local correlation, and non-local correlation, respectively, in hybrid DFT functionals",
+      "dtypeStr": "C",
+      "name": "hybrid_xc_coeff2",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    }, {
+      "description": "Hartree-Fock exchange",
+      "dtypeStr": "f",
+      "name": "x_gaussian_hybrid_xc_hfx",
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    }, {
+      "description": "Slater exchange",
+      "dtypeStr": "f",
+      "name": "x_gaussian_hybrid_xc_slater",
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    }, {
+      "description": "Slater exchange",
+      "dtypeStr": "f",
+      "name": "x_gaussian_hybrid_xc_nonlocalex",
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    }, {
+      "description": "Slater exchange",
+      "dtypeStr": "f",
+      "name": "x_gaussian_hybrid_xc_localcorr",
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    }, {
+      "description": "Slater exchange",
+      "dtypeStr": "f",
+      "name": "x_gaussian_hybrid_xc_nonlocalcorr",
+      "superNames": [
+        "x_gaussian_section_hybrid_coeffs"
+      ]
+    },  {
+      "description": "Total energy calculated with a given method during the self-consistent field (SCF) iterations.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_energy_total_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    },  {
+      "description": "Total energy increment calculated with a given method during the self-consistent field (SCF) iterations.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_delta_energy_total_scf_iteration",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "SCF total energy converged for a given geometry.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_energy_total_scf_converged",
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Determines whether a single configuration calculation is converged.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_single_configuration_calculation_converged",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Check for SCF convergence and writes the total energy value to backend",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_total_scf_one_geometry",
+      "shape": [],  
+      "superNames": [
+        "section_single_configuration_calculation"
+       ]
+    }, {
+      "description": "section that contains the execution times of the run",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_times",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Total charge of the system.",
+      "dtypeStr": "i",
+      "name": "x_gaussian_total_charge",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Target (user-imposed) value of the spin multiplicity $M=2S+1$, where $S$ is the total spin. It is an integer value. This value is not necessarly the value obtained at the end of the calculation. See spin_S2 for the converged value of the spin moment.",
+      "dtypeStr": "i",
+      "name": "x_gaussian_spin_target_multiplicity",
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Real value of spin squared.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_spin_S2",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Real value of spin squared resulting from the annihilation of the first spin contaminant.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_after_annihilation_spin_S2",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Positions of all the atoms, in Cartesian coordinates. This metadata defines a configuration and is therefore required.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_atom_positions",
+      "shape": [
+        "number_of_atoms",
+        3
+      ],
+      "superNames": [
+        "x_gaussian_configuration_core"
+      ],
+      "units": "m"
+    }, {
+      "description": "Labels of the atoms. These strings identify the atom kind and conventionally start with the symbol of the atomic species, possibly followed by a number. The same atomic species can be labelled with more than one atom_labels in order to distinguish, e.g., atoms of the same species assigned to different atom-centered basis sets or pseudopotentials, or simply atoms in different locations in the structure (e.g., bulk and surface). These labels can also be used for *particles* that do not correspond to physical atoms (e.g., ghost atoms in some codes using atom-centered basis sets). This metadata defines a configuration and is therefore required.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_atom_labels",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_configuration_core"
+      ]
+    }, {
+      "description": "Number of performed self-consistent field (SCF) iterations at DFT level.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "repeats": false,
+      "name": "x_gaussian_number_of_scf_iterations",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_scf_info"
+      ]
+    }, {
+      "description": "Properties defining the current configuration.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gaussian_configuration_core",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "section that contains Cartesian coordinates of the system for a given geometry",
+      "kindStr": "type_section",
+      "shape": [],
+      "name": "x_gaussian_section_atom_forces",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Some forces on the atoms (i.e. minus derivatives of some energy with respect to the atom position).",
+      "dtypeStr": "f",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gaussian_atom_forces_type",
+      "repeats": true,
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Information on the self-consistent field (SCF) procedure.",
+      "kindStr": "type_abstract_document_content",
+      "name": "x_gaussian_scf_info",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Value of the total charge of the system (in electronic units).",
+      "dtypeStr": "C",
+      "name": "charge",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the x component of the dipole moment (Debye).",
+      "dtypeStr": "C",
+      "name": "dipole_moment_x",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the y component of the dipole moment (Debye).",
+      "dtypeStr": "C",
+      "name": "dipole_moment_y",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the z component of the dipole moment (Debye).",
+      "dtypeStr": "C",
+      "name": "dipole_moment_z",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xx component of the quadrupole moment (Debye-Ang).",
+      "dtypeStr": "C",
+      "name": "quadrupole_moment_xx",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yy component of the quadrupole moment (Debye-Ang).",
+      "dtypeStr": "C",
+      "name": "quadrupole_moment_yy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the zz component of the quadrupole moment (Debye-Ang).",
+      "dtypeStr": "C",
+      "name": "quadrupole_moment_zz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xy component of the quadrupole moment (Debye-Ang).",
+      "dtypeStr": "C",
+      "name": "quadrupole_moment_xy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xz component of the quadrupole moment (Debye-Ang).",
+      "dtypeStr": "C",
+      "name": "quadrupole_moment_xz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yz component of the quadrupole moment (Debye-Ang).",
+      "dtypeStr": "C",
+      "name": "quadrupole_moment_yz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxx component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_xxx",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyy component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_yyy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the zzz component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_zzz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xyy component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_xyy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxy component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_xxy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxz component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_xxz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xzz component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_xzz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yzz component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_yzz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyz component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_yyz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xyz component of the octapole moment (Debye-Ang**2).",
+      "dtypeStr": "C",
+      "name": "octapole_moment_xyz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxxx component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_xxxx",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyyy component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_yyyy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the zzzz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_zzzz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxxy component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_xxxy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxxz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_xxxz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyyx component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_yyyx",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyyz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_yyyz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the zzzx component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_zzzx",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the zzzy component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_zzzy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxyy component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_xxyy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxzz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_xxzz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyzz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_yyzz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the xxyz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_xxyz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the yyxz component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_yyxz",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the zzxy component of the hexadecapole moment (Debye-Ang**3).",
+      "dtypeStr": "C",
+      "name": "hexadecapole_moment_zzxy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Tuples of $l$ and $m$ values for which the molecular multipoles (including the electric charge, dipole, etc.) are given. The meaning of the integer number $l$ is monopole/charge for $l=0$, dipole for $l=1$, quadrupole for $l=2$, etc. The meaning of the integer numbers $m$ is specified by molecular_multipole_m_kind.",
+      "dtypeStr": "i",
+      "name": "x_gaussian_molecular_multipole_lm",
+      "shape": [
+        "x_gaussian_number_of_lm_molecular_multipoles",
+        2
+      ],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "String describing what the integer numbers $m$ in molecular_multipole_lm mean. Allowed values (for atomic multipoles) are listed in the [m\\_kind wiki page](https://gitlab.rzg.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/m-kind).",
+      "dtypeStr": "C",
+      "name": "x_gaussian_molecular_multipole_m_kind",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Value of the multipoles (including the monopole/charge for $l$ = 0, the dipole for $l$ = 1, etc.).",
+      "dtypeStr": "f",
+      "name": "x_gaussian_molecular_multipole_values",
+      "shape": [
+        "x_gaussian_number_of_lm_molecular_multipoles"
+      ],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, {
+      "description": "Number of $l,m$ combinations for which molecular multipoles are given.",
+      "dtypeStr": "i",
+      "kindStr": "type_dimension",
+      "name": "x_gaussian_number_of_lm_molecular_multipoles",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molecular_multipoles"
+      ]
+    }, { 
+      "description": "Section describing multipoles (charges, dipoles,...).",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_molecular_multipoles",
+      "superNames": [
+        "section_single_configuration_calculation"
+    ]
+    }, {
+      "description": "Specifies whether a geometry optimization is converged.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_geometry_optimization_info",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Specifies whether a geometry optimization is converged.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_geometry_optimization_converged",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_geometry_optimization_info"
+      ]
+    }, {
+      "description": "x component of lattice vector",
+      "dtypeStr": "C",
+      "name": "x_gaussian_geometry_lattice_vector_x",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "y component of lattice vector",
+      "dtypeStr": "C",
+      "name": "x_gaussian_geometry_lattice_vector_y",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "z component of lattice vector",
+      "dtypeStr": "C",
+      "name": "x_gaussian_geometry_lattice_vector_z",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "section for the values of the frequencies, reduced masses and normal mode vectors",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_frequencies",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "values of frequencies, in cm-1",
+      "dtypeStr": "C",
+      "name": "x_gaussian_frequency_values",
+      "shape": [
+          "number_of_frequency_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_frequencies"
+      ]
+    }, {
+      "description": "values of frequencies, in cm-1",
+      "dtypeStr": "f",
+      "name": "x_gaussian_frequencies",
+      "shape": [
+         "number_of_frequencies"
+      ], 
+      "superNames": [
+        "x_gaussian_section_frequencies"
+      ]
+    }, {
+      "description": "values of normal mode reduced masses",
+      "dtypeStr": "C",
+      "name": "x_gaussian_reduced_masses",
+      "shape": [
+          "number_of_reduced_masses_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_frequencies"
+      ]
+    }, {
+      "description": "values of normal mode reduced masses",
+      "dtypeStr": "f",
+      "name": "x_gaussian_red_masses",
+      "shape": [
+         "number_of_frequencies"
+      ],
+      "superNames": [
+        "x_gaussian_section_frequencies"
+      ]
+    }, {
+      "description": "normal mode vectors",
+      "dtypeStr": "C",
+      "name": "x_gaussian_normal_modes",
+      "shape": [
+          "number_of_normal_modes_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_frequencies"
+      ]
+    }, {
+      "description": "normal mode vectors",
+      "dtypeStr": "f",
+      "name": "x_gaussian_normal_mode_values",
+      "shape": [
+         "number_of_frequencies",
+         "number_of_atoms",
+         3
+      ],
+      "superNames": [
+        "x_gaussian_section_frequencies"
+      ]
+    }, {
+      "description": "section for thermochemical quantities",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_thermochem",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Value of temperature for thermochemical values",
+      "dtypeStr": "f",
+      "name": "x_gaussian_temperature",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Value of pressure for thermochemical values",
+      "dtypeStr": "f",
+      "name": "x_gaussian_pressure",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "X component of moment of inertia",
+      "dtypeStr": "f",
+      "name": "x_gaussian_moment_of_inertia_X",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Y component of moment of inertia",
+      "dtypeStr": "f",
+      "name": "x_gaussian_moment_of_inertia_Y",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Z component of moment of inertia",
+      "dtypeStr": "f",
+      "name": "x_gaussian_moment_of_inertia_Z",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Values of moments of inertia",
+      "dtypeStr": "f",
+      "name": "x_gaussian_moments",
+      "shape": [
+             3
+      ],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Value of zero-point energy",
+      "dtypeStr": "f",
+      "name": "x_gaussian_zero_point_energy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Value of thermal correction to total energy",
+      "dtypeStr": "f",
+      "name": "x_gaussian_thermal_correction_energy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Value of thermal correction to enthalpy",
+      "dtypeStr": "f",
+      "name": "x_gaussian_thermal_correction_enthalpy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "Value of thermal correction to Gibbs free energy",
+      "dtypeStr": "f",
+      "name": "x_gaussian_thermal_correction_free_energy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_thermochem"
+      ]
+    }, {
+      "description": "section for force constant matrix in Cartesians. Units are mdyne.Angstrom",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_force_constant_matrix",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "Force constant matrix elements",
+      "dtypeStr": "C",
+      "name": "x_gaussian_force_constants",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_force_constant_matrix"
+      ]
+    }, {
+      "description": "Force constant matrix element values",
+      "dtypeStr": "f",
+      "name": "x_gaussian_force_constant_values",
+      "shape": [
+            "number_of_degrees_of_freedom",
+            "number_of_degrees_of_freedom"
+      ],
+      "superNames": [
+        "x_gaussian_section_force_constant_matrix"
+      ]
+    }, {
+      "description": "section for the symmetry of the MOs",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_orbital_symmetries",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "symmetry of the alpha occupied MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_alpha_occ_symmetry_values",
+      "shape": [
+          "number_of_alpha_occ_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_orbital_symmetries"
+      ]
+    }, {
+      "description": "symmetry of the alpha virtual MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_alpha_vir_symmetry_values",
+      "shape": [
+          "number_of_alpha_vir_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_orbital_symmetries"
+      ]
+    }, {
+      "description": "symmetry of the beta occupied MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_beta_occ_symmetry_values",
+      "shape": [
+          "number_of_beta_occ_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_orbital_symmetries"
+      ]
+    }, {
+      "description": "symmetry of the beta virtual MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_beta_vir_symmetry_values",
+      "shape": [
+          "number_of_beta_vir_rows"
+      ],
+      "superNames": [
+        "x_gaussian_section_orbital_symmetries"
+      ]
+    }, {
+      "description": "symmetry of the alpha MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_alpha_symmetries",
+      "shape": [
+          "number_of_alpha_mos"
+      ],
+      "superNames": [
+        "x_gaussian_section_orbital_symmetries"
+      ]
+    }, {
+      "description": "symmetry of the beta MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_beta_symmetries",
+      "shape": [
+          "number_of_beta_mos"
+      ],
+      "superNames": [
+        "x_gaussian_section_orbital_symmetries"
+      ]
+    }, {
+      "description": "section for the symmetry of the electronic state",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_symmetry",
+      "superNames": [
+        "section_run"
+      ]
+    }, {
+      "description": "symmetry group of the electronic state",
+      "dtypeStr": "C",
+      "name": "x_gaussian_elstate_symmetry",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_symmetry"
+      ]
+    }, {
+      "description": "Section containing (electronic-energy) eigenvalues for one spin channel. If, for example, the eigenvalues of the Kohn-Sham operator are to be stored, a string identifying this kind of eigenvalues is put in eigenvalues_kind (see the [eigenvalues\\_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-meta-info/wikis/metainfo/eigenvalues-kind for the allowed strings), the coordinates of the $k$-points at which the eigenvalues were evaluated is stored in eigenvalues_kpoints, and the energy values of the eigenstates and their occupation is stored in eigenvalues_values and eigenvalues_occupation , respectively.",
+      "kindStr": "type_section",
+      "name": "section_eigenvalues",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "values of eigenenergies for occupied alpha MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_alpha_occ_eigenvalues_values",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies for virtual alpha MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_alpha_vir_eigenvalues_values",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies for occupied beta MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_beta_occ_eigenvalues_values",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies for virtual beta MOs",
+      "dtypeStr": "C",
+      "name": "x_gaussian_beta_vir_eigenvalues_values",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies, alpha occ",
+      "dtypeStr": "f",
+      "name": "x_gaussian_alpha_eigenvalues",
+      "shape": [
+          "number_of_alpha_mos"
+      ],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies, beta occ",
+      "dtypeStr": "f",
+      "name": "x_gaussian_beta_eigenvalues",
+      "shape": [
+          "number_of_beta_mos"
+      ],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies, alpha occ",
+      "dtypeStr": "f",
+      "name": "x_gaussian_alpha_occupations",
+      "shape": [
+          "number_of_alpha_mos"
+      ],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "values of eigenenergies, beta occ",
+      "dtypeStr": "f",
+      "name": "x_gaussian_beta_occupations",
+      "shape": [
+          "number_of_beta_mos"
+      ],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "Occupation of the eigenstates whose (energy) eigenvalues are given in eigenvalues_values.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_eigenvalues_occupation",
+      "shape": [
+        "number_of_spin_channels",
+        "number_of_eigenvalues_kpoints",
+        "number_of_eigenvalues"
+      ],
+      "superNames": [
+        "section_eigenvalues"
+      ]
+    }, {
+      "description": "Values of the (electronic-energy) eigenvalues. Their occupations are given in eigenvalues_occupation.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_eigenvalues_values",
+      "shape": [
+        "number_of_spin_channels",
+        "number_of_eigenvalues_kpoints",
+        "number_of_eigenvalues"
+      ],
+      "superNames": [
+        "section_eigenvalues"
+      ],
+      "units": "J"
+    }, {
+      "description": "values of atomic masses",
+      "dtypeStr": "f",
+      "name": "x_gaussian_masses",
+      "shape": [
+          "number_of_atoms"
+      ],
+      "superNames": [
+        "section_system"
+      ]
+    }, {
+      "description": "Section containing electronic structure method.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_elstruc_method",
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Section containing total energy components",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_energy_components",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Name of electronic structure method.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_electronic_structure_method",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_elstruc_method"
+      ]
+    }, {
+      "description": "electronic structure method, basis set, etc.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_settings",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "electronic structure method, basis set, etc.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_settings_corrected",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Value of the total energy (nuclei + electrons), calculated with the method described in calculation_method.",
+      "dtypeStr": "f",
+      "name": "energy_total",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "energy_total_potential",
+        "section_single_configuration_calculation"
+      ],
+      "units": "J"
+    }, {
+      "description": "Value of the SCF total energy, either HF or DFT.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_energy_scf",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "energy_total_potential",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Value of the perturbation energy for double hybrids",
+      "dtypeStr": "f",
+      "name": "x_gaussian_perturbation_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "energy_total_potential",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Determine if the SCF method is one of RHF, UHF, or ROHF",
+      "dtypeStr": "C",
+      "name": "x_gaussian_hf_detect",
+      "shape": [],
+      "superNames": [
+        "section_scf_iteration"
+      ]
+    }, {
+      "description": "Total electrostatic energy (nuclei + electrons), defined consistently with calculation_method.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_energy_electrostatic",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Error in the total energy. Defined consistently with XC_method.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_energy_error",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "error_estimate_contribution",
+        "section_scf_iteration",
+        "energy_value"
+      ],
+      "units": "J"
+    }, {
+      "description": "Self-consistent electronic kinetic energy as defined in XC_method.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_electronic_kinetic_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "energy_component",
+        "section_scf_iteration"
+      ],
+      "units": "J"
+    }, {
+      "description": "Perturbative Moller-Plesset energies.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_moller_plesset",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Difference between SCF and MP2 energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_mp2_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_moller_plesset"
+      ],
+      "units": "J"
+    }, {
+      "description": "Difference between SCF and MP3 energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_mp3_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_moller_plesset"
+      ],
+      "units": "J"
+    }, {
+      "description": "Difference between SCF and MP4(DQ) energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_mp4dq_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_moller_plesset"
+      ],
+      "units": "J"
+    }, {
+      "description": "Difference between SCF and MP4(SDQ) energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_mp4sdq_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_moller_plesset"
+      ],
+      "units": "J"
+    }, {
+      "description": "Difference between SCF and MP4(SDTQ) energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_mp4sdtq_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_moller_plesset"
+      ],
+      "units": "J"
+    }, {
+      "description": "Difference between SCF and MP5 energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_mp5_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_moller_plesset"
+      ],
+      "units": "J"
+    }, {
+      "description": "Coupled cluster energies.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_coupled_cluster",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Difference between SCF and CCSD energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_ccsd_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_coupled_cluster"
+      ],
+      "units": "J"
+    }, {
+      "description": "Quadratic CI energies.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_quadratic_ci",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Difference between SCF and QCISD energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_qcisd_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_quadratic_ci"
+      ],
+      "units": "J"
+    }, {
+      "description": "Difference between SCF and QCISD(TQ) energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_qcisdtq_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_quadratic_ci"
+      ],
+      "units": "J"
+    }, {
+      "description": "CI energies.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_ci",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Difference between SCF and CI energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_ci_correction_energy",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_ci"
+      ],
+      "units": "J"
+    }, {
+      "description": "semiempirical convergence cycles and energies.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_semiempirical",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "semiempirical energies.",
+      "dtypeStr": "f",
+      "name": "x_gaussian_semiempirical_energy",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_semiempirical"
+      ],
+      "units": "J"
+    }, {
+      "description": "semiempirical method.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_semiempirical_method",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_semiempirical"
+      ]
+    }, {
+      "description": "molecular mechanics method and energies.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_molmech",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "molecular mechanics method.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_molmech_method",
+      "repeats": false,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_molmech"
+      ]
+    }, {
+      "description": "composite model chemistries.",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_models",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "Excited state energies and properties",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_excited_initial",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "CI singles, TDDFT/TDHF, ZINDO or EOMCCSD excited state energies and properties",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_excited",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state number",
+      "dtypeStr": "i",
+      "name": "x_gaussian_excited_state_number",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_excited"
+      ]
+    }, {
+      "description": "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state energy",
+      "dtypeStr": "f",
+      "name": "x_gaussian_excited_energy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_excited"
+      ],
+      "units": "J"
+    }, {
+      "description": "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state oscillator strength",
+      "dtypeStr": "f",
+      "name": "x_gaussian_excited_oscstrength",
+      "repeats": true,
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_excited"
+      ]
+    }, {
+      "description": "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state spin squared value",
+      "dtypeStr": "f",
+      "name": "x_gaussian_excited_spin_squared",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_excited"
+      ]
+    }, { 
+      "description": "CIS, TDDFT/TDHF, ZINDO or EOMCCSD excited state MOs involved in transitions and their coefficients",
+      "dtypeStr": "C",
+      "name": "x_gaussian_excited_transition",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_excited"
+      ]
+    }, {
+      "description": "CASSCF energies and properties",
+      "kindStr": "type_section",
+      "name": "x_gaussian_section_casscf",
+      "superNames": [
+        "section_single_configuration_calculation"
+      ]
+    }, {
+      "description": "CASSCF energy",
+      "dtypeStr": "f",
+      "name": "x_gaussian_casscf_energy",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_casscf"
+      ],
+      "units": "J"
+    }, {
+      "description": "CASSCF determinant number",
+      "dtypeStr": "i",
+      "name": "x_gaussian_casscf_determinant",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_casscf"
+      ]
+    }, {
+      "description": "CASSCF determinant coefficient",
+      "dtypeStr": "f",
+      "name": "x_gaussian_casscf_coefficient",
+      "shape": [],
+      "superNames": [
+        "x_gaussian_section_casscf"
+      ]
+    }, {
+      "description": "String identifying in an unique way the electronic structure method used for the final wavefunctions.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_method",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "String identifying in an unique way the XC method used for the final wavefunctions.",
+      "dtypeStr": "C",
+      "name": "x_gaussian_xc",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }
+]
+}

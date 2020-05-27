@@ -1,0 +1,15 @@
+{
+  "meta_name":"basis_set_atom_centered_ls",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Azimuthal quantum number ($l$) values (of the angular part given by the ",
+    "spherical harmonic $Y_{lm}$) of the atom-centered basis function defined in the ",
+    "current section_basis_set_atom_centered."],
+  "meta_parent_section":"section_basis_set_atom_centered",
+  "meta_abstract_types":[
+    "basis_set_description"],
+  "meta_data_type":"int",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_kinds_in_basis_set_atom_centered"
+  }]
+}

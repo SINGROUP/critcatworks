@@ -1,0 +1,13 @@
+{
+  "meta_name":"atom_species",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Species of the atom (normally the atomic number Z, 0 or negative for ",
+    "unidentifed species or particles that are not ",
+    "atoms."],
+  "meta_parent_section":"section_topology",
+  "meta_abstract_types":[
+    "derived_quantity"],
+  "meta_data_type":"int",
+  "meta_repeats":true
+}

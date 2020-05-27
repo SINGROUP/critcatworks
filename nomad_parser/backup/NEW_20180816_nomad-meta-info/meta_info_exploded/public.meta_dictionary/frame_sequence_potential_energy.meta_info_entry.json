@@ -1,0 +1,18 @@
+{
+  "meta_name":"frame_sequence_potential_energy",
+  "meta_type":"type-value",
+  "meta_description":[
+    "(deprecated) Array containing the value of the potential energy along this ",
+    "sequence of frames (i.e., a trajectory, a frame is one ",
+    "section_single_configuration_calculation). This is equal to energy_total of the ",
+    "corresponding section_single_configuration_calculation and repeated here in a ",
+    "summary array for easier access. If not all frames have a value the indices of ",
+    "the frames that have a value are stored in ",
+    "frame_sequence_potential_energy_frames."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"float",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_potential_energies_in_sequence"
+  }],
+  "meta_units":"J"
+}

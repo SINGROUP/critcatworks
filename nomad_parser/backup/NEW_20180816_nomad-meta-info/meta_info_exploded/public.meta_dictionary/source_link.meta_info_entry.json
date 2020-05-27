@@ -1,0 +1,11 @@
+{
+  "meta_name":"source_link",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Link to a webpage describing the object, material,... within the project that ",
+    "calculated this  of this calculation. For example a link to aflow lib ",
+    "calculation, oqmd or material project material"],
+  "meta_parent_section":"section_calculation_info",
+  "meta_data_type":"string",
+  "meta_repeats":true
+}

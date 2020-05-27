@@ -1,0 +1,10 @@
+{
+  "meta_name":"meta_dimension_symbolic",
+  "meta_type":"type-value",
+  "meta_description":[
+    "A symbolic (variable) dimension, contains the name of a meta_info_entry with ",
+    "meta_type *type-dimension* that represents this ",
+    "dimension."],
+  "meta_parent_section":"meta_dimension",
+  "meta_data_type":"string"
+}

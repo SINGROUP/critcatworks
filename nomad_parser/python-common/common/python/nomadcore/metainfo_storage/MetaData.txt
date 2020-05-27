@@ -1,0 +1,669 @@
+   -->[section_run]
+   |   `.
+   |    |__.basis_set_description
+   |    |__.message_debug_run
+   |    |__.message_error_run
+   |    |__.message_info_run
+   |    |__.message_warning_run
+   |    |__.parsing_message_debug_run
+   |    |__.parsing_message_error_run
+   |    |__.parsing_message_info_run
+   |    |__.parsing_message_warning_run
+   |    |__.program_basis_set_type
+   |    |__.program_info
+   |    |__.run_clean_end
+   |    |__.run_hosts
+   |    |__.settings_run
+   |    |__.source_references
+   |    |__.time_run_cpu1_end
+   |    |__.time_run_cpu1_start
+   |    |__.time_run_date_end
+   |    |__.time_run_date_start
+   |    |__.time_run_wall_end
+   |    |__.time_run_wall_start
+   |
+   |
+   |   `-->[section_topology]
+   |   |   `.
+   |   |    |__.atom_to_molecule
+   |   |    |__.molecule_to_molecule_type_map
+   |   |    |__.number_of_topology_atoms
+   |   |    |__.number_of_topology_molecules
+   |   |    |__.topology_force_field_name
+   |   |
+   |   |
+   |   |   `-->[section_atom_type]
+   |   |   |   `.
+   |   |   |    |__.atom_type_charge
+   |   |   |    |__.atom_type_mass
+   |   |   |    |__.atom_type_name
+   |   |   |
+   |   |
+   |   |   `-->[section_constraint]
+   |   |   |   `.
+   |   |   |    |__.constraint_atoms
+   |   |   |    |__.constraint_kind
+   |   |   |    |__.constraint_parameters
+   |   |   |    |__.number_of_atoms_per_constraint
+   |   |   |    |__.number_of_constraints
+   |   |   |
+   |   |
+   |   |   `-->[section_interaction]
+   |   |   |   `.
+   |   |   |    |__.interaction_atoms
+   |   |   |    |__.interaction_kind
+   |   |   |    |__.interaction_parameters
+   |   |   |    |__.number_of_atoms_per_interaction
+   |   |   |    |__.number_of_interactions
+   |   |   |
+   |   |
+   |   |   `-->[section_molecule_type]
+   |   |   |   `.
+   |   |   |    |__.molecule_type_name
+   |   |   |    |__.number_of_atoms_in_molecule
+   |   |   |    |__.settings_atom_in_molecule
+   |   |   |
+   |   |   |
+   |   |   |   `-->[section_molecule_constraint]
+   |   |   |   |   `.
+   |   |   |   |    |__.molecule_constraint_atoms
+   |   |   |   |    |__.molecule_constraint_kind
+   |   |   |   |    |__.molecule_constraint_parameters
+   |   |   |   |    |__.number_of_atoms_per_molecule_constraint
+   |   |   |   |    |__.number_of_molecule_constraints
+   |   |   |   |
+   |   |   |
+   |   |   |   `-->[section_molecule_interaction]
+   |   |   |   |   `.
+   |   |   |   |    |__.molecule_interaction_atoms
+   |   |   |   |    |__.molecule_interaction_kind
+   |   |   |   |    |__.molecule_interaction_parameters
+   |   |   |   |    |__.number_of_atoms_per_molecule_interaction
+   |   |   |   |    |__.number_of_molecule_interactions
+   |   |   |   |
+   |   |   |
+   |   |   |   `-->[settings_atom_in_molecule]
+   |   |   |   |   `.
+   |   |   |   |    |__.atom_in_molecule_charge
+   |   |   |   |    |__.atom_in_molecule_name
+   |   |   |   |    |__.atom_in_molecule_to_atom_type_ref
+   |   |   |   |
+   |
+   |   `-->[basis_set_description]
+   |   |   `.
+   |   |
+   |   |   `-->[section_basis_set_atom_centered]
+   |   |   |   `.
+   |   |   |    |__.basis_set_atom_centered_ls
+   |   |   |    |__.basis_set_atom_centered_radial_functions
+   |   |   |    |__.basis_set_atom_centered_short_name
+   |   |   |    |__.basis_set_atom_centered_unique_name
+   |   |   |    |__.basis_set_atom_number
+   |   |   |    |__.number_of_basis_functions_in_basis_set_atom_centered
+   |   |   |    |__.number_of_kinds_in_basis_set_atom_centered
+   |   |   |
+   |   |   |
+   |   |   |   `-->[section_gaussian_basis_group]
+   |   |   |   |   `.
+   |   |   |   |    |__.gaussian_basis_group_contractions
+   |   |   |   |    |__.gaussian_basis_group_exponents
+   |   |   |   |    |__.gaussian_basis_group_ls
+   |   |   |   |    |__.number_of_gaussian_basis_group_contractions
+   |   |   |   |    |__.number_of_gaussian_basis_group_exponents
+   |   |   |   |
+   |   |
+   |   |   `-->[section_basis_set_cell_dependent]
+   |   |   |   `.
+   |   |   |    |__.basis_set_cell_dependent_kind
+   |   |   |    |__.basis_set_cell_dependent_name
+   |   |   |    |__.basis_set_planewave_cutoff
+   |   |   |
+   |
+   |   `-->[program_info]
+   |   |   `.
+   |   |    |__.program_compilation_datetime
+   |   |    |__.program_compilation_host
+   |   |    |__.program_name
+   |   |    |__.program_version
+   |   |
+   |
+   |   `-->[section_frame_sequence]
+   |   |   `.
+   |   |    |__.frame_sequence_conserved_quantity_frames
+   |   |    |__.frame_sequence_conserved_quantity_stats
+   |   |    |__.frame_sequence_conserved_quantity
+   |   |    |__.frame_sequence_continuation_kind
+   |   |    |__.frame_sequence_external_url
+   |   |    |__.frame_sequence_kinetic_energy_frames
+   |   |    |__.frame_sequence_kinetic_energy_stats
+   |   |    |__.frame_sequence_kinetic_energy
+   |   |    |__.frame_sequence_local_frames_ref
+   |   |    |__.frame_sequence_potential_energy_frames
+   |   |    |__.frame_sequence_potential_energy_stats
+   |   |    |__.frame_sequence_potential_energy
+   |   |    |__.frame_sequence_pressure_frames
+   |   |    |__.frame_sequence_pressure_stats
+   |   |    |__.frame_sequence_pressure
+   |   |    |__.frame_sequence_temperature_frames
+   |   |    |__.frame_sequence_temperature_stats
+   |   |    |__.frame_sequence_temperature
+   |   |    |__.frame_sequence_time
+   |   |    |__.frame_sequence_to_sampling_ref
+   |   |    |__.geometry_optimization_converged
+   |   |    |__.number_of_conserved_quantity_evaluations_in_sequence
+   |   |    |__.number_of_frames_in_sequence
+   |   |    |__.number_of_kinetic_energies_in_sequence
+   |   |    |__.number_of_potential_energies_in_sequence
+   |   |    |__.number_of_pressure_evaluations_in_sequence
+   |   |    |__.number_of_temperatures_in_sequence
+   |   |    |__.previous_sequence_ref
+   |   |
+   |   |
+   |   |   `-->[section_frame_sequence_user_quantity]
+   |   |   |   `.
+   |   |   |    |__.frame_sequence_user_quantity_frames
+   |   |   |    |__.frame_sequence_user_quantity_name
+   |   |   |    |__.frame_sequence_user_quantity_stats
+   |   |   |    |__.frame_sequence_user_quantity
+   |   |   |    |__.number_of_frame_sequence_user_quantity_components
+   |   |   |    |__.number_of_user_quantity_evaluations_in_sequence
+   |   |   |
+   |   |
+   |   |   `-->[section_thermodynamical_properties]
+   |   |   |   `.
+   |   |   |    |__.helmholz_free_energy
+   |   |   |    |__.number_of_thermodynamical_property_values
+   |   |   |    |__.thermodynamical_properties_calculation_method
+   |   |   |    |__.thermodynamical_property_heat_capacity_C_v
+   |   |   |    |__.thermodynamical_property_temperature
+   |   |   |    |__.vibrational_free_energy_at_constant_volume
+   |   |   |
+   |
+   |   `-->[section_method]
+   |   |   `.
+   |   |    |__.method_to_topology_ref
+   |   |    |__.dft_plus_u_projection_type
+   |   |    |__.dft_plus_u_functional
+   |   |    |__.basis_set
+   |   |    |__.calculation_method_current
+   |   |    |__.calculation_method_kind
+   |   |    |__.calculation_method
+   |   |    |__.number_of_spin_channels
+   |   |    |__.settings_k_points
+   |   |    |__.settings_scf
+   |   |    |__.settings_smearing
+   |   |    |__.settings_stress_tensor
+   |   |    |__.settings_XC
+   |   |    |__.spin_target_multiplicity
+   |   |    |__.total_charge
+   |   |
+   |   |
+   |   |   `-->[section_method_basis_set]
+   |   |   |   `.
+   |   |   |    |__.mapping_section_method_basis_set_atom_centered
+   |   |   |    |__.mapping_section_method_basis_set_cell_associated
+   |   |   |    |__.method_basis_set_kind
+   |   |   |    |__.number_of_basis_sets_atom_centered
+   |   |   |
+   |   |
+   |   |   `-->[section_dft_plus_u_orbital]
+   |   |   |   `.
+   |   |   |    |__.dft_plus_u_orbital_atom
+   |   |   |    |__.dft_plus_u_orbital_label
+   |   |   |    |__.dft_plus_u_orbital_U
+   |   |   |    |__.dft_plus_u_orbital_J
+   |   |   |    |__.dft_plus_u_orbital_U_effective
+   |   |   |
+   |   |
+   |   |   `-->[section_method_atom_kind]
+   |   |   |   `.
+   |   |   |    |__.method_atom_kind_atom_number
+   |   |   |    |__.method_atom_kind_explicit_electrons
+   |   |   |    |__.method_atom_kind_label
+   |   |   |    |__.method_atom_kind_mass
+   |   |   |    |__.method_atom_kind_pseudopotential_name
+   |   |   |
+   |   |
+   |   |   `-->[section_method_to_method_refs]
+   |   |   |   `.
+   |   |   |    |__.method_to_method_external_url
+   |   |   |    |__.method_to_method_kind
+   |   |   |    |__.method_to_method_ref
+   |   |   |
+   |   |
+   |   |   `-->[settings_scf]
+   |   |   |   `.
+   |   |   |    |__.scf_max_iteration
+   |   |   |    |__.scf_threshold_energy_change
+   |   |   |
+   |   |
+   |   |   `-->[settings_smearing]
+   |   |   |   `.
+   |   |   |    |__.smearing_kind
+   |   |   |    |__.smearing_width
+   |   |   |
+   |   |
+   |   |   `-->[settings_stress_tensor]
+   |   |   |   `.
+   |   |   |    |__.stress_tensor_method
+   |   |   |
+   |   |
+   |   |   `-->[settings_XC]
+   |   |   |   `.
+   |   |   |    |__.electronic_structure_method
+   |   |   |    |__.settings_post_hartree_fock
+   |   |   |    |__.settings_relativity
+   |   |   |    |__.settings_self_interaction_correction
+   |   |   |    |__.settings_van_der_Waals
+   |   |   |    |__.settings_XC_functional
+   |   |   |    |__.XC_method
+   |   |   |    |__.XC_method_current
+   |   |   |
+   |   |   |
+   |   |   |   `-->[settings_post_hartree_fock]
+   |   |   |   |   `.
+   |   |   |   |    |__.settings_coupled_cluster
+   |   |   |   |    |__.settings_GW
+   |   |   |   |    |__.settings_MCSCF
+   |   |   |   |    |__.settings_moller_plesset_perturbation_theory
+   |   |   |   |    |__.settings_multi_reference
+   |   |   |   |
+   |   |   |
+   |   |   |   `-->[settings_relativity]
+   |   |   |   |   `.
+   |   |   |   |    |__.relativity_method
+   |   |   |   |
+   |   |   |
+   |   |   |   `-->[settings_self_interaction_correction]
+   |   |   |   |   `.
+   |   |   |   |    |__.self_interaction_correction_method
+   |   |   |   |
+   |   |   |
+   |   |   |   `-->[settings_van_der_Waals]
+   |   |   |   |   `.
+   |   |   |   |    |__.van_der_Waals_method
+   |   |   |   |
+   |   |   |
+   |   |   |   `-->[settings_XC_functional]
+   |   |   |   |   `.
+   |   |   |   |    |__.XC_functional
+   |   |   |   |
+   |   |   |   |
+   |   |   |   |   `-->[section_XC_functionals]
+   |   |   |   |   |   `.
+   |   |   |   |   |    |__.XC_functional_name
+   |   |   |   |   |    |__.XC_functional_parameters
+   |   |   |   |   |    |__.XC_functional_weight
+   |   |   |   |   |
+   |
+   |   `-->[section_sampling_method]
+   |   |   `.
+   |   |    |__.ensemble_type
+   |   |    |__.sampling_method_expansion_order
+   |   |    |__.sampling_method
+   |   |    |__.settings_geometry_optimization
+   |   |    |__.settings_metadynamics
+   |   |    |__.settings_molecular_dynamics
+   |   |    |__.settings_Monte_Carlo
+   |   |
+   |   |
+   |   |   `-->[settings_geometry_optimization]
+   |   |   |   `.
+   |   |   |    |__.geometry_optimization_energy_change
+   |   |   |    |__.geometry_optimization_geometry_change
+   |   |   |    |__.geometry_optimization_method
+   |   |   |    |__.geometry_optimization_threshold_force
+   |   |   |
+   |   |
+   |   |   `-->[settings_molecular_dynamics]
+   |   |   |   `.
+   |   |   |    |__.settings_barostat
+   |   |   |    |__.settings_integrator
+   |   |   |    |__.settings_thermostat
+   |   |   |
+   |
+   |   `-->[section_single_configuration_calculation]
+   |   |   `.
+   |   |    |__.energy_X_mGGA_scaled
+   |   |    |__.energy_reference_fermi
+   |   |    |__.energy_reference_highest_occupied
+   |   |    |__.energy_reference_lowest_unoccupied
+   |   |    |__.atom_forces_type
+   |   |    |__.electronic_kinetic_energy
+   |   |    |__.energy_correction_entropy
+   |   |    |__.energy_correction_hartree
+   |   |    |__.energy_current
+   |   |    |__.energy_electrostatic
+   |   |    |__.energy_free_per_atom
+   |   |    |__.energy_free
+   |   |    |__.energy_hartree_error
+   |   |    |__.energy_hartree_fock_X_scaled
+   |   |    |__.energy_method_current
+   |   |    |__.energy_sum_eigenvalues_per_atom
+   |   |    |__.energy_sum_eigenvalues
+   |   |    |__.energy_T0_per_atom
+   |   |    |__.energy_total_T0_per_atom
+   |   |    |__.energy_total_T0
+   |   |    |__.energy_total
+   |   |    |__.energy_type_C
+   |   |    |__.energy_type_van_der_Waals
+   |   |    |__.energy_type_XC
+   |   |    |__.energy_type_X
+   |   |    |__.energy_XC_potential
+   |   |    |__.hessian_matrix
+   |   |    |__.message_debug_evaluation
+   |   |    |__.message_error_evaluation
+   |   |    |__.message_info_evaluation
+   |   |    |__.message_warning_evaluation
+   |   |    |__.parsing_message_debug_evaluation
+   |   |    |__.parsing_message_error_single_configuration
+   |   |    |__.parsing_message_info_single_configuration
+   |   |    |__.parsing_message_warning_evaluation
+   |   |    |__.scf_info
+   |   |    |__.single_configuration_calculation_converged
+   |   |    |__.single_configuration_calculation_to_system_ref
+   |   |    |__.single_configuration_to_calculation_method_ref
+   |   |    |__.spin_S2
+   |   |    |__.stress_tensor
+   |   |    |__.time_calculation
+   |   |    |__.time_single_configuration_calculation_cpu1_end
+   |   |    |__.time_single_configuration_calculation_cpu1_start
+   |   |    |__.time_single_configuration_calculation_date_end
+   |   |    |__.time_single_configuration_calculation_date_start
+   |   |    |__.time_single_configuration_calculation_wall_end
+   |   |    |__.time_single_configuration_calculation_wall_start
+   |   |
+   |   |
+   |   |   `-->[section_excited_states]
+   |   |   |   `.
+   |   |   |    |__.number_of_excited_states
+   |   |   |    |__.excitation_energies
+   |   |   |    |__.oscillator_strengths
+   |   |   |    |__.transition_dipole_moments
+   |   |   |
+   |   |
+   |   |   `-->[atom_forces_type]
+   |   |   |   `.
+   |   |   |    |__.atom_forces_free_raw
+   |   |   |    |__.atom_forces_free
+   |   |   |    |__.atom_forces_raw
+   |   |   |    |__.atom_forces_T0_raw
+   |   |   |    |__.atom_forces_T0
+   |   |   |    |__.atom_forces
+   |   |   |
+   |   |
+   |   |   `-->[energy_type_C]
+   |   |   |   `.
+   |   |   |    |__.energy_C_mGGA
+   |   |   |    |__.energy_C
+   |   |   |
+   |   |
+   |   |   `-->[energy_type_van_der_Waals]
+   |   |   |   `.
+   |   |   |    |__.energy_van_der_Waals_value
+   |   |   |    |__.energy_van_der_Waals
+   |   |   |
+   |   |
+   |   |   `-->[energy_type_XC]
+   |   |   |   `.
+   |   |   |    |__.energy_XC_functional
+   |   |   |    |__.energy_XC
+   |   |   |
+   |   |
+   |   |   `-->[energy_type_X]
+   |   |   |   `.
+   |   |   |    |__.energy_X_mGGA
+   |   |   |    |__.energy_hartree_fock_X
+   |   |   |    |__.energy_X
+   |   |   |
+   |   |
+   |   |   `-->[scf_info]
+   |   |   |   `.
+   |   |   |    |__.number_of_scf_iterations
+   |   |   |
+   |   |   |
+   |   |   |   `-->[section_scf_iteration]
+   |   |   |   |   `.
+   |   |   |   |    |__.energy_reference_fermi_iteration
+   |   |   |   |    |__.energy_reference_highest_occupied_iteration
+   |   |   |   |    |__.energy_reference_lowest_unoccupied_iteration
+   |   |   |   |    |__.electronic_kinetic_energy_scf_iteration
+   |   |   |   |    |__.energy_change_scf_iteration
+   |   |   |   |    |__.energy_correction_entropy_scf_iteration
+   |   |   |   |    |__.energy_correction_hartree_scf_iteration
+   |   |   |   |    |__.energy_electrostatic_scf_iteration
+   |   |   |   |    |__.energy_free_per_atom_scf_iteration
+   |   |   |   |    |__.energy_free_scf_iteration
+   |   |   |   |    |__.energy_hartree_error_scf_iteration
+   |   |   |   |    |__.energy_sum_eigenvalues_per_atom_scf_iteration
+   |   |   |   |    |__.energy_sum_eigenvalues_scf_iteration
+   |   |   |   |    |__.energy_total_scf_iteration
+   |   |   |   |    |__.energy_total_T0_per_atom_scf_iteration
+   |   |   |   |    |__.energy_total_T0_scf_iteration
+   |   |   |   |    |__.energy_XC_potential_scf_iteration
+   |   |   |   |    |__.energy_XC_scf_iteration
+   |   |   |   |    |__.spin_S2_scf_iteration
+   |   |   |   |    |__.time_scf_iteration_cpu1_end
+   |   |   |   |    |__.time_scf_iteration_cpu1_start
+   |   |   |   |    |__.time_scf_iteration_date_end
+   |   |   |   |    |__.time_scf_iteration_date_start
+   |   |   |   |    |__.time_scf_iteration_wall_end
+   |   |   |   |    |__.time_scf_iteration_wall_start
+   |   |   |   |
+   |   |
+   |   |   `-->[section_atom_projected_dos]
+   |   |   |   `.
+   |   |   |    |__.atom_projected_dos_energies
+   |   |   |    |__.atom_projected_dos_lm
+   |   |   |    |__.atom_projected_dos_m_kind
+   |   |   |    |__.atom_projected_dos_values_lm
+   |   |   |    |__.atom_projected_dos_values_total
+   |   |   |    |__.number_of_atom_projected_dos_values
+   |   |   |    |__.number_of_lm_atom_projected_dos
+   |   |   |
+   |   |
+   |   |   `-->[section_atomic_multipoles]
+   |   |   |   `.
+   |   |   |    |__.atomic_multipole_kind
+   |   |   |    |__.atomic_multipole_lm
+   |   |   |    |__.atomic_multipole_m_kind
+   |   |   |    |__.atomic_multipole_values
+   |   |   |    |__.number_of_lm_atomic_multipoles
+   |   |   |
+   |   |
+   |   |   `-->[section_basis_set]
+   |   |   |   `.
+   |   |   |    |__.basis_set_kind
+   |   |   |    |__.basis_set_name
+   |   |   |    |__.mapping_section_basis_set_atom_centered
+   |   |   |    |__.mapping_section_basis_set_cell_dependent
+   |   |   |    |__.number_of_basis_functions
+   |   |   |
+   |   |
+   |   |   `-->[section_calculation_to_calculation_refs]
+   |   |   |   `.
+   |   |   |    |__.calculation_to_calculation_external_url
+   |   |   |    |__.calculation_to_calculation_kind
+   |   |   |    |__.calculation_to_calculation_ref
+   |   |   |
+   |   |
+   |   |   `-->[section_calculation_to_folder_refs]
+   |   |   |   `.
+   |   |   |    |__.calculation_to_folder_external_url
+   |   |   |    |__.calculation_to_folder_kind
+   |   |   |
+   |   |
+   |   |   `-->[section_dos]
+   |   |   |   `.
+   |   |   |    |__.dos_energies_normalized
+   |   |   |    |__.dos_energies
+   |   |   |    |__.dos_fermi_energy
+   |   |   |    |__.dos_integrated_values
+   |   |   |    |__.dos_kind
+   |   |   |    |__.dos_lm
+   |   |   |    |__.dos_m_kind
+   |   |   |    |__.dos_values_lm
+   |   |   |    |__.dos_values
+   |   |   |    |__.number_of_dos_lms
+   |   |   |    |__.number_of_dos_values
+   |   |   |
+   |   |
+   |   |   `-->[section_eigenvalues]
+   |   |   |   `.
+   |   |   |    |__.eigenvalues_kind
+   |   |   |    |__.eigenvalues_kpoints_multiplicity
+   |   |   |    |__.eigenvalues_kpoints_weights
+   |   |   |    |__.eigenvalues_kpoints
+   |   |   |    |__.eigenvalues_occupation
+   |   |   |    |__.eigenvalues_values
+   |   |   |    |__.number_of_band_segment_eigenvalues
+   |   |   |    |__.number_of_eigenvalues_kpoints
+   |   |   |    |__.number_of_eigenvalues
+   |   |   |    |__.number_of_normalized_band_segment_eigenvalues
+   |   |   |
+   |   |
+   |   |   `-->[section_energy_code_independent]
+   |   |   |   `.
+   |   |   |    |__.energy_code_independent_kind
+   |   |   |    |__.energy_code_independent_value
+   |   |   |
+   |   |
+   |   |   `-->[section_energy_van_der_Waals]
+   |   |   |   `.
+   |   |   |    |__.energy_van_der_Waals_kind
+   |   |   |    |__.energy_van_der_Waals_value
+   |   |   |
+   |   |
+   |   |   `-->[section_k_band_normalized]
+   |   |   |   `.
+   |   |   |    |__.k_band_path_normalized_is_standard
+   |   |   |
+   |   |   |
+   |   |   |   `-->[section_k_band_segment_normalized]
+   |   |   |   |   `.
+   |   |   |   |    |__.band_energies_normalized
+   |   |   |   |    |__.band_k_points_normalized
+   |   |   |   |    |__.band_occupations_normalized
+   |   |   |   |    |__.band_segm_labels_normalized
+   |   |   |   |    |__.band_segm_start_end_normalized
+   |   |   |   |    |__.number_of_normalized_k_points_per_segment
+   |   |   |   |
+   |   |
+   |   |   `-->[section_k_band]
+   |   |   |   `.
+   |   |   |    |__.band_structure_kind
+   |   |   |
+   |   |   |
+   |   |   |   `-->[section_k_band_segment]
+   |   |   |   |   `.
+   |   |   |   |    |__.band_energies
+   |   |   |   |    |__.band_k_points
+   |   |   |   |    |__.band_occupations
+   |   |   |   |    |__.band_segm_labels
+   |   |   |   |    |__.band_segm_start_end
+   |   |   |   |    |__.number_of_k_points_per_segment
+   |   |   |   |
+   |   |
+   |   |   `-->[section_scf_iteration]
+   |   |   |   `.
+   |   |   |    |__.energy_reference_fermi_iteration
+   |   |   |    |__.energy_reference_highest_occupied_iteration
+   |   |   |    |__.energy_reference_lowest_unoccupied_iteration
+   |   |   |    |__.electronic_kinetic_energy_scf_iteration
+   |   |   |    |__.energy_change_scf_iteration
+   |   |   |    |__.energy_correction_entropy_scf_iteration
+   |   |   |    |__.energy_correction_hartree_scf_iteration
+   |   |   |    |__.energy_electrostatic_scf_iteration
+   |   |   |    |__.energy_free_per_atom_scf_iteration
+   |   |   |    |__.energy_free_scf_iteration
+   |   |   |    |__.energy_hartree_error_scf_iteration
+   |   |   |    |__.energy_sum_eigenvalues_per_atom_scf_iteration
+   |   |   |    |__.energy_sum_eigenvalues_scf_iteration
+   |   |   |    |__.energy_total_scf_iteration
+   |   |   |    |__.energy_total_T0_per_atom_scf_iteration
+   |   |   |    |__.energy_total_T0_scf_iteration
+   |   |   |    |__.energy_XC_potential_scf_iteration
+   |   |   |    |__.energy_XC_scf_iteration
+   |   |   |    |__.spin_S2_scf_iteration
+   |   |   |    |__.time_scf_iteration_cpu1_end
+   |   |   |    |__.time_scf_iteration_cpu1_start
+   |   |   |    |__.time_scf_iteration_date_end
+   |   |   |    |__.time_scf_iteration_date_start
+   |   |   |    |__.time_scf_iteration_wall_end
+   |   |   |    |__.time_scf_iteration_wall_start
+   |   |   |
+   |   |
+   |   |   `-->[section_species_projected_dos]
+   |   |   |   `.
+   |   |   |    |__.number_of_lm_species_projected_dos
+   |   |   |    |__.number_of_species_projected_dos_values
+   |   |   |    |__.number_of_species
+   |   |   |    |__.species_projected_dos_energies_normalized
+   |   |   |    |__.species_projected_dos_energies
+   |   |   |    |__.species_projected_dos_lm
+   |   |   |    |__.species_projected_dos_m_kind
+   |   |   |    |__.species_projected_dos_species_label
+   |   |   |    |__.species_projected_dos_values_lm
+   |   |   |    |__.species_projected_dos_values_total
+   |   |   |
+   |   |
+   |   |   `-->[section_stress_tensor]
+   |   |   |   `.
+   |   |   |    |__.stress_tensor_kind
+   |   |   |    |__.stress_tensor_value
+   |   |   |
+   |
+   |   `-->[section_system]
+   |   |   `.
+   |   |    |__.topology_ref
+   |   |    |__.atom_atom_number
+   |   |    |__.atom_concentrations
+   |   |    |__.atom_velocities
+   |   |    |__.configuration_core
+   |   |    |__.configuration_raw_gid
+   |   |    |__.local_rotations
+   |   |    |__.number_of_atoms
+   |   |    |__.number_of_sites
+   |   |    |__.number_of_symmetry_operations
+   |   |    |__.reduced_symmetry_matrices
+   |   |    |__.reduced_symmetry_translations
+   |   |    |__.SC_matrix
+   |   |    |__.spacegroup_3D_choice
+   |   |    |__.spacegroup_3D_hall
+   |   |    |__.spacegroup_3D_international
+   |   |    |__.spacegroup_3D_number
+   |   |    |__.spacegroup_3D_origin_shift
+   |   |    |__.spacegroup_3D_pointgroup
+   |   |    |__.spacegroup_3D_std_lattice
+   |   |    |__.spacegroup_3D_std_positions
+   |   |    |__.spacegroup_3D_std_types
+   |   |    |__.spacegroup_3D_trasformation_matrix
+   |   |    |__.spacegroup_3D_wyckoff
+   |   |    |__.symmorphic
+   |   |    |__.system_name
+   |   |    |__.time_reversal_symmetry
+   |   |
+   |   |
+   |   |   `-->[configuration_core]
+   |   |   |   `.
+   |   |   |    |__.number_of_electrons
+   |   |   |    |__.atom_labels
+   |   |   |    |__.atom_positions
+   |   |   |    |__.configuration_periodic_dimensions
+   |   |   |    |__.embedded_system
+   |   |   |    |__.lattice_vectors
+   |   |   |    |__.simulation_cell
+   |   |   |
+   |   |
+   |   |   `-->[section_spacegroup_3D_operation]
+   |   |   |   `.
+   |   |   |    |__.spacegroup_3D_rotation
+   |   |   |    |__.spacegroup_3D_translation
+   |   |   |
+   |   |
+   |   |   `-->[section_system_to_system_refs]
+   |   |   |   `.
+   |   |   |    |__.system_to_system_kind
+   |   |   |    |__.system_to_system_ref
+   |   |   |
+

@@ -1,0 +1,20 @@
+{
+  "meta_name":"calculation_to_calculation_kind",
+  "meta_type":"type-value",
+  "meta_description":[
+    "String defining the relationship between the referenced ",
+    "section_single_configuration_calculation and the present ",
+    "section_single_configuration_calculation. Valid values are described in the ",
+    "[calculation_to_calculation_kind wiki page](https://gitlab.mpcdf.mpg.de/nomad-la",
+    "b/nomad-meta-info/wikis/metainfo/calculation-to-calculation-kind). Often ",
+    "calculations are connected, for instance, one calculation is a perturbation ",
+    "performed using a self-consistent field (SCF) calculation as starting point, or ",
+    "a simulated system is partitioned in regions with different but connected ",
+    "Hamiltonians (e.g., QM/MM, or a region treated via Kohn-Sham DFT embedded into ",
+    "a region treated via orbital-free DFT). Hence, the need of keeping track of ",
+    "these connected calculations. The referenced calculation is identified via ",
+    "calculation_to_calculation_ref (typically used for a calculation in the same ",
+    "section_run) or calculation_to_calculation_external_url."],
+  "meta_parent_section":"section_calculation_to_calculation_refs",
+  "meta_data_type":"string"
+}

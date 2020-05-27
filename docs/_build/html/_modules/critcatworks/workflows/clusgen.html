@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.workflows.clusgen &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.workflows.clusgen</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span>
+
+<span class="c1"># internal modules</span>
+<span class="kn">from</span> <span class="nn">critcatworks.structure</span> <span class="k">import</span> <span class="n">generate_nanoclusters</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.format</span> <span class="k">import</span> <span class="n">ase_to_atoms_dict</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database.update</span> <span class="k">import</span> <span class="n">initialize_workflow_data</span>
+
+<div class="viewcode-block" id="generate_nanoclusters_workflow"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.clusgen.generate_nanoclusters_workflow">[docs]</a><span class="k">def</span> <span class="nf">generate_nanoclusters_workflow</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> 
+    <span class="n">worker_target_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extdb_connect</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="s2">&quot;ico&quot;</span><span class="p">,</span> <span class="n">nanocluster_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">compositions</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">elements</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_configurations</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n_initial_configurations</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Workflow to generate binary nanoclusters of defined size and shape.</span>
+<span class="sd">    For each binary element combination, for each composition, n_configurations</span>
+<span class="sd">    maximally dissimilar structures are created and uploaded to the</span>
+<span class="sd">    simulations collection of the mongodb database.</span>
+
+<span class="sd">    For generating the structures, the cluster generator in the </span>
+<span class="sd">    python package cluskit is used.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (str) :        user who executed the workflow</span>
+<span class="sd">        password (str) :        password for user to upload to the database</span>
+<span class="sd">        worker_target_path (str) :  absolute path on computing resource </span>
+<span class="sd">                                    directory needs to exist</span>
+<span class="sd">        extdb_connect (dict):   dictionary containing the keys host,</span>
+<span class="sd">                                username, password, authsource and db_name.</span>
+<span class="sd">        shape (str) : determines shape of nanoclusters. &#39;ico&#39;, &#39;octa&#39; and &#39;wulff&#39; </span>
+<span class="sd">        nanocluster_size (int) : determines nanocluster size. Meaning depends on shape </span>
+<span class="sd">        compositions (list) : each element determines the amount of atoms of type 1. </span>
+<span class="sd">        elements (list) : elements (str) to iterate over</span>
+<span class="sd">        generate_pure_nanoclusters (bool) : if set to True, also pure </span>
+<span class="sd">                                            nanoclusters are generated</span>
+<span class="sd">        n_configurations (int) :    number of configurations per composition </span>
+<span class="sd">                                    (chosen based on maximally different </span>
+<span class="sd">                                    structural features)</span>
+<span class="sd">        n_initial_configurations (int) : number of initial configurations per </span>
+<span class="sd">                                         composition to choose from (higher number</span>
+<span class="sd">                                         will make the grid finer)</span>
+<span class="sd">        bondlength_dct (dict) :     bond lengths to use for specific elements. </span>
+<span class="sd">                                    Some default bond lenghts are provided for</span>
+<span class="sd">                                    common elements</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fireworks.Workflow : generate_nanoclusters Fireworks Workflow object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#FireWork: Initialize workflow with workflow_id from external database</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;worker_target_path&quot;</span> <span class="p">:</span> <span class="n">worker_target_path</span><span class="p">,</span>
+        <span class="s2">&quot;workflow_type&quot;</span> <span class="p">:</span> <span class="s2">&quot;generate_nanoclusters&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;shape&quot;</span> <span class="p">:</span> <span class="n">shape</span><span class="p">,</span>
+        <span class="s2">&quot;nanocluster_size&quot;</span> <span class="p">:</span> <span class="n">nanocluster_size</span><span class="p">,</span>
+        <span class="s2">&quot;compositions&quot;</span> <span class="p">:</span> <span class="n">compositions</span><span class="p">,</span>
+        <span class="s2">&quot;elements&quot;</span> <span class="p">:</span> <span class="n">elements</span><span class="p">,</span>
+        <span class="s2">&quot;generate_pure_nanoclusters&quot;</span> <span class="p">:</span> <span class="n">generate_pure_nanoclusters</span><span class="p">,</span>
+        <span class="s2">&quot;n_configurations&quot;</span> <span class="p">:</span> <span class="n">n_configurations</span><span class="p">,</span>
+        <span class="s2">&quot;n_initial_configurations&quot;</span> <span class="p">:</span> <span class="n">n_initial_configurations</span><span class="p">,</span>
+        <span class="s2">&quot;bondlength_dct&quot;</span> <span class="p">:</span> <span class="n">bondlength_dct</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">fw_init</span> <span class="o">=</span> <span class="n">initialize_workflow_data</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> 
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;UNNAMED&quot;</span><span class="p">,</span> <span class="n">workflow_type</span> <span class="o">=</span> <span class="s2">&quot;generate_nanoclusters&quot;</span><span class="p">,</span>
+        <span class="n">extdb_connect</span> <span class="o">=</span> <span class="n">extdb_connect</span><span class="p">)</span>
+
+    <span class="c1"># Firework: generate nanoclusters</span>
+    <span class="n">fw_generate_nanoclusters</span> <span class="o">=</span> <span class="n">generate_nanoclusters</span><span class="p">(</span><span class="n">n_initial_configurations</span><span class="p">,</span> <span class="n">n_configurations</span><span class="p">,</span> 
+            <span class="n">shape</span><span class="p">,</span> <span class="n">nanocluster_size</span><span class="p">,</span> 
+            <span class="n">compositions</span><span class="p">,</span> <span class="n">elements</span><span class="p">,</span> 
+            <span class="n">generate_pure_nanoclusters</span> <span class="o">=</span> <span class="n">generate_pure_nanoclusters</span><span class="p">,</span> <span class="n">bondlength_dct</span> <span class="o">=</span> <span class="n">bondlength_dct</span><span class="p">)</span>
+
+    <span class="c1"># add above Fireworks with links</span>
+    <span class="n">workflow_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">fw_init</span><span class="p">,</span>
+        <span class="n">fw_generate_nanoclusters</span><span class="p">,</span>
+        <span class="p">]</span>
+
+    <span class="n">links_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">fw_init</span> <span class="p">:</span> <span class="p">[</span><span class="n">fw_generate_nanoclusters</span><span class="p">]}</span>
+
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">workflow_list</span><span class="p">,</span> <span class="n">links_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wf</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

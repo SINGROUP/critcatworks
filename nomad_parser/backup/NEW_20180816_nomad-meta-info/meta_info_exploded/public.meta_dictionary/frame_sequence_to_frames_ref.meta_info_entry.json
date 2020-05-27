@@ -1,0 +1,19 @@
+{
+  "meta_name":"frame_sequence_to_frames_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference from each frame (a frame is one ",
+    "section_single_configuration_calculation) in this section_frame_sequence to the ",
+    "corresponding section_single_configuration_calculation. Each ",
+    "section_frame_sequence binds a collection of ",
+    "section_single_configuration_calculation, because they all belong to, e.g., a ",
+    "molecular dynamics trajectory, or geometry optimization. The full information ",
+    "for each frame is stored in section_single_configuration_calculation and this ",
+    "metadata establishes the link for each frame."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"reference",
+  "meta_dimension":[{
+    "meta_dimension_symbolic":"number_of_frames_in_sequence"
+  }],
+  "meta_referenced_section":"section_single_configuration_calculation"
+}

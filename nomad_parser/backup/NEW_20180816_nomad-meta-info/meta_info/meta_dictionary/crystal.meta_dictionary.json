@@ -1,0 +1,5053 @@
+{
+  "metadict_name":"crystal",
+  "metadict_description":[
+    "meta info used by the Crystal parser, all names are expected to start with ",
+    "x_crystal_"],
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_crystal_atoms_in_asymmetric_unit",
+    "meta_type":"type-value",
+    "meta_description":"Atoms in asymmetric unit.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_atoms_in_unit_cell",
+    "meta_type":"type-value",
+    "meta_description":"Atoms in unit cell.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_energy_fermi",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ENERGY RANGE (A.U.) -104.75831 -   0.62475 EFERMI  ",
+      "-0.39686"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_energy_max",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ENERGY RANGE (A.U.) -104.75831 -   0.62475 EFERMI  ",
+      "-0.39686"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_energy_min",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ENERGY RANGE (A.U.) -104.75831 -   0.62475 EFERMI  ",
+      "-0.39686"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_is1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_is2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_is3",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_k_pts_monk_net",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_coordinates_cartesian_begin",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CARTESIAN COORD. ( 0.000 0.000 0.000):( 0.000 0.590 0.000) STEP  ",
+      "0.0310"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_bands_line_coordinates_cartesian_end",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CARTESIAN COORD. ( 0.000 0.000 0.000):( 0.000 0.590 0.000) STEP  ",
+      "0.0310"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_bands_line_coordinates_primitive_begin",
+    "meta_type":"type-value",
+    "meta_description":[
+      "LINE  1 ( 0.00 0.00 0.00: 0.50 0.00 0.50) IN TERMS OF PRIMITIVE LATTICE ",
+      "VECTORS"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_bands_line_coordinates_primitive_end",
+    "meta_type":"type-value",
+    "meta_description":[
+      "LINE  1 ( 0.00 0.00 0.00: 0.50 0.00 0.50) IN TERMS OF PRIMITIVE LATTICE ",
+      "VECTORS"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_bands_line_number",
+    "meta_type":"type-value",
+    "meta_description":[
+      "LINE  1 ( 0.00 0.00 0.00: 0.50 0.00 0.50) IN TERMS OF PRIMITIVE LATTICE ",
+      "VECTORS"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_number_of_points",
+    "meta_type":"type-value",
+    "meta_description":"20 POINTS - SHRINKING_FACTOR 456",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_coordinates",
+    "meta_type":"type-value",
+    "meta_description":[
+      "fractional coordinates of the point: 1(  0/456  0/456  ",
+      "0/456)"],
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_bands_line_point_energies",
+    "meta_type":"type-value",
+    "meta_description":"Energy of each band",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_bands_line_point_integer1",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_integer2",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_integer3",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_integer4",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_integer5",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_integer6",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_point_number",
+    "meta_type":"type-value",
+    "meta_description":"number of the point: 1(  0/456  0/456  0/456)",
+    "meta_parent_section":"x_crystal_section_bands_line_point",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_shrink",
+    "meta_type":"type-value",
+    "meta_description":"20 POINTS - SHRINKING_FACTOR 456",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_line_step",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CARTESIAN COORD. ( 0.000 0.000 0.000):( 0.000 0.590 0.000) STEP  ",
+      "0.0310"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_line_value11",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_line_value12",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_line_value13",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_line_value21",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_line_value22",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_line_value23",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_max",
+    "meta_type":"type-value",
+    "meta_description":"FROM BAND   1 TO BAND  18",
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_min",
+    "meta_type":"type-value",
+    "meta_description":"FROM BAND   1 TO BAND  18",
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_number_of_points",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL OF  60 K-POINTS ALONG THE PATH",
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_symmops_g",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_symmops_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_bands_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BAND        TELAPSE        0.11 TCPU        ",
+      "0.11"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BAND        TELAPSE        0.11 TCPU        ",
+      "0.11"],
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bands_title",
+    "meta_type":"type-value",
+    "meta_description":"Title string for the file",
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"Atom element coordinates.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_crystal_basis_set_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom element label.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom id.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_omax",
+    "meta_type":"type-value",
+    "meta_description":"Orbital number: last orbital.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_omin",
+    "meta_type":"type-value",
+    "meta_description":"Orbital number: first orbital.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_primitive_coeff_dfg",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Gaussian primitive: coefficient for d, f or g ",
+      "orbitals."],
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_primitive_coeff_p",
+    "meta_type":"type-value",
+    "meta_description":"Gaussian primitive: coefficient for p orbitals.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_primitive_coeff_s",
+    "meta_type":"type-value",
+    "meta_description":"Gaussian primitive: coefficient for s orbitals.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_primitive_exp",
+    "meta_type":"type-value",
+    "meta_description":"Gaussian primitive: exponent.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_shell_type",
+    "meta_type":"type-value",
+    "meta_description":"Shell type: S / P / SP / D / F / G.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_basis_set_atom_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_bohr_angstrom",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Conversion factor Bohr as Angstroms, used by ",
+      "Crystal."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_atom_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"Atom coordinates.",
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_cell_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom in crystallographic cell",
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_cell_atom_in_asymmetric",
+    "meta_type":"type-value",
+    "meta_description":"Atom belongs to the asymmetric unit.",
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_cell_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom in crystallographic cell",
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_cell_atom_tag",
+    "meta_type":"type-value",
+    "meta_description":"Atom in crystallographic cell",
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_cell_atom_value1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom in crystallographic cell: temporary ",
+      "value"],
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_atom_value2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom in crystallographic cell: temporary ",
+      "value"],
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_atom_value3",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom in crystallographic cell: temporary ",
+      "value"],
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_atom_z",
+    "meta_type":"type-value",
+    "meta_description":"Atom in crystallographic cell",
+    "meta_parent_section":"x_crystal_section_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_cell_number_of_symmops",
+    "meta_type":"type-value",
+    "meta_description":"Number of symmetry operators",
+    "meta_parent_section":"x_crystal_section_cell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_cell_parameters",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Crystallographic cell: vector lengths and ",
+      "angles."],
+    "meta_parent_section":"x_crystal_section_cell",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_cell_symmop_id",
+    "meta_type":"type-value",
+    "meta_description":"Symmop id.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_cell_symmop_inv",
+    "meta_type":"type-value",
+    "meta_description":"Id of inversion symmop",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_cell_symmop_rotation",
+    "meta_type":"type-value",
+    "meta_description":"Rotation matrix related to the symmop.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_cell_symmop_translation",
+    "meta_type":"type-value",
+    "meta_description":"Translation related to the symmop.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_cell_symmop_value1",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value10",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value11",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value12",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value2",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value3",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value4",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value5",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value6",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value7",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value8",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_symmop_value9",
+    "meta_type":"type-value",
+    "meta_description":"Symmop: temporary storage.",
+    "meta_parent_section":"x_crystal_section_cell_symmop",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_cell_transformation_matrix",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Crystallographic cell transformation matrix from primitive ",
+      "cell."],
+    "meta_parent_section":"x_crystal_section_cell",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_crystal_cell_volume",
+    "meta_type":"type-value",
+    "meta_description":"Crystallographic cell volume.",
+    "meta_parent_section":"x_crystal_section_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_centring_code_d",
+    "meta_type":"type-value",
+    "meta_description":"Centring code denumerator.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_centring_code_n",
+    "meta_type":"type-value",
+    "meta_description":"Centring code nominator.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_class",
+    "meta_type":"type-value",
+    "meta_description":"Crystal class.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_class_ref",
+    "meta_type":"type-value",
+    "meta_description":"Reference for crystal classes.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_conventional_cell_angles",
+    "meta_type":"type-value",
+    "meta_description":"Angles between conventional lattice vectors.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_conventional_cell_atom_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"Atom coordinates.",
+    "meta_parent_section":"x_crystal_section_conventional_cell_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_crystal_conventional_cell_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom label",
+    "meta_parent_section":"x_crystal_section_conventional_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_conventional_cell_atom_z",
+    "meta_type":"type-value",
+    "meta_description":"Proton number.",
+    "meta_parent_section":"x_crystal_section_conventional_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_conventional_cell_lengths",
+    "meta_type":"type-value",
+    "meta_description":"Lengths of conventional lattice vectors.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_conventional_cell_number_of_atoms",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Number of non-equivalent atoms in the conventional ",
+      "cell."],
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_conventional_cell_units",
+    "meta_type":"type-value",
+    "meta_description":"Units used for length and angle.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_conventional_cell_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_conventional_cell_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_conventional_cell_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_conventional_cell_value4",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_conventional_cell_value5",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_conventional_cell_value6",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_density",
+    "meta_type":"type-value",
+    "meta_description":"Crystal density in g/cm3.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_dielectric_tensor",
+    "meta_type":"type-value",
+    "meta_description":"Dielectric tensor for frequency calculations.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_dimensionality",
+    "meta_type":"type-value",
+    "meta_description":"System dimensionality.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_endinformation_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "runcry14 termination stats (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         ",
+      "TELAPSE      166.54 TCPU      166.18)"],
+    "meta_parent_section":"x_crystal_section_endinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_endinformation_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "runcry14 termination stats (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         ",
+      "TELAPSE      166.54 TCPU      166.18)"],
+    "meta_parent_section":"x_crystal_section_endinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_family",
+    "meta_type":"type-value",
+    "meta_description":"Crystal family.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_forces_atom_force",
+    "meta_type":"type-value",
+    "meta_description":"Atomic forces on a single atom",
+    "meta_parent_section":"x_crystal_section_forces_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_forces_atom_label",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom label (number), e.g. in 1  11            -2.045495870088E-15 ",
+      "-2.044980874056E-15 -2.242718650102E-15"],
+    "meta_parent_section":"x_crystal_section_forces_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_atom_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_forces_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_atom_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_forces_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_atom_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_forces_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_atom_z",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom proton number, e.g. in 1  11            -2.045495870088E-15 ",
+      "-2.044980874056E-15 -2.242718650102E-15"],
+    "meta_parent_section":"x_crystal_section_forces_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_born_atom_charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom dynamic charge (e.g. in ATOM   1 NA DYNAMIC CHARGE     ",
+      "0.986361)"],
+    "meta_parent_section":"x_crystal_section_forces_born_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_born_atom_element",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom element symbol (e.g. in ATOM   1 NA DYNAMIC CHARGE     ",
+      "0.986361)"],
+    "meta_parent_section":"x_crystal_section_forces_born_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_forces_born_atom_label",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom label number (e.g. in ATOM   1 NA DYNAMIC CHARGE     ",
+      "0.986361)"],
+    "meta_parent_section":"x_crystal_section_forces_born_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_born_atom_tensor",
+    "meta_type":"type-value",
+    "meta_description":"ATOMIC BORN CHARGE TENSOR",
+    "meta_parent_section":"x_crystal_section_forces_born_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_forces_central_point_cycles",
+    "meta_type":"type-value",
+    "meta_description":[
+      "  ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM.    ",
+      "CENTRAL POINT             -6.214954000417E+02    22     0.0000E+00    ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_central_point_de",
+    "meta_type":"type-value",
+    "meta_description":[
+      "  ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM.    ",
+      "CENTRAL POINT             -6.214954000417E+02    22     0.0000E+00    ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_central_point_energy",
+    "meta_type":"type-value",
+    "meta_description":"Force matrix: central point energy",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_central_point_sym",
+    "meta_type":"type-value",
+    "meta_description":[
+      "  ATOM      MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM.    ",
+      "CENTRAL POINT             -6.214954000417E+02    22     0.0000E+00    ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_cycles",
+    "meta_type":"type-value",
+    "meta_description":[
+      "number of cycles (N.CYC) in atom list of forces section (e.g. in ATOM      MAX ",
+      "ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05     ",
+      " -6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_de",
+    "meta_type":"type-value",
+    "meta_description":[
+      "delta energy (DE) in atom list of forces section (e.g. in ATOM      MAX ",
+      "ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05     ",
+      " -6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_dir",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Direction in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)      ",
+      " TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DX   9.7672E-05      ",
+      "-6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_element",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Element symbol in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD) ",
+      "      TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DX   9.7672E-05      ",
+      "-6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOTAL ENERGY (AU) in atom list of forces section (e.g. in ATOM      MAX ",
+      "ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05     ",
+      " -6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_gen_dir",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Direction in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)      ",
+      " TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DY                   ",
+      "GENERATED FROM A PREVIOUS LINE)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom_gen",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_gen_element",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Element symbol in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD) ",
+      "      TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DY                   ",
+      "GENERATED FROM A PREVIOUS LINE)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom_gen",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_gen_label",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom label in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)     ",
+      "  TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DY                   ",
+      "GENERATED FROM A PREVIOUS LINE)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom_gen",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_grad",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MAX ABS(DGRAD) in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD) ",
+      "      TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05      ",
+      "-6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_label",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom label in atom list of forces section (e.g. in ATOM      MAX ABS(DGRAD)     ",
+      "  TOTAL ENERGY (AU)  N.CYC      DE       SYM. 2 CL DX   9.7672E-05      ",
+      "-6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_matrix_atom_sym",
+    "meta_type":"type-value",
+    "meta_description":[
+      "number of symmetries (SYM) in atom list of forces section (e.g. in ATOM      ",
+      "MAX ABS(DGRAD)       TOTAL ENERGY (AU)  N.CYC      DE       SYM. X   9.7672E-05 ",
+      "     -6.214953997616E+02     4     2.8014E-07     ",
+      "8)"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_resultant",
+    "meta_type":"type-value",
+    "meta_description":"Atomic forces: resultant of all",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_forces_symmetry_allowed_directions",
+    "meta_type":"type-value",
+    "meta_description":"Symmetry allowed directions.",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_forces_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_forces_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_frequency_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom label.",
+    "meta_parent_section":"x_crystal_section_frequency_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_frequency_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom label.",
+    "meta_parent_section":"x_crystal_section_frequency_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_atom_mass",
+    "meta_type":"type-value",
+    "meta_description":"Mass in AMU.",
+    "meta_parent_section":"x_crystal_section_frequency_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"IRREDUCIBLE ATOM",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_atom_number_of_symmops",
+    "meta_type":"type-value",
+    "meta_description":[
+      "NUMBER OF SYMMETRY OPERATORS THAT DOESN'T MOVE THE IRREDUCIBLE ",
+      "ATOM"],
+    "meta_parent_section":"x_crystal_section_frequency_gradients_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_atom_order",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MAXIMUM ORDER AMONG THE OPERATORS OF THE IRREDUCIBLE ",
+      "ATOM"],
+    "meta_parent_section":"x_crystal_section_frequency_gradients_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_dx",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Length (angstrom) of single displacement in gradient ",
+      "calculations."],
+    "meta_parent_section":"x_crystal_section_frequency_gradients",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_equilibrium_symmops",
+    "meta_type":"type-value",
+    "meta_description":"Number of symmops used in equilibrium geometry.",
+    "meta_parent_section":"x_crystal_section_frequency_gradients",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_number_of_atoms",
+    "meta_type":"type-value",
+    "meta_description":"Number of irreducible atoms.",
+    "meta_parent_section":"x_crystal_section_frequency_gradients",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_number_of_ops",
+    "meta_type":"type-value",
+    "meta_description":"Number of scf+gradient calculations needed.",
+    "meta_parent_section":"x_crystal_section_frequency_gradients",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_displacement",
+    "meta_type":"type-value",
+    "meta_description":"Particular gradient: displacement component",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_element",
+    "meta_type":"type-value",
+    "meta_description":"Particular gradient: element symbol",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_generated_by_symmop",
+    "meta_type":"type-value",
+    "meta_description":"GENERATED FROM LINE ? WITH OP ?",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_generated_from_line",
+    "meta_type":"type-value",
+    "meta_description":"GENERATED FROM LINE ? WITH OP ?",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_label",
+    "meta_type":"type-value",
+    "meta_description":"Particular gradient: atom label",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_num",
+    "meta_type":"type-value",
+    "meta_description":"Particular gradient: number",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_symmops",
+    "meta_type":"type-value",
+    "meta_description":"Number of symmops",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_text",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_frequency_gradients_op_translational_invariance",
+    "meta_type":"type-value",
+    "meta_description":"GENERATED BY TRANSLATIONAL INVARIANCE",
+    "meta_parent_section":"x_crystal_section_frequency_gradients_op",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_geometry_consistent",
+    "meta_type":"type-value",
+    "meta_description":"Geometry is consistent with the group.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_header_date",
+    "meta_type":"type-value",
+    "meta_description":"Date of the Crystal version.",
+    "meta_parent_section":"x_crystal_section_header",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_header_distribution",
+    "meta_type":"type-value",
+    "meta_description":"Distribution describer.",
+    "meta_parent_section":"x_crystal_section_header",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_header_minor",
+    "meta_type":"type-value",
+    "meta_description":"Minor version number of Crystal.",
+    "meta_parent_section":"x_crystal_section_header",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_header_url",
+    "meta_type":"type-value",
+    "meta_description":"URL given in the header.",
+    "meta_parent_section":"x_crystal_section_header",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_info_convergence_on_deltap",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Convergence seettings, on power of 10 (e.g. CONVERGENCE ON DELTAP        ",
+      "10**-16)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_convergence_on_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Convergence seettings, on power of 10 (e.g. CONVERGENCE ON ENERGY        ",
+      "10**-10)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_coulomb_bipolar_buffer",
+    "meta_type":"type-value",
+    "meta_description":"COULOMB BIPOLAR BUFFER SET TO x Mb",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_eigenvectors_disk_space_ftn",
+    "meta_type":"type-value",
+    "meta_description":[
+      "DISK SPACE FOR EIGENVECTORS (FTN 10)      351575 ",
+      "REALS"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_eigenvectors_disk_space_reals",
+    "meta_type":"type-value",
+    "meta_description":[
+      "DISK SPACE FOR EIGENVECTORS (FTN 10)      351575 ",
+      "REALS"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_exchange_bipolar_buffer",
+    "meta_type":"type-value",
+    "meta_description":"EXCHANGE BIPOLAR BUFFER SET TO x Mb",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_fock_ks_matrix_mixing",
+    "meta_type":"type-value",
+    "meta_description":"FOCK/KS MATRIX MIXING SET TO x %",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_input_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT INPUT       TELAPSE        0.01 TCPU        ",
+      "0.01"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_input_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT INPUT       TELAPSE        0.01 TCPU        ",
+      "0.01"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_irr_f",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_irr_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_is1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48. (mentioned after the basis set)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_is2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48. (mentioned after the basis set)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_is3",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48. (mentioned after the basis set)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_item_key",
+    "meta_type":"type-value",
+    "meta_description":"Header of unspecified info line.",
+    "meta_parent_section":"x_crystal_section_info_item",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_info_item_value",
+    "meta_type":"type-value",
+    "meta_description":"Contents of unspecified info line.",
+    "meta_parent_section":"x_crystal_section_info_item",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_info_k_points_gilat",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF K POINTS(GILAT NET)    145",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_k_points_ibz",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF K POINTS IN THE IBZ    145",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_k_pts_monk_net",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48. (mentioned after the basis set)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_matrix_size_f",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_matrix_size_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_max_g_vector_index",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MAX G-VECTOR INDEX FOR 1- AND 2-ELECTRON INTEGRALS ",
+      "247"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_max_scf_cycles",
+    "meta_type":"type-value",
+    "meta_description":"MAX NUMBER OF SCF CYCLES",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_number_of_atoms",
+    "meta_type":"type-value",
+    "meta_description":"N. OF ATOMS PER CELL",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_number_of_core_electrons",
+    "meta_type":"type-value",
+    "meta_description":"CORE ELECTRONS PER CELL",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_number_of_electrons",
+    "meta_type":"type-value",
+    "meta_description":"N. OF ELECTRONS PER CELL",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_number_of_orbitals",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF AO (Atomic orbitals)",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_number_of_shells",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF SHELLS",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_number_of_symmops",
+    "meta_type":"type-value",
+    "meta_description":"N. OF SYMMETRY OPERATORS",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_pole_order",
+    "meta_type":"type-value",
+    "meta_description":"POLE ORDER IN MONO ZONE",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_shrink",
+    "meta_type":"type-value",
+    "meta_description":"SHRINK. FACT.(MONKH.)   16 16 16",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_info_shrink_gilat",
+    "meta_type":"type-value",
+    "meta_description":"SHRINKING FACTOR(GILAT NET)   16",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_shrink_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_shrink_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_shrink_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_symmetry_adaption",
+    "meta_type":"type-value",
+    "meta_description":[
+      "SYMMETRY ADAPTION OF THE BLOCH FUNCTIONS ",
+      "ENABLED"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_info_symmops_g",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48. (mentioned after the basis set)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_symmops_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48. (mentioned after the basis set)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_info_tol_coulomb_overlap",
+    "meta_type":"type-value",
+    "meta_description":[
+      "COULOMB OVERLAP TOL         (T1) 10**   -6. (Tolerance T1, power of ",
+      "10)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_tol_coulomb_penetration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "COULOMB PENETRATION TOL     (T2) 10**   -6. (Tolerance T2, power of ",
+      "10)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_tol_exchange_overlap",
+    "meta_type":"type-value",
+    "meta_description":[
+      "EXCHANGE OVERLAP TOL        (T3) 10**   -6. (Tolerance T3, power of ",
+      "10)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_tol_pseudo_overlap_f",
+    "meta_type":"type-value",
+    "meta_description":[
+      "EXCHANGE PSEUDO OVP (F(G))  (T4) 10**   -6. (Tolerance T4, power of ",
+      "10)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_tol_pseudo_overlap_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "EXCHANGE PSEUDO OVP (P(G))  (T5) 10**  -12. (Tolerance T5, power of ",
+      "10)"],
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_toldee",
+    "meta_type":"type-value",
+    "meta_description":"TOLDEE info",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_info_type_of_calculation",
+    "meta_type":"type-value",
+    "meta_description":"The type of the calculation that was performed.",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_info_weight_previous",
+    "meta_type":"type-value",
+    "meta_description":"WEIGHT OF F(I) IN F(I+1)      30%",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_atomic_charges",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. TOTAL ATOMIC CHARGES:. 10.0000000  ",
+      "10.0000000)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_initial_charge_normalization",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. CHARGE NORMALIZATION FACTOR   ",
+      "1.00000000)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_monmo3_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      ",
+      "TELAPSE        0.62 TCPU        0.62)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_monmo3_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3 ",
+      "     TELAPSE        0.62 TCPU        0.62)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_moqgad_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      ",
+      "TELAPSE        0.07 TCPU        0.07)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_moqgad_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      ",
+      "TELAPSE        0.07 TCPU        0.07)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_shellx2_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     ",
+      "TELAPSE        0.61 TCPU        0.61)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_initial_shellx2_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "scf cycles, initial step (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     ",
+      "TELAPSE        0.61 TCPU        0.61)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_atom_position",
+    "meta_type":"type-value",
+    "meta_description":"Atom coordinates.",
+    "meta_parent_section":"x_crystal_section_input_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_crystal_input_atom_z",
+    "meta_type":"type-value",
+    "meta_description":"Atom proton number.",
+    "meta_parent_section":"x_crystal_section_input_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_basis_number_of_shells",
+    "meta_type":"type-value",
+    "meta_description":"Atom number of shells.",
+    "meta_parent_section":"x_crystal_section_input_basis",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_charge",
+    "meta_type":"type-value",
+    "meta_description":"Atom shell total charge.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_l",
+    "meta_type":"type-value",
+    "meta_description":"Atom shell l-value.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_number_of_primitives",
+    "meta_type":"type-value",
+    "meta_description":"Atom shell number of primitives.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_primitive_coefficient",
+    "meta_type":"type-value",
+    "meta_description":"Gaussian primitive: coefficient.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_primitive_coefficient_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Gaussian primitive: coefficient for p (in sp ",
+      "shell)."],
+    "meta_parent_section":"x_crystal_section_input_basis_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_primitive_coefficient_s",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Gaussian primitive: coefficient for s (in sp ",
+      "shell)."],
+    "meta_parent_section":"x_crystal_section_input_basis_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_primitive_exp",
+    "meta_type":"type-value",
+    "meta_description":"Gaussian primitive: exponent.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell_primitive",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_scale",
+    "meta_type":"type-value",
+    "meta_description":"Atom shell scale factor.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_basis_shell_type",
+    "meta_type":"type-value",
+    "meta_description":"Atom shell type.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_basis_z",
+    "meta_type":"type-value",
+    "meta_description":"Atom proton number.",
+    "meta_parent_section":"x_crystal_section_input_basis",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_calculation_type",
+    "meta_type":"type-value",
+    "meta_description":"Crystal calculation type name.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_dft_correlation",
+    "meta_type":"type-value",
+    "meta_description":"DFT correlation functional name",
+    "meta_parent_section":"x_crystal_section_input_dft",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_dft_exchange",
+    "meta_type":"type-value",
+    "meta_description":"DFT exchange functional name",
+    "meta_parent_section":"x_crystal_section_input_dft",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_dft_xc_shortcut",
+    "meta_type":"type-value",
+    "meta_description":[
+      "DFT exchange-correlation functional shortcut ",
+      "name"],
+    "meta_parent_section":"x_crystal_section_input_dft",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_dielectric_tensor",
+    "meta_type":"type-value",
+    "meta_description":"Freqcalc dielectric tensor.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    },{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_crystal_input_geometry",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Geometry key: CRYSTAL / SLAB / POLYMER / HELIX / MOLECULE / EXTERNAL / ",
+      "DLVINPUT."],
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_ifhr",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Lattice parameters given in: 0: hexagonal, ",
+      "1:rhombohedral."],
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_iflag",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Spacegroup input format: 0:sequential number, ",
+      "1:Hermann-Manguin."],
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_ifso",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Setting of origin: 0: spacegroup, 1: standard, 2: specified in ",
+      "input."],
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_intens",
+    "meta_type":"type-value",
+    "meta_description":"Freqcalc intens.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_input_keyword",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for parsing a keyword.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_lattice_parameters",
+    "meta_type":"type-value",
+    "meta_description":"Lattice parameters.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_input_number_of_atoms",
+    "meta_type":"type-value",
+    "meta_description":"Number of non-equivalent atoms.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_pointgroup",
+    "meta_type":"type-value",
+    "meta_description":"Point group for molecules.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_ppan",
+    "meta_type":"type-value",
+    "meta_description":"Flag for Mulliken population analysis.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_input_rodgroup",
+    "meta_type":"type-value",
+    "meta_description":"Rod group for polymers.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_shift_of_origin",
+    "meta_type":"type-value",
+    "meta_description":[
+      "A non-standard shift of origin in fractional ",
+      "coordinates."],
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":3
+    }]
+  },{
+    "meta_name":"x_crystal_input_shrink",
+    "meta_type":"type-value",
+    "meta_description":"Shrink factors.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_crystal_input_slabgroup",
+    "meta_type":"type-value",
+    "meta_description":"Slab group for slabs.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_spacegroup",
+    "meta_type":"type-value",
+    "meta_description":"Spacegroup for crystals.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_spacegroup_hm",
+    "meta_type":"type-value",
+    "meta_description":"Spacegroup given in Hermann-Manguin notation.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_system_type",
+    "meta_type":"type-value",
+    "meta_description":"Crystal system type name.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_title",
+    "meta_type":"type-value",
+    "meta_description":"Input file title.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_input_toldee",
+    "meta_type":"type-value",
+    "meta_description":"Input TOLDEE",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_input_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for parsing a line of numbers.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for parsing a line of numbers.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for parsing a line of numbers.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_value4",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for parsing a line of numbers.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_input_value5",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage for parsing a line of numbers.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_mode_eigv",
+    "meta_type":"type-value",
+    "meta_description":"EIGENVALUES (EIGV)",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_mode_frequency_cmp",
+    "meta_type":"type-value",
+    "meta_description":"FREQUENCIES (CM**-1)",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_mode_frequency_thz",
+    "meta_type":"type-value",
+    "meta_description":"FREQUENCIES (THZ)",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_mode_intens",
+    "meta_type":"type-value",
+    "meta_description":"IR INTENS",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_mode_irrep",
+    "meta_type":"type-value",
+    "meta_description":"IRREP",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irlo_mode_max",
+    "meta_type":"type-value",
+    "meta_description":"MODES",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_irlo_mode_min",
+    "meta_type":"type-value",
+    "meta_description":"MODES",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_irlo_mode_shift_cmp",
+    "meta_type":"type-value",
+    "meta_description":"SHIFTS (CM**-1)",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_mode_shift_thz",
+    "meta_type":"type-value",
+    "meta_description":"SHIFTS (THZ)",
+    "meta_parent_section":"x_crystal_section_irlo_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_modes_atom_axislabels",
+    "meta_type":"type-value",
+    "meta_description":"Labels used for Cartesian axes.",
+    "meta_parent_section":"x_crystal_section_irlo_modes_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irlo_modes_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom element symbol",
+    "meta_parent_section":"x_crystal_section_irlo_modes_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irlo_modes_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom label",
+    "meta_parent_section":"x_crystal_section_irlo_modes_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_irlo_modes_atom_mode_frequencies",
+    "meta_type":"type-value",
+    "meta_description":"Frequencies",
+    "meta_parent_section":"x_crystal_section_irlo_modes_atom_mode",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irlo_modes_atom_mode_tensor",
+    "meta_type":"type-value",
+    "meta_description":"Mode tensor",
+    "meta_parent_section":"x_crystal_section_irlo_modes_atom_mode",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irlo_modes_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_modes_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_modes_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_modes_value4",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_modes_value5",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_modes_value6",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irlo_overlap_lo",
+    "meta_type":"type-value",
+    "meta_description":"IRREP Fu LO (ENTRIES ARE FRQS IN CM**-1)",
+    "meta_parent_section":"x_crystal_section_irlo",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irlo_overlap_matrix",
+    "meta_type":"type-value",
+    "meta_description":"IRREP Fu OVERLAP matrix",
+    "meta_parent_section":"x_crystal_section_irlo",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irlo_overlap_to",
+    "meta_type":"type-value",
+    "meta_description":"IRREP Fu TO (ENTRIES ARE FRQS IN CM**-1)",
+    "meta_parent_section":"x_crystal_section_irlo_overlap",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irto_conversion_hartree",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CONVERSION FACTORS FOR FREQUENCIES: 1 CM**(-1) = ? ",
+      "HARTREE"],
+    "meta_parent_section":"x_crystal_section_irto",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_conversion_thz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CONVERSION FACTORS FOR FREQUENCIES: 1 THZ = ? ",
+      "CM**(-1)"],
+    "meta_parent_section":"x_crystal_section_irto",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_mode_eigv",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode eigv value (e.g. in 1-   3    0.0000E+00      0.0000    ",
+      "0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_mode_frequency_cmp",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode frequency CM**-1 (e.g. in 1-   3    0.0000E+00      ",
+      "0.0000    0.0000  (Fu )   A (     0.00)   ",
+      "I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_mode_frequency_thz",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode frequency THZ (e.g. in 1-   3    0.0000E+00      0.0000 ",
+      "   0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_mode_intens",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode INTENSity KM/MOL (e.g. in 1-   3    0.0000E+00      ",
+      "0.0000    0.0000  (Fu )   A (     0.00)   ",
+      "I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_mode_ir",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode IR tag (e.g. in 1-   3    0.0000E+00      0.0000    ",
+      "0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irto_mode_irrep",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode IRREP tag (e.g. in 1-   3    0.0000E+00      0.0000    ",
+      "0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irto_mode_max",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode number, max (e.g. in 1-   3    0.0000E+00      0.0000   ",
+      " 0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_irto_mode_min",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode number, min (e.g. in 1-   3    0.0000E+00      0.0000   ",
+      " 0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_irto_mode_raman",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Transverse optical mode RAMAN tag (e.g. in 1-   3    0.0000E+00      0.0000    ",
+      "0.0000  (Fu )   A (     0.00)   I)"],
+    "meta_parent_section":"x_crystal_section_irto_mode",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irto_modes_atom_axislabels",
+    "meta_type":"type-value",
+    "meta_description":"Labels used for Cartesian axes.",
+    "meta_parent_section":"x_crystal_section_irto_modes_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irto_modes_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom element symbol",
+    "meta_parent_section":"x_crystal_section_irto_modes_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_irto_modes_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom label",
+    "meta_parent_section":"x_crystal_section_irto_modes_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_irto_modes_atom_mode_frequencies",
+    "meta_type":"type-value",
+    "meta_description":"Frequencies",
+    "meta_parent_section":"x_crystal_section_irto_modes_atom_mode",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irto_modes_atom_mode_tensor",
+    "meta_type":"type-value",
+    "meta_description":"Mode tensor",
+    "meta_parent_section":"x_crystal_section_irto_modes_atom_mode",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_irto_modes_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_modes_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_modes_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_modes_value4",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_modes_value5",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_irto_modes_value6",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_kpoint_coordinates",
+    "meta_type":"type-value",
+    "meta_description":[
+      "K point integer coordinates. (as in 21-C( 12  1  ",
+      "0))"],
+    "meta_parent_section":"x_crystal_section_kpoint",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_kpoint_number",
+    "meta_type":"type-value",
+    "meta_description":"K point number (as in 21-C( 12  1  0))",
+    "meta_parent_section":"x_crystal_section_kpoint",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_kpoint_symbol",
+    "meta_type":"type-value",
+    "meta_description":"K point symbol (as in 21-C( 12  1  0))",
+    "meta_parent_section":"x_crystal_section_kpoint",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_kpoints_is_units",
+    "meta_type":"type-value",
+    "meta_description":[
+      "K points units (as in e.g. *** K POINTS COORDINATES (OBLIQUE COORDINATES IN ",
+      "UNITS OF IS = 16))"],
+    "meta_parent_section":"x_crystal_section_kpoints",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_lattice_parameters",
+    "meta_type":"type-value",
+    "meta_description":"Lattice parameters in angstroms and angles.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_fixed":6
+    }]
+  },{
+    "meta_name":"x_crystal_lattice_real",
+    "meta_type":"type-value",
+    "meta_description":"Real space primary lattice vectors.",
+    "meta_parent_section":"x_crystal_section_lattice",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_lattice_reciprocal",
+    "meta_type":"type-value",
+    "meta_description":"Reciprocal lattice vectors.",
+    "meta_parent_section":"x_crystal_section_lattice",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_neighbors_atom_distance_ang",
+    "meta_type":"type-value",
+    "meta_description":"Distance in angstroms.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_neighbors_atom_distance_au",
+    "meta_type":"type-value",
+    "meta_description":"Distance in atomic units.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_neighbors_atom_distance_neighbor_cell",
+    "meta_type":"type-value",
+    "meta_description":"Neighbor atom cell.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance_neighbor",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_neighbors_atom_distance_neighbor_element",
+    "meta_type":"type-value",
+    "meta_description":"Neighbor atom element.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance_neighbor",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_neighbors_atom_distance_neighbor_label",
+    "meta_type":"type-value",
+    "meta_description":"Neighbor atom label.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance_neighbor",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_neighbors_atom_distance_number_of_neighbors",
+    "meta_type":"type-value",
+    "meta_description":"Number of neighbors at at given distance",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_neighbors_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom element",
+    "meta_parent_section":"x_crystal_section_neighbors_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_neighbors_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom label",
+    "meta_parent_section":"x_crystal_section_neighbors_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_number_of_symmops",
+    "meta_type":"type-value",
+    "meta_description":"Number of symmetry operators.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_pointgroup",
+    "meta_type":"type-value",
+    "meta_description":"Pointgroup number name.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_pointgroup_corresponding_spacegroup",
+    "meta_type":"type-value",
+    "meta_description":"Spacegroup corresponding to the pointgroup.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_pointgroup_number",
+    "meta_type":"type-value",
+    "meta_description":"Pointgroup number.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_pointgroup_number2",
+    "meta_type":"type-value",
+    "meta_description":"Pointgroup number 2.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_prim_atom_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"Atom coordinates.",
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_prim_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Atom mentioned in asymmetric unit listing.",
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_prim_atom_in_asymmetric",
+    "meta_type":"type-value",
+    "meta_description":"Atom belongs to the asymmetric unit.",
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_prim_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom mentioned in asymmetric unit listing.",
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_prim_atom_tag",
+    "meta_type":"type-value",
+    "meta_description":"Atom mentioned in asymmetric unit listing.",
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_prim_atom_value1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom mentioned in asymmetric unit listing: temporary ",
+      "value"],
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_prim_atom_value2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom mentioned in asymmetric unit listing: temporary ",
+      "value"],
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_prim_atom_value3",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Atom mentioned in asymmetric unit listing: temporary ",
+      "value"],
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_prim_atom_z",
+    "meta_type":"type-value",
+    "meta_description":"Atom mentioned in asymmetric unit listing.",
+    "meta_parent_section":"x_crystal_section_prim_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_primitive_cell_angles",
+    "meta_type":"type-value",
+    "meta_description":"Angles between primitive lattice vectors.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"Atom coordinates.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"Element symbol.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"Atom label",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_number",
+    "meta_type":"type-value",
+    "meta_description":"Atom number",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_number_of_equivalents",
+    "meta_type":"type-value",
+    "meta_description":"Number of equivalent atoms.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_atom_z",
+    "meta_type":"type-value",
+    "meta_description":"Proton number.",
+    "meta_parent_section":"x_crystal_section_primitive_cell_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_primitive_cell_lengths",
+    "meta_type":"type-value",
+    "meta_description":"Lengths of primitive lattice vectors.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_primitive_cell_units",
+    "meta_type":"type-value",
+    "meta_description":"Units used for length and angle.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_primitive_cell_units_atom",
+    "meta_type":"type-value",
+    "meta_description":"Units used for atom coordinates.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value4",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value5",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value6",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_value7",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_primitive_cell_volume",
+    "meta_type":"type-value",
+    "meta_description":"Primitive cell volume.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_process_datetime",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Temporary type for storing date and time, in locale-dependent ",
+      "format."],
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_exe",
+    "meta_type":"type-value",
+    "meta_description":"Crystal executable file name.",
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_hn",
+    "meta_type":"type-value",
+    "meta_description":"Hostname where Crystal was run",
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_input",
+    "meta_type":"type-value",
+    "meta_description":"Input file name.",
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_os",
+    "meta_type":"type-value",
+    "meta_description":[
+      "String describing the operating system where Crystal was ",
+      "run."],
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_output",
+    "meta_type":"type-value",
+    "meta_description":"Output file name.",
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_tmpdir",
+    "meta_type":"type-value",
+    "meta_description":"Temporary directory.",
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_process_user",
+    "meta_type":"type-value",
+    "meta_description":"Username: who ran Crystal.",
+    "meta_parent_section":"x_crystal_section_process",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_atom_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"X(A)      Y(A)      Z(A)",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_properties_atom_element",
+    "meta_type":"type-value",
+    "meta_description":"AT.",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_atom_exad",
+    "meta_type":"type-value",
+    "meta_description":"EXAD",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_atom_label",
+    "meta_type":"type-value",
+    "meta_description":"ATOM",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_atom_number_of_electrons",
+    "meta_type":"type-value",
+    "meta_description":"N.ELECT.",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_atom_shell",
+    "meta_type":"type-value",
+    "meta_description":"SHELL",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_atom_value1",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_atom_value2",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_atom_value3",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_atom_z",
+    "meta_type":"type-value",
+    "meta_description":"N.",
+    "meta_parent_section":"x_crystal_section_properties_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_cappa_is1",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_cappa_is2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_cappa_is3",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_cell_volume",
+    "meta_type":"type-value",
+    "meta_description":"CELL VOLUME (A.U.)",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_convergence",
+    "meta_type":"type-value",
+    "meta_description":"CONVERGENCE ON ENER",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_dek",
+    "meta_type":"type-value",
+    "meta_description":"DE(K)",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_energy_level_shifting",
+    "meta_type":"type-value",
+    "meta_description":"ENERGY LEVEL SHIFTING",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_fermi_energy",
+    "meta_type":"type-value",
+    "meta_description":"FERMI ENERGY",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_gcalco_max_indices",
+    "meta_type":"type-value",
+    "meta_description":"GCALCO - MAX INDICES DIRECT LATTICE VECTOR",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_properties_input_file",
+    "meta_type":"type-value",
+    "meta_description":"properties input file",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_integer1",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_integer2",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_integer3",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_irr_f",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_irr_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_k_pts_monk_net",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":"KIN. ENERGY",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_angles",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Angles between primitive lattice vectors in degrees (e.g. LATTICE PARAMETERS  ",
+      "(ANGSTROM AND DEGREES) - PRIMITIVE CELL. A          B          C         ALPHA  ",
+      "    BETA     GAMMA        VOLUME. 3.98822    3.98822    3.98822     60.0000   ",
+      "60.0000   60.0000      44.85631)"],
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_properties_lattice_lengths",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Lengths of primitive lattice vectors in angstroms (e.g. LATTICE PARAMETERS  ",
+      "(ANGSTROM AND DEGREES) - PRIMITIVE CELL. A          B          C         ALPHA  ",
+      "    BETA     GAMMA        VOLUME. 3.98822    3.98822    3.98822     60.0000   ",
+      "60.0000   60.0000      44.85631)"],
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_properties_lattice_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_value4",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_value5",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_value6",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_value7",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_lattice_vectors",
+    "meta_type":"type-value",
+    "meta_description":"DIRECT LATTICE VECTOR COMPONENTS (ANGSTROM)",
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_properties_lattice_volume",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Primitive cell volume in cubic angstroms. (e.g. LATTICE PARAMETERS  (ANGSTROM ",
+      "AND DEGREES) - PRIMITIVE CELL. A          B          C         ALPHA      BETA  ",
+      "   GAMMA        VOLUME. 3.98822    3.98822    3.98822     60.0000   60.0000   ",
+      "60.0000      44.85631)"],
+    "meta_parent_section":"x_crystal_section_properties_lattice",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_matrix_size_f",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_matrix_size_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MATRIX SIZE: P(G)   31533, F(G)    5204, P(G) IRR    1802, F(G) IRR     ",
+      "964"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_max_gvector_index",
+    "meta_type":"type-value",
+    "meta_description":[
+      "MAX G-VECTOR INDEX FOR 1- AND 2-ELECTRON INTEGRALS ",
+      "247"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_atoms",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, N. OF ATOMS PER ",
+      "CELL."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_core_electrons",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, CORE ELECTRONS PER ",
+      "CELL."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_electrons",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, N. OF ELECTRONS PER ",
+      "CELL."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_k_points_ibz",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF K POINTS IN THE IBZ",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_orbitals",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, NUMBER OF ",
+      "AO."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_scf_cycles",
+    "meta_type":"type-value",
+    "meta_description":"N. OF SCF CYCLES",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_shells",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, NUMBER OF ",
+      "SHELLS."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_symmops",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, N. OF SYMMETRY ",
+      "OPERATORS."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_number_of_vectors",
+    "meta_type":"type-value",
+    "meta_description":[
+      "NO.OF VECTORS CREATED 6999 STARS  105 RMAX    79.76041 ",
+      "BOHR"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_pole_order",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, POLE ORDER IN MONO ",
+      "ZONE"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_rmax_bohr",
+    "meta_type":"type-value",
+    "meta_description":[
+      "NO.OF VECTORS CREATED 6999 STARS  105 RMAX    79.76041 ",
+      "BOHR"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_shrink_gilat",
+    "meta_type":"type-value",
+    "meta_description":"SHRINKING FACTOR(GILAT NET)",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_shrink_monkh",
+    "meta_type":"type-value",
+    "meta_description":"SHRINK. FACT.(MONKH.)",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_properties_stars",
+    "meta_type":"type-value",
+    "meta_description":[
+      "NO.OF VECTORS CREATED 6999 STARS  105 RMAX    79.76041 ",
+      "BOHR"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_start_date",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Start date of program Properties (Properties performs e.g. band structure ",
+      "analysis) EEEEEEEEEE STARTING  DATE 26 05 2016 TIME ",
+      "13:13:06.5."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_start_time",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Start time of program Properties (Properties performs e.g. band structure ",
+      "analysis). EEEEEEEEEE STARTING  DATE 26 05 2016 TIME ",
+      "13:13:06.5"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_symmops_g",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_symmops_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CAPPA:IS1 16;IS2 16;IS3 16; K PTS MONK NET 145; SYMMOPS:K SPACE  48;G SPACE  ",
+      "48"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_properties_title",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Title following Properties starting date and ",
+      "time."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_tol_coulomb_overlap",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, tolerance T1 as power of 10 (e.g. ",
+      "COULOMB OVERLAP TOL          (T1) 10**   ",
+      "-6)"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_tol_coulomb_penetration",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, tolerance T2 as power in 10 (e.g. ",
+      "COULOMB PENETRATION TOL      (T2) 10**   ",
+      "-6)"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_tol_exchange_overlap",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, tolerance T3 as power in 10 (e.g. ",
+      "EXCHANGE OVERLAP TOL         (T3) 10**   ",
+      "-6)"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_tol_pseudo_overlap_f",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, tolerance T4 as power in 10 (e.g. ",
+      "EXCHANGE PSEUDO OVP (F(G))   (T4) 10**   ",
+      "-6)"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_tol_pseudo_overlap_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Info section related to program Properties, tolerance T5 as power in 10 (e.g. ",
+      "EXCHANGE PSEUDO OVP (P(G))   (T5) 10**  -12)"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_total_energy",
+    "meta_type":"type-value",
+    "meta_description":"TOTAL ENERGY",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_type",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Type of properties calculation (e.g. CRYSTAL - PROPERTIES - TYPE OF CALCULATION ",
+      ":  RESTRICTED CLOSED SHELL)"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_type2",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Following line, 2nd type of properties calculation (e.g. HARTREE-FOCK ",
+      "HAMILTONIAN),"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_value1",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_value2",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_value3",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_virial_coefficient",
+    "meta_type":"type-value",
+    "meta_description":"VIR. COEFF.",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_properties_warning_key",
+    "meta_type":"type-value",
+    "meta_description":[
+      "WARNING **** F90MAIN3 **** BF SYMMETRY ADAPTED-INFO MODIFIED BY BAND-CALL ",
+      "NEWK"],
+    "meta_parent_section":"x_crystal_section_properties_warning",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_warning_text",
+    "meta_type":"type-value",
+    "meta_description":[
+      "WARNING **** F90MAIN3 **** BF SYMMETRY ADAPTED-INFO MODIFIED BY BAND-CALL ",
+      "NEWK"],
+    "meta_parent_section":"x_crystal_section_properties_warning",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_properties_weight_f",
+    "meta_type":"type-value",
+    "meta_description":"WEIGHT OF F(I) IN F(I+1)",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_band_doss_per",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BAND     INTEGRATED DOSS PER PROJECTION AND TOTAL. ",
+      "T."],
+    "meta_parent_section":"x_crystal_section_restart_band",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_band_number",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BAND     INTEGRATED DOSS PER PROJECTION AND TOTAL. ",
+      "T."],
+    "meta_parent_section":"x_crystal_section_restart_band",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_bottom_of_virtual_b",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BOTTOM OF VIRTUAL BANDS - BAND     15; K    1; EIG  1.2859066E-01 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_bottom_of_virtual_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BOTTOM OF VIRTUAL BANDS - BAND     15; K    1; EIG  1.2859066E-01 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_bottom_of_virtual_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BOTTOM OF VIRTUAL BANDS - BAND     15; K    1; EIG  1.2859066E-01 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_density_matrix_cycle",
+    "meta_type":"type-value",
+    "meta_description":[
+      "FERMI ENERGY AND DENSITY MATRIX CALCULATION ON COMPUTED EIGENVECTORS. DENSITY ",
+      "MATRIX AT SCF CYCLE ( 22+1)"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_density_matrix_cycleplus",
+    "meta_type":"type-value",
+    "meta_description":[
+      "FERMI ENERGY AND DENSITY MATRIX CALCULATION ON COMPUTED EIGENVECTORS. DENSITY ",
+      "MATRIX AT SCF CYCLE ( 22+1)"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_dos_energy_dos",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart_dos_energy",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_dos_energy_energy",
+    "meta_type":"type-value",
+    "meta_description":"ENERGY",
+    "meta_parent_section":"x_crystal_section_restart_dos_energy",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_dos_energy_text",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_restart_dos_energy",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_restart_dos_scale_full",
+    "meta_type":"type-value",
+    "meta_description":[
+      "*** ENERGY      TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart_dos",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_dos_scale_t",
+    "meta_type":"type-value",
+    "meta_description":[
+      "*** INTEGRATED DENSITIES IN THE ENERGY INTERVAL PER PROJECTION AND TOTAL. ",
+      "T."],
+    "meta_parent_section":"x_crystal_section_restart_dos",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_dos_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT DOSS        TELAPSE        0.35 TCPU        ",
+      "0.35"],
+    "meta_parent_section":"x_crystal_section_restart_dos",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_dos_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT DOSS        TELAPSE        0.35 TCPU        ",
+      "0.35"],
+    "meta_parent_section":"x_crystal_section_restart_dos",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_end_date",
+    "meta_type":"type-value",
+    "meta_description":[
+      "EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME ",
+      "13:13:06.9"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_restart_end_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ENDPROP. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE        0.35 TCPU    ",
+      "    0.35"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_end_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ENDPROP. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         TELAPSE        0.35 TCPU    ",
+      "    0.35"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_end_time",
+    "meta_type":"type-value",
+    "meta_description":[
+      "EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME ",
+      "13:13:06.9"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_restart_fl_band_max",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 ",
+      "TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_fl_band_min",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 ",
+      "TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_fl_energy_max",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 ",
+      "TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_fl_energy_min",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOTAL AND PROJECTED DENSITY OF STATES - FOURIER LEGENDRE METHOD. FROM BAND   11 ",
+      "TO BAND   14 ENERGY RANGE -0.10285E+01 -0.39686E+00"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_insulating_state",
+    "meta_type":"type-value",
+    "meta_description":"INSULATING STATE",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_restart_integer1",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_integer2",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_integer3",
+    "meta_type":"type-value",
+    "meta_description":"temporary storage",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_kpoint_coordinates",
+    "meta_type":"type-value",
+    "meta_description":"14-C(  7  1  0)",
+    "meta_parent_section":"x_crystal_section_restart_kpoint",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_restart_kpoint_number",
+    "meta_type":"type-value",
+    "meta_description":"14-C(  7  1  0)",
+    "meta_parent_section":"x_crystal_section_restart_kpoint",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_kpoint_symbol",
+    "meta_type":"type-value",
+    "meta_description":"14-C(  7  1  0)",
+    "meta_parent_section":"x_crystal_section_restart_kpoint",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_restart_kpoints_is_units",
+    "meta_type":"type-value",
+    "meta_description":[
+      "*** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF IS = ",
+      "12)"],
+    "meta_parent_section":"x_crystal_section_restart_kpoints",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_number_of_epoints",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF ENERGY POINTS",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_number_of_kpsn",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF K POINTS OF SECONDARY NET",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_number_of_lpols",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF LEGENDRE POLYNOMIALS",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_number_of_projections",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF PROJECTIONS",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_number_of_sympws",
+    "meta_type":"type-value",
+    "meta_description":"NUMBER OF SYMMETRIZED PWS FOR EXPANSION",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_points_gilat",
+    "meta_type":"type-value",
+    "meta_description":"POINTS(GILAT NET)",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_points_ibz",
+    "meta_type":"type-value",
+    "meta_description":"POINTS IN THE IBZ",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_shrink_gilat",
+    "meta_type":"type-value",
+    "meta_description":"SHRINK FACTOR(GILAT)",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_shrink_monkh",
+    "meta_type":"type-value",
+    "meta_description":"SHRINK FACTORS(MONK.)",
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_restart_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CORE DENSITY MATRIX CALCULATION. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT NEWK        ",
+      "TELAPSE        0.34 TCPU        0.34"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "CORE DENSITY MATRIX CALCULATION. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT NEWK        ",
+      "TELAPSE        0.34 TCPU        0.34"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_top_of_valence_b",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOP OF VALENCE BANDS -    BAND     14; K    1; EIG -3.9685829E-01 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_restart_top_of_valence_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOP OF VALENCE BANDS -    BAND     14; K    1; EIG -3.9685829E-01 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_restart_top_of_valence_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "TOP OF VALENCE BANDS -    BAND     14; K    1; EIG -3.9685829E-01 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_run_end_date",
+    "meta_type":"type-value",
+    "meta_description":[
+      "runcry14 termination stats (e.g. EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME ",
+      "13:13:06.4)"],
+    "meta_parent_section":"x_crystal_section_endinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_run_end_time",
+    "meta_type":"type-value",
+    "meta_description":[
+      "runcry14 termination stats (e.g. EEEEEEEEEE TERMINATION  DATE 26 05 2016 TIME ",
+      "13:13:06.4)"],
+    "meta_parent_section":"x_crystal_section_endinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_run_start_date",
+    "meta_type":"type-value",
+    "meta_description":"The date when this run was started.",
+    "meta_parent_section":"x_crystal_section_startinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_run_start_time",
+    "meta_type":"type-value",
+    "meta_description":"The time when this run was started.",
+    "meta_parent_section":"x_crystal_section_startinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_run_title",
+    "meta_type":"type-value",
+    "meta_description":"Title of the runcry(14) task.",
+    "meta_parent_section":"x_crystal_section_startinformation",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_scf_atomic_charges",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g.  TOTAL ATOMIC CHARGES:. 10.0158876   ",
+      "9.9841124)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_scf_bielet_zone_ee",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: BIELET ZONE E-E                               ",
+      "5.7175063847322E+02"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_charge_normalization",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. CHARGE NORMALIZATION FACTOR   ",
+      "1.00000000)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_cycle",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles, number of a particular scf iteration cycle (e.g.  CYC   ",
+      "0 ETOT(AU) -2.750919138897E+02 DETOT -2.75E+02 tst  0.00E+00 PX  ",
+      "1.00E+00)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_scf_cycles",
+    "meta_type":"type-value",
+    "meta_description":"Cycles when converged.",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_scf_ext_elpole",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: EXT EL-POLE                                  ",
+      "-5.2914791274154E+02"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_ext_spheropole",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: EXT EL-SPHEROPOLE                             ",
+      "3.9924168445258E+00"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_fdik_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT FDIK        TELAPSE  ",
+      "      0.63 TCPU        0.63)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_fdik_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT FDIK        TELAPSE  ",
+      "      0.63 TCPU        0.63)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_final_cycle",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Final scf step, cycle number (e.g. in TOTAL ENERGY(HF)(AU)(  22) ",
+      "-6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX ",
+      "1.2E-08)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_scf_final_delta_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Final scf step, delta energy (e.g. in TOTAL ENERGY(HF)(AU)(  22) ",
+      "-6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX ",
+      "1.2E-08)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_final_px",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Final scf step, px value (e.g. in TOTAL ENERGY(HF)(AU)(  22) ",
+      "-6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX ",
+      "1.2E-08)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_final_total_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Final scf step, total energy (e.g. in TOTAL ENERGY(HF)(AU)(  22) ",
+      "-6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX ",
+      "1.2E-08)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_final_tst",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Final scf step, tst value (e.g. in TOTAL ENERGY(HF)(AU)(  22) ",
+      "-6.2149540004172E+02 DE-3.7E-11 tst 1.6E-15 PX ",
+      "1.2E-08)"],
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_insulating_state",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (contains text INSULATING ",
+      "STATE)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"boolean"
+  },{
+    "meta_name":"x_crystal_scf_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: KINETIC ENERGY                                ",
+      "2.7465596172356E+02"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_mode",
+    "meta_type":"type-value",
+    "meta_description":"SCF mode (e.g. HF).",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_scf_monmo3_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      TELAPSE  ",
+      "      1.20 TCPU        1.20)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_monmo3_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MONMO3      TELAPSE  ",
+      "      1.20 TCPU        1.20)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_moqgad_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      TELAPSE  ",
+      "      0.63 TCPU        0.63)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_moqgad_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT MOQGAD      TELAPSE  ",
+      "      0.63 TCPU        0.63)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_pdig_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT PDIG        TELAPSE  ",
+      "      0.63 TCPU        0.63)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_pdig_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT PDIG        TELAPSE  ",
+      "      0.63 TCPU        0.63)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_px",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. CYC   0 ETOT(AU) -2.750919138897E+02 DETOT ",
+      "-2.75E+02 tst  0.00E+00 PX  1.00E+00)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_shellx2_tcpu",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     TELAPSE  ",
+      "      1.19 TCPU        1.19)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_shellx2_telapse",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT SHELLX2     TELAPSE  ",
+      "      1.19 TCPU        1.19)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_total_ee",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: TOTAL E-E                                     ",
+      "4.6595142576204E+01"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_total_en_ne",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: TOTAL E-N + N-E                              ",
+      "-5.2283101954878E+02"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_total_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: TOTAL   ENERGY                               ",
+      "-2.7466419192577E+02"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_total_nn",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: TOTAL N-N                                    ",
+      "-7.3084276676762E+01 "],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_tst",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. CYC   0 ETOT(AU) -2.750919138897E+02 DETOT ",
+      "-2.75E+02 tst  0.00E+00 PX  1.00E+00)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_valence_band",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TOP OF VALENCE BANDS -    BAND     10; K    1; EIG ",
+      "-3.4527266E-01 AU)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_scf_valence_eig",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TOP OF VALENCE BANDS -    BAND     10; K    1; EIG ",
+      "-3.4527266E-01 AU)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_valence_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. TOP OF VALENCE BANDS -    BAND     10; K    1; EIG ",
+      "-3.4527266E-01 AU)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_scf_virial_coefficient",
+    "meta_type":"type-value",
+    "meta_description":[
+      "+++ ENERGIES IN A.U. +++. ::: VIRIAL COEFFICIENT                            ",
+      "9.9998501747632E-01"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_virtual_band",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. BOTTOM OF VIRTUAL BANDS - BAND     11; K    1; EIG  ",
+      "3.7948795E-01 AU)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_scf_virtual_eig",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. BOTTOM OF VIRTUAL BANDS - BAND     11; K    1; EIG  ",
+      "3.7948795E-01 AU)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_scf_virtual_k",
+    "meta_type":"type-value",
+    "meta_description":[
+      "subsequent scf cycles (e.g. BOTTOM OF VIRTUAL BANDS - BAND     11; K    1; EIG  ",
+      "3.7948795E-01 AU)"],
+    "meta_parent_section":"section_scf_iteration",
+    "meta_abstract_types":[
+      "scf_info"],
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_section_bands",
+    "meta_type":"type-section",
+    "meta_description":"BAND STRUCTURE",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_bands_line",
+    "meta_type":"type-section",
+    "meta_description":"A particular line in band structure calculation",
+    "meta_parent_section":"x_crystal_section_bands",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_bands_line_point",
+    "meta_type":"type-section",
+    "meta_description":[
+      "A particular point in a line: 1(  0/456  0/456  ",
+      "0/456)"],
+    "meta_parent_section":"x_crystal_section_bands_line",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_basis_set",
+    "meta_type":"type-section",
+    "meta_description":"Basis set with low precision.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_basis_set_atom",
+    "meta_type":"type-section",
+    "meta_description":"Basis set atom",
+    "meta_parent_section":"x_crystal_section_basis_set",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_basis_set_atom_shell",
+    "meta_type":"type-section",
+    "meta_description":"Shell contains a number of orbitals.",
+    "meta_parent_section":"x_crystal_section_basis_set_atom",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_basis_set_atom_shell_primitive",
+    "meta_type":"type-section",
+    "meta_description":[
+      "A GTF shell / orbital has a number of gaussian ",
+      "primitives."],
+    "meta_parent_section":"x_crystal_section_basis_set_atom_shell",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_cell",
+    "meta_type":"type-section",
+    "meta_description":"Crystallographic lattice",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_cell_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom in crystallographic cell.",
+    "meta_parent_section":"x_crystal_section_cell",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_cell_symmop",
+    "meta_type":"type-section",
+    "meta_description":"Symmetry operator.",
+    "meta_parent_section":"x_crystal_section_cell",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_conventional_cell",
+    "meta_type":"type-section",
+    "meta_description":"Section for conventional cell parameters",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_conventional_cell_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom information.",
+    "meta_parent_section":"x_crystal_section_conventional_cell",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_endinformation",
+    "meta_type":"type-section",
+    "meta_description":[
+      "runcry14 termination stats (e.g. TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT END         ",
+      "TELAPSE      166.54 TCPU      166.18)"],
+    "meta_parent_section":"section_run",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_forces",
+    "meta_type":"type-section",
+    "meta_description":"Atomic forces",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_forces_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atomic forces on a single atom",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_forces_born_atom",
+    "meta_type":"type-section",
+    "meta_description":[
+      "ATOMIC BORN CHARGE TENSOR (UNITS OF e, ELECTRON ",
+      "CHARGE)."],
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_forces_matrix_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom in force matrix",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_forces_matrix_atom_gen",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Atom in force matrix: directions that are GENERATED FROM A PREVIOUS ",
+      "LINE"],
+    "meta_parent_section":"x_crystal_section_forces_matrix_atom",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_frequency",
+    "meta_type":"type-section",
+    "meta_description":"Frequency calculations setup.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_frequency_atom",
+    "meta_type":"type-section",
+    "meta_description":"Frequency calculation setup: atom masses.",
+    "meta_parent_section":"x_crystal_section_frequency",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_frequency_gradients",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Frequency calculation: scf+gradient calculations required for calculating ",
+      "frequencies."],
+    "meta_parent_section":"x_crystal_section_frequency",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_frequency_gradients_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom listed in the gradients section.",
+    "meta_parent_section":"x_crystal_section_frequency_gradients",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_frequency_gradients_op",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Frequency calculation: scf+gradient calculations required for calculating ",
+      "frequencies: a particular gradient."],
+    "meta_parent_section":"x_crystal_section_frequency_gradients",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_header",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Contains crystal version information and other information obtained from the ",
+      "first asterix header in the Crystal output ",
+      "file."],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_info",
+    "meta_type":"type-section",
+    "meta_description":"Section containing miscellaneous information.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_info_item",
+    "meta_type":"type-section",
+    "meta_description":"Information line.",
+    "meta_parent_section":"x_crystal_section_info",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_input",
+    "meta_type":"type-section",
+    "meta_description":"Contains the input data for Crystal.",
+    "meta_parent_section":"section_run",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_input_atom",
+    "meta_type":"type-section",
+    "meta_description":"Non-equivalent atom.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_input_basis",
+    "meta_type":"type-section",
+    "meta_description":"Basis set for an atom.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_input_basis_shell",
+    "meta_type":"type-section",
+    "meta_description":"Atom shell in basis set.",
+    "meta_parent_section":"x_crystal_section_input_basis",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_input_basis_shell_primitive",
+    "meta_type":"type-section",
+    "meta_description":"Atom shell gaussian primitive.",
+    "meta_parent_section":"x_crystal_section_input_basis_shell",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_input_dft",
+    "meta_type":"type-section",
+    "meta_description":"DFT input.",
+    "meta_parent_section":"x_crystal_section_input",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irlo",
+    "meta_type":"type-section",
+    "meta_description":[
+      "LONGITUDINAL OPTICAL (LO) PHONON CALCULATION ",
+      "REQUESTED."],
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irlo_mode",
+    "meta_type":"type-section",
+    "meta_description":[
+      "MODES         EIGV          FREQUENCIES    IRREP IR INTENS       ",
+      "SHIFTS"],
+    "meta_parent_section":"x_crystal_section_irlo",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irlo_modes",
+    "meta_type":"type-section",
+    "meta_description":"LO MODES FOR IRREP Fu",
+    "meta_parent_section":"x_crystal_section_irlo",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irlo_modes_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom",
+    "meta_parent_section":"x_crystal_section_irlo_modes",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irlo_modes_atom_mode",
+    "meta_type":"type-section",
+    "meta_description":"Mode",
+    "meta_parent_section":"x_crystal_section_irlo_modes_atom",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irlo_overlap",
+    "meta_type":"type-section",
+    "meta_description":[
+      "OVERLAP BETWEEN THE EIGENVECTORS OF LO AND TO ",
+      "MODES."],
+    "meta_parent_section":"x_crystal_section_irlo",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irto",
+    "meta_type":"type-section",
+    "meta_description":[
+      "EIGENVALUES (EIGV) OF THE MASS WEIGHTED HESSIAN MATRIX AND HARMONIC TRANSVERSE ",
+      "OPTICAL (TO) FREQUENCIES."],
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irto_mode",
+    "meta_type":"type-section",
+    "meta_description":[
+      "MODES         EIGV          FREQUENCIES     IRREP  IR   INTENS    ",
+      "RAMAN"],
+    "meta_parent_section":"x_crystal_section_irto",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irto_modes",
+    "meta_type":"type-section",
+    "meta_description":"NORMAL MODES NORMALIZED TO CLASSICAL AMPLITUDES.",
+    "meta_parent_section":"x_crystal_section_irto",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irto_modes_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom",
+    "meta_parent_section":"x_crystal_section_irto_modes",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_irto_modes_atom_mode",
+    "meta_type":"type-section",
+    "meta_description":"Mode",
+    "meta_parent_section":"x_crystal_section_irto_modes_atom",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_kpoint",
+    "meta_type":"type-section",
+    "meta_description":[
+      "K point (as in e.g. *** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF ",
+      "IS = 16))"],
+    "meta_parent_section":"x_crystal_section_kpoints",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_kpoints",
+    "meta_type":"type-section",
+    "meta_description":"K points",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_lattice",
+    "meta_type":"type-section",
+    "meta_description":"Vectors of the real and reciprical lattice.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_neighbors",
+    "meta_type":"type-section",
+    "meta_description":"Nearest neighbors.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_neighbors_atom",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Nearest neighbors of a particular (equivalent) ",
+      "atom"],
+    "meta_parent_section":"x_crystal_section_neighbors",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_neighbors_atom_distance",
+    "meta_type":"type-section",
+    "meta_description":"Nearest neighbors at a given distance.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_neighbors_atom_distance_neighbor",
+    "meta_type":"type-section",
+    "meta_description":"Particular neighbor at a given distance.",
+    "meta_parent_section":"x_crystal_section_neighbors_atom_distance",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_prim",
+    "meta_type":"type-section",
+    "meta_description":"Atoms mentioned in asymmetric unit listings.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_prim_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom mentioned in asymmetric unit listings.",
+    "meta_parent_section":"x_crystal_section_prim",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_primitive_cell",
+    "meta_type":"type-section",
+    "meta_description":"Section for primitive cell parameters",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_primitive_cell_atom",
+    "meta_type":"type-section",
+    "meta_description":"Atom information.",
+    "meta_parent_section":"x_crystal_section_primitive_cell",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_process",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Stores operating system related information related to the Crystal ",
+      "process."],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_properties",
+    "meta_type":"type-section",
+    "meta_description":"program called properties, output file begins.",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_properties_atom",
+    "meta_type":"type-section",
+    "meta_description":[
+      "ATOM N.AT.  SHELL    X(A)      Y(A)      Z(A)      EXAD       ",
+      "N.ELECT."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_properties_lattice",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Section containing lattice parameters used by Properties ",
+      "program."],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_properties_warning",
+    "meta_type":"type-section",
+    "meta_description":[
+      "WARNING **** F90MAIN3 **** BF SYMMETRY ADAPTED-INFO MODIFIED BY BAND-CALL ",
+      "NEWK"],
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_restart",
+    "meta_type":"type-section",
+    "meta_description":"RESTART WITH NEW K POINTS NET",
+    "meta_parent_section":"x_crystal_section_properties",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_restart_band",
+    "meta_type":"type-section",
+    "meta_description":[
+      "BAND     INTEGRATED DOSS PER PROJECTION AND TOTAL. ",
+      "T."],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_restart_dos",
+    "meta_type":"type-section",
+    "meta_description":[
+      "*** ENERGY      TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_restart_dos_energy",
+    "meta_type":"type-section",
+    "meta_description":[
+      "*** ENERGY      TOTAL DENSITY OF STATES - FULL SCALE =   160.18198 ",
+      "AU"],
+    "meta_parent_section":"x_crystal_section_restart_dos",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_restart_kpoint",
+    "meta_type":"type-section",
+    "meta_description":"14-C(  7  1  0)",
+    "meta_parent_section":"x_crystal_section_restart_kpoints",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_restart_kpoints",
+    "meta_type":"type-section",
+    "meta_description":[
+      "*** K POINTS COORDINATES (OBLIQUE COORDINATES IN UNITS OF IS = ",
+      "12)"],
+    "meta_parent_section":"x_crystal_section_restart",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_startinformation",
+    "meta_type":"type-section",
+    "meta_description":[
+      "Contains information about the starting conditions for this ",
+      "run."],
+    "meta_parent_section":"section_run",
+    "meta_abstract_types":[
+      "program_info"],
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_symmetry",
+    "meta_type":"type-section",
+    "meta_description":"Symmetry allowed directions.",
+    "meta_parent_section":"section_system",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_thermodynamic",
+    "meta_type":"type-section",
+    "meta_description":"Thermodynamic quantities",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_thermodynamic_contrib",
+    "meta_type":"type-section",
+    "meta_description":[
+      "HARMONIC VIBRATIONAL CONTRIBUTIONS TO THERMODYNAMIC FUNCTIONS AT GIVEN ",
+      "TEMPERATURE AND PRESSURE. THERMODYNAMIC FUNCTIONS WITH VIBRATIONAL ",
+      "CONTRIBUTIONS."],
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational",
+    "meta_type":"type-section",
+    "meta_description":"SYMMETRY ADAPTION OF VIBRATIONAL MODES",
+    "meta_parent_section":"x_crystal_section_forces",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational_mode",
+    "meta_type":"type-section",
+    "meta_description":[
+      "BORN CHARGE VECTOR IN THE BASIS OF NORMAL ",
+      "MODES"],
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational_modes",
+    "meta_type":"type-section",
+    "meta_description":"VIBRATIONAL TEMPERATURES (K) [MODE NUMBER;IRREP]",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational_modes_lo",
+    "meta_type":"type-section",
+    "meta_description":"VIBRATIONAL TEMPERATURES, LO MODES",
+    "meta_parent_section":"x_crystal_section_vibrational_modes",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational_modes_to",
+    "meta_type":"type-section",
+    "meta_description":"VIBRATIONAL TEMPERATURES, TO MODES",
+    "meta_parent_section":"x_crystal_section_vibrational_modes",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational_multip",
+    "meta_type":"type-section",
+    "meta_description":"IRREP/CLA MULTIP Fu for GROUP OPERATORS",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_vibrational_symmetry",
+    "meta_type":"type-section",
+    "meta_description":[
+      "SYMMETRY ADAPTION OF VIBRATIONAL MODES: K-LITTLE GROUP: CLASS TABLE, CHARACTER ",
+      "TABLE."],
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_wavefunctions",
+    "meta_type":"type-section",
+    "meta_description":"Wavefunctions",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_section_wavefunctions_atom",
+    "meta_type":"type-section",
+    "meta_description":"Wavefunctions of an atom: initial conditions",
+    "meta_parent_section":"x_crystal_section_wavefunctions",
+    "meta_repeats":true,
+    "meta_context_identifier":[]
+  },{
+    "meta_name":"x_crystal_spacegroup",
+    "meta_type":"type-value",
+    "meta_description":[
+      "Crystal spacegroup string resembling Hermann\u2013Mauguin ",
+      "notation."],
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_spacegroup_class",
+    "meta_type":"type-value",
+    "meta_description":"Crystal spacegroup class",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_symmetry_allowed_directions",
+    "meta_type":"type-value",
+    "meta_description":"Symmetry allowed directions.",
+    "meta_parent_section":"x_crystal_section_symmetry",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_symmetry_intscreen_tcpu",
+    "meta_type":"type-value",
+    "meta_description":"CPU time used for calculating symmetry.",
+    "meta_parent_section":"x_crystal_section_symmetry",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_symmetry_intscreen_telapse",
+    "meta_type":"type-value",
+    "meta_description":"Elapsed time used for calculating symmetry.",
+    "meta_parent_section":"x_crystal_section_symmetry",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_symmetry_tcpu",
+    "meta_type":"type-value",
+    "meta_description":"Time used for calculating symmetry.",
+    "meta_parent_section":"x_crystal_section_symmetry",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_symmetry_telapse",
+    "meta_type":"type-value",
+    "meta_description":"Time used for calculating symmetry.",
+    "meta_parent_section":"x_crystal_section_symmetry",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_c1_aucell",
+    "meta_type":"type-value",
+    "meta_description":"ET+PV-TS: AU/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_c1_ev",
+    "meta_type":"type-value",
+    "meta_description":"ET+PV-TS: EV/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_c1_kjmol",
+    "meta_type":"type-value",
+    "meta_description":"ET+PV-TS : KJ/MOL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_c2_aucell",
+    "meta_type":"type-value",
+    "meta_description":"EL+E0+ET+PV-TS: AU/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_c2_ev",
+    "meta_type":"type-value",
+    "meta_description":"EL+E0+ET+PV-TS: EV/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_c2_kjmol",
+    "meta_type":"type-value",
+    "meta_description":"EL+E0+ET+PV-TS: KJ/MOL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_e0_aucell",
+    "meta_type":"type-value",
+    "meta_description":"ZERO-POINT ENERGY: AU/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_e0_ev",
+    "meta_type":"type-value",
+    "meta_description":"ZERO-POINT ENERGY: EV/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_e0_kjmol",
+    "meta_type":"type-value",
+    "meta_description":"ZERO-POINT ENERGY: KJ/MOL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_el_aucell",
+    "meta_type":"type-value",
+    "meta_description":"ELECTRONIC ENERGY: AU/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_el_ev",
+    "meta_type":"type-value",
+    "meta_description":"ELECTRONIC ENERGY: EV/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_el_kjmol",
+    "meta_type":"type-value",
+    "meta_description":"ELECTRONIC ENERGY: KJ/MOL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_et_aucell",
+    "meta_type":"type-value",
+    "meta_description":[
+      "THERMAL CONTRIBUTION TO THE VIBRATIONAL ENERGY: ",
+      "AU/CELL"],
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_et_ev",
+    "meta_type":"type-value",
+    "meta_description":[
+      "THERMAL CONTRIBUTION TO THE VIBRATIONAL ENERGY: ",
+      "EV/CELL"],
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_et_kjmol",
+    "meta_type":"type-value",
+    "meta_description":[
+      "THERMAL CONTRIBUTION TO THE VIBRATIONAL ENERGY: ",
+      "KJ/MOL"],
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_pressure",
+    "meta_type":"type-value",
+    "meta_description":[
+      "AT GIVEN TEMPERATURE AND PRESSURE: (T =  ? K, P =   ? ",
+      "MPA)"],
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_pv_aucell",
+    "meta_type":"type-value",
+    "meta_description":"PRESSURE * VOLUME: AU/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_pv_ev",
+    "meta_type":"type-value",
+    "meta_description":"PRESSURE * VOLUME: EV/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_pv_kjmol",
+    "meta_type":"type-value",
+    "meta_description":"PRESSURE * VOLUME: KJ/MOL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_temperature",
+    "meta_type":"type-value",
+    "meta_description":[
+      "AT GIVEN TEMPERATURE AND PRESSURE: (T =  ? K, P =   ? ",
+      "MPA)"],
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_ts_aucell",
+    "meta_type":"type-value",
+    "meta_description":"TEMPERATURE * ENTROPY: AU/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_ts_ev",
+    "meta_type":"type-value",
+    "meta_description":"TEMPERATURE * ENTROPY: EV/CELL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_contrib_ts_kjmol",
+    "meta_type":"type-value",
+    "meta_description":"TEMPERATURE * ENTROPY: KJ/MOL",
+    "meta_parent_section":"x_crystal_section_thermodynamic_contrib",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_entropy_jmolk",
+    "meta_type":"type-value",
+    "meta_description":"OTHER THERMODYNAMIC FUNCTIONS: ENTROPY: J/(MOL*K)",
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_entropy_mev",
+    "meta_type":"type-value",
+    "meta_description":"OTHER THERMODYNAMIC FUNCTIONS: ENTROPY: mEV/(CELL*K)",
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_entropy_mhartree",
+    "meta_type":"type-value",
+    "meta_description":"OTHER THERMODYNAMIC FUNCTIONS: ENTROPY: mHARTREE/(CELL*K)",
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_heatcapacity_jmolk",
+    "meta_type":"type-value",
+    "meta_description":[
+      "OTHER THERMODYNAMIC FUNCTIONS: HEAT CAPACITY: ",
+      "J/(MOL*K)"],
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_heatcapacity_mev",
+    "meta_type":"type-value",
+    "meta_description":[
+      "OTHER THERMODYNAMIC FUNCTIONS: HEAT CAPACITY: ",
+      "mEV/(CELL*K)"],
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_thermodynamic_heatcapacity_mhartree",
+    "meta_type":"type-value",
+    "meta_description":[
+      "OTHER THERMODYNAMIC FUNCTIONS: HEAT CAPACITY: ",
+      "mHARTREE/(CELL*K)"],
+    "meta_parent_section":"x_crystal_section_thermodynamic",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_dielectric_tensor_contrib",
+    "meta_type":"type-value",
+    "meta_description":[
+      "SUM TENSOR OF THE VIBRATIONAL CONTRIBUTIONS TO THE STATIC DIELECTRIC ",
+      "TENSOR"],
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_dielectric_tensor_hf",
+    "meta_type":"type-value",
+    "meta_description":"HIGH FREQUENCY DIELECTRIC TENSOR (FROM INPUT)",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_dielectric_tensor_static",
+    "meta_type":"type-value",
+    "meta_description":"STATIC DIELECTRIC TENSOR",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_fu",
+    "meta_type":"type-value",
+    "meta_description":"Fu vector",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_fixed":2
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_integer1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_vibrational_integer2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_vibrational_minus",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_mode_born_charge_vector",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BORN CHARGE VECTOR IN THE BASIS OF NORMAL MODES (UNITS OF e*M_E**(-1/2) ",
+      ")."],
+    "meta_parent_section":"x_crystal_section_vibrational_mode",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_mode_number",
+    "meta_type":"type-value",
+    "meta_description":[
+      "BORN CHARGE VECTOR IN THE BASIS OF NORMAL MODES (UNITS OF e*M_E**(-1/2) ",
+      ")."],
+    "meta_parent_section":"x_crystal_section_vibrational_mode",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_vibrational_mode_tensor",
+    "meta_type":"type-value",
+    "meta_description":"CARTESIAN AXES SYSTEM",
+    "meta_parent_section":"x_crystal_section_vibrational_mode",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    },{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_mode_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_mode_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_mode_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational_mode",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_modes_lo_irrep",
+    "meta_type":"type-value",
+    "meta_description":"IRREP",
+    "meta_parent_section":"x_crystal_section_vibrational_modes_lo",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_modes_lo_number",
+    "meta_type":"type-value",
+    "meta_description":"Mode number",
+    "meta_parent_section":"x_crystal_section_vibrational_modes_lo",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_vibrational_modes_lo_temperature",
+    "meta_type":"type-value",
+    "meta_description":"VIBRATIONAL TEMPERATURES (K)",
+    "meta_parent_section":"x_crystal_section_vibrational_modes_lo",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_modes_to_irrep",
+    "meta_type":"type-value",
+    "meta_description":"Mode number",
+    "meta_parent_section":"x_crystal_section_vibrational_modes_to",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_modes_to_number",
+    "meta_type":"type-value",
+    "meta_description":"Mode number",
+    "meta_parent_section":"x_crystal_section_vibrational_modes_to",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_vibrational_modes_to_temperature",
+    "meta_type":"type-value",
+    "meta_description":"VIBRATIONAL TEMPERATURES (K)",
+    "meta_parent_section":"x_crystal_section_vibrational_modes_to",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_multip_fu",
+    "meta_type":"type-value",
+    "meta_description":"Fu",
+    "meta_parent_section":"x_crystal_section_vibrational_multip",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_multip_irrep_cla",
+    "meta_type":"type-value",
+    "meta_description":"IRREP/CLA",
+    "meta_parent_section":"x_crystal_section_vibrational_multip",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_multip_multip",
+    "meta_type":"type-value",
+    "meta_description":"MULTIP",
+    "meta_parent_section":"x_crystal_section_vibrational_multip",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_vibrational_optical_longitudal_mode_direction",
+    "meta_type":"type-value",
+    "meta_description":[
+      "SYMMETRY ADAPTED DIRECTIONS FOR LONGITUDINAL OPTICAL ",
+      "MODES"],
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_symmetry_class",
+    "meta_type":"type-value",
+    "meta_description":"CLASS",
+    "meta_parent_section":"x_crystal_section_vibrational_symmetry",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_symmetry_group_operators",
+    "meta_type":"type-value",
+    "meta_description":"GROUP OPERATORS (SEE SYMMOPS KEYWORD)",
+    "meta_parent_section":"x_crystal_section_vibrational_symmetry",
+    "meta_data_type":"int",
+    "meta_dimension":[{
+      "meta_dimension_symbolic":"n"
+    }]
+  },{
+    "meta_name":"x_crystal_vibrational_symmetry_text",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_vibrational_symmetry",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_text1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_text2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_text3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage.",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_crystal_vibrational_value1",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_value2",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_vibrational_value3",
+    "meta_type":"type-value",
+    "meta_description":"Temporary storage",
+    "meta_parent_section":"x_crystal_section_vibrational",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_volume",
+    "meta_type":"type-value",
+    "meta_description":"Simulation cell volume, in cubic angstroms.",
+    "meta_parent_section":"section_system",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_accuracy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  ",
+      "12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  ",
+      "2.6E-06"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_kinetic_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  ",
+      "12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  ",
+      "2.6E-06"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_nuclear_charge",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUCLEAR CHARGE 11.0  SYMMETRY SPECIES            ",
+      "S    P"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_closed_shells_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CLOSED SHELLS     S:2    ",
+      "P:1"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_closed_shells_s",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CLOSED SHELLS     S:2    ",
+      "P:1"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_contracted_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CONTRACTED GTOS   S:4    ",
+      "P:3"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_contracted_s",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUMBER OF CONTRACTED GTOS   S:4    ",
+      "P:3"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_electrons",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): N. ELECTRONS   11.0  NUMBER OF PRIMITIVE GTOS   ",
+      "S:15    P:7"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_primitive_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUMBER OF PRIMITIVE GTOS   S:15    ",
+      "P:7"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_number_of_primitive_s",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): NUMBER OF PRIMITIVE GTOS   S:15    ",
+      "P:7"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_open_shell_occupation_p",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): OPEN SHELL OCCUPATION       S:1    ",
+      "P:0"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_open_shell_occupation_s",
+    "meta_type":"type-value",
+    "meta_description":[
+      "as in ATOMIC WAVEFUNCTION(S): OPEN SHELL OCCUPATION       S:1    ",
+      "P:0"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_scfit",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  ",
+      "12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  ",
+      "2.6E-06"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"int"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_total_hf_energy",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  ",
+      "12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  ",
+      "2.6E-06"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_virial_theorem",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  ",
+      "12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  ",
+      "2.6E-06"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_crystal_wavefunctions_atom_znuc",
+    "meta_type":"type-value",
+    "meta_description":[
+      "ZNUC SCFIT  TOTAL HF ENERGY   KINETIC ENERGY   VIRIAL THEOREM ACCURACY. 11.0  ",
+      "12   -1.616362095E+02  1.622491907E+02 -1.996221977E+00  ",
+      "2.6E-06"],
+    "meta_parent_section":"x_crystal_section_wavefunctions_atom",
+    "meta_data_type":"float"
+  }]
+}

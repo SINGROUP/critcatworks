@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>critcatworks.workflows.simpleflow &#8212; critcatworks 01.07.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for critcatworks.workflows.simpleflow</h1><div class="highlight"><pre>
+<span></span><span class="c1"># this workflow is for testing if fireworks runs</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">Firework</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">,</span> <span class="n">LaunchPad</span><span class="p">,</span> <span class="n">ScriptTask</span><span class="p">,</span> <span class="n">TemplateWriterTask</span><span class="p">,</span> <span class="n">FileTransferTask</span><span class="p">,</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">fireworks.core.rocket_launcher</span> <span class="k">import</span> <span class="n">launch_rocket</span><span class="p">,</span> <span class="n">rapidfire</span>
+<span class="kn">from</span> <span class="nn">fireworks</span> <span class="k">import</span> <span class="n">explicit_serialize</span><span class="p">,</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">FWAction</span>
+<span class="kn">from</span> <span class="nn">fireworks.user_objects.firetasks.dataflow_tasks</span> <span class="k">import</span> <span class="n">ForeachTask</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">critcatworks.database</span> <span class="k">import</span> <span class="n">mylaunchpad</span>
+
+<div class="viewcode-block" id="SimpleTestTask"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.simpleflow.SimpleTestTask">[docs]</a><span class="nd">@explicit_serialize</span>
+<span class="k">class</span> <span class="nc">SimpleTestTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">   Simple FireTask to see what attributes FireTasks have.</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+   <span class="n">_fw_name</span> <span class="o">=</span> <span class="s1">&#39;SimpleTestTask&#39;</span>
+   <span class="n">required_params</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="SimpleTestTask.run_task"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.simpleflow.SimpleTestTask.run_task">[docs]</a>   <span class="k">def</span> <span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+       <span class="c1">#print(self.__dict__)</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a simple test task&quot;</span><span class="p">)</span>
+       <span class="c1">#print(&quot;outputs&quot;, self.outputs)</span>
+       <span class="n">pp</span><span class="p">(</span><span class="n">fw_spec</span><span class="p">)</span>
+       <span class="c1">#ranking = fw_spec[&quot;ranking&quot;]</span>
+       <span class="c1">#ranking.append(1)</span>
+       <span class="n">dft_params</span> <span class="o">=</span> <span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;dft_params&quot;</span><span class="p">]</span>
+       <span class="c1">#dft_params.append(1)</span>
+       <span class="n">update_spec</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;dft_params&#39;</span><span class="p">:</span> <span class="n">dft_params</span><span class="p">}</span>
+       <span class="n">mod_spec</span> <span class="o">=</span><span class="p">[{</span><span class="s1">&#39;_set&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dft_outputs-&gt;id&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dft_params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span> <span class="n">dft_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]}}]</span>
+       <span class="c1">#return FWAction(update_spec=update_spec)</span>
+       <span class="k">return</span> <span class="n">FWAction</span><span class="p">(</span><span class="n">update_spec</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;dft_params&#39;</span><span class="p">:</span> <span class="n">dft_params</span><span class="p">},</span> <span class="n">mod_spec</span><span class="o">=</span><span class="n">mod_spec</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="test_foreachtask_workflow"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.simpleflow.test_foreachtask_workflow">[docs]</a><span class="k">def</span> <span class="nf">test_foreachtask_workflow</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Workflow to test fireworks ForeachTask with a dummy workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">simple_task</span> <span class="o">=</span> <span class="n">SimpleTestTask</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dft_params&#39;</span><span class="p">:[]},</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dft_params&#39;</span><span class="p">])</span>
+    <span class="n">simple_dict</span> <span class="o">=</span> <span class="n">simple_task</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="c1">#resimple_task = SimpleTestTask.from_dict(simple_dict)</span>
+    <span class="c1">#print(simple_task)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">simple_dict</span><span class="p">)</span>
+    <span class="c1">#print(resimple_task)</span>
+    <span class="n">firetask1</span> <span class="o">=</span> <span class="n">ForeachTask</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">simple_dict</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s1">&#39;dft_params&#39;</span><span class="p">,</span> <span class="n">spec</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dft_params&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]})</span>
+
+    <span class="n">fw1</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">simple_task</span><span class="p">],</span> <span class="n">spec</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dft_params&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;dft_outputs&#39;</span><span class="p">:{}</span>   <span class="p">},</span> <span class="n">fw_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fw2</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span>   <span class="n">fw_id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">fw3</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">],</span>   <span class="n">fw_id</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">fw4</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">simple_task</span><span class="p">],</span> <span class="n">fw_id</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1">#wf = Firework([simple_task, firetask1, simple_task], spec={&#39;dft_params&#39;:[1,2,3], &#39;ranking&#39;: [-3,-1] })</span>
+    <span class="n">workflow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">([</span><span class="n">fw1</span><span class="p">,</span> <span class="n">fw2</span><span class="p">,</span> <span class="n">fw4</span><span class="p">],</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],})</span>
+    <span class="k">return</span> <span class="n">workflow</span></div>
+
+<div class="viewcode-block" id="dummy_workflow"><a class="viewcode-back" href="../../../src/doc/critcatworks.workflows.html#critcatworks.workflows.simpleflow.dummy_workflow">[docs]</a><span class="k">def</span> <span class="nf">dummy_workflow</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    dummy fireworks Workflow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># create the Firework consisting of multiple tasks</span>
+    <span class="n">firetask1</span> <span class="o">=</span> <span class="n">TemplateWriterTask</span><span class="p">({</span><span class="s1">&#39;context&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;opt1&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;opt2&#39;</span><span class="p">:</span> <span class="s1">&#39;fast method&#39;</span><span class="p">},</span> <span class="s1">&#39;template_file&#39;</span><span class="p">:</span> <span class="s1">&#39;simple_template.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="s1">&#39;inputs.txt&#39;</span><span class="p">})</span>
+    <span class="n">firetask2</span> <span class="o">=</span> <span class="n">ScriptTask</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s1">&#39;wc -w &lt; inputs.txt &gt; words.txt&#39;</span><span class="p">)</span>
+    <span class="n">firetask3</span> <span class="o">=</span> <span class="n">FileTransferTask</span><span class="p">({</span><span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="s1">&#39;words.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;dest&#39;</span><span class="p">:</span> <span class="s1">&#39;~/words.txt&#39;</span><span class="p">}],</span> <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;copy&#39;</span><span class="p">})</span>
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">Firework</span><span class="p">([</span><span class="n">firetask1</span><span class="p">,</span> <span class="n">firetask2</span><span class="p">,</span> <span class="n">firetask3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">wf</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">logging</span>
+    <span class="n">IS_QUEUE</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dummy workflow&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">IS_QUEUE</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(name)s</span><span class="s1">:</span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logdir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span> <span class="o">=</span> <span class="n">logdir</span> <span class="o">+</span> <span class="s2">&quot;/logfile_dummy_workflow.log&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="c1"># set up the LaunchPad and reset it</span>
+    <span class="n">launchpad</span> <span class="o">=</span> <span class="n">mylaunchpad</span><span class="o">.</span><span class="n">create_launchpad</span><span class="p">()</span>
+    <span class="n">launchpad</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">require_password</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">wf</span> <span class="o">=</span> <span class="n">dummy_workflow</span><span class="p">()</span>
+
+    <span class="c1"># store workflow and launch it locally, single shot</span>
+    <span class="n">launchpad</span><span class="o">.</span><span class="n">add_wf</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+
+
+    <span class="c1">#launch_rocket(launchpad, FWorker())</span>
+    <span class="n">rapidfire</span><span class="p">(</span><span class="n">launchpad</span><span class="p">,</span> <span class="n">FWorker</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">critcatworks 01.07.2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marc Jaeger.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

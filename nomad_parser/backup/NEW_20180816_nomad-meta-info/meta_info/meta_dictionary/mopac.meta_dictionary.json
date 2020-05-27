@@ -1,0 +1,27 @@
+{
+  "metadict_name":"mopac",
+  "metadict_description":"metainfo for the mopac_parser",
+  "metadict_version":"0.1",
+  "metadict_require":[{
+    "metadict_required_name":"common"
+  }],
+  "meta_info_entry":[{
+    "meta_name":"x_mopac_fhof",
+    "meta_type":"type-value",
+    "meta_description":"Final heat of formation",
+    "meta_parent_section":"section_single_configuration_calculation",
+    "meta_data_type":"float"
+  },{
+    "meta_name":"x_mopac_keyword_line",
+    "meta_type":"type-value",
+    "meta_description":"Mopac keyword line (it controls the calculation)",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  },{
+    "meta_name":"x_mopac_method",
+    "meta_type":"type-value",
+    "meta_description":"Mopac method, i.e. PM7, AM1, etc..",
+    "meta_parent_section":"section_method",
+    "meta_data_type":"string"
+  }]
+}

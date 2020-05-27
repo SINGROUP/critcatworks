@@ -1,0 +1,109 @@
+{
+  "meta_name":"springer_classification",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Contains the classification name of the current material according to Springer ",
+    "Materials"],
+  "meta_parent_section":"section_springer_classification",
+  "meta_data_type":"string",
+  "meta_enum":[{
+    "meta_enum_value":"pyroelectric",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"ferroelectric FE",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"antiferroelectric AFE",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"polaron conductor",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"optically isotropic",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"Van Vleck paramagnet",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"ferromagnet FM",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"antiferromagnet AFM",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"superionic conductor",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"semimetal",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"\u2013",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"superconductor",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"semiconductor",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"helimagnet",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"ferroelastic FEL",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"charge-density wave state CDW",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"ionic conductor",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"birefringent",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"nonmetal",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"mictomagnet",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"heavy fermion compound",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"Pauli paramagnet",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"ferrielectric FiE",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"piezoelectric",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"hard magnet",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"diamagnetic",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"high-Tc superconductor",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"ferrimagnet FiM",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"metal",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"intercalation compound",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"spin-density wave state SDW",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"spin glass",
+    "meta_enum_description":"-"
+  },{
+    "meta_enum_value":"intermediate valence",
+    "meta_enum_description":"-"
+  }]
+}

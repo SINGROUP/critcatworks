@@ -1,0 +1,44 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "metainfo for the atk_parser",
+  "dependencies": [ {
+      "relativePath": "meta_types.nomadmetainfo.json"
+    }, {
+      "relativePath": "common.nomadmetainfo.json"
+    }],
+  "metaInfos": [ {
+      "description": "Density convergence criteria to break the SCF cycle",
+      "dtypeStr": "f",
+      "name": "x_atk_density_convergence_criterion",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Number of old densities in the density mixer",
+      "dtypeStr": "i",
+      "name": "x_atk_mix_old",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Mixing weight in density mixer",
+      "dtypeStr": "f",
+      "name": "x_atk_mix_weight",
+      "shape": [],
+      "superNames": [
+        "section_method"
+      ]
+    }, {
+      "description": "Monkhorstpack grid sampling",
+      "dtypeStr": "i",
+      "name": "x_atk_monkhorstpack_sampling",
+      "shape": [
+        3
+      ],
+      "superNames": [
+        "section_method"
+      ]
+    }]
+}

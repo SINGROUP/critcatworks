@@ -1,0 +1,12 @@
+{
+  "meta_name":"frame_sequence_to_sampling_method_ref",
+  "meta_type":"type-value",
+  "meta_description":[
+    "Reference from the present section_frame_sequence to the ",
+    "section_sampling_method, that defines the parameters used in this sequence of ",
+    "frames (i.e., a trajectory, a frame is one ",
+    "section_single_configuration_calculation)."],
+  "meta_parent_section":"section_frame_sequence",
+  "meta_data_type":"reference",
+  "meta_referenced_section":"section_sampling_method"
+}

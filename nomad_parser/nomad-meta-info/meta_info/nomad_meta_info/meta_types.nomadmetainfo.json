@@ -1,0 +1,45 @@
+{
+  "type": "nomad_meta_info_1_0",
+  "description": "The meta infos that describe other meta info",
+  "metaInfos": [ {
+      "description": "A property used only to classify other concrete properties, and thus without an associated value",
+      "kindStr": "type_meta",
+      "name": "type_abstract_document_content",
+      "superNames": []
+    }, {
+      "description": "kind of InfoKinds describing the type of information contained in documents (Infos)",
+      "kindStr": "type_meta",
+      "name": "type_connection",
+      "superNames": []
+    }, {
+      "description": "A dimension of other quantities. The value is an integer, the dimension of that scale. If the value is the same the dimension is assumed compatible with other having the same dimension. On Hdf5 this corresponds to a netcdf scale, and for every type_dimension and every distinct dimension a scale object is created.",
+      "kindStr": "type_meta",
+      "name": "type_dimension",
+      "superNames": []
+    }, {
+      "description": "Kind of something contained in a document",
+      "kindStr": "type_meta",
+      "name": "type_document_content",
+      "superNames": []
+    }, {
+      "description": "kind of InfoKinds describing the type of documents (Infos)",
+      "kindStr": "type_meta",
+      "name": "type_document",
+      "superNames": []
+    }, {
+      "description": "A property used to group other properties. A meta info X of kind SectionType implicitly defines a meta info X_identifier of type string and a meta info X_index of type integer inheriting from it.",
+      "kindStr": "type_meta",
+      "name": "type_section",
+      "superNames": []
+    }, {
+      "description": "kind of InfoKinds describing a meta type that has not been defined, and is unknown",
+      "kindStr": "type_meta",
+      "name": "type_unknown_meta",
+      "superNames": []
+    }, {
+      "description": "kind of InfoKinds describing a type of information that has not been defined, and is unknown",
+      "kindStr": "type_meta",
+      "name": "type_unknown",
+      "superNames": []
+    }]
+}
